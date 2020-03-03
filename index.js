@@ -62,8 +62,6 @@ mongoose.connect('mongodb://localhost/example-app', (err) => {
     })
 
     // • Start listening on port 3000 for requests.
-    //const PORT = 3000
-    //app.listen(PORT, () => console.log(`Application started successfully on port: ${PORT}!`))
     https.createServer({
       key: fs.readFileSync('server.key'),
       cert: fs.readFileSync('server.cert')
@@ -72,7 +70,7 @@ mongoose.connect('mongodb://localhost/example-app', (err) => {
 
     // redirect HTTP server
     const httpApp = express();
-    httpApp.all('*', (req, res) => res.redirect(300, 'https://localhost:3000'));
+    httpApp.all('*', (req, res) => res.redirect(303, 'https://localhost'));
     const httpServer = http.createServer(httpApp);
     httpServer.listen(80, () => console.log(`HTTP server listening: http://localhost:80`));
   }
