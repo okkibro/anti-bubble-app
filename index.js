@@ -70,7 +70,7 @@ mongoose.connect('mongodb://localhost/example-app', (err) => {
 
     // redirect HTTP server
     const httpApp = express();
-    httpApp.all('*', (req, res) => res.redirect(303, 'https://localhost'));
+    httpApp.all('*', (req, res) => res.redirect(303, 'https://localhost:3000'));
     const httpServer = http.createServer(httpApp);
     httpServer.listen(80, () => console.log(`HTTP server listening: http://localhost:80`));
   }
