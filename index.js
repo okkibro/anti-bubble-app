@@ -6,9 +6,16 @@
 const express = require('express')
 const path = require('path')
 const mongoose = require('mongoose')
+const helmet = require('helmet')
+
+var fs = require('fs')
+var https = require('https')
+var http = require('http')
 
 // • Creating Express instance. Later we will use this to declare routes
 const app = express()
+
+app.use(helmet())
 
 // • Connect to MongoDB database. Please be sure you have started MongoDB
 // services before running application and replace `example-app` with your
@@ -55,8 +62,18 @@ mongoose.connect('mongodb://localhost/example-app', (err) => {
     })
 
     // • Start listening on port 3000 for requests.
-    const PORT = 3000
-    app.listen(PORT, () => console.log(`Application started successfully on port: ${PORT}!`))
+    //const PORT = 3000
+    //app.listen(PORT, () => console.log(`Application started successfully on port: ${PORT}!`))
+    https.createServer({
+      key: fs.readFileSync('server.key'),
+      cert: fs.readFileSync('server.cert')
+    }, app)
+    .listen(3000, () => console.log(`HTTPS server listening: https://localhost:3000`));
 
+    // redirect HTTP server
+    const httpApp = express();
+    httpApp.all('*', (req, res) => res.redirect(300, 'https://localhost:3000'));
+    const httpServer = http.createServer(httpApp);
+    httpServer.listen(80, () => console.log(`HTTP server listening: http://localhost:80`));
   }
 })
