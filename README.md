@@ -30,7 +30,11 @@
 + Be sure you have started MongoDB
 + Navigate to project folder
 + Run ```node index.js```
-+ Poen browser and navigate to localhost:3000
++ Open browser and navigate to localhost:3000
+
+### Running MongoDB
++ ```mongod --dbpath /System/Volumes/Data/data/db```
+
 
 
 Template by Agon Gashi (agonxgashi)
