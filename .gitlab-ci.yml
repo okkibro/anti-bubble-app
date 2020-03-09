@@ -1,4 +1,4 @@
-  image: node:latest
+    image: node:latest
 
     stages:
       - build
@@ -12,7 +12,6 @@
       stage: build
       script:
         - npm install
-        - node index.js
       artifacts:
         paths:
           - node_modules/
