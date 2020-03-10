@@ -23,7 +23,7 @@
                 <tr>
                     <td>
                         <mat-form-field class="example-full-width">
-                            <input matInput placeholder="Email" [(ngModel)]="email" name="email" required>
+                            <input matInput placeholder="Email" [(ngModel)]="email" name="email" (keydown.enter)="register()" required>
                         </mat-form-field>
                     </td>
                 </tr>
