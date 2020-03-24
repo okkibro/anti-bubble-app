@@ -11,7 +11,15 @@ router.get('/', function (req, res) {
 
 // • Declaring POST method
 router.post('/register', function (req, res) {
-
+    let user = new User();
+    user.email = req.body.email;
+    user.name = req.body.name;
+    user.save((err, doc) => {
+        if (err) {
+          console.log(err);
+        }
+      });
+    res.sendStatus(200);
 });
 
 module.exports = router;
