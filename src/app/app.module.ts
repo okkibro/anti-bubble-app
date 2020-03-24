@@ -1,14 +1,14 @@
 // angular modules
 import { BrowserModule } from '@angular/platform-browser';
-import { BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import { FormsModule } from '@angular/forms';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
 import { HttpClientModule, HTTP_INTERCEPTORS } from "@angular/common/http";
 import { AuthInterceptor } from './shared/authconfig.interceptor';
 
 // core modules
-import { CustomMaterialModule } from './core/material.module';
-import { AppRoutingModule } from './core/app-routing.module';
+import { CustomMaterialModule } from './shared/material.module';
+import { AppRoutingModule } from './app-routing.module';
 
 // component modules
 import { AppComponent } from './app.component';
@@ -28,8 +28,10 @@ import { UserProfileComponent } from './components/user-profile/user-profile.com
         BrowserAnimationsModule,
         CustomMaterialModule,
         FormsModule,
+        ReactiveFormsModule,
         AppRoutingModule,
-        HttpClientModule
+        HttpClientModule,
+
     ],
     providers: [
         {

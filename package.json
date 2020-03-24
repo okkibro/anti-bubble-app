@@ -4,7 +4,7 @@
   "description": "A MEAN Stack (Mongo, Express, Angular, Node) simple application template",
   "main": "index.js",
   "scripts": {
-    "start": "ng build && node index.js",
+    "start": "ng build && nodemon index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -46,8 +46,6 @@
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.9.3",
     "mongoose-unique-validator": "^2.0.3",
-    "passport": "^0.4.1",
-    "passport-local": "^1.0.0",
     "path": "^0.12.7",
     "phaser": "^3.22.0",
     "rate-limiter-flexible": "^2.0.0",

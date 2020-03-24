@@ -18,10 +18,10 @@ router.post("/register",
         check('email', 'Email is required')
             .not()
             .isEmpty(),
-        check('password', 'Password should be between 5 to 8 characters long')
+        check('password', 'Password should be atleat 6 characters long')
             .not()
             .isEmpty()
-            .isLength({ min: 5, max: 8 })
+            .isLength({ min: 6 })
     ],
     (req, res, next) => {
         const errors = validationResult(req);
@@ -31,7 +31,7 @@ router.post("/register",
             return res.status(422).jsonp(errors.array());
         }
         else {
-            bcrypt.hash(req.body.password, 10).then((hash) => {
+            bcrypt.hash(req.body.password, "$DFDS8mdS67SDbdsSD8a^D9").then((hash) => {
                 const user = new UserSchema({
                     name: req.body.name,
                     email: req.body.email,
@@ -79,7 +79,7 @@ router.post("/login", (req, res, next) => {
         });
         res.status(200).json({
             token: jwtToken,
-            expiresIn: 3600,
+            expiresIn: 86400,
             _id: getUser._id
         });
     }).catch(err => {
@@ -95,7 +95,7 @@ router.route('/').get((req, res) => {
         if (error) {
             return next(error)
         } else {
-            res.status(200).json(response)
+            res.status(200).json(response);
         }
     })
 });

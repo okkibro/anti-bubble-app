@@ -8,9 +8,6 @@ const https = require('https');
 const http = require('http');
 const app = express();
 
-// Remvoe MongoDB warning error
-//mongoose.set('useCreateIndex', true);
-
 // Initialize middleware
 app.use(helmet());
 
@@ -21,14 +18,14 @@ app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, 'dist/index.html'))
 });
 
-// • Start listening on port 3000 for requests.
+// Start listening on port 3000 for requests.
 https.createServer({
   key: fs.readFileSync('server.key'),
   cert: fs.readFileSync('server.cert')
 }, app)
 .listen(3000, () => console.log(`HTTPS server listening: https://localhost:3000`));
 
-// redirect HTTP server
+// Redirect HTTP server
 const httpApp = express();
 httpApp.all('*', (req, res) => res.redirect(303, 'https://localhost:3000'));
 const httpServer = http.createServer(httpApp);
