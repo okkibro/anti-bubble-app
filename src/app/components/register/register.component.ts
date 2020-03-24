@@ -14,16 +14,14 @@ export class RegisterComponent implements OnInit {
   password: String;
   email: String;
 
-  constructor(private fb: FormBuilder, private authService: AuthService, private router: Router) {
-    this.signupForm = this.fb.group({
-      email: [''],
-      password: ['']
-    })
+  constructor(private authService: AuthService, private router: Router) {
+    
   }
 
   ngOnInit() { }
 
   registerUser() {
+    console.log("test");
     this.authService.register(this.signupForm.value).subscribe((res) => {
       if (res.result) {
         this.signupForm.reset();

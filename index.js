@@ -1,7 +1,7 @@
 const express = require('express');
 const path = require('path');
 const helmet = require('helmet');
-const mongoose = require('mongoose');
+const mongoose = require('./database/mongoose');
 
 const fs = require('fs');
 const https = require('https');
@@ -9,13 +9,17 @@ const http = require('http');
 const app = express();
 
 // Remvoe MongoDB warning error
-mongoose.set('useCreateIndex', true);
+//mongoose.set('useCreateIndex', true);
 
 // Initialize middleware
 app.use(helmet());
 
 app.use(express.static(path.join(__dirname, 'dist')));
 app.use('/user', require('./server/routes/user-route'));
+
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, 'dist/index.html'))
+});
 
 // • Start listening on port 3000 for requests.
 https.createServer({
