@@ -2,6 +2,7 @@ const express = require('express');
 const path = require('path');
 const helmet = require('helmet');
 const mongoose = require('./database/mongoose');
+const cors = require('cors');
 
 const fs = require('fs');
 const https = require('https');
@@ -10,6 +11,7 @@ const app = express();
 
 // Initialize middleware
 app.use(helmet());
+app.use(cors());
 
 app.use(express.static(path.join(__dirname, 'dist')));
 app.use('/user', require('./server/routes/user-route'));

@@ -10,8 +10,8 @@ import { User } from '../../models/user';
 })
 
 export class RegisterComponent implements OnInit {
-    password: String;
-    email: String;
+    email: string;
+    password: string;
 
     constructor(private authService: AuthService, private router: Router) { }
 

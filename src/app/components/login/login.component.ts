@@ -8,12 +8,15 @@ import { UserService } from '../../services/user.service';
     templateUrl: './login.component.html',
     styleUrls: ['./login.component.css']
 })
+
 export class LoginComponent implements OnInit {
-    constructor(private router: Router, private userService: UserService) { }
     email: string;
     password: string;
-    ngOnInit() {
-    }
+
+    constructor(private router: Router, private userService: UserService) { }
+
+    ngOnInit() { }
+
     login(): void {
         if (this.email && this.password) {
             this.userService.getUser(this.email, this.password); //hashen?!

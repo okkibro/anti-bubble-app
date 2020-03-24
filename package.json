@@ -4,7 +4,7 @@
   "description": "A MEAN Stack (Mongo, Express, Angular, Node) simple application template",
   "main": "index.js",
   "scripts": {
-    "start": "ng build && nodemon index.js",
+    "start": "ng build && node index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -60,6 +60,7 @@
     "@angular/language-service": "~9.0.2",
     "@types/node": "^12.11.1",
     "bcrypt": "^4.0.1",
+    "cors": "^2.8.5",
     "express-validator": "^6.4.0",
     "ts-node": "~7.0.0",
     "tslint": "~5.15.0",
