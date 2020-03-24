@@ -8,14 +8,15 @@
 </mat-toolbar>
 <mat-card class="example-card">
     <mat-card-header>
-        <mat-card-title>Login</mat-card-title>
+        <mat-card-title>Registreren</mat-card-title>
     </mat-card-header>
     <mat-card-content>
         <form class="example-form">
-            <table class="example-full-width" cellspacing="0">
+            <table class="example-full-width">
                 <tr>
                     <td>
                         <mat-form-field class="example-full-width">
+                            <mat-label>Email</mat-label>
                             <input matInput placeholder="Email" [(ngModel)]="email" name="email" required>
                         </mat-form-field>
                     </td>
@@ -23,7 +24,8 @@
                 <tr>
                     <td>
                         <mat-form-field class="example-full-width">
-                            <input matInput placeholder="Password" [(ngModel)]="password" type="password" name="password" (keydown.enter)="login()" required/>
+                            <mat-label>Wachtwoord</mat-label>
+                            <input matInput placeholder="Wachtwoord" [(ngModel)]="password" name=password (keydown.enter)="registerUser()" required>
                         </mat-form-field>
                     </td>
                 </tr>
@@ -31,7 +33,7 @@
         </form>
     </mat-card-content>
     <mat-card-actions>
-        <button mat-raised-button (click)="login()" color="primary">Login</button>
+        <button mat-raised-button (click)="registerUser()" color="primary">Registreer</button>
     </mat-card-actions>
 </mat-card>
 <footer>

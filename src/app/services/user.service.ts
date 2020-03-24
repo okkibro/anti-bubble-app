@@ -12,7 +12,7 @@ export class UserService {
     return this.webService.get('user', {email, hash})
   }
 
-  registerUser(email:string, name:string) {
+  registerUser(email: string, name: string) {
     return this.webService.post('user', {email, name})
   }
 }

@@ -1,26 +1,20 @@
-// --- index.js ---
-// • This is the start (entry-point) of our application.
-// • Mongoose is used to make communication with MongoDB easy and simple
-// -----------------------------------------------------------------------------
-
 const express = require('express');
 const path = require('path');
-const mongoose = require('./database/mongoose');
 const helmet = require('helmet');
+const mongoose = require('mongoose');
 
-var fs = require('fs');
-var https = require('https');
-var http = require('http');
-
-// • Creating Express instance. Later we will use this to declare routes
+const fs = require('fs');
+const https = require('https');
+const http = require('http');
 const app = express();
 
+// Remvoe MongoDB warning error
+mongoose.set('useCreateIndex', true);
+
+// Initialize middleware
 app.use(helmet());
 
-//app.use(express.json());
-
 app.use(express.static(path.join(__dirname, 'dist')));
-
 app.use('/user', require('./server/routes/user-route'));
 
 // • Start listening on port 3000 for requests.
