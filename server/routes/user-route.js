@@ -1,5 +1,5 @@
 const express = require('express');
-const mongoose = require('../../database/mongoose')
+const mongoose = require('../../database/mongoose');
 const router = express.Router();
 
 // • Declaring GET method
