@@ -32,5 +32,14 @@ userSchema.methods.validatePassword = function(password) {
     return this.hash === hash;
 };
 
+userSchema.methods.generateJwt = function() {
+    return jwt.sign({
+        _id: this._id,
+        email: this.email,
+        name: this.name,
+        exp: 86400,
+    }, "longer-secret-is-better"); // DO NOT KEEP YOUR SECRET IN THE CODE!
+};
+
 userSchema.plugin(uniqueValidator);
 module.exports = mongoose.model('User', userSchema);

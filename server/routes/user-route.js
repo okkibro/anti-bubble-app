@@ -21,11 +21,11 @@ router.post("/register",
         user.setPassword(req.body.password);
 
         user.save(function(err) {
-            let token;
-            token = user.generateJwt();
-            res.status(200);
-            res.json({
-                "token" : token
+            let token = user.generateJwt();
+            res.status(200).json({
+                token: token,
+                expiresIn: 86400,
+                msg: user
             });
         });
     });
@@ -47,14 +47,9 @@ router.post("/login", (req, res) => {
 
         // TODO: Remove secret from code
         // If a user is found
-        let jwtToken = jwt.sign({
-            email: user.email,
-            userID: user._id
-        }, "longer-secret-is-better", {
-            expiresIn: "1d"
-        });
+        let token = user.generateJwt();
         res.status(200).json({
-            token: jwtToken,
+            token: token,
             expiresIn: 86400,
             msg: user
         });

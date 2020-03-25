@@ -17,7 +17,10 @@
                     <td>
                         <mat-form-field class="example-full-width">
                             <mat-label>Voornaam</mat-label>
-                            <input matInput [(ngModel)]="firstName" name="firstName" required>
+                            <input matInput [formControl]="firstNameFormControl" [errorStateMatcher]="matcher" [(ngModel)]="firstName" name="firstName" required>
+                            <mat-error *ngIf="firstNameFormControl.hasError('required')">
+                                Voornaam is <strong>verplicht</strong>
+                            </mat-error>
                         </mat-form-field>
                     </td>
                 </tr>
@@ -25,7 +28,10 @@
                     <td>
                         <mat-form-field class="example-full-width">
                             <mat-label>Achternaam</mat-label>
-                            <input matInput [(ngModel)]="lastName" name="lastName" required>
+                            <input matInput [formControl]="lastNameFormControl" [errorStateMatcher]="matcher" [(ngModel)]="lastName" name="lastName" required>
+                            <mat-error *ngIf="lastNameFormControl.hasError('required')">
+                                Achternaam is <strong>verplicht</strong>
+                            </mat-error>
                         </mat-form-field>
                     </td>
                 </tr>
@@ -33,7 +39,13 @@
                     <td>
                         <mat-form-field class="example-full-width">
                             <mat-label>Email</mat-label>
-                            <input matInput [(ngModel)]="email" name="email" type="email" required>
+                            <input matInput [formControl]="emailFormControl" [errorStateMatcher]="matcher" [(ngModel)]="email" name="email" required>
+                            <mat-error *ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')">
+                                Vul een correct emailadres in
+                            </mat-error>
+                            <mat-error *ngIf="emailFormControl.hasError('required')">
+                                Email invullen is <strong>verplicht</strong>
+                            </mat-error>
                         </mat-form-field>
                     </td>
                 </tr>
@@ -41,7 +53,10 @@
                     <td>
                         <mat-form-field class="example-full-width">
                             <mat-label>Wachtwoord</mat-label>
-                            <input matInput [(ngModel)]="password" name="password" type=password (keydown.enter)="registerUser()" required>
+                            <input matInput [formControl]="passwordFormControl" [errorStateMatcher]="matcher" [(ngModel)]="password" name="password" type=password required>
+                            <mat-error *ngIf="passwordFormControl.hasError('required')">
+                                Wachtwoord is <strong>verplicht</strong>
+                            </mat-error>
                         </mat-form-field>
                     </td>
                 </tr>
@@ -49,7 +64,10 @@
                     <td>
                         <mat-form-field class="example-full-width">
                             <mat-label>Herhaal wachtwoord</mat-label>
-                            <input matInput [(ngModel)]="password" name="password" type=password (keydown.enter)="registerUser()" required>
+                            <input matInput [formControl]="repeatPasswordFormControl" [errorStateMatcher]="matcher" [(ngModel)]="repeatPassword" name="repeatPassword" type=password required>
+                            <mat-error *ngIf="repeatPasswordFormControl.hasError('required')">
+                                Wachtwoord is <strong>verplicht</strong>
+                            </mat-error>
                         </mat-form-field>
                     </td>
                 </tr>
@@ -57,7 +75,7 @@
         </form>
     </mat-card-content>
     <mat-card-actions>
-        <button mat-raised-button (click)="registerUser()" color="primary">Registreer</button>
+        <button mat-raised-button type="submit" (click)="registerUser()" color="primary">Registreer</button>
     </mat-card-actions>
 </mat-card>
 <footer>
