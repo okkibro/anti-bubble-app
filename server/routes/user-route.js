@@ -13,7 +13,8 @@ const User = mongoose.model('User');
 router.post("/register",
     (req, res, next) => {
         let user = new User();
-        user.name = req.body.name;
+        user.firstName = req.body.firstName;
+        user.lastName = req.body.lastName;
         user.email = req.body.email;
         user.password = req.body.password;
 
