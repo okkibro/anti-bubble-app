@@ -25,6 +25,7 @@ router.post("/register",
     ],
     (req, res, next) => {
         const errors = validationResult(req);
+        console.log("body: ");
         console.log(req.body);
 
         if (!errors.isEmpty()) {
@@ -54,6 +55,7 @@ router.post("/register",
 
 // Login
 router.post("/login", (req, res, next) => {
+    console.log(req.body)
     let getUser;
     UserSchema.findOne({
         email: req.body.email

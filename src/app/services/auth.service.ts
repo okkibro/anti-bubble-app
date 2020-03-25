@@ -10,7 +10,7 @@ import { Router } from '@angular/router';
 })
 
 export class AuthService {
-  endpoint: string = 'https://localhost:3000';
+  endpoint: string = 'https://localhost:3000/user';
   headers = new HttpHeaders().set('Content-Type', 'application/json');
   currentUser = {};
 
@@ -22,6 +22,7 @@ export class AuthService {
 
     // Sign-up
     register(user: User): Observable<any> {
+        console.log(user);
         let api = `${this.endpoint}/register`;
         return this.http.post(api, user)
             .pipe(

@@ -4,7 +4,9 @@
   "description": "A MEAN Stack (Mongo, Express, Angular, Node) simple application template",
   "main": "index.js",
   "scripts": {
-    "start": "ng build && node index.js",
+    "client": "ng serve",
+    "server": "ng build && nodemon index.js",
+    "start": "npm-run-all -p client server",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {

@@ -17,7 +17,7 @@
                     <td>
                         <mat-form-field class="example-full-width">
                             <mat-label>Email</mat-label>
-                            <input matInput placeholder="Email" name="email" type="email" required>
+                            <input matInput placeholder="Email" [(ngModel)]="email" name="email" type="email" required>
                         </mat-form-field>
                     </td>
                 </tr>
@@ -25,7 +25,7 @@
                     <td>
                         <mat-form-field class="example-full-width">
                             <mat-label>Wachtwoord</mat-label>
-                            <input matInput placeholder="Wachtwoord" name="password" type="password" (keydown.enter)="login()" required/>
+                            <input matInput placeholder="Wachtwoord" [(ngModel)]="password" name="password" type="password" (keydown.enter)="login()" required/>
                         </mat-form-field>
                     </td>
                 </tr>
