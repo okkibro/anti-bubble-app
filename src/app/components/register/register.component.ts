@@ -10,7 +10,8 @@ import { User } from '../../models/user';
 })
 
 export class RegisterComponent implements OnInit {
-    name: string;
+    firstName: string;
+    lastName: string;
     email: string;
     password: string;
 
@@ -22,7 +23,8 @@ export class RegisterComponent implements OnInit {
         let user = new User();
         user.email = this.email;
         user.password = this.password;
-        user.name = this.name;
+        user.firstName = this.firstName;
+        user.lastName = this.lastName;
         this.authService.register(user).subscribe((res) => {
             this.router.navigate(['login']);
         })

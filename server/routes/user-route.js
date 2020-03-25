@@ -8,40 +8,18 @@ const authorize = require("../../middlewares/auth");
 const { check, validationResult } = require('express-validator');
 
 // Register
-router.post("/register",
-    [
-        check('name')
-            .not()
-            .isEmpty()
-            .isLength({min: 3})
-            .withMessage('Name must be atleast 3 characters long'),
-        check('email', 'Email is required')
-            .not()
-            .isEmpty(),
-        check('password', 'Password should be atleat 6 characters long')
-            .not()
-            .isEmpty()
-            .isLength({min: 8})
-    ],
-    (req, res, next) => {
-        const errors = validationResult(req);
-
-        if (!errors.isEmpty()) {
-            return res.status(422).jsonp(errors.array());
-        }
-        else {
-            this.salt = crypto.randomBytes(16).toString('hex');
-            this.hash = crypto.pbkdf2Sync(req.body.password, this.salt, 1000, 64, 'sha512').toString('hex');
-            const user = new UserSchema({
-                name: req.body.name,
-                email: req.body.email,
-                password: this.hash
-            });
-            user.save().then((user) => res.send(user))
-                .catch((error) => console.log(error));
-        }
+router.post("/register", (req, res, next) => {
+        this.salt = crypto.randomBytes(16).toString('hex');
+        this.hash = crypto.pbkdf2Sync(req.body.password, this.salt, 1000, 64, 'sha512').toString('hex');
+        const user = new UserSchema({
+            firstName: req.body.firstName,
+            lastName: req.body.lastName,
+            email: req.body.email,
+            password: this.hash
+        });
+        user.save().then((user) => res.send(user))
+            .catch((error) => console.log(error));        
     });
-
 
 // Login
 router.post("/login", (req, res, next) => {
