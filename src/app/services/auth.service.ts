@@ -22,7 +22,6 @@ export class AuthService {
 
     // Sign-up
     register(user: User): Observable<any> {
-        console.log(user);
         let api = `${this.endpoint}/register`;
         return this.http.post(api, user)
             .pipe(

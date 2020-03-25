@@ -1,6 +1,6 @@
 const express = require("express");
 const jwt = require("jsonwebtoken");
-const bcrypt = require("bcrypt");
+const crypto = require("crypto");
 const router = express.Router();
 const UserSchema = require("../../database/models/users");
 // TODO: Make sure we don't need this anymore
@@ -13,7 +13,7 @@ router.post("/register",
         check('name')
             .not()
             .isEmpty()
-            .isLength({ min: 3 })
+            .isLength({min: 3})
             .withMessage('Name must be atleast 3 characters long'),
         check('email', 'Email is required')
             .not()
@@ -21,34 +21,24 @@ router.post("/register",
         check('password', 'Password should be atleat 6 characters long')
             .not()
             .isEmpty()
-            .isLength({ min: 6 })
+            .isLength({min: 8})
     ],
     (req, res, next) => {
         const errors = validationResult(req);
-        console.log("body: ");
-        console.log(req.body);
 
         if (!errors.isEmpty()) {
             return res.status(422).jsonp(errors.array());
         }
         else {
-            bcrypt.hash(req.body.password, "$DFDS8mdS67SDbdsSD8a^D9").then((hash) => {
-                const user = new UserSchema({
-                    name: req.body.name,
-                    email: req.body.email,
-                    password: hash
-                });
-                user.save().then((response) => {
-                    res.status(201).json({
-                        message: "User successfully created!",
-                        result: response
-                    });
-                }).catch(error => {
-                    res.status(500).json({
-                        error: error
-                    });
-                });
+            this.salt = crypto.randomBytes(16).toString('hex');
+            this.hash = crypto.pbkdf2Sync(req.body.password, this.salt, 1000, 64, 'sha512').toString('hex');
+            const user = new UserSchema({
+                name: req.body.name,
+                email: req.body.email,
+                password: this.hash
             });
+            user.save().then((user) => res.send(user))
+                .catch((error) => console.log(error));
         }
     });
 
