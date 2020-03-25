@@ -1,10 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { MatDialog } from '@angular/material/dialog'
-import { UserService } from '../../services/user.service';
+import { AuthService } from '../../services/auth.service';
+import { User } from '../../models/user';
 
 @Component({
-    selector: 'app-login',
+    selector: 'mean-login',
     templateUrl: './login.component.html',
     styleUrls: ['./login.component.css']
 })
@@ -13,15 +12,14 @@ export class LoginComponent implements OnInit {
     email: string;
     password: string;
 
-    constructor(private router: Router, private userService: UserService) { }
+    constructor(private authService: AuthService) { }
 
     ngOnInit() { }
 
-    login(): void {
-        if (this.email && this.password) {
-            this.userService.getUser(this.email, this.password); //hashen?!
-        } else {
-            alert("Invalid credentials");
-        }
+    loginUser() {
+        let user = new User();
+        user.email = this.email;
+        user.password = this.password;
+        this.authService.login(user)
     }
 }

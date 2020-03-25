@@ -4,11 +4,14 @@ const helmet = require('helmet');
 const mongoose = require('./database/mongoose');
 const cors = require('cors');
 const bodyParser = require('body-parser');
+const passport = require('passport');
 
 const fs = require('fs');
 const https = require('https');
 const http = require('http');
 const app = express();
+
+require('./src/app/shared/passport');
 
 // Initialize middleware
 app.use(helmet());
@@ -17,6 +20,7 @@ app.use(bodyParser.urlencoded({
     extended: false
 }));
 app.use(cors());
+app.use(passport.initialize());
 
 app.use(express.static(path.join(__dirname, 'dist')));
 app.use('/user', require('./server/routes/user-route'));
