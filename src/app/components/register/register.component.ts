@@ -21,7 +21,7 @@ export class RegisterComponent implements OnInit {
         let user = new User();
         user.email = this.email;
         user.password = this.password;
-        user._id = '1234';
+        user._id = 1234;
         user.name = 'tijmen';
         this.authService.register(user).subscribe((res) => {
             if (res.result) {

@@ -3,6 +3,7 @@ const path = require('path');
 const helmet = require('helmet');
 const mongoose = require('./database/mongoose');
 const cors = require('cors');
+const bodyParser = require('body-parser');
 
 const fs = require('fs');
 const https = require('https');
@@ -11,21 +12,25 @@ const app = express();
 
 // Initialize middleware
 app.use(helmet());
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({
+    extended: false
+}));
 app.use(cors());
 
 app.use(express.static(path.join(__dirname, 'dist')));
 app.use('/user', require('./server/routes/user-route'));
 
 app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, 'dist/index.html'))
+    res.sendFile(path.join(__dirname, 'dist/index.html'))
 });
 
 // Start listening on port 3000 for requests.
 https.createServer({
-  key: fs.readFileSync('server.key'),
-  cert: fs.readFileSync('server.cert')
+    key: fs.readFileSync('server.key'),
+    cert: fs.readFileSync('server.cert')
 }, app)
-.listen(3000, () => console.log(`HTTPS server listening: https://localhost:3000`));
+    .listen(3000, () => console.log(`HTTPS server listening: https://localhost:3000`));
 
 // Redirect HTTP server
 const httpApp = express();
