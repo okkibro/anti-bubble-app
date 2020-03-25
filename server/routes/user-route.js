@@ -11,7 +11,7 @@ const User = mongoose.model('User');
 
 // Register
 router.post("/register",
-    (req, res, next) => {
+    (req, res) => {
         let user = new User();
         user.firstName = req.body.firstName;
         user.lastName = req.body.lastName;
@@ -31,27 +31,33 @@ router.post("/register",
     });
 
 // Login
-router.post("/login", (req, res, next) => {
-    passport.authenticate('local', function(err, user, info){
-        let token;
-
+router.post("/login", (req, res) => {
+    passport.authenticate('local', function(err, user){
         // If Passport throws/catches an error
         if (err) {
             res.status(404).json(err);
             return;
         }
-
-        // If a user is found
-        if(user){
-            token = user.generateJwt();
-            res.status(200);
-            res.json({
-                "token" : token
+        // If no user was found
+        if (!user || !res) {
+            return res.status(401).json({
+                message: "Authentication failed"
             });
-        } else {
-            // If user is not found
-            res.status(401).json(info);
         }
+
+        // TODO: Remove secret from code
+        // If a user is found
+        let jwtToken = jwt.sign({
+            email: user.email,
+            userID: user._id
+        }, "longer-secret-is-better", {
+            expiresIn: "1d"
+        });
+        res.status(200).json({
+            token: jwtToken,
+            expiresIn: 86400,
+            msg: user
+        });
     })(req, res);
 });
 
@@ -67,7 +73,7 @@ router.route('/').get((req, res) => {
 });
 
 // Get Single User
-router.route('/user-profile/:id').get(authorize, (req, res, next) => {
+router.route('/profile/:id').get(authorize, (req, res, next) => {
     UserSchema.findById(req.params.id, (error, data) => {
         if (error) {
             return next(error);

@@ -14,14 +14,14 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
-import { UserProfileComponent } from './components/user-profile/user-profile.component';
+import { ProfileComponent } from './components/profile/profile.component';
 
 @NgModule({
     declarations: [
         AppComponent,
         LoginComponent,
         RegisterComponent,
-        UserProfileComponent,
+        ProfileComponent,
     ],
     imports: [
         BrowserModule,

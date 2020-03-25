@@ -34,9 +34,9 @@ export class AuthService {
         return this.http.post<any>(`${this.endpoint}/login`, user)
             .subscribe((res: any) => {
                 localStorage.setItem('access_token', res.token);
-                this.getUserProfile(res._id).subscribe((res) => {
+                this.getUserProfile(res.msg._id).subscribe((res) => {
                     this.currentUser = res;
-                    this.router.navigate(['user-profile/' + res.msg._id]);
+                    this.router.navigate(['profile/' + res.msg._id]);
                 })
             })
     }
@@ -50,7 +50,7 @@ export class AuthService {
         return (authToken !== null);
     }
 
-    doLogout() {
+    logout() {
         let removeToken = localStorage.removeItem('access_token');
         if (removeToken == null) {
             this.router.navigate(['login']);
@@ -59,7 +59,7 @@ export class AuthService {
 
     // User profile
     getUserProfile(id): Observable<any> {
-        let api = `${this.endpoint}/user-profile/${id}`;
+        let api = `${this.endpoint}/profile/${id}`;
         return this.http.get(api, { headers: this.headers }).pipe(
             map((res: Response) => {
                 return res || {}

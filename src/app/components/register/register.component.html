@@ -45,6 +45,14 @@
                         </mat-form-field>
                     </td>
                 </tr>
+                <tr>
+                    <td>
+                        <mat-form-field class="example-full-width">
+                            <mat-label>Herhaal wachtwoord</mat-label>
+                            <input matInput [(ngModel)]="password" name="password" type=password (keydown.enter)="registerUser()" required>
+                        </mat-form-field>
+                    </td>
+                </tr>
             </table>
         </form>
     </mat-card-content>
