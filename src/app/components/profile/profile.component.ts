@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { AuthService } from '../../services/auth.service';
+import {Component, OnInit} from '@angular/core';
+import { AuthenticationService } from '../../services/authentication.service';
+import { User } from '../../models/user';
 
 @Component({
     selector: 'mean-profile',
@@ -9,15 +9,15 @@ import { AuthService } from '../../services/auth.service';
 })
 
 export class ProfileComponent implements OnInit {
-    currentUser: Object = {};
+    userDetails: User;
 
-    constructor(public authService: AuthService, private actRoute: ActivatedRoute
-    ) {
-        let id = this.actRoute.snapshot.paramMap.get('id');
-        this.authService.getUserProfile(id).subscribe(res => {
-            this.currentUser = res.msg;
-        })
+    constructor(private auth: AuthenticationService) {}
+
+    ngOnInit() {
+        this.auth.profile().subscribe(user => {
+            this.userDetails = user;
+        }, (err) => {
+            console.error(err);
+        });
     }
-
-    ngOnInit() { }
 }

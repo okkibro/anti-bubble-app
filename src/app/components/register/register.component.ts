@@ -1,16 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import {FormGroup, FormControl, FormGroupDirective, NgForm, Validators} from '@angular/forms';
-import { AuthService } from '../../services/auth.service';
+import { Validators, FormBuilder } from '@angular/forms';
+import { AuthenticationService } from '../../services/authentication.service';
 import { Router } from '@angular/router';
 import { User } from '../../models/user';
-import {ErrorStateMatcher} from '@angular/material/core';
-
-export class MyErrorStateMatcher implements ErrorStateMatcher {
-    isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
-        const isSubmitted = form && form.submitted;
-        return !!(control && control.invalid && (control.dirty || control.touched || isSubmitted));
-    }
-}
 
 @Component({
     selector: 'mean-register',
@@ -18,50 +10,29 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
     styleUrls: ['./register.component.css']
 })
 
-//TODO: Make sure fields go red when you try to submit and no value is filled in
-//TODO: Add check for matching passwords
+// TODO: Add extra field to verify password is typed in correctly
+// TODO: Check whether SQL-injection or input scrubbing has to be done here
 
 export class RegisterComponent implements OnInit {
-    firstNameFormControl = new FormControl('', [
-        Validators.required
-    ]);
+    registerForm = this.fb.group({
+        firstName: ['', Validators.required],
+        lastName: ['', Validators.required],
+        email: ['', [Validators.required, Validators.email]],
+        password: ['', Validators.required],
+    });
 
-    lastNameFormControl = new FormControl('', [
-        Validators.required
-    ]);
-
-    emailFormControl = new FormControl('', [
-        Validators.email,
-        Validators.required
-    ]);
-
-    passwordFormControl = new FormControl('', [
-        Validators.required
-    ]);
-
-    repeatPasswordFormControl = new FormControl('', [
-        Validators.required
-    ]);
-
-    matcher = new MyErrorStateMatcher();
-
-    firstName: string;
-    lastName: string;
-    email: string;
-    password: string;
-    repeatPassword: string;
-
-    constructor(private authService: AuthService, private router: Router) { }
+    constructor(private authenticationService: AuthenticationService, private router: Router, private fb: FormBuilder) { }
 
     ngOnInit() { }
 
     registerUser() {
         let user = new User();
-        user.email = this.email;
-        user.password = this.password;
-        user.firstName = this.firstName;
-        user.lastName = this.lastName;
-        this.authService.register(user).subscribe((res) => {
+        user.firstName = this.registerForm.get('firstName').value;
+        user.lastName = this.registerForm.get('lastName').value;
+        user.email = this.registerForm.get('email').value;
+        user.password = this.registerForm.get('password').value;
+
+        this.authenticationService.register(user).subscribe(() => {
             this.router.navigate(['login']);
         })
     }

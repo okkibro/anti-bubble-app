@@ -22,9 +22,9 @@ app.use(bodyParser.urlencoded({
 app.use(cors());
 app.use(passport.initialize());
 
+// Define routing
 app.use(express.static(path.join(__dirname, 'dist')));
 app.use('/user', require('./server/routes/user-route'));
-
 app.get('*', (req, res) => {
     res.sendFile(path.join(__dirname, 'dist/index.html'))
 });

@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from '../../services/auth.service';
+import { Validators, FormBuilder } from '@angular/forms';
+import { AuthenticationService } from '../../services/authentication.service';
+import { Router } from '@angular/router';
 import { User } from '../../models/user';
 
 @Component({
@@ -9,17 +11,27 @@ import { User } from '../../models/user';
 })
 
 export class LoginComponent implements OnInit {
-    email: string;
-    password: string;
+    loginForm = this.fb.group({
+        email: ['', [Validators.required, Validators.email]],
+        password: ['', Validators.required],
+    });
 
-    constructor(private authService: AuthService) { }
+    constructor(private authenticationService: AuthenticationService, private router: Router, private fb: FormBuilder) { }
 
     ngOnInit() { }
 
     loginUser() {
         let user = new User();
-        user.email = this.email;
-        user.password = this.password;
-        this.authService.login(user)
+        user.email = this.loginForm.get('email').value;
+        user.password = this.loginForm.get('password').value;
+        console.log("Here 1");
+
+        this.authenticationService.login(user).subscribe(() => {
+            console.log("Here 8");
+            this.router.navigate(['profile']);
+            console.log("Here 11");
+        }, (err) => {
+            console.error(err);
+        });
     }
 }

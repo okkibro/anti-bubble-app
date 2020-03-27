@@ -1,10 +1,9 @@
 // angular modules
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
-import { HttpClientModule, HTTP_INTERCEPTORS } from "@angular/common/http";
-import { AuthInterceptor } from './shared/authconfig.interceptor';
+import { HttpClientModule } from "@angular/common/http";
 
 // core modules
 import { CustomMaterialModule } from './shared/material.module';
@@ -15,6 +14,9 @@ import { AppComponent } from './app.component';
 import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
 import { ProfileComponent } from './components/profile/profile.component';
+
+// services
+import { AuthGuardService } from './services/auth-guard.service';
 
 @NgModule({
     declarations: [
@@ -27,19 +29,12 @@ import { ProfileComponent } from './components/profile/profile.component';
         BrowserModule,
         BrowserAnimationsModule,
         CustomMaterialModule,
-        FormsModule,
         ReactiveFormsModule,
         AppRoutingModule,
         HttpClientModule,
 
     ],
-    providers: [
-        {
-            provide: HTTP_INTERCEPTORS,
-            useClass: AuthInterceptor,
-            multi: true
-        }
-    ],
+    providers: [AuthGuardService],
     bootstrap: [AppComponent]
 })
 export class AppModule { }
