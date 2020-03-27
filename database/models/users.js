@@ -38,7 +38,7 @@ userSchema.methods.generateJwt = function() {
         _id: this._id,
         email: this.email,
         name: this.name,
-        exp: 86400,
+        exp: Date.now() + (86400 * 1000)
     }, "longer-secret-is-better");
 };
 

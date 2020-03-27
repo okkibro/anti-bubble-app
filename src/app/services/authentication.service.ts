@@ -47,12 +47,11 @@ export class AuthenticationService {
             return null;
         }
     }
-
-    // TODO: Check user.exp > 86400 statement
+    
     public isLoggedIn(): boolean {
         const user = this.getUserDetails();
         if (user) {
-            return user.exp > 86400;
+            return user.exp > Date.now() + (86400 * 1000);
         } else {
             return false;
         }
