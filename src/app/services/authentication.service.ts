@@ -51,8 +51,6 @@ export class AuthenticationService {
     public isLoggedIn(): boolean {
         const user = this.getUserDetails();
         if (user) {
-            console.log(user.exp)
-            console.log(user.exp < Date.now() + (86400 * 1000))
             return user.exp < Date.now() + (86400 * 1000);
         } else {
             return false;
@@ -62,15 +60,11 @@ export class AuthenticationService {
     private request(method: 'post'|'get', type: 'login'|'register'|'profile', user?: User): Observable<any> {
         let base;
 
-        console.log("Here 3");
-
         if (method === 'post') {
             base = this.http.post(`https://localhost:3000/user/${type}`, user);
         } else {
             base = this.http.get(`https://localhost:3000/user/${type}`, { headers: { Authorization: `Bearer ${this.getToken()}` }});
         }
-
-        console.log("Here 7");
 
         return base.pipe(
             map((data: TokenResponse) => {
@@ -87,12 +81,10 @@ export class AuthenticationService {
     }
 
     public login(user: User): Observable<any> {
-        console.log("Here 2");
         return this.request('post', 'login', user);
     }
 
     public profile(): Observable<any> {
-        console.log("Here 10");
         return this.request('get', 'profile');
     }
 }

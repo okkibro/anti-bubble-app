@@ -30,12 +30,7 @@ router.post('/register', (req, res) => {
 
 // Login
 router.post( '/login', (req, res) => {
-
-    console.log("Here 4");
-
     passport.authenticate('local', function(err, user){
-
-        console.log(user);
 
         // If Passport throws/catches an error
         if (err) {
@@ -55,15 +50,11 @@ router.post( '/login', (req, res) => {
         res.status(200).json({
             token: token
         });
-
-        console.log("Here 6");
     })(req, res);
 });
 
 // Get Single User
 router.get('/profile', auth, (req, res) => {
-
-    console.log("Here 9");
 
     // If no user ID exists in the JWT return a 401
     if (!req.payload._id) {

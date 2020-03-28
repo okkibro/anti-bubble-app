@@ -24,12 +24,8 @@ export class LoginComponent implements OnInit {
         let user = new User();
         user.email = this.loginForm.get('email').value;
         user.password = this.loginForm.get('password').value;
-        console.log("Here 1");
-
         this.authenticationService.login(user).subscribe(() => {
-            console.log("Here 8");
             this.router.navigate(['home']);
-            console.log("Here 11");
         }, (err) => {
             console.error(err);
         });
