@@ -1,0 +1,65 @@
+body {
+    background-color: paleturquoise;
+    text-align: center;
+}
+
+h1 {
+    color: Black;
+}
+
+#navBar {
+    height: 40px;
+    width:100%;
+    text-align: center;
+    background-color: blue;
+}
+
+nav a {
+   padding: 35px;
+   margin: 35px;
+   text-align: center;
+   color: white;
+   font-size: 25px;
+}
+
+nav a:hover {
+    color:red;
+}
+
+#mainText {
+    position: center;
+    
+}
+
+#sessionButton {
+    font-size: 20px;
+    margin-top: 20px;
+    background-color: purple;
+    height: 75px;
+    width: 250px;
+    border-radius: 12px;
+    text-align: center;
+}
+
+#sessionButton a {
+    color: white;
+}
+
+.bubbleIcon {
+    height: 250px;
+    width: 250px;
+}
+
+#iconLeft {
+    position: relative;
+    float: left;
+}
+
+#iconRight {
+    position: relative;
+    float: right;
+}
+
+#secondPart {
+    height: 300px;
+}
