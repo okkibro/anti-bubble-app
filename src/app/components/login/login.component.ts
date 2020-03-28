@@ -28,7 +28,7 @@ export class LoginComponent implements OnInit {
 
         this.authenticationService.login(user).subscribe(() => {
             console.log("Here 8");
-            this.router.navigate(['profile']);
+            this.router.navigate(['home']);
             console.log("Here 11");
         }, (err) => {
             console.error(err);
