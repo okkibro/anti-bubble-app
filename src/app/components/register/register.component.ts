@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Validators, FormBuilder } from '@angular/forms';
+import {Validators, FormBuilder, FormGroup} from '@angular/forms';
 import { AuthenticationService } from '../../services/authentication.service';
 import { Router } from '@angular/router';
 import { User } from '../../models/user';
@@ -19,7 +19,11 @@ export class RegisterComponent implements OnInit {
         lastName: ['', Validators.required],
         email: ['', [Validators.required, Validators.email]],
         password: ['', Validators.required],
-    });
+        repeatPassword: ['', Validators.required],
+    },
+        {
+            validator: this.passwordMatchValidator
+        });
 
     constructor(private authenticationService: AuthenticationService, private router: Router, private fb: FormBuilder) { }
 
@@ -35,5 +39,13 @@ export class RegisterComponent implements OnInit {
         this.authenticationService.register(user).subscribe(() => {
             this.router.navigate(['login']);
         })
+    }
+
+    passwordMatchValidator(form: FormGroup) {
+        let password = form.get('password').value;
+        let repeatPassword = form.get('repeatPassword').value;
+        if (password != repeatPassword) {
+            form.get('repeatPassword').setErrors({ noPasswordMatch: true });
+        }
     }
 }

@@ -46,6 +46,7 @@
                             <mat-error *ngIf="registerForm.get('email').hasError('required')">
                                 Email is <strong>verplicht</strong>
                             </mat-error>
+
                         </mat-form-field>
                     </td>
                 </tr>
@@ -53,9 +54,20 @@
                     <td>
                         <mat-form-field class="example-full-width">
                             <mat-label>Wachtwoord</mat-label>
-                            <input matInput placeholder="Wachtwoord" formControlName="password" name="password" type=password required>
+                            <input matInput placeholder="Wachtwoord" formControlName="password" type=password required>
                             <mat-error *ngIf="registerForm.get('password').hasError('required')">
                                 Wachtwoord is <strong>verplicht</strong>
+                            </mat-error>
+                        </mat-form-field>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <mat-form-field class="example-full-width">
+                            <mat-label>Herhaal wachtwoord</mat-label>
+                            <input matInput placeholder="Herhaal wachtwoord" formControlName="repeatPassword" type=password required>
+                            <mat-error *ngIf="registerForm.get('repeatPassword').hasError('noPasswordMatch')">
+                                Wachtwoorden komen niet overeen
                             </mat-error>
                         </mat-form-field>
                     </td>
