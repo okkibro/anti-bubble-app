@@ -30,19 +30,16 @@ nav a:hover {
     position: center;
     
 }
-
+ 
 #sessionButton {
     font-size: 20px;
     margin-top: 20px;
+    color: white;
     background-color: purple;
     height: 75px;
     width: 250px;
     border-radius: 12px;
     text-align: center;
-}
-
-#sessionButton a {
-    color: white;
 }
 
 .bubbleIcon {
