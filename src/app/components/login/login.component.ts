@@ -10,6 +10,8 @@ import { User } from '../../models/user';
     styleUrls: ['./login.component.css']
 })
 
+// TODO: Add error when trying to login with wrong username password combination
+
 export class LoginComponent implements OnInit {
     loginForm = this.fb.group({
         email: ['', [Validators.required, Validators.email]],

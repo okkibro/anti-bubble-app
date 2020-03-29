@@ -4,6 +4,8 @@ const jwt = require('jsonwebtoken');
 const uniqueValidator = require('mongoose-unique-validator');
 const Schema = mongoose.Schema;
 
+// TODO: Check use of mongoose-unique-validator
+
 let userSchema = new Schema({
     firstName: {
         type: String,

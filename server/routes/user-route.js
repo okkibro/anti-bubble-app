@@ -3,7 +3,9 @@ const router = express.Router();
 const mongoose = require('mongoose');
 const passport = require("passport");
 const User = mongoose.model('User');
+const sanitize = require('mongo-sanitize');
 
+// TODO: Remove secret from code
 const jwt = require('express-jwt');
 const auth = jwt({
     secret: 'longer-secret-is-better',
@@ -13,10 +15,10 @@ const auth = jwt({
 // Register
 router.post('/register', (req, res) => {
     let user = new User();
-    user.firstName = req.body.firstName;
-    user.lastName = req.body.lastName;
-    user.email = req.body.email;
-    user.password = req.body.password;
+    user.firstName = sanitize(req.body.firstName);
+    user.lastName = sanitize(req.body.lastName);
+    user.email = sanitize(req.body.email);
+    user.password = sanitize(req.body.password);
 
     user.setPassword(req.body.password);
 
@@ -44,7 +46,6 @@ router.post( '/login', (req, res) => {
             });
         }
 
-        // TODO: Remove secret from code
         // If a user is found
         let token = user.generateJwt();
         res.status(200).json({
