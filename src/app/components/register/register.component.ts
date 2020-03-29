@@ -10,8 +10,7 @@ import { User } from '../../models/user';
     styleUrls: ['./register.component.css']
 })
 
-// TODO: Add extra field to verify password is typed in correctly
-// TODO: Check whether SQL-injection or input scrubbing has to be done here
+// TODO: Add error when trying to register with already used email address
 
 export class RegisterComponent implements OnInit {
     registerForm = this.fb.group({
