@@ -1,10 +1,7 @@
 const mongoose = require('mongoose');
 const crypto = require('crypto');
 const jwt = require('jsonwebtoken');
-const uniqueValidator = require('mongoose-unique-validator');
 const Schema = mongoose.Schema;
-
-// TODO: Check use of mongoose-unique-validator
 
 let userSchema = new Schema({
     firstName: {
@@ -44,5 +41,4 @@ userSchema.methods.generateJwt = function() {
     }, "longer-secret-is-better");
 };
 
-userSchema.plugin(uniqueValidator);
 module.exports = mongoose.model('User', userSchema);
