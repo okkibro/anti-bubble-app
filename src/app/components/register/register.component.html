@@ -46,7 +46,9 @@
                             <mat-error *ngIf="registerForm.get('email').hasError('required')">
                                 Email is <strong>verplicht</strong>
                             </mat-error>
-
+                            <mat-error *ngIf="registerForm.get('email').hasError('emailTaken')">
+                                Er bestaat al een account met dit emailadres
+                            </mat-error>
                         </mat-form-field>
                     </td>
                 </tr>

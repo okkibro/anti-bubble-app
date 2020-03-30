@@ -57,6 +57,10 @@ export class AuthenticationService {
         }
     }
 
+    public checkEmailTaken(email: string) {
+        return this.http.post('https://localhost:3000/user/checkEmailTaken', email);
+    }
+
     private request(method: 'post'|'get', type: 'login'|'register'|'profile', user?: User): Observable<any> {
         let base;
 

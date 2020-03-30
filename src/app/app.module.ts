@@ -18,6 +18,7 @@ import { ProfileComponent } from './components/profile/profile.component';
 // services
 import { AuthGuardService } from './services/auth-guard.service';
 import { HomeComponent } from './home/home.component';
+import { UniqueEmailValidatorDirective } from './services/unique-email-validator.directive';
 
 @NgModule({
     declarations: [
@@ -26,6 +27,7 @@ import { HomeComponent } from './home/home.component';
         RegisterComponent,
         ProfileComponent,
         HomeComponent,
+        UniqueEmailValidatorDirective,
     ],
     imports: [
         BrowserModule,

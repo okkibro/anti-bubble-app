@@ -22,7 +22,7 @@ router.post('/register', (req, res) => {
 
     user.setPassword(req.body.password);
 
-    user.save(function(err) {
+    user.save(function() {
         let token = user.generateJwt();
         res.status(200).json({
             token: token
@@ -69,6 +69,21 @@ router.get('/profile', auth, (req, res) => {
                 res.status(200).json(user);
             });
     }
+});
+
+router.post('/checkEmailTaken', (req, res) => {
+    User.findOne({email: sanitize(req.body.email)}).then(user => {
+        if (user) {
+            return res.status(200).json({
+                emailTaken: true,
+                user: user
+            });
+        } else {
+            return res.status(200).json({
+                emailTaken: false
+            });
+        }
+    });
 });
 
 module.exports = router;
