@@ -13,6 +13,10 @@ export class ProfileComponent implements OnInit {
 
     constructor(private auth: AuthenticationService) {}
 
+    logoutButton() {
+      return this.auth.logout();
+    }
+
     ngOnInit() {
         this.auth.profile().subscribe(user => {
             this.userDetails = user;

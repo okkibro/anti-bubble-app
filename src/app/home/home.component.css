@@ -1,9 +1,19 @@
 body {
-    background-color: paleturquoise;
+    background-image: url("../../favicon.ico");
     text-align: center;
     margin: 0;
+    padding: 0;
     height: 100%;
     width: 100%;
+    background-size: auto;
+    
+}
+
+.bodyDiv {
+    height: 100%;
+    width: 70%;
+    display: inline-block;
+    background-color: orange;
 }
 
 #logoutButton {
@@ -28,7 +38,7 @@ nav a {
    margin: 35px;
    text-align: center;
    color: white;
-   font-size: 25px;
+   font-size: 20px;
 }
 
 nav a:hover {
