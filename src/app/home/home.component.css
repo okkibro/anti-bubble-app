@@ -1,10 +1,19 @@
 body {
     background-color: paleturquoise;
     text-align: center;
+    margin: 0;
+    height: 100%;
+    width: 100%;
 }
 
-h1 {
-    color: Black;
+#logoutButton {
+    color: white;
+    background-color: lightcoral;
+    position: fixed;
+    right: 15px;
+    top: 15px;
+    height: 30px;
+    border-radius: 8px;
 }
 
 #navBar {
