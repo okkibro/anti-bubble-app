@@ -2,9 +2,10 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { Observable } from "rxjs";
-import { map } from "rxjs/operators";
+import {auditTime, debounce, debounceTime, map} from "rxjs/operators";
 import { User } from '../models/user';
-import {AbstractControl, AsyncValidatorFn, ValidationErrors} from "@angular/forms";
+import { AbstractControl, AsyncValidatorFn, ValidationErrors } from "@angular/forms";
+
 
 interface TokenResponse {
     token: string;
@@ -58,19 +59,17 @@ export class AuthenticationService {
         }
     }
 
+    // TODO: Add debouncing to reduce HTTP-requests for below 2 methods
+
     public checkEmailTaken(email: string) {
-        console.log(JSON.stringify({ email: email }));
-        return this.http.post('https://localhost:3000/user/checkEmailTaken', JSON.stringify({ email: email }));
+        return this.http.post('https://localhost:3000/user/checkEmailTaken', { email: email });
     }
 
     public uniqueEmailValidator(): AsyncValidatorFn {
         return (control: AbstractControl): Observable<ValidationErrors | null> => {
             return this.checkEmailTaken(control.value).pipe(
                 map(res => {
-                    console.log(res);
-                    // if res is true, username exists, return true
-                    return res ? { usernameExists: true } : null;
-                    // NB: Return null if there is no error
+                    return res.hasOwnProperty('emailTaken') == true ? { emailTaken: true } : null;
                 })
             );
         };

@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {AuthenticationService} from '../../services/authentication.service';
 import {Router} from '@angular/router';
 import {User} from '../../models/user';
@@ -9,8 +9,6 @@ import {User} from '../../models/user';
     templateUrl: './register.component.html',
     styleUrls: ['./register.component.css']
 })
-
-// TODO: Add error when trying to register with already used email address
 
 export class RegisterComponent implements OnInit {
     registerForm = this.fb.group({
@@ -47,17 +45,4 @@ export class RegisterComponent implements OnInit {
             form.get('repeatPassword').setErrors({ noPasswordMatch: true });
         }
     }
-
-    // uniqueEmailValidator(control: FormControl) {
-    //     return new Promise((resolve) => {
-    //         setTimeout(() => {
-    //             this.authenticationService.checkEmailTaken(control.value).subscribe((res) => {
-    //                 console.log(res);
-    //                 resolve(null);
-    //             }, () => {
-    //                 resolve({'emailTaken': true});
-    //             });
-    //         }, 250);
-    //     });
-    // }
 }
