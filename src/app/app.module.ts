@@ -14,10 +14,11 @@ import { AppComponent } from './app.component';
 import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
 import { ProfileComponent } from './components/profile/profile.component';
+import { HomeComponent } from './components/home/home.component';
 
 // services
 import { AuthGuardService } from './services/auth-guard.service';
-import { HomeComponent } from './home/home.component';
+
 
 @NgModule({
     declarations: [
