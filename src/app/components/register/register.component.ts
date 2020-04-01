@@ -1,9 +1,8 @@
 import {Component, OnInit} from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {AuthenticationService} from '../../services/authentication.service';
 import {Router} from '@angular/router';
 import {User} from '../../models/user';
-import {uniqueEmailValidator} from '../../services/unique-email-validator.directive';
 
 @Component({
     selector: 'mean-register',
@@ -17,19 +16,15 @@ export class RegisterComponent implements OnInit {
     registerForm = this.fb.group({
         firstName: ['', Validators.required],
         lastName: ['', Validators.required],
-        email: ['', [Validators.required, Validators.email], uniqueEmailValidator(this.authenticationService)],
+        email: ['', [Validators.required, Validators.email], this.authenticationService.uniqueEmailValidator()],
         password: ['', Validators.required],
         repeatPassword: ['', Validators.required],
     },
         {
-            validator: [this.passwordMatchValidator, uniqueEmailValidator(this.authenticationService)]
+            validator: this.passwordMatchValidator
         });
 
-    constructor(
-        private authenticationService: AuthenticationService,
-        private router: Router,
-        private fb: FormBuilder
-    ) { }
+    constructor(private authenticationService: AuthenticationService, private router: Router, private fb: FormBuilder) { }
 
     ngOnInit() { }
 
@@ -52,4 +47,17 @@ export class RegisterComponent implements OnInit {
             form.get('repeatPassword').setErrors({ noPasswordMatch: true });
         }
     }
+
+    // uniqueEmailValidator(control: FormControl) {
+    //     return new Promise((resolve) => {
+    //         setTimeout(() => {
+    //             this.authenticationService.checkEmailTaken(control.value).subscribe((res) => {
+    //                 console.log(res);
+    //                 resolve(null);
+    //             }, () => {
+    //                 resolve({'emailTaken': true});
+    //             });
+    //         }, 250);
+    //     });
+    // }
 }

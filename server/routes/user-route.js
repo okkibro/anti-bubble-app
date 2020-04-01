@@ -72,6 +72,9 @@ router.get('/profile', auth, (req, res) => {
 });
 
 router.post('/checkEmailTaken', (req, res) => {
+    console.log(Date.now());
+    console.log(req.body);
+    console.log(req.payload);
     User.findOne({email: sanitize(req.body.email)}).then(user => {
         if (user) {
             return res.status(200).json({

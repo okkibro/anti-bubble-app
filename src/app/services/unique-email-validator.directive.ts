@@ -6,12 +6,8 @@ import { AuthenticationService } from './authentication.service';
 
 export function uniqueEmailValidator(authenticationService: AuthenticationService): AsyncValidatorFn {
     return (c: AbstractControl): Promise<ValidationErrors | null> | Observable<ValidationErrors | null> => {
-        // console.log(c.get('email').value);
-        // console.log(c.get('email'));
-        console.log(c.value['email']);
-        return authenticationService.checkEmailTaken(user).pipe(
+        return authenticationService.checkEmailTaken(c.value).pipe(
             map(users => {
-                console.log(users);
                 return users.hasOwnProperty('emailTaken') ? { 'emailTaken': true } : null;
             })
         );

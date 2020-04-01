@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { Observable } from "rxjs";
 import { map } from "rxjs/operators";
 import { User } from '../models/user';
+import {AbstractControl, AsyncValidatorFn, ValidationErrors} from "@angular/forms";
 
 interface TokenResponse {
     token: string;
@@ -58,7 +59,21 @@ export class AuthenticationService {
     }
 
     public checkEmailTaken(email: string) {
-        return this.http.post('https://localhost:3000/user/checkEmailTaken', email);
+        console.log(JSON.stringify({ email: email }));
+        return this.http.post('https://localhost:3000/user/checkEmailTaken', JSON.stringify({ email: email }));
+    }
+
+    public uniqueEmailValidator(): AsyncValidatorFn {
+        return (control: AbstractControl): Observable<ValidationErrors | null> => {
+            return this.checkEmailTaken(control.value).pipe(
+                map(res => {
+                    console.log(res);
+                    // if res is true, username exists, return true
+                    return res ? { usernameExists: true } : null;
+                    // NB: Return null if there is no error
+                })
+            );
+        };
     }
 
     private request(method: 'post'|'get', type: 'login'|'register'|'profile', user?: User): Observable<any> {
