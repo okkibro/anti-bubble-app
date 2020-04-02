@@ -75,6 +75,10 @@ export class AuthenticationService {
         };
     }
 
+    public updatePassword(email: string, oldPassword: string, newPassword: string) {
+        return this.http.patch('https://localhost:3000/user/updatePassword', {email: email, oldPassword: oldPassword, newPassword: newPassword})
+    }
+
     private request(method: 'post'|'get', type: 'login'|'register'|'profile', user?: User): Observable<any> {
         let base;
 

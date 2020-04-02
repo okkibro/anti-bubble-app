@@ -20,9 +20,9 @@ router.post('/register', (req, res) => {
     user.email = sanitize(req.body.email);
     user.password = sanitize(req.body.password);
 
-    user.setPassword(req.body.password);
+    user.setPassword(user.password);
 
-    user.save(function() {
+    user.save(function () {
         let token = user.generateJwt();
         res.status(200).json({
             token: token
@@ -31,8 +31,8 @@ router.post('/register', (req, res) => {
 });
 
 // Login
-router.post( '/login', (req, res) => {
-    passport.authenticate('local', function(err, user){
+router.post('/login', (req, res) => {
+    passport.authenticate('local', function (err, user) {
 
         // If Passport throws/catches an error
         if (err) {
@@ -60,19 +60,19 @@ router.get('/profile', auth, (req, res) => {
     // If no user ID exists in the JWT return a 401
     if (!req.payload._id) {
         res.status(401).json({
-            "message" : "UnauthorizedError: private profile"
+            "message": "UnauthorizedError: private profile"
         });
     } else {
         // Otherwise continue
         User.findById(req.payload._id)
-            .exec(function(err, user) {
+            .exec(function (err, user) {
                 res.status(200).json(user);
             });
     }
 });
 
 router.post('/checkEmailTaken', (req, res) => {
-    User.findOne({email: sanitize(req.body.email)}).then(user => {
+    User.findOne({ email: sanitize(req.body.email) }).then(user => {
         if (user) {
             return res.status(200).json({
                 emailTaken: true
@@ -81,6 +81,31 @@ router.post('/checkEmailTaken', (req, res) => {
             return res.status(200).json({
                 emailNotTaken: true
             });
+        }
+    });
+});
+
+router.patch('/updatePassword', (req, res) => {
+    User.findOne({ email: sanitize(req.body.email) }).then(user => {
+        if (user) {
+            //check if old password is filled in correctly
+            if (user.validatePassword(sanitize(req.body.oldPassword))) {
+                //update password in database to new password
+                user.setPassword(sanitize(req.body.newPassword))
+                return res.status(200).json({
+                    message: "password changed"
+                })
+            } else {
+                //handle error if old password doesn't match with the one in database
+                return res.status(401).json({
+                    message: "password doesn't match with old password"
+                })
+            }
+        } else {
+            //handle error if user is not found in database
+            return res.status(401).json({
+                message: "user not found"
+            })
         }
     });
 });

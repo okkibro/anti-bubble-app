@@ -8,7 +8,8 @@ import { MatTableModule } from '@angular/material/table';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatIconModule } from '@angular/material/icon';
-import { MatProgressSpinnerModule} from '@angular/material/progress-spinner'
+import { MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import { MatExpansionModule } from '@angular/material/expansion'
 
 
 @NgModule({
@@ -22,7 +23,8 @@ import { MatProgressSpinnerModule} from '@angular/material/progress-spinner'
   MatTableModule,
   MatMenuModule,
   MatIconModule,
-  MatProgressSpinnerModule
+  MatProgressSpinnerModule,
+  MatExpansionModule
   ],
   exports: [
   CommonModule,
@@ -34,7 +36,8 @@ import { MatProgressSpinnerModule} from '@angular/material/progress-spinner'
    MatTableModule, 
    MatMenuModule,
    MatIconModule,
-   MatProgressSpinnerModule
+   MatProgressSpinnerModule,
+   MatExpansionModule
    ],
 })
 export class CustomMaterialModule { }
