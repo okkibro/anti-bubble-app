@@ -18,6 +18,7 @@ import { HomeComponent } from './components/home/home.component';
 
 // services
 import { AuthGuardService } from './services/auth-guard.service';
+import { CookieService } from 'ngx-cookie-service';
 
 
 @NgModule({
@@ -37,7 +38,7 @@ import { AuthGuardService } from './services/auth-guard.service';
         HttpClientModule,
 
     ],
-    providers: [AuthGuardService],
+    providers: [AuthGuardService, CookieService],
     bootstrap: [AppComponent]
 })
 export class AppModule { }
