@@ -3,6 +3,7 @@ import { Validators, FormBuilder } from '@angular/forms';
 import { AuthenticationService } from '../../services/authentication.service';
 import { Router } from '@angular/router';
 import { User } from '../../models/user';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
     selector: 'mean-login',
@@ -10,7 +11,7 @@ import { User } from '../../models/user';
     styleUrls: ['./login.component.css']
 })
 
-// TODO: Add error when trying to login with wrong username password combination
+// TODO: Make sure you can't see attempted password in plain text in "Network" tab in Chrome
 
 export class LoginComponent implements OnInit {
     loginForm = this.fb.group({
@@ -18,7 +19,7 @@ export class LoginComponent implements OnInit {
         password: ['', Validators.required],
     });
 
-    constructor(private authenticationService: AuthenticationService, private router: Router, private fb: FormBuilder) { }
+    constructor(private authenticationService: AuthenticationService, private router: Router, private fb: FormBuilder, private snackBar: MatSnackBar) { }
 
     ngOnInit() { }
 
@@ -28,8 +29,8 @@ export class LoginComponent implements OnInit {
         user.password = this.loginForm.get('password').value;
         this.authenticationService.login(user).subscribe(() => {
             this.router.navigate(['home']);
-        }, (err) => {
-            console.error(err);
+        }, () => {
+            this.snackBar.open("Onjuist wachtwoord of email", 'X');
         });
     }
 }

@@ -9,32 +9,35 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatIconModule } from '@angular/material/icon';
 import { MatProgressSpinnerModule} from '@angular/material/progress-spinner'
+import { MatSnackBarModule} from '@angular/material/snack-bar'
 
 
 @NgModule({
-  imports: [
-  CommonModule, 
-  MatToolbarModule,
-  MatButtonModule, 
-  MatCardModule,
-  MatInputModule,
-  MatDialogModule,
-  MatTableModule,
-  MatMenuModule,
-  MatIconModule,
-  MatProgressSpinnerModule
-  ],
-  exports: [
-  CommonModule,
-   MatToolbarModule, 
-   MatButtonModule, 
-   MatCardModule, 
-   MatInputModule, 
-   MatDialogModule, 
-   MatTableModule, 
-   MatMenuModule,
-   MatIconModule,
-   MatProgressSpinnerModule
-   ],
+    imports: [
+        CommonModule,
+        MatToolbarModule,
+        MatButtonModule,
+        MatCardModule,
+        MatInputModule,
+        MatDialogModule,
+        MatTableModule,
+        MatMenuModule,
+        MatIconModule,
+        MatProgressSpinnerModule,
+        MatSnackBarModule,
+    ],
+    exports: [
+        CommonModule,
+        MatToolbarModule,
+        MatButtonModule,
+        MatCardModule,
+        MatInputModule,
+        MatDialogModule,
+        MatTableModule,
+        MatMenuModule,
+        MatIconModule,
+        MatProgressSpinnerModule,
+        MatSnackBarModule,
+    ],
 })
 export class CustomMaterialModule { }
