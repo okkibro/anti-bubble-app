@@ -12,16 +12,17 @@ const auth = jwt({
     userProperty: 'payload'
 });
 
-// Register
+//router to register a user in the database
 router.post('/register', (req, res) => {
+    //make a new user
     let user = new User();
+    //fill in data to user attributes
     user.firstName = sanitize(req.body.firstName);
     user.lastName = sanitize(req.body.lastName);
     user.email = sanitize(req.body.email);
-    user.password = sanitize(req.body.password);
+    user.setPassword(sanitize(req.body.password));
 
-    user.setPassword(user.password);
-
+    //save the changes to the database
     user.save(function () {
         let token = user.generateJwt();
         res.status(200).json({
@@ -30,7 +31,7 @@ router.post('/register', (req, res) => {
     });
 });
 
-// Login
+//router to check if login details match with the database (authentication)
 router.post('/login', (req, res) => {
     passport.authenticate('local', function (err, user) {
 
@@ -54,7 +55,7 @@ router.post('/login', (req, res) => {
     })(req, res);
 });
 
-// Get Single User
+//router to get a user given an id
 router.get('/profile', auth, (req, res) => {
 
     // If no user ID exists in the JWT return a 401
@@ -71,6 +72,7 @@ router.get('/profile', auth, (req, res) => {
     }
 });
 
+//router to check if email is already present in the database
 router.post('/checkEmailTaken', (req, res) => {
     User.findOne({ email: sanitize(req.body.email) }).then(user => {
         if (user) {
@@ -85,6 +87,7 @@ router.post('/checkEmailTaken', (req, res) => {
     });
 });
 
+//router for updating a password given an email
 router.patch('/updatePassword', (req, res) => {
     User.findOne({ email: sanitize(req.body.email) }).then(user => {
         if (user) {
