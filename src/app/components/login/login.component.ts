@@ -30,7 +30,7 @@ export class LoginComponent implements OnInit {
         this.authenticationService.login(user).subscribe(() => {
             this.router.navigate(['home']);
         }, () => {
-            this.snackBar.open("Onjuist wachtwoord of email", 'X');
+            this.snackBar.open("Onjuist wachtwoord of email", 'X', {duration: 2500});
         });
     }
 }

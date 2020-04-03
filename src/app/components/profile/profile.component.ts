@@ -36,7 +36,7 @@ export class ProfileComponent implements OnInit {
         let newPassword = this.changePasswordForm.get('newPassword').value;
         let email = this.userDetails.email;
         this.auth.updatePassword(email, oldPassword, newPassword).subscribe(() => {
-            this.snackbar.open("Wachtwoord is aangepast!", "X")
+            this.snackbar.open("Wachtwoord is aangepast!", "X", {duration: 2500})
         }, (err) => {
             console.error(err);
         });
