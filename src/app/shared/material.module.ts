@@ -10,6 +10,7 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatIconModule } from '@angular/material/icon';
 import { MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import { MatExpansionModule } from '@angular/material/expansion'
+import { MatSnackBarModule} from '@angular/material/snack-bar'
 
 
 @NgModule({
@@ -24,7 +25,8 @@ import { MatExpansionModule } from '@angular/material/expansion'
   MatMenuModule,
   MatIconModule,
   MatProgressSpinnerModule,
-  MatExpansionModule
+  MatExpansionModule,
+  MatSnackBarModule
   ],
   exports: [
   CommonModule,
@@ -37,7 +39,8 @@ import { MatExpansionModule } from '@angular/material/expansion'
    MatMenuModule,
    MatIconModule,
    MatProgressSpinnerModule,
-   MatExpansionModule
+   MatExpansionModule,
+   MatSnackBarModule
    ],
 })
 export class CustomMaterialModule { }

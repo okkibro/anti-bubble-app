@@ -2,10 +2,12 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { Observable } from "rxjs";
-import {auditTime, debounce, debounceTime, map} from "rxjs/operators";
+import { map } from "rxjs/operators";
 import { User } from '../models/user';
 import { AbstractControl, AsyncValidatorFn, ValidationErrors } from "@angular/forms";
+import { CookieService } from 'ngx-cookie-service';
 
+// TODO: Check for possible CSRF-attack vulnerabilities because of use of cookies
 
 interface TokenResponse {
     token: string;
@@ -18,23 +20,23 @@ interface TokenResponse {
 export class AuthenticationService {
     private token: string;
 
-    constructor(private http: HttpClient, private router: Router) {}
+    constructor(private http: HttpClient, private router: Router, private cookie: CookieService) {}
 
     private saveToken(token: string): void {
-        localStorage.setItem('mean-token', token);
+        this.cookie.set('mean-token', token, 1, '/', 'localhost', false, 'Strict');
         this.token = token;
     }
 
     private getToken(): string {
         if (!this.token) {
-            this.token = localStorage.getItem('mean-token');
+            this.token = this.cookie.get('mean-token');
         }
         return this.token;
     }
 
     public logout(): void {
         this.token = '';
-        window.localStorage.removeItem('mean-token');
+        this.cookie.delete('mean-token');
         this.router.navigateByUrl('/login');
     }
 

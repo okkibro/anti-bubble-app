@@ -37,9 +37,9 @@ router.post('/login', (req, res) => {
 
         // If Passport throws/catches an error
         if (err) {
-            res.status(404).json(err);
-            return;
+            return res.status(404).json(err);
         }
+
         // If no user was found
         if (!user) {
             return res.status(401).json({
