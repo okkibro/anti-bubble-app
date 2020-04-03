@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthenticationService } from '../../services/authentication.service';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { User } from '../../models/user';
 
 @Component({
@@ -20,7 +21,7 @@ export class ProfileComponent implements OnInit {
     });
 
 
-    constructor(private auth: AuthenticationService, private fb: FormBuilder) {}
+    constructor(private auth: AuthenticationService, private fb: FormBuilder, private snackbar: MatSnackBar) {}
     
     ngOnInit() {
         this.auth.profile().subscribe(user => {
@@ -35,7 +36,7 @@ export class ProfileComponent implements OnInit {
         let newPassword = this.changePasswordForm.get('newPassword').value;
         let email = this.userDetails.email;
         this.auth.updatePassword(email, oldPassword, newPassword).subscribe(() => {
-            alert("password is changed")
+            this.snackbar.open("Wachtwoord is aangepast!", "X")
         }, (err) => {
             console.error(err);
         });
