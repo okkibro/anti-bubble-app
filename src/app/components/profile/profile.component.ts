@@ -33,11 +33,12 @@ export class ProfileComponent implements OnInit {
     changePassword() {
         let oldPassword = this.changePasswordForm.get('oldPassword').value;
         let newPassword = this.changePasswordForm.get('newPassword').value;
-        if (this.auth.updatePassword(this.userDetails.email, oldPassword, newPassword)) {
-            alert("password is changed");
-        } else {
-            alert("password is not changed");
-        }
+        let email = this.userDetails.email;
+        this.auth.updatePassword(email, oldPassword, newPassword).subscribe(() => {
+            alert("password is changed")
+        }, (err) => {
+            console.error(err);
+        });
     }
 
     logoutButton() {

@@ -91,21 +91,25 @@ router.patch('/updatePassword', (req, res) => {
             //check if old password is filled in correctly
             if (user.validatePassword(sanitize(req.body.oldPassword))) {
                 //update password in database to new password
-                user.setPassword(sanitize(req.body.newPassword))
+                user.setPassword(sanitize(req.body.newPassword));
+                //save changes to database
+                user.save();
+                //return status ok
                 return res.status(200).json({
                     message: "password changed"
-                })
+                });
             } else {
                 //handle error if old password doesn't match with the one in database
                 return res.status(401).json({
                     message: "password doesn't match with old password"
-                })
+                });
             }
         } else {
+            console.log("user not found")
             //handle error if user is not found in database
             return res.status(401).json({
                 message: "user not found"
-            })
+            });
         }
     });
 });

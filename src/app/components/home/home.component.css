@@ -1,5 +1,5 @@
 body {
-    background-image: url("../../../favicon.ico");
+    /* background-image: url("../../../favicon.ico"); */
     text-align: center;
     margin: 0;
     padding: 0;
@@ -13,12 +13,12 @@ body {
     height: 100%;
     width: 70%;
     display: inline-block;
-    background-color: orange;
+    /* background-color: orange; */
 }
 
 #logoutButton {
-    color: white;
-    background-color: lightcoral;
+    /* color: white; */
+    /* background-color: lightcoral; */
     position: fixed;
     right: 15px;
     top: 15px;
@@ -30,19 +30,19 @@ body {
     height: 40px;
     width:100%;
     text-align: center;
-    background-color: blue;
+    /* background-color: blue; */
 }
 
 nav a {
    padding: 35px;
    margin: 35px;
    text-align: center;
-   color: white;
+   /* color: white; */
    font-size: 20px;
 }
 
 nav a:hover {
-    color:red;
+    /* color:red; */
 }
 
 #mainText {
@@ -53,8 +53,8 @@ nav a:hover {
 #sessionButton {
     font-size: 20px;
     margin-top: 20px;
-    color: white;
-    background-color: purple;
+    /* color: white; */
+    /* background-color: purple; */
     height: 75px;
     width: 250px;
     border-radius: 12px;
