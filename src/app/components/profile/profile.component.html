@@ -1,3 +1,43 @@
+<mat-toolbar color="primary" class="navBarAng">
+    <mat-toolbar-row>
+        <span>Anti Bubble</span>
+        <span class="example-fill-remaining-space"></span>
+        <span class="align-center"></span>
+        <span class="example-spacer"></span>
+        <span>Home</span>
+        <span>Link 1</span>
+        <span>Profiel</span>
+        <span>Log uit</span>
+    </mat-toolbar-row>
+</mat-toolbar>
+<mat-card class="example-card">
+    <mat-card-header>
+        <mat-card-title>Profiel</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+        <table>
+            <tr>
+              <th>Gebruikersnaam</th>
+              <td>{{ userDetails?.firstName }}</td>
+            </tr>
+          
+            <tr>
+              <th>Volledige naam</th>
+              <td>{{ userDetails?.firstName }} {{ userDetails?.lastName }}</td>
+            </tr>
+            <tr>
+                <th>E-mail adres</th>
+                <td>{{ userDetails?.email }}</td>
+            </tr>
+          </table>
+    </mat-card-content>
+</mat-card>
+
+
+<footer>
+    <p> &copy; Utrecht University (ICS)</p>
+</footer>
+
 <head>
 
     <title>Profiel pagina</title>
@@ -17,22 +57,22 @@
         <a href="/home">Linkjes</a>
         <a href="/home">Naar</a>
         <a href="/home">Niks</a>
-        <a href="profile">Bekijk Profiel</a>
+        <a href="profile">Profiel</a>
     </nav> 
 
     <img class="bubbleIcon" id="iconLeft" src="../../favicon.ico" alt="Bubbles Logo">
     <img class="bubbleIcon" id="iconRight" src="../../favicon.ico" alt="Bubbles Logo">
 
     <br>
-
+  
 <div class="form-horizontal">
     <div class="form-group">
         <strong><label class="col-sm-3 control-label">Full name</label></strong>
-        <p class="form-control-static">{{ userDetails?.firstName }}</p>
+        <p class="form-control-static">{{ userDetails?.firstName }} {{ userDetails?.lastName }}</p>
     </div>
     <div class="form-group">
         <strong><label class="col-sm-3 control-label">Email</label></strong>
-        <p class="form-control-static">{{ userDetails?.email }}</p>
+       <p class="form-control-static">{{ userDetails?.email }}</p>
     </div>
 
     <br>

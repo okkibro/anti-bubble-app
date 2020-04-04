@@ -59,3 +59,8 @@ nav a:hover {
     position: relative;
     float: right;
 }
+
+.mat-sort-header-container {
+    align-items: center;
+  }
+
