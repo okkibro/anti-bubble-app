@@ -1,3 +1,4 @@
+/* this defines the first version of the homepage */
 body {
     background-image: url("../../favicon.ico");
     text-align: center;
@@ -14,16 +15,6 @@ body {
     width: 70%;
     display: inline-block;
     background-color: orange;
-}
-
-#logoutButton {
-    color: white;
-    background-color: lightcoral;
-    position: fixed;
-    right: 15px;
-    top: 15px;
-    height: 30px;
-    border-radius: 8px;
 }
 
 #navBar {
@@ -78,4 +69,45 @@ nav a:hover {
 
 #secondPart {
     height: 300px;
+}
+
+
+/* the following things define the toolbar*/
+#logoutButton {
+    color: black;
+    background-color: lightskyblue;
+    position: fixed;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    height: 60px;
+    width: 60px;
+    right: 15px;
+    text-align: center;
+    font-size: 15px;
+    border-radius: 100%;
+}
+
+.navBarAng {
+    position: sticky;
+}
+
+.navBarAng div {
+    display: fixed;
+    flex: 1 1 auto;
+    text-align: center;
+}
+
+.navitems a {
+    padding: 30px;
+}
+
+.navBarAng a:hover {
+    color: orange;
+}
+
+.logo {
+    text-decoration: underline;
+    text-decoration-color: orange;
+    position: absolute;
 }

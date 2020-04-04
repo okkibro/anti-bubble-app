@@ -1,4 +1,24 @@
-<!DOCTYPE html>
+<mat-toolbar color="primary" class="navBarAng">
+    <mat-toolbar-row>
+            <span class="logo">Anti Bubble</span>
+        
+            <div class="navitems">
+            <a mat-button [routerLink]="'/home'"> Home </a>
+            <a mat-button [routerLink]="'/home'"> Weer home </a>
+            <a mat-button [routerLink]="'/home'"> Ook home </a>
+            <a mat-button [routerLink]="'/profile'"> Profiel </a>
+            </div>
+
+            <a mat-button id="logoutButton" (click)="logoutButton()"> Log uit </a>   
+    </mat-toolbar-row>
+</mat-toolbar>
+
+<footer>
+    <p> &copy; Utrecht University (ICS)</p>
+</footer>
+
+
+
 <html>
 
     <head>

@@ -1,15 +1,18 @@
 <mat-toolbar color="primary" class="navBarAng">
     <mat-toolbar-row>
-        <span>Anti Bubble</span>
-        <span class="example-fill-remaining-space"></span>
-        <span class="align-center"></span>
-        <span class="example-spacer"></span>
-        <span>Home</span>
-        <span>Link 1</span>
-        <span>Profiel</span>
-        <span>Log uit</span>
+            <span class="logo">Anti Bubble</span>
+        
+            <div class="navitems">
+            <a mat-button [routerLink]="'/home'"> Home </a>
+            <a mat-button [routerLink]="'/home'"> Weer home </a>
+            <a mat-button [routerLink]="'/home'"> Ook home </a>
+            <a mat-button [routerLink]="'/profile'"> Profiel </a>
+            </div>
+
+            <a mat-button id="logoutButton" (click)="logoutButton()"> Log uit </a>   
     </mat-toolbar-row>
 </mat-toolbar>
+
 <mat-card class="example-card">
     <mat-card-header>
         <mat-card-title>Profiel</mat-card-title>
@@ -46,7 +49,7 @@
 
 <body>
     <div class="bodyDiv">
-        <input type="button" id="logoutButton" (click)="logoutButton()" value="Log uit">
+        <!-- <input type="button" id="logoutButton" (click)="logoutButton()" value="Log uit"> -->
 
     <h1>Breaking Bubbles</h1>  
     <h5>Breaking Bubbles is een online webpagina waar leerlingen zich bewust kunnen worden van hun filterbubbel.<br>
