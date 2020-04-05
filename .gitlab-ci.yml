@@ -1,25 +1,21 @@
-build:
+image: node:latest
 
- stage: build
+stages:
+  - build
+  - test
 
- image: trion/ng-cli
-
- before_script:
-
-  - npm ci
-
- script:
-
-  - ng build --prod
-
- artifacts:
-
-  expire_in: 1 day
-
+cache:
   paths:
+    - node_modules/
 
-   - dist/
+install_dependencies:
+  stage: build
+  script:
+    - npm install
+  artifacts:
+    paths:
+      - node_modules/
 
- tags:
-
-  - docker
+testing_testing:
+  stage: test
+  script: npm test
