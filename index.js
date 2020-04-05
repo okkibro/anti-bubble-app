@@ -6,6 +6,9 @@ const cors = require('cors');
 const bodyParser = require('body-parser');
 const passport = require('passport');
 
+const dotenv = require('dotenv');
+dotenv.config();
+
 const fs = require('fs');
 const https = require('https');
 const http = require('http');

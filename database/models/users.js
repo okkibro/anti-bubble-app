@@ -31,14 +31,13 @@ userSchema.methods.validatePassword = function(password) {
     return this.hash === hash;
 };
 
-// TODO: Remove secret from code
 userSchema.methods.generateJwt = function() {
     return jwt.sign({
         _id: this._id,
         email: this.email,
         name: this.name,
         exp: Date.now() + (86400 * 1000)
-    }, "longer-secret-is-better");
+    }, process.env.MY_SECRET);
 };
 
 module.exports = mongoose.model('User', userSchema);
