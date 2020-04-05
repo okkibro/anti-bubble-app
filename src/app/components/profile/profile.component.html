@@ -1,47 +1,54 @@
 <mat-toolbar color="primary" class="navBarAng">
     <mat-toolbar-row>
-            <span class="logo">Anti Bubble</span>
-        
-            <div class="navitems">
+        <span class="logo">Anti Bubble</span>
+
+        <div class="navitems">
             <a mat-button [routerLink]="'/home'"> Home </a>
             <a mat-button [routerLink]="'/home'"> Weer home </a>
             <a mat-button [routerLink]="'/home'"> Ook home </a>
             <a mat-button [routerLink]="'/profile'"> Profiel </a>
-            </div>
+        </div>
 
-            <a mat-button id="logoutButton" (click)="logoutButton()"> Log uit </a>   
+        <a mat-button id="logoutButton" (click)="logoutButton()"> Log uit </a>
     </mat-toolbar-row>
 </mat-toolbar>
 
-<mat-card class="example-card">
-    <mat-card-header>
-        <mat-card-title>Profiel</mat-card-title>
-    </mat-card-header>
-    <mat-card-content>
-        <table>
-            <tr>
-              <th>Gebruikersnaam</th>
-              <td>{{ userDetails?.firstName }}</td>
-            </tr>
-          
-            <tr>
-              <th>Volledige naam</th>
-              <td>{{ userDetails?.firstName }} {{ userDetails?.lastName }}</td>
-            </tr>
-            <tr>
-                <th>E-mail adres</th>
-                <td>{{ userDetails?.email }}</td>
-            </tr>
-          </table>
-    </mat-card-content>
-</mat-card>
+<body>
+    <mat-card class="bodyDiv">
+        <mat-card-header class="matCardHeader">
+            <mat-card-title>Profiel</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+            <table class="profileTable">
+                <tr>
+                    <th>Gebruikersnaam</th>
+                    <td>{{ userDetails?.firstName }}</td>
+                </tr>
+                <tr>
+                    <th>Volledige naam</th>
+                    <td>{{ userDetails?.firstName }} {{ userDetails?.lastName }}</td>
+                </tr>
+                <tr>
+                    <th>E-mail adres</th>
+                    <td>{{ userDetails?.email }}</td>
+                </tr>
+            </table>
+        </mat-card-content>
+    </mat-card>
+</body>
 
+
+<!-- <img class="bubbleIcon" id="iconLeft" src="../../favicon.ico" alt="Bubbles Logo"> -->
+<!-- <img class="bubbleIcon" id="iconRight" src="../../favicon.ico" alt="Bubbles Logo"> -->
 
 <footer>
     <p> &copy; Utrecht University (ICS)</p>
 </footer>
 
-<head>
+
+
+
+<!-- <head>
 
     <title>Profiel pagina</title>
 
@@ -49,12 +56,12 @@
 
 <body>
     <div class="bodyDiv">
-        <!-- <input type="button" id="logoutButton" (click)="logoutButton()" value="Log uit"> -->
+        <input type="button" id="logoutButton" (click)="logoutButton()" value="Log uit">
 
-    <h1>Breaking Bubbles</h1>  
-    <h5>Breaking Bubbles is een online webpagina waar leerlingen zich bewust kunnen worden van hun filterbubbel.<br>
-    Dit wordt bereikt door middel van lessen die in de klas met de docent(e) worden afgenomen.</h5> 
-
+        <h1>Breaking Bubbles</h1>
+        <h5>Breaking Bubbles is een online webpagina waar leerlingen zich bewust kunnen worden van hun filterbubbel.<br>
+            Dit wordt bereikt door middel van lessen die in de klas met de docent(e) worden afgenomen.</h5>
+        
     <nav id="navBar">
         <a href="/home">Home</a>
         <a href="/home">Linkjes</a>
@@ -63,10 +70,10 @@
         <a href="profile">Profiel</a>
     </nav> 
 
-    <img class="bubbleIcon" id="iconLeft" src="../../favicon.ico" alt="Bubbles Logo">
-    <img class="bubbleIcon" id="iconRight" src="../../favicon.ico" alt="Bubbles Logo">
+        <img class="bubbleIcon" id="iconLeft" src="../../favicon.ico" alt="Bubbles Logo">
+        <img class="bubbleIcon" id="iconRight" src="../../favicon.ico" alt="Bubbles Logo">
 
-    <br>
+        <br>
   
 <div class="form-horizontal">
     <div class="form-group">
@@ -78,9 +85,9 @@
        <p class="form-control-static">{{ userDetails?.email }}</p>
     </div>
 
-    <br>
-    <a href="/home">Back to Home</a>
-</div>
+        <br>
+        <a href="/home">Back to Home</a>
+    </div>
 
-</div>
-</body>
+    </div>
+</body> -->

@@ -10,13 +10,6 @@ body {
     
 }
 
-.bodyDiv {
-    height: 100%;
-    width: 70%;
-    display: inline-block;
-    background-color: orange;
-}
-
 
 #navBar {
     height: 40px;
@@ -80,7 +73,8 @@ nav a:hover {
 }
 
 .navitems a {
-    padding: 30px;
+    padding-left: 30px;
+    padding-right: 30px;
 }
 
 .navBarAng a:hover {
@@ -92,3 +86,37 @@ nav a:hover {
     text-decoration-color: orange;
     position: absolute;
 }
+
+/* the following code will describe the rest of the (angular) page */
+body {
+    background-image: url("../../../favicon.ico");
+    text-align: center;
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    width: 100%;
+    background-size: auto;  
+}
+
+.bodyDiv {
+    height: 100%;
+    width: 70%;
+    display: inline-block;
+    background-color: orange;
+    text-align: center;
+}
+
+.matCardHeader {
+    display: inline-block;
+}
+
+.profileTable {
+    display: inline-block;
+}
+
+.profileTable th, td {
+    text-align: left;
+    padding: 10px;
+}
+
+

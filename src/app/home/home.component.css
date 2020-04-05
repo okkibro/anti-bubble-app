@@ -1,22 +1,4 @@
 /* this defines the first version of the homepage */
-body {
-    background-image: url("../../favicon.ico");
-    text-align: center;
-    margin: 0;
-    padding: 0;
-    height: 100%;
-    width: 100%;
-    background-size: auto;
-    
-}
-
-.bodyDiv {
-    height: 100%;
-    width: 70%;
-    display: inline-block;
-    background-color: orange;
-}
-
 #navBar {
     height: 40px;
     width:100%;
@@ -39,17 +21,6 @@ nav a:hover {
 #mainText {
     position: center;
     
-}
- 
-#sessionButton {
-    font-size: 20px;
-    margin-top: 20px;
-    color: white;
-    background-color: purple;
-    height: 75px;
-    width: 250px;
-    border-radius: 12px;
-    text-align: center;
 }
 
 .bubbleIcon {
@@ -99,7 +70,8 @@ nav a:hover {
 }
 
 .navitems a {
-    padding: 30px;
+    padding-left: 30px;
+    padding-right: 30px;
 }
 
 .navBarAng a:hover {
@@ -110,4 +82,40 @@ nav a:hover {
     text-decoration: underline;
     text-decoration-color: orange;
     position: absolute;
+}
+
+
+/* the following code will describe the rest of the (angular) page */
+body {
+    background-image: url("../../favicon.ico");
+    text-align: center;
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    width: 100%;
+    background-size: auto;  
+}
+
+.bodyDiv {
+    height: 100%;
+    width: 70%;
+    display: inline-block;
+    background-color: orange;
+}
+
+#sessionButton {
+    font-size: 20px;
+    margin-top: 20px;
+    color: white;
+    background-color: purple;
+    height: 75px;
+    width: 250px;
+    border-radius: 12px;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.matCardHeader {
+    display: inline-block;
 }
