@@ -4,7 +4,8 @@ import { AuthenticationService } from '../../services/authentication.service';
 @Component({
   selector: 'mean-home',
   templateUrl: './home.component.html',
-  styleUrls: ['./home.component.css']
+  styleUrls: ['./home.component.css',
+              '../../shared/general-styles.css']
 })
 export class HomeComponent implements OnInit {
 
