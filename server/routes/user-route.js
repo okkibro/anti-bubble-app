@@ -5,10 +5,9 @@ const passport = require("passport");
 const User = mongoose.model('User');
 const sanitize = require('mongo-sanitize');
 
-// TODO: Remove secret from code
 const jwt = require('express-jwt');
 const auth = jwt({
-    secret: 'longer-secret-is-better',
+    secret: process.env.MY_SECRET,
     userProperty: 'payload'
 });
 
