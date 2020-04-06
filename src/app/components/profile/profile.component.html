@@ -1,0 +1,87 @@
+<head>
+
+    <title>Profiel pagina</title>
+
+</head>
+
+<body>
+    <div class="bodyDiv">
+        <input type="button" id="logoutButton" (click)="logoutButton()" value="Log uit">
+
+        <h1>Breaking Bubbles</h1>
+        <h5>Breaking Bubbles is een online webpagina waar leerlingen zich bewust kunnen worden van hun filterbubbel.<br>
+            Dit wordt bereikt door middel van lessen die in de klas met de docent(e) worden afgenomen.</h5>
+
+        <nav id="navBar">
+            <a href="/home">Home</a>
+            <a href="/home">Linkjes</a>
+            <a href="/home">Naar</a>
+            <a href="/home">Niks</a>
+            <a href="profile">Bekijk Profiel</a>
+        </nav>
+
+        <img class="bubbleIcon" id="iconLeft" src="../../favicon.ico" alt="Bubbles Logo">
+        <img class="bubbleIcon" id="iconRight" src="../../favicon.ico" alt="Bubbles Logo">
+
+        <br>
+
+        <div class="form-horizontal">
+            <div class="form-group">
+                <strong><label class="col-sm-3 control-label">Full name</label></strong>
+                <p class="form-control-static">{{ userDetails?.firstName }}</p>
+            </div>
+            <div class="form-group">
+                <strong><label class="col-sm-3 control-label">Email</label></strong>
+                <p class="form-control-static">{{ userDetails?.email }}</p>
+            </div>
+
+            <br>
+            <a href="/home">Back to Home</a>
+        </div>
+        <mat-accordion >
+            <mat-expansion-panel>
+                <mat-expansion-panel-header>
+                    <mat-panel-title>
+                        Wachtwoord Aanpassen
+                    </mat-panel-title>
+                    <mat-panel-description>
+                        Vul je oude en nieuwe wachtwoord in
+                    </mat-panel-description>
+                </mat-expansion-panel-header>
+                <form name="changePasswordForm" [formGroup]="changePasswordForm" (ngSubmit)="changePassword()">
+                    <table align="center">
+                        <tr>
+                            <mat-form-field class="example-full-width">
+                                <mat-label>Oude wachtwoord</mat-label>
+                                <input matInput type="password" formControlName="oldPassword">
+                                <mat-error *ngIf="changePasswordForm.get('oldPassword').hasError('required')">
+                                    Wachtwoord is <strong>verplicht</strong>
+                                </mat-error>
+                            </mat-form-field>
+                        </tr>
+                        <tr>
+                            <mat-form-field class="example-full-width">
+                                <mat-label>Nieuw wachtwoord</mat-label>
+                                <input matInput type="password" formControlName="newPassword">
+                                <mat-error *ngIf="changePasswordForm.get('oldPassword').hasError('required')">
+                                    Wachtwoord is <strong>verplicht</strong>
+                                </mat-error>
+                            </mat-form-field>
+                        </tr>
+                        <tr>
+                            <mat-form-field class="example-full-width">
+                                <mat-label>Herhaal nieuw wachtwoord</mat-label>
+                                <input matInput type="password" formControlName="repeatPassword">
+                                <mat-error *ngIf="changePasswordForm.get('repeatPassword').hasError('noPasswordMatch')">
+                                    Wachtwoorden komen niet overeen
+                                </mat-error>
+                            </mat-form-field>
+                        </tr>
+                    </table>
+                    <button mat-raised-button type="submit" [disabled]="!changePasswordForm.valid" color="primary">Aanpassen</button>
+                </form>
+            </mat-expansion-panel>
+        </mat-accordion>
+
+    </div>
+</body>

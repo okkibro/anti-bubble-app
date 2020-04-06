@@ -1,0 +1,86 @@
+<mat-toolbar color="primary">
+    <mat-toolbar-row>
+        <span>Anti Bubble</span>
+        <span class="example-fill-remaining-space"></span>
+        <span class="align-center"></span>
+        <span class="example-spacer"></span>
+    </mat-toolbar-row>
+</mat-toolbar>
+<mat-card class="example-card">
+    <mat-card-header>
+        <mat-card-title>Registreren</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+        <form name="registerForm" class="example-form" [formGroup]="registerForm" (ngSubmit)="registerUser()">
+            <table class="example-full-width">
+                <tr>
+                    <td>
+                        <mat-form-field class="example-full-width">
+                            <mat-label>Voornaam</mat-label>
+                            <input matInput placeholder="Voornaam" formControlName="firstName" required>
+                            <mat-error *ngIf="registerForm.get('firstName').hasError('required')">
+                                Voornaam is <strong>verplicht</strong>
+                            </mat-error>
+                        </mat-form-field>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <mat-form-field class="example-full-width">
+                            <mat-label>Achternaam</mat-label>
+                            <input matInput placeholder="Achternaam" formControlName="lastName" required>
+                            <mat-error *ngIf="registerForm.get('lastName').hasError('required')">
+                                Achternaam is <strong>verplicht</strong>
+                            </mat-error>
+                        </mat-form-field>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <mat-form-field class="example-full-width">
+                            <mat-label>Email</mat-label>
+                            <input matInput placeholder="Email" formControlName="email" required>
+                            <mat-error *ngIf="registerForm.get('email').hasError('email') && !registerForm.get('email').hasError('required')">
+                                Vul een geldig emailadres in
+                            </mat-error>
+                            <mat-error *ngIf="registerForm.get('email').hasError('required')">
+                                Email is <strong>verplicht</strong>
+                            </mat-error>
+                            <mat-error *ngIf="registerForm.get('email').hasError('emailTaken')">
+                                Er bestaat al een account met dit emailadres
+                            </mat-error>
+                        </mat-form-field>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <mat-form-field class="example-full-width">
+                            <mat-label>Wachtwoord</mat-label>
+                            <input matInput placeholder="Wachtwoord" formControlName="password" type=password required>
+                            <mat-error *ngIf="registerForm.get('password').hasError('required')">
+                                Wachtwoord is <strong>verplicht</strong>
+                            </mat-error>
+                        </mat-form-field>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <mat-form-field class="example-full-width">
+                            <mat-label>Herhaal wachtwoord</mat-label>
+                            <input matInput placeholder="Herhaal wachtwoord" formControlName="repeatPassword" type=password required>
+                            <mat-error *ngIf="registerForm.get('repeatPassword').hasError('noPasswordMatch')">
+                                Wachtwoorden komen niet overeen
+                            </mat-error>
+                        </mat-form-field>
+                    </td>
+                </tr>
+            </table>
+            <mat-card-actions>
+                <button mat-raised-button type="submit" [disabled]="!registerForm.valid" color="primary">Registreer</button>
+            </mat-card-actions>
+        </form>
+    </mat-card-content>
+</mat-card>
+<footer>
+    <p> &copy; Utrecht University (ICS)</p>
+</footer>

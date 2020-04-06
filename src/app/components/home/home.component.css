@@ -1,0 +1,81 @@
+body {
+    /* background-image: url("../../../favicon.ico"); */
+    text-align: center;
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    width: 100%;
+    background-size: auto;
+    
+}
+
+.bodyDiv {
+    height: 100%;
+    width: 70%;
+    display: inline-block;
+    /* background-color: orange; */
+}
+
+#logoutButton {
+    /* color: white; */
+    /* background-color: lightcoral; */
+    position: fixed;
+    right: 15px;
+    top: 15px;
+    height: 30px;
+    border-radius: 8px;
+}
+
+#navBar {
+    height: 40px;
+    width:100%;
+    text-align: center;
+    /* background-color: blue; */
+}
+
+nav a {
+   padding: 35px;
+   margin: 35px;
+   text-align: center;
+   /* color: white; */
+   font-size: 20px;
+}
+
+nav a:hover {
+    /* color:red; */
+}
+
+#mainText {
+    position: center;
+    
+}
+ 
+#sessionButton {
+    font-size: 20px;
+    margin-top: 20px;
+    /* color: white; */
+    /* background-color: purple; */
+    height: 75px;
+    width: 250px;
+    border-radius: 12px;
+    text-align: center;
+}
+
+.bubbleIcon {
+    height: 250px;
+    width: 250px;
+}
+
+#iconLeft {
+    position: relative;
+    float: left;
+}
+
+#iconRight {
+    position: relative;
+    float: right;
+}
+
+#secondPart {
+    height: 300px;
+}
