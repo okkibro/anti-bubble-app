@@ -1,5 +1,44 @@
-<!DOCTYPE html>
-<html>
+<mat-toolbar color="primary" class="navBarAng">
+    <mat-toolbar-row>
+        <span class="logo">Anti Bubble</span>
+
+        <div class="navitems">
+            <a mat-button [routerLink]="'/home'"> Home </a>
+            <a mat-button [routerLink]="'/home'"> Weer home </a>
+            <a mat-button [routerLink]="'/home'"> Ook home </a>
+            <a mat-button [routerLink]="'/profile'"> Profiel </a>
+        </div>
+
+        <a mat-button id="logoutButton" (click)="logoutButton()"> Log uit </a>
+    </mat-toolbar-row>
+</mat-toolbar>
+
+<body>
+    <mat-card class="bodyDiv">
+        <mat-card-header class="matCardHeader">
+            <mat-card-title>Breaking Bubbles</mat-card-title>
+            <mat-card-subtitle>
+                Breaking Bubbles is een online webpagina waar leerlingen zich bewust kunnen worden van hun filterbubbel.<br>
+                Dit wordt bereikt door middel van lessen die in de klas met de docent(e) worden afgenomen.
+            </mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-content>
+
+            <a mat-button id="sessionButton" onclick="alert('Sessie begonnen')"> Start nieuwe sessie! </a>
+
+        </mat-card-content>
+    </mat-card>
+</body>
+
+
+
+<footer>
+    <p> &copy; Utrecht University (ICS)</p>
+</footer>
+
+
+
+<!-- <html>
 
     <head>
 
@@ -19,7 +58,7 @@
             <a href="/home">Linkjes</a>
             <a href="/home">Naar</a>
             <a href="/home">Niks</a>
-            <a href="profile">Bekijk Profiel</a>
+            <a href="profile">Profiel</a>
         </nav>  
 
         <br>    
@@ -49,4 +88,4 @@
 
 
 
-</html>
+</html> -->

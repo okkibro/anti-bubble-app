@@ -18,23 +18,6 @@ body {
     
 }
 
-.bodyDiv {
-    height: 100%;
-    width: 70%;
-    display: inline-block;
-    /* background-color: orange; */
-}
-
-#logoutButton {
-    /* color: white; */
-    /* background-color: lightcoral; */
-    position: fixed;
-    right: 15px;
-    top: 15px;
-    height: 30px;
-    border-radius: 8px;
-}
-
 #navBar {
     height: 40px;
     width:100%;
@@ -67,4 +50,78 @@ nav a:hover {
 #iconRight {
     position: relative;
     float: right;
+}
+
+
+/* the following things define the toolbar*/
+#logoutButton {
+    color: black;
+    background-color: lightskyblue;
+    position: fixed;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    height: 60px;
+    width: 60px;
+    right: 15px;
+    text-align: center;
+    font-size: 15px;
+    border-radius: 100%;
+}
+
+.navBarAng {
+    position: sticky;
+}
+
+.navBarAng div {
+    display: fixed;
+    flex: 1 1 auto;
+    text-align: center;
+}
+
+.navitems a {
+    padding-left: 30px;
+    padding-right: 30px;
+}
+
+.navBarAng a:hover {
+    color: orange;
+}
+
+.logo {
+    text-decoration: underline;
+    text-decoration-color: orange;
+    position: absolute;
+}
+
+/* the following code will describe the rest of the (angular) page */
+body {
+    background-image: url("../../../favicon.ico");
+    text-align: center;
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    width: 100%;
+    background-size: auto;  
+}
+
+.bodyDiv {
+    height: 100%;
+    width: 70%;
+    display: inline-block;
+    background-color: orange;
+    text-align: center;
+}
+
+.matCardHeader {
+    display: inline-block;
+}
+
+.profileTable {
+    display: inline-block;
+}
+
+.profileTable th, td {
+    text-align: left;
+    padding: 10px;
 }
