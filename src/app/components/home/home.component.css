@@ -87,7 +87,7 @@ nav a:hover {
 
 /* the following code will describe the rest of the (angular) page */
 body {
-    background-image: url("../../favicon.ico");
+    background-image: url("../../../favicon.ico");
     text-align: center;
     margin: 0;
     padding: 0;
