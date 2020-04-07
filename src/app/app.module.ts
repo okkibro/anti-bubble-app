@@ -4,6 +4,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ReactiveFormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from "@angular/common/http";
+import { FlexLayoutModule } from "@angular/flex-layout";
 
 // core modules
 import { CustomMaterialModule } from './shared/material.module';
@@ -36,7 +37,7 @@ import { CookieService } from 'ngx-cookie-service';
         ReactiveFormsModule,
         AppRoutingModule,
         HttpClientModule,
-
+        FlexLayoutModule,
     ],
     providers: [AuthGuardService, CookieService],
     bootstrap: [AppComponent]
