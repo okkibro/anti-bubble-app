@@ -9,10 +9,9 @@ cache:
 install_dependencies:
   stage: build
   script:
-    - npm install -g @angular/cli
     - npm install
     - npm audit fix
 
 testing_testing:
   stage: test
-  script: npm test
+  script: ./node_modules/@angular/cli/bin/ng test
