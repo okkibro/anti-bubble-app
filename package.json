@@ -7,7 +7,7 @@
     "client": "ng serve",
     "server": "ng build && nodemon index.js",
     "start": "npm-run-all -p client server",
-    "test": "ts-node node_modules/jasmine/bin/jasmine"
+    "test": "ng test"
   },
   "repository": {
     "type": "git",
