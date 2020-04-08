@@ -1,4 +1,4 @@
-image:
+image: node:latest
 stages:
   - build
   - test
@@ -7,12 +7,13 @@ cache:
   paths:
     - node_modules/
 
-Build:
-  stage: build
-  script:
-    - npm install
+#Build:
+#  stage: build
+#  script:
+#    - npm install
 
 Test:
   stage: test
   script: 
-    - ./node_modules/@angular/bin/ng test --watch=false --browsers=ChromeHeadless
+    - npm install
+    - ./node_modules/@angular/cli/bin/ng test --watch=false --browsers=ChromeHeadless
