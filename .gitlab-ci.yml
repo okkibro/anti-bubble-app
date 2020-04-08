@@ -15,4 +15,4 @@ Build:
 Test:
   stage: test
   script: 
-    - ng test --watch=false --browsers=ChromeHeadless
+    - ./node_modules/@angular/bin/ng test --watch=false --browsers=ChromeHeadless
