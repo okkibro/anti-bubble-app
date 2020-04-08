@@ -10,4 +10,4 @@ testing_testing:
   stage: test
   script: 
     - npm install
-    - ./node_modules/@angular/cli/bin/ng test --no-watch=false --no-progress --browsers=ChromeHeadlessCI
+    - ./node_modules/@angular/cli/bin/ng test --no-watch --no-progress --browsers=ChromeHeadlessCI
