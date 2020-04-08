@@ -15,7 +15,6 @@ module.exports = function(config) {
     plugins: [
       require('karma-jasmine'),
       require('karma-chrome-launcher'),
-      require('karma-firefox-launcher'),
       require('@angular-devkit/build-angular/plugins/karma'),
       require('karma-jasmine-html-reporter'),
     ],
@@ -56,14 +55,7 @@ module.exports = function(config) {
 
     // start these browsers
     // available browser launchers: https://npmjs.org/browse/keyword/karma-launcher
-    browsers: ['Firefox', 'Chrome', 'ChromeHeadlessNoSandbox'],
-    customLaunchers: {
-      customLaunchers: {
-        ChromeHeadlessNoSandbox: {
-          base: 'ChromeHeadless',
-          flags: ['--no-sandbox','--disable-setuid-sandbox']
-        }
-      },
+    browsers: ['Chrome', 'ChromeHeadless'],
 
 
     // Continuous Integration mode
