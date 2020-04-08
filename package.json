@@ -48,6 +48,7 @@
     "express-jwt": "^5.3.1",
     "express-session": "^1.17.0",
     "helmet": "^3.21.3",
+    "intl": "^1.2.5",
     "jasmine-html-reporter": "0.0.7",
     "jsonwebtoken": "^8.5.1",
     "mongo-sanitize": "^1.1.0",
@@ -79,6 +80,10 @@
     "karma-chrome-launcher": "^3.1.0",
     "karma-firefox-launcher": "^1.3.0",
     "karma-jasmine": "^3.1.1",
+    "karma-jasmine-html-reporter": "^1.5.3",
+    "karma-phantomjs-launcher": "^1.0.4",
+    "phantomjs-prebuilt": "^2.1.16",
+    "puppeteer": "^2.1.1",
     "ts-node": "~7.0.0",
     "tslint": "~5.15.0",
     "typescript": "~3.7.5"
