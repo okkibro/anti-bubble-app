@@ -60,15 +60,15 @@ body {
     width: 70%;
     justify-content: center;
     text-align: center;
-    align-items: center;
+    align-items: center; 
     background-color: pink;
 }
 
-body mat-card {
+mat-card {
     background-color: orange;
 }
 
-body mat-card-header {
+mat-card-header {
     display: inline-block;
 }
 
