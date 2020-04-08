@@ -9,8 +9,6 @@ cache:
 
 Build:
   stage: build
-  tags:
-    - node
   script:
     - npm install
 
