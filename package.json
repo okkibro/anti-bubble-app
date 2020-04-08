@@ -7,7 +7,9 @@
     "client": "ng serve",
     "server": "ng build && nodemon index.js",
     "start": "npm-run-all -p client server",
-    "test": "ng test"
+    "test": "ng test",
+    "test:karma": "node_modules/.bin/karma start karma.conf.js",
+    "test:karma-headless": "node_modules/.bin/karma start ./config/karma-headless.conf.js"
   },
   "repository": {
     "type": "git",
@@ -41,6 +43,7 @@
     "@angular/router": "~9.0.2",
     "@types/jest": "^25.1.4",
     "body-parser": "^1.19.0",
+    "chromium": "^2.1.2",
     "cookie-session": "^1.4.0",
     "csurf": "^1.11.0",
     "dotenv": "^8.2.0",
