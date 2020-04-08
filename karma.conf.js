@@ -15,6 +15,7 @@ module.exports = function(config) {
     plugins: [
       require('karma-jasmine'),
       require('karma-chrome-launcher'),
+      require('karma-firefox-launcher'),
       require('@angular-devkit/build-angular/plugins/karma'),
       require('karma-jasmine-html-reporter'),
     ],
@@ -53,10 +54,9 @@ module.exports = function(config) {
     // enable / disable watching file and executing tests whenever any file changes
     autoWatch: true,
 
-
     // start these browsers
     // available browser launchers: https://npmjs.org/browse/keyword/karma-launcher
-    browsers: ['Chrome', 'ChromeHeadlessNoSandbox'],
+    browsers: ['Firefox', 'Chrome', 'ChromeHeadlessNoSandbox'],
     customLaunchers: {
       ChromeHeadlessNoSandbox: {
         base: 'ChromeHeadless',
