@@ -14,4 +14,5 @@ install_dependencies:
 
 testing_testing:
   stage: test
-  script: ./node_modules/@angular/cli/bin/ng test
+  script: 
+    - ./node_modules/@angular/cli/bin/ng test
