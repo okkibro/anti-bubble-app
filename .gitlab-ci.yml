@@ -6,13 +6,8 @@ cache:
   paths:
     - node_modules/
 
-install_dependencies:
-  stage: build
-  script:
-    - npm install
-    - npm audit fix
-
 testing_testing:
   stage: test
   script: 
+    - npm install
     - ./node_modules/@angular/cli/bin/ng test
