@@ -19,7 +19,7 @@ import { HomeComponent } from './components/home/home.component';
 // services
 import { AuthGuardService } from './services/auth-guard.service';
 import { CookieService } from 'ngx-cookie-service';
-
+import { SocketIOService } from './services/socket-io.service';
 
 @NgModule({
     declarations: [
@@ -35,10 +35,9 @@ import { CookieService } from 'ngx-cookie-service';
         CustomMaterialModule,
         ReactiveFormsModule,
         AppRoutingModule,
-        HttpClientModule,
-
+        HttpClientModule
     ],
-    providers: [AuthGuardService, CookieService],
+    providers: [AuthGuardService, CookieService, SocketIOService],
     bootstrap: [AppComponent]
 })
 export class AppModule { }
