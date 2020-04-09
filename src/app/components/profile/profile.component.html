@@ -35,6 +35,10 @@
                             <th>E-mail adres</th>
                             <td>{{ userDetails?.email }}</td>
                         </tr>
+                        <tr>
+                            <th>Klas</th>
+                            <td>TODO: klas toevoegen</td>
+                        </tr>
                     </table>
                 </mat-card-content>
             </mat-card>
@@ -61,6 +65,26 @@
                     <mat-form-field>
                         <input matInput placeholder="Zoek hier">
                     </mat-form-field>
+                    <button mat-button>Go</button>
+                    <mat-accordion>
+                        <mat-expansion-panel>
+                        <mat-expansion-panel-header>
+                            <mat-panel-title>
+                                Klas tonen
+                            </mat-panel-title>
+                        </mat-expansion-panel-header>
+                            <table class="profileTable"> 
+                                <tr>
+                                    <th>Voornaam</th>
+                                    <th>Achternaam</th>
+                                </tr>
+                                <tr>
+                                    <td>Klasgenoot</td>
+                                    <td>1</td>
+                                </tr>
+                            </table>
+                        </mat-expansion-panel>
+                    </mat-accordion>
                 </mat-card-content>
             </mat-card>
 

@@ -2,7 +2,7 @@
 #logoutButton {
     color: black;
     background-color: lightskyblue;
-    position: fixed;
+    position: sticky;
     display: inline-flex;
     justify-content: center;
     align-items: center;
