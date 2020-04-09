@@ -75,3 +75,9 @@ mat-card-header {
 mat-card button{
     background-color: royalblue;
 }
+
+mat-card img{
+    object-fit: cover; 
+    width: 15%; 
+    height: width;
+}
