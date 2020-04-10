@@ -16,6 +16,8 @@ import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { HomeComponent } from './components/home/home.component';
+import { ClassOverviewComponent } from './components/class-overview/class-overview.component';
+import { ClassmateProfileComponent } from './components/classmateProfile/classmateProfile.component';
 
 // services
 import { AuthGuardService } from './services/auth-guard.service';
@@ -29,6 +31,8 @@ import { CookieService } from 'ngx-cookie-service';
         RegisterComponent,
         ProfileComponent,
         HomeComponent,
+        ClassOverviewComponent,
+        ClassmateProfileComponent
     ],
     imports: [
         BrowserModule,

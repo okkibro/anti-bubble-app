@@ -7,13 +7,17 @@ import { RegisterComponent } from './components/register/register.component';
 import { ProfileComponent } from './components/profile/profile.component';
 
 import { AuthGuardService} from './services/auth-guard.service';
+import { ClassOverviewComponent } from './components/class-overview/class-overview.component';
+import { ClassmateProfileComponent } from './components/classmateProfile/classmateProfile.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
   { path: 'home', component: HomeComponent, canActivate: [AuthGuardService]},
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
-  { path: 'profile', component: ProfileComponent, canActivate: [AuthGuardService]}
+  { path: 'profile', component: ProfileComponent, canActivate: [AuthGuardService]},
+  { path: 'class-overview', component: ClassOverviewComponent },
+  { path: 'classmateProfile', component: ClassmateProfileComponent }
 ];
 
 @NgModule({

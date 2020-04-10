@@ -16,6 +16,8 @@
 
 .navBarAng {
     position: sticky;
+    top: 0;
+    z-index: 100;
 }
 
 .navBarAng div {
@@ -78,6 +80,16 @@ mat-card button{
 
 mat-card img{
     object-fit: cover; 
-    width: 15%; 
+    width: 20%; 
     height: width;
 }
+
+.UItable {
+    display: inline-block;
+}
+
+.UItable th, td {
+    text-align: left;
+    padding: 10px;    
+}
+
