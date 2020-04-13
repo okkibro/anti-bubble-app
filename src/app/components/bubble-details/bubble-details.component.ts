@@ -1,55 +1,88 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthenticationService } from '../../services/authentication.service';
 import { User } from '../../models/user';
-// import * as Highcharts from 'highcharts-angular';
+import * as Highcharts from 'highcharts-angular';
+
+import { analyzeAndValidateNgModules } from '@angular/compiler';
+import * as Highcharts2 from "highcharts";
+
 
 @Component({
   selector: 'mean-bubble-details',
   templateUrl: './bubble-details.component.html',
   styleUrls: ['./bubble-details.component.css',
-              '../../shared/general-styles.css']
+    '../../shared/general-styles.css']
 })
 export class BubbleDetailsComponent implements OnInit {
 
-//   data = [{
-//     name: 'ItSolutionStuff.com',
-//     data: [500, 700, 555, 444, 777, 877, 944, 567, 666, 789, 456, 654]
-//  },{
-//     name: 'Nicesnippets.com',
-//     data: [677, 455, 677, 877, 455, 778, 888, 567, 785, 488, 567, 654]
-//  }];
+  charts = Highcharts2;
 
-//   highcharts = Highcharts;
+  chartConstructor = 'chart'; // optional string, defaults to 'chart'
 
-//   chartOptions = {   
-//     chart: {
-//        type: "spline"
-//     },
-//     title: {
-//        text: "Monthly Site Visitor"
-//     },
-//     xAxis:{
-//        categories:["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
-//     },
-//     yAxis: {          
-//        title:{
-//           text:"Visitors"
-//        } 
-//     },
-//     series: this.data
-//   };
- 
+  chartCallback = function (chart) { } // optional function, defaults to null
+  updateFlag = false; // optional boolean
+  oneToOneFlag = true; // optional boolean, defaults to false
+  runOutsideAngularFlag = false; // optional boolean, defaults to false
+
+  chartOptions = {}
+
+  initChart() {
+    this.chartOptions = {
+      chart: {
+        type: "spline"
+      },
+      title: {
+        text: "Bubbel Geschiedenis"
+      },
+      subtitle: {
+        text: "Veranderingen van je bubbel over de tijd"
+      },
+      xAxis: {
+        categories: ["Sessie 1", "Sessie 2", "Sessie 3", "Sessie 4", "Sessie 5", "Sessie 6", "Sessie 7"]
+      },
+      yAxis: {
+        title: {
+          text: "Percentage (%)"
+        },
+        visible: true,
+      },
+      tooltip: {
+        valueSuffix: " %"
+      },
+      series: [
+        {
+          name: 'Diversiteit nieuwsbronnen',
+          color: 'red',
+          data: [7, 6, 9, 14, 18, 21, 25]
+        },
+        {
+          name: 'Kwaliteit/Betrouwbaarheid nieuwsbronnen',
+          color: 'green',
+          data: [0, 8, 5, 11, 17, 28, 31]
+        },
+        {
+          name: 'Kennis over filter bubbles',
+          color: 'blue',
+          data: [12, 13, 17, 29, 25, 26, 31]
+        }
+      ]
+    };
+  }
+
+
   userDetails: User;
 
   constructor(private authenticationService: AuthenticationService) {
 
-   }
+  }
 
   logoutButton() {
     return this.authenticationService.logout();
   }
 
-  ngOnInit(): void {
+  ngOnInit() {
+    this.initChart();
+
   }
 
 }

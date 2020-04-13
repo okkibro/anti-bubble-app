@@ -55,13 +55,16 @@
                 <mat-card-header>
                     <mat-card-title>Bubbel van {{ userDetails?.firstName }}</mat-card-title>
                 </mat-card-header><br>
-                <img mat-card-image src="https://f1.pngfuel.com/png/724/363/759/cartoon-speech-bubble-soap-bubble-speech-balloon-pink-circle-material-property-sphere-magenta-png-clip-art.png"
+                <img mat-card-image
+                    src="https://f1.pngfuel.com/png/724/363/759/cartoon-speech-bubble-soap-bubble-speech-balloon-pink-circle-material-property-sphere-magenta-png-clip-art.png"
                     alt="bubbel voorbeeld">
             </mat-card>
         </div>
 
         <div fxLayout="row" fxLayoutAlign="space-evenly center">
-            <a mat-button [routerLink]="'/class-overview'"> Terug naar overzicht </a>
+            <button mat-button [routerLink]="'/class-overview'">
+                <mat-icon>keyboard_backspace</mat-icon> Terug naar profiel
+            </button>
         </div>
     </div>
 

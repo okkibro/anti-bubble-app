@@ -4,6 +4,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ReactiveFormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from "@angular/common/http";
+import { HighchartsChartModule } from 'highcharts-angular';
 import { FlexLayoutModule } from "@angular/flex-layout"; 
 
 // core modules
@@ -45,8 +46,8 @@ import { CookieService } from 'ngx-cookie-service';
         ReactiveFormsModule,
         AppRoutingModule,
         HttpClientModule,
+        HighchartsChartModule,
         FlexLayoutModule,
-        
     ],
     providers: [AuthGuardService, CookieService],
     bootstrap: [AppComponent]
