@@ -3,12 +3,12 @@ import { AuthenticationService } from '../../services/authentication.service';
 import { User } from '../../models/user';
 
 @Component({
-  selector: 'mean-classmateProfile',
-  templateUrl: './classmateProfile.component.html',
-  styleUrls: ['./classmateProfile.component.css',
+  selector: 'mean-avatar',
+  templateUrl: './avatar.component.html',
+  styleUrls: ['./avatar.component.css',
               '../../shared/general-styles.css']
 })
-export class ClassmateProfileComponent implements OnInit {
+export class AvatarComponent implements OnInit {
 
   userDetails: User;
 
@@ -18,12 +18,7 @@ export class ClassmateProfileComponent implements OnInit {
     return this.authenticationService.logout();
   }
 
-  ngOnInit() {
-    this.authenticationService.profile().subscribe(user => {
-      this.userDetails = user;
-  }, (err) => {
-      console.error(err);
-  });
+  ngOnInit(): void {
   }
 
 }

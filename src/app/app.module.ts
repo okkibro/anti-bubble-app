@@ -4,7 +4,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ReactiveFormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from "@angular/common/http";
-import { FlexLayoutModule } from "@angular/flex-layout";
+import { FlexLayoutModule } from "@angular/flex-layout"; 
 
 // core modules
 import { CustomMaterialModule } from './shared/material.module';
@@ -18,6 +18,8 @@ import { ProfileComponent } from './components/profile/profile.component';
 import { HomeComponent } from './components/home/home.component';
 import { ClassOverviewComponent } from './components/class-overview/class-overview.component';
 import { ClassmateProfileComponent } from './components/classmateProfile/classmateProfile.component';
+import { AvatarComponent } from './components/avatar/avatar.component';
+import { BubbleDetailsComponent } from './components/bubble-details/bubble-details.component';
 
 // services
 import { AuthGuardService } from './services/auth-guard.service';
@@ -32,7 +34,9 @@ import { CookieService } from 'ngx-cookie-service';
         ProfileComponent,
         HomeComponent,
         ClassOverviewComponent,
-        ClassmateProfileComponent
+        ClassmateProfileComponent,
+        AvatarComponent,
+        BubbleDetailsComponent,
     ],
     imports: [
         BrowserModule,
@@ -42,6 +46,7 @@ import { CookieService } from 'ngx-cookie-service';
         AppRoutingModule,
         HttpClientModule,
         FlexLayoutModule,
+        
     ],
     providers: [AuthGuardService, CookieService],
     bootstrap: [AppComponent]

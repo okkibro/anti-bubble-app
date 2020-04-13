@@ -59,7 +59,7 @@ body {
 
 .containerDiv {
     height: 100%;
-    width: 70%;
+    width: 80%;
     justify-content: center;
     text-align: center;
     align-items: center; 
@@ -93,3 +93,6 @@ mat-card img{
     padding: 10px;    
 }
 
+.abutton {
+    background-color: blueviolet;
+}

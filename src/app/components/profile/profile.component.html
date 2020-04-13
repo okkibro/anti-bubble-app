@@ -16,7 +16,7 @@
 <body>
     <div class="containerDiv" fxLayoutGap="0.5%" fxLayout="column" fxLayoutAlign="space-evenly">
 
-        <div fxLayout="row" fxLayoutGap="0.5%" fxLayoutAlign="space-evenly">
+        <div fxLayout.xs="row" fxLayoutGap="0.5%" fxLayoutAlign="space-evenly">
             <mat-card fxFlex="50%">
                 <mat-card-header>
                     <mat-card-title>Profiel</mat-card-title>
@@ -51,12 +51,12 @@
                     src="https://image.freepik.com/vrije-vector/jonge-vrouw-avatar-cartoon-karakter-profielfoto_18591-55056.jpg"
                     alt="avatar voorbeeld">
                 <mat-card-content>
-                    <button mat-button>Avatar aanpassen</button>
+                    <a mat-button [routerLink]="'/avatar'" class='abutton'>Avatar aanpassen</a>
                 </mat-card-content>
             </mat-card>
         </div>
 
-        <div fxLayout="row" fxLayoutGap="0.5%" fxLayoutAlign="space-evenly">
+        <div fxLayout.xs="row" fxLayoutGap="0.5%" fxLayoutAlign="space-evenly">
             <mat-card fxFlex="50%">
                 <mat-card-header>
                     <mat-card-title>Mijn Bubbel</mat-card-title>
@@ -64,7 +64,7 @@
                 <img mat-card-image src="https://f1.pngfuel.com/png/724/363/759/cartoon-speech-bubble-soap-bubble-speech-balloon-pink-circle-material-property-sphere-magenta-png-clip-art.png"
                     alt="bubbel voorbeeld">
                 <mat-card-content>
-                    <button mat-button>Meer details</button>
+                    <a mat-button [routerLink]="'/bubble-details'" class='abutton'>Meer details</a>
                 </mat-card-content>
             </mat-card>
 
@@ -140,7 +140,7 @@
             </mat-accordion>
         </mat-card> -->
         
-        <mat-card fxLayout="row" fxLayoutAlign="space-evenly center">
+        <mat-card fxLayout.xs="row" fxLayoutAlign="space-evenly center">
             <mat-accordion>
                 <mat-expansion-panel>
                     <mat-expansion-panel-header>

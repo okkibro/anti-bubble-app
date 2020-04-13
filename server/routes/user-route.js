@@ -71,6 +71,7 @@ router.get('/profile', auth, (req, res) => {
     }
 });
 
+
 //router to check if email is already present in the database
 router.post('/checkEmailTaken', (req, res) => {
     User.findOne({ email: sanitize(req.body.email) }).then(user => {

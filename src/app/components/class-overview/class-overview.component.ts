@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthenticationService } from '../../services/authentication.service';
+import {Router} from '@angular/router';
+import { User } from '../../models/user';
 
 @Component({
   selector: 'mean-class-overview',
@@ -9,13 +11,20 @@ import { AuthenticationService } from '../../services/authentication.service';
 })
 export class ClassOverviewComponent implements OnInit {
 
-  constructor(private authenticationService: AuthenticationService) { }
+  userDetails: User;
+
+  constructor(private auth: AuthenticationService, private router: Router) { }
 
   logoutButton() {
-    return this.authenticationService.logout();
+    return this.auth.logout();
   }
 
-  ngOnInit(): void {
+  ngOnInit() {
+    this.auth.profile().subscribe(user => {
+      this.userDetails = user;
+  }, (err) => {
+      console.error(err);
+  });
   }
 
 }
