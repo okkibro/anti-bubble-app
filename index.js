@@ -12,7 +12,6 @@ dotenv.config();
 const fs = require('fs');
 const https = require('https');
 const http = require('http');
-const socketIO = require('socket.io');
 const app = express();
 
 require('./src/app/shared/passport');
@@ -46,13 +45,5 @@ httpApp.all('*', (req, res) => res.redirect(303, 'https://localhost:3000'));
 const httpServer = http.createServer(httpApp);
 httpServer.listen(80, () => console.log(`HTTP server listening: http://localhost:80`));
 
-/* SocketIO stuff */
-const io = socketIO.listen(server);
-const connections = [];
-
-io.on('connection', (socket) => {
-    console.log('a user connected');
-    socket.on('disconnect', () => {
-      console.log('user disconnected');
-    });
-});
+const io = require('socket.io').listen(server);
+const sockets = require('./server/sockets')(io);
