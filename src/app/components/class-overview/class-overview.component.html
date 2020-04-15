@@ -3,13 +3,13 @@
         <span class="logo">Anti Bubble</span>
 
         <div class="navitems">
-            <a mat-button [routerLink]="'/home'"> Home </a>
-            <a mat-button [routerLink]="'/class-overview'"> Klas Overzicht </a>
-            <a mat-button [routerLink]="'/home'"> Uitleg </a>
-            <a mat-button [routerLink]="'/profile'"> Profiel </a>
+            <button mat-button [routerLink]="'/home'"> Home </button>
+            <button mat-button [routerLink]="'/class-overview'"> Klas Overzicht </button>
+            <button mat-button [routerLink]="'/home'"> Uitleg </button>
+            <button mat-button [routerLink]="'/profile'"> Profiel </button>
         </div>
 
-        <a mat-button id="logoutButton" (click)="logoutButton()"> Log uit </a>
+        <button mat-button id="logoutButton" (click)="logoutButton()"> Log uit </button>
     </mat-toolbar-row>
 </mat-toolbar>
 
@@ -35,7 +35,7 @@
                     <tr>
                         <td>{{ userDetails?.firstName }}</td>
                         <td>Online</td>
-                        <td><a mat-button [routerLink]="'/classmateProfile'" class="abutton"> Bekijk Profiel </a></td>
+                        <td><button mat-button [routerLink]="'/classmateProfile'" class="abutton"> Bekijk Profiel </button></td>
                     </tr>
                     <tr>
                         <td>[Naam 2]</td>
