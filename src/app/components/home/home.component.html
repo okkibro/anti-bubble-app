@@ -4,7 +4,7 @@
 
         <div class="navitems">
             <a mat-button [routerLink]="'/home'"> Home </a>
-            <a mat-button [routerLink]="'/home'"> Weer home </a>
+            <a mat-button [routerLink]="'/class-overview'"> Klas Overzicht </a>
             <a mat-button [routerLink]="'/home'"> Uitleg </a>
             <a mat-button [routerLink]="'/profile'"> Profiel </a>
         </div>
@@ -14,27 +14,27 @@
 </mat-toolbar>
 
 <body>
-    <div class="containerDiv">
-        <div fxLayout="row" fxLayoutGap="0.5%" fxLayoutAlign="space-evenly">
-        <mat-card>
-            <mat-card-header>
-                <mat-card-title class="welcomeHeader">Welkom!</mat-card-title>
-                <mat-card-subtitle>
-                    Breaking Bubbles is een online webpagina waar leerlingen zich bewust kunnen worden van hun
-                    filterbubbel.<br>
-                    Dit wordt bereikt door middel van lessen die in de klas met de docent(e) worden afgenomen.
-                </mat-card-subtitle>
-            </mat-card-header>
-            <mat-card-content>
-
-                <a mat-button id="sessionButton" onclick="alert('Sessie begonnen')"> Start nieuwe sessie! </a>
-
-            </mat-card-content>
-        </mat-card>
+    <div class="containerDiv" fxLayoutGap="0.5%" fxLayout="column" fxLayoutAlign="space-evenly">
+        <div fxLayout.xs="row" fxLayoutGap="0.5%" fxLayoutAlign="space-evenly">
+            <mat-card fxFlex="100%">
+                <mat-card-header>
+                    <mat-card-title class="welcomeHeader">Welkom!</mat-card-title>
+                    <mat-card-subtitle>
+                        Breaking Bubbles is een online webpagina waar leerlingen zich bewust kunnen worden van hun
+                        filterbubbel.<br>
+                        Dit wordt bereikt door middel van lessen die in de klas met de docent(e) worden afgenomen.
+                    </mat-card-subtitle>
+                </mat-card-header>
+                <mat-card-content>
+    
+                    <a mat-button id="sessionButton" class='abutton' onclick="alert('Sessie begonnen')"> Start nieuwe sessie! </a>
+    
+                </mat-card-content>
+            </mat-card>
         </div>
     
-    <div fxLayout="row" fxLayoutGap="0.5%" fxLayoutAlign="space-evenly">
-        <mat-card fxFlex="50%">
+    <div fxLayout.xs="row" fxLayoutGap="0.5%" fxLayoutAlign="space-evenly">
+        <mat-card fxFlex="40%">
             <mat-card-header>
                 <mat-card-title>Klas updates</mat-card-title>
                 <!-- Of nieuws? Klas activiteiten? -->
@@ -57,7 +57,7 @@
             </mat-card-content>
         </mat-card>
 
-        <mat-card fxFlex="50%">
+        <mat-card fxFlex="40%">
             <mat-card-header>
                 <mat-card-title>Scorebord</mat-card-title>
             </mat-card-header>
@@ -78,7 +78,7 @@
                 </table>
             </mat-card-content>
         </mat-card>
-        <mat-card fxFlex="50%">
+        <mat-card fxFlex="20%">
             <mat-card-header>Aantal munten</mat-card-header>
             <mat-card-content class="number">
                 
