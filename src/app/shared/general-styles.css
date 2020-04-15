@@ -57,7 +57,7 @@ body {
 
 .containerDiv {
     height: 100%;
-    width: 70%;
+    /* width: 70%; */
     justify-content: center;
     text-align: center;
     align-items: center; 

@@ -15,9 +15,10 @@
 
 <body>
     <div class="containerDiv">
+        <div fxLayout="row" fxLayoutGap="0.5%" fxLayoutAlign="space-evenly">
         <mat-card>
             <mat-card-header>
-                <mat-card-title>Breaking Bubbles</mat-card-title>
+                <mat-card-title class="welcomeHeader">Welkom!</mat-card-title>
                 <mat-card-subtitle>
                     Breaking Bubbles is een online webpagina waar leerlingen zich bewust kunnen worden van hun
                     filterbubbel.<br>
@@ -30,10 +31,64 @@
 
             </mat-card-content>
         </mat-card>
+        </div>
+    
+    <div fxLayout="row" fxLayoutGap="0.5%" fxLayoutAlign="space-evenly">
+        <mat-card fxFlex="50%">
+            <mat-card-header>
+                <mat-card-title>Klas updates</mat-card-title>
+                <!-- Of nieuws? Klas activiteiten? -->
+            </mat-card-header>
+            <mat-card-content>
+                <table class="profileTable">
+                    <tr>
+                        <th>Per1</th>
+                        <td>Heeft spel X gespeeld!</td>
+                    </tr>
+                    <tr>
+                        <th>Per2</th>
+                        <td>Heeft 5 muntjes verdiend!</td>
+                    </tr>
+                    <tr>
+                        <th>Per3</th>
+                        <td>Heeft meegedaan aan de laatste klas sessie!</td>
+                    </tr>
+                </table>
+            </mat-card-content>
+        </mat-card>
+
+        <mat-card fxFlex="50%">
+            <mat-card-header>
+                <mat-card-title>Scorebord</mat-card-title>
+            </mat-card-header>
+            <mat-card-content>
+                <table class="profileTable">
+                    <tr>
+                        <th>Badge1</th>
+                        <td>Gehaald!</td>
+                    </tr>
+                    <tr>
+                        <th>Badge2</th>
+                        <td>Gehaald!</td>
+                    </tr>
+                    <tr>
+                        <th>Badge3</th>
+                        <td>Gehaald!</td>
+                    </tr>
+                </table>
+            </mat-card-content>
+        </mat-card>
+        <mat-card fxFlex="50%">
+            <mat-card-header>Aantal munten</mat-card-header>
+            <mat-card-content class="number">
+                
+                45
+            </mat-card-content>
+            <button mat-button>Ga naar winkel</button>
+        </mat-card>
     </div>
+</div> 
 </body>
-
-
 
 <footer>
     <p> &copy; Utrecht University (ICS)</p>

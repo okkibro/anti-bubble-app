@@ -7,11 +7,24 @@
     font-size: 20px;
     margin-top: 20px;
     color: white;
-    background-color: purple;
+    background-color: blue;
     height: 75px;
     width: 250px;
     border-radius: 12px;
     display: inline-flex;
     justify-content: center;
     align-items: center;
+}
+
+.welcomeHeader{
+    font-size: 40px;
+}
+
+.profileTable th, td {
+    text-align: left;
+    padding: 10px;
+}
+
+.number{
+    font-size: 70px;
 }
