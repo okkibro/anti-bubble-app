@@ -4,6 +4,7 @@ const mongoose = require('mongoose');
 const passport = require("passport");
 const User = mongoose.model('User');
 const sanitize = require('mongo-sanitize');
+const nodemailer = require('nodemailer');
 
 const jwt = require('express-jwt');
 const auth = jwt({
@@ -52,6 +53,43 @@ router.post('/login', (req, res) => {
             token: token
         });
     })(req, res);
+});
+
+// router to send a password recovery email
+router.post('/passwordrecovery', (req, res) => {
+
+    nodemailer.createTestAccount((error, account) => {
+        if (error) {
+            return console.log(error.message);
+        }
+
+        let transporter = nodemailer.createTransport({
+            host: account.smtp.host,
+            port: account.smtp.port,
+            secure: account.smtp.secure,
+            auth: {
+              user: account.user, // generated ethereal user
+              pass: account.pass // generated ethereal password
+            }
+        });
+    
+        let mailOptions = {
+            from: 'Anti Bubble App <' + account.user + '>', // sender address
+            to: req.body.email, // list of receivers
+            subject: "Password Recovery", // Subject line
+            text: "Hello world?", // plain text body
+            html: "<b>Hello world?</b>" // html body
+          };
+    
+          transporter.sendMail(mailOptions, (error, info) => {
+            if (error) {
+                return console.log(error.message);
+            }
+            console.log(nodemailer.getTestMessageUrl(info));
+          });
+    });
+
+    res.status(200).end();
 });
 
 //router to get a user given an id
