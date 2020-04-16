@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthenticationService } from '../../services/authentication.service';
+import { SocketIOService } from '../../services/socket-io.service';
 
 @Component({
   selector: 'mean-home',
@@ -8,13 +9,22 @@ import { AuthenticationService } from '../../services/authentication.service';
 })
 export class HomeComponent implements OnInit {
 
-  constructor(private authenticationService: AuthenticationService) { }
+  constructor(private authenticationService: AuthenticationService, private socketService: SocketIOService) { }
 
+  ngOnInit(): void {
+
+  }
+  
   logoutButton() {
     return this.authenticationService.logout();
   }
 
-  ngOnInit(): void {
+  createSession() {
+    this.socketService.createSession();
   }
 
+  joinSession() {
+    this.socketService.joinSession();
+  }
+  
 }

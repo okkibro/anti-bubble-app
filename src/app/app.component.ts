@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { SocketIOService } from './services/socket-io.service';
 
 @Component({
   selector: 'mean-root',
@@ -9,9 +8,8 @@ import { SocketIOService } from './services/socket-io.service';
 export class AppComponent implements OnInit{
   note = 'Client app is running!';
 
-  constructor(private socketService: SocketIOService) {}
+  constructor() {}
 
   ngOnInit() {
-    this.socketService.setupSocketConnection();
   }
 }

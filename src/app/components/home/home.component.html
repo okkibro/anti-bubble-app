@@ -24,7 +24,12 @@
         </mat-card-header>
         <mat-card-content>
 
-            <a mat-button id="sessionButton" onclick="alert('Sessie begonnen')"> Start nieuwe sessie! </a>
+            <a mat-button id="sessionButton" (click)="createSession()"> Create Session </a>
+
+        </mat-card-content>
+        <mat-card-content>
+
+            <a mat-button id="sessionButton" (click)="joinSession()"> Join Session </a>
 
         </mat-card-content>
     </mat-card>

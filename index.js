@@ -45,5 +45,7 @@ httpApp.all('*', (req, res) => res.redirect(303, 'https://localhost:3000'));
 const httpServer = http.createServer(httpApp);
 httpServer.listen(80, () => console.log(`HTTP server listening: http://localhost:80`));
 
+
+//SocketIO
 const io = require('socket.io').listen(server);
 const sockets = require('./server/sockets')(io);
