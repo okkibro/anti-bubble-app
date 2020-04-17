@@ -7,7 +7,8 @@ import {User} from '../../models/user';
 @Component({
     selector: 'mean-register',
     templateUrl: './register.component.html',
-    styleUrls: ['./register.component.css']
+    styleUrls: ['./register.component.css',
+                '../../shared/general-styles.css']
 })
 
 export class RegisterComponent implements OnInit {

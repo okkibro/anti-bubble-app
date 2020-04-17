@@ -11,9 +11,10 @@ import { ClassOverviewComponent } from './components/class-overview/class-overvi
 import { ClassmateProfileComponent } from './components/classmateProfile/classmateProfile.component';
 import { AvatarComponent } from './components/avatar/avatar.component';
 import { BubbleDetailsComponent } from './components/bubble-details/bubble-details.component';
+import { TeacherOrStudentComponent } from './components/teacherOrStudent/teacherOrStudent.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: '/login', pathMatch: 'full' },
+  { path: '', redirectTo: '/teacherOrStudent', pathMatch: 'full' },
   { path: 'home', component: HomeComponent, canActivate: [AuthGuardService]},
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
@@ -21,7 +22,8 @@ const routes: Routes = [
   { path: 'class-overview', component: ClassOverviewComponent },
   { path: 'classmateProfile', component: ClassmateProfileComponent },
   { path: 'avatar', component: AvatarComponent },
-  { path: 'bubble-details', component: BubbleDetailsComponent }
+  { path: 'bubble-details', component: BubbleDetailsComponent },
+  { path: 'teacherOrStudent', component: TeacherOrStudentComponent }
 ];
 
 @NgModule({

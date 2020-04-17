@@ -8,7 +8,8 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 @Component({
     selector: 'mean-login',
     templateUrl: './login.component.html',
-    styleUrls: ['./login.component.css']
+    styleUrls: ['./login.component.css',
+                '../../shared/general-styles.css']
 })
 
 // TODO: Make sure you can't see attempted password in plain text in "Network" tab in Chrome

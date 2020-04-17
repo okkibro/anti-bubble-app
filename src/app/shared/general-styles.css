@@ -26,12 +26,12 @@
     text-align: center;
 }
 
-.navitems a {
+.navitems button {
     padding-left: 30px;
     padding-right: 30px;
 }
 
-.navBarAng a:hover {
+.navBarAng button:hover {
     color: orange;
 }
 

@@ -21,6 +21,7 @@ import { ClassOverviewComponent } from './components/class-overview/class-overvi
 import { ClassmateProfileComponent } from './components/classmateProfile/classmateProfile.component';
 import { AvatarComponent } from './components/avatar/avatar.component';
 import { BubbleDetailsComponent } from './components/bubble-details/bubble-details.component';
+import { TeacherOrStudentComponent } from './components/teacherOrStudent/teacherOrStudent.component';
 
 // services
 import { AuthGuardService } from './services/auth-guard.service';
@@ -38,6 +39,7 @@ import { CookieService } from 'ngx-cookie-service';
         ClassmateProfileComponent,
         AvatarComponent,
         BubbleDetailsComponent,
+        TeacherOrStudentComponent,
     ],
     imports: [
         BrowserModule,
