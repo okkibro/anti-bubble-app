@@ -1,48 +1,3 @@
-/* this defines the first version of the homepage */
-#navBar {
-    height: 40px;
-    width:100%;
-    text-align: center;
-    /* background-color: blue; */
-}
-
-nav a {
-   padding: 35px;
-   margin: 35px;
-   text-align: center;
-   /* color: white; */
-   font-size: 20px;
-}
-
-nav a:hover {
-    /* color:red; */
-}
-
-#mainText {
-    position: center;
-    
-}
-
-.bubbleIcon {
-    height: 250px;
-    width: 250px;
-}
-
-#iconLeft {
-    position: relative;
-    float: left;
-}
-
-#iconRight {
-    position: relative;
-    float: right;
-}
-
-#secondPart {
-    height: 300px;
-}
-
-
 /* the following things define the toolbar*/
 #logoutButton {
     color: black;
@@ -93,7 +48,7 @@ body {
     padding: 0;
     height: 100%;
     width: 100%;
-    background-size: auto;  
+    background-size: auto;
 }
 
 .bodyDiv {
@@ -103,20 +58,15 @@ body {
     background-color: orange;
 }
 
-#joinSessionButton,
-#createSessionButton {
-    font-size: 20px;
-    margin-top: 20px;
-    color: white;
-    background-color: purple;
-    height: 75px;
-    width: 250px;
-    border-radius: 12px;
-    display: inline-flex;
-    justify-content: center;
-    align-items: center;
-}
-
 .matCardHeader {
     display: inline-block;
+}
+
+.sessionTable {
+    display: inline-block;
+}
+
+.sessionTable th, td {
+    text-align: left;
+    padding: 10px;
 }

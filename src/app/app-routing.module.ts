@@ -5,6 +5,7 @@ import { HomeComponent } from './components/home/home.component';
 import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
 import { ProfileComponent } from './components/profile/profile.component';
+import {SessionComponent} from "./components/session/session.component";
 
 import { AuthGuardService} from './services/auth-guard.service';
 
@@ -12,6 +13,7 @@ const routes: Routes = [
   { path: 'home', component: HomeComponent, canActivate: [AuthGuardService]},
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
+  { path: 'session', component: SessionComponent },
   { path: 'profile', component: ProfileComponent, canActivate: [AuthGuardService]},
   { path: '**', redirectTo: '/login', pathMatch: 'full' },
 ];

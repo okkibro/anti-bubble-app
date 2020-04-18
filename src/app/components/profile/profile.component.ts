@@ -20,7 +20,6 @@ export class ProfileComponent implements OnInit {
         validator: this.passwordMatchValidator
     });
 
-
     constructor(private auth: AuthenticationService, private fb: FormBuilder, private snackbar: MatSnackBar) {}
     
     ngOnInit() {
@@ -53,5 +52,4 @@ export class ProfileComponent implements OnInit {
             form.get('repeatPassword').setErrors({ noPasswordMatch: true });
         }
     }
-
 }

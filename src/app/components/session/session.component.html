@@ -1,0 +1,32 @@
+<mat-toolbar color="primary" class="navBarAng">
+    <mat-toolbar-row>
+        <span class="logo">Anti Bubble</span>
+
+        <div class="navitems">
+            <a mat-button [routerLink]="'/home'"> Home </a>
+            <a mat-button [routerLink]="'/home'"> Weer home </a>
+            <a mat-button [routerLink]="'/home'"> Ook home </a>
+            <a mat-button [routerLink]="'/profile'"> Profiel </a>
+        </div>
+
+        <a mat-button id="logoutButton" (click)="logoutButton()"> Log uit </a>
+    </mat-toolbar-row>
+</mat-toolbar>
+<body>
+    <mat-card class="bodyDiv">
+        <mat-card-header class="matCardHeader">
+            <mat-card-title>Game</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+            <table class="sessionTable">
+                <tr>
+                    <th>Session code</th>
+                    <td>Code</td>
+                </tr>
+            </table>
+        </mat-card-content>
+    </mat-card>
+</body>
+<footer>
+    <p> &copy; Utrecht University (ICS)</p>
+</footer>

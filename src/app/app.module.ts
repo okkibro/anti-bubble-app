@@ -20,6 +20,7 @@ import { HomeComponent } from './components/home/home.component';
 import { AuthGuardService } from './services/auth-guard.service';
 import { CookieService } from 'ngx-cookie-service';
 import { SocketIOService } from './services/socket-io.service';
+import { SessionComponent } from './components/session/session.component';
 
 @NgModule({
     declarations: [
@@ -28,6 +29,7 @@ import { SocketIOService } from './services/socket-io.service';
         RegisterComponent,
         ProfileComponent,
         HomeComponent,
+        SessionComponent,
     ],
     imports: [
         BrowserModule,
