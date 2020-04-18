@@ -81,7 +81,7 @@ router.post('/passwordrecovery', (req, res) => {
         })
     });
 
-    // Send email
+    // Send email with link and token in the link
     nodemailer.createTestAccount((error, account) => {
         if (error) {
             return console.log(error.message);
@@ -98,11 +98,11 @@ router.post('/passwordrecovery', (req, res) => {
         });
     
         let mailOptions = {
-            from: 'Anti Bubble App <' + account.user + '>', // sender address
-            to: req.body.email, // list of receivers
-            subject: "Password Recovery", // Subject line
-            text: "Hello world?", // plain text body
-            html: "<h1>Password Recovery</h1><p>Reset Password by clicking on the following link: https://localhost:3000/user/reset/" + token // html body
+            from: 'Anti Bubble App <' + account.user + '>',
+            to: req.body.email,
+            subject: "Password Recovery",
+            text: "",
+            html: "<h1>Password Recovery</h1><p>Reset Password by clicking on the following link: https://" + req.headers.host + "/user/reset/" + token // html body
           };
     
           transporter.sendMail(mailOptions, (error, info) => {
@@ -116,7 +116,9 @@ router.post('/passwordrecovery', (req, res) => {
     res.status(200).end();
 });
 
+// router that checks the password recovery token and shows the reset password page or a wrong token error
 router.get('/reset/:token', (req, res) => {
+    // Find the user that belongs to the given token
     User.findOne({ recoverPasswordToken: req.params.token, recoverPasswordExpires: {$gt: Date.now() } }, (error, user) => {
         if (!user) {
             return console.log("wrong token or token expired");
@@ -125,7 +127,34 @@ router.get('/reset/:token', (req, res) => {
         // TODO: Load password change form
         console.log("correct token");
     });
-})
+});
+
+// router that changes the password of the user belonging to the given password recovery token
+router.post('/reset/:token', (req, res) => {
+    // Find the user that belongs to the given token
+    User.findOne({ recoverPasswordToken: req.params.token, recoverPasswordExpires: {$gt: Date.now() } }, (error, user) => {
+        if (error) { return console.log(error.message); }
+        if (!user) {
+            return console.log("wrong token or token expired");
+        }
+
+        // Change the password in the database
+        if (req.body.password === req.body.confirmPassword) {
+            user.setPassword(req.body.password, (error) => {
+                if (error) { return console.log(error.message); }
+                user.recoverPasswordToken = undefined;
+                user.recoverPasswordExpires = undefined;
+            });
+        } else {
+            return console.log("password and confirmation are not the same");
+        }
+        user.save((error) => {
+            if (error) { return console.log(error.message); }
+            console.log("password change succesful");
+            res.status(200).end();
+        });
+    });
+});
 
 //router to get a user given an id
 router.get('/profile', auth, (req, res) => {
