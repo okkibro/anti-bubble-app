@@ -5,6 +5,7 @@ const passport = require("passport");
 const User = mongoose.model('User');
 const sanitize = require('mongo-sanitize');
 const nodemailer = require('nodemailer');
+const crypto = require('crypto');
 
 const jwt = require('express-jwt');
 const auth = jwt({
@@ -58,6 +59,29 @@ router.post('/login', (req, res) => {
 // router to send a password recovery email
 router.post('/passwordrecovery', (req, res) => {
 
+    // Generate Random Token
+    let token = "";
+    crypto.randomBytes(20, (error, buffer) => {
+        token = buffer.toString("hex");
+    });
+
+    // Find the user with the given email and set the token
+    User.findOne({ email: req.body.email }, (error, user) => {
+        if (!user){
+            return console.log("no user with that email");
+        }
+
+        user.recoverPasswordToken = token;
+        user.recoverPasswordExpires = Date.now() + 360000;
+
+        user.save((error) => {
+            if (error){
+                console.log(error.message);
+            }
+        })
+    });
+
+    // Send email
     nodemailer.createTestAccount((error, account) => {
         if (error) {
             return console.log(error.message);
@@ -78,7 +102,7 @@ router.post('/passwordrecovery', (req, res) => {
             to: req.body.email, // list of receivers
             subject: "Password Recovery", // Subject line
             text: "Hello world?", // plain text body
-            html: "<b>Hello world?</b>" // html body
+            html: "<h1>Password Recovery</h1><p>Reset Password by clicking on the following link: https://localhost:3000/user/reset/" + token // html body
           };
     
           transporter.sendMail(mailOptions, (error, info) => {
@@ -91,6 +115,17 @@ router.post('/passwordrecovery', (req, res) => {
 
     res.status(200).end();
 });
+
+router.get('/reset/:token', (req, res) => {
+    User.findOne({ recoverPasswordToken: req.params.token, recoverPasswordExpires: {$gt: Date.now() } }, (error, user) => {
+        if (!user) {
+            return console.log("wrong token or token expired");
+        }
+
+        // TODO: Load password change form
+        console.log("correct token");
+    });
+})
 
 //router to get a user given an id
 router.get('/profile', auth, (req, res) => {

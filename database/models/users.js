@@ -18,7 +18,9 @@ let userSchema = new Schema({
         required: true
     },
     hash: String,
-    salt: String
+    salt: String,
+    recoverPasswordToken: String,
+    recoverPasswordExpires: Date
 });
 
 userSchema.methods.setPassword = function(password){
