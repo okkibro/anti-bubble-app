@@ -142,12 +142,14 @@ router.post('/reset/:token', (req, res) => {
         if (req.body.password === req.body.confirmPassword) {
             user.setPassword(req.body.password, (error) => {
                 if (error) { return console.log(error.message); }
-                user.recoverPasswordToken = undefined;
-                user.recoverPasswordExpires = undefined;
             });
         } else {
             return console.log("password and confirmation are not the same");
         }
+
+        user.recoverPasswordToken = undefined;
+        user.recoverPasswordExpires = undefined;
+
         user.save((error) => {
             if (error) { return console.log(error.message); }
             console.log("password change succesful");
