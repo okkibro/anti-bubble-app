@@ -12,14 +12,14 @@ export class ClassmateProfileComponent implements OnInit {
 
   userDetails: User;
 
-  constructor(private authenticationService: AuthenticationService) { }
+  constructor(private auth: AuthenticationService) { }
 
   logoutButton() {
-    return this.authenticationService.logout();
+    return this.auth.logout();
   }
 
   ngOnInit() {
-    this.authenticationService.profile().subscribe(user => {
+    this.auth.profile().subscribe(user => {
       this.userDetails = user;
   }, (err) => {
       console.error(err);

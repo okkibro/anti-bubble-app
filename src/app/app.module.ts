@@ -26,6 +26,7 @@ import { TeacherOrStudentComponent } from './components/teacherOrStudent/teacher
 // services
 import { AuthGuardService } from './services/auth-guard.service';
 import { CookieService } from 'ngx-cookie-service';
+import { TeacherOverviewComponent } from './components/teacher-overview/teacher-overview.component';
 
 
 @NgModule({
@@ -40,6 +41,7 @@ import { CookieService } from 'ngx-cookie-service';
         AvatarComponent,
         BubbleDetailsComponent,
         TeacherOrStudentComponent,
+        TeacherOverviewComponent,
     ],
     imports: [
         BrowserModule,

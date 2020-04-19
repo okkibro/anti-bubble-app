@@ -3,22 +3,19 @@ import { AuthenticationService } from '../../services/authentication.service';
 import { User } from '../../models/user';
 
 @Component({
-  selector: 'mean-avatar',
-  templateUrl: './avatar.component.html',
-  styleUrls: ['./avatar.component.css',
-              '../../shared/general-styles.css']
+    selector: 'mean-avatar',
+    templateUrl: './avatar.component.html',
+    styleUrls: ['./avatar.component.css',
+        '../../shared/general-styles.css']
 })
 export class AvatarComponent implements OnInit {
 
-  userDetails: User;
+    constructor(private auth: AuthenticationService) { }
 
-  constructor(private authenticationService: AuthenticationService) { }
+    logoutButton() {
+        return this.auth.logout();
+    }
 
-  logoutButton() {
-    return this.authenticationService.logout();
-  }
-
-  ngOnInit(): void {
-  }
-
+    ngOnInit(): void {
+    }
 }

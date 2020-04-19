@@ -20,7 +20,7 @@ export class LoginComponent implements OnInit {
         password: ['', Validators.required],
     });
 
-    constructor(private authenticationService: AuthenticationService, private router: Router, private fb: FormBuilder, private snackBar: MatSnackBar) { }
+    constructor(private auth: AuthenticationService, private router: Router, private fb: FormBuilder, private snackBar: MatSnackBar) { }
 
     ngOnInit() { }
 
@@ -28,7 +28,7 @@ export class LoginComponent implements OnInit {
         let user = new User();
         user.email = this.loginForm.get('email').value;
         user.password = this.loginForm.get('password').value;
-        this.authenticationService.login(user).subscribe(() => {
+        this.auth.login(user).subscribe(() => {
             this.router.navigate(['home']);
         }, () => {
             this.snackBar.open("Onjuist wachtwoord of email", 'X', {duration: 2500});

@@ -72,12 +72,12 @@ export class BubbleDetailsComponent implements OnInit {
 
   userDetails: User;
 
-  constructor(private authenticationService: AuthenticationService) {
+  constructor(private auth: AuthenticationService) {
 
   }
 
   logoutButton() {
-    return this.authenticationService.logout();
+    return this.auth.logout();
   }
 
   ngOnInit() {
