@@ -30,6 +30,7 @@ import { CookieService } from 'ngx-cookie-service';
 import { SocketIOService } from './services/socket-io.service';
 import { SessionComponent } from './components/session/session.component';
 import { TeacherOverviewComponent } from './components/teacher-overview/teacher-overview.component';
+import { NavBarComponent } from './components/nav-bar/nav-bar.component';
 
 
 @NgModule({
@@ -47,6 +48,7 @@ import { TeacherOverviewComponent } from './components/teacher-overview/teacher-
         TeacherOrStudentComponent,
         TeacherOverviewComponent,
         ShopComponent,
+        NavBarComponent,
     ],
     imports: [
         BrowserModule,

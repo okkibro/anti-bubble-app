@@ -1,18 +1,4 @@
-<mat-toolbar color="primary" class="navBarAng">
-    <mat-toolbar-row>
-        <span class="logo">Anti Bubble</span>
-
-        <div class="navitems">
-            <button mat-button [routerLink]="'/home'"> Home </button>
-            <button mat-button [routerLink]="'/class-overview'"> Klas Overzicht </button>
-            <button mat-button [routerLink]="'/home'"> Uitleg </button>
-            <button mat-button [routerLink]="'/profile'"> Profiel </button>
-        </div>
-
-        <button mat-button id="logoutButton" (click)="logoutButton()"> Log uit </button>
-    </mat-toolbar-row>
-</mat-toolbar>
-
+<mean-nav-bar></mean-nav-bar>
 
 <body>
     <div class="containerDiv" fxLayoutGap="0.5%" fxLayout="column" fxLayoutAlign="space-evenly">
