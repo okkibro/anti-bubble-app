@@ -18,8 +18,8 @@ test:
     - Xvfb :0 -ac -screen 0 1024x768x24 &
     # Export display for Chrome
     - export DISPLAY=:99
+    - adduser -u chromeuser
     # Install AngularJS CLI exclusively
-    - npm install webdriver-manager
     # Add --unsafe-perm to resolve problems with node-gyp infinite loop on Docker
     - npm install --silent --unsafe-perm -g @angular/cli@1.1.2
     # Install remaining project dependencies
@@ -27,6 +27,6 @@ test:
     # Download Selenium server JAR, drivers for Chrome
     - node ./node_modules/.bin/webdriver-manager update
   script:
-    - ./node_modules/@angular/cli/bin/ng test --watch=false --browsers=ChromeHeadless
+    - ./node_modules/@angular/cli/bin/ng test --watch=false --browsers=ChromeChromiumHeadless
   only:
     - unit-tests
