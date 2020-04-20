@@ -23,6 +23,8 @@ test:
     - npm install --silent --unsafe-perm -g @angular/cli@1.1.2
     # Install remaining project dependencies
     - npm install --silent
+    # install webdriver manager
+    - npm install -g webdriver-manager
     # Download Selenium server JAR, drivers for Chrome
     - node ./node_modules/.bin/webdriver-manager update
   script:
