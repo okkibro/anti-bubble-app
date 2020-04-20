@@ -1,0 +1,80 @@
+<mat-toolbar color="primary" class="navBarAng">
+    <mat-toolbar-row>
+        <span class="logo">Anti Bubble</span>
+
+        <div class="navitems">
+            <button mat-button [routerLink]="'/home'"> Home </button>
+            <button mat-button [routerLink]="'/class-overview'"> Klas Overzicht </button>
+            <button mat-button [routerLink]="'/home'"> Uitleg </button>
+            <button mat-button [routerLink]="'/profile'"> Profiel </button>
+        </div>
+
+        <button mat-button id="logoutButton" (click)="logoutButton()"> Log uit </button>
+    </mat-toolbar-row>
+</mat-toolbar>
+
+<body>
+    <div class="containerDiv" fxLayoutGap="0.5%" fxLayout="column" fxLayoutAlign="space-evenly">
+        <div fxLayout.xs="row" fxLayoutGap="0.5%" fxLayoutAlign="space-evenly">
+            <mat-card fxFlex="100%">
+                <mat-card-header>
+                    <mat-card-title class="welcomeHeader">Winkel</mat-card-title>
+                </mat-card-header>
+                <mat-card-content>
+    
+                </mat-card-content>
+            </mat-card>
+        </div>
+        <div fxLayout.xs="row" fxLayoutGap="0.5%" fxLayoutAlign="space-evenly">
+            <mat-card>
+                <table class="shopTable">
+                    <tr>
+                        <th></th>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <img mat-card-image
+                             src="https://image.freepik.com/vrije-vector/jonge-vrouw-avatar-cartoon-karakter-profielfoto_18591-55056.jpg"
+                            alt="avatar voorbeeld"><br>
+                            <button mat-button>Koop item</button> 
+                        </td>
+                        <td>
+                            Item2
+                            <img mat-card-image
+                             src="https://image.freepik.com/vrije-vector/jonge-vrouw-avatar-cartoon-karakter-profielfoto_18591-55056.jpg"
+                            alt="avatar voorbeeld">
+                            <button mat-button>Koop item</button>
+                        </td>
+                        <td>
+                            Item3
+                            <img mat-card-image
+                             src="https://image.freepik.com/vrije-vector/jonge-vrouw-avatar-cartoon-karakter-profielfoto_18591-55056.jpg"
+                            alt="avatar voorbeeld">
+                            <button mat-button>Koop item</button>
+                        </td>
+                        <td>
+                            Item4
+                            <img mat-card-image
+                             src="https://image.freepik.com/vrije-vector/jonge-vrouw-avatar-cartoon-karakter-profielfoto_18591-55056.jpg"
+                            alt="avatar voorbeeld">
+                            <button mat-button>Koop item</button>
+                        </td>
+                    </tr>
+                    <!-- <tr>
+                        <th></th>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <th></th>
+                        <td></td>
+                    </tr> -->
+                </table>
+            </mat-card>
+        </div>
+    </div>
+</body>
+
+<footer>
+    <p> &copy; Utrecht University (ICS)</p>
+</footer>

@@ -22,6 +22,7 @@ import { ClassmateProfileComponent } from './components/classmateProfile/classma
 import { AvatarComponent } from './components/avatar/avatar.component';
 import { BubbleDetailsComponent } from './components/bubble-details/bubble-details.component';
 import { TeacherOrStudentComponent } from './components/teacherOrStudent/teacherOrStudent.component';
+import { ShopComponent } from './components/shop/shop.component';
 
 // services
 import { AuthGuardService } from './services/auth-guard.service';
@@ -45,6 +46,7 @@ import { TeacherOverviewComponent } from './components/teacher-overview/teacher-
         BubbleDetailsComponent,
         TeacherOrStudentComponent,
         TeacherOverviewComponent,
+        ShopComponent,
     ],
     imports: [
         BrowserModule,

@@ -13,9 +13,8 @@ import { AvatarComponent } from './components/avatar/avatar.component';
 import { BubbleDetailsComponent } from './components/bubble-details/bubble-details.component';
 import { TeacherOrStudentComponent } from './components/teacherOrStudent/teacherOrStudent.component';
 import { TeacherOverviewComponent } from './components/teacher-overview/teacher-overview.component';
-
 import { AuthGuardService} from './services/auth-guard.service';
-
+import { ShopComponent } from './components/shop/shop.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/teacherOrStudent', pathMatch: 'full' },
@@ -30,6 +29,8 @@ const routes: Routes = [
   { path: 'bubble-details', component: BubbleDetailsComponent },
   { path: 'teacherOrStudent', component: TeacherOrStudentComponent },
   { path: 'teacher-overview', component: TeacherOverviewComponent, canActivate: [AuthGuardService], data: {roles: [Role.teacher]}},
+  { path: 'shop', component: ShopComponent },
+  // Auto redirect als je bullshit invult (Moet als laatste!)
   { path: '**', redirectTo: '/login', pathMatch: 'full' },
 ];
 
