@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthenticationService } from '../../services/authentication.service';
 import { SocketIOService } from '../../services/socket-io.service';
-import {FormBuilder, Validators} from "@angular/forms";
-import {User} from "../../models/user";
-import {Router} from "@angular/router";
+import { FormBuilder, Validators } from "@angular/forms";
+import { User } from "../../models/user";
+import { Router } from "@angular/router";
 
 @Component({
     selector: 'mean-home',
