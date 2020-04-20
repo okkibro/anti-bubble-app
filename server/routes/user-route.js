@@ -4,6 +4,8 @@ const mongoose = require('mongoose');
 const passport = require("passport");
 const User = mongoose.model('User');
 const sanitize = require('mongo-sanitize');
+const nodemailer = require('nodemailer');
+const crypto = require('crypto');
 
 const jwt = require('express-jwt');
 const auth = jwt({
@@ -53,6 +55,108 @@ router.post('/login', (req, res) => {
             token: token
         });
     })(req, res);
+});
+
+// router to send a password recovery email
+router.post('/passwordrecovery', (req, res) => {
+
+    // Generate Random Token
+    let token = "";
+    crypto.randomBytes(20, (error, buffer) => {
+        token = buffer.toString("hex");
+    });
+
+    // Find the user with the given email and set the token
+    User.findOne({ email: req.body.email }, (error, user) => {
+        if (!user){
+            return console.log("no user with that email");
+        }
+
+        user.recoverPasswordToken = token;
+        user.recoverPasswordExpires = Date.now() + 360000;
+
+        user.save((error) => {
+            if (error){
+                console.log(error.message);
+            }
+        })
+    });
+
+    // Send email with link and token in the link
+    nodemailer.createTestAccount((error, account) => {
+        if (error) {
+            return console.log(error.message);
+        }
+
+        let transporter = nodemailer.createTransport({
+            host: account.smtp.host,
+            port: account.smtp.port,
+            secure: account.smtp.secure,
+            auth: {
+              user: account.user, // generated ethereal user
+              pass: account.pass // generated ethereal password
+            }
+        });
+    
+        let mailOptions = {
+            from: 'Anti Bubble App <' + account.user + '>',
+            to: req.body.email,
+            subject: "Password Recovery",
+            text: "",
+            html: "<h1>Password Recovery</h1><p>Reset Password by clicking on the following link: https://" + req.headers.host + "/user/reset/" + token // html body
+          };
+    
+          transporter.sendMail(mailOptions, (error, info) => {
+            if (error) {
+                return console.log(error.message);
+            }
+            console.log(nodemailer.getTestMessageUrl(info));
+          });
+    });
+
+    res.status(200).end();
+});
+
+// router that checks the password recovery token and shows the reset password page or a wrong token error
+router.get('/reset/:token', (req, res) => {
+    // Find the user that belongs to the given token
+    User.findOne({ recoverPasswordToken: req.params.token, recoverPasswordExpires: {$gt: Date.now() } }, (error, user) => {
+        if (!user) {
+            return console.log("wrong token or token expired");
+        }
+
+        // TODO: Load password change form
+        console.log("correct token");
+    });
+});
+
+// router that changes the password of the user belonging to the given password recovery token
+router.post('/reset/:token', (req, res) => {
+    // Find the user that belongs to the given token
+    User.findOne({ recoverPasswordToken: req.params.token, recoverPasswordExpires: {$gt: Date.now() } }, (error, user) => {
+        if (error) { return console.log(error.message); }
+        if (!user) {
+            return console.log("wrong token or token expired");
+        }
+
+        // Change the password in the database
+        if (req.body.password === req.body.confirmPassword) {
+            user.setPassword(req.body.password, (error) => {
+                if (error) { return console.log(error.message); }
+            });
+        } else {
+            return console.log("password and confirmation are not the same");
+        }
+
+        user.recoverPasswordToken = undefined;
+        user.recoverPasswordExpires = undefined;
+
+        user.save((error) => {
+            if (error) { return console.log(error.message); }
+            console.log("password change succesful");
+            res.status(200).end();
+        });
+    });
 });
 
 //router to get a user given an id
