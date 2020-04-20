@@ -1,0 +1,34 @@
+<mat-toolbar color="primary" class="navBarAng">
+    <mat-toolbar-row>
+        <span class="logo">Anti Bubble</span>
+
+        <div class="navitems">
+            <button mat-button [routerLink]="'/home'"> Home </button>
+            <button mat-button [routerLink]="'/class-overview'"> Klas Overzicht </button>
+            <button mat-button [routerLink]="'/home'"> Uitleg </button>
+            <button mat-button [routerLink]="'/profile'"> Profiel </button>
+        </div>
+
+        <button mat-button id="logoutButton" (click)="logoutButton()"> Log uit </button>
+    </mat-toolbar-row>
+</mat-toolbar>
+
+
+<body>
+    <div class="containerDiv">
+        <mat-card>
+            <mat-card-header>
+                <mat-card-title>Avatar Wijzigen</mat-card-title>
+            </mat-card-header><br>    
+        <img mat-card-image
+        src="https://image.freepik.com/vrije-vector/jonge-vrouw-avatar-cartoon-karakter-profielfoto_18591-55056.jpg"
+        alt="avatar voorbeeld">
+    <mat-card-content>
+        <button mat-button [routerLink]="'/avatar'" class='abutton'>Wijzigingen Opslaan</button>
+    </mat-card-content>
+</mat-card>
+
+        
+        <button mat-button [routerLink]="'/profile'"> <mat-icon>keyboard_backspace</mat-icon> Terug naar profiel</button>
+    </div>
+</body>

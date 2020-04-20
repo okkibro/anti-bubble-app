@@ -19,6 +19,7 @@ router.post('/register', (req, res) => {
     user.firstName = sanitize(req.body.firstName);
     user.lastName = sanitize(req.body.lastName);
     user.email = sanitize(req.body.email);
+    user.role = sanitize(req.body.role);
     user.setPassword(sanitize(req.body.password));
 
     //save the changes to the database
@@ -70,6 +71,7 @@ router.get('/profile', auth, (req, res) => {
             });
     }
 });
+
 
 //router to check if email is already present in the database
 router.post('/checkEmailTaken', (req, res) => {

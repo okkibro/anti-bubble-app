@@ -7,22 +7,24 @@ import {User} from '../../models/user';
 @Component({
     selector: 'mean-register',
     templateUrl: './register.component.html',
-    styleUrls: ['./register.component.css']
+    styleUrls: ['./register.component.css',
+        '../../shared/general-styles.css']
 })
 
 export class RegisterComponent implements OnInit {
     registerForm = this.fb.group({
         firstName: ['', Validators.required],
         lastName: ['', Validators.required],
-        email: ['', [Validators.required, Validators.email], this.authenticationService.uniqueEmailValidator()],
+        email: ['', [Validators.required, Validators.email], this.auth.uniqueEmailValidator()],
+        role: ['', Validators.required],
         password: ['', Validators.required],
         repeatPassword: ['', Validators.required],
     },
-        {
-            validator: this.passwordMatchValidator
-        });
+    {
+        validator: this.passwordMatchValidator
+    });
 
-    constructor(private authenticationService: AuthenticationService, private router: Router, private fb: FormBuilder) { }
+    constructor(private auth: AuthenticationService, private router: Router, private fb: FormBuilder) { }
 
     ngOnInit() { }
 
@@ -31,9 +33,10 @@ export class RegisterComponent implements OnInit {
         user.firstName = this.registerForm.get('firstName').value;
         user.lastName = this.registerForm.get('lastName').value;
         user.email = this.registerForm.get('email').value;
+        user.role = this.registerForm.get('role').value;
         user.password = this.registerForm.get('password').value;
 
-        this.authenticationService.register(user).subscribe(() => {
+        this.auth.register(user).subscribe(() => {
             this.router.navigate(['login']);
         });
     }

@@ -1,0 +1,94 @@
+/* the following things define the toolbar*/
+#logoutButton {
+    color: black;
+    background-color: lightskyblue;
+    position: sticky;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    height: 60px;
+    width: 60px;
+    right: 15px;
+    text-align: center;
+    font-size: 15px;
+    border-radius: 100%;
+}
+
+.navBarAng {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.navBarAng div {
+    display: fixed;
+    flex: 1 1 auto;
+    text-align: center;
+}
+
+.navitems button {
+    padding-left: 30px;
+    padding-right: 30px;
+}
+
+.navBarAng button:hover {
+    color: orange;
+}
+
+.logo {
+    text-decoration: underline;
+    text-decoration-color: orange;
+    position: absolute;
+}
+
+
+/* the following code will describe the rest of the (angular) page */
+body {
+    background-image: url("../../favicon.ico");
+    text-align: center;
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    width: 100%;
+    background-size: auto;  
+
+    display: flex;
+    justify-content: center;
+    align-items: center; 
+}
+
+.containerDiv {
+    height: 100%;
+    width: 80%;
+    justify-content: center;
+    text-align: center;
+    align-items: center; 
+    background-color: pink;
+}
+
+mat-card {
+    background-color: orange;
+}
+
+mat-card-header {
+    display: inline-block;
+}
+
+mat-card button{
+    background-color: royalblue;
+}
+
+mat-card img{
+    object-fit: cover; 
+    width: 20%; 
+    height: width;
+}
+
+.UItable {
+    display: inline-block;
+}
+
+.UItable th, td {
+    text-align: left;
+    padding: 10px;    
+}

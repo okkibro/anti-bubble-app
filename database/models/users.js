@@ -17,8 +17,19 @@ let userSchema = new Schema({
         unique: true,
         required: true
     },
-    hash: String,
-    salt: String
+    role: {
+        type: String,
+        enum: ['teacher', 'student'],
+        required: true
+    },
+    hash: {
+        type: String,
+        required: true
+    },
+    salt: {
+        type: String,
+        required: true
+    }
 });
 
 userSchema.methods.setPassword = function(password){
@@ -35,7 +46,7 @@ userSchema.methods.generateJwt = function() {
     return jwt.sign({
         _id: this._id,
         email: this.email,
-        name: this.name,
+        role: this.role,
         exp: Date.now() + (86400 * 1000)
     }, process.env.MY_SECRET);
 };

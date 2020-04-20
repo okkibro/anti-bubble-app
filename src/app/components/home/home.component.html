@@ -3,53 +3,92 @@
         <span class="logo">Anti Bubble</span>
 
         <div class="navitems">
-            <a mat-button [routerLink]="'/home'"> Home </a>
-            <a mat-button [routerLink]="'/home'"> Weer home </a>
-            <a mat-button [routerLink]="'/home'"> Ook home </a>
-            <a mat-button [routerLink]="'/profile'"> Profiel </a>
+            <button mat-button [routerLink]="'/home'"> Home </button>
+            <button mat-button [routerLink]="'/class-overview'"> Klas Overzicht </button>
+            <button mat-button [routerLink]="'/home'"> Uitleg </button>
+            <button mat-button [routerLink]="'/profile'"> Profiel </button>
+            <button *ngIf="isTeacher" mat-button [routerLink]="'/teacher-overview'"> Docent overzicht </button>
         </div>
 
-        <a mat-button id="logoutButton" (click)="logoutButton()"> Log uit </a>
+        <button mat-button id="logoutButton" (click)="logoutButton()"> Log uit </button>
     </mat-toolbar-row>
 </mat-toolbar>
 
 <body>
-    <mat-card class="bodyDiv">
-        <mat-card-header class="matCardHeader">
-            <mat-card-title>Breaking Bubbles</mat-card-title>
-            <mat-card-subtitle>
-                Breaking Bubbles is een online webpagina waar leerlingen zich bewust kunnen worden van hun filterbubbel.<br>
-                Dit wordt bereikt door middel van lessen die in de klas met de docent(e) worden afgenomen.
-            </mat-card-subtitle>
-        </mat-card-header>
-        <mat-card-content>
-            <a mat-button id="createSessionButton" (click)="createSession()"> Create Session </a>
-        </mat-card-content>
-        <mat-accordion >
-            <mat-expansion-panel>
-                <mat-expansion-panel-header>
-                    <mat-panel-title>
-                        Join session
-                    </mat-panel-title>
-                    <mat-panel-description>
-                        Join session with code
-                    </mat-panel-description>
-                </mat-expansion-panel-header>
-                <form name="joinSession" [formGroup]="joinSessionForm" (ngSubmit)="joinSession()">
-                    <table align="center">
-                        <tr>
-                            <mat-form-field class="example-full-width">
-                                <mat-label>Session code</mat-label>
-                                <input matInput type="number" formControlName="sessionCode">
-                            </mat-form-field>
-                        </tr>
-                    </table>
-                    <button mat-raised-button type="submit" [disabled]="!joinSessionForm.valid" color="primary">Join session</button>
-                </form>
-            </mat-expansion-panel>
-        </mat-accordion>
-    </mat-card>
+    <div class="containerDiv" fxLayoutGap="0.5%" fxLayout="column" fxLayoutAlign="space-evenly">
+        <div fxLayout.xs="row" fxLayoutGap="0.5%" fxLayoutAlign="space-evenly">
+            <mat-card fxFlex="100%">
+                <mat-card-header>
+                    <mat-card-title class="welcomeHeader">Welkom!</mat-card-title>
+                    <mat-card-subtitle>
+                        Breaking Bubbles is een online webpagina waar leerlingen zich bewust kunnen worden van hun
+                        filterbubbel.<br>
+                        Dit wordt bereikt door middel van lessen die in de klas met de docent(e) worden afgenomen.
+                    </mat-card-subtitle>
+                </mat-card-header>
+                <mat-card-content>
+                    <a mat-button id="createSessionButton" (click)="createSession()"> Create Session </a>
+                </mat-card-content>
+            </mat-card>
+        </div>
+
+    <div fxLayout.xs="row" fxLayoutGap="0.5%" fxLayoutAlign="space-evenly">
+        <mat-card fxFlex="40%">
+            <mat-card-header>
+                <mat-card-title>Klas updates</mat-card-title>
+                <!-- Of nieuws? Klas activiteiten? -->
+            </mat-card-header>
+            <mat-card-content>
+                <table class="UItable">
+                    <tr>
+                        <th>Per1</th>
+                        <td>Heeft spel X gespeeld!</td>
+                    </tr>
+                    <tr>
+                        <th>Per2</th>
+                        <td>Heeft 5 muntjes verdiend!</td>
+                    </tr>
+                    <tr>
+                        <th>Per3</th>
+                        <td>Heeft meegedaan aan de laatste klas sessie!</td>
+                    </tr>
+                </table>
+            </mat-card-content>
+        </mat-card>
+
+        <mat-card fxFlex="40%">
+            <mat-card-header>
+                <mat-card-title>Scorebord</mat-card-title>
+            </mat-card-header>
+            <mat-card-content>
+                <table class="UItable">
+                    <tr>
+                        <th>Badge1</th>
+                        <td>Gehaald!</td>
+                    </tr>
+                    <tr>
+                        <th>Badge2</th>
+                        <td>Gehaald!</td>
+                    </tr>
+                    <tr>
+                        <th>Badge3</th>
+                        <td>Gehaald!</td>
+                    </tr>
+                </table>
+            </mat-card-content>
+        </mat-card>
+        <mat-card fxFlex="20%">
+            <mat-card-header>Aantal munten</mat-card-header>
+            <mat-card-content class="number">
+
+                45
+            </mat-card-content>
+            <button mat-button>Ga naar winkel</button>
+        </mat-card>
+    </div>
+</div>
 </body>
+
 <footer>
     <p> &copy; Utrecht University (ICS)</p>
 </footer>

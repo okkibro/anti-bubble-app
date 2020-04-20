@@ -9,38 +9,41 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatIconModule } from '@angular/material/icon';
 import { MatProgressSpinnerModule} from '@angular/material/progress-spinner';
-import { MatExpansionModule } from '@angular/material/expansion'
-import { MatSnackBarModule} from '@angular/material/snack-bar'
+import { MatExpansionModule } from '@angular/material/expansion';
+import { MatSnackBarModule} from '@angular/material/snack-bar';
+import { MatRadioModule } from '@angular/material/radio';
 
 
 @NgModule({
-  imports: [
-  CommonModule, 
-  MatToolbarModule,
-  MatButtonModule, 
-  MatCardModule,
-  MatInputModule,
-  MatDialogModule,
-  MatTableModule,
-  MatMenuModule,
-  MatIconModule,
-  MatProgressSpinnerModule,
-  MatExpansionModule,
-  MatSnackBarModule
-  ],
-  exports: [
-  CommonModule,
-   MatToolbarModule, 
-   MatButtonModule, 
-   MatCardModule, 
-   MatInputModule, 
-   MatDialogModule, 
-   MatTableModule, 
-   MatMenuModule,
-   MatIconModule,
-   MatProgressSpinnerModule,
-   MatExpansionModule,
-   MatSnackBarModule
-   ],
+    imports: [
+        CommonModule,
+        MatToolbarModule,
+        MatButtonModule,
+        MatCardModule,
+        MatInputModule,
+        MatDialogModule,
+        MatTableModule,
+        MatMenuModule,
+        MatIconModule,
+        MatProgressSpinnerModule,
+        MatExpansionModule,
+        MatSnackBarModule,
+        MatRadioModule,
+    ],
+    exports: [
+        CommonModule,
+        MatToolbarModule,
+        MatButtonModule,
+        MatCardModule,
+        MatInputModule,
+        MatDialogModule,
+        MatTableModule,
+        MatMenuModule,
+        MatIconModule,
+        MatProgressSpinnerModule,
+        MatExpansionModule,
+        MatSnackBarModule,
+        MatRadioModule,
+    ],
 })
 export class CustomMaterialModule { }

@@ -8,11 +8,13 @@ import { Router } from "@angular/router";
 @Component({
     selector: 'mean-home',
     templateUrl: './home.component.html',
-    styleUrls: ['./home.component.css']
+    styleUrls: ['./home.component.css',
+        '../../shared/general-styles.css']
 })
 
 export class HomeComponent implements OnInit {
     userDetails: User;
+    isTeacher: boolean = this.authenticationService.isTeacher();
     joinSessionForm = this.fb.group({
         sessionCode: ['', Validators.required]
     });
