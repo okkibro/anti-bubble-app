@@ -12,6 +12,7 @@ import { ClassmateProfileComponent } from './components/classmateProfile/classma
 import { AvatarComponent } from './components/avatar/avatar.component';
 import { BubbleDetailsComponent } from './components/bubble-details/bubble-details.component';
 import { TeacherOrStudentComponent } from './components/teacherOrStudent/teacherOrStudent.component';
+import { ShopComponent } from './components/shop/shop.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/teacherOrStudent', pathMatch: 'full' },
@@ -23,7 +24,8 @@ const routes: Routes = [
   { path: 'classmateProfile', component: ClassmateProfileComponent },
   { path: 'avatar', component: AvatarComponent },
   { path: 'bubble-details', component: BubbleDetailsComponent },
-  { path: 'teacherOrStudent', component: TeacherOrStudentComponent }
+  { path: 'teacherOrStudent', component: TeacherOrStudentComponent },
+  { path: 'shop', component: ShopComponent }
 ];
 
 @NgModule({

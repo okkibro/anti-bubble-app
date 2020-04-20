@@ -1,0 +1,8 @@
+.shopTable th,td {
+    text-align: right;
+    padding: 10px;
+}
+
+.welcomeHeader{
+    font-size: 40px;
+}
