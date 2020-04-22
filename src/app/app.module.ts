@@ -23,6 +23,8 @@ import { AvatarComponent } from './components/avatar/avatar.component';
 import { BubbleDetailsComponent } from './components/bubble-details/bubble-details.component';
 import { TeacherOrStudentComponent } from './components/teacherOrStudent/teacherOrStudent.component';
 import { ShopComponent } from './components/shop/shop.component';
+import { PasswordRecoveryComponent } from './components/password-recovery/password-recovery.component';
+import { PasswordResetComponent } from './components/password-reset/password-reset.component';
 
 // services
 import { AuthGuardService } from './services/auth-guard.service';
@@ -49,6 +51,8 @@ import { NavBarComponent } from './components/nav-bar/nav-bar.component';
         TeacherOverviewComponent,
         ShopComponent,
         NavBarComponent,
+        PasswordRecoveryComponent,
+        PasswordResetComponent,
     ],
     imports: [
         BrowserModule,

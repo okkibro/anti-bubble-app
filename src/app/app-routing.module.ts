@@ -15,6 +15,8 @@ import { TeacherOrStudentComponent } from './components/teacherOrStudent/teacher
 import { TeacherOverviewComponent } from './components/teacher-overview/teacher-overview.component';
 import { AuthGuardService} from './services/auth-guard.service';
 import { ShopComponent } from './components/shop/shop.component';
+import { PasswordRecoveryComponent } from './components/password-recovery/password-recovery.component';
+import { PasswordResetComponent } from './components/password-reset/password-reset.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/teacherOrStudent', pathMatch: 'full' },
@@ -30,6 +32,8 @@ const routes: Routes = [
   { path: 'teacherOrStudent', component: TeacherOrStudentComponent },
   { path: 'teacher-overview', component: TeacherOverviewComponent, canActivate: [AuthGuardService], data: {roles: [Role.teacher]}},
   { path: 'shop', component: ShopComponent },
+  { path: 'passwordrecovery', component: PasswordRecoveryComponent },
+  { path: 'reset/:token', component: PasswordResetComponent },
   // Auto redirect als je bullshit invult (Moet als laatste!)
   { path: '**', redirectTo: '/login', pathMatch: 'full' },
 ];

@@ -63,6 +63,7 @@ router.post('/passwordrecovery', (req, res) => {
     // Generate Random Token
     let token = "";
     crypto.randomBytes(20, (error, buffer) => {
+        if (error) {console.log(error.message);}
         token = buffer.toString("hex");
     });
 
