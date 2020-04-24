@@ -10,11 +10,13 @@
     font-size: 20px;
 } */
 
-mat-card {
+.shopStyle {
     width: 25%;
     height: 25%;
+    font-size: xx-large;
 }
 
 .welcomeHeader{
     font-size: 40px;
 }
+

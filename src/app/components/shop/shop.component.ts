@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthenticationService } from '../../services/authentication.service';
-import {Router} from '@angular/router';
-import { User } from '../../models/user';
+import { Router } from '@angular/router';
+import { Shop } from '../../models/shop';
 
 @Component({
     selector: 'mean-shop',
@@ -12,7 +12,7 @@ import { User } from '../../models/user';
 
 export class ShopComponent implements OnInit {
 
-  userDetails: User;
+  shopDetails: Shop;
 
   constructor(private authenticationService: AuthenticationService) { }
 
@@ -21,7 +21,22 @@ export class ShopComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.authenticationService.profile().subscribe(shop => {
+      this.shopDetails = shop;
+      console.log(shop, this.shopDetails);
+  }, (err) => {
+      console.error(err);
+  });
   }
+
+  // addItem() {
+  //   let shop = new Shop();
+
+  //   shop.title = "Hoedje";
+  //   shop.image = "/assets/images/mean_stack_banner.png";
+  //   shop.price = "5";
+
+  // }
 
   getShopItems() {
     //database returns id, image, price and name of the product
@@ -49,7 +64,10 @@ export class ShopComponent implements OnInit {
     var cutLine = document.createElement("br");
 
     image1.setAttribute("src", items[1]);
-    cardContent1.setAttribute("class","shopImage");
+    cardContent1.setAttribute("ng-class","style");
+    cardContent1.setAttribute("ng-model", "style");
+    cardContent1.setAttribute("id","id1");
+
     var price1 = document.createElement("button");
     var price1Text = document.createTextNode(items[2]);
     price1.appendChild(price1Text);
@@ -62,7 +80,6 @@ export class ShopComponent implements OnInit {
     cardContent1.appendChild(price1);
     card1.appendChild(cardContent1);
     anchor.appendChild(card1);
-    
   }
 
 }
