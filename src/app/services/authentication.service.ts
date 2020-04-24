@@ -150,4 +150,8 @@ export class AuthenticationService {
     public profile(): Observable<any> {
         return this.request('get', 'profile');
     }
+
+    public shop(): Observable<any> {
+        return this.http.get('https://localhost:3000/shop', { headers: { Authorization: `Bearer ${this.getToken()}`}});
+    }
 }

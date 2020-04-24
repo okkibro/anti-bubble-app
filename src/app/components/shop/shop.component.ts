@@ -21,7 +21,7 @@ export class ShopComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.authenticationService.profile().subscribe(shop => {
+    this.authenticationService.shop().subscribe(shop => {
       this.shopDetails = shop;
       console.log(shop, this.shopDetails);
   }, (err) => {
