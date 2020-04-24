@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AuthenticationService } from '../../services/authentication.service';
 import { Router } from '@angular/router';
 import { Shop } from '../../models/shop';
+import { ShopService } from 'src/app/services/shop.service';
 
 @Component({
     selector: 'mean-shop',
@@ -14,16 +15,15 @@ export class ShopComponent implements OnInit {
 
   shopDetails: Shop;
 
-  constructor(private authenticationService: AuthenticationService) { }
+  constructor(private authenticationService: AuthenticationService, private shopService : ShopService) { }
 
   logoutButton() {
     return this.authenticationService.logout();
   }
 
   ngOnInit(): void {
-    this.authenticationService.shop().subscribe(shop => {
+    this.shopService.shop().subscribe(shop => {
       this.shopDetails = shop;
-      console.log(shop, this.shopDetails);
   }, (err) => {
       console.error(err);
   });
