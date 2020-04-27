@@ -80,8 +80,15 @@ mat-card button{
 
 mat-card img{
     object-fit: cover; 
-    width: 20%; 
+    width: 15%; 
     height: width;
+}
+
+mat-tab-group, mat-tab {
+    text-align: center;
+    justify-content: center;
+    align-items: center; 
+    display: flex;
 }
 
 .UItable {
