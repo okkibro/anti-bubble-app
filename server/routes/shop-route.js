@@ -15,7 +15,6 @@ const auth = jwt({
 
 //router to gets shop items from the database based on a query
 router.get('/', (req, res) => {
-   // console.log(req);
     var query = { title : req.headers.id };
     Shop.find(query)
         .exec(function (err, shop) {
@@ -24,12 +23,13 @@ router.get('/', (req, res) => {
         });
 });
 
-//router to register a user in the database
+//router to register an item in the database
 router.post('/create', (req, res) => {
-    //make a new user
+    //make a new shop item
     let shop = new Shop();
-    //fill in data to user attributes
-    shop.title = "bril";
+    //fill in data to shop attributes
+    shop.title = "bril1";
+    shop.category = "bril";
     shop.image = "png";
     shop.price = "5";
     //save the changes to the database
