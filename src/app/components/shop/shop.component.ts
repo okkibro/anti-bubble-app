@@ -28,6 +28,16 @@ export class ShopComponent implements OnInit {
   }, (err) => {
       console.error(err);
   });
-  this.shopService.createShop().subscribe();
+  // this.shopService.createShop().subscribe();
+  }
+
+  loadTable(){
+    // var shopQueryRes : Shop[] = [] ;
+    // for(var i = 0; i < 8; i++){
+      
+    // }
+
+    this.shopDetails[0].image;
+    this.shopDetails[0].price;
   }
 }

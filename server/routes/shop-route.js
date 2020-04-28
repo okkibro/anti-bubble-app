@@ -18,7 +18,7 @@ router.get('/', (req, res) => {
     var query = { category : req.headers.id };
     Shop.find(query)
         .exec(function (err, shop) {
-            console.log(shop);
+            // console.log(shop);
             res.status(200).json(shop);
         });
 });
@@ -28,9 +28,9 @@ router.post('/create', (req, res) => {
     //make a new shop item
     let shop = new Shop();
     //fill in data to shop attributes
-    shop.title = "bril1";
-    shop.category = "bril";
-    shop.image = "png";
+    shop.title = "Hoedje";
+    shop.category = "hoed";
+    shop.image = "/assets/images/Test_hoedje_1";
     shop.price = "5";
     //save the changes to the database
     shop.save((error) => { 
