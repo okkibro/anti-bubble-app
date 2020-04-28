@@ -15,26 +15,26 @@ build:
  artifacts:
   expire_in: 1 day
   paths:
-   - dist/
+    - dist/
  tags:
-  - docker
+   - docker
   only:
-    - unit-tests
+   - unit-tests
 
 test:karma:
   stage: test
   image: trion/ng-cli-karma:${CLI_VERSION}
   allow_failure: false
   script:
-  - ng test --progress false --watch false
+   - ng test --progress false --watch false
   tags:
-  - docker
+   - docker
 
 test:e2e:
   stage: test
   image: trion/ng-cli-e2e:${CLI_VERSION}
   allow_failure: false
   script:
-  - ng e2e
+   - ng e2e
   tags:
-  - docker
+   - docker
