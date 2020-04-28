@@ -11,7 +11,7 @@ export class ShopService {
   constructor(private http: HttpClient, private router: Router) { }
 
   public shop(): Observable<any> {
-    return this.http.get('https://localhost:3000/shop', {headers : { id : "hoed" }});
+    return this.http.get('https://localhost:3000/shop', {headers : { id : "hoofddeksel" }});
 }
 
 public createShop(): Observable<any> {

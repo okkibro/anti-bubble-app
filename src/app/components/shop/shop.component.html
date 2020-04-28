@@ -15,14 +15,14 @@
         <div fxLayout.xs="row" fxLayoutGap="0.5%" fxLayoutAlign="space-evenly">
             <mat-card>
                 <div id="shopAnchor"></div>
-                <!-- <table class="shopTable">
+                <!-- <table mat-table [dataSource] = "shopDetails">
                     <tr>
-                        <td><img src= {{shopDetails?.image}}></td>
+                        <td><img src= {{shopDetails[0]?.image}}></td>
                     </tr>
                     <tr>
-                        <td>{{ shopDetails?.title }}</td>
+                        <td>{{ shopDetails[1]?.title }}</td>
                     </tr>
-                    <tr><button mat-button>{{ shopDetails?.price }} <mat-icon>payment</mat-icon></button></tr>
+                    <tr><button mat-button>{{ shopDetails[2]?.price }} <mat-icon>payment</mat-icon></button></tr>
                 </table> -->
             </mat-card>
         </div>
