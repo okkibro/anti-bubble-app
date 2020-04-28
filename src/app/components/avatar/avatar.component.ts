@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ContentChild } from '@angular/core';
 import { AuthenticationService } from '../../services/authentication.service';
 import { User } from '../../models/user';
 import { Variable } from '@angular/compiler/src/render3/r3_ast';
+import { MatTab } from '@angular/material/tabs';
 
 @Component({
     selector: 'mean-avatar',
@@ -20,85 +21,69 @@ export class AvatarComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.skincolorTab(); //display skin colors on init
+        //display skin colors on init
+        var collection = document.getElementById("itemCollection");
+        var sc_Images: string[] = ["../../../assets/images/avatarpage/brown.jpg",
+        "../../../assets/images/avatarpage/beige.png",
+        "../../../assets/images/avatarpage/darkbrown.jpg"];
+
+        collection.appendChild(this.applyTabData(sc_Images)); 
     }
- 
+
     tabChange(event) {
-         var currentTab = event.tab.textLabel;
-         var collection = document.getElementById("itemCollection"); 
+        var currentTab = event.tab.textLabel;
+        var collection = document.getElementById("itemCollection");
 
-         //replace existing images with the images corresponding to the clicked tab
-         if(currentTab == "Huidskleur"){     
-            collection.lastChild.replaceWith(this.skincolorTab());    
-         }
-         else if(currentTab == "Kleding"){
-            collection.lastChild.replaceWith(this.clothingTab());
-         }
-         else {
-            collection.lastChild.replaceWith(this.hatTab());
-         }
+        //replace existing images with the images corresponding to the clicked tab
+        if (currentTab == "Huidskleur") {
+            var sc_Images: string[] = ["../../../assets/images/avatarpage/brown.jpg",
+            "../../../assets/images/avatarpage/beige.png",
+            "../../../assets/images/avatarpage/darkbrown.jpg"];
+
+            collection.lastChild.replaceWith(this.applyTabData(sc_Images));
+        }
+        else if (currentTab == "Kleding") {
+            var cl_Images: string[] = ["../../../assets/images/avatarpage/pants.png",
+            "../../../assets/images/avatarpage/shirt.png",
+            "../../../assets/images/avatarpage/dress.png"];
+
+            collection.lastChild.replaceWith(this.applyTabData(cl_Images));
+        }
+        else {
+            var hat_Images: string[] = ["../../../assets/images/avatarpage/redHat1.png",
+            "../../../assets/images/avatarpage/blueHat2.png",
+            "../../../assets/images/avatarpage/blueHat4.png",
+            "../../../assets/images/avatarpage/blueHat5.png",
+            "../../../assets/images/avatarpage/greenHat2.png",
+            "../../../assets/images/avatarpage/greenHat3.png"];
+
+            collection.lastChild.replaceWith(this.applyTabData(hat_Images));
+        }
     }
 
-    skincolorTab(){
-        var images: string[] = ["../../../assets/images/brown.jpg",
-            "../../../assets/images/beige.png",
-            "../../../assets/images/darkbrown.jpg"];
+    applyTabData(images: string[]) {
 
-        var skincolorTab = document.getElementById("itemCollection");
-        var tab = document.createElement("mat-tab");
+        var selectedTab = document.getElementById("itemCollection");
+        var tabData = document.createElement("mat-tab");
+        var newline = document.createElement("br");
 
         for (var i = 0; i < images.length; i++) {
             var image = document.createElement("img");
             image.setAttribute("src", images[i]);
-            image.style.height = "75%";
+            image.style.height = "40%";                      //height of artists' images is a lot higher
             image.style.width = "20%";
             image.style.padding = "0.5%";
-            tab.appendChild(image);
+            tabData.appendChild(image);
+
+            if ((i % 3) == 0 && i > 0) {                   //breakline after 4 items (start at 0)
+                tabData.appendChild(newline);
+            }
         }
 
-        skincolorTab.appendChild(tab);
-        return tab;   
+        selectedTab.appendChild(tabData);
+        return tabData;
     }
 
-    clothingTab(){
-        var images: string[] = ["../../../assets/images/pants.png",
-            "../../../assets/images/shirt.png",
-            "../../../assets/images/dress.png"];
 
-        var clothingTab = document.getElementById("itemCollection");
-        var tab = document.createElement("mat-tab");
-
-        for (var i = 0; i < images.length; i++) {
-            var image = document.createElement("img");
-            image.setAttribute("src", images[i]);
-            image.style.height = "75%";
-            image.style.width = "20%";
-            image.style.padding = "0.5%";
-            tab.appendChild(image);
-        }
-
-        clothingTab.appendChild(tab);
-        return tab;
-    }
-
-    hatTab(){
-        var images: string[] = ["../../../assets/images/hat.png",
-            "../../../assets/images/sombrero.jpg"];
-
-        var hatTab = document.getElementById("itemCollection");
-        var tab = document.createElement("mat-tab");
-
-        for (var i = 0; i < images.length; i++) {
-            var image = document.createElement("img");
-            image.setAttribute("src", images[i]);
-            image.style.height = "75%";
-            image.style.width = "20%";
-            image.style.padding = "0.5%";
-            tab.appendChild(image);
-        }
-
-        hatTab.appendChild(tab);
-        return tab;
-    }
 
 }
