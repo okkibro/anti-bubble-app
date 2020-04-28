@@ -20,6 +20,7 @@ module.exports = function(config) {
       require('karma-chrome-launcher'),
       require('@angular-devkit/build-angular/plugins/karma'),
       require('karma-jasmine-html-reporter'),
+      require('karma-coverage-istanbul-reporter')
     ],
 
     client: {
