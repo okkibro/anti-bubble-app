@@ -24,7 +24,7 @@ export class ShopComponent implements OnInit {
   ngOnInit(): void {
     this.shopService.shop().subscribe(shop => {
       this.shopDetails = shop;
-      console.log(shop);
+      console.log(this.shopDetails);
   }, (err) => {
       console.error(err);
   });
@@ -36,7 +36,6 @@ export class ShopComponent implements OnInit {
     // for(var i = 0; i < 8; i++){
       
     // }
-
     this.shopDetails[0].image;
     this.shopDetails[0].price;
   }
