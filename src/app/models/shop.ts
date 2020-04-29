@@ -3,8 +3,9 @@ import { Role } from './role';
 export class Shop {
     _id: string;
     title: string;
+    category: string;
     image: string;
-    price: string;
+    price: number;
     role: Role;
     exp: number;
 }
