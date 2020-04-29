@@ -1,20 +1,37 @@
 <mean-nav-bar></mean-nav-bar>
 
 <body>
-    <div class="containerDiv">
-        <mat-card>
-            <mat-card-header>
-                <mat-card-title>Avatar Wijzigen</mat-card-title>
-            </mat-card-header><br>    
-        <img mat-card-image
-        src="https://image.freepik.com/vrije-vector/jonge-vrouw-avatar-cartoon-karakter-profielfoto_18591-55056.jpg"
-        alt="avatar voorbeeld">
-    <mat-card-content>
-        <button mat-button [routerLink]="'/avatar'" class='abutton'>Wijzigingen Opslaan</button>
-    </mat-card-content>
-</mat-card>
 
-        
-        <button mat-button [routerLink]="'/profile'"> <mat-icon>keyboard_backspace</mat-icon> Terug naar profiel</button>
+    <div class="containerDiv" fxLayoutGap="0.2%" fxLayout="column" fxLayoutAlign="space-evenly">
+        <div fxLayout.xs="row" fxLayoutGap="0.5%" fxLayoutAlign="space-evenly">
+            <mat-card fxFlex="100%">
+                <mat-card-header>
+                    <mat-card-title>Avatar Wijzigen</mat-card-title>
+                </mat-card-header><br>
+                <img mat-card-image
+                    src="https://image.freepik.com/vrije-vector/jonge-vrouw-avatar-cartoon-karakter-profielfoto_18591-55056.jpg"
+                    alt="avatar voorbeeld">
+            </mat-card>
+        </div>
+
+        <div fxLayout.xs="row" fxLayoutGap="0.5%" fxLayoutAlign="space-evenly">
+            <mat-card id="itemCollection" fxFlex="100%">
+                <mat-tab-group (selectedTabChange)="tabChange($event)">
+                    <mat-tab label="Huidskleur"></mat-tab>
+                    <mat-tab label="Kleding"></mat-tab>
+                    <mat-tab label="Hoedjes"></mat-tab>
+                </mat-tab-group>
+            </mat-card>
+        </div>
+
+        <mat-card>
+            <mat-card-content>
+                <button mat-button [routerLink]="'/avatar'" class='abutton'>Wijzigingen Opslaan</button>
+            </mat-card-content>
+        </mat-card>
+
+        <button mat-button [routerLink]="'/profile'">
+            <mat-icon>keyboard_backspace</mat-icon> Terug naar profiel
+        </button>
     </div>
 </body>

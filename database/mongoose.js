@@ -7,5 +7,6 @@ mongoose.connect('mongodb://127.0.0.1:27017/anti-bubble', {useNewUrlParser: true
     .catch((error) => console.log(error));
 
 module.exports = {
-    User: require('./models/users')
+    User: require('./models/users'),
+    Shop: require('./models/shopItems')
 };

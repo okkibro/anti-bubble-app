@@ -6,6 +6,7 @@ import { NgModule } from '@angular/core';
 import { HttpClientModule } from "@angular/common/http";
 import { HighchartsChartModule } from 'highcharts-angular';
 import { FlexLayoutModule } from "@angular/flex-layout"; 
+import {MatTabsModule} from '@angular/material/tabs';
 
 // core modules
 import { CustomMaterialModule } from './shared/material.module';
@@ -63,6 +64,7 @@ import { NavBarComponent } from './components/nav-bar/nav-bar.component';
         HttpClientModule,
         HighchartsChartModule,
         FlexLayoutModule,
+        MatTabsModule,
     ],
     providers: [AuthGuardService, CookieService, SocketIOService],
     bootstrap: [AppComponent]

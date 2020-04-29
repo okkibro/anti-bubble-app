@@ -150,4 +150,5 @@ export class AuthenticationService {
     public profile(): Observable<any> {
         return this.request('get', 'profile');
     }
+
 }
