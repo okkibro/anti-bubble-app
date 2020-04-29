@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "client": "ng serve",
-    "server": "ng build && nodemon index.js",
+    "server": "ng build && nodemon index.js -V -L",
     "start": "npm-run-all -p client server",
     "test": "ng build && nodemon index.js && ng test"
   },

@@ -58,64 +58,63 @@ router.post('/login', (req, res) => {
 });
 
 // router to send a password recovery email
-router.post('/passwordrecovery', (req, res) => {
+router.post('/passwordrecovery', async (req, res) => {
 
     // Generate Random Token
-    let token = "";
-    crypto.randomBytes(20, (error, buffer) => {
-        if (error) {console.log(error.message);}
-        token = buffer.toString("hex");
-    });
+    const token = crypto.randomBytes(20).toString("hex");
+    console.log(token);
 
     // Find the user with the given email and set the token
     User.findOne({ email: req.body.email }, (error, user) => {
         if (!user){
-            return console.log("no user with that email");
+            console.log("no user with that email");
+            res.json({ succes: false, message: "No user found with the given email"});
+            return res.end();
         }
 
         user.recoverPasswordToken = token;
         user.recoverPasswordExpires = Date.now() + 360000;
 
         user.save((error) => {
-            if (error){
-                console.log(error.message);
-            }
-        })
-    });
-
-    // Send email with link and token in the link
-    nodemailer.createTestAccount((error, account) => {
-        if (error) {
-            return console.log(error.message);
+        if (error){
+            console.log(error.message);
         }
-
-        let transporter = nodemailer.createTransport({
-            host: account.smtp.host,
-            port: account.smtp.port,
-            secure: account.smtp.secure,
-            auth: {
-              user: account.user, // generated ethereal user
-              pass: account.pass // generated ethereal password
-            }
         });
-    
-        let mailOptions = {
-            from: 'Anti Bubble App <' + account.user + '>',
-            to: req.body.email,
-            subject: "Password Recovery",
-            text: "",
-            html: "<h1>Password Recovery</h1><p>Reset Password by clicking on the following link: https://" + req.headers.host + "/user/reset/" + token // html body
-          };
-    
-          transporter.sendMail(mailOptions, (error, info) => {
+        // Send email with link and token in the link
+        nodemailer.createTestAccount((error, account) => {
             if (error) {
                 return console.log(error.message);
             }
-            console.log(nodemailer.getTestMessageUrl(info));
-          });
-    });
 
-    res.status(200).end();
+            let transporter = nodemailer.createTransport({
+                host: account.smtp.host,
+                port: account.smtp.port,
+                secure: account.smtp.secure,
+                auth: {
+                user: account.user, // generated ethereal user
+                pass: account.pass // generated ethereal password
+                }
+            });
+        
+            let mailOptions = {
+                from: 'Anti Bubble App <' + account.user + '>',
+                to: req.body.email,
+                subject: "Password Recovery",
+                text: "",
+                html: "<h1>Password Recovery</h1><p>Reset Password by clicking on the following link: https://" + req.headers.host + "/reset/" + token // html body
+            };
+            
+            transporter.sendMail(mailOptions, (error, info) => {
+                if (error) {
+                    return console.log(error.message);
+                }
+                console.log(nodemailer.getTestMessageUrl(info));
+            });
+            
+            res.json({ succes: true, message: "Email succesfully sent" })
+            return res.status(200).end();
+        });
+    });
 });
 
 // router that checks the password recovery token and shows the reset password page or a wrong token error
@@ -123,11 +122,14 @@ router.get('/reset/:token', (req, res) => {
     // Find the user that belongs to the given token
     User.findOne({ recoverPasswordToken: req.params.token, recoverPasswordExpires: {$gt: Date.now() } }, (error, user) => {
         if (!user) {
-            return console.log("wrong token or token expired");
+            console.log("wrong token or token expired");
+            res.json({ correct: false });
+            res.status(200).end();
+        } else {
+            console.log("correct token");
+            res.json({ correct: true });
+            res.status(200).end();
         }
-
-        // TODO: Load password change form
-        console.log("correct token");
     });
 });
 
@@ -137,7 +139,9 @@ router.post('/reset/:token', (req, res) => {
     User.findOne({ recoverPasswordToken: req.params.token, recoverPasswordExpires: {$gt: Date.now() } }, (error, user) => {
         if (error) { return console.log(error.message); }
         if (!user) {
-            return console.log("wrong token or token expired");
+            console.log("wrong token or token expired");
+            res.json({ succes: false, message: "wrong token or token expired" });
+            return res.end();
         }
 
         // Change the password in the database
@@ -146,7 +150,9 @@ router.post('/reset/:token', (req, res) => {
                 if (error) { return console.log(error.message); }
             });
         } else {
-            return console.log("password and confirmation are not the same");
+            console.log("password and confirmation are not the same");
+            res.json({ succes: false, message: "password and confirmation are not the same" });
+            return res.end();
         }
 
         user.recoverPasswordToken = undefined;
@@ -155,6 +161,7 @@ router.post('/reset/:token', (req, res) => {
         user.save((error) => {
             if (error) { return console.log(error.message); }
             console.log("password change succesful");
+            res.json({ succes: true, message: "password change succesful" });
             res.status(200).end();
         });
     });
