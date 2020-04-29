@@ -68,7 +68,7 @@ router.post('/passwordrecovery', async (req, res) => {
     User.findOne({ email: req.body.email }, (error, user) => {
         if (!user){
             console.log("no user with that email");
-            res.json({ succes: false, message: "No user found with the given email"});
+            res.json({ succes: false, message: "Geen gebruiker gevonden met het gegeven email adres"});
             return res.end();
         }
 
@@ -111,7 +111,7 @@ router.post('/passwordrecovery', async (req, res) => {
                 console.log(nodemailer.getTestMessageUrl(info));
             });
             
-            res.json({ succes: true, message: "Email succesfully sent" })
+            res.json({ succes: true, message: "Email succesvol verzonden" })
             return res.status(200).end();
         });
     });
@@ -151,7 +151,7 @@ router.post('/reset/:token', (req, res) => {
             });
         } else {
             console.log("password and confirmation are not the same");
-            res.json({ succes: false, message: "password and confirmation are not the same" });
+            res.json({ succes: false, message: "wachtwoord en bevestiging zijn niet hetzelfde" });
             return res.end();
         }
 
@@ -161,7 +161,7 @@ router.post('/reset/:token', (req, res) => {
         user.save((error) => {
             if (error) { return console.log(error.message); }
             console.log("password change succesful");
-            res.json({ succes: true, message: "password change succesful" });
+            res.json({ succes: true, message: "wachtwoord succesvol veranderd" });
             res.status(200).end();
         });
     });
