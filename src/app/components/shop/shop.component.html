@@ -13,15 +13,14 @@
             </mat-card>
         </div>
         <div fxLayout.xs="row" fxLayoutGap="0.5%" fxLayoutAlign="space-evenly">
-            <mat-card>
+            <mat-card>        
                 <table class="shopTable">
-                    <tr>
-                        <td><img src="/assets/images/Test_hoedje_1.png"></td>
+                    <tr *ngFor = "let item of shopDetails">
+                        <td><img src= "{{item.image}}"></td>
+                        <td>{{ item.title }}</td>
+                        <td> <button mat-button>{{ item.price }} <mat-icon>payment</mat-icon></button> </td>
+                        <br>
                     </tr>
-                    <tr>
-                        <td>{{ shopDetails[0]?.title }}</td>
-                    </tr>
-                    <tr><button mat-button>{{ shopDetails[0]?.price }} <mat-icon>payment</mat-icon></button></tr>
                 </table>
             </mat-card>
         </div>

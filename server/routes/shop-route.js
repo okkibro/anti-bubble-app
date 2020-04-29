@@ -30,7 +30,7 @@ router.post('/create', (req, res) => {
     //fill in data to shop attributes
     shop.title = "Hoedje";
     shop.category = "hoed";
-    shop.image = "/assets/images/Test_hoedje_1";
+    shop.image = "/assets/images/Test_hoedje_1.png";
     shop.price = "5";
     //save the changes to the database
     shop.save((error) => { 
