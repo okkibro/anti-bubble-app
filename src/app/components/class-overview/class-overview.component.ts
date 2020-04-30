@@ -11,8 +11,6 @@ import { User } from '../../models/user';
 })
 export class ClassOverviewComponent implements OnInit {
 
-  //userDetails: User;
-
   classmates: User[];
 
   constructor(private auth: AuthenticationService, private router: Router) { }
@@ -24,8 +22,6 @@ export class ClassOverviewComponent implements OnInit {
   ngOnInit() {
     this.auth.getAllClassmates().subscribe((data) => {
       this.classmates = data;
-      console.log(this.classmates);
     });
   }
-
 }

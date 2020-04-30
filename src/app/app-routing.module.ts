@@ -26,7 +26,7 @@ const routes: Routes = [
   { path: 'session', component: SessionComponent },
   { path: 'profile', component: ProfileComponent, canActivate: [AuthGuardService]},
   { path: 'class-overview', component: ClassOverviewComponent },
-  { path: 'classmateProfile', component: ClassmateProfileComponent },
+  { path: 'classmateProfile/:id', component: ClassmateProfileComponent },
   { path: 'avatar', component: AvatarComponent },
   { path: 'bubble-details', component: BubbleDetailsComponent },
   { path: 'teacherOrStudent', component: TeacherOrStudentComponent },

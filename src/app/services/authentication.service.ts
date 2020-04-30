@@ -117,7 +117,7 @@ export class AuthenticationService {
     }
 
     // TODO:: Check if this is necessary
-    private request(method: 'post'|'get', type: 'login'|'register'|'profile'|'getAllClassmates', user?: User): Observable<any> {
+    private request(method: 'post'|'get', type: 'login'|'register'|'profile'|'getAllClassmates'|any , user?: User): Observable<any> {
         let base;
 
         if (method === 'post') {
@@ -153,6 +153,10 @@ export class AuthenticationService {
 
     public getAllClassmates() : Observable<any> {
         return this.request('get', 'getAllClassmates');
+    }
+
+    public classmateProfile(id: string) : Observable<any> {
+        return this.request('get', 'classmateProfile/' + id)
     }
 
 }

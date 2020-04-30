@@ -21,7 +21,7 @@
                     <tr *ngFor="let classmate of classmates">
                         <td>{{ classmate.firstName }}</td>
                         <td>Online</td>
-                        <td><button mat-button [routerLink]="'/user/classmateProfile/' + classmate._id" class="abutton"> Bekijk Profiel </button></td>
+                        <td><button mat-button [routerLink]="'/classmateProfile/' + classmate._id" class="abutton"> Bekijk Profiel </button></td>
                     </tr>
                     <!-- <tr>
                         <td>{{ userDetails?.firstName }}</td>

@@ -199,14 +199,15 @@ router.get('/classmateProfile/:id', auth, (req, res) => {
                     res.status(404).json({
                         "message": "User's profile not found"
                     })
-                }
-                // Check if classmate is actually in the same class
-                if (user.class != classmate.class) {
-                    res.status(401).json({
-                        "message": "Not authorized to see user's profile"
-                    })
                 } else {
-                    res.status(200).json(classmate);
+                    // Check if classmate is actually in the same class
+                    if (user.class != classmate.class) {
+                        res.status(401).json({
+                            "message": "Not authorized to see user's profile"
+                        })
+                    } else {
+                        res.status(200).json(classmate);
+                    }
                 }
             });
         });
