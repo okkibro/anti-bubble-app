@@ -31,7 +31,8 @@ let userSchema = new Schema({
         required: true
     },
     recoverPasswordToken: String,
-    recoverPasswordExpires: Date
+    recoverPasswordExpires: Date,
+    class: String
 });
 
 userSchema.methods.setPassword = function(password){

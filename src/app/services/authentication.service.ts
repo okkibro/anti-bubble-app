@@ -117,7 +117,7 @@ export class AuthenticationService {
     }
 
     // TODO:: Check if this is necessary
-    private request(method: 'post'|'get', type: 'login'|'register'|'profile', user?: User): Observable<any> {
+    private request(method: 'post'|'get', type: 'login'|'register'|'profile'|'getAllClassmates', user?: User): Observable<any> {
         let base;
 
         if (method === 'post') {
@@ -149,6 +149,10 @@ export class AuthenticationService {
     /** GET method for fetching a user's profile */
     public profile(): Observable<any> {
         return this.request('get', 'profile');
+    }
+
+    public getAllClassmates() : Observable<any> {
+        return this.request('get', 'getAllClassmates');
     }
 
 }
