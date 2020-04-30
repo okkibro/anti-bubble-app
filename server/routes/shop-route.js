@@ -18,7 +18,6 @@ router.get('/', (req, res) => {
     var query = { category : req.headers.id };
     Shop.find(query)
         .exec(function (err, shop) {
-            // console.log(shop);
             res.status(200).json(shop);
         });
 });

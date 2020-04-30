@@ -12,6 +12,7 @@ import { MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatSnackBarModule} from '@angular/material/snack-bar';
 import { MatRadioModule } from '@angular/material/radio';
+import { MatGridListModule } from '@angular/material/grid-list';
 
 
 @NgModule({
@@ -29,6 +30,7 @@ import { MatRadioModule } from '@angular/material/radio';
         MatExpansionModule,
         MatSnackBarModule,
         MatRadioModule,
+        MatGridListModule,
     ],
     exports: [
         CommonModule,
@@ -44,6 +46,7 @@ import { MatRadioModule } from '@angular/material/radio';
         MatExpansionModule,
         MatSnackBarModule,
         MatRadioModule,
+        MatGridListModule,
     ],
 })
 export class CustomMaterialModule { }

@@ -7,21 +7,22 @@
                 <mat-card-header>
                     <mat-card-title class="welcomeHeader">Winkel</mat-card-title>
                 </mat-card-header>
-                <mat-card-content>
-    
-                </mat-card-content>
             </mat-card>
         </div>
-        <div fxLayout.xs="row" fxLayoutGap="0.5%" fxLayoutAlign="space-evenly">
-            <mat-card>        
-                <table class="shopTable">
-                    <tr *ngFor = "let item of shopDetails">
-                        <td><img src= "{{item.image}}"></td>
-                        <td>{{ item.title }}</td>
-                        <td> <button mat-button>{{ item.price }} <mat-icon>payment</mat-icon></button> </td>
-                        <br>
-                    </tr>
-                </table>
+        <div fxLayout.xs="row"  fxLayoutGap="0.5%" fxLayoutAlign="space-evenly"> 
+            <mat-card fxFlex="100%">
+                <mat-card-content>
+                    <mat-grid-list cols="4" rowHeight="2:1">
+                        <mat-grid-tile *ngFor = "let item of shopDetails">
+                                <table>
+                                <img src= "{{item.image}}"><br>
+                                {{ item.title }} <br>
+                                <button mat-button>{{ item.price }} <mat-icon>payment</mat-icon></button>
+                                <br>
+                                </table>
+                        </mat-grid-tile>
+                    </mat-grid-list> 
+                </mat-card-content>
             </mat-card>
         </div>
     </div>
