@@ -18,6 +18,7 @@
             <mat-card id="itemCollection" fxFlex="100%">
                 <mat-tab-group (selectedTabChange)="tabChange($event)">
                     <mat-tab label="Huidskleur"></mat-tab>
+                    <mat-tab label="Haarstijl"></mat-tab>
                     <mat-tab label="Kleding"></mat-tab>
                     <mat-tab label="Hoedjes"></mat-tab>
                 </mat-tab-group>
@@ -26,7 +27,7 @@
 
         <mat-card>
             <mat-card-content>
-                <button mat-button [routerLink]="'/avatar'" class='abutton'>Wijzigingen Opslaan</button>
+                <button mat-button [routerLink]="'/profile'">Wijzigingen Opslaan</button>
             </mat-card-content>
         </mat-card>
 

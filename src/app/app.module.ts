@@ -26,6 +26,7 @@ import { TeacherOrStudentComponent } from './components/teacherOrStudent/teacher
 import { ShopComponent } from './components/shop/shop.component';
 import { PasswordRecoveryComponent } from './components/password-recovery/password-recovery.component';
 import { PasswordResetComponent } from './components/password-reset/password-reset.component';
+import { TrophiesComponent } from './components/trophies/trophies.component';
 
 // services
 import { AuthGuardService } from './services/auth-guard.service';
@@ -34,6 +35,8 @@ import { SocketIOService } from './services/socket-io.service';
 import { SessionComponent } from './components/session/session.component';
 import { TeacherOverviewComponent } from './components/teacher-overview/teacher-overview.component';
 import { NavBarComponent } from './components/nav-bar/nav-bar.component';
+import {MatProgressBarModule} from '@angular/material/progress-bar';
+
 
 
 @NgModule({
@@ -54,6 +57,7 @@ import { NavBarComponent } from './components/nav-bar/nav-bar.component';
         NavBarComponent,
         PasswordRecoveryComponent,
         PasswordResetComponent,
+        TrophiesComponent,
     ],
     imports: [
         BrowserModule,
@@ -65,6 +69,7 @@ import { NavBarComponent } from './components/nav-bar/nav-bar.component';
         HighchartsChartModule,
         FlexLayoutModule,
         MatTabsModule,
+        MatProgressBarModule,
     ],
     providers: [AuthGuardService, CookieService, SocketIOService],
     bootstrap: [AppComponent]

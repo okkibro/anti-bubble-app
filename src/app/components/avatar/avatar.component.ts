@@ -42,14 +42,24 @@ export class AvatarComponent implements OnInit {
 
             collection.lastChild.replaceWith(this.applyTabData(sc_Images));
         }
-        else if (currentTab == "Kleding") {
-            var cl_Images: string[] = ["../../../assets/images/avatarpage/pants.png",
-            "../../../assets/images/avatarpage/shirt.png",
-            "../../../assets/images/avatarpage/dress.png"];
+        else if (currentTab == "Haarstijl") {
+            var cl_Images: string[] = ["../../../assets/images/avatarpage/blondHair2.png",
+            "../../../assets/images/avatarpage/blueHair1.png",
+            "../../../assets/images/avatarpage/blueHair2.png",
+            "../../../assets/images/avatarpage/redHair3.png",
+            "../../../assets/images/avatarpage/redHair4.png"];
 
             collection.lastChild.replaceWith(this.applyTabData(cl_Images));
         }
-        else {
+        else if (currentTab == "Kleding") {
+            var cl_Images: string[] = ["../../../assets/images/avatarpage/blueClothes1.png",
+            "../../../assets/images/avatarpage/blueClothes2.png",
+            "../../../assets/images/avatarpage/greenClothes2.png",
+            "../../../assets/images/avatarpage/redClothes1.png"];
+
+            collection.lastChild.replaceWith(this.applyTabData(cl_Images));
+        }
+        else if (currentTab == "Hoedjes"){
             var hat_Images: string[] = ["../../../assets/images/avatarpage/redHat1.png",
             "../../../assets/images/avatarpage/blueHat2.png",
             "../../../assets/images/avatarpage/blueHat4.png",
@@ -58,6 +68,9 @@ export class AvatarComponent implements OnInit {
             "../../../assets/images/avatarpage/greenHat3.png"];
 
             collection.lastChild.replaceWith(this.applyTabData(hat_Images));
+        }
+        else {
+            window.alert("er is iets fout gegaan");
         }
     }
 
@@ -70,8 +83,8 @@ export class AvatarComponent implements OnInit {
         for (var i = 0; i < images.length; i++) {
             var image = document.createElement("img");
             image.setAttribute("src", images[i]);
-            image.style.height = "40%";                      //height of artists' images is a lot higher
-            image.style.width = "20%";
+            image.style.height = "20vh";                      //20 view height --> scales with view
+            image.style.width = "10vw";                       //10 view width
             image.style.padding = "0.5%";
             tabData.appendChild(image);
 

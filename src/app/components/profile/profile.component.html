@@ -51,29 +51,28 @@
                 <img mat-card-image src="https://f1.pngfuel.com/png/724/363/759/cartoon-speech-bubble-soap-bubble-speech-balloon-pink-circle-material-property-sphere-magenta-png-clip-art.png"
                     alt="bubbel voorbeeld">
                 <mat-card-content>
-                    <button mat-button [routerLink]="'/bubble-details'" class='abutton'>Meer details</button>
+                    <button mat-button [routerLink]="'/bubble-details'">Meer details</button>
                 </mat-card-content>
             </mat-card>
 
             <mat-card fxFlex="50%">
                 <mat-card-header>
-                    <mat-card-title>Voortgang</mat-card-title>
+                    <mat-card-title>Trofeeën</mat-card-title>
+                    <mat-card-subtitle>Je recent behaalde trofeeën</mat-card-subtitle>
                 </mat-card-header>
                 <mat-card-content>
                     <table class="UItable">
                         <tr>
-                            <th>Doel 1</th>
-                            <td>Gehaald</td>
+                            <th>Beginner</th>
+                            <td>Voor het eerst een minigame gespeeld</td>
                         </tr>
                         <tr>
-                            <th>Doel 2</th>
-                            <td>Gehaald</td>
+                            <th>Kleine Spaarder</th>
+                            <td>10 munten verzameld</td>
                         </tr>
-                        <tr>
-                            <th>Doel 3</th>
-                            <td>Niet gehaald</td>
-                        </tr>
-                    </table>
+                    </table><br>
+
+                    <button mat-button [routerLink]="'/trophies'">Alle trofeeën</button>
                 </mat-card-content>
             </mat-card>
         </div>
