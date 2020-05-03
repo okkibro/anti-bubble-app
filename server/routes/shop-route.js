@@ -31,29 +31,12 @@ router.get('/', (req, res) => {
             break;  
         } 
      } 
-    // var query = { category : req.headers.id };
+
     console.log(req.headers.id);
     Shop.find(query)
         .exec(function (err, shop) {
             res.status(200).json(shop);
         });
-});
-
-//router to register an item in the database
-router.post('/create', (req, res) => {
-    //make a new shop item
-    let shop = new Shop();
-    //fill in data to shop attributes
-    shop.title = "Hoedje";
-    shop.category = "hoed";
-    shop.image = "/assets/images/Test_hoedje_1.png";
-    shop.price = "5";
-    //save the changes to the database
-    shop.save((error) => { 
-        if (error){
-            console.log(error.message);
-        } 
-    });
 });
 
 module.exports = router;

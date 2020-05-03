@@ -36,34 +36,6 @@ export class ShopComponent implements OnInit {
     }, (err) => {
         console.error(err);
     });
-
-  //   switch(currentTab) { 
-  //     case "Hoofddeksels": { 
-  //       this.shopService.shop("hoofddeksel").subscribe(shop => {
-  //         this.shopDetails = shop;
-  //     }, (err) => {
-  //         console.error(err);
-  //     });
-        
-  //        break; 
-  //     } 
-  //     case "Kleding": { 
-  //       this.shopService.shop("kleding").subscribe(shop => {
-  //         this.shopDetails = shop;
-  //     }, (err) => {
-  //         console.error(err);
-  //     });
-  //        break; 
-  //     } 
-  //     default: { 
-  //        this.shopService.shop("alles").subscribe(shop => {
-  //     this.shopDetails = shop;
-  // }, (err) => {
-  //     console.error(err);
-  // }); 
-  //        break; 
-  //     } 
-  //  } 
    
 }
 
