@@ -9,17 +9,25 @@
                 </mat-card-header>
             </mat-card>
         </div>
+       
         <div fxLayout.xs="row"  fxLayoutGap="0.5%" fxLayoutAlign="space-evenly"> 
-            <mat-card fxFlex="100%">
+            <mat-card  id="itemCollection" fxFlex="100%"> 
                 <mat-card-content>
-                    <mat-grid-list cols="4" rowHeight="2:1">
-                        <mat-grid-tile *ngFor = "let item of shopDetails">
-                                <table>
-                                <img src= "{{item.image}}"><br>
-                                {{ item.title }} <br>
-                                <button mat-button>{{ item.price }} <mat-icon>payment</mat-icon></button>
-                                <br>
-                                </table>
+                    <mat-tab-group (selectedTabChange)="tabChange($event)">
+                        <mat-tab label="Alles"></mat-tab>
+                        <mat-tab label="Hoofddeksels"></mat-tab>
+                        <mat-tab label="Kleding"></mat-tab>
+                    </mat-tab-group>
+                    <mat-grid-list cols="4">
+                        <mat-grid-tile *ngFor = "let item of shopDetails" fxFlexAlign="stretch">
+                                <mat-card class="shopCardStyle" fxFlex="100%" fxLayoutGap="0.5%" fxFlexAlign="stretch">
+                                <mat-card-title>{{ item.title }}</mat-card-title>
+                                <img mat-card-image src= "{{item.image}}" alt="{{ item.title }}"> 	
+                                <!-- <mat-card-content><img src= "{{item.image}}"><br></mat-card-content> -->
+                                <mat-card-actions fxFlexAlign="end">
+                                    <button mat-button>{{ item.price }} <mat-icon>payment</mat-icon></button>
+                                </mat-card-actions>
+                                </mat-card>
                         </mat-grid-tile>
                     </mat-grid-list> 
                 </mat-card-content>

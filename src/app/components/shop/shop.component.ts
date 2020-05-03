@@ -22,11 +22,49 @@ export class ShopComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.shopService.shop().subscribe(shop => {
+    this.shopService.shop("alles").subscribe(shop => {
       this.shopDetails = shop;
   }, (err) => {
       console.error(err);
   });
   }
   
+  tabChange(event) {
+    var currentTab = event.tab.textLabel;
+    this.shopService.shop(currentTab).subscribe(shop => {
+        this.shopDetails = shop;
+    }, (err) => {
+        console.error(err);
+    });
+
+  //   switch(currentTab) { 
+  //     case "Hoofddeksels": { 
+  //       this.shopService.shop("hoofddeksel").subscribe(shop => {
+  //         this.shopDetails = shop;
+  //     }, (err) => {
+  //         console.error(err);
+  //     });
+        
+  //        break; 
+  //     } 
+  //     case "Kleding": { 
+  //       this.shopService.shop("kleding").subscribe(shop => {
+  //         this.shopDetails = shop;
+  //     }, (err) => {
+  //         console.error(err);
+  //     });
+  //        break; 
+  //     } 
+  //     default: { 
+  //        this.shopService.shop("alles").subscribe(shop => {
+  //     this.shopDetails = shop;
+  // }, (err) => {
+  //     console.error(err);
+  // }); 
+  //        break; 
+  //     } 
+  //  } 
+   
+}
+
 }

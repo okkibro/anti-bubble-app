@@ -15,7 +15,24 @@ const auth = jwt({
 
 //router to gets shop items from the database based on a query
 router.get('/', (req, res) => {
-    var query = { category : req.headers.id };
+    
+    var query;
+    switch(req.headers.id) { 
+        case "Hoofddeksels": { 
+            query = { category : "hoofddeksel" };
+            break; 
+        } 
+        case "Kleding": { 
+            query = { category : "kleding" };
+            break; 
+        } 
+        default: { 
+            query = { };
+            break;  
+        } 
+     } 
+    // var query = { category : req.headers.id };
+    console.log(req.headers.id);
     Shop.find(query)
         .exec(function (err, shop) {
             res.status(200).json(shop);

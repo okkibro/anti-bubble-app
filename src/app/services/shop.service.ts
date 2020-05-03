@@ -6,16 +6,13 @@ import {Observable} from "rxjs";
 @Injectable({
   providedIn: 'root'
 })
+
 export class ShopService {
 
   constructor(private http: HttpClient, private router: Router) { }
 
-  public shop(): Observable<any> {
-    return this.http.get('https://localhost:3000/shop', {headers : { id : "hoofddeksel" }});
-}
-
-public createShop(): Observable<any> {
-    return this.http.post('https://localhost:3000/shop/create', {});
+  public shop(type: 'alles'|'hoofddeksel'|'kleding'): Observable<any> {
+    return this.http.get('https://localhost:3000/shop', {headers : { id : type }});
 }
 
 }
