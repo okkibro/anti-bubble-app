@@ -18,6 +18,8 @@ export class ClassOverviewComponent implements OnInit {
 
   classmates: User[];
 
+  public value: string;
+
   constructor(private auth: AuthenticationService, private router: Router, private fb: FormBuilder) { }
 
   logoutButton() {
@@ -39,6 +41,14 @@ export class ClassOverviewComponent implements OnInit {
       } else {
         (table[i + 1] as HTMLElement).style.display = "none";
       }
+    }
+  }
+
+  clear() {
+    this.value = '';
+    let table = document.getElementById("table").childNodes;
+    for (let i:number = 0; i < this.classmates.length; i++) {
+      (table[i + 1] as HTMLElement).style.display = "";
     }
   }
 }

@@ -58,7 +58,10 @@
             </mat-card-header>
             <mat-card-content>
                 <mat-form-field>
-                    <input matInput formControlName="query" placeholder="Zoek hier">
+                    <input type="text" matInput formControlName="query" [(ngModel)]="value" placeholder="Zoek hier">
+                    <button mat-button *ngIf="value" matSuffix mat-icon-button aria-label="Clear" (click)="clear()">
+                        <mat-icon>close</mat-icon>
+                    </button>
                 </mat-form-field>
                 <button (click)="search()" mat-button>Go</button>
                 <!-- <mat-accordion>
