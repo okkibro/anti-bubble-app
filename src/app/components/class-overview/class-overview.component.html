@@ -13,7 +13,7 @@
 
         <mat-card>
             <mat-card-content>
-                <table class="UItable">
+                <table class="UItable" id="table">
                     <tr>
                         <th>Naam</th>
                         <th>Status</th>
@@ -52,15 +52,15 @@
             </mat-card-content>
         </mat-card>
 
-        <mat-card class="searchBar">
+        <mat-card class="searchBar" [formGroup]="searchBar">
             <mat-card-header>
                 <mat-card-title>Zoek klasgenoot</mat-card-title>
             </mat-card-header>
             <mat-card-content>
                 <mat-form-field>
-                    <input matInput placeholder="Zoek hier">
+                    <input matInput formControlName="query" placeholder="Zoek hier">
                 </mat-form-field>
-                <button mat-button>Go</button>
+                <button (click)="search()" mat-button>Go</button>
                 <!-- <mat-accordion>
                     <mat-expansion-panel>
                         <mat-expansion-panel-header>
