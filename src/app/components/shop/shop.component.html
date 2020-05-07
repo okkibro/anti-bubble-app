@@ -25,7 +25,7 @@
                                 <img mat-card-image src= "{{item.image}}" alt="{{ item.title }}"> 	
                                 <!-- <mat-card-content><img src= "{{item.image}}"><br></mat-card-content> -->
                                 <mat-card-actions fxFlexAlign="end">
-                                    <button mat-button>{{ item.price }} <mat-icon>payment</mat-icon></button>
+                                    <button (click)="buy(item)" mat-button>{{ item.price }} <mat-icon>payment</mat-icon></button>
                                 </mat-card-actions>
                                 </mat-card>
                         </mat-grid-tile>

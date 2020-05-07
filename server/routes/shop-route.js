@@ -6,6 +6,8 @@ const Shop = mongoose.model('Shop');
 const sanitize = require('mongo-sanitize');
 const nodemailer = require('nodemailer');
 const crypto = require('crypto');
+const User = mongoose.model('User');
+const Item = mongoose.model('Item');
 
 const jwt = require('express-jwt');
 const auth = jwt({
@@ -54,6 +56,15 @@ router.post('/create', (req, res) => {
             console.log(error.message);
         } 
     });
+});
+
+router.post('/buy', auth, (req, res) => {
+    User.findById(req.payload._id)
+            .exec(function (err, user) {
+                user.inventory.push(req.body.item);
+                user.save();
+                res.status(200);
+            });
 });
 
 module.exports = router;

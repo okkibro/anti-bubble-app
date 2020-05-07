@@ -3,6 +3,7 @@ import { AuthenticationService } from '../../services/authentication.service';
 import { Router } from '@angular/router';
 import { Shop } from '../../models/shop';
 import { ShopService } from 'src/app/services/shop.service';
+import { BuiltinType } from '@angular/compiler';
 
 @Component({
     selector: 'mean-shop',
@@ -36,6 +37,13 @@ export class ShopComponent implements OnInit {
     }, (err) => {
         console.error(err);
     });
+  }
+
+  buy(item): void {
+    this.shopService.buy(item).subscribe((data) => {  
+    
+    });
+  }
 
   //   switch(currentTab) { 
   //     case "Hoofddeksels": { 
@@ -64,7 +72,5 @@ export class ShopComponent implements OnInit {
   //        break; 
   //     } 
   //  } 
-   
-}
 
 }
