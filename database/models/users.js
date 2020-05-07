@@ -31,7 +31,11 @@ let userSchema = new Schema({
         required: true
     },
     recoverPasswordToken: String,
-    recoverPasswordExpires: Date
+    recoverPasswordExpires: Date,
+    milestones: {
+        type: [Number],
+        required: true
+    }
 });
 
 userSchema.methods.setPassword = function(password){
