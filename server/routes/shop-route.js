@@ -61,9 +61,14 @@ router.post('/create', (req, res) => {
 router.post('/buy', auth, (req, res) => {
     User.findById(req.payload._id)
             .exec(function (err, user) {
-                user.inventory.push(req.body.item);
-                user.save();
-                res.status(200);
+                if (user.currency >= req.body.item.price) {
+                    user.inventory.push(req.body.item);
+                    user.currency -= req.body.item.price;
+                    user.save();
+                    res.status(200).json( { succes: true, message: `Je hebt ${req.body.item.title} succesvol gekocht!` } );
+                } else {
+                    res.status(200).json( { succes: false, message: `Je hebt niet genoeg geld om ${req.body.item.title} te kopen` } )
+                }
             });
 });
 

@@ -38,6 +38,10 @@ let userSchema = new Schema({
         item: {type: Schema.ObjectId, ref: 'Item'}
         }],
         required: true
+    },
+    currency: {
+        type: Number,
+        required: true
     }
 });
 
