@@ -1,0 +1,79 @@
+@import '~@angular/material/theming';
+@include mat-core();
+
+$primary: (
+    50: #ffffff,
+    100: #f4fafa,
+    200: #e2f2f2,
+    300: #d0eaeb,
+    400: #bfe2e3,
+    500: #addadb,
+    600: #9bd2d3,
+    700: #8acacb,
+    800: #78c2c4,
+    900: #66babc,
+    A100: #ffffff,
+    A200: #ffffff,
+    A400: #ffffff,
+    A700: #54b2b4,
+contrast: (
+    50: white,
+    100: white,
+    200: white,
+    300: white,
+    400: white,
+    500: white,
+    600: white,
+    700: white,
+    800: white,
+    900: white,
+    A100: white,
+    A200: white,
+    A400: white,
+    A700: white,
+  )
+  );
+
+  $warn: (
+    50: #ffffff,
+    100: #fff9f8,
+    200: #fde5e1,
+    300: #fbd1c9,
+    400: #fabdb1,
+    500: #f8a999,
+    600: #f69581,
+    700: #f58169,
+    800: #f36d51,
+    900: #f1583a,
+    A100: #ffffff,
+    A200: #ffffff,
+    A400: #ffffff,
+    A700: #f04422,
+contrast: (
+    50: white,
+    100: white,
+    200: white,
+    300: white,
+    400: white,
+    500: white,
+    600: white,
+    700: white,
+    800: white,
+    900: white,
+    A100: white,
+    A200: white,
+    A400: white,
+    A700: white,
+  )
+  );
+
+// below creates a primary palette with three shades of blue
+// $my-primary: mat-palette($my-blue, 100, 50, 200);
+
+$my-custom-primary: mat-palette($primary, 500, 300, 700);
+$my-custom-accent: mat-palette($mat-pink, 100, 500, A100);
+$my-custom-warn: mat-palette($warn);
+
+$my-custom-theme: mat-light-theme($my-custom-primary, $my-custom-accent, $my-custom-warn);
+
+@include angular-material-theme($my-custom-theme);

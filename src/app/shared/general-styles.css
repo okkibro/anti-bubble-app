@@ -66,9 +66,9 @@ body {
     background-color: pink;
 }
 
-mat-card {
-    background-color: orange;
-}
+/* mat-card {
+    background-color: ;
+} */
 
 mat-card-header {
     display: inline-block;
