@@ -7,6 +7,7 @@ import { HttpClientModule } from "@angular/common/http";
 import { HighchartsChartModule } from 'highcharts-angular';
 import { FlexLayoutModule } from "@angular/flex-layout"; 
 import {MatTabsModule} from '@angular/material/tabs';
+import {MatProgressBarModule} from '@angular/material/progress-bar';
 
 // core modules
 import { CustomMaterialModule } from './shared/material.module';
@@ -67,6 +68,7 @@ import { TrophiesComponent } from './components/trophies/trophies.component';
         HighchartsChartModule,
         FlexLayoutModule,
         MatTabsModule,
+        MatProgressBarModule,
     ],
     providers: [AuthGuardService, CookieService, SocketIOService],
     bootstrap: [AppComponent]
