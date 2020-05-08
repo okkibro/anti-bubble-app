@@ -9,8 +9,9 @@
                 </mat-card-header>
                 <mat-card-content>
 
-                    Je hebt nu 35% van alle trofeeën behaald.<br>
-                    <mat-progress-bar mode="determinate" value="35" class="progressBar">=</mat-progress-bar>
+                    Je hebt nu 44% van alle trofeeën behaald.<br>
+                    <mat-progress-bar mode="determinate" [value]=44.4 class="progressBar">=</mat-progress-bar>
+                    <!--  value moet worden aangepast naar progressbar() return waarde, kan pas als er een ng-for loop is bij de tables -->
                 </mat-card-content>
             </mat-card>
         </div>
@@ -18,49 +19,46 @@
         <div fxLayout.xs="row" fxLayoutGap="0.5%" fxLayoutAlign="space-evenly">
             <mat-card fxFlex="100%">
                 <mat-card-content>
-                    <mat-tab-group>
+                    <mat-tab-group (selectedTabChange)="progressBar()" id="matTab">
+                        <!-- voor nu even zo, percentage klopt maar het moment van berekenen niet -->
                         <mat-tab label="Behaald">
-                            <table class="UItable">
+                            <table class="UItable" id="achievedTable">
                                 <tr>
-                                    <th>Beginner</th>
-                                    <td>Voor het eerst een minigame gespeeld</td>
-                                </tr>
-                                <tr>
-                                    <th>Kleine Spaarder</th>
-                                    <td>10 munten verzameld</td>
-                                </tr>
-                                <tr>
-                                    <th>Gierige Gerrie</th>
-                                    <td>1 item uit de shop gekocht</td>
-                                </tr>
-                                <tr>
-                                    <th>Nieuwsgierige Niels</th>
-                                    <td>Gekeken naar je bubbel geschiedenis</td>
+                                    <td><strong>Beginner</strong><br>
+                                        Voor het eerst een minigame gespeeld</td>
+                            
+                                    <td><strong>Kleine Spaarder</strong><br>
+                                        10 munten verzameld</td>
+                       
+                                    <td><strong>Gierige Gerrie</strong><br>
+                                        1 item uit de shop gekocht</td>
+                          
+                                    <td><strong>Nieuwsgierige Niels</strong><br>
+                                        Gekeken naar je bubbel geschiedenis</td>
                                 </tr>
                             </table>
                         </mat-tab>
 
                         <mat-tab label="Te behalen">
-                            <table class="UItable">
+                            <table class="UItable" id="notYetAchievedTable">
                                 <tr>
-                                    <th>Shoppaholic</th>
-                                    <td>Alle items uit de shop gekocht</td>
-                                </tr>
-                                <tr>
-                                    <th>Het glas is halfvol</th>
-                                    <td>50% kennis over filter bubbels behaald</td>
-                                </tr>
-                                <tr>
-                                    <th>Snelheidsmonster</th>
-                                    <td>Als snelste een minigame geëindigd</td>
-                                </tr>
-                                <tr>
-                                    <th>Money Maker</th>
-                                    <td>100 munten verzameld</td>
-                                </tr>
-                                <tr>
-                                    <th>3/4 Trofee</th>
-                                    <td>75% van al je trofeeën behaald</td>
+                                    <td><strong>Shoppaholic</strong><br>
+                                    Alle items uit de shop gekocht</td>
+                             
+                                    <td><strong>Het glas is halfvol</strong><br>
+                                    50% kennis over filter bubbels behaald</td>
+                               
+                                    <td><strong>Snelheidsmonster</strong><br>
+                                    Als snelste een minigame geëindigd</td>
+                               
+                                    <td><strong>Money Maker</strong><br>
+                                    100 munten verzameld</td>
+                              
+                                    <td><strong>3/4 Trofee</strong><br>
+                                    75% van al je trofeeën behaald</td>
+
+                                    <td><strong>Kleding Wissel</strong><br>
+                                    Je avatar gepersonaliseerd</td>
                                 </tr>
                             </table>
                         </mat-tab>
@@ -68,7 +66,6 @@
                 </mat-card-content>
             </mat-card>
         </div>
-
 
         <button mat-button [routerLink]="'/profile'">
             <mat-icon>keyboard_backspace</mat-icon> Terug naar profiel
