@@ -60,18 +60,10 @@
                     <mat-card-title>Voortgang</mat-card-title>
                 </mat-card-header>
                 <mat-card-content>
-                    <table class="UItable">
+                    <table class="UItable" *ngFor="let milestone of userDetails?.milestones; let i = index" [attr.data-index]="i">
                         <tr>
-                            <th>Doel 1</th>
-                            <td>Gehaald</td>
-                        </tr>
-                        <tr>
-                            <th>Doel 2</th>
-                            <td>Gehaald</td>
-                        </tr>
-                        <tr>
-                            <th>Doel 3</th>
-                            <td>Niet gehaald</td>
+                            <th>{{milestones[i].name}}</th>
+                            <td>{{milestone}}/{{milestones[i].maxValue}}</td>
                         </tr>
                     </table>
                 </mat-card-content>

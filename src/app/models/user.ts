@@ -1,4 +1,5 @@
 import { Role } from './role';
+import { Milestone } from './milestone'
 
 export class User {
     _id: string;
@@ -9,4 +10,5 @@ export class User {
     password: string;
     salt: string;
     exp: number;
+    milestones: [Milestone];
 }

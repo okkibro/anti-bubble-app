@@ -3,6 +3,8 @@ import { AuthenticationService } from '../../services/authentication.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { User } from '../../models/user';
+import { Milestone } from 'src/app/models/milestone';
+import { milestones } from '../../../../constants';
 
 @Component({
     selector: 'mean-profile',
@@ -13,6 +15,7 @@ import { User } from '../../models/user';
 
 export class ProfileComponent implements OnInit {
     userDetails: User;
+    milestones: Milestone[];
     changePasswordForm = this.fb.group({
         oldPassword: ['', Validators.required],
         newPassword: ['', Validators.required],
@@ -29,6 +32,8 @@ export class ProfileComponent implements OnInit {
         }, (err) => {
             console.error(err);
         });
+        this.milestones = milestones;
+        console.log(this.milestones);
     }
 
     changePassword() {
