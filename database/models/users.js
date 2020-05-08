@@ -2,6 +2,7 @@ const mongoose = require('mongoose');
 const crypto = require('crypto');
 const jwt = require('jsonwebtoken');
 const Schema = mongoose.Schema;
+const Item = mongoose.model('Item');
 
 let userSchema = new Schema({
     firstName: {
@@ -31,7 +32,17 @@ let userSchema = new Schema({
         required: true
     },
     recoverPasswordToken: String,
-    recoverPasswordExpires: Date
+    recoverPasswordExpires: Date,
+    inventory: {
+        type: [{
+        item: {type: Schema.ObjectId, ref: 'Item'}
+        }],
+        required: true
+    },
+    currency: {
+        type: Number,
+        required: true
+    }
 });
 
 userSchema.methods.setPassword = function(password){
