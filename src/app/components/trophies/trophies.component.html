@@ -20,12 +20,12 @@
                 <mat-card-content>
                     <mat-tab-group>
                         <mat-tab label="Behaald">
-                            <table class="UItable">
+                            <table class="UItable" *ngFor="let milestoneCompleted of completed">
                                 <tr>
-                                    <th>Beginner</th>
-                                    <td>Voor het eerst een minigame gespeeld</td>
+                                    <th>{{milestoneCompleted.milestone.name}}</th>
+                                    <td>{{milestoneCompleted.milestone.description}}</td>
                                 </tr>
-                                <tr>
+                                <!-- <tr>
                                     <th>Kleine Spaarder</th>
                                     <td>10 munten verzameld</td>
                                 </tr>
@@ -36,13 +36,18 @@
                                 <tr>
                                     <th>Nieuwsgierige Niels</th>
                                     <td>Gekeken naar je bubbel geschiedenis</td>
-                                </tr>
+                                </tr> -->
                             </table>
                         </mat-tab>
 
                         <mat-tab label="Te behalen">
-                            <table class="UItable">
+                            <table class="UItable" *ngFor="let milestoneCompleted of uncompleted">
                                 <tr>
+                                    <th>{{milestoneCompleted.milestone.name}}</th>
+                                    <td>{{milestoneCompleted.milestone.description}}</td>
+                                    <td>Voortgang: {{userDetails?.milestones[milestoneCompleted.index - 1]}}/{{milestoneCompleted.milestone.maxValue}}</td>
+                                </tr>
+                                <!-- <tr>
                                     <th>Shoppaholic</th>
                                     <td>Alle items uit de shop gekocht</td>
                                 </tr>
@@ -61,7 +66,7 @@
                                 <tr>
                                     <th>3/4 Trofee</th>
                                     <td>75% van al je trofeeën behaald</td>
-                                </tr>
+                                </tr> -->
                             </table>
                         </mat-tab>
                     </mat-tab-group>
