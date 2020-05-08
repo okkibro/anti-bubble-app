@@ -23,6 +23,8 @@ router.post('/register', (req, res) => {
     user.email = sanitize(req.body.email);
     user.role = sanitize(req.body.role);
     user.setPassword(sanitize(req.body.password));
+    user.inventory = [];
+    user.currency = 0;
 
     //save the changes to the database
     user.save(function () {
