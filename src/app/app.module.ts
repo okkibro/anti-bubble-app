@@ -34,6 +34,7 @@ import { SocketIOService } from './services/socket-io.service';
 import { SessionComponent } from './components/session/session.component';
 import { TeacherOverviewComponent } from './components/teacher-overview/teacher-overview.component';
 import { NavBarComponent } from './components/nav-bar/nav-bar.component';
+import { TrophiesComponent } from './components/trophies/trophies.component';
 
 
 @NgModule({
@@ -54,6 +55,7 @@ import { NavBarComponent } from './components/nav-bar/nav-bar.component';
         NavBarComponent,
         PasswordRecoveryComponent,
         PasswordResetComponent,
+        TrophiesComponent,
     ],
     imports: [
         BrowserModule,
