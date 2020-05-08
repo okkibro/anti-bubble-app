@@ -19,7 +19,7 @@
                         <mat-tab label="Kleding"></mat-tab>
                     </mat-tab-group>
                     <mat-grid-list cols="4">
-                        <mat-grid-tile *ngFor = "let item of shopDetails" fxFlexAlign="stretch">
+                        <mat-grid-tile *ngFor = "let item of filteredShop" fxFlexAlign="stretch">
                                 <mat-card class="shopCardStyle" fxFlex="100%" fxLayoutGap="0.5%" fxFlexAlign="stretch">
                                 <mat-card-title>{{ item.title }}</mat-card-title>
                                 <img mat-card-image src= "{{item.image}}" alt="{{ item.title }}"> 	
