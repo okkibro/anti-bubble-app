@@ -26,13 +26,7 @@ export class HomeComponent implements OnInit {
         private router: Router
     ) { }
 
-    ngOnInit(): void {
-        this.authenticationService.profile().subscribe(user => {
-            this.userDetails = user;
-        }, (err) => {
-            console.error(err);
-        });
-     }
+    ngOnInit(): void { }
 
     logoutButton() {
         return this.authenticationService.logout();
