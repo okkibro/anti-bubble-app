@@ -3,24 +3,10 @@
 }
 
 .shopCardStyle {
-    /* height: 100%; */
-
-    background-color: rgba(255 , 255, 255, 0.8);
-}
-
-mat-card img{
-    object-fit: cover; 
-    /* width: 15%; 
-    height: width; */
+    /* background-color: rgba(255 , 255, 255, 0.8); */
+    background-color: seashell;
 }
 
 mat-card-title {
-    padding-top: 15%;
-    text-align: center;
-    font-size: medium;
+   font-size: medium;
 }
-
-/* mat-card-img {
-    width: 100%;
-} */
-
