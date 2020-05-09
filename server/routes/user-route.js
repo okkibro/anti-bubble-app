@@ -23,6 +23,9 @@ router.post('/register', (req, res) => {
     user.email = sanitize(req.body.email);
     user.role = sanitize(req.body.role);
     user.setPassword(sanitize(req.body.password));
+    for (let i = 0; i < 9; i++) { //TODO: change 9 to correct number when done making all the milestones
+        user.milestones.push(0);
+    }
 
     //save the changes to the database
     user.save(function () {

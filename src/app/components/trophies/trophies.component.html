@@ -9,8 +9,8 @@
                 </mat-card-header>
                 <mat-card-content>
 
-                    Je hebt nu 35% van alle trofeeën behaald.<br>
-                    <mat-progress-bar mode="determinate" value="35" class="progressBar">=</mat-progress-bar>
+                    Je hebt nu {{completedRatio()}}% van alle trofeeën behaald.<br>
+                    <mat-progress-bar mode="determinate" role="progressbar" class="progressBar" value="{{value}}" aria-valuemin="0" aria-valuemax="100">=</mat-progress-bar>
                 </mat-card-content>
             </mat-card>
         </div>
@@ -33,7 +33,7 @@
                                 <tr *ngFor="let milestoneCompleted of uncompleted">
                                     <th>{{milestoneCompleted.milestone.name}}</th>
                                     <td>{{milestoneCompleted.milestone.description}}</td>
-                                    <td>Voortgang: {{userDetails?.milestones[milestoneCompleted.index - 1]}}/{{milestoneCompleted.milestone.maxValue}}</td>
+                                    <td>Voortgang: {{userDetails?.milestones[milestoneCompleted.index]}}/{{milestoneCompleted.milestone.maxValue}}</td>
                                 </tr>
                             </table>
                         </mat-tab>
