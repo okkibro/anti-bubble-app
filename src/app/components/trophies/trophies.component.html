@@ -18,22 +18,26 @@
         <div fxLayout.xs="row" fxLayoutGap="0.5%" fxLayoutAlign="space-evenly">
             <mat-card fxFlex="100%">
                 <mat-card-content>
-                    <mat-tab-group>
+                    <mat-tab-group dynamicHeight>
                         <mat-tab label="Behaald">
                             <table class="UItable">
-                                <tr *ngFor="let milestoneCompleted of completed">
-                                    <th>{{milestoneCompleted.milestone.name}}</th>
-                                    <td>{{milestoneCompleted.milestone.description}}</td>
+                                <tr >
+                                    <td *ngFor="let milestoneCompleted of completed">
+                                        <strong>{{milestoneCompleted.milestone.name}}</strong><br>
+                                        {{milestoneCompleted.milestone.description}}
+                                    </td>
                                 </tr>
                             </table>
                         </mat-tab>
 
                         <mat-tab label="Te behalen">
                             <table class="UItable">
-                                <tr *ngFor="let milestoneCompleted of uncompleted">
-                                    <th>{{milestoneCompleted.milestone.name}}</th>
-                                    <td>{{milestoneCompleted.milestone.description}}</td>
-                                    <td>Voortgang: {{userDetails?.milestones[milestoneCompleted.index]}}/{{milestoneCompleted.milestone.maxValue}}</td>
+                                <tr>
+                                    <td  *ngFor="let milestoneCompleted of uncompleted">
+                                        <strong>{{milestoneCompleted.milestone.name}}</strong><br>
+                                        {{milestoneCompleted.milestone.description}}<br>
+                                        Voortgang: {{userDetails?.milestones[milestoneCompleted.index]}}/{{milestoneCompleted.milestone.maxValue}}
+                                    </td>
                                 </tr>
                             </table>
                         </mat-tab>

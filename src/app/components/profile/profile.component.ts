@@ -3,6 +3,7 @@ import { AuthenticationService } from '../../services/authentication.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { User } from '../../models/user';
+import { milestones } from '../../../../constants';
 
 @Component({
     selector: 'mean-profile',
@@ -13,6 +14,7 @@ import { User } from '../../models/user';
 
 export class ProfileComponent implements OnInit {
     userDetails: User;
+    milestoneShown;
     changePasswordForm = this.fb.group({
         oldPassword: ['', Validators.required],
         newPassword: ['', Validators.required],
@@ -26,6 +28,18 @@ export class ProfileComponent implements OnInit {
     ngOnInit() {
         this.auth.profile().subscribe(user => {
             this.userDetails = user;
+            this.milestoneShown = {
+                name: "Gefeliciteerd",
+                description: "Je hebt alle milestones gehaald",
+                index: 0,
+                maxValue: 0
+            }
+            for (let i = 0; i < milestones.length; i++) {
+                if (user.milestones[i] != milestones[i].maxValue && user.milestones[i] >= user.milestones[this.milestoneShown.index]) {
+                    console.log(user.miles)
+                    this.milestoneShown = milestones[i];
+                }
+            }
         }, (err) => {
             console.error(err);
         });
