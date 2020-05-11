@@ -44,7 +44,8 @@ export class AvatarComponent implements OnInit {
 
     tabChange(event) {
         var currentTab = event.tab.textLabel;
-        var collection = document.getElementById("itemCollection");
+
+        // var collection = document.getElementById("itemCollection");
 
         //replace existing images with the images corresponding to the clicked tab
         // if (currentTab == "Huidskleur") {
