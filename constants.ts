@@ -50,7 +50,7 @@ export const milestones = [
     {
         index: 8,
         name: "3/4 Trofee",
-        maxValue: 10,
+        maxValue: 75,
         description: "75% van al je trofeeën behaald"
     }
 ]
