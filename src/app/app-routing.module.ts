@@ -17,6 +17,7 @@ import { AuthGuardService} from './services/auth-guard.service';
 import { ShopComponent } from './components/shop/shop.component';
 import { PasswordRecoveryComponent } from './components/password-recovery/password-recovery.component';
 import { PasswordResetComponent } from './components/password-reset/password-reset.component';
+import { TrophiesComponent } from './components/trophies/trophies.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/teacherOrStudent', pathMatch: 'full' },
@@ -31,6 +32,7 @@ const routes: Routes = [
   { path: 'bubble-details', component: BubbleDetailsComponent },
   { path: 'teacherOrStudent', component: TeacherOrStudentComponent },
   { path: 'teacher-overview', component: TeacherOverviewComponent, canActivate: [AuthGuardService], data: {roles: [Role.teacher]}},
+  { path: 'trophies', component: TrophiesComponent },
   { path: 'shop', component: ShopComponent },
   { path: 'passwordrecovery', component: PasswordRecoveryComponent },
   { path: 'reset/:token', component: PasswordResetComponent },

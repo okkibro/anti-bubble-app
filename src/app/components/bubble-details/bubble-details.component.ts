@@ -51,17 +51,12 @@ export class BubbleDetailsComponent implements OnInit {
       },
       series: [
         {
-          name: 'Diversiteit nieuwsbronnen',
-          color: 'red',
+          name: 'Diversiteit van de inhoud',
+          color: 'yellow',
           data: [7, 6, 9, 14, 18, 21, 25]
         },
         {
-          name: 'Kwaliteit/Betrouwbaarheid nieuwsbronnen',
-          color: 'green',
-          data: [0, 8, 5, 11, 17, 28, 31]
-        },
-        {
-          name: 'Kennis over filter bubbles',
+          name: 'Kennis en bewustzijn van filter bubbles',
           color: 'blue',
           data: [12, 13, 17, 29, 25, 26, 31]
         }

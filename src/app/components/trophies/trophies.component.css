@@ -1,0 +1,16 @@
+.progressBar {
+    width: 50%;
+    display: inline-block;
+}
+
+.UItable {
+    padding: 10px;
+    border-spacing: 70px 0;
+    margin: 10px;
+}
+
+.UItable td{
+    padding: 25px;
+    text-align: center;
+    display: inline-block;
+}
