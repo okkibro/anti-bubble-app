@@ -18,8 +18,24 @@
             <mat-card id="itemCollection" fxFlex="100%">
                 <mat-tab-group (selectedTabChange)="tabChange($event)">
                     <mat-tab label="Huidskleur"></mat-tab>
-                    <mat-tab label="Kleding"></mat-tab>
-                    <mat-tab label="Hoedjes"></mat-tab>
+                    <mat-tab label="Kleding">
+                        <table>
+                            <tr *ngFor="let item of itemsShown">
+                                <td *ngIf="item.category == 'kleding'">
+                                    {{item.title}}
+                                </td>
+                            </tr>
+                        </table>
+                    </mat-tab>
+                    <mat-tab label="Hoedjes">
+                        <table>
+                            <tr *ngFor="let item of itemsShown">
+                                <td *ngIf="item.category == 'hoofddeksel'">
+                                    {{item.title}}
+                                </td>
+                            </tr>
+                        </table>
+                    </mat-tab>
                 </mat-tab-group>
             </mat-card>
         </div>
