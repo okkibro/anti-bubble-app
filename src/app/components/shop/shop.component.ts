@@ -52,7 +52,7 @@ export class ShopComponent implements OnInit {
   buy(item): void {
     this.shopService.buy(item).subscribe((data:any) => {  
       if (data.succes) {
-        this.snackBar.open(data.message, 'X', {duration: 2500, panelClass: ['style-succes'], }).afterDismissed().subscribe(() => {
+        this.snackBar.open(data.message, 'X', {duration: 1000, panelClass: ['style-succes'], }).afterDismissed().subscribe(() => {
           window.location.reload();
         });;
       } else {
