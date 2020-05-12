@@ -41,6 +41,8 @@ let userSchema = new Schema({
     },
     currency: {
         type: Number,
+    milestones: {
+        type: [Number],
         required: true
     }
 });

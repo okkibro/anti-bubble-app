@@ -25,6 +25,9 @@ router.post('/register', (req, res) => {
     user.setPassword(sanitize(req.body.password));
     user.inventory = [];
     user.currency = 0;
+    for (let i = 0; i < 9; i++) { //TODO: change 9 to correct number when done making all the milestones
+        user.milestones.push(0);
+    }
 
     //save the changes to the database
     user.save(function () {
@@ -231,5 +234,29 @@ router.patch('/updatePassword', (req, res) => {
         }
     });
 });
+
+// Router for getting all milestone values in an array for the logged in user
+router.get('/milestone', auth, (req, res) => {
+    User.findById(req.payload._id, (err, user) => {
+        res.json(user.milestones);
+    });
+});
+
+// Router that changes a milestone by a given value, returns the updated value and whether it is completed or not
+router.post('/milestone', auth, (req, res) => {
+    User.findById(req.payload._id, (err, user) => {
+        let milestone = req.body.milestone;
+        let completed = false;
+        user.milestones[milestone.index] += req.body.value;
+        if (user.milestones[milestone.index] > milestone.maxValue) {
+            user.milestones[milestone.index] = milestone.maxValue;
+            completed = true;
+        }
+        user.markModified('milestones');
+        user.save(() => {
+            res.json( { updatedValue: user.milestones[milestone.index], completed: completed } );
+        });
+    })
+})
 
 module.exports = router;

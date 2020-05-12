@@ -5,8 +5,9 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { HttpClientModule } from "@angular/common/http";
 import { HighchartsChartModule } from 'highcharts-angular';
-import { FlexLayoutModule } from "@angular/flex-layout"; 
-import { MatTabsModule} from '@angular/material/tabs';
+import { FlexLayoutModule } from "@angular/flex-layout";
+import { MatTabsModule } from '@angular/material/tabs';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
 
 // core modules
 import { CustomMaterialModule } from './shared/material.module';
@@ -34,6 +35,7 @@ import { SocketIOService } from './services/socket-io.service';
 import { SessionComponent } from './components/session/session.component';
 import { TeacherOverviewComponent } from './components/teacher-overview/teacher-overview.component';
 import { NavBarComponent } from './components/nav-bar/nav-bar.component';
+import { TrophiesComponent } from './components/trophies/trophies.component';
 
 
 @NgModule({
@@ -54,6 +56,7 @@ import { NavBarComponent } from './components/nav-bar/nav-bar.component';
         NavBarComponent,
         PasswordRecoveryComponent,
         PasswordResetComponent,
+        TrophiesComponent,
     ],
     imports: [
         BrowserModule,
@@ -65,6 +68,7 @@ import { NavBarComponent } from './components/nav-bar/nav-bar.component';
         HighchartsChartModule,
         FlexLayoutModule,
         MatTabsModule,
+        MatProgressBarModule,
     ],
     providers: [AuthGuardService, CookieService, SocketIOService],
     bootstrap: [AppComponent],

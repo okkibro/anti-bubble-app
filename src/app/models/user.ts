@@ -1,5 +1,6 @@
 import { Role } from './role';
 import { ShopItem } from './shopItem'
+import { Milestone } from './milestone'
 
 export class User {
     _id: string;
@@ -11,4 +12,5 @@ export class User {
     salt: string;
     exp: number;
     inventory: [ShopItem]
+    milestones: [Milestone];
 }
