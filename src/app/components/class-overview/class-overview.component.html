@@ -13,12 +13,17 @@
 
         <mat-card>
             <mat-card-content>
-                <table class="UItable">
+                <table class="UItable" id="table">
                     <tr>
                         <th>Naam</th>
                         <th>Status</th>
                     </tr>
-                    <tr>
+                    <tr *ngFor="let classmate of classmates">
+                        <td>{{ classmate.firstName }}</td>
+                        <td>Online</td>
+                        <td><button mat-button [routerLink]="'/classmateProfile/' + classmate._id" class="abutton"> Bekijk Profiel </button></td>
+                    </tr>
+                    <!-- <tr>
                         <td>{{ userDetails?.firstName }}</td>
                         <td>Online</td>
                         <td><button mat-flat-button [routerLink]="'/classmateProfile'" [ngClass]="{'my-custom-theme': true}" color="primary"> Bekijk Profiel </button></td>
@@ -47,13 +52,16 @@
             </mat-card-content>
         </mat-card>
 
-        <mat-card class="searchBar">
+        <mat-card class="searchBar" [formGroup]="searchBar">
             <mat-card-header>
                 <mat-card-title>Zoek klasgenoot</mat-card-title>
             </mat-card-header>
             <mat-card-content>
                 <mat-form-field>
-                    <input matInput placeholder="Zoek hier">
+                    <input type="text" matInput formControlName="query" [(ngModel)]="value" placeholder="Zoek hier">
+                    <button mat-button *ngIf="value" matSuffix mat-icon-button aria-label="Clear" (click)="clear()">
+                        <mat-icon>close</mat-icon>
+                    </button>
                 </mat-form-field>
                 <button mat-flat-button  [ngClass]="{'my-custom-theme': true}" color="primary">Go</button>
                 <!-- <mat-accordion>

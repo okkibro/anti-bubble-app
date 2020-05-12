@@ -189,6 +189,50 @@ router.get('/profile', auth, (req, res) => {
     }
 });
 
+router.get('/classmateProfile/:id', auth, (req, res) => {
+    // If no user ID exists in the JWT return a 401
+    if (!req.payload._id) {
+        res.status(401).json({
+            "message": "UnauthorizedError: private profile"
+        });
+    } else {
+        // Otherwise continue and find own and classmate's profile
+        User.findById(req.payload._id, (error, user) => {
+            User.findById(req.params.id, (error, classmate) => {
+                // Throw error if the given id does not correspond with a user
+                if (!classmate) {
+                    res.status(404).json({
+                        "message": "User's profile not found"
+                    })
+                } else {
+                    // Check if classmate is actually in the same class
+                    if (user.class != classmate.class) {
+                        res.status(401).json({
+                            "message": "Not authorized to see user's profile"
+                        })
+                    } else {
+                        res.status(200).json(classmate);
+                    }
+                }
+            });
+        });
+    }
+});
+
+router.get('/getAllClassmates', auth, (req, res) => {
+    if (!req.payload._id) {
+        res.status(401).json({
+            "message": "UnauthorizedError: private profile"
+        });
+    } else {
+        User.findById(req.payload._id, (error, user) => {
+            User.find({ class: user.class }, (error, classmates) => {
+                res.status(200).json(classmates);
+            });
+        });
+    }
+})
+
 
 //router to check if email is already present in the database
 router.post('/checkEmailTaken', (req, res) => {
