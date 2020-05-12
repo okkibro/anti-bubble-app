@@ -1,22 +1,22 @@
 @import '~@angular/material/theming';
 @include mat-core();
 
-$primary: (
-    50: #ffffff,
-    100: #f4fafa,
-    200: #e2f2f2,
-    300: #d0eaeb,
-    400: #bfe2e3,
-    500: #addadb,
-    600: #9bd2d3,
-    700: #8acacb,
-    800: #78c2c4,
-    900: #66babc,
-    A100: #ffffff,
-    A200: #ffffff,
-    A400: #ffffff,
-    A700: #54b2b4,
-contrast: (
+$darkest-pink: (
+    50 : #fff5f6,
+    100 : #ffe5e7,
+    200 : #ffd4d8,
+    300 : #ffc3c8,
+    400 : #ffb6bc,
+    500 : #ffa9b0,
+    600 : #ffa2a9,
+    700 : #ff98a0,
+    800 : #ff8f97,
+    900 : #ff7e87,
+    A100 : #ffffff,
+    A200 : #ffffff,
+    A400 : #ffffff,
+    A700 : #ffffff,
+    contrast: (
     50: white,
     100: white,
     200: white,
@@ -32,9 +32,9 @@ contrast: (
     A400: white,
     A700: white,
   )
-  );
+);
 
-  $warn: (
+$dark-pink: (
     50: #ffffff,
     100: #fff9f8,
     200: #fde5e1,
@@ -67,13 +67,265 @@ contrast: (
   )
   );
 
+  $medium-pink: (
+    50: #ffffff,
+    100: #ffffff,
+    200: #ffffff,
+    300: #fef5f6,
+    400: #fddde1,
+    500: #fbc5cc,
+    600: #f9adb7,
+    700: #f895a2,
+    800: #f67d8d,
+    900: #f46678,
+    A100: #ffffff,
+    A200: #ffffff,
+    A400: #ffffff,
+    A700: #f34e63,
+contrast: (
+    50: white,
+    100: white,
+    200: white,
+    300: white,
+    400: white,
+    500: white,
+    600: white,
+    700: white,
+    800: white,
+    900: white,
+    A100: white,
+    A200: white,
+    A400: white,
+    A700: white,
+  )
+  );
+
+  $light-pink: (
+    50: #ffffff,
+    100: #ffffff,
+    200: #ffffff,
+    300: #ffffff,
+    400: #fdf0e8,
+    500: #fbe0d0,
+    600: #f9d0b8,
+    700: #f7c1a1,
+    800: #f5b189,
+    900: #f3a272,
+    A100: #ffffff,
+    A200: #ffffff,
+    A400: #ffffff,
+    A700: #f1925a,
+  contrast: (
+    50: white,
+    100: white,
+    200: white,
+    300: white,
+    400: white,
+    500: white,
+    600: white,
+    700: white,
+    800: white,
+    900: white,
+    A100: white,
+    A200: white,
+    A400: white,
+    A700: white,
+  )
+  );
+
+  $yellow: (
+    50: #ffffff,
+    100: #ffffff,
+    200: #fffcf3,
+    300: #fef7da,
+    400: #fdf1c2,
+    500: #fceca9,
+    600: #fbe790,
+    700: #fae178,
+    800: #f9dc5f,
+    900: #f9d646,
+    A100: #ffffff,
+    A200: #ffffff,
+    A400: #ffffff,
+    A700: #f8d12e,
+contrast: (
+    50: white,
+    100: white,
+    200: white,
+    300: white,
+    400: white,
+    500: white,
+    600: white,
+    700: white,
+    800: white,
+    900: white,
+    A100: white,
+    A200: white,
+    A400: white,
+    A700: white,
+  )
+  );
+
+  $green: (
+    50: #e7f6ea,
+    100: #d4efda,
+    200: #c2e8cb,
+    300: #afe1bb,
+    400: #9ddaab,
+    500: #8ad39b,
+    600: #77cc8b,
+    700: #65c57b,
+    800: #52be6b,
+    900: #44b35e,
+    A100: #f9fdfa,
+    A200: #ffffff,
+    A400: #ffffff,
+    A700: #3da154,
+contrast: (
+    50: white,
+    100: white,
+    200: white,
+    300: white,
+    400: white,
+    500: white,
+    600: white,
+    700: white,
+    800: white,
+    900: white,
+    A100: white,
+    A200: white,
+    A400: white,
+    A700: white,
+  )
+  );
+
+$light-blue: (
+    50: #ffffff,
+    100: #f4fafa,
+    200: #e2f2f2,
+    300: #d0eaeb,
+    400: #bfe2e3,
+    500: #addadb,
+    600: #9bd2d3,
+    700: #8acacb,
+    800: #78c2c4,
+    900: #66babc,
+    A100: #ffffff,
+    A200: #ffffff,
+    A400: #ffffff,
+    A700: #54b2b4,
+contrast: (
+    50: white,
+    100: white,
+    200: white,
+    300: white,
+    400: white,
+    500: white,
+    600: white,
+    700: white,
+    800: white,
+    900: white,
+    A100: white,
+    A200: white,
+    A400: white,
+    A700: white,
+  )
+  );
+
+  $medium-blue: (
+    50: #e2ebef,
+    100: #d1e0e6,
+    200: #c1d5dd,
+    300: #b0c9d4,
+    400: #9fbecb,
+    500: #8fb3c2,
+    600: #7ea8b9,
+    700: #6e9db0,
+    800: #5d91a7,
+    900: #538498,
+    A100: #f2f6f8,
+    A200: #ffffff,
+    A400: #ffffff,
+    A700: #4a7588,
+contrast: (
+    50: white,
+    100: white,
+    200: white,
+    300: white,
+    400: white,
+    500: white,
+    600: white,
+    700: white,
+    800: white,
+    900: white,
+    A100: white,
+    A200: white,
+    A400: white,
+    A700: white,
+  )
+  );
+
+  $dark-blue: (
+    50: #7c99b0,
+    100: #6c8da7,
+    200: #5e809c,
+    300: #54738c,
+    400: #4b667c,
+    500: #41596c,
+    600: #374c5c,
+    700: #2e3f4c,
+    800: #24323c,
+    900: #1b252c,
+    A100: #8ca6ba,
+    A200: #9cb2c3,
+    A400: #acbecd,
+    A700: #11171c,
+contrast: (
+    50: white,
+    100: white,
+    200: white,
+    300: white,
+    400: white,
+    500: white,
+    600: white,
+    700: white,
+    800: white,
+    900: white,
+    A100: white,
+    A200: white,
+    A400: white,
+    A700: white,
+  )
+  );
+
 // below creates a primary palette with three shades of blue
 // $my-primary: mat-palette($my-blue, 100, 50, 200);
 
-$my-custom-primary: mat-palette($primary, 500, 300, 700);
-$my-custom-accent: mat-palette($mat-pink, 100, 500, A100);
-$my-custom-warn: mat-palette($warn);
+$my-custom-primary: mat-palette($green, 500, 300, 700);
+$my-custom-accent: mat-palette($light-blue, 500, 100, 700);
+$my-custom-warn: mat-palette($dark-pink);
+$my-custom-foreground: mat-palette($green, 500, 300, 700);
+$my-custom-background: mat-palette($light-pink, 500, 300, 700);
 
 $my-custom-theme: mat-light-theme($my-custom-primary, $my-custom-accent, $my-custom-warn);
+// $alt-theme: mat-light-theme($my-custom-primary, $my-custom-primary, $my-custom-primary);
 
 @include angular-material-theme($my-custom-theme);
+
+$alt-primary: mat-palette($dark-blue, 500, 300, 700);
+$alt-accent: mat-palette($medium-pink, 500, 100, 700);
+$alt-warn: mat-palette($dark-pink);
+
+$alt-theme: mat-dark-theme($alt-primary, $alt-accent, $alt-warn);
+
+.alternative {
+  // @include angular-material-theme($alt-theme);
+  @include mat-button-theme($alt-theme);
+}
+
+
+
+// .alternative {
+//   @include mat-button-theme($alt-theme);
+//   @include mat-card-theme($alt-theme);
+// }

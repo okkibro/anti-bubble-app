@@ -20,11 +20,11 @@
                     </mat-tab-group>
                     <mat-grid-list cols="4">
                         <mat-grid-tile *ngFor = "let item of filteredShop" fxFlexAlign="stretch">
-                                <mat-card class="shopCardStyle" fxFlex="100%" fxLayoutGap="0.5%" fxFlexAlign="stretch">
+                                <mat-card fxFlex="100%" fxLayoutGap="0.5%" fxFlexAlign="stretch">
                                 <mat-card-title>{{ item.title }}</mat-card-title>
                                 <img mat-card-image src= "{{item.image}}" alt="{{ item.title }}"> 	
                                 <mat-card-actions fxFlexAlign="end">
-                                    <button (click)="buy(item)" mat-button>{{ item.price }} <mat-icon>payment</mat-icon></button>
+                                    <button (click)="buy(item)" mat-flat-button [ngClass]="{'my-custom-theme': true}" color="primary">{{ item.price }} <mat-icon>payment</mat-icon></button>
                                 </mat-card-actions>
                                 </mat-card>
                         </mat-grid-tile>

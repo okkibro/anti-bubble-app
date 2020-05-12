@@ -21,27 +21,27 @@
                     <tr>
                         <td>{{ userDetails?.firstName }}</td>
                         <td>Online</td>
-                        <td><button mat-button [routerLink]="'/classmateProfile'" class="abutton"> Bekijk Profiel </button></td>
+                        <td><button mat-flat-button [routerLink]="'/classmateProfile'" [ngClass]="{'my-custom-theme': true}" color="primary"> Bekijk Profiel </button></td>
                     </tr>
                     <tr>
                         <td>[Naam 2]</td>
                         <td>Offline</td>
-                        <td><button mat-button>Bekijk profiel</button></td>
+                        <td><button mat-flat-button [ngClass]="{'my-custom-theme': true}" color="primary">Bekijk profiel</button></td>
                     </tr>
                     <tr>
                         <td>[Naam 3]</td>
                         <td>Offline</td>
-                        <td><button mat-button>Bekijk profiel</button></td>
+                        <td><button mat-flat-button [ngClass]="{'my-custom-theme': true}" color="primary">Bekijk profiel</button></td>
                     </tr>
                     <tr>
                         <td>[Naam 4]</td>
                         <td>Online</td>
-                        <td><button mat-button>Bekijk profiel</button></td>
+                        <td><button mat-flat-button [ngClass]="{'my-custom-theme': true}" color="primary">Bekijk profiel</button></td>
                     </tr>
                     <tr>
                         <td>[Naam 5]</td>
                         <td>Offline</td>
-                        <td><button mat-button>Bekijk profiel</button></td>
+                        <td><button mat-flat-button [ngClass]="{'my-custom-theme': true}" color="primary">Bekijk profiel</button></td>
                     </tr>
                 </table>
             </mat-card-content>
@@ -55,7 +55,7 @@
                 <mat-form-field>
                     <input matInput placeholder="Zoek hier">
                 </mat-form-field>
-                <button mat-button>Go</button>
+                <button mat-flat-button  [ngClass]="{'my-custom-theme': true}" color="primary">Go</button>
                 <!-- <mat-accordion>
                     <mat-expansion-panel>
                         <mat-expansion-panel-header>

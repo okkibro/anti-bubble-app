@@ -2,18 +2,9 @@
     font-size: xx-large;
 }
 
-.shopCardStyle {
-    /* background-color: rgba(255 , 255, 255, 0.8); */
-    background-color: seashell;
-}
-
 mat-card-title {
    font-size: medium;
 }
-
-/* mat-card-img {
-    width: 100%;
-} */
 
 ::ng-deep .mat-simple-snackbar-action {
     color: white;
