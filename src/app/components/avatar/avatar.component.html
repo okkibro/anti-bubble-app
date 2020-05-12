@@ -16,17 +16,39 @@
 
         <div fxLayout.xs="row" fxLayoutGap="0.5%" fxLayoutAlign="space-evenly">
             <mat-card id="itemCollection" fxFlex="100%">
-                <mat-tab-group (selectedTabChange)="tabChange($event)">
+                <mat-tab-group (selectedTabChange)="tabChange($event)" dynamicHeight>
                     <mat-tab label="Huidskleur"></mat-tab>
-                    <mat-tab label="Kleding"></mat-tab>
-                    <mat-tab label="Hoedjes"></mat-tab>
+                    <mat-tab label="Kleding">
+                        <table class="UItable">
+                            <tr>
+                                <td *ngFor="let item of itemsShown">
+                                    <ng-container *ngIf="item.category == 'kleding'">
+                                        <img mat-card-image src="{{item.image}}" alt="{{item.title}}"><br>
+                                        {{item.title}}
+                                    </ng-container>
+                                </td>
+                            </tr>
+                        </table>
+                    </mat-tab>
+                    <mat-tab label="Hoedjes">
+                        <table class="UItable">
+                            <tr>
+                                <td *ngFor="let item of itemsShown">
+                                    <ng-container *ngIf="item.category == 'hoofddeksel'">
+                                        <img mat-card-image src="{{item.image}}" alt="{{item.title}}"><br>
+                                        {{item.title}}
+                                    </ng-container>
+                                </td>
+                            </tr>
+                        </table>
+                    </mat-tab>
                 </mat-tab-group>
             </mat-card>
         </div>
 
         <mat-card>
             <mat-card-content>
-                <button mat-button [routerLink]="'/avatar'" class='abutton'>Wijzigingen Opslaan</button>
+                <button mat-button [routerLink]="'/profile'">Wijzigingen Opslaan</button>
             </mat-card-content>
         </mat-card>
 

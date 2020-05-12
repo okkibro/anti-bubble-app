@@ -32,6 +32,7 @@ const routes: Routes = [
   { path: 'bubble-details', component: BubbleDetailsComponent },
   { path: 'teacherOrStudent', component: TeacherOrStudentComponent },
   { path: 'teacher-overview', component: TeacherOverviewComponent, canActivate: [AuthGuardService], data: {roles: [Role.teacher]}},
+  { path: 'trophies', component: TrophiesComponent },
   { path: 'shop', component: ShopComponent },
   { path: 'passwordrecovery', component: PasswordRecoveryComponent },
   { path: 'reset/:token', component: PasswordResetComponent },
