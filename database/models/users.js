@@ -35,17 +35,18 @@ let userSchema = new Schema({
     recoverPasswordExpires: Date,
     inventory: {
         type: [{
-        item: {type: Schema.ObjectId, ref: 'Item'}
+            item: {type: Schema.ObjectId, ref: 'Item'}
         }],
         required: true
     },
     currency: {
         type: Number,
-    milestones: {
-        type: [Number],
-        required: true
-    }
-    class: String
+        milestones: {
+            type: [Number],
+            required: true
+        }
+    },
+    class: String,
 });
 
 userSchema.methods.setPassword = function(password){
