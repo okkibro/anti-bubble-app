@@ -27,7 +27,7 @@ import { TeacherOrStudentComponent } from './components/teacherOrStudent/teacher
 import { ShopComponent } from './components/shop/shop.component';
 import { PasswordRecoveryComponent } from './components/password-recovery/password-recovery.component';
 import { PasswordResetComponent } from './components/password-reset/password-reset.component';
-import { TrophiesComponent } from './components/trophies/trophies.component';
+import { BadgesComponent } from './components/badges/badges.component';
 
 // services
 import { AuthGuardService } from './services/auth-guard.service';
@@ -55,7 +55,7 @@ import { NavBarComponent } from './components/nav-bar/nav-bar.component';
         NavBarComponent,
         PasswordRecoveryComponent,
         PasswordResetComponent,
-        TrophiesComponent,
+        BadgesComponent,
     ],
     imports: [
         BrowserModule,

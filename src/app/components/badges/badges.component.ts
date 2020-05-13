@@ -4,12 +4,12 @@ import { AuthenticationService } from '../../services/authentication.service';
 import { User } from '../../models/user';
 
 @Component({
-  selector: 'mean-trophies',
-  templateUrl: './trophies.component.html',
-  styleUrls: ['./trophies.component.css',
+  selector: 'mean-badges',
+  templateUrl: './badges.component.html',
+  styleUrls: ['./badges.component.css',
               '../../shared/general-styles.css']
 })
-export class TrophiesComponent implements OnInit {
+export class BadgesComponent implements OnInit {
 
   completed = [];
   uncompleted = [];
