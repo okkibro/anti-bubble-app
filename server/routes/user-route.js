@@ -29,6 +29,10 @@ router.post('/register', (req, res) => {
     for (let i = 0; i < 9; i++) { //TODO: change 9 to correct number when done making all the milestones
         user.milestones.push(0);
     }
+    user.recentMilestones = []
+    for (let i = 0; i < 5; i++) {
+        user.recentMilestones[i] = "";
+    }
 
     //save the changes to the database
     user.save(function () {
@@ -292,16 +296,33 @@ router.post('/milestone', auth, (req, res) => {
     User.findById(req.payload._id, (err, user) => {
         let milestone = req.body.milestone;
         let completed = false;
-        user.milestones[milestone.index] += req.body.value;
-        if (user.milestones[milestone.index] > milestone.maxValue) {
-            user.milestones[milestone.index] = milestone.maxValue;
-            completed = true;
+        if (user.milestones[milestone.index] == milestone.maxValue) {
+            res.json( { updatedValue: milestone.maxValue, completed: completed } );
+        } else {
+            user.milestones[milestone.index] += req.body.value;
+            if (user.milestones[milestone.index] >= milestone.maxValue) {
+                user.milestones[milestone.index] = milestone.maxValue;
+                completed = true;
+            }
+            user.markModified('milestones');
+            user.save(() => {
+                res.json( { updatedValue: user.milestones[milestone.index], completed: completed } );
+            });
         }
-        user.markModified('milestones');
-        user.save(() => {
-            res.json( { updatedValue: user.milestones[milestone.index], completed: completed } );
-        });
     })
-})
+});
+
+// Router to post a new message to recent milestones
+router.post('/recentMilestones', auth, (req, res) => {
+    console.log("test");
+    User.findById(req.payload._id, (err, user) => {
+        user.recentMilestones.push(req.body.value);
+        user.recentMilestones.shift();
+        console.log(user.recentMilestones);
+        user.save(() => {
+            res.end();
+        });
+    });
+});
 
 module.exports = router;

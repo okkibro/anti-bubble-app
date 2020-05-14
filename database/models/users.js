@@ -48,6 +48,10 @@ let userSchema = new Schema({
         required: true
     },
     class: String,
+    recentMilestones: {
+        type: [String],
+        required: true
+    },
 });
 
 userSchema.methods.setPassword = function(password){

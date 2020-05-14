@@ -3,7 +3,7 @@ import { AuthenticationService } from '../../services/authentication.service';
 import { Router } from '@angular/router';
 import { Shop } from '../../models/shop';
 import { ShopService } from 'src/app/services/shop.service';
-import { BuiltinType } from '@angular/compiler';
+import { BuiltinType, CompileTemplateMetadata } from '@angular/compiler';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { User } from '../../models/user';
 import { MilestoneUpdatesService } from '../../services/milestone-updates.service'
@@ -55,9 +55,17 @@ export class ShopComponent implements OnInit {
     this.shopService.buy(item).subscribe((data:any) => {  
       if (data.succes) {
         this.snackBar.open(data.message, 'X', {duration: 1000, panelClass: ['style-succes'], }).afterDismissed().subscribe(() => {
-          this.milestoneUpdates.update(milestones[2], 1).subscribe();
-          this.milestoneUpdates.update(milestones[4], 1).subscribe();
-          window.location.reload();
+          this.milestoneUpdates.updateMilestone(milestones[2], 1).subscribe(data => {
+            if (data.completed) {
+              this.milestoneUpdates.updateRecent(`${new Date().toLocaleDateString()}: Je hebt de badge 'Gierige Gerrie' verdiend!`).subscribe();
+            }
+            this.milestoneUpdates.updateMilestone(milestones[4], 1).subscribe(data => {
+              if (data.completed) {
+                this.milestoneUpdates.updateRecent(`${new Date().toLocaleDateString()}: Je hebt de badge 'Shoppaholic' verdiend`). subscribe();
+              }
+              window.location.reload();
+            });
+          });
         });;
       } else {
         this.snackBar.open(data.message, 'X', {duration: 2500, panelClass: ['style-error'], });

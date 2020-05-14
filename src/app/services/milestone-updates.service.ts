@@ -11,7 +11,11 @@ export class MilestoneUpdatesService {
 
   constructor(private http: HttpClient, private cookie: CookieService) { }
 
-  public update(milestone : Milestone, value: Number) : Observable<any> {
+  public updateMilestone(milestone : Milestone, value: Number) : Observable<any> {
     return this.http.post('https://localhost:3000/user/milestone', { milestone: milestone, value: value }, { headers: { Authorization: 'Bearer ' + this.cookie.get('mean-token')}});
+  }
+
+  public updateRecent(value: String) : Observable<any> {
+    return this.http.post('https://localhost:3000/user/recentMilestones', { value: value }, { headers: { Authorization: 'Bearer ' + this.cookie.get('mean-token')}});
   }
 }

@@ -13,4 +13,5 @@ export class User {
     exp: number;
     inventory: [ShopItem]
     milestones: [Milestone];
+    recentMilestones: [String];
 }
