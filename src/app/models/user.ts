@@ -9,6 +9,7 @@ export class User {
     email: string;
     role: Role;
     password: string;
+    classCode: number;
     salt: string;
     exp: number;
     inventory: [ShopItem]

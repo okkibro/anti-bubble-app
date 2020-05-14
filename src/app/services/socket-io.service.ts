@@ -15,12 +15,12 @@ export class SocketIOService {
     createSession() {
         this.socket.emit('host-join');
         this.socket.on('players', (players: []) => {
-            console.log(players);
+            console.log(0,players);
         });
         this.socket.on('showGamePin', (pin) => {
             this.data.changeMessage(pin);
             this.pin = pin;
-            console.log(pin);
+            console.log(1,pin);
         });
         
     }

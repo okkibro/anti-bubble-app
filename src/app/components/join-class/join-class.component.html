@@ -1,0 +1,8 @@
+<mat-card [formGroup]="classCodeField">
+    <mat-card-content class="example-full-width">
+        <mat-form-field>
+            <input type="number" matInput formControlName="classCode" [(ngModel)]="value" placeholder="Vul hier je klascode in">
+        </mat-form-field>
+        <button mat-flat-button [ngClass]="{'my-custom-theme': true}" color="primary" >Toevoegen</button>
+    </mat-card-content>
+</mat-card>
