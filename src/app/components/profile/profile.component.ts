@@ -38,7 +38,6 @@ export class ProfileComponent implements OnInit {
             this.userDetails = user;
             for (let i = 0; i < milestones.length; i++) {
                 if (user.milestones[i] != milestones[i].maxValue && user.milestones[i] >= user.milestones[this.milestoneShown.index]) {
-                    console.log(user.milestones)
                     this.milestoneShown = milestones[i];
                 }
             }
