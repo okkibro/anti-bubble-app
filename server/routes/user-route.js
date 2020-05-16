@@ -3,6 +3,7 @@ const router = express.Router();
 const mongoose = require('mongoose');
 const passport = require("passport");
 const User = mongoose.model('User');
+const Classes = mongoose.model('Classes');
 const sanitize = require('mongo-sanitize');
 const nodemailer = require('nodemailer');
 const crypto = require('crypto');
@@ -302,6 +303,30 @@ router.post('/milestone', auth, (req, res) => {
             res.json( { updatedValue: user.milestones[milestone.index], completed: completed } );
         });
     })
-})
+});
+
+router.post('/joinClass', auth, (req, res) => {
+    User.findById(req.payload._id, (err, user) => {
+        Classes.findOne({ code: req.body.code }, (error, foundClass) => {
+            if (!foundClass) {
+                res.json({ succes: false, message: "Geen klas gevonden met de gegeven code" });
+            } else {
+                foundClass.year = 3;
+                //foundClass.students.push(new User(user));
+                //foundClass.markModified('students');
+                console.log(foundClass);
+                foundClass.save((err) => {
+                    foundClass.year = 3;
+                    res.json({ succes: true, message: "Succesvol toegevoegd aan klas: " + foundClass.title });
+                });
+            }
+        });
+        // Classes.updateOne(
+        //     { code: req.body.code },
+        //     { $push: { students: new User(user) } }
+        // );
+        // res.json({test: 123});
+    });
+});
 
 module.exports = router;
