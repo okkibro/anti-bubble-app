@@ -311,21 +311,18 @@ router.post('/joinClass', auth, (req, res) => {
             if (!foundClass) {
                 res.json({ succes: false, message: "Geen klas gevonden met de gegeven code" });
             } else {
-                foundClass.year = 3;
-                //foundClass.students.push(new User(user));
-                //foundClass.markModified('students');
-                console.log(foundClass);
-                foundClass.save((err) => {
-                    foundClass.year = 3;
-                    res.json({ succes: true, message: "Succesvol toegevoegd aan klas: " + foundClass.title });
-                });
+                if (foundClass.students.filter(x => x._id != user._id).length > 0) {
+                    res.json({ succes: false, message: "Je zit al in klas: " + foundClass.title});
+                } else {
+                    Classes.updateOne(
+                        { code: req.body.code },
+                        { $push: { students: new User(user) } }, () => {
+                            res.json({ succes: true, message: "Succesvol toegevoegd aan klas: " + foundClass.title });
+                        }
+                    );
+                }
             }
         });
-        // Classes.updateOne(
-        //     { code: req.body.code },
-        //     { $push: { students: new User(user) } }
-        // );
-        // res.json({test: 123});
     });
 });
 
