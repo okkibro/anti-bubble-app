@@ -305,22 +305,28 @@ router.post('/milestone', auth, (req, res) => {
     })
 });
 
+router.get('/getClass', auth, (req, res) => {
+    User.findById(req.payload._id, (err, user) => {
+        Classes.findOne({ code: user.class }, (err, foundClass) => {
+            res.json({ class: foundClass });
+        })
+    })
+});
+
 router.post('/joinClass', auth, (req, res) => {
     User.findById(req.payload._id, (err, user) => {
         Classes.findOne({ code: req.body.code }, (err, foundClass) => {
             if (!foundClass) {
                 res.json({ succes: false, message: "Geen klas gevonden met de gegeven code" });
             } else {
-                if (foundClass.students.filter(x => x._id != user._id).length > 0) {
+                if (foundClass.students.find(x => x._id == req.payload._id) != undefined) {
                     res.json({ succes: false, message: "Je zit al in klas: " + foundClass.title});
                 } else {
                     Classes.updateOne(
                         { code: req.body.code },
                         { $push: { students: new User(user) } }, () => {
                             if (user.class != undefined) {
-                                console.log("test");
                                 Classes.findOne({ code: user.class }, (err, previousClass) => {
-                                    console.log(previousClass);
                                     Classes.updateOne(
                                         { code: previousClass.code },
                                         { $pull: { students: { _id: user._id } } }, () => {

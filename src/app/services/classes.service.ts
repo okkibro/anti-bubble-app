@@ -13,4 +13,8 @@ export class ClassesService {
   public joinClass(code: String) : Observable<any> {
     return this.http.post('https://localhost:3000/user/joinClass', { code: code }, { headers: { Authorization: 'Bearer ' + this.cookie.get('mean-token')}});
   }
+
+  public getClass2() : Observable<any> {
+    return this.http.get('https://localhost:3000/user/getClass', { headers: { Authorization: 'Bearer ' + this.cookie.get('mean-token')}});
+  }
 }
