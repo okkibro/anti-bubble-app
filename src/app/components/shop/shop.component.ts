@@ -44,6 +44,7 @@ export class ShopComponent implements OnInit {
     var currentTab = event.tab.textLabel;
     this.shopService.shop(currentTab).subscribe(shop => {
         this.shopDetails = shop;
+        this.filteredShop = this.filterShop();
     }, (err) => {
         console.error(err);
     });
