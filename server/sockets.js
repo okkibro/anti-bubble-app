@@ -20,16 +20,18 @@ function runIO(io) {
       console.log(pin, params.pin, params.pin==pin);
 			if (params.pin == pin) {
 				socket.join(params.pin);
-				console.log(`Player ${params.player} is now connected`);
+        console.log(`Player ${params.player} is now connected`);
+        socket.emit('join-succes', true);
 			} else {
-				console.log('Invalid Pin');
+        console.log('Invalid Pin');
+        socket.emit('join-succes', false);
 			}
 		});
 
 		socket.on('message', (message) => {
 			console.log(message);
 			io.sockets.emit('message', `server: ${message}`);
-		});
+    });
 	});
 }
 

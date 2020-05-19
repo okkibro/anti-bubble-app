@@ -5,6 +5,8 @@ import { FormBuilder, Validators } from "@angular/forms";
 import { User } from "../../models/user";
 import { Router } from "@angular/router";
 import { PointInteractionEventObject } from 'highcharts';
+import { DataService } from 'src/app/services/data-exchage.service';
+import { Message } from '@angular/compiler/src/i18n/i18n_ast';
 
 @Component({
     selector: 'mean-home',
@@ -25,7 +27,8 @@ export class HomeComponent implements OnInit {
         private authenticationService: AuthenticationService,
         private socketService: SocketIOService,
         private fb: FormBuilder,
-        private router: Router
+        private router: Router,
+        private data: DataService
     ) { }
 
     ngOnInit(): void {
@@ -46,7 +49,12 @@ export class HomeComponent implements OnInit {
     joinSession() {
         //this.userDetails = this.authenticationService.getUserDetails();
         const email = this.userDetails.email;
-        this.socketService.joinSession(this.pin, email);
-        this.router.navigate(['session']);
+        let succes = this.socketService.joinSession(this.pin, email)
+        console.log(succes);
+        if (succes) {
+            this.router.navigate(['session']);
+        } else {
+            console.log("nee");
+        }
     }
 }
