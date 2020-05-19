@@ -12,8 +12,13 @@
                         Dit wordt bereikt door middel van lessen die in de klas met de docent(e) worden afgenomen.
                     </mat-card-subtitle>
                 </mat-card-header>
-                <mat-card-content>
-                    <a mat-flat-button (click)="createSession()" [ngClass]="{'my-custom-theme': true}" color="accent"> Create Session </a>
+                <mat-card-content *ngIf="userDetails.role == 'teacher'">
+                    <a mat-flat-button (click)="createSession()" [ngClass]="{'my-custom-theme': true}" color="accent"> Maak sessie </a>
+                </mat-card-content>
+                <mat-card-content *ngIf="userDetails.role == 'student'">
+                    <a mat-flat-button (click)="createSession()" [ngClass]="{'my-custom-theme': true}" color="accent"> Maak sessie </a><br>
+                    <input [(ngModel)]="pin" placeholder="Sessie code"><br>
+                    <a mat-flat-button (click)="joinSession()" [ngClass]="{'my-custom-theme': true}" color="accent"> Deelnemen aan sessie </a>
                 </mat-card-content>
             </mat-card>
         </div>

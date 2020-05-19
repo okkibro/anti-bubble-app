@@ -8,6 +8,7 @@ import { HighchartsChartModule } from 'highcharts-angular';
 import { FlexLayoutModule } from "@angular/flex-layout";
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { FormsModule } from "@angular/forms";
 
 // core modules
 import { CustomMaterialModule } from './shared/material.module';
@@ -70,6 +71,7 @@ import { JoinClassComponent } from './components/join-class/join-class.component
         FlexLayoutModule,
         MatTabsModule,
         MatProgressBarModule,
+        FormsModule,
     ],
     providers: [AuthGuardService, CookieService, SocketIOService],
     bootstrap: [AppComponent],

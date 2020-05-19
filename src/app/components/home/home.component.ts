@@ -4,6 +4,7 @@ import { SocketIOService } from '../../services/socket-io.service';
 import { FormBuilder, Validators } from "@angular/forms";
 import { User } from "../../models/user";
 import { Router } from "@angular/router";
+import { PointInteractionEventObject } from 'highcharts';
 
 @Component({
     selector: 'mean-home',
@@ -14,6 +15,7 @@ import { Router } from "@angular/router";
 
 export class HomeComponent implements OnInit {
     userDetails: User;
+    pin: string;
     isTeacher: boolean = this.authenticationService.isTeacher();
     joinSessionForm = this.fb.group({
         sessionCode: ['', Validators.required]
@@ -44,6 +46,6 @@ export class HomeComponent implements OnInit {
     joinSession() {
         this.userDetails = this.authenticationService.getUserDetails();
         const email = this.userDetails.email;
-        this.socketService.joinSession(this.joinSessionForm.get('sessionCode').value, email);
+        this.socketService.joinSession(this.pin, email);
     }
 }
