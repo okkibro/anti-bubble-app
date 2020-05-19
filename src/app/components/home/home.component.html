@@ -66,7 +66,7 @@
         <mat-card fxFlex="20%">
             <mat-card-header>Aantal munten</mat-card-header>
             <mat-card-content class="number">
-                    50
+                    {{ userDetails.currency }}
             </mat-card-content>
             <button mat-flat-button [routerLink]="'/shop'" theme="alternative" [ngClass]="{'my-custom-theme': true}" color="primary">Ga naar winkel</button>
         </mat-card>

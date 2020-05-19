@@ -12,6 +12,7 @@ export class User {
     classCode: number;
     salt: string;
     exp: number;
-    inventory: [ShopItem]
+    currency: number;
+    inventory: [ShopItem];
     milestones: [Milestone];
 }
