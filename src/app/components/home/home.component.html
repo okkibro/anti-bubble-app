@@ -12,10 +12,10 @@
                         Dit wordt bereikt door middel van lessen die in de klas met de docent(e) worden afgenomen.
                     </mat-card-subtitle>
                 </mat-card-header>
-                <mat-card-content *ngIf="userDetails.role == 'teacher'">
+                <mat-card-content *ngIf="userDetails?.role == 'teacher'">
                     <a mat-flat-button (click)="createSession()" [ngClass]="{'my-custom-theme': true}" color="accent"> Maak sessie </a>
                 </mat-card-content>
-                <mat-card-content *ngIf="userDetails.role == 'student'">
+                <mat-card-content *ngIf="userDetails?.role == 'student'">
                     <a mat-flat-button (click)="createSession()" [ngClass]="{'my-custom-theme': true}" color="accent"> Maak sessie </a><br>
                     <input [(ngModel)]="pin" placeholder="Sessie code"><br>
                     <a mat-flat-button (click)="joinSession()" [ngClass]="{'my-custom-theme': true}" color="accent"> Deelnemen aan sessie </a>
@@ -71,7 +71,7 @@
         <mat-card fxFlex="20%">
             <mat-card-header>Aantal munten</mat-card-header>
             <mat-card-content class="number">
-                    {{ userDetails.currency }}
+                    {{ userDetails?.currency }}
             </mat-card-content>
             <button mat-flat-button [routerLink]="'/shop'" theme="alternative" [ngClass]="{'my-custom-theme': true}" color="primary">Ga naar winkel</button>
         </mat-card>

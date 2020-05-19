@@ -11,8 +11,7 @@ import { DataService } from 'src/app/services/data-exchage.service';
 
 export class SessionComponent implements OnInit {
     pin;
-
-
+    
     constructor(
         private authenticationService: AuthenticationService, 
         private socketService: SocketIOService, 

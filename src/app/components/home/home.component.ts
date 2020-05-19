@@ -44,7 +44,7 @@ export class HomeComponent implements OnInit {
     }
 
     joinSession() {
-        this.userDetails = this.authenticationService.getUserDetails();
+        //this.userDetails = this.authenticationService.getUserDetails();
         const email = this.userDetails.email;
         this.socketService.joinSession(this.pin, email);
     }

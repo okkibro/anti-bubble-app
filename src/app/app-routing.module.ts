@@ -20,7 +20,7 @@ import { PasswordResetComponent } from './components/password-reset/password-res
 import { TrophiesComponent } from './components/trophies/trophies.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: '/teacherOrStudent', pathMatch: 'full' },
+  { path: '', redirectTo: '/login', pathMatch: 'full' },
   { path: 'home', component: HomeComponent, canActivate: [AuthGuardService]},
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
