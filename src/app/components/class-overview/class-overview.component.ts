@@ -56,15 +56,4 @@ export class ClassOverviewComponent implements OnInit {
       (table[i + 1] as HTMLElement).style.display = "";
     }
   }
-
-  getClassTitle():any {
-    if (this.userClassTitle != undefined) {
-      return this.userClassTitle
-    } else {
-      this.classesService.getClass2().subscribe(data => {
-        this.userClassTitle = data.class.title;
-        return data.class.title;
-      });
-    }
-  }
 }

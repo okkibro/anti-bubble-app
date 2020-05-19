@@ -23,6 +23,7 @@ export class JoinClassComponent implements OnInit {
     this.classesService.joinClass(this.value).subscribe(data => {
       if (data.succes) {
         this.snackBar.open(data.message, 'X', {duration: 2500, panelClass: ['style-succes'], });
+        window.location.reload();
       } else {
         this.snackBar.open(data.message, 'X', {duration: 2500, panelClass: ['style-error'], });
       }
