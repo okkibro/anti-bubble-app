@@ -13,4 +13,6 @@ export class User {
     exp: number;
     inventory: [ShopItem]
     milestones: [Milestone];
+    knowledge: [number];
+    diversity: [number];
 }

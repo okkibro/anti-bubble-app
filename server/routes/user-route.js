@@ -304,4 +304,14 @@ router.post('/milestone', auth, (req, res) => {
     })
 })
 
+router.post('/updateGraph', auth, (req, res) => {
+    User.updateOne(
+        {_id : req.payload._id},
+        {$push : {knowledge : req.body.knowledgeScore, diversity : req.body.diversityScore}},
+        () => {
+            res.json({});
+        }
+    )
+})
+
 module.exports = router;

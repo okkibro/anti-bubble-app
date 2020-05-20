@@ -47,6 +47,15 @@ let userSchema = new Schema({
         type: [Number],
         required: true
     },
+
+    knowledge: {
+        type: [Number]
+    },
+
+    diversity: {
+        type: [Number]
+    },
+
     class: String,
 });
 

@@ -46,19 +46,22 @@ export class BubbleDetailsComponent implements OnInit {
         },
         visible: true,
       },
-      tooltip: {
-        valueSuffix: " %"
-      },
       series: [
         {
           name: 'Diversiteit van de inhoud',
           color: 'yellow',
-          data: [7, 6, 9, 14, 18, 21, 25]
+          data: this.userDetails.diversity,
+          tooltip: {
+            valueSuffix: "%"
+          }
         },
         {
           name: 'Kennis en bewustzijn van filter bubbles',
           color: 'blue',
-          data: [12, 13, 17, 29, 25, 26, 31]
+          data: this.userDetails.knowledge,
+          tooltip: {
+            valueSuffix: "%"
+          }
         }
       ]
     };
@@ -76,7 +79,10 @@ export class BubbleDetailsComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.initChart();
+    this.auth.profile().subscribe(user => {
+      this.userDetails = user;
+      this.initChart();
+    })
 
   }
 
