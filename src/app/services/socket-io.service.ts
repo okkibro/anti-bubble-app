@@ -27,17 +27,16 @@ export class SocketIOService {
         
     }
 
-    joinSession(pin, email): any {
+    joinSession(pin, email, callback): any {
         this.socket.emit('player-join', {pin: pin, player: email});
         this.socket.on('message', (message: string) => {
             console.log(message);
         });
         this.socket.on('join-succes', (succes) => {
+            this.data.changeMessage(pin);
             this.succes = succes;
-            console.log(1, this.succes);
-            return this.succes;
+            callback(succes);
         });
-        while (this.succes == undefined) {}
     }
 
     sendMessage(message) {

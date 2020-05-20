@@ -16,8 +16,6 @@ function runIO(io) {
 		});
 
 		socket.on('player-join', (params) => {
-      console.log(params);
-      console.log(pin, params.pin, params.pin==pin);
 			if (params.pin == pin) {
 				socket.join(params.pin);
         console.log(`Player ${params.player} is now connected`);
