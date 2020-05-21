@@ -1,6 +1,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
 var pin;
+var players = [];
 
 function runIO(io) {
 	io.on('connection', (socket) => {
@@ -18,7 +19,8 @@ function runIO(io) {
 		socket.on('player-join', (params) => {
 			if (params.pin == pin) {
 				socket.join(params.pin);
-        console.log(`Player ${params.player} is now connected`);
+		console.log(`Player ${params.player} is now connected`);
+		players.push(params.player);
         socket.emit('join-succes', true);
 			} else {
         console.log('Invalid Pin');
@@ -29,7 +31,11 @@ function runIO(io) {
 		socket.on('message', (message) => {
 			console.log(message);
 			io.sockets.emit('message', `server: ${message}`);
-    });
+		});
+		
+		socket.on('get-players', () => {
+			socket.emit('send-players', players);
+		})
 	});
 }
 

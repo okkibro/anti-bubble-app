@@ -25,20 +25,20 @@
                 </mat-card-header>
                 <mat-card-content>
 
-                    <!-- <table class="sessionTable">
-                        <tr *ngFor="">
-                            {{userDetails?.name}}
+                    <table class="sessionTable" *ngIf="players.length > 0">
+                        <tr *ngFor="let player of players">
+                            {{player.email}}
                         </tr>
-                    </table> -->
+                    </table>
 
-                    <pre>
+                    <!-- <pre>
                       /`·.¸
                         /¸...¸`:·
                     ¸.·´  ¸   `·.¸.·´;
                    : © ;:´;      ¸  ;
                     `·.¸ `·  ¸.·´\`·¸;
                         `\\´´\¸.·´  
-                    </pre>
+                    </pre> -->
                 </mat-card-content>
             </mat-card>
 
