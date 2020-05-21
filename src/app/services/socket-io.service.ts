@@ -10,7 +10,7 @@ import { Observable } from 'rxjs';
 export class SocketIOService {
     private socket = io(environment.ENDPOINT);
     pin;
-    succes = false;
+    players = [];
 
     constructor(private data: DataService) { }
 
@@ -34,7 +34,9 @@ export class SocketIOService {
         });
         this.socket.on('join-succes', (succes) => {
             this.data.changeMessage(pin);
-            this.succes = succes;
+            if (succes) {
+                this.players.push(email);
+            }
             callback(succes);
         });
     }
