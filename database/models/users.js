@@ -47,7 +47,7 @@ let userSchema = new Schema({
         type: [Number],
         required: true
     },
-    class: String,
+    class: [Number]
 });
 
 userSchema.methods.setPassword = function(password){

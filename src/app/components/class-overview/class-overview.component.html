@@ -2,7 +2,7 @@
 
 <body>
     <div class="containerDiv" fxLayoutGap="0.5%" fxLayout="column" fxLayoutAlign="space-evenly">
-        <mat-card *ngIf="userClassTitle != undefined">
+        <mat-card *ngIf="userClassTitle">
             <mat-card-header>
                 <mat-card-title> Klassen Overzicht </mat-card-title>
                 <mat-card-subtitle>
@@ -11,7 +11,7 @@
             </mat-card-header>
         </mat-card>
 
-        <mat-card *ngIf="userClassTitle != undefined">
+        <mat-card *ngIf="userClassTitle">
             <mat-card-content>
                 <table class="UItable" id="table">
                     <tr>
@@ -28,7 +28,7 @@
             </mat-card-content>
         </mat-card>
 
-        <mat-card class="searchBar" [formGroup]="searchBar" *ngIf="userClassTitle != undefined">
+        <mat-card class="searchBar" [formGroup]="searchBar" *ngIf="userClassTitle">
             <mat-card-header>
                 <mat-card-title>Zoek klasgenoot</mat-card-title>
             </mat-card-header>
@@ -62,7 +62,7 @@
             </mat-card-content>
         </mat-card>
 
-        <mat-card *ngIf="userClassTitle == undefined">
+        <mat-card *ngIf="userClassTitle">
             <mat-title>Je zit nog niet in een klas</mat-title>
         </mat-card>
         

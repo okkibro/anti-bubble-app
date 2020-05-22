@@ -27,6 +27,7 @@ router.post('/register', (req, res) => {
     user.inventory = [];
     user.milestones = [];
     user.currency = 0;
+    user.class = null;
     for (let i = 0; i < 9; i++) { //TODO: change 9 to correct number when done making all the milestones
         user.milestones.push(0);
     }
@@ -305,6 +306,24 @@ router.post('/milestone', auth, (req, res) => {
     })
 });
 
+router.post('/createClass', auth, (req, res) => {
+    //make a new user
+    let classes = new Classes();
+    //fill in data to classes attributes
+    classes.code = sanitize(req.body.classes.code);
+    classes.level = sanitize(req.body.classes.level);
+    classes.year = sanitize(req.body.classes.year);
+    classes.title = sanitize(req.body.classes.title);
+    classes.teacher = sanitize(req.body.teacher);
+    classes.students = [];
+    //save the changes to the database
+    classes.save().then(() => {
+        res.status(200);
+    }).catch(err => {
+        res.status(400).send(err);
+    });
+});
+
 router.get('/getClass', auth, (req, res) => {
     User.findById(req.payload._id, (err, user) => {
         Classes.findOne({ code: user.class }, (err, foundClass) => {
@@ -313,6 +332,7 @@ router.get('/getClass', auth, (req, res) => {
     })
 });
 
+/*TODO: Rewrite to suit new usermodel*/
 router.post('/joinClass', auth, (req, res) => {
     User.findById(req.payload._id, (err, user) => {
         Classes.findOne({ code: req.body.code }, (err, foundClass) => {

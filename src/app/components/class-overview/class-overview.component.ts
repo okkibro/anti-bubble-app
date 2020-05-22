@@ -32,8 +32,10 @@ export class ClassOverviewComponent implements OnInit {
     this.auth.getAllClassmates().subscribe((data) => {
       this.classmates = data;
     });
-    this.classesService.getClass2().subscribe(data => {
-      this.userClassTitle = data.class.title;
+    this.classesService.getClass().subscribe((data) => {
+      if (data.class) {
+        this.userClassTitle = data.class.title;
+      }
     });
   }
 

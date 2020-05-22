@@ -1,3 +1,9 @@
-.welcomeHeader {
-    font-size: 40px;
+.role-radio-group {
+    display: flex;
+    flex-direction: column;
+    margin: 5px 0;
+}
+
+.role-radio-button {
+    margin: 5px;
 }
