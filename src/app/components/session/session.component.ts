@@ -3,7 +3,6 @@ import {AuthenticationService} from "../../services/authentication.service";
 import { SocketIOService } from 'src/app/services/socket-io.service';
 import { DataService } from 'src/app/services/data-exchage.service';
 import { User } from '../../models/user';
-import { ClassesService } from 'src/app/services/classes.service';
 
 @Component({
     selector: 'mean-session',
@@ -21,7 +20,6 @@ export class SessionComponent implements OnInit {
         private authenticationService: AuthenticationService, 
         private socketService: SocketIOService, 
         private data: DataService,
-        private classesService: ClassesService
     ) { }
 
     ngOnInit(): void {
@@ -34,18 +32,30 @@ export class SessionComponent implements OnInit {
 
         this.authenticationService.profile().subscribe(user => {
             this.userDetails = user;
-            if (user.role == "student") {
-                this.socketService.getPlayers(emails => {
-                    this.classesService.getSessionPlayers(emails).subscribe(players => {
-                        this.players = players;
-                    });
+
+            if (this.userDetails.role == "teacher") {
+                this.socketService.listenForUpdates(newPlayer => {
+                    this.players.push(newPlayer);
+                    console.log("new player joined");
+                    let tableRow = document.createElement("tr").appendChild(document.createTextNode(newPlayer.firstName));
+                    let breakLine = document.createElement("br");
+                    let table = document.getElementsByClassName("sessionTable")[0];
+                    table.appendChild(tableRow);
+                    table.appendChild(breakLine);
                 });
             }
         });
-
     }
 
     logoutButton() {
         return this.authenticationService.logout();
+    }
+
+    getPlayers() {
+        if (this.userDetails.role == "teacher") {
+            this.socketService.getPlayers(players => {
+                this.players = players;
+            });
+        }
     }
 }

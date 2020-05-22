@@ -22,12 +22,11 @@ export class SocketIOService {
             this.data.changeMessage(pin);
             this.pin = pin;
             console.log(1,pin);
-        });
-        
+        });        
     }
 
-    joinSession(pin, email, callback): any {
-        this.socket.emit('player-join', {pin: pin, player: email});
+    joinSession(pin, user, callback): any {
+        this.socket.emit('player-join', {pin: pin, player: user});
         this.socket.on('message', (message: string) => {
             console.log(message);
         });
@@ -42,9 +41,16 @@ export class SocketIOService {
     }
 
     getPlayers(callback) {
-        this.socket.emit('get-players');
+        this.socket.emit('get-players', this.socket.id);
         this.socket.on('send-players', players => {
+            console.log(players);
             callback(players);
+        });
+    }
+
+    listenForUpdates(callback) {
+        this.socket.on('update-players', player => {
+            callback(player);
         });
     }
 }

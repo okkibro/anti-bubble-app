@@ -7,6 +7,7 @@
     <div class="containerDiv" fxLayoutGap="0.5%" fxLayout="column" fxLayoutAlign="space-evenly">
         <div fxLayout.xs="row" fxLayoutGap="0.5%" fxLayoutAlign="space-evenly">
             <mat-card fxFlex=70% *ngIf="userDetails?.role == 'teacher'">
+                <button (click)="getPlayers()">GetPlayers</button>
                 <mat-card-header class="matCardHeader">
                     <mat-card-title>Session code</mat-card-title>
                 </mat-card-header>
@@ -25,20 +26,16 @@
                 </mat-card-header>
                 <mat-card-content>
 
-                    <table class="sessionTable" *ngIf="players.length > 0">
-                        <tr *ngFor="let player of players">
-                            {{player.email}}
-                        </tr>
-                    </table>
+                    <table class="sessionTable" *ngIf="players.length > 0"></table>
 
-                    <!-- <pre>
+                    <pre>
                       /`·.¸
                         /¸...¸`:·
                     ¸.·´  ¸   `·.¸.·´;
                    : © ;:´;      ¸  ;
                     `·.¸ `·  ¸.·´\`·¸;
                         `\\´´\¸.·´  
-                    </pre> -->
+                    </pre>
                 </mat-card-content>
             </mat-card>
 

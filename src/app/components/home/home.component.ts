@@ -49,8 +49,8 @@ export class HomeComponent implements OnInit {
     }
 
     joinSession() {
-        const email = this.userDetails.email;
-        this.socketService.joinSession(this.pin, email, (succes) => {
+        const user = this.userDetails;
+        this.socketService.joinSession(this.pin, user, (succes) => {
             if (succes) {
                 this.router.navigate(['session']);
             } else {
