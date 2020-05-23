@@ -116,3 +116,12 @@ mat-tab-group, mat-tab {
     color: white;
     background-color: green;
 }
+
+::ng-deep .style-warning {
+    color: black;
+    background-color: yellow;
+}
+
+::ng-deep .style-warning .mat-simple-snackbar-action {
+    color: black;
+}
