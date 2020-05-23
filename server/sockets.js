@@ -68,7 +68,7 @@ function runIO(io) {
 				var player = players.getPlayer(socket.id); //Getting player with socket.id
 				//If a player has been found with that id
 				if (player) {
-					var hostId = player.hostId;//Gets id of host of the game
+					var hostId = player.hostID;//Gets id of host of the game
 					var game = games.getGame(hostId);//Gets game data with hostId
 					var pin = game.pin;//Gets the pin of the game
 					
