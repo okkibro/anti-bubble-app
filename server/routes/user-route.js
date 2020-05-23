@@ -351,22 +351,4 @@ router.post('/joinClass', auth, (req, res) => {
     });
 });
 
-router.post('/getSessionPlayers', auth, (req, res) => {
-    let result = [];
-    User.findById(req.payload._id, (err, user) => {
-        Classes.findOne({ code: user.class }, (err, foundClass) => {
-            for (let i = 0; i < foundClass.students.length; i++) {
-                User.findById(foundClass.students[i], (err, player) => {
-                    if (req.body.emails.includes(player.email)) {
-                        result.push(player);
-                    }
-                    if (i == foundClass.students.length - 1) {
-                        res.json(result);
-                    }
-                });
-            }
-        });
-    });
-});
-
 module.exports = router;

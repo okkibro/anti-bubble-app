@@ -56,6 +56,8 @@ export class HomeComponent implements OnInit {
             } else {
                 this.snackBar.open("Er is iets mis gegaan, probeer het opnieuw", 'X', {duration: 2500, panelClass: ['style-error'], });
             }
+        }, () => {
+            this.router.navigate(['home']);
         });
     }
 }

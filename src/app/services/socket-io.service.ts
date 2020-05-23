@@ -25,14 +25,17 @@ export class SocketIOService {
         });        
     }
 
-    joinSession(pin, user, callback): any {
+    joinSession(pin, user, join, backToHome): any {
         this.socket.emit('player-join', {pin: pin, player: user});
         this.socket.on('message', (message: string) => {
             console.log(message);
         });
         this.socket.on('join-succes', (succes) => {
             this.data.changeMessage(pin);
-            callback(succes);
+            join(succes);
+        });
+        this.socket.on('host-disconnect', () => {
+            backToHome();
         });
     }
 
@@ -48,9 +51,12 @@ export class SocketIOService {
         });
     }
 
-    listenForUpdates(callback) {
+    listenForUpdates(addPlayer, removePlayer) {
         this.socket.on('update-players', player => {
-            callback(player);
+            addPlayer(player);
+        });
+        this.socket.on('remove-player', player => {
+            removePlayer(player);
         });
     }
 }

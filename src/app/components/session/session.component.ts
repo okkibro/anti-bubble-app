@@ -42,6 +42,8 @@ export class SessionComponent implements OnInit {
                     let table = document.getElementsByClassName("sessionTable")[0];
                     table.appendChild(tableRow);
                     table.appendChild(breakLine);
+                }, removedPlayer => {
+                    //TODO: remove player from screen and playerlist
                 });
             }
         });

@@ -17,8 +17,4 @@ export class ClassesService {
   public getClass2() : Observable<any> {
     return this.http.get('https://localhost:3000/user/getClass', { headers: { Authorization: 'Bearer ' + this.cookie.get('mean-token')}});
   }
-
-  public getSessionPlayers(emails: [String]) : Observable<any> {
-    return this.http.post('https://localhost:3000/user/getSessionPlayers', { emails: emails }, { headers: { Authorization: 'Bearer ' + this.cookie.get('mean-token')}});
-  }
 }
