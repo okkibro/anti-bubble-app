@@ -42,9 +42,22 @@ let userSchema = new Schema({
     currency: {
         type: Number,
     },
-    
     milestones: {
         type: [Number],
+        required: true
+    },
+    avatar: {
+        type: {
+            hair1:      Schema.ObjectId, ref: 'Item', 
+            body:       Schema.ObjectId, ref: 'Item', required: true,
+            pants:      Schema.ObjectId, ref: 'Item', required: true,
+            shirt:      Schema.ObjectId, ref: 'Item', required: true,
+            shoes:      Schema.ObjectId, ref: 'Item',
+            glasses:    Schema.ObjectId, ref: 'Item',
+            hair2:      Schema.ObjectId, ref: 'Item',
+            hat:        Schema.ObjectId, ref: 'Item',
+            medal:      Schema.ObjectId, ref: 'Item'
+        },
         required: true
     },
     class: String,

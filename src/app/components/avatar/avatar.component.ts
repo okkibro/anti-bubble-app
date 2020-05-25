@@ -4,6 +4,8 @@ import { User } from '../../models/user';
 import { Variable } from '@angular/compiler/src/render3/r3_ast';
 import { MatTab } from '@angular/material/tabs';
 import { ShopService } from 'src/app/services/shop.service';
+import { AvatarService } from 'src/app/services/avatar.service';
+import { arrayMax } from 'highcharts';
 
 @Component({
     selector: 'mean-avatar',
@@ -15,8 +17,9 @@ export class AvatarComponent implements OnInit {
 
     userDetails: User;
     itemsShown = [];
+    avatarItems = [];
 
-    constructor(private auth: AuthenticationService, private shopService: ShopService) { }
+    constructor(private auth: AuthenticationService, private shopService: ShopService, private avatarService: AvatarService) { }
 
     logoutButton() {
         return this.auth.logout();
@@ -36,10 +39,18 @@ export class AvatarComponent implements OnInit {
                 for (let i = 0; i < shop.length; i++) {
                     if (user.inventory.find(x => x._id == shop[i]._id) != null) {
                         this.itemsShown.push(shop[i]);
+                        
                     }
                 }
+                user.avatar
             })
         })
+    }
+
+    equip(item){
+        this.avatarService.equip(item).subscribe(data => {
+            console.log(data);
+        });
     }
 
     tabChange(event) {
@@ -72,6 +83,30 @@ export class AvatarComponent implements OnInit {
 
         //     collection.lastChild.replaceWith(this.applyTabData(hat_Images));
         //}
+    }
+
+    
+
+    updateAvatar() {
+
+    // layer 0: Backhair
+    // layer 1: Body
+    // layer 2: Pants
+    // layer 3: Shirt
+    // layer 4: Shoes
+    // layer 5: Glasses
+    // layer 6: Fronthair
+    // layer 7: Hats
+    // layer 8: Medals
+   
+}
+
+    showAvatar(){
+        var fullAvatar;
+
+        for(var i = 0 ; i < /*avatarArray.length*/ 9 ; i++){
+            
+        }
     }
 
     applyTabData(images: string[]) {

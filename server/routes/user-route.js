@@ -304,4 +304,20 @@ router.post('/milestone', auth, (req, res) => {
     })
 })
 
+//Router that adds selecter item for the avatar
+router.post('/avatar', auth, (req,res) => {
+    User.findById(req.payload._id, (err, user) => {
+        user.avatar[req.body.avatarItem.category] = req.body.avatarItem;
+        user.markModified('avatar');
+        user.save((error) => { 
+            if (error){
+                console.log(error.message);
+            }
+            res.status(200).json({
+                test : 456
+            });
+        })
+    })
+}) 
+
 module.exports = router;

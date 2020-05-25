@@ -11,6 +11,7 @@ export class User {
     password: string;
     salt: string;
     exp: number;
-    inventory: [ShopItem]
+    inventory: [ShopItem];
     milestones: [Milestone];
+    avatar: [ShopItem];
 }

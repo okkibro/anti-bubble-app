@@ -23,7 +23,7 @@
                                 <mat-card fxFlex="100%" fxLayout="column" fxLayoutGap="0.5%" fxFlexAlign="stretch" >
                                 <mat-card-title fxFlex="20%">{{ item.title }}</mat-card-title>
                                 <div fxLayoutAlign="center" fxFlex="50%">
-                                    <img mat-card-image src= "{{item.image}}" alt="{{ item.title }}"> 
+                                    <img mat-card-image src= "{{ item.previewImage }}" alt="{{ item.title }}"> 
                                 </div>  
                                    <mat-card-footer fxFlex="20%">
                                     <button (click)="buy(item)" mat-flat-button [ngClass]="{'my-custom-theme': true}" color="primary">{{ item.price }} <mat-icon>payment</mat-icon></button>
