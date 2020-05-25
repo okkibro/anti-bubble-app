@@ -18,13 +18,14 @@ import { ShopComponent } from './components/shop/shop.component';
 import { PasswordRecoveryComponent } from './components/password-recovery/password-recovery.component';
 import { PasswordResetComponent } from './components/password-reset/password-reset.component';
 import { TrophiesComponent } from './components/trophies/trophies.component';
+import { SessionGuardService } from './services/session-guard.service';
 
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
   { path: 'home', component: HomeComponent, canActivate: [AuthGuardService]},
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
-  { path: 'session', component: SessionComponent },
+  { path: 'session', component: SessionComponent, canDeactivate: [SessionGuardService] },
   { path: 'profile', component: ProfileComponent, canActivate: [AuthGuardService]},
   { path: 'class-overview', component: ClassOverviewComponent },
   { path: 'classmateProfile/:id', component: ClassmateProfileComponent },

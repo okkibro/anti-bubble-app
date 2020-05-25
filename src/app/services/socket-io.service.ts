@@ -59,4 +59,9 @@ export class SocketIOService {
             removePlayer(player);
         });
     }
+
+    leaveSession() {
+        console.log("test");
+        this.socket.emit('leave');
+    }
 }

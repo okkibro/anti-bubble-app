@@ -73,6 +73,10 @@ export class SessionComponent implements OnInit, AfterViewInit {
         return this.authenticationService.logout();
     }
 
+    leaveSession() {
+        this.socketService.leaveSession();
+    }
+
     // getPlayers() {
     //     if (this.userDetails.role == "teacher") {
     //         this.socketService.getPlayers(players => {
