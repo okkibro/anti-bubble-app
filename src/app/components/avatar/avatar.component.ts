@@ -50,6 +50,7 @@ export class AvatarComponent implements OnInit {
     equip(item){
         this.avatarService.equip(item).subscribe(data => {
             console.log(data);
+            document.getElementById(data.category).setAttribute("src", data.image);
         });
     }
 

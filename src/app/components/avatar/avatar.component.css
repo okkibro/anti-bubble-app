@@ -22,3 +22,10 @@
     height: width;
     padding: 20px;
 }
+
+#avatarDisplay img {
+    position: absolute;
+    display: block;
+    top: 0px;
+    left: 0px;
+}

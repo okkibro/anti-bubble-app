@@ -314,7 +314,8 @@ router.post('/avatar', auth, (req,res) => {
                 console.log(error.message);
             }
             res.status(200).json({
-                test : 456
+                image: req.body.avatarItem.fullImage,
+                category: req.body.avatarItem.category
             });
         })
     })
