@@ -1,14 +1,15 @@
 <mat-toolbar color="primary" class="navBarAng">
-    <mat-toolbar-row>
-        <span class="logo">Anti Bubble</span>
+    <mat-toolbar-row fxLayoutAlign="start stretch" fxLayout="row"> 
+        <!-- <span class="logo" fxFlex="25">Anti Bubble</span> -->
 
         <div class="navitems">
-            <button mat-button [routerLink]="'/home'"> Home </button>
-            <button mat-button [routerLink]="'/class-overview'"> Klas Overzicht </button>
-            <button mat-button [routerLink]="'/home'"> Uitleg </button>
-            <button mat-button [routerLink]="'/profile'"> Profiel </button>
+            <button mat-button [routerLink]="'/home'" fxFlex="10">Anti-Bubble</button>
+            <button mat-button [routerLink]="'/home'" fxFlex="15" fxFlexOffset="10"> Home </button>
+            <button mat-button [routerLink]="'/class-overview'" fxFlex="15"> Klas </button>
+            <button mat-button [routerLink]="'/home'" fxFlex="15"> Uitleg </button>
+            <button mat-button [routerLink]="'/profile'" fxFlex="15"> Profiel </button>
+            <button mat-button (click)="logoutButton()" fxFlex="10" fxFlexOffset="10"> Log uit </button>
         </div>
 
-        <button mat-button (click)="logoutButton()"> Log uit </button>
     </mat-toolbar-row>
 </mat-toolbar>

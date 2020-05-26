@@ -29,6 +29,8 @@
 .navitems button {
     padding-left: 30px;
     padding-right: 30px;
+
+    color: white;
 }
 
 .navBarAng button:hover {
@@ -79,6 +81,7 @@ mat-card-header {
 
 mat-card button{
     background-color: #addadb;
+    width: 40%;
 }
 
 mat-card img{
@@ -101,4 +104,11 @@ mat-tab-group, mat-tab {
 .UItable th, td {
     text-align: left;
     padding: 10px;    
+}
+
+#artisticButtonBlue {
+    width: 40%;
+    background: transparent;
+    background-image: url("/assets/images/Super_map/Basic_Buttons/Button_blue_rectangle.png");
+    background-repeat: round;
 }
