@@ -4,27 +4,61 @@
 
     <div class="containerDiv" fxLayoutGap="0.2%" fxLayout="column" fxLayoutAlign="space-evenly">
         <div fxLayout.xs="row" fxLayoutGap="0.5%" fxLayoutAlign="space-evenly">
-            <mat-card fxFlex="100%">
+            <mat-card fxFlex="100%" >
                 <mat-card-header>
                     <mat-card-title>Avatar Wijzigen</mat-card-title>
                 </mat-card-header><br>
-                <img mat-card-image id="haarAchter" class="avatarDisplay">
-                <img mat-card-image id="lichaam" class="avatarDisplay">
-                <img mat-card-image id="broek" class="avatarDisplay">
-                <img mat-card-image id="shirt" class="avatarDisplay">
-                <img mat-card-image id="schoenen" class="avatarDisplay">
-                <img mat-card-image id="bril" class="avatarDisplay">
-                <img mat-card-image id="haarVoor" class="avatarDisplay">
-                <img mat-card-image id="hoed" class="avatarDisplay">
-                <img mat-card-image id="medaille" class="avatarDisplay">
-              
-                <!-- <img mat-card-image id="lichaam"
-                    src="https://image.freepik.com/vrije-vector/jonge-vrouw-avatar-cartoon-karakter-profielfoto_18591-55056.jpg"
+                <!-- <mat-card-content>
+                    <img mat-card-image id="haarAchter" class="avatarDisplay">
+                    <img mat-card-image id="lichaam" class="avatarDisplay">
+                    <img mat-card-image id="broek" class="avatarDisplay">
+                    <img mat-card-image id="shirt" class="avatarDisplay">
+                    <img mat-card-image id="schoenen" class="avatarDisplay">
+                    <img mat-card-image id="bril" class="avatarDisplay">
+                    <img mat-card-image id="haarVoor" class="avatarDisplay">
+                    <img mat-card-image id="hoofddeksel" class="avatarDisplay">
+                    <img mat-card-image id="medaille" class="avatarDisplay">
+                </mat-card-content> -->
+
+                <!-- <img mat-card-image
+                    src="assets/images/Super_map/Characters_Assets/Skin colors/Placeholder.png"
                     alt="avatar voorbeeld"> -->
+
+                <mat-card class="avatarDisplay"><img mat-card-image id="haarAchter" src="assets/images/Super_map/Characters_Assets/Skin colors/Placeholder.png"></mat-card>
+                <mat-card class="avatarDisplay"><img mat-card-image id="lichaam" src="assets/images/Super_map/Characters_Assets/Skin colors/Placeholder.png"></mat-card>
+                <mat-card class="avatarDisplay"><img mat-card-image id="broek" src="assets/images/Super_map/Characters_Assets/Skin colors/Placeholder.png"></mat-card>
+                <mat-card class="avatarDisplay"><img mat-card-image id="shirt" src="assets/images/Super_map/Characters_Assets/Skin colors/Placeholder.png"></mat-card>
+                <mat-card class="avatarDisplay"><img mat-card-image id="schoenen" src="assets/images/Super_map/Characters_Assets/Skin colors/Placeholder.png"></mat-card>
+                <mat-card class="avatarDisplay"><img mat-card-image id="bril" src="assets/images/Super_map/Characters_Assets/Skin colors/Placeholder.png"></mat-card>
+                <mat-card class="avatarDisplay"><img mat-card-image id="haarVoor" src="assets/images/Super_map/Characters_Assets/Skin colors/Placeholder.png"></mat-card>
+                <mat-card class="avatarDisplay"><img mat-card-image id="hoofddeksel" src="assets/images/Super_map/Characters_Assets/Skin colors/Placeholder.png"></mat-card>
+                <mat-card class="avatarDisplay"><img mat-card-image id="medaille" src="assets/images/Super_map/Characters_Assets/Skin colors/Placeholder.png"></mat-card>              
+                
             </mat-card>
         </div>
 
-        <div fxLayout.xs="row" fxLayoutGap="0.5%" fxLayoutAlign="space-evenly">
+        <div fxLayout.xs="row"  fxLayoutGap="0.5%" fxLayoutAlign="space-evenly"> 
+            <mat-card  id="itemCollection" fxFlex="100%"> 
+                <mat-card-content>
+                    <mat-tab-group (selectedTabChange)="tabChange($event)">
+                        <mat-tab label="Lichaam"></mat-tab>
+                        <mat-tab label="Hoofddeksel"></mat-tab>
+                        <mat-tab label="Kleding"></mat-tab>
+                    </mat-tab-group>
+                    <mat-grid-list cols="4">
+                        <mat-grid-tile *ngFor = "let item of filteredAvatar" fxFlexAlign="stretch">
+                            <mat-card fxFlex="100%" fxLayout="column" fxLayoutGap="0.5%" fxFlexAlign="stretch" class="avatarDisplay">
+                                    {{item.title}}
+                                    <img mat-card-image src="{{item.previewImage}}" alt="{{item.title}}" (click)="equip(item)"><br>
+                            </mat-card>
+                        </mat-grid-tile>
+                    </mat-grid-list> 
+                </mat-card-content>
+            </mat-card>
+        </div>
+
+
+        <!-- <div fxLayout.xs="row" fxLayoutGap="0.5%" fxLayoutAlign="space-evenly">
             <mat-card id="itemCollection" fxFlex="100%">
                 <mat-tab-group (selectedTabChange)="tabChange($event)" dynamicHeight>
                     <mat-tab label="Huidskleur">
@@ -42,7 +76,7 @@
                             <tr>
                                 <td *ngFor="let item of itemsShown">
                                     <ng-container *ngIf="item.category == 'kleding'">
-                                        <img mat-card-image src="{{item.previewImage}}" alt="{{item.title}}"><br>
+                                        <img mat-card-image src="{{item.previewImage}}" alt="{{item.title}}" (click)="equip(item)"><br>
                                         {{item.title}}
                                     </ng-container>
                                 </td>
@@ -54,7 +88,7 @@
                             <tr>
                                 <td *ngFor="let item of itemsShown">
                                     <ng-container *ngIf="item.category == 'hoofddeksel'">
-                                        <img mat-card-image src="{{item.previewImage}}" alt="{{item.title}}"><br>
+                                        <img mat-card-image src="{{item.previewImage}}" alt="{{item.title}}" (click)="equip(item)"><br>
                                         {{item.title}}
                                     </ng-container>
                                 </td>
@@ -69,7 +103,7 @@
             <mat-card-content>
                 <button mat-button [routerLink]="'/profile'">Wijzigingen Opslaan</button>
             </mat-card-content>
-        </mat-card>
+        </mat-card> -->
 
         <button mat-button [routerLink]="'/profile'">
             <mat-icon>keyboard_backspace</mat-icon> Terug naar profiel
