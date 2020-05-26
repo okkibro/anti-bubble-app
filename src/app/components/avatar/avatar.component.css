@@ -23,9 +23,12 @@
     padding: 20px;
 }
 
-#avatarDisplay img {
+.avatarDisplay {
     position: absolute;
-    display: block;
-    top: 0px;
-    left: 0px;
+    top: 10%;
+    left: 10%;
+    background-color: transparent;
+    border: transparent;
+    box-shadow: none;
+    z-index: 1;
 }

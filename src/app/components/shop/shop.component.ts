@@ -27,7 +27,7 @@ export class ShopComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.shopService.shop("alles").subscribe(shop => {
+    this.shopService.shop("lichaam").subscribe(shop => {
       this.shopDetails = shop;
       this.authenticationService.profile().subscribe(user => {
         this.userDetails = user;
