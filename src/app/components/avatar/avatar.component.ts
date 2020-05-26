@@ -35,7 +35,7 @@ export class AvatarComponent implements OnInit {
                         this.filteredAvatar = this.filterAvatar();
                     }
                 }
-                user.avatar
+                this.showAvatar();
             })
         })
     }
@@ -45,6 +45,18 @@ export class AvatarComponent implements OnInit {
             console.log(data);
             document.getElementById(data.category).setAttribute("src", data.image);
         });
+    }
+
+    showAvatar(){
+        document.getElementById("haar1").setAttribute("src", this.userDetails.avatar.haar1?.fullImage);
+        document.getElementById("lichaam").setAttribute("src", this.userDetails.avatar.lichaam.fullImage);
+        document.getElementById("broek").setAttribute("src", this.userDetails.avatar.broek?.fullImage);
+        document.getElementById("shirt").setAttribute("src", this.userDetails.avatar.shirt?.fullImage);
+        document.getElementById("schoenen").setAttribute("src", this.userDetails.avatar.schoenen?.fullImage);
+        document.getElementById("bril").setAttribute("src", this.userDetails.avatar.bril?.fullImage);
+        document.getElementById("haar2").setAttribute("src", this.userDetails.avatar.haar2?.fullImage);
+        document.getElementById("hoofddeksel").setAttribute("src", this.userDetails.avatar.hoofddeksel?.fullImage);
+        document.getElementById("medaille").setAttribute("src", this.userDetails.avatar.medaille?.fullImage);   
     }
 
     tabChange(event) {
