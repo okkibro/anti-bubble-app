@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterViewInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import {AuthenticationService} from "../../services/authentication.service";
 import { SocketIOService } from 'src/app/services/socket-io.service';
 import { DataService } from 'src/app/services/data-exchage.service';
@@ -11,7 +11,7 @@ import { User } from '../../models/user';
     '../../shared/general-styles.css']
 })
 
-export class SessionComponent implements OnInit, AfterViewInit {
+export class SessionComponent implements OnInit {
     userDetails: User;
     players = [];
     pin;
@@ -36,7 +36,6 @@ export class SessionComponent implements OnInit, AfterViewInit {
             if (this.userDetails.role == "teacher") {
                 this.socketService.listenForUpdates(newPlayer => {
                     this.players.push(newPlayer);
-                    console.log("new player joined");
                     let tableRow = document.createElement("tr");
                     tableRow.appendChild(document.createTextNode(newPlayer.firstName + " " + newPlayer.lastName));
                     tableRow.classList.add("player");
@@ -59,22 +58,16 @@ export class SessionComponent implements OnInit, AfterViewInit {
         });
     }
 
-    ngAfterViewInit() {
-        let navBar = document.getElementsByClassName("navitems")[0];
-        for (let i = 0; i < navBar.childNodes.length; i++) {
-            navBar.childNodes[i].addEventListener("click", function() {
-                console.log("test123");
-            });
-            console.log(navBar.childNodes[i]);
-        }
-    }
-
     logoutButton() {
         return this.authenticationService.logout();
     }
 
     leaveSession() {
         this.socketService.leaveSession();
+    }
+
+    isHostDisconnected(): boolean {
+        return this.socketService.hostDisconnected;
     }
 
     // getPlayers() {

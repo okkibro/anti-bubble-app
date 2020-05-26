@@ -8,8 +8,9 @@ import { Observable } from 'rxjs';
     providedIn: 'root'
 })
 export class SocketIOService {
-    private socket = io(environment.ENDPOINT);
+    socket = io(environment.ENDPOINT);
     pin;
+    hostDisconnected: boolean;
 
     constructor(private data: DataService) { }
 
@@ -21,11 +22,11 @@ export class SocketIOService {
         this.socket.on('showGamePin', (pin) => {
             this.data.changeMessage(pin);
             this.pin = pin;
-            console.log(1,pin);
         });        
     }
 
     joinSession(pin, user, join, backToHome): any {
+        this.hostDisconnected = false;
         this.socket.emit('player-join', {pin: pin, player: user});
         this.socket.on('message', (message: string) => {
             console.log(message);
@@ -35,6 +36,8 @@ export class SocketIOService {
             join(succes);
         });
         this.socket.on('host-disconnect', () => {
+            this.hostDisconnected = true;
+            this.socket.removeAllListeners();
             backToHome();
         });
     }
@@ -46,7 +49,6 @@ export class SocketIOService {
     getPlayers(callback) {
         this.socket.emit('get-players', this.socket.id);
         this.socket.on('send-players', players => {
-            console.log(players);
             callback(players);
         });
     }
@@ -61,7 +63,9 @@ export class SocketIOService {
     }
 
     leaveSession() {
-        console.log("test");
         this.socket.emit('leave');
+        this.socket.on('after-leave', () => {
+            this.socket.removeAllListeners();
+        });
     }
 }
