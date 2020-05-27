@@ -22,17 +22,17 @@ export class ClassOverviewComponent implements OnInit {
 
   public value: string;
 
-  constructor(private auth: AuthenticationService, private router: Router, private fb: FormBuilder, private classesService: ClassesService) { }
+  constructor(private classService: ClassesService, private auth: AuthenticationService, private router: Router, private fb: FormBuilder) { }
   
   logoutButton() {
     return this.auth.logout();
   }
   
   ngOnInit() {
-    this.auth.getAllClassmates().subscribe((data) => {
+    this.classService.getAllClassmates().subscribe((data) => {
       this.classmates = data;
     });
-    this.classesService.getClass().subscribe((data) => {
+    this.classService.getClass().subscribe((data) => {
       if (data.class) {
         this.userClassTitle = data.class.title;
       }

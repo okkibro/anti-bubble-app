@@ -3,6 +3,7 @@ import { AuthenticationService } from '../../services/authentication.service';
 import { User } from '../../models/user';
 import { ActivatedRoute } from "@angular/router";
 import { Router } from '@angular/router';
+import { ClassesService } from 'src/app/services/classes.service';
 
 @Component({
   selector: 'mean-classmateProfile',
@@ -14,14 +15,14 @@ export class ClassmateProfileComponent implements OnInit {
 
   userDetails: User;
 
-  constructor(private auth: AuthenticationService, private route: ActivatedRoute, private router: Router) { }
+  constructor(private classService: ClassesService ,private auth: AuthenticationService, private route: ActivatedRoute, private router: Router) { }
 
   logoutButton() {
     return this.auth.logout();
   }
 
   ngOnInit() {
-    this.auth.classmateProfile(this.route.snapshot.paramMap.get("id")).subscribe(user => {
+    this.classService.classmateProfile(this.route.snapshot.paramMap.get("id")).subscribe(user => {
       this.userDetails = user;
   }, (err) => {
       console.error(err);
