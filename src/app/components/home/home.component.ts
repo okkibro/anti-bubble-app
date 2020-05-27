@@ -44,8 +44,8 @@ export class HomeComponent implements OnInit {
     }
 
     createSession() {
-        this.socketService.createSession();
-        this.router.navigate(['session']);
+        // this.socketService.createSession();
+        this.router.navigate(['session-options']);
     }
 
     joinSession() {

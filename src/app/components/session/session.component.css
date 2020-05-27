@@ -20,15 +20,6 @@ body {
     display: inline-block;
 }
 
-.sessionTable {
-    display: inline-block;
-}
-
-.sessionTable th, td {
-    text-align: left;
-    padding: 10px;
-}
-
 .sessionCode {
     top: 10%;
     right: 3%;

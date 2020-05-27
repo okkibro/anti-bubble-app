@@ -103,6 +103,15 @@ mat-tab-group, mat-tab {
     padding: 10px;    
 }
 
+.sessionTable {
+    display: inline-block;
+}
+
+.sessionTable th, td {
+    text-align: left;
+    padding: 10px;
+}
+
 ::ng-deep .mat-simple-snackbar-action {
     color: white;
 }

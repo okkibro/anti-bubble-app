@@ -19,6 +19,7 @@ import { PasswordRecoveryComponent } from './components/password-recovery/passwo
 import { PasswordResetComponent } from './components/password-reset/password-reset.component';
 import { TrophiesComponent } from './components/trophies/trophies.component';
 import { SessionGuardService } from './services/session-guard.service';
+import { SessionOptionsComponent } from './components/session-options/session-options.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
@@ -38,6 +39,7 @@ const routes: Routes = [
   { path: 'passwordrecovery', component: PasswordRecoveryComponent },
   { path: 'reset/:token', component: PasswordResetComponent },
   { path: 'trophies', component: TrophiesComponent },
+  { path: 'session-options', component: SessionOptionsComponent, data: {roles: [Role.teacher]}},
   // Auto redirect als je bullshit invult (Moet als laatste!)
   { path: '**', redirectTo: '/login', pathMatch: 'full' },
 ];

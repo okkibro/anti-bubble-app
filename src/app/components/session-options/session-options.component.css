@@ -1,0 +1,31 @@
+mat-panel-title {
+    justify-content: center;
+    margin-left: 16px;  /*the toggle arrow takes up exactly 16px of margin on the right side, this evens it out and centers the title.*/
+    font-weight: bold;
+}
+
+/* .SessionOptionsTable {
+display: inline;
+        text-align: center;
+        justify-content: center;
+        justify-items: center;
+  
+} */
+
+.sessionOptionsTable td{
+    width: 50%;
+}
+
+.sessionOptionsTable th{
+    text-align: center;
+    width: 10%;
+}
+
+.sessionOptionsTable {
+    margin: 10px;
+    display: inline-block;
+    width: 75%;
+    border-collapse: collapse;
+    border: 1px solid black;
+}
+

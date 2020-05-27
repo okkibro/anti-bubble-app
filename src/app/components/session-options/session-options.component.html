@@ -1,0 +1,163 @@
+<mean-nav-bar></mean-nav-bar>
+
+<body>
+    <div class="containerDiv" fxLayout="column" fxLayoutAlign="space-evenly">
+
+        <mat-card>
+            <mat-card-header>
+                <mat-card-title>Activiteiten</mat-card-title>
+                <mat-card-subtitle>Kies een activiteit en de bijbehorende opties</mat-card-subtitle>
+            </mat-card-header>
+            <mat-card-content>
+                <mat-accordion>
+                    <mat-expansion-panel hideToggle="true" expanded="true">
+                        <mat-expansion-panel-header>
+                            <mat-panel-title>Doorlopende Doolhof</mat-panel-title>
+                        </mat-expansion-panel-header>
+                        <mat-expansion-panel-content>
+                            Dit is de eerste activiteit die de leerlingen moeten doorlopen.
+                            <table class="sessionOptionsTable">
+                                <tr>
+                                    <th>Soort activiteit:</th>
+                                    <td>Individueel</td>
+                                </tr>
+                                <tr>
+                                    <th>Doel:</th>
+                                    <td>Het creëeren van een persoonlijke filterbubbel</td>
+                                </tr>
+                                <tr>
+                                    <th>Uitleg:</th>
+                                    <td>De leerlingen volgen een doolhof, waarbij ze verscheidende vragen moeten beantwoorden.
+                                        Aan de hand van de antwoorden, wordt voor elke speler zijn/haar persoonlijke filter bubbel
+                                        gecreëerd.
+                                    </td>
+                                </tr>
+                            </table>
+                             <br>
+                            <button mat-button>Start Sessie</button> <!-- createSession()-->
+                            <!-- TODO: disable alle andere start sessie knoppen als deze activiteit nog niet is gedaan -->
+                        </mat-expansion-panel-content>
+                    </mat-expansion-panel>
+
+                    <mat-expansion-panel hideToggle="true">
+                        <mat-expansion-panel-header>
+                            <mat-panel-title>Naamloos Nieuws</mat-panel-title>
+                        </mat-expansion-panel-header>
+                        <mat-expansion-panel-content>
+                            <table class="sessionOptionsTable">
+                                <tr>
+                                    <th>Soort activiteit:</th>
+                                    <td>Klassikaal</td>
+                                </tr>
+                                <tr>
+                                    <th>Doel:</th>
+                                    <td>Inzicht krijgen in het feit dat het nieuws op meerdere manieren wordt verwoord</td>
+                                </tr>
+                                <tr>
+                                    <th>Uitleg:</th>
+                                    <td>  In dit spel moeten de leerlingen nieuwsartikelen bij elkaar zoeken.
+                                        Iedere speler krijgt een deel van een artikel, bijvoorbeeld een alinea.
+                                        De artikelen gaan over hetzelfde onderwerp, maar komen van verschillende bronnen.
+                                        Als de leerlingen denken het hele artikel compleet te hebben gemaakt, sturen ze dit in.
+                                    </td>
+                                </tr>
+                            </table>
+                            <br>
+                            <button mat-button>Start Sessie</button> <!-- createSession()-->
+                        </mat-expansion-panel-content>
+                    </mat-expansion-panel>
+
+                    <mat-expansion-panel hideToggle="true">
+                        <mat-expansion-panel-header>
+                            <mat-panel-title>Botsende Bubbels</mat-panel-title>
+                        </mat-expansion-panel-header>
+                        <mat-expansion-panel-content>
+                            <table class="sessionOptionsTable">
+                                <tr>
+                                    <th>Soort activiteit:</th>
+                                    <td>Klassikaal</td>
+                                </tr>
+                                <tr>
+                                    <th>Doel:</th>
+                                    <td>Inzicht krijgen in het feit dat er verschillende filterbubbels zijn</td>
+                                </tr>
+                                <tr>
+                                    <th>Uitleg:</th>
+                                    <td>De docent kiest een onderwerp naar keuze uit.
+                                        Vervolgens worden de leeerlingen ingedeeld in tweetallen en komen ze in een anonieme chat
+                                        met elkaar.
+                                        Het is de bedoeling dat de leerlingen met elkaar zowel een voorargument als een
+                                        tegenargument op de stelling vinden.
+                                        Hopelijk leidt dit tot discussies tussen de leerlingen, waarna ze inzien dat ze in
+                                        verschillende bubbels zitten.
+                                    </td>
+                                </tr>
+                            </table>
+                            <br>
+                            <button mat-button>Start Sessie</button> <!-- createSession()-->
+                        </mat-expansion-panel-content>
+                    </mat-expansion-panel>
+
+                    <mat-expansion-panel hideToggle="true">
+                        <mat-expansion-panel-header>
+                            <mat-panel-title>Alternatieve Antwoorden</mat-panel-title>
+                        </mat-expansion-panel-header>
+                        <mat-expansion-panel-content>
+                            <table class="sessionOptionsTable">
+                                <tr>
+                                    <th>Soort activiteit:</th>
+                                    <td>Individueel</td>
+                                </tr>
+                                <tr>
+                                    <th>Doel:</th>
+                                    <td>Inzicht vergaren in het feit dat nieuwsbronnen het nieuws verschillend verwoorden</td>
+                                </tr>
+                                <tr>
+                                    <th>Uitleg:</th>
+                                    <td>In deze activiteit moeten de leerlingen een antwoord op een vraag vinden in een artikel.
+                                        Echter zal dit artikel voor elke leerling net iets anders zijn.
+                                        De leerlingen krijgen namelijk een artikel die het meest overeenkomt met hun filterbubbel.
+                                        Als ze het antwoord op de vraag denken te hebben gevonden, kunnen ze dit antwoord insturen.
+                                    </td>
+                                </tr>
+                            </table>
+                            <br>
+                            <button mat-button>Start Sessie</button> <!-- createSession()-->
+                        </mat-expansion-panel-content>
+                    </mat-expansion-panel>
+
+                    <mat-expansion-panel hideToggle="true">
+                        <mat-expansion-panel-header>
+                            <mat-panel-title>Aanradend Algoritme</mat-panel-title>
+                        </mat-expansion-panel-header>
+                        <mat-expansion-panel-content>
+                            <table class="sessionOptionsTable">
+                                <tr>
+                                    <th>Soort activiteit:</th>
+                                    <td>Klassikaal</td>
+                                </tr>
+                                <tr>
+                                    <th>Doel:</th>
+                                    <td>De leerlingen laten inzien hoe een algoritme werkt op basis van wat je online invoert</td>
+                                </tr>
+                                <tr>
+                                    <th>Uitleg:</th>
+                                    <td>De leerlingen krijgen een virtueel poppetje te zien die zogenaamd een filmpje kijkt.
+                                        De bedoeling is om dit poppetje zo lang mogelijk vrolijk te houden, door goede filmpjes te
+                                        kiezen. De leerlingen krijgen telkens 30 seconden om op een volgende video te stemmen.
+                                        Als de tijd op is, wordt de video met de meeste stemmen "afgespeeld". 
+                                        Het virtuele poppetje geeft hierop een reactie weer in de vorm van een gezichtsexpressie.
+                                        Als het poppetje meerdere malen achter elkaar niet blij is met de gekozen video, eindigt de activiteit.
+                                    </td>
+                                </tr>
+                            </table>                            
+                            <br>
+                            <button mat-button>Start Sessie</button> <!-- createSession()-->
+                        </mat-expansion-panel-content>
+                    </mat-expansion-panel>
+                </mat-accordion>
+            </mat-card-content>
+        </mat-card>
+
+    </div>
+</body>
