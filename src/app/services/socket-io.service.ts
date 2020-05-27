@@ -14,6 +14,7 @@ export class SocketIOService {
 
     constructor(private data: DataService) { }
 
+    // Gets called when a teacher creates a new session
     createSession() {
         this.socket.emit('host-join');
         this.socket.on('players', (players: []) => {
@@ -25,7 +26,8 @@ export class SocketIOService {
         });        
     }
 
-    joinSession(pin, user, join, backToHome): any {
+    // Gets called when a user enters a pin and presses the join session button
+    joinSession(pin, user, join, backToHome) {
         this.hostDisconnected = false;
         this.socket.emit('player-join', {pin: pin, player: user});
         this.socket.on('message', (message: string) => {
@@ -33,24 +35,17 @@ export class SocketIOService {
         });
         this.socket.on('join-succes', (succes) => {
             this.data.changeMessage(pin);
-            join(succes);
+            join(succes); // After player-join return succes to the angular component
         });
         this.socket.on('host-disconnect', () => {
             this.hostDisconnected = true;
             this.socket.removeAllListeners();
-            backToHome();
+            backToHome(); // When the host disconnects, call the function that sends the player back to the home screen
         });
     }
 
     sendMessage(message) {
         this.socket.emit('message', message);
-    }
-
-    getPlayers(callback) {
-        this.socket.emit('get-players', this.socket.id);
-        this.socket.on('send-players', players => {
-            callback(players);
-        });
     }
 
     listenForUpdates(addPlayer, removePlayer) {

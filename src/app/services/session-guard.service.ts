@@ -9,8 +9,10 @@ export class SessionGuardService implements CanDeactivate<SessionComponent> {
 
   constructor() { }
 
+  // Guard that activates when user tries to leave the session page
   canDeactivate(component: SessionComponent): boolean {
-    if (component.isHostDisconnected()) {
+    // If player got kicked cause host disconnected or player is not in a session, then dont show the message and just leave the page
+    if (component.isHostDisconnected() || component.pin == undefined) {
       return true;
     } else {
       if (confirm("Weet je zeker dat je de sessie wilt verlaten?")) {

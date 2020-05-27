@@ -12,23 +12,24 @@ function runIO(io) {
 		});
 
 		socket.on('host-join', () => {
-			var pin = Math.floor(100000 + Math.random() * 900000);
-			games.addGame(pin, socket.id, false, {})
-			socket.join(pin);
+			var pin = Math.floor(100000 + Math.random() * 900000); // Generate pin
+			games.addGame(pin, socket.id, false, {}); // Create a new game object and add it to the games list
+			socket.join(pin); // Host's socket joins the game room
 			console.log('Game created with pin:', pin);
 			socket.emit('showGamePin', pin);
 		});
 
 		socket.on('player-join', (params) => {
 			var gameFound = false;
+			// Look for a game with the entered pin
 			for (let i = 0; i < games.games.length; i++) {
 				if (params.pin == games.games[i].pin) {
 					var hostId = games.games[i].hostID;
-					players.addPlayer(hostId, socket.id, `${params.player.firstName} ${params.player.lastName}`, {}, params.player.email);
-					socket.join(params.pin);
+					players.addPlayer(hostId, socket.id, `${params.player.firstName} ${params.player.lastName}`, {}, params.player.email); // Add player to the list of players
+					socket.join(params.pin); // Player socket joins game room
 					gameFound = true;
-					socket.emit('join-succes', true);
-					io.to(games.games[i].hostID).emit('update-players', params.player);
+					socket.emit('join-succes', true); // Return succes is true
+					io.to(games.games[i].hostID).emit('update-players', params.player); // Send update to the host so the host's screen gets updated with the player's name
 				}
 			}
 			if (!gameFound) {
@@ -42,10 +43,7 @@ function runIO(io) {
 			io.sockets.emit('message', `server: ${message}`);
 		});
 
-		socket.on('get-players', (hostId) => {
-			socket.emit('send-players', players.getPlayers(hostId));
-		});
-
+		// Gets called when player or host leaves the session page
 		socket.on('leave', () => {
 			var game = games.getGame(socket.id); //Finding game with socket.id
 			console.log("disconnect");

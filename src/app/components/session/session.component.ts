@@ -23,6 +23,7 @@ export class SessionComponent implements OnInit {
     ) { }
 
     ngOnInit(): void {
+        // Get pin of the session from the dataservice
         this.data.currentMessage.subscribe(message => {
             if (message) {
                 this.pin = message;
@@ -34,19 +35,18 @@ export class SessionComponent implements OnInit {
             this.userDetails = user;
 
             if (this.userDetails.role == "teacher") {
-                this.socketService.listenForUpdates(newPlayer => {
-                    this.players.push(newPlayer);
+                this.socketService.listenForUpdates(newPlayer => { // Callback that gets called whenever a player connects with the session
+                    this.players.push(newPlayer); // Add player to the list
+                    // Create a tablerow with a textnode that contains the player's name
                     let tableRow = document.createElement("tr");
                     tableRow.appendChild(document.createTextNode(newPlayer.firstName + " " + newPlayer.lastName));
                     tableRow.classList.add("player");
-                    let breakLine = document.createElement("br");
                     let table = document.getElementsByClassName("sessionTable")[0];
-                    table.appendChild(tableRow);
-                }, removedPlayer => {
-                    // remove player from the list
-                    this.players = this.players.filter(x => x.email != removedPlayer.email);
+                    table.appendChild(tableRow); // Append the tablerow to the table
+                }, removedPlayer => { // Gets called when a player leaves the session
+                    this.players = this.players.filter(x => x.email != removedPlayer.email); // Remove player from the list
 
-                    // remove player from DOM
+                    // Remove player from DOM
                     let htmlPlayers = document.getElementsByClassName("player"); // get all tr's with class player
                     for (let i = 0; i < htmlPlayers.length; i++) {
                         if (htmlPlayers[i].childNodes[0].textContent == removedPlayer.name) { // if the name is equal to removed player
@@ -56,6 +56,10 @@ export class SessionComponent implements OnInit {
                 });
             }
         });
+
+        window.onbeforeunload = (event) => {
+            this.leaveSession();
+        };
     }
 
     logoutButton() {
@@ -69,12 +73,4 @@ export class SessionComponent implements OnInit {
     isHostDisconnected(): boolean {
         return this.socketService.hostDisconnected;
     }
-
-    // getPlayers() {
-    //     if (this.userDetails.role == "teacher") {
-    //         this.socketService.getPlayers(players => {
-    //             this.players = players;
-    //         });
-    //     }
-    // }
 }
