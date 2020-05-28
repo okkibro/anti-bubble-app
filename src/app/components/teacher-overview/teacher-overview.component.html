@@ -6,7 +6,7 @@
             <mat-card fxFlex="100%">
                 <mat-card-header>
                     <mat-card-title class="welcomeHeader">Klas Overzicht</mat-card-title>
-                    <a mat-flat-button *ngIf="!userDetails?.class" [ngClass]="{'my-custom-theme': true}" color="accent" (click)="onClickOpenForm()">Maak een nieuew klas aan</a>
+                    <a mat-flat-button [ngClass]="{'my-custom-theme': true}" color="accent" (click)="onClickOpenForm()">Maak een nieuwe klas aan</a>
                 </mat-card-header>
                 <form [hidden]="!openform" name="classForm" class="example-form" [formGroup]="classForm" (ngSubmit)="createClass()">
                     <table class="UItable">

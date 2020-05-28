@@ -71,7 +71,7 @@ router.post('/createClass', auth, (req, res) => {
     //save the changes to the database
     classes.save().then(() => {
         console.log('saved class');
-        res.status(200).json(classes);;
+        res.status(200).json(classes.code);;
     }).catch(err => {
         res.status(400).send(err);
     });
@@ -92,32 +92,27 @@ router.post('/joinClass', auth, (req, res) => {
             if (!foundClass) {
                 res.json({ succes: false, message: "Geen klas gevonden met de gegeven code" });
             } else {
-                if (foundClass.students.find(x => x._id == req.payload._id) != undefined) {
-                    res.json({ succes: false, message: "Je zit al in klas: " + foundClass.title});
+                if (user.role == 'student') {
+                    if (foundClass.students.find(x => x._id == req.payload._id) != undefined) {
+                        res.status(200).json({ succes: false, message: "Je zit al in klas: " + foundClass.title});
+                    } else {
+                        foundClass.students.push(user);
+                        foundClass.save().catch(err => {
+                            res.status(400).send(err);
+                        });
+                        user.class.push(foundClass);
+                        user.save().catch(err => {
+                            res.status(400).send(err);
+                        });
+                        res.status(200).json({succes: true, message: `Leerling is succesvol toegevoegd aan de klas ${foundClass.title}`});
+                    }
                 } else {
-                    Classes.updateOne(
-                        { code: req.body.code },
-                        { $push: { students: new User(user) } }, () => {
-                            if (user.class != undefined) {
-                                Classes.findOne({ code: user.class }, (err, previousClass) => {
-                                    Classes.updateOne(
-                                        { code: previousClass.code },
-                                        { $pull: { students: { _id: user._id } } }, () => {
-                                            user.class = foundClass.code;
-                                            user.save(() => {
-                                                res.json({ succes: true, message: "Succesvol toegevoegd aan klas: " + foundClass.title });
-                                            })
-                                        }
-                                    );
-                                })
-                            } else {
-                                user.class = foundClass.code;
-                                user.save(() => {
-                                    res.json({ succes: true, message: "Succesvol toegevoegd aan klas: " + foundClass.title });
-                                })
-                            }
-                        }
-                    );
+                    user.class.push(foundClass);
+                    user.save().then(() => {
+                        res.status(200).json({succes: true, message: `Docent is succesvol toegevoegd aan de klas ${foundClass.title}`});
+                    }).catch(err => {
+                        res.status(400).send(err);
+                    });
                 }
             }
         });

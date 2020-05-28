@@ -47,7 +47,11 @@ let userSchema = new Schema({
         type: [Number],
         required: true
     },
-    class: [Number]
+    class: {
+        type: [{
+            item: {type: Schema.ObjectId, ref: 'Class'}
+        }],
+    }
 });
 
 userSchema.methods.setPassword = function(password){

@@ -61,12 +61,9 @@
                 </mat-accordion>
             </mat-card-content>
         </mat-card>
-
-        <mat-card *ngIf="userClassTitle">
-            <mat-title>Je zit nog niet in een klas</mat-title>
-        </mat-card>
-        
-        <mean-join-class></mean-join-class>
+        <div *ngIf="userClassTitle == undefined">
+            <mean-join-class></mean-join-class>
+        </div>
     </div>
 </body>
 

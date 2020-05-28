@@ -37,9 +37,10 @@ export class TeacherOverviewComponent implements OnInit {
             classes.year  = this.classForm.get('classYear').value;
             this.openform = false;
 
-            this.classService.createClass(classes, this.userDetails).subscribe((classes) => {
-                console.log('Joining new class: ', classes.code);
-                this.classService.joinClass(classes.code);
+            this.classService.createClass(classes, this.userDetails).subscribe((code: Number) => {
+                this.classService.joinClass(code).subscribe((output) => {
+                    console.log(output.succes, output.message);
+                });
             });
         } else {
             console.log('you are not eligible to create a class')
