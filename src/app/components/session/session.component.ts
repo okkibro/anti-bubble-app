@@ -3,6 +3,7 @@ import {AuthenticationService} from "../../services/authentication.service";
 import { SocketIOService } from 'src/app/services/socket-io.service';
 import { DataService } from 'src/app/services/data-exchage.service';
 import { User } from '../../models/user';
+import { Router } from '@angular/router';
 
 @Component({
     selector: 'mean-session',
@@ -15,14 +16,18 @@ export class SessionComponent implements OnInit {
     userDetails: User;
     players = [];
     pin;
+    gameData;
     
     constructor(
         private authenticationService: AuthenticationService, 
         private socketService: SocketIOService, 
         private data: DataService,
+        private router: Router,
     ) { }
 
     ngOnInit(): void {
+        this.gameData = this.getGameData();
+
         // Get pin of the session from the dataservice
         this.data.currentMessage.subscribe(message => {
             if (message) {
@@ -57,9 +62,11 @@ export class SessionComponent implements OnInit {
             }
         });
 
-        window.onbeforeunload = (event) => {
-            this.leaveSession();
-        };
+        // window.addEventListener('beforeunload', e => {
+        //     this.leaveSession();
+        //     while (!this.socketService.removedListeners) {}
+        //     //this.router.navigate(['home']);
+        // });
     }
 
     logoutButton() {
@@ -72,5 +79,9 @@ export class SessionComponent implements OnInit {
 
     isHostDisconnected(): boolean {
         return this.socketService.hostDisconnected;
+    }
+
+    getGameData(): any {
+        return this.socketService.gameData;
     }
 }

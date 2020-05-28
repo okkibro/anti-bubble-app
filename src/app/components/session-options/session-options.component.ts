@@ -19,8 +19,8 @@ export class SessionOptionsComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  createSession() {
-    this.socketService.createSession();
+  createSession(gameData) {
+    this.socketService.createSession(gameData);
     this.router.navigate(['session']);
   }
 

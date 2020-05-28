@@ -10,13 +10,17 @@ import { Observable } from 'rxjs';
 export class SocketIOService {
     socket = io(environment.ENDPOINT);
     pin;
-    hostDisconnected: boolean;
+    hostDisconnected;
+    gameData;
+    removedListeners;
 
     constructor(private data: DataService) { }
 
     // Gets called when a teacher creates a new session
-    createSession() {
-        this.socket.emit('host-join');
+    createSession(gameData) {
+        this.removedListeners = false;
+        this.gameData = gameData;
+        this.socket.emit('host-join', gameData);
         this.socket.on('players', (players: []) => {
             console.log(0,players);
         });
@@ -33,10 +37,14 @@ export class SocketIOService {
         this.socket.on('message', (message: string) => {
             console.log(message);
         });
-        this.socket.on('join-succes', (succes) => {
+        this.socket.on('join-succes', (gameData) => {
             this.data.changeMessage(pin);
-            join(succes); // After player-join return succes to the angular component
+            this.gameData = gameData;
+            join(true); // After player-join return succes to the angular component
         });
+        this.socket.on('join-failure', () => {
+            join(false);
+        })
         this.socket.on('host-disconnect', () => {
             this.hostDisconnected = true;
             this.socket.removeAllListeners();
@@ -50,6 +58,7 @@ export class SocketIOService {
 
     listenForUpdates(addPlayer, removePlayer) {
         this.socket.on('update-players', player => {
+            console.log("new played found");
             addPlayer(player);
         });
         this.socket.on('remove-player', player => {
@@ -58,9 +67,12 @@ export class SocketIOService {
     }
 
     leaveSession() {
+        console.log("leave session");
         this.socket.emit('leave');
-        this.socket.on('after-leave', () => {
+        this.socket.on('remove-listeners', () => {
+            console.log("remove listeners");
             this.socket.removeAllListeners();
+            this.removedListeners = true;
         });
     }
 }
