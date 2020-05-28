@@ -17,6 +17,7 @@ export class SessionComponent implements OnInit {
     players = [];
     pin;
     gameData;
+    playerCount = 0;
     
     constructor(
         private authenticationService: AuthenticationService, 
@@ -48,6 +49,9 @@ export class SessionComponent implements OnInit {
                     tableRow.classList.add("player");
                     let table = document.getElementsByClassName("sessionTable")[0];
                     table.appendChild(tableRow); // Append the tablerow to the table
+                    
+                    this.playerCount = this.playerCount + 1; //display number of players in top right corner
+
                 }, removedPlayer => { // Gets called when a player leaves the session
                     this.players = this.players.filter(x => x.email != removedPlayer.email); // Remove player from the list
 
@@ -58,6 +62,8 @@ export class SessionComponent implements OnInit {
                             htmlPlayers[i].remove(); // remove the node
                         }
                     }
+
+                    this.playerCount = this.playerCount - 1; //display number of players in top right corner
                 });
             }
         });

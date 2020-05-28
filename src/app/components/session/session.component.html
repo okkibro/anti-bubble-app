@@ -3,6 +3,7 @@
 <body>
 
     <p *ngIf="userDetails?.role == 'student'" class="sessionCode">Sessie code: {{pin}}</p>
+    <p *ngIf="userDetails?.role == 'teacher'" class="playerCount">Aantal Spelers: <br> <strong>{{playerCount}}</strong></p>
 
     <div class="containerDiv" fxLayoutGap="0.5%" fxLayout="column" fxLayoutAlign="space-evenly">
         <div fxLayout.xs="row" fxLayoutGap="0.5%" fxLayoutAlign="space-evenly">

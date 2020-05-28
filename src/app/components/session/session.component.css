@@ -20,7 +20,7 @@ body {
     display: inline-block;
 }
 
-.sessionCode {
+.sessionCode, .playerCount {
     top: 10%;
     right: 3%;
     float: right;
