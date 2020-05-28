@@ -24,10 +24,6 @@ export class ClassesService {
     return this.http.get('https://localhost:3000/class/getClass', { headers: { Authorization: 'Bearer ' + this.cookie.get('mean-token') } });
   }
 
-  public getAllClassmates(): Observable<any> {
-    return this.http.get('https://localhost:3000/class/getAllClassmates', { headers: { Authorization: 'Bearer ' + this.cookie.get('mean-token') }})
-  }
-
   public classmateProfile(id: string): Observable<any> {
     return this.http.get(`https://localhost:3000/class/classmateProfile/${id}`, { headers: { Authorization: 'Bearer ' + this.cookie.get('mean-token') }})
   }

@@ -29,12 +29,10 @@ export class ClassOverviewComponent implements OnInit {
   }
   
   ngOnInit() {
-    this.classService.getAllClassmates().subscribe((data) => {
-      this.classmates = data;
-    });
     this.classService.getClass().subscribe((data) => {
-      if (data.class) {
+      if (data) {
         this.userClassTitle = data.class.title;
+        this.classmates = data.classmates;
       }
     });
   }
