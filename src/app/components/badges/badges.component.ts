@@ -19,23 +19,22 @@ export class BadgesComponent implements OnInit {
   constructor(private auth: AuthenticationService) { }
 
   ngOnInit(): void {
-    this.auth.profile().subscribe(user => {
+    this.auth.profile().subscribe(user => { // Get the user object of the logged in user
       this.userDetails = user;
-      for (let i = 0; i < milestones.length; i++) {
+      for (let i = 0; i < milestones.length; i++) { // Loop over all milestones and sort them into the arrays
         if (milestones[i].maxValue == user.milestones[i]) {
           this.completed.push({ index: i, milestone: milestones[i]})
         } else {
           this.uncompleted.push({ index: i, milestone: milestones[i]})
         }
       }
-      //document.getElementsByClassName("progressBar")[0].setAttribute("aria-valuenow", this.completedRatio());
-      this.value = this.completedRatio();
+      this.value = this.completedRatio(); // Set value of progressbar
     }, (err) => {
       console.error(err);
     });
   }
 
-  completedRatio(): string {
+  completedRatio(): string { //Calculates how much % of all milestones the user has completed
     return (this.completed.length / (this.completed.length + this.uncompleted.length) * 100).toFixed(0);
   }
 

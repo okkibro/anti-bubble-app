@@ -27,6 +27,9 @@ export class ProfileComponent implements OnInit {
     constructor(private auth: AuthenticationService, private fb: FormBuilder, private snackbar: MatSnackBar) {}
     
     ngOnInit() {
+        //Show badge with most progress
+
+        // Milestone that gets shown when you have all badges
         this.milestoneShown = {
             name: "Gefeliciteerd",
             description: "Je hebt alle badges gehaald",
@@ -36,6 +39,7 @@ export class ProfileComponent implements OnInit {
         
         this.auth.profile().subscribe(user => {
             this.userDetails = user;
+            // Loop over all milestones and find the one with the most progress that the user didnt complete yet
             for (let i = 0; i < milestones.length; i++) {
                 if (user.milestones[i] != milestones[i].maxValue && user.milestones[i] >= user.milestones[this.milestoneShown.index]) {
                     this.milestoneShown = milestones[i];
