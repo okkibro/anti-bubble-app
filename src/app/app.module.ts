@@ -6,9 +6,11 @@ import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { HttpClientModule } from "@angular/common/http";
 import { HighchartsChartModule } from 'highcharts-angular';
 import { FlexLayoutModule } from "@angular/flex-layout";
+import { MatSliderModule } from '@angular/material/slider';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { FormsModule } from "@angular/forms";
+
 
 // core modules
 import { CustomMaterialModule } from './shared/material.module';
@@ -70,6 +72,7 @@ import { SessionOptionsComponent } from './components/session-options/session-op
         AppRoutingModule,
         HttpClientModule,
         HighchartsChartModule,
+        MatSliderModule,
         FlexLayoutModule,
         MatTabsModule,
         MatProgressBarModule,

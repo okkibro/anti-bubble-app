@@ -108,7 +108,6 @@ mat-tab-group, mat-tab {
 }
 
 .sessionTable th, td {
-    text-align: left;
     padding: 10px;
 }
 

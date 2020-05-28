@@ -31,3 +31,13 @@ body {
 #teacherPin {
     font-size: 66px;
 }
+
+#gameChoice {
+    font-size: 20px;
+}
+
+#startButton {
+    font-size: 30px;
+    margin-top: 10px;
+    margin-bottom: 20px;
+}

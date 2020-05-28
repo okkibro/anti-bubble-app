@@ -2,32 +2,36 @@
 
 <body>
 
-    <p *ngIf="userDetails?.role == 'student'" class="sessionCode">Session code: {{pin}}</p>
+    <p *ngIf="userDetails?.role == 'student'" class="sessionCode">Sessie code: {{pin}}</p>
 
     <div class="containerDiv" fxLayoutGap="0.5%" fxLayout="column" fxLayoutAlign="space-evenly">
         <div fxLayout.xs="row" fxLayoutGap="0.5%" fxLayoutAlign="space-evenly">
-            <mat-card fxFlex=70% *ngIf="userDetails?.role == 'teacher'">
+            <mat-card fxFlex=80% *ngIf="userDetails?.role == 'teacher'">
                 <!-- <button (click)="getPlayers()">GetPlayers</button> -->
                 <mat-card-header class="matCardHeader">
-                    <mat-card-title>Session code</mat-card-title>
+                    <mat-card-title>Sessie code</mat-card-title>
+                    <mat-card-subtitle id="gameChoice">{{gameData?.game}}, ({{gameData?.duration}} min)
+                    </mat-card-subtitle>
                 </mat-card-header>
                 <mat-card-content>
                     <table class="sessionTable">
                         <tr>
                             <td id="teacherPin">{{pin}}</td>
                         </tr>
+                        <tr>
+                            <button mat-button id="startButton">Start!</button>
+                        </tr>
                     </table>
-                    <h1>{{gameData?.game}}</h1>
                 </mat-card-content>
             </mat-card>
 
-            <mat-card fxFlex=70% *ngIf="userDetails?.role == 'student'">
+            <mat-card fxFlex=80% *ngIf="userDetails?.role == 'student'">
                 <mat-card-header class="matCardHeader">
                     <mat-card-title>Aquarium</mat-card-title>
+                    <mat-card-subtitle id="gameChoice">{{gameData?.game}}</mat-card-subtitle>
                 </mat-card-header>
                 <mat-card-content>
-
-                    <table class="sessionTable" *ngIf="players.length > 0"></table>
+                    <!--<table class="sessionTable" *ngIf="players.length > 0"></table>-->
 
                     <pre>
                       /`·.¸
@@ -37,6 +41,9 @@
                     `·.¸ `·  ¸.·´\`·¸;
                         `\\´´\¸.·´  
                     </pre>
+
+                    Je bent toegevoegd! <br>
+                    Wacht tot de docent de activiteit start.
                 </mat-card-content>
             </mat-card>
 
