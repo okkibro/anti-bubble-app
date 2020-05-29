@@ -36,6 +36,7 @@ import { SocketIOService } from './services/socket-io.service';
 import { SessionComponent } from './components/session/session.component';
 import { TeacherOverviewComponent } from './components/teacher-overview/teacher-overview.component';
 import { NavBarComponent } from './components/nav-bar/nav-bar.component';
+import { BubbleVisualisationComponent } from './components/bubble-visualisation/bubble-visualisation.component';
 
 @NgModule({
     declarations: [
@@ -56,6 +57,7 @@ import { NavBarComponent } from './components/nav-bar/nav-bar.component';
         PasswordRecoveryComponent,
         PasswordResetComponent,
         TrophiesComponent,
+        BubbleVisualisationComponent,
     ],
     imports: [
         BrowserModule,
