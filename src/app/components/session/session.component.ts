@@ -68,11 +68,16 @@ export class SessionComponent implements OnInit {
             }
         });
 
-        // window.addEventListener('beforeunload', e => {
-        //     this.leaveSession();
-        //     while (!this.socketService.removedListeners) {}
-        //     //this.router.navigate(['home']);
-        // });
+        window.addEventListener('beforeunload', this.beforeUnload);
+
+        if (this.gameData == undefined) {
+            this.router.navigate(['home']);
+        }
+    }
+
+    beforeUnload(e) {
+        e.returnValue = "Weet je zeker dat je de sessie wilt verlaten?";
+        return "Weet je zeker dat je de sessie wilt verlaten?";
     }
 
     logoutButton() {
