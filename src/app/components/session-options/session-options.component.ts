@@ -14,6 +14,8 @@ import { SessionService } from 'src/app/services/session.service';
 export class SessionOptionsComponent implements OnInit {
 
   userDetails: User;
+  buttonStatus = true;
+  labyrinthButton = false;
 
   constructor(private auth: AuthenticationService, private router: Router, private socketService: SocketIOService, private sessionService: SessionService) { }
 
@@ -23,6 +25,10 @@ export class SessionOptionsComponent implements OnInit {
   createSession(gameData) {
     this.sessionService.getActivity(gameData?.game).subscribe(data => {
       gameData.game = data;
+      if (gameData.game.name == "Dwalende Doolhof") {
+        this.buttonStatus = false;
+        this.labyrinthButton = true;
+      }
       this.socketService.createSession(gameData);
       this.router.navigate(['session']);
     });
@@ -31,4 +37,5 @@ export class SessionOptionsComponent implements OnInit {
   logoutButton() {
     return this.auth.logout();
   }
+
 }
