@@ -13,6 +13,8 @@ import { ClassesService } from 'src/app/services/classes.service';
 })
 export class TeacherOverviewComponent implements OnInit {
     userDetails: User;
+    classes;
+    classmates: User[];
     classForm = this.fb.group({
         classTitle: ['', Validators.required],
         classLevel: ['', Validators.required],
@@ -25,6 +27,10 @@ export class TeacherOverviewComponent implements OnInit {
     ngOnInit(): void { 
         this.authenticationService.profile().subscribe(user => {
             this.userDetails = user;
+        });
+        this.classService.getClass().subscribe(output => {
+            this.classes = output.class;
+            this.classmates = output.classmates;
         })
     }
 

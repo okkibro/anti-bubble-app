@@ -181,7 +181,7 @@ router.get('/profile', auth, (req, res) => {
     // If no user ID exists in the JWT return a 401
     if (!req.payload._id) {
         res.status(401).json({
-            "message": "UnauthorizedError: private profile"
+            message: "UnauthorizedError: private profile"
         });
     } else {
         // Otherwise continue

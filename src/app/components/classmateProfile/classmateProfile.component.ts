@@ -9,25 +9,29 @@ import { ClassesService } from 'src/app/services/classes.service';
   selector: 'mean-classmateProfile',
   templateUrl: './classmateProfile.component.html',
   styleUrls: ['./classmateProfile.component.css',
-              '../../shared/general-styles.css']
+    '../../shared/general-styles.css']
 })
 export class ClassmateProfileComponent implements OnInit {
 
-  userDetails: User;
+  classmate: User;
+  user: User;
 
-  constructor(private classService: ClassesService ,private auth: AuthenticationService, private route: ActivatedRoute, private router: Router) { }
+  constructor(private classService: ClassesService, private auth: AuthenticationService, private route: ActivatedRoute, private router: Router) { }
 
   logoutButton() {
     return this.auth.logout();
   }
 
   ngOnInit() {
-    this.classService.classmateProfile(this.route.snapshot.paramMap.get("id")).subscribe(user => {
-      this.userDetails = user;
-  }, (err) => {
+    this.classService.classmateProfile(this.route.snapshot.paramMap.get("id")).subscribe(classmate => {
+      this.classmate = classmate;
+    }, (err) => {
       console.error(err);
       this.router.navigate(['/home']);
-  });
+    });
+    this.auth.profile().subscribe(user => {
+      this.user = user;
+    })
   }
 
 }
