@@ -20,17 +20,21 @@ function runIO(io) {
 		});
 
 		socket.on('player-join', (params) => {
-			console.log("player join");
 			var gameFound = false;
 			// Look for a game with the entered pin
 			for (let i = 0; i < games.games.length; i++) {
 				if (params.pin == games.games[i].pin) {
 					var hostId = games.games[i].hostID;
-					players.addPlayer(hostId, socket.id, `${params.player.firstName} ${params.player.lastName}`, {}, params.player.email); // Add player to the list of players
-					socket.join(params.pin); // Player socket joins game room
 					gameFound = true;
-					socket.emit('join-succes', games.games[i].gameData); // Return succes is true
-					io.to(games.games[i].hostID).emit('update-players', params.player); // Send update to the host so the host's screen gets updated with the player's name
+					if (players.getPlayers(hostId).find(x => x.email == params.player.email) != undefined) {
+						console.log(`Player ${params.player.email} already in game ${params.pin}`);
+						socket.emit('join-failure');
+					} else {
+						players.addPlayer(hostId, socket.id, `${params.player.firstName} ${params.player.lastName}`, {}, params.player.email); // Add player to the list of players
+						socket.join(params.pin); // Player socket joins game room
+						socket.emit('join-succes', games.games[i].gameData); // Return succes is true
+						io.to(games.games[i].hostID).emit('update-players', params.player); // Send update to the host so the host's screen gets updated with the player's name
+					}
 				}
 			}
 			if (!gameFound) {
