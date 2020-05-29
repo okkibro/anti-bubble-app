@@ -11,7 +11,7 @@
                 <!-- <button (click)="getPlayers()">GetPlayers</button> -->
                 <mat-card-header class="matCardHeader">
                     <mat-card-title>Sessie code</mat-card-title>
-                    <mat-card-subtitle id="gameChoice">{{gameData?.game}}, ({{gameData?.duration}} min)
+                    <mat-card-subtitle id="gameChoice">{{gameData?.game.name}}, ({{gameData?.duration}} min)
                     </mat-card-subtitle>
                 </mat-card-header>
                 <mat-card-content>
@@ -28,11 +28,10 @@
 
             <mat-card fxFlex=80% *ngIf="userDetails?.role == 'student'">
                 <mat-card-header class="matCardHeader">
-                    <mat-card-title>Aquarium</mat-card-title>
-                    <mat-card-subtitle id="gameChoice">{{gameData?.game}}</mat-card-subtitle>
+                    <mat-card-title>{{gameData?.game.name}}</mat-card-title>
+                    <mat-card-subtitle id="gameChoice">{{gameData?.game.description}}</mat-card-subtitle>
                 </mat-card-header>
                 <mat-card-content>
-                    <!--<table class="sessionTable" *ngIf="players.length > 0"></table>-->
 
                     <pre>
                       /`·.¸

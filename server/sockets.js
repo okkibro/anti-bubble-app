@@ -20,7 +20,7 @@ function runIO(io) {
 		});
 
 		socket.on('player-join', (params) => {
-      console.log("player join");
+			console.log("player join");
 			var gameFound = false;
 			// Look for a game with the entered pin
 			for (let i = 0; i < games.games.length; i++) {
@@ -42,47 +42,10 @@ function runIO(io) {
 		socket.on('message', (message) => {
 			console.log(message);
 			io.sockets.emit('message', `server: ${message}`);
-    });
-    
-    socket.on('disconnect', () => {
-      socket.emit('remove-listeners');
-      var game = games.getGame(socket.id); //Finding game with socket.id
-			console.log("disconnect");
-			//If a game hosted by that id is found, the socket disconnected is a host
-			if (game) {
-				games.removeGame(socket.id);//Remove the game from games class
-				console.log('Game ended with pin:', game.pin);
+		});
 
-				var playersToRemove = players.getPlayers(game.hostID); //Getting all players in the game
-
-				//For each player in the game
-				for (var i = 0; i < playersToRemove.length; i++) {
-					players.removePlayer(playersToRemove[i].playerID); //Removing each player from player class
-        }
-        
-				io.in(game.pin).emit('host-disconnect'); //Send player back to 'join' screen
-				socket.leave(game.pin); //Socket is leaving room
-			} else {
-				//No game has been found, so it is a player socket that has disconnected
-				var player = players.getPlayer(socket.id); //Getting player with socket.id
-				//If a player has been found with that id
-				if (player) {
-					var hostId = player.hostID;//Gets id of host of the game
-          var game = games.getGame(hostId);//Gets game data with hostId
-					var pin = game.pin;//Gets the pin of the game
-
-					players.removePlayer(socket.id);//Removes player from players class
-					//var playersInGame = players.getPlayers(hostId);//Gets remaining players in game
-
-					io.to(hostId).emit('remove-player', player);//Sends data to host to update screen
-					socket.leave(pin); //Player is leaving the room
-				}
-			}
-    });
-
-		// Gets called when player or host leaves the session page
-		socket.on('leave', () => {
-      socket.emit('remove-listeners');
+		socket.on('disconnect', () => {
+			socket.emit('remove-listeners');
 			var game = games.getGame(socket.id); //Finding game with socket.id
 			console.log("disconnect");
 			//If a game hosted by that id is found, the socket disconnected is a host
@@ -95,8 +58,8 @@ function runIO(io) {
 				//For each player in the game
 				for (var i = 0; i < playersToRemove.length; i++) {
 					players.removePlayer(playersToRemove[i].playerID); //Removing each player from player class
-        }
-        
+				}
+
 				io.in(game.pin).emit('host-disconnect'); //Send player back to 'join' screen
 				socket.leave(game.pin); //Socket is leaving room
 			} else {
@@ -105,7 +68,7 @@ function runIO(io) {
 				//If a player has been found with that id
 				if (player) {
 					var hostId = player.hostID;//Gets id of host of the game
-          var game = games.getGame(hostId);//Gets game data with hostId
+					var game = games.getGame(hostId);//Gets game data with hostId
 					var pin = game.pin;//Gets the pin of the game
 
 					players.removePlayer(socket.id);//Removes player from players class
@@ -115,6 +78,49 @@ function runIO(io) {
 					socket.leave(pin); //Player is leaving the room
 				}
 			}
+		});
+
+		// Gets called when player or host leaves the session page
+		socket.on('leave', () => {
+			socket.emit('remove-listeners');
+			var game = games.getGame(socket.id); //Finding game with socket.id
+			console.log("disconnect");
+			//If a game hosted by that id is found, the socket disconnected is a host
+			if (game) {
+				games.removeGame(socket.id);//Remove the game from games class
+				console.log('Game ended with pin:', game.pin);
+
+				var playersToRemove = players.getPlayers(game.hostID); //Getting all players in the game
+
+				//For each player in the game
+				for (var i = 0; i < playersToRemove.length; i++) {
+					players.removePlayer(playersToRemove[i].playerID); //Removing each player from player class
+				}
+
+				io.in(game.pin).emit('host-disconnect'); //Send player back to 'join' screen
+				socket.leave(game.pin); //Socket is leaving room
+			} else {
+				//No game has been found, so it is a player socket that has disconnected
+				var player = players.getPlayer(socket.id); //Getting player with socket.id
+				//If a player has been found with that id
+				if (player) {
+					var hostId = player.hostID;//Gets id of host of the game
+					var game = games.getGame(hostId);//Gets game data with hostId
+					var pin = game.pin;//Gets the pin of the game
+
+					players.removePlayer(socket.id);//Removes player from players class
+					//var playersInGame = players.getPlayers(hostId);//Gets remaining players in game
+
+					io.to(hostId).emit('remove-player', player);//Sends data to host to update screen
+					socket.leave(pin); //Player is leaving the room
+				}
+			}
+		});
+
+		// Listener that will receive a question from the host and send it to all players in the session
+		socket.on('send-question', (question) => {
+			var game = games.getGame(socket.id); // Get the game that the host hosts
+			io.in(game.pin).emit('receive-question', question); // Send question to all players in the session
 		});
 	});
 }

@@ -4,6 +4,7 @@ import { SocketIOService } from 'src/app/services/socket-io.service';
 import { DataService } from 'src/app/services/data-exchage.service';
 import { User } from '../../models/user';
 import { Router } from '@angular/router';
+import { SessionService } from 'src/app/services/session.service';
 
 @Component({
     selector: 'mean-session',
@@ -18,12 +19,14 @@ export class SessionComponent implements OnInit {
     pin;
     gameData;
     playerCount = 0;
+    activity;
     
     constructor(
         private authenticationService: AuthenticationService, 
         private socketService: SocketIOService, 
         private data: DataService,
         private router: Router,
+        private sessionService: SessionService,
     ) { }
 
     ngOnInit(): void {
@@ -66,6 +69,12 @@ export class SessionComponent implements OnInit {
                     this.playerCount = this.playerCount - 1; //display number of players in top right corner
                 });
             }
+
+            if (this.userDetails.role == "student") {
+                this.socketService.listenForQuestion(question => {
+                    console.log(question);
+                });
+            }
         });
 
         window.addEventListener('beforeunload', this.beforeUnload);
@@ -94,5 +103,9 @@ export class SessionComponent implements OnInit {
 
     getGameData(): any {
         return this.socketService.gameData;
+    }
+
+    sendQuestion(question: string) {
+        this.socketService.sendQuestion(question);
     }
 }

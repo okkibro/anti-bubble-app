@@ -58,7 +58,6 @@ export class SocketIOService {
 
     listenForUpdates(addPlayer, removePlayer) {
         this.socket.on('update-players', player => {
-            console.log("new played found");
             addPlayer(player);
         });
         this.socket.on('remove-player', player => {
@@ -67,12 +66,20 @@ export class SocketIOService {
     }
 
     leaveSession() {
-        console.log("leave session");
         this.socket.emit('leave');
         this.socket.on('remove-listeners', () => {
-            console.log("remove listeners");
             this.socket.removeAllListeners();
             this.removedListeners = true;
+        });
+    }
+
+    sendQuestion(question) {
+        this.socket.emit('send-question', question);
+    }
+
+    listenForQuestion(receiveQuestion) {
+        this.socket.on('receive-question', (question) => {
+            receiveQuestion(question);
         });
     }
 }

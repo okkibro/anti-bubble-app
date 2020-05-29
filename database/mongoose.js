@@ -10,5 +10,6 @@ module.exports = {
     Item:       require('./models/item'),
     User:       require('./models/users'),
     Shop:       require('./models/shopItems'),
-    Classes:    require('./models/classes')
+    Classes:    require('./models/classes'),
+    Activities: require('./models/activities'),
 };

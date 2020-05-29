@@ -29,8 +29,9 @@ app.use(passport.initialize());
 app.use(express.static(path.join(__dirname, 'dist')));
 app.use('/user', require('./server/routes/user-route'));
 app.use('/shop', require('./server/routes/shop-route'));
+app.use('/session', require('./server/routes/session-route'));
 app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname, 'dist/index.html'))
+    res.sendFile(path.join(__dirname, 'dist/index.html'));
 });
 
 // Start listening on port 3000 for requests.
