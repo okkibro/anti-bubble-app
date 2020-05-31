@@ -10,7 +10,7 @@
             </mat-card-header>
             <mat-card-content>
                 <mat-accordion multi="true"> <!-- enables multiple panels to be expanded at the same time -->
-                    <mat-expansion-panel hideToggle="true" expanded="true">
+                    <!-- <mat-expansion-panel hideToggle="true" expanded="true">
                         <mat-expansion-panel-header>
                             <mat-panel-title>Dwalende Doolhof</mat-panel-title>
                         </mat-expansion-panel-header>
@@ -41,9 +41,9 @@
                             </table>
                              <br>
                              <button (click)="createSession({game : 'Dwalende Doolhof', duration : doolhofSlider.value})" mat-button [disabled]="labyrinthButton">Start Sessie</button>
-                            <!-- TODO: disable alle andere start sessie knoppen als deze activiteit nog niet is gedaan -->
+                                TODO: disable alle andere start sessie knoppen als deze activiteit nog niet is gedaan
                         </mat-expansion-panel-content>
-                    </mat-expansion-panel>
+                    </mat-expansion-panel> -->
 
                     <mat-expansion-panel hideToggle="true">
                         <mat-expansion-panel-header>
@@ -75,7 +75,7 @@
                                 </tr>
                             </table>
                             <br>
-                            <button (click)="createSession({game : 'Naamloos Nieuws', duration : naamloosSlider.value})" mat-button [disabled]="buttonStatus">Start Sessie</button>
+                            <button (click)="createSession({game : 'Naamloos Nieuws', duration : naamloosSlider.value})" mat-button>Start Sessie</button>
                         </mat-expansion-panel-content>
                     </mat-expansion-panel>
 
@@ -112,7 +112,7 @@
                                 </tr>
                             </table>
                             <br>
-                            <button (click)="createSession({game : 'Botsende Bubbels', duration : botsendeSlider.value})" mat-button [disabled]="buttonStatus">Start Sessie</button>
+                            <button (click)="createSession({game : 'Botsende Bubbels', duration : botsendeSlider.value})" mat-button>Start Sessie</button>
                         </mat-expansion-panel-content>
                     </mat-expansion-panel>
 
@@ -146,7 +146,7 @@
                                 </tr>
                             </table>
                             <br>
-                            <button (click)="createSession({game : 'Alternatieve Antwoorden', duration : alternatieveSlider.value})" mat-button [disabled]="buttonStatus">Start Sessie</button>
+                            <button (click)="createSession({game : 'Alternatieve Antwoorden', duration : alternatieveSlider.value})" mat-button>Start Sessie</button>
                         </mat-expansion-panel-content>
                     </mat-expansion-panel>
 
@@ -182,7 +182,7 @@
                                 </tr>
                             </table>                            
                             <br>
-                            <button (click)="createSession({game : 'Aanradend Algoritme'})" mat-button [disabled]="buttonStatus">Start Sessie</button>
+                            <button (click)="createSession({game : 'Aanradend Algoritme'})" mat-button>Start Sessie</button>
                         </mat-expansion-panel-content>
                     </mat-expansion-panel>
                 </mat-accordion>

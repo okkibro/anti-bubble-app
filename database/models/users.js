@@ -47,6 +47,10 @@ let userSchema = new Schema({
         type: [Number],
         required: true
     },
+    bubbleInit: {
+        type: Boolean,
+        required: true
+    },
     class: String,
 });
 

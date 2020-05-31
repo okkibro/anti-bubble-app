@@ -15,4 +15,5 @@ export class User {
     currency: number;
     inventory: [ShopItem];
     milestones: [Milestone];
+    bubbleInit: boolean;
 }

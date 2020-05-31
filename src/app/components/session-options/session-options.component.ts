@@ -24,19 +24,12 @@ export class SessionOptionsComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  // Gets called when teacher presses create session button. gamedata contains the name of the game and time of the slider
   createSession(gameData) {
-    this.sessionService.getActivity(gameData?.game).subscribe(data => {
+    this.sessionService.getActivity(gameData?.game).subscribe(data => { // Get the entire activity data from the database
       gameData.game = data;
-
-      if (gameData.game.name == "Dwalende Doolhof" && !this.activityDetails?.completed) {
-        this.buttonStatus = false;
-        this.labyrinthButton = true;
-        // Hier moet de activityDetails.completed dus nog op true komen te staan, lukt me niet (iig niet dat ie na refresh nog steeds true is)
-        // console.log(this.activityDetails?.completed);
-      }
-
-      this.socketService.createSession(gameData);
-      this.router.navigate(['session']);
+      this.socketService.createSession(gameData); // Create a session in socket io service and pass it the chosen activity with set options
+      this.router.navigate(['session']); // Navigate to session page
     });
   }
 
