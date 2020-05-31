@@ -43,7 +43,7 @@
             </mat-card>
         </div>
 
-        <div fxLayout.xs="row" fxLayoutGap="0.5%" fxLayoutAlign="space-evenly" class="my-custom-theme">
+        <div fxLayout.xs="row" fxLayoutGap="0.5%" fxLayoutAlign="space-evenly" class="my-custom-theme" *ngIf="userDetails?.role == 'student'">
             <mat-card fxFlex="50%">
                 <mat-card-header>
                     <mat-card-title>Mijn Bubbel</mat-card-title>
