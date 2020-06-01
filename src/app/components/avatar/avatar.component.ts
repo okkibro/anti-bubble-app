@@ -26,9 +26,10 @@ export class AvatarComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.shopService.shop("lichaam").subscribe(shop => {
+        this.shopService.shop("haar").subscribe(shop => {
             this.auth.profile().subscribe(user => {
                 this.userDetails = user;
+                // Checks for items in the shop that the player bought
                 for (let i = 0; i < shop.length; i++) {
                     if (user.inventory.find(x => x._id == shop[i]._id) != null) {
                         this.itemsShown.push(shop[i]);
@@ -40,13 +41,16 @@ export class AvatarComponent implements OnInit {
         })
     }
 
+    // Assigns an item to the user's avatar in the database
     equip(item){
         this.avatarService.equip(item).subscribe(data => {
             console.log(data);
+            // Updates the image shown to the player without reloading the page
             document.getElementById(data.category).setAttribute("src", data.image);
         });
     }
 
+    // Function to show the avatar, taking the object from the database
     showAvatar(){
         document.getElementById("haar1").setAttribute("src", this.userDetails.avatar.haar1?.fullImage);
         document.getElementById("lichaam").setAttribute("src", this.userDetails.avatar.lichaam.fullImage);
@@ -59,6 +63,7 @@ export class AvatarComponent implements OnInit {
         document.getElementById("medaille").setAttribute("src", this.userDetails.avatar.medaille?.fullImage);   
     }
 
+    // Changes the tab in the HTML and updates the shown items
     tabChange(event) {
         var currentTab = event.tab.textLabel;
         this.shopService.shop(currentTab).subscribe(shop => {
@@ -69,6 +74,7 @@ export class AvatarComponent implements OnInit {
         });
     }
 
+    // Filtering the avatar items to only show the items in the inventory/that the player bought
     filterAvatar(): AvatarComponent[] {
         return this.itemsShown.filter(x => {
           return this.userDetails.inventory.find(y => x._id == y._id) != null

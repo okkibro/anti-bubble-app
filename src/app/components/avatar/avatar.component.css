@@ -1,9 +1,3 @@
-/* mat-card img mat-card-image{
-    object-fit: cover; 
-    width: 10%; 
-    height: width;
-} */
-
 .UItable {
     padding: 10px;
     border-spacing: 70px 0;
@@ -23,10 +17,15 @@
     padding: 20px;
 }
 
+.avatarImage{
+    position: sticky;
+    top: 0;
+}
+
 .avatarDisplay {
     position: absolute;
     top: 10%;
-    left: 10%;
+    left: 0%;
     background-color: transparent;
     border: transparent;
     box-shadow: none;

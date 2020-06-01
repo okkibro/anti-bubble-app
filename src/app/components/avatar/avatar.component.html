@@ -2,28 +2,13 @@
 
 <body>
 
-    <div class="containerDiv" fxLayoutGap="0.2%" fxLayout="column" fxLayoutAlign="space-evenly">
-        <div fxLayout.xs="row" fxLayoutGap="0.5%" fxLayoutAlign="space-evenly">
-            <mat-card fxFlex="100%" >
+    <div class="containerDiv" fxLayoutGap="0.2%" fxLayout="row" fxLayoutAlign="space-evenly">
+        <!-- <div fxLayout.xs="row" fxLayoutGap="0.5%" fxLayoutAlign="space-evenly"> -->
+            <mat-card fxFlex="30%" class="avatarImage">
                 <mat-card-header>
                     <mat-card-title>Avatar Wijzigen</mat-card-title>
                 </mat-card-header><br>
-                <!-- <mat-card-content>
-                    <img mat-card-image id="haarAchter" class="avatarDisplay">
-                    <img mat-card-image id="lichaam" class="avatarDisplay">
-                    <img mat-card-image id="broek" class="avatarDisplay">
-                    <img mat-card-image id="shirt" class="avatarDisplay">
-                    <img mat-card-image id="schoenen" class="avatarDisplay">
-                    <img mat-card-image id="bril" class="avatarDisplay">
-                    <img mat-card-image id="haarVoor" class="avatarDisplay">
-                    <img mat-card-image id="hoofddeksel" class="avatarDisplay">
-                    <img mat-card-image id="medaille" class="avatarDisplay">
-                </mat-card-content> -->
-
-                <!-- <img mat-card-image
-                    src="assets/images/Super_map/Characters_Assets/Skin colors/Placeholder.png"
-                    alt="avatar voorbeeld"> -->
-
+                
                 <mat-card class="avatarDisplay"><img mat-card-image id="haar1"></mat-card>
                 <mat-card class="avatarDisplay"><img mat-card-image id="lichaam"></mat-card>
                 <mat-card class="avatarDisplay"><img mat-card-image id="broek"></mat-card>
@@ -35,17 +20,22 @@
                 <mat-card class="avatarDisplay"><img mat-card-image id="medaille"></mat-card>              
                 
             </mat-card>
-        </div>
+       <!--  </div> -->
 
-        <div fxLayout.xs="row"  fxLayoutGap="0.5%" fxLayoutAlign="space-evenly"> 
-            <mat-card  id="itemCollection" fxFlex="100%"> 
+        <!-- <div fxLayout.xs="row"  fxLayoutGap="0.5%" fxLayoutAlign="space-evenly">  -->
+            <mat-card  id="itemCollection" fxFlex="70%"> 
                 <mat-card-content>
                     <mat-tab-group (selectedTabChange)="tabChange($event)">
+                        <mat-tab label="Haar"></mat-tab>
                         <mat-tab label="Lichaam"></mat-tab>
+                        <mat-tab label="Broek"></mat-tab>
+                        <mat-tab label="Shirt"></mat-tab>
+                        <mat-tab label="Schoenen"></mat-tab>
+                        <mat-tab label="Bril"></mat-tab>
                         <mat-tab label="Hoofddeksel"></mat-tab>
-                        <mat-tab label="Kleding"></mat-tab>
+                        <mat-tab label="Medaille"></mat-tab>
                     </mat-tab-group>
-                    <mat-grid-list cols="4">
+                    <mat-grid-list cols="2">
                         <mat-grid-tile *ngFor = "let item of filteredAvatar" fxFlexAlign="stretch">
                             <mat-card fxFlex="100%" fxLayout="column" fxLayoutGap="0.5%" fxFlexAlign="stretch" class="avatarDisplay">
                                     {{item.title}}
@@ -55,55 +45,7 @@
                     </mat-grid-list> 
                 </mat-card-content>
             </mat-card>
-        </div>
-
-
-        <!-- <div fxLayout.xs="row" fxLayoutGap="0.5%" fxLayoutAlign="space-evenly">
-            <mat-card id="itemCollection" fxFlex="100%">
-                <mat-tab-group (selectedTabChange)="tabChange($event)" dynamicHeight>
-                    <mat-tab label="Huidskleur">
-                        <tr>
-                            <td *ngFor="let item of itemsShown">
-                                <ng-container *ngIf="item.category == 'lichaam'">
-                                    <img mat-card-image src="{{item.previewImage}}" alt="{{item.title}}" (click)="equip(item)"><br>
-                                    {{item.title}}
-                                </ng-container>
-                            </td>
-                        </tr>
-                    </mat-tab>
-                    <mat-tab label="Kleding">
-                        <table class="UItable">
-                            <tr>
-                                <td *ngFor="let item of itemsShown">
-                                    <ng-container *ngIf="item.category == 'kleding'">
-                                        <img mat-card-image src="{{item.previewImage}}" alt="{{item.title}}" (click)="equip(item)"><br>
-                                        {{item.title}}
-                                    </ng-container>
-                                </td>
-                            </tr>
-                        </table>
-                    </mat-tab>
-                    <mat-tab label="Hoedjes">
-                        <table class="UItable">
-                            <tr>
-                                <td *ngFor="let item of itemsShown">
-                                    <ng-container *ngIf="item.category == 'hoofddeksel'">
-                                        <img mat-card-image src="{{item.previewImage}}" alt="{{item.title}}" (click)="equip(item)"><br>
-                                        {{item.title}}
-                                    </ng-container>
-                                </td>
-                            </tr>
-                        </table>
-                    </mat-tab>
-                </mat-tab-group>
-            </mat-card>
-        </div>
-
-        <mat-card>
-            <mat-card-content>
-                <button mat-button [routerLink]="'/profile'">Wijzigingen Opslaan</button>
-            </mat-card-content>
-        </mat-card> -->
+        <!-- </div> -->
 
         <button mat-button [routerLink]="'/profile'">
             <mat-icon>keyboard_backspace</mat-icon> Terug naar profiel
