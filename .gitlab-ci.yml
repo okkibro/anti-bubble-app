@@ -28,7 +28,7 @@ test:karma:
   before_script:
     - npm ci
   script:
-   - ng test --code-coverage --progress false --watch false
+   - ng test --code-coverage --progress false --watch false --browsers=ChromiumHeadless
   artifacts:
     paths:
       - coverage/
