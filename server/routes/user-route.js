@@ -24,6 +24,10 @@ router.post('/register', (req, res) => {
     user.role = sanitize(req.body.role);
     user.setPassword(sanitize(req.body.password));
     user.inventory = [];
+    user.avatar = { body:  mongoose.Types.ObjectId('5eca3c87f5a0edaaa09915e8'),
+                    pants: mongoose.Types.ObjectId('5ecfb686974e5b139cc1972e'),
+                    shirt: mongoose.Types.ObjectId('5eaa9475cc3aec14b8b6537a')
+                }
     user.milestones = [];
     user.currency = 0;
     for (let i = 0; i < 9; i++) { //TODO: change 9 to correct number when done making all the milestones
