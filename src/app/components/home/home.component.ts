@@ -43,6 +43,10 @@ export class HomeComponent implements OnInit {
         return this.authenticationService.logout();
     }
 
+    startLabyrinth(){
+        this.router.navigate(['labyrinth']);
+    }
+
     createSession() {
         // this.socketService.createSession();
         this.router.navigate(['session-options']);

@@ -41,6 +41,7 @@ import { TeacherOverviewComponent } from './components/teacher-overview/teacher-
 import { NavBarComponent } from './components/nav-bar/nav-bar.component';
 import { JoinClassComponent } from './components/join-class/join-class.component';
 import { SessionOptionsComponent } from './components/session-options/session-options.component';
+import { LabyrinthComponent } from './components/labyrinth/labyrinth.component';
 
 @NgModule({
     declarations: [
@@ -63,6 +64,7 @@ import { SessionOptionsComponent } from './components/session-options/session-op
         TrophiesComponent,
         JoinClassComponent,
         SessionOptionsComponent,
+        LabyrinthComponent,
     ],
     imports: [
         BrowserModule,

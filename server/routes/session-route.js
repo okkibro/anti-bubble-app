@@ -3,6 +3,7 @@ const router = express.Router();
 const mongoose = require('mongoose');
 const Activities = mongoose.model('Activities');
 const User = mongoose.model('User');
+const sanitize = require('mongo-sanitize');
 
 const jwt = require('express-jwt');
 const auth = jwt({
@@ -22,6 +23,14 @@ router.post('/activity', auth, (req, res) => {
             });
         }
     });
+});
+
+router.patch('/updateBubbleInit', (req, res) => {
+    User.findOne({ email: sanitize(req.body.email) }).then(user => {
+        user.bubbleInit = true;
+        user.save();
+    });
+    res.json({ succes: true });
 });
 
 module.exports = router;
