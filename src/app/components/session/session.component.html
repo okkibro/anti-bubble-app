@@ -1,9 +1,10 @@
+<!--This page represents the session page. It has a session pin, with which students can join the activity. The teacher has a overview page of all the students that join-->
 <mean-nav-bar></mean-nav-bar>
 
 <body>
 
-    <p *ngIf="userDetails?.role == 'student'" class="sessionCode">Sessie code: {{pin}}</p>
-    <p *ngIf="userDetails?.role == 'teacher'" class="playerCount">Aantal Spelers: <br> <strong>{{playerCount}}</strong></p>
+    <p *ngIf="userDetails?.role == 'student'" class="sessionCode">Sessie code: <br><strong>{{pin}}</strong></p>
+    <p *ngIf="userDetails?.role == 'teacher'" class="playerCount">Aantal Spelers: <br><strong>{{playerCount}}</strong></p>
 
     <div class="containerDiv" fxLayoutGap="0.5%" fxLayout="column" fxLayoutAlign="space-evenly">
         <div fxLayout.xs="row" fxLayoutGap="0.5%" fxLayoutAlign="space-evenly">
@@ -11,8 +12,10 @@
                 <!-- <button (click)="getPlayers()">GetPlayers</button> -->
                 <mat-card-header class="matCardHeader">
                     <mat-card-title>Sessie code</mat-card-title>
-                    <mat-card-subtitle id="gameChoice" *ngIf="gameData?.duration != null">{{gameData?.game.name}}, ({{gameData?.duration}} min)</mat-card-subtitle>
-                    <mat-card-subtitle id="gameChoice" *ngIf="gameData?.duration == null">{{gameData?.game.name}}</mat-card-subtitle>
+                    <mat-card-subtitle id="gameChoice" *ngIf="gameData?.duration != null">{{gameData?.game.name}},
+                        ({{gameData?.duration}} min)</mat-card-subtitle>
+                    <mat-card-subtitle id="gameChoice" *ngIf="gameData?.duration == null">{{gameData?.game.name}}
+                    </mat-card-subtitle>
                 </mat-card-header>
                 <mat-card-content>
                     <table class="sessionTable">
@@ -44,8 +47,8 @@
                         `\\´´\¸.·´  
                     </pre>
 
-                 
-                    
+
+
                 </mat-card-content>
             </mat-card>
 

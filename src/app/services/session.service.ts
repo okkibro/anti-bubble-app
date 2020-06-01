@@ -10,11 +10,11 @@ export class SessionService {
 
   constructor(private http: HttpClient, private cookie: CookieService) { }
 
-  public getActivity(activity: String) : Observable<any> {
-    return this.http.post('https://localhost:3000/session/activity', { activity: activity }, { headers: { Authorization: 'Bearer ' + this.cookie.get('mean-token')}});
+  public getActivity(activity: String): Observable<any> {
+    return this.http.post('https://localhost:3000/session/activity', { activity: activity }, { headers: { Authorization: 'Bearer ' + this.cookie.get('mean-token') } });
   }
 
-  public performedLabyrinth(email : String) : Observable<any> {
-      return this.http.patch('https://localhost:3000/session/updateBubbleInit', { email: email });
+  public performedLabyrinth(email: String): Observable<any> {
+    return this.http.patch('https://localhost:3000/session/updateBubbleInit', { email: email });
   }
 }
