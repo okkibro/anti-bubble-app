@@ -35,19 +35,4 @@ describe('LoginComponent', () => {
     expect(component.authError).toBeFalsy();
     expect(component.authErrorMsg).toBeUndefined();
   });
-
-  it('submitted should be true when valid loginUser()', () => {
-    component.loginUser(validUser);
-    expect(component.submitted).toBeTruthy();
-    expect(component.authError).toBeFalsy();
-    expect(component.authErrorMsg).toBeUndefined();
-  });
-
-  it('submitted should be true when invalid loginUser()', () => {
-    component.loginUser(invalidUser);
-    expect(component.submitted).toBeTruthy();
-    expect(component.authError).toBeTruthy();
-    expect(component.authErrorMsg).toBeDefined();
-  });
-
 });
