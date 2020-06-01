@@ -35,13 +35,13 @@ test:karma:
   tags:
    - docker
 
-test:e2e:
-  stage: test
-  image: trion/ng-cli-e2e:${CLI_VERSION}
-  allow_failure: false
-  before_script:
-    - npm ci
-  script:
-   - ng e2e
-  tags:
-   - docker
+#test:e2e:
+#  stage: test
+#  image: trion/ng-cli-e2e:${CLI_VERSION}
+#  allow_failure: false
+#  before_script:
+#    - npm ci
+#  script:
+#   - ng e2e
+#  tags:
+#   - docker
