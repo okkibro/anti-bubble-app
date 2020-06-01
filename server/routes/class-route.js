@@ -97,32 +97,39 @@ router.get('/getClass', auth, (req, res) => {
 	} else {
 		User.findById(req.payload._id, (error, user) => {
 			if (user.role == 'student') {
-                classmates = [];
-				Classes.findOne({ _id: user.class[0] }, (error, foundClass) => {
+				classmates = [];
+				Classes.findOne({_id: user.class[0]}, (error, foundClass) => {
+					console.log(foundClass);
+					numberOfMembers = foundClass.students.length;
 					for (id in foundClass.students) {
-						User.findById(foundClass.students[id]._id, (error, classmate) => {
+						student = foundClass.students[id];
+						User.findById(student._id, (error, classmate) => {
 							classmates.push(classmate);
-							if (id == foundClass.students.length - 1) {
+							if (classmates.length == numberOfMembers) {
 								res.status(200).json({ class: foundClass, classmates: classmates });
 							}
 						});
 					}
-				});
-			} else {
-                classmates = [];
-                classes = [];
-                Classes.find({_id: {$in: user.class}}, (error, foundClasses) => {
-                    for (i in foundClasses) {
-                        students = foundClasses[i].students;
-                        console.log(students);
-                    }
-                    
-                })
-            }
-		}).catch((err) => {
-			console.log(err);
-			res.status(400).send(err);
+				})
+			} else { //teacher
+
+			}
 		});
+		// 	} else {
+        //         classmates = [];
+        //         classes = [];
+        //         Classes.find({_id: {$in: user.class}}, (error, foundClasses) => {
+        //             for (i in foundClasses) {
+        //                 students = foundClasses[i].students;
+        //                 console.log(students);
+        //             }
+                    
+        //         })
+        //     }
+		// }).catch((err) => {
+		// 	console.log(err);
+		// 	res.status(400).send(err);
+		// });
 	}
 });
 
