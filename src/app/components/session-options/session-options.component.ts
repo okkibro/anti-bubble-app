@@ -3,7 +3,6 @@ import { AuthenticationService } from '../../services/authentication.service';
 import { SocketIOService } from 'src/app/services/socket-io.service';
 import { Router } from '@angular/router';
 import { User } from '../../models/user';
-import { Activity } from '../../models/activity';
 import { SessionService } from 'src/app/services/session.service';
 
 @Component({
@@ -15,9 +14,6 @@ import { SessionService } from 'src/app/services/session.service';
 export class SessionOptionsComponent implements OnInit {
 
   userDetails: User;
-  activityDetails: Activity;
-  buttonStatus = true;
-  labyrinthButton = false;
 
   constructor(private auth: AuthenticationService, private router: Router, private socketService: SocketIOService, private sessionService: SessionService) { }
 
