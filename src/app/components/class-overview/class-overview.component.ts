@@ -30,7 +30,7 @@ export class ClassOverviewComponent implements OnInit {
   
   ngOnInit() {
     this.classService.getClass().subscribe((data) => {
-      if (data) {
+      if (data.succes) {
         this.userClassTitle = data.class.title;
         this.classmates = data.classmates;
       }

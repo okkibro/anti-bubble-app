@@ -13,7 +13,9 @@ import { ClassesService } from 'src/app/services/classes.service';
 })
 export class TeacherOverviewComponent implements OnInit {
     userDetails: User;
-    classes;
+    classIds = [];
+    classes = [];
+    currentClass;
     classmates: User[];
     classForm = this.fb.group({
         classTitle: ['', Validators.required],
@@ -24,14 +26,20 @@ export class TeacherOverviewComponent implements OnInit {
 
     constructor(private authenticationService: AuthenticationService, private classService: ClassesService, private fb: FormBuilder) { }
 
-    ngOnInit(): void { 
+    ngOnInit(): void {
         this.authenticationService.profile().subscribe(user => {
             this.userDetails = user;
         });
-        this.classService.getClass().subscribe(output => {
-            this.classes = output.class;
-            this.classmates = output.classmates;
-        })
+        this.classService.getClassIds().subscribe((ids) => {
+            this.classIds = ids.classIds;
+            for (const id of this.classIds) {
+                this.classService.getSingleClass(id._id).subscribe(output => {
+                    this.classes.push(output);
+                    this.currentClass = this.classes[0].class;
+                    this.classmates = this.classes[0].classmates;
+                });
+            }
+        });
     }
 
     createClass() {
@@ -51,6 +59,10 @@ export class TeacherOverviewComponent implements OnInit {
         } else {
             console.log('you are not eligible to create a class')
         }
+    }
+
+    switchClass() {
+        
     }
 
     onClickOpenForm(){

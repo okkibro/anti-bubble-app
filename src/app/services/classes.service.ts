@@ -24,6 +24,14 @@ export class ClassesService {
     return this.http.get('https://localhost:3000/class/getClass', { headers: { Authorization: 'Bearer ' + this.cookie.get('mean-token') } });
   }
 
+  public getClassIds(): Observable<any> {
+    return this.http.get('https://localhost:3000/class/getClassIds', { headers: { Authorization: 'Bearer ' + this.cookie.get('mean-token') } });
+  }
+
+  public getSingleClass(id: string): Observable<any> {
+    return this.http.get(`https://localhost:3000/class/getSingleClass/${id}`, { headers: { Authorization: 'Bearer ' + this.cookie.get('mean-token') } });
+  }
+
   public classmateProfile(id: string): Observable<any> {
     return this.http.get(`https://localhost:3000/class/classmateProfile/${id}`, { headers: { Authorization: 'Bearer ' + this.cookie.get('mean-token') }})
   }
