@@ -36,12 +36,9 @@
 + Run ```node index.js```
 + Open browser and navigate to localhost:3000
 
-### Running MongoDB
-+ ```mongod --dbpath /System/Volumes/Data/data/db```
 
-
-
-Template by Agon Gashi (agonxgashi)
-
+### Running test locally
++ Run ng test --code-coverage --browsers=Chrome
++ Updates automatically on save
 
 
