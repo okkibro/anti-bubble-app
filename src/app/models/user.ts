@@ -17,4 +17,6 @@ export class User {
     milestones: [Milestone];
     class: string;
     avatar: [ShopItem];
+    knowledge: [number];
+    diversity: [number];
 }

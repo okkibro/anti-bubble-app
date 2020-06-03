@@ -64,6 +64,13 @@ let userSchema = new Schema({
             medal:      Schema.ObjectId, ref: 'Item'
         },
         required: true
+    },
+    knowledge: {
+        type: [Number]
+    },
+
+    diversity: {
+        type: [Number]
     }
 });
 
