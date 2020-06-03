@@ -126,6 +126,10 @@ function runIO(io) {
 			var game = games.getGame(socket.id); // Get the game that the host hosts
 			io.in(game.pin).emit('receive-question', question); // Send question to all players in the session
 		});
+
+		socket.on('submit', (data) => {
+			io.to(players.getPlayer(socket.id).hostID).emit('receive-submit', data);
+		});
 	});
 }
 

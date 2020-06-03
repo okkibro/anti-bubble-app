@@ -68,6 +68,10 @@ export class SessionComponent implements OnInit {
 
                     this.playerCount = this.playerCount - 1; //display number of players in top right corner
                 });
+
+                this.socketService.listenForSubmits((data) => {
+                    console.log(data);
+                });
             }
 
             if (this.userDetails.role == "student") {
@@ -107,5 +111,9 @@ export class SessionComponent implements OnInit {
 
     sendQuestion(question: string) {
         this.socketService.sendQuestion(question);
+    }
+
+    submit(data) {
+        this.socketService.studentSubmit(data);
     }
 }

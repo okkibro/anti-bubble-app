@@ -82,4 +82,14 @@ export class SocketIOService {
             receiveQuestion(question);
         });
     }
+
+    studentSubmit(data) {
+        this.socket.emit('submit', data);
+    }
+
+    listenForSubmits(receiveSubmit) {
+        this.socket.on('receive-submit', data => {
+            receiveSubmit(data);
+        });
+    }
 }
