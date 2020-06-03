@@ -57,20 +57,20 @@
 
             <mat-card fxFlex="50%">
                 <mat-card-header>
-                    <mat-card-title>Trofeeën</mat-card-title>
-                    <mat-card-subtitle>Trofee met de meeste voortgang</mat-card-subtitle>
+                    <mat-card-title>Badges</mat-card-title>
+                    <mat-card-subtitle>Badge met de meeste voortgang</mat-card-subtitle>
                 </mat-card-header>
                 <mat-card-content>
                     <table class="UItable">
-                        <tr >
-                            <td *ngIf="milestoneShown.name !='Gefeliciteerd'">
+                        <tr *ngIf="milestoneShown.name !='Gefeliciteerd'">
+                            <td>
                                 <strong>{{milestoneShown.name}}</strong><br>
                                 {{milestoneShown.description}}<br>
                                 Voortgang: {{userDetails?.milestones[milestoneShown.index]}}/{{milestoneShown.maxValue}}
                             </td>
                         </tr>
                     </table><br>
-                    <button mat-button [routerLink]="'/trophies'">Alle trofeeën</button>
+                    <button mat-button [routerLink]="'/badges'">Alle badges</button>
                 </mat-card-content>
             </mat-card>
         </div>

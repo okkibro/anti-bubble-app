@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { User } from '../../models/user';
 import { milestones } from '../../../../constants';
+import { Milestone } from 'src/app/models/milestone';
 
 @Component({
     selector: 'mean-profile',
@@ -14,7 +15,7 @@ import { milestones } from '../../../../constants';
 
 export class ProfileComponent implements OnInit {
     userDetails: User;
-    milestoneShown;
+    milestoneShown: Milestone;
     changePasswordForm = this.fb.group({
         oldPassword: ['', Validators.required],
         newPassword: ['', Validators.required],
@@ -26,17 +27,21 @@ export class ProfileComponent implements OnInit {
     constructor(private auth: AuthenticationService, private fb: FormBuilder, private snackbar: MatSnackBar) {}
     
     ngOnInit() {
+        //Show badge with most progress
+
+        // Milestone that gets shown when you have all badges
+        this.milestoneShown = {
+            name: "Gefeliciteerd",
+            description: "Je hebt alle badges gehaald",
+            index: 0,
+            maxValue: 0
+        }
+        
         this.auth.profile().subscribe(user => {
             this.userDetails = user;
-            this.milestoneShown = {
-                name: "Gefeliciteerd",
-                description: "Je hebt alle milestones gehaald",
-                index: 0,
-                maxValue: 0
-            }
+            // Loop over all milestones and find the one with the most progress that the user didnt complete yet
             for (let i = 0; i < milestones.length; i++) {
                 if (user.milestones[i] != milestones[i].maxValue && user.milestones[i] >= user.milestones[this.milestoneShown.index]) {
-                    console.log(user.miles)
                     this.milestoneShown = milestones[i];
                 }
             }

@@ -19,4 +19,5 @@ export class User {
     avatar: [ShopItem];
     knowledge: [number];
     diversity: [number];
+    recentMilestones: [String];
 }

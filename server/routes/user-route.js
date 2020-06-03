@@ -31,6 +31,10 @@ router.post('/register', (req, res) => {
     for (let i = 0; i < 9; i++) { //TODO: change 9 to correct number when done making all the milestones
         user.milestones.push(0);
     }
+    user.recentMilestones = []
+    for (let i = 0; i < 5; i++) {
+        user.recentMilestones[i] = "";
+    }
 
     //save the changes to the database
     user.save(function () {
@@ -244,19 +248,35 @@ router.get('/milestone', auth, (req, res) => {
     });
 });
 
-// Router that changes a milestone by a given value, returns the updated value and whether it is completed or not
+// Router that changes a milestone by a given value, returns the updated value and whether it is completed now or not
 router.post('/milestone', auth, (req, res) => {
-    User.findById(req.payload._id, (err, user) => {
+    User.findById(req.payload._id, (err, user) => { // Get currently logged in user
         let milestone = req.body.milestone;
         let completed = false;
-        user.milestones[milestone.index] += req.body.value;
-        if (user.milestones[milestone.index] > milestone.maxValue) {
-            user.milestones[milestone.index] = milestone.maxValue;
-            completed = true;
+        if (user.milestones[milestone.index] == milestone.maxValue) { // Check if milestone is already completed
+            res.json( { updatedValue: milestone.maxValue, completed: completed } ); // Return completed false because it was already completed
+        } else {
+            user.milestones[milestone.index] += req.body.value; // Add value to milestone
+            if (user.milestones[milestone.index] >= milestone.maxValue) { // Check if you surpassed the max value
+                user.milestones[milestone.index] = milestone.maxValue; // Set value to max value cause it cant be larger than max value
+                completed = true;
+            }
+            // Mark and save changes
+            user.markModified('milestones');
+            user.save(() => {
+                res.json( { updatedValue: user.milestones[milestone.index], completed: completed } );
+            });
         }
-        user.markModified('milestones');
+    })
+});
+
+// Router to post a new message to recent milestones
+router.post('/recentMilestones', auth, (req, res) => {
+    User.findById(req.payload._id, (err, user) => {
+        user.recentMilestones.push(req.body.value); // Push new value into the array
+        user.recentMilestones.shift(); // Remove oldest value of the 5
         user.save(() => {
-            res.json( { updatedValue: user.milestones[milestone.index], completed: completed } );
+            res.end();
         });
     })
 });
@@ -274,9 +294,9 @@ router.post('/avatar', auth, (req,res) => {
                 image: req.body.avatarItem.fullImage,
                 category: req.body.avatarItem.category
             });
-        })
-    })
-}) 
+        });
+    });
+});
 
 router.post('/updateGraph', auth, (req, res) => {
     User.updateOne(
@@ -285,7 +305,7 @@ router.post('/updateGraph', auth, (req, res) => {
         () => {
             res.json({});
         }
-    )
-})
+    );
+});
 
 module.exports = router;

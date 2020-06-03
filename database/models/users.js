@@ -71,7 +71,11 @@ let userSchema = new Schema({
 
     diversity: {
         type: [Number]
-    }
+    },
+    recentMilestones: {
+        type: [String],
+        required: true
+    },
 });
 
 userSchema.methods.setPassword = function(password){
