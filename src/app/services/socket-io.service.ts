@@ -92,4 +92,8 @@ export class SocketIOService {
             receiveSubmit(data);
         });
     }
+
+    startGame() {
+        this.socket.emit('start-game');
+    }
 }

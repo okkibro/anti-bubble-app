@@ -8,7 +8,7 @@
 
     <div class="containerDiv" fxLayoutGap="0.5%" fxLayout="column" fxLayoutAlign="space-evenly">
         <div fxLayout.xs="row" fxLayoutGap="0.5%" fxLayoutAlign="space-evenly">
-            <mat-card fxFlex=80% *ngIf="userDetails?.role == 'teacher'">
+            <mat-card fxFlex=80% *ngIf="userDetails?.role == 'teacher' && !gameStarted">
                 <!-- <button (click)="getPlayers()">GetPlayers</button> -->
                 <mat-card-header class="matCardHeader">
                     <mat-card-title>Sessie code</mat-card-title>
@@ -23,7 +23,7 @@
                             <td id="teacherPin">{{pin}}</td>
                         </tr>
                         <tr>
-                            <button mat-button id="startButton">Start!</button>
+                            <button (click)="startGame()" mat-button id="startButton">Start!</button>
                         </tr>
                     </table>
                 </mat-card-content>
@@ -47,8 +47,17 @@
                         `\\´´\¸.·´  
                     </pre>
 
-
-
+                </mat-card-content>
+            </mat-card>
+            
+            <mat-card fxFlex=80% *ngIf="userDetails?.role == 'teacher' && gameStarted">
+                <mat-card-header class="matCardHeader">
+                    <mat-card-title>Antwoorden</mat-card-title>
+                </mat-card-header>
+                <mat-card-content>
+                    <table class="submitTable">
+                        
+                    </table>
                 </mat-card-content>
             </mat-card>
 
