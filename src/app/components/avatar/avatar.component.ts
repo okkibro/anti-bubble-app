@@ -61,7 +61,7 @@ export class AvatarComponent implements OnInit {
         document.getElementById("haar2").setAttribute("src", this.userDetails.avatar.haar2?.fullImage);
         document.getElementById("hoofddeksel").setAttribute("src", this.userDetails.avatar.hoofddeksel?.fullImage);
         document.getElementById("medaille").setAttribute("src", this.userDetails.avatar.medaille?.fullImage);
-        console.log( this.userDetails.avatar.body?.fullImage);   
+        console.log(this.userDetails.avatar.body?.fullImage);   
     }
 
     // Changes the tab in the HTML and updates the shown items
