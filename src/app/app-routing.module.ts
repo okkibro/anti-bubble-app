@@ -18,13 +18,16 @@ import { ShopComponent } from './components/shop/shop.component';
 import { PasswordRecoveryComponent } from './components/password-recovery/password-recovery.component';
 import { PasswordResetComponent } from './components/password-reset/password-reset.component';
 import { BadgesComponent } from './components/badges/badges.component';
+import { SessionGuardService } from './services/session-guard.service';
+import { SessionOptionsComponent } from './components/session-options/session-options.component';
+import { LabyrinthComponent } from './components/labyrinth/labyrinth.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
   { path: 'home', component: HomeComponent, canActivate: [AuthGuardService]},
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
-  { path: 'session', component: SessionComponent },
+  { path: 'session', component: SessionComponent, canDeactivate: [SessionGuardService] },
   { path: 'profile', component: ProfileComponent, canActivate: [AuthGuardService]},
   { path: 'class-overview', component: ClassOverviewComponent },
   { path: 'classmateProfile/:id', component: ClassmateProfileComponent },
@@ -36,6 +39,8 @@ const routes: Routes = [
   { path: 'shop', component: ShopComponent },
   { path: 'passwordrecovery', component: PasswordRecoveryComponent },
   { path: 'reset/:token', component: PasswordResetComponent },
+  { path: 'labyrinth', component: LabyrinthComponent },
+  { path: 'session-options', component: SessionOptionsComponent, data: {roles: [Role.teacher]}},
   // Auto redirect als je bullshit invult (Moet als laatste!)
   { path: '**', redirectTo: '/login', pathMatch: 'full' },
 ];

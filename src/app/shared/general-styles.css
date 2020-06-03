@@ -105,6 +105,14 @@ mat-tab-group, mat-tab {
     padding: 10px;    
 }
 
+.sessionTable {
+    display: inline-block;
+}
+
+.sessionTable th, td {
+    padding: 10px;
+}
+
 ::ng-deep .mat-simple-snackbar-action {
     color: white;
 }
@@ -134,4 +142,13 @@ mat-tab-group, mat-tab {
     background: transparent;
     background-image: url("/assets/images/Super_map/Basic_Buttons/Button_blue_rectangle.png");
     background-repeat: round;
+}
+
+::ng-deep .style-warning {
+    color: black;
+    background-color: yellow;
+}
+
+::ng-deep .style-warning .mat-simple-snackbar-action {
+    color: black;
 }

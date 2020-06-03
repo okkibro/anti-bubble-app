@@ -6,9 +6,11 @@ import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { HttpClientModule } from "@angular/common/http";
 import { HighchartsChartModule } from 'highcharts-angular';
 import { FlexLayoutModule } from "@angular/flex-layout";
+import { MatSliderModule } from '@angular/material/slider';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { FormsModule } from "@angular/forms";
+
 
 // core modules
 import { CustomMaterialModule } from './shared/material.module';
@@ -39,6 +41,8 @@ import { TeacherOverviewComponent } from './components/teacher-overview/teacher-
 import { NavBarComponent } from './components/nav-bar/nav-bar.component';
 import { JoinClassComponent } from './components/join-class/join-class.component';
 import { BubbleVisualisationComponent } from './components/bubble-visualisation/bubble-visualisation.component';
+import { SessionOptionsComponent } from './components/session-options/session-options.component';
+import { LabyrinthComponent } from './components/labyrinth/labyrinth.component';
 
 @NgModule({
     declarations: [
@@ -61,6 +65,8 @@ import { BubbleVisualisationComponent } from './components/bubble-visualisation/
         JoinClassComponent,
         BubbleVisualisationComponent,
         BadgesComponent,
+        SessionOptionsComponent,
+        LabyrinthComponent,
     ],
     imports: [
         BrowserModule,
@@ -70,6 +76,7 @@ import { BubbleVisualisationComponent } from './components/bubble-visualisation/
         AppRoutingModule,
         HttpClientModule,
         HighchartsChartModule,
+        MatSliderModule,
         FlexLayoutModule,
         MatTabsModule,
         MatProgressBarModule,

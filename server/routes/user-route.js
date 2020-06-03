@@ -26,6 +26,7 @@ router.post('/register', (req, res) => {
     user.setPassword(sanitize(req.body.password));
     user.inventory = [];
     user.milestones = [];
+    user.bubbleInit = false;
     user.currency = 0;
     user.class = [];
     for (let i = 0; i < 9; i++) { //TODO: change 9 to correct number when done making all the milestones

@@ -20,4 +20,5 @@ export class User {
     knowledge: [number];
     diversity: [number];
     recentMilestones: [String];
+    bubbleInit: boolean;
 }

@@ -76,6 +76,10 @@ let userSchema = new Schema({
         type: [String],
         required: true
     },
+    bubbleInit: {
+        type: Boolean,
+        required: true
+    }
 });
 
 userSchema.methods.setPassword = function(password){
