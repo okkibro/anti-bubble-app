@@ -37,13 +37,13 @@ export class HomeComponent implements OnInit {
         this.authenticationService.profile().subscribe(user => {
             this.userDetails = user;
         })
-     }
+    }
 
     logoutButton() {
         return this.authenticationService.logout();
     }
 
-    startLabyrinth(){
+    startLabyrinth() {
         this.router.navigate(['labyrinth']);
     }
 
@@ -58,11 +58,11 @@ export class HomeComponent implements OnInit {
             if (succes) {
                 this.router.navigate(['session']);
             } else {
-                this.snackBar.open("Er is iets mis gegaan, probeer het opnieuw", 'X', {duration: 2500, panelClass: ['style-error'], });
+                this.snackBar.open("Er is iets mis gegaan, probeer het opnieuw", 'X', { duration: 2500, panelClass: ['style-error'], });
             }
         }, () => {
-            this.snackBar.open("De host heeft de sessie verlaten, je wordt naar de home pagina geleid", 'X', {duration: 2500, panelClass: ['style-warning']})
-            .afterDismissed().subscribe(() => { this.router.navigate(['home']) });
+            this.snackBar.open("De host heeft de sessie verlaten, je wordt naar de home pagina geleid", 'X', { duration: 2500, panelClass: ['style-warning'] })
+                .afterDismissed().subscribe(() => { this.router.navigate(['home']) });
         });
     }
 }
