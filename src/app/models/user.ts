@@ -16,4 +16,5 @@ export class User {
     inventory: [ShopItem];
     milestones: [Milestone];
     class: string;
+    avatar: [ShopItem];
 }

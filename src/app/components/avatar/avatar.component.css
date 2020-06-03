@@ -22,3 +22,13 @@
     height: width;
     padding: 20px;
 }
+
+.avatarDisplay {
+    position: absolute;
+    top: 10%;
+    left: 10%;
+    background-color: transparent;
+    border: transparent;
+    box-shadow: none;
+    z-index: 1;
+}

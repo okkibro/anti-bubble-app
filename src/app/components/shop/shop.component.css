@@ -5,3 +5,17 @@
 mat-card-title {
    font-size: medium;
 }
+
+::ng-deep .mat-simple-snackbar-action {
+    color: white;
+}
+
+::ng-deep .style-error {
+    color: white;
+    background-color: red;
+}
+
+::ng-deep .style-succes {
+    color: white;
+    background-color: green;
+}

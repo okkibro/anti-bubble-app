@@ -27,7 +27,7 @@ export class ShopComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.shopService.shop("alles").subscribe(shop => {
+    this.shopService.shop("lichaam").subscribe(shop => {
       this.shopDetails = shop;
       this.authenticationService.profile().subscribe(user => {
         this.userDetails = user;
@@ -44,6 +44,7 @@ export class ShopComponent implements OnInit {
     var currentTab = event.tab.textLabel;
     this.shopService.shop(currentTab).subscribe(shop => {
         this.shopDetails = shop;
+        this.filteredShop = this.filterShop();
     }, (err) => {
         console.error(err);
     });

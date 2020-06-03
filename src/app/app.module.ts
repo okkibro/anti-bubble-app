@@ -38,6 +38,7 @@ import { SessionComponent } from './components/session/session.component';
 import { TeacherOverviewComponent } from './components/teacher-overview/teacher-overview.component';
 import { NavBarComponent } from './components/nav-bar/nav-bar.component';
 import { JoinClassComponent } from './components/join-class/join-class.component';
+import { BubbleVisualisationComponent } from './components/bubble-visualisation/bubble-visualisation.component';
 
 @NgModule({
     declarations: [
@@ -59,6 +60,7 @@ import { JoinClassComponent } from './components/join-class/join-class.component
         PasswordResetComponent,
         TrophiesComponent,
         JoinClassComponent,
+        BubbleVisualisationComponent,
     ],
     imports: [
         BrowserModule,
