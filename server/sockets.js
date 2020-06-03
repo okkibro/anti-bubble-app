@@ -23,7 +23,7 @@ function runIO(io) {
 			var gameFound = false;
 			// Look for a game with the entered pin
 			for (let i = 0; i < games.games.length; i++) {
-				if (params.pin == games.games[i].pin) {
+				if (params.pin == games.games[i].pin && games.games[i].gameLive == false) {
 					var hostId = games.games[i].hostID;
 					gameFound = true;
 					if (players.getPlayers(hostId).find(x => x.email == params.player.email) != undefined) {
@@ -129,6 +129,11 @@ function runIO(io) {
 
 		socket.on('submit', (data) => {
 			io.to(players.getPlayer(socket.id).hostID).emit('receive-submit', data);
+		});
+
+		socket.on('start-game', () => {
+			var game = games.getGame(socket.id);
+			game.gameLive = true;
 		});
 	});
 }

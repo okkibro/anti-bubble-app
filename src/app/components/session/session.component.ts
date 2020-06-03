@@ -20,6 +20,7 @@ export class SessionComponent implements OnInit {
     gameData;
     playerCount = 0;
     activity;
+    gameStarted;
     
     constructor(
         private authenticationService: AuthenticationService, 
@@ -30,6 +31,7 @@ export class SessionComponent implements OnInit {
     ) { }
 
     ngOnInit(): void {
+        this.gameStarted = false;
         this.gameData = this.getGameData();
 
         // Get pin of the session from the dataservice
@@ -70,7 +72,11 @@ export class SessionComponent implements OnInit {
                 });
 
                 this.socketService.listenForSubmits((data) => {
-                    console.log(data);
+                    var submitTable = document.getElementsByClassName('submitTable')[0];
+                    var dataNode = document.createTextNode(data);
+                    var tablerow = document.createElement('tr');
+                    tablerow.appendChild(dataNode);
+                    submitTable.appendChild(tablerow);
                 });
             }
 
@@ -115,5 +121,10 @@ export class SessionComponent implements OnInit {
 
     submit(data) {
         this.socketService.studentSubmit(data);
+    }
+
+    startGame() {
+        this.gameStarted = true;
+        this.socketService.startGame();
     }
 }

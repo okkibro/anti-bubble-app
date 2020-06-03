@@ -103,11 +103,11 @@ mat-tab-group, mat-tab {
     padding: 10px;    
 }
 
-.sessionTable {
+.sessionTable, .submitTable {
     display: inline-block;
 }
 
-.sessionTable th, td {
+.sessionTable, .submitTable th, td {
     padding: 10px;
 }
 
