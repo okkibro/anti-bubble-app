@@ -127,4 +127,10 @@ export class SessionComponent implements OnInit {
         this.gameStarted = true;
         this.socketService.startGame();
     }
+
+    pairStudentsTest() {
+        this.socketService.pairStudents(false, 2, pairs => {
+            
+        });
+    }
 }

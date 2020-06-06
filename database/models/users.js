@@ -63,7 +63,7 @@ let userSchema = new Schema({
             hat:        Schema.ObjectId, ref: 'Item',
             medal:      Schema.ObjectId, ref: 'Item'
         },
-        required: true
+        required: false
     },
     knowledge: {
         type: [Number]

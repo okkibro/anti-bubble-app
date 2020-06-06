@@ -9,7 +9,7 @@
     <div class="containerDiv" fxLayoutGap="0.5%" fxLayout="column" fxLayoutAlign="space-evenly">
         <div fxLayout.xs="row" fxLayoutGap="0.5%" fxLayoutAlign="space-evenly">
             <mat-card fxFlex=80% *ngIf="userDetails?.role == 'teacher' && !gameStarted">
-                <!-- <button (click)="getPlayers()">GetPlayers</button> -->
+                <button (click)="pairStudentsTest()">GetPlayers</button>
                 <mat-card-header class="matCardHeader">
                     <mat-card-title>Sessie code</mat-card-title>
                     <mat-card-subtitle id="gameChoice" *ngIf="gameData?.duration != null">{{gameData?.game.name}},

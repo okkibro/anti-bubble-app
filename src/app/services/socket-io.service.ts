@@ -96,4 +96,11 @@ export class SocketIOService {
     startGame() {
         this.socket.emit('start-game');
     }
+
+    pairStudents(chat, groupSize, receivePairs) {
+        this.socket.emit('pair-students', chat, groupSize);
+        this.socket.on('send-pairs', (pairs) => {
+            receivePairs(pairs);
+        });
+    }
 }
