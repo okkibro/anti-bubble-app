@@ -21,6 +21,7 @@ import { BadgesComponent } from './components/badges/badges.component';
 import { SessionGuardService } from './services/session-guard.service';
 import { SessionOptionsComponent } from './components/session-options/session-options.component';
 import { LabyrinthComponent } from './components/labyrinth/labyrinth.component';
+import { ActivitiesComponent } from './components/activities/activities.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
@@ -41,6 +42,7 @@ const routes: Routes = [
   { path: 'reset/:token', component: PasswordResetComponent },
   { path: 'labyrinth', component: LabyrinthComponent },
   { path: 'session-options', component: SessionOptionsComponent, data: {roles: [Role.teacher]}},
+  { path: 'activities', component: ActivitiesComponent, canDeactivate: [SessionGuardService] },
   // Auto redirect als je bullshit invult (Moet als laatste!)
   { path: '**', redirectTo: '/login', pathMatch: 'full' },
 ];

@@ -133,7 +133,9 @@ function runIO(io) {
 
 		socket.on('start-game', () => {
 			let game = games.getGame(socket.id);
+			// let gameName = game.gameData.game.name;
 			game.gameLive = true;
+			io.in(game.pin).emit('game-start-redirect');
 		});
 
 		// Listener that will divide students into groups

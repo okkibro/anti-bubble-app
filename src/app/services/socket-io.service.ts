@@ -31,7 +31,7 @@ export class SocketIOService {
     }
 
     // Gets called when a user enters a pin and presses the join session button
-    joinSession(pin, user, join, backToHome) {
+    joinSession(pin, user, join, backToHome, redirect) {
         this.hostDisconnected = false;
         this.socket.emit('player-join', {pin: pin, player: user});
         this.socket.on('message', (message: string) => {
@@ -50,6 +50,9 @@ export class SocketIOService {
             this.socket.removeAllListeners();
             backToHome(); // When the host disconnects, call the function that sends the player back to the home screen
         });
+        this.socket.on('game-start-redirect', () => {
+            redirect();
+        })
     }
 
     sendMessage(message) {

@@ -63,6 +63,8 @@ export class HomeComponent implements OnInit {
         }, () => {
             this.snackBar.open("De host heeft de sessie verlaten, je wordt naar de home pagina geleid", 'X', { duration: 2500, panelClass: ['style-warning'] })
                 .afterDismissed().subscribe(() => { this.router.navigate(['home']) });
+        }, () => {
+                this.router.navigate(['activities']);
         });
     }
 }
