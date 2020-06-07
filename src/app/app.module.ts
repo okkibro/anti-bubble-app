@@ -44,6 +44,7 @@ import { JoinClassComponent } from './components/join-class/join-class.component
 import { BubbleVisualisationComponent } from './components/bubble-visualisation/bubble-visualisation.component';
 import { SessionOptionsComponent } from './components/session-options/session-options.component';
 import { LabyrinthComponent } from './components/labyrinth/labyrinth.component';
+import { AnswerFormComponent } from './components/answer-form/answer-form.component';
 
 
 @NgModule({
@@ -70,6 +71,7 @@ import { LabyrinthComponent } from './components/labyrinth/labyrinth.component';
         BadgesComponent,
         SessionOptionsComponent,
         LabyrinthComponent,
+        AnswerFormComponent,
     ],
     imports: [
         BrowserModule,

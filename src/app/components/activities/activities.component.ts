@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { SocketIOService } from 'src/app/services/socket-io.service';
 import { Router } from '@angular/router';
 import { DataService } from 'src/app/services/data-exchage.service';
+import { FormBuilder } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'mean-activities',
@@ -14,7 +16,7 @@ export class ActivitiesComponent implements OnInit {
   gameData;
   pin;
 
-  constructor(private socketService: SocketIOService, private router: Router, private data: DataService) { }
+  constructor(private socketService: SocketIOService, private router: Router, private data: DataService, private fb: FormBuilder, private snackBar: MatSnackBar) { }
 
   ngOnInit(): void {
     this.gameData = this.getGameData();
@@ -51,3 +53,6 @@ export class ActivitiesComponent implements OnInit {
   }
 
 }
+
+
+
