@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output } from '@angular/core';
 import { AuthenticationService } from 'src/app/services/authentication.service';
 import { User } from 'src/app/models/user';
 import { FormBuilder, Validators } from '@angular/forms';
@@ -13,8 +13,9 @@ import { ClassesService } from 'src/app/services/classes.service';
 })
 export class TeacherOverviewComponent implements OnInit {
     userDetails: User;
+    loading = true;
     classIds = [];
-    classes = [];
+    names = [];
     currentClass;
     classmates: User[];
     classForm = this.fb.group({
@@ -23,6 +24,7 @@ export class TeacherOverviewComponent implements OnInit {
         classYear: ['', Validators.required]
     });
     openform = false;
+    selectklas = false;
 
     constructor(private authenticationService: AuthenticationService, private classService: ClassesService, private fb: FormBuilder) { }
 
@@ -31,21 +33,36 @@ export class TeacherOverviewComponent implements OnInit {
             this.userDetails = user;
         });
         this.classService.getClassIds().subscribe((ids) => {
-            console.log(ids);
             this.classIds = ids.classIds;
-            this.getClass(this.classIds[0].id);
+            this.getClass(this.classIds[0]._id);
+            this.getClassNames();
         });
     }
 
     getClass(id): void {
-        this.classService.getSingleClass(id).subscribe(output => {
-            this.currentClass = output.class;
-            this.classmates = output.classmates;
+        this.classService.getSingleClass(id).subscribe((output) => {
+            if (output.succes) {
+                this.currentClass = output.class;
+                this.classmates = output.classmates;
+            }
         });
     }
 
-    switchClass(): void {
-        this.getClass(this.classIds[1].id);
+    getClassNames(): void {
+        for (const id of this.classIds) {
+            this.classService.getSingleClass(id._id).subscribe((output) => {
+                if (output.succes) {
+                    this.names.push({title: output.class.title, id: id._id});
+                }
+                if (this.names.length == this.classIds.length) {
+                    this.loading = false
+                }
+            });
+        }
+    }
+
+    switchClass(id): void {
+        this.getClass(id);
     }
 
     createClass() {
@@ -67,7 +84,11 @@ export class TeacherOverviewComponent implements OnInit {
         }
     }
 
-    onClickOpenForm(){
+    onClickSelectKlas() {
+        this.selectklas = !this.selectklas;
+    }
+
+    onClickOpenForm() {
         this.openform = true;  
     }
 }

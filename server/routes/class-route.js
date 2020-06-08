@@ -131,7 +131,7 @@ router.get('/getClass', auth, (req, res) => {
 });
 
 router.get('/getClassIds', auth, (req, res) => {
-	User.findById(req.payload._id, async (err, user) => {
+	User.findById(req.payload._id, (err, user) => {
 		if (err) {
 			console.log(err);
 			res.status(200).json({ succes: false, message: err });
@@ -143,8 +143,8 @@ router.get('/getClassIds', auth, (req, res) => {
 
 router.get('/getSingleClass/:id', auth, (req, res) => {
 	classmates = [];
-	Classes.findById(req.params.id, (error, foundClass) => {
-		if (foundClass) {
+	Classes.findById(req.params.id, (err, foundClass) => {
+		if (!err) {
 			numberOfMembers = foundClass.students.length;
 			if (numberOfMembers > 0) {
 				for (student of foundClass.students) {
@@ -159,7 +159,8 @@ router.get('/getSingleClass/:id', auth, (req, res) => {
 				res.status(200).json({ succes: true, class: foundClass, classmates: [] });
 			}
 		} else {
-			res.status(200).json({succes: false});
+			console.log(err);
+			res.status(200).json({succes: false, message: err});
 		}
 	});
 });
