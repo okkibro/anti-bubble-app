@@ -19,7 +19,8 @@ build:
   tags:
    - docker
   only:
-   - unit-tests
+   - Development
+   - Master
 
 test:karma:
   stage: test
