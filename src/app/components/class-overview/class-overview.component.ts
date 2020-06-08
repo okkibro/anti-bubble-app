@@ -3,6 +3,7 @@ import { AuthenticationService } from '../../services/authentication.service';
 import { Router } from '@angular/router';
 import { User } from '../../models/user';
 import { FormBuilder } from '@angular/forms';
+import { ClassesService } from '../../services/classes.service';
 
 @Component({
   selector: 'mean-class-overview',
@@ -17,18 +18,22 @@ export class ClassOverviewComponent implements OnInit {
   });
 
   classmates: User[];
+  userClassTitle;
 
   public value: string;
 
-  constructor(private auth: AuthenticationService, private router: Router, private fb: FormBuilder) { }
-
+  constructor(private classService: ClassesService, private auth: AuthenticationService, private router: Router, private fb: FormBuilder) { }
+  
   logoutButton() {
     return this.auth.logout();
   }
-
+  
   ngOnInit() {
-    this.auth.getAllClassmates().subscribe((data) => {
-      this.classmates = data;
+    this.classService.getClass().subscribe((data) => {
+      if (data.succes) {
+        this.userClassTitle = data.class.title;
+        this.classmates = data.classmates;
+      }
     });
   }
 

@@ -9,8 +9,16 @@ export class User {
     email: string;
     role: Role;
     password: string;
+    classCode: number;
     salt: string;
     exp: number;
-    inventory: [ShopItem]
+    currency: number;
+    inventory: [ShopItem];
     milestones: [Milestone];
+    class: string;
+    avatar: [ShopItem];
+    knowledge: [number];
+    diversity: [number];
+    recentMilestones: [String];
+    bubbleInit: boolean;
 }

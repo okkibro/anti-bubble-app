@@ -3,6 +3,7 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {AuthenticationService} from '../../services/authentication.service';
 import {Router} from '@angular/router';
 import {User} from '../../models/user';
+import { Role } from 'src/app/models/role';
 
 @Component({
     selector: 'mean-register',
@@ -19,6 +20,7 @@ export class RegisterComponent implements OnInit {
         role: ['', Validators.required],
         password: ['', Validators.required],
         repeatPassword: ['', Validators.required],
+        classCode: ['',],
     },
     {
         validator: this.passwordMatchValidator
@@ -35,6 +37,7 @@ export class RegisterComponent implements OnInit {
         user.email = this.registerForm.get('email').value;
         user.role = this.registerForm.get('role').value;
         user.password = this.registerForm.get('password').value;
+        user.classCode = this.registerForm.get('classCode').value;
 
         this.auth.register(user).subscribe(() => {
             this.router.navigate(['login']);

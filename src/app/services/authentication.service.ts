@@ -150,13 +150,4 @@ export class AuthenticationService {
     public profile(): Observable<any> {
         return this.request('get', 'profile');
     }
-
-    public getAllClassmates() : Observable<any> {
-        return this.request('get', 'getAllClassmates');
-    }
-
-    public classmateProfile(id: string) : Observable<any> {
-        return this.request('get', 'classmateProfile/' + id)
-    }
-
 }

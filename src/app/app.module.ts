@@ -6,8 +6,11 @@ import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { HttpClientModule } from "@angular/common/http";
 import { HighchartsChartModule } from 'highcharts-angular';
 import { FlexLayoutModule } from "@angular/flex-layout";
+import { MatSliderModule } from '@angular/material/slider';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { FormsModule } from "@angular/forms";
+
 
 // core modules
 import { CustomMaterialModule } from './shared/material.module';
@@ -27,15 +30,22 @@ import { TeacherOrStudentComponent } from './components/teacherOrStudent/teacher
 import { ShopComponent } from './components/shop/shop.component';
 import { PasswordRecoveryComponent } from './components/password-recovery/password-recovery.component';
 import { PasswordResetComponent } from './components/password-reset/password-reset.component';
-import { TrophiesComponent } from './components/trophies/trophies.component';
+import { BadgesComponent } from './components/badges/badges.component';
 
 // services
 import { AuthGuardService } from './services/auth-guard.service';
 import { CookieService } from 'ngx-cookie-service';
 import { SocketIOService } from './services/socket-io.service';
 import { SessionComponent } from './components/session/session.component';
+import { ActivitiesComponent } from './components/activities/activities.component';
 import { TeacherOverviewComponent } from './components/teacher-overview/teacher-overview.component';
 import { NavBarComponent } from './components/nav-bar/nav-bar.component';
+import { JoinClassComponent } from './components/join-class/join-class.component';
+import { BubbleVisualisationComponent } from './components/bubble-visualisation/bubble-visualisation.component';
+import { SessionOptionsComponent } from './components/session-options/session-options.component';
+import { LabyrinthComponent } from './components/labyrinth/labyrinth.component';
+import { AnswerFormComponent } from './components/answer-form/answer-form.component';
+
 
 @NgModule({
     declarations: [
@@ -53,9 +63,15 @@ import { NavBarComponent } from './components/nav-bar/nav-bar.component';
         TeacherOverviewComponent,
         ShopComponent,
         NavBarComponent,
+        ActivitiesComponent,
         PasswordRecoveryComponent,
         PasswordResetComponent,
-        TrophiesComponent,
+        JoinClassComponent,
+        BubbleVisualisationComponent,
+        BadgesComponent,
+        SessionOptionsComponent,
+        LabyrinthComponent,
+        AnswerFormComponent,
     ],
     imports: [
         BrowserModule,
@@ -65,9 +81,11 @@ import { NavBarComponent } from './components/nav-bar/nav-bar.component';
         AppRoutingModule,
         HttpClientModule,
         HighchartsChartModule,
+        MatSliderModule,
         FlexLayoutModule,
         MatTabsModule,
         MatProgressBarModule,
+        FormsModule,
     ],
     providers: [AuthGuardService, CookieService, SocketIOService],
     bootstrap: [AppComponent],

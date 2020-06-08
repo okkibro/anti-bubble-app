@@ -92,7 +92,7 @@
                         </tr>
                     </table>
                     <mat-card-actions>
-                        <button mat-raised-button type="submit" [disabled]="!registerForm.valid" color="primary">Registreer</button>
+                        <button mat-raised-button type="submit" [disabled]="!registerForm.valid && (registerForm.get('role').value === 'student' )" color="primary">Registreer</button>
                     </mat-card-actions>
                 </form>
             </mat-card-content>

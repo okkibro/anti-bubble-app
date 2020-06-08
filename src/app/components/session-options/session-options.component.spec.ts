@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { TrophiesComponent } from './trophies.component';
+import { SessionOptionsComponent } from './session-options.component';
 
-describe('TrophiesComponent', () => {
-  let component: TrophiesComponent;
-  let fixture: ComponentFixture<TrophiesComponent>;
+describe('SessionOptionsComponent', () => {
+  let component: SessionOptionsComponent;
+  let fixture: ComponentFixture<SessionOptionsComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ TrophiesComponent ]
+      declarations: [ SessionOptionsComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(TrophiesComponent);
+    fixture = TestBed.createComponent(SessionOptionsComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

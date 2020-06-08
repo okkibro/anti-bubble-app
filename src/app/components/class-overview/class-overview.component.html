@@ -2,16 +2,16 @@
 
 <body>
     <div class="containerDiv" fxLayoutGap="0.5%" fxLayout="column" fxLayoutAlign="space-evenly">
-        <mat-card>
+        <mat-card *ngIf="userClassTitle">
             <mat-card-header>
                 <mat-card-title> Klassen Overzicht </mat-card-title>
                 <mat-card-subtitle>
-                    Overzicht van alle spelers van klas [klasnaam].
+                    Overzicht van alle spelers van klas {{userClassTitle}}.
                 </mat-card-subtitle>
             </mat-card-header>
         </mat-card>
 
-        <mat-card>
+        <mat-card *ngIf="userClassTitle">
             <mat-card-content>
                 <table class="UItable" id="table">
                     <tr>
@@ -28,7 +28,7 @@
             </mat-card-content>
         </mat-card>
 
-        <mat-card class="searchBar" [formGroup]="searchBar">
+        <mat-card class="searchBar" [formGroup]="searchBar" *ngIf="userClassTitle">
             <mat-card-header>
                 <mat-card-title>Zoek klasgenoot</mat-card-title>
             </mat-card-header>
@@ -61,6 +61,9 @@
                 </mat-accordion>
             </mat-card-content>
         </mat-card>
+        <div *ngIf="userClassTitle == undefined">
+            <mean-join-class></mean-join-class>
+        </div>
     </div>
 </body>
 

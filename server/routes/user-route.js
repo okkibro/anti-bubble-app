@@ -3,6 +3,7 @@ const router = express.Router();
 const mongoose = require('mongoose');
 const passport = require("passport");
 const User = mongoose.model('User');
+const Classes = mongoose.model('Classes');
 const sanitize = require('mongo-sanitize');
 const nodemailer = require('nodemailer');
 const crypto = require('crypto');
@@ -25,9 +26,15 @@ router.post('/register', (req, res) => {
     user.setPassword(sanitize(req.body.password));
     user.inventory = [];
     user.milestones = [];
+    user.bubbleInit = false;
     user.currency = 0;
+    user.class = [];
     for (let i = 0; i < 9; i++) { //TODO: change 9 to correct number when done making all the milestones
         user.milestones.push(0);
+    }
+    user.recentMilestones = []
+    for (let i = 0; i < 5; i++) {
+        user.recentMilestones[i] = "";
     }
 
     //save the changes to the database
@@ -179,7 +186,7 @@ router.get('/profile', auth, (req, res) => {
     // If no user ID exists in the JWT return a 401
     if (!req.payload._id) {
         res.status(401).json({
-            "message": "UnauthorizedError: private profile"
+            message: "UnauthorizedError: private profile"
         });
     } else {
         // Otherwise continue
@@ -189,51 +196,6 @@ router.get('/profile', auth, (req, res) => {
             });
     }
 });
-
-router.get('/classmateProfile/:id', auth, (req, res) => {
-    // If no user ID exists in the JWT return a 401
-    if (!req.payload._id) {
-        res.status(401).json({
-            "message": "UnauthorizedError: private profile"
-        });
-    } else {
-        // Otherwise continue and find own and classmate's profile
-        User.findById(req.payload._id, (error, user) => {
-            User.findById(req.params.id, (error, classmate) => {
-                // Throw error if the given id does not correspond with a user
-                if (!classmate) {
-                    res.status(404).json({
-                        "message": "User's profile not found"
-                    })
-                } else {
-                    // Check if classmate is actually in the same class
-                    if (user.class != classmate.class) {
-                        res.status(401).json({
-                            "message": "Not authorized to see user's profile"
-                        })
-                    } else {
-                        res.status(200).json(classmate);
-                    }
-                }
-            });
-        });
-    }
-});
-
-router.get('/getAllClassmates', auth, (req, res) => {
-    if (!req.payload._id) {
-        res.status(401).json({
-            "message": "UnauthorizedError: private profile"
-        });
-    } else {
-        User.findById(req.payload._id, (error, user) => {
-            User.find({ class: user.class }, (error, classmates) => {
-                res.status(200).json(classmates);
-            });
-        });
-    }
-})
-
 
 //router to check if email is already present in the database
 router.post('/checkEmailTaken', (req, res) => {
@@ -287,21 +249,64 @@ router.get('/milestone', auth, (req, res) => {
     });
 });
 
-// Router that changes a milestone by a given value, returns the updated value and whether it is completed or not
+// Router that changes a milestone by a given value, returns the updated value and whether it is completed now or not
 router.post('/milestone', auth, (req, res) => {
-    User.findById(req.payload._id, (err, user) => {
+    User.findById(req.payload._id, (err, user) => { // Get currently logged in user
         let milestone = req.body.milestone;
         let completed = false;
-        user.milestones[milestone.index] += req.body.value;
-        if (user.milestones[milestone.index] > milestone.maxValue) {
-            user.milestones[milestone.index] = milestone.maxValue;
-            completed = true;
+        if (user.milestones[milestone.index] == milestone.maxValue) { // Check if milestone is already completed
+            res.json( { updatedValue: milestone.maxValue, completed: completed } ); // Return completed false because it was already completed
+        } else {
+            user.milestones[milestone.index] += req.body.value; // Add value to milestone
+            if (user.milestones[milestone.index] >= milestone.maxValue) { // Check if you surpassed the max value
+                user.milestones[milestone.index] = milestone.maxValue; // Set value to max value cause it cant be larger than max value
+                completed = true;
+            }
+            // Mark and save changes
+            user.markModified('milestones');
+            user.save(() => {
+                res.json( { updatedValue: user.milestones[milestone.index], completed: completed } );
+            });
         }
-        user.markModified('milestones');
+    })
+});
+
+// Router to post a new message to recent milestones
+router.post('/recentMilestones', auth, (req, res) => {
+    User.findById(req.payload._id, (err, user) => {
+        user.recentMilestones.push(req.body.value); // Push new value into the array
+        user.recentMilestones.shift(); // Remove oldest value of the 5
         user.save(() => {
-            res.json( { updatedValue: user.milestones[milestone.index], completed: completed } );
+            res.end();
         });
     })
-})
+});
+
+//Router that adds selecter item for the avatar
+router.post('/avatar', auth, (req,res) => {
+    User.findById(req.payload._id, (err, user) => {
+        user.avatar[req.body.avatarItem.category] = req.body.avatarItem;
+        user.markModified('avatar');
+        user.save((error) => { 
+            if (error){
+                console.log(error.message);
+            }
+            res.status(200).json({
+                image: req.body.avatarItem.fullImage,
+                category: req.body.avatarItem.category
+            });
+        });
+    });
+});
+
+router.post('/updateGraph', auth, (req, res) => {
+    User.updateOne(
+        {_id : req.payload._id},
+        {$push : {knowledge : req.body.knowledgeScore, diversity : req.body.diversityScore}},
+        () => {
+            res.json({});
+        }
+    );
+});
 
 module.exports = router;

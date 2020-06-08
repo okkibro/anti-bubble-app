@@ -1,0 +1,28 @@
+<mean-nav-bar></mean-nav-bar>
+
+<body>
+    <div class="containerDiv" fxLayoutGap="0.5%" fxLayout="column" fxLayoutAlign="space-evenly">
+        <div fxLayout.xs="row" fxLayoutGap="0.5%" fxLayoutAlign="space-evenly">
+            <mat-card fxFlex="100%">
+                <mat-card-header>
+                    <mat-card-title class="welcomeHeader">{{gameData?.game.name}}</mat-card-title>
+                </mat-card-header>
+
+                <mat-card-content *ngIf="gameData?.game.name == 'Naamloos Nieuws'">
+                </mat-card-content>
+
+                <mat-card-content *ngIf="gameData?.game.name == 'Botsende Bubbels'">
+                    <mean-answer-form></mean-answer-form>
+                </mat-card-content>
+
+                <mat-card-content *ngIf="gameData?.game.name == 'Alternatieve Antwoorden'">
+                    <mean-answer-form></mean-answer-form>
+                </mat-card-content>
+
+                <mat-card-content *ngIf="gameData?.game.name == 'Aanradend Algoritme'">
+                </mat-card-content>
+
+            </mat-card>
+        </div>
+    </div>
+</body>

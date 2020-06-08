@@ -29,6 +29,8 @@
 .navitems button {
     padding-left: 30px;
     padding-right: 30px;
+
+    color: white;
 }
 
 .navBarAng button:hover {
@@ -45,7 +47,7 @@
 /* the following code will describe the rest of the (angular) page */
 body {
     /* background-image: url("../../favicon.ico"); */
-    background-image: url("../../assets/images/background.png");
+    background-image: url("../../assets/images/oud/background.png");
     text-align: center;
     margin: 0;
     padding: 0;
@@ -70,7 +72,6 @@ body {
 mat-card {
     background-color: #fffcf3;
     border: 5px solid #fceca9;
-    /* border-radius: 20px; */
 }
 
 mat-card-header {
@@ -79,11 +80,12 @@ mat-card-header {
 
 mat-card button{
     background-color: #addadb;
+    width: 40%;
 }
 
 mat-card img{
     object-fit: cover; 
-    width: 15%; 
+    width: 50%; 
     height: width;
 }
 
@@ -101,4 +103,52 @@ mat-tab-group, mat-tab {
 .UItable th, td {
     text-align: left;
     padding: 10px;    
+}
+
+.sessionTable, .submitTable {
+    display: inline-block;
+}
+
+.sessionTable, .submitTable th, td {
+    padding: 10px;
+}
+
+::ng-deep .mat-simple-snackbar-action {
+    color: white;
+}
+
+::ng-deep .style-error {
+    color: white;
+    background-color: red;
+}
+
+::ng-deep .style-succes {
+    color: white;
+    background-color: green;
+}
+.bubbleImage {
+    position: absolute;
+    top: 10%;
+    left: 0%;
+    background-color: transparent;
+    border: transparent;
+    box-shadow: none;
+    z-index: 1;
+}
+
+/* Apply this id for blue buttons designed by the artists */
+#artisticButtonBlue {
+    width: 40%;
+    background: transparent;
+    background-image: url("/assets/images/Super_map/Basic_Buttons/Button_blue_rectangle.png");
+    background-repeat: round;
+}
+
+::ng-deep .style-warning {
+    color: black;
+    background-color: yellow;
+}
+
+::ng-deep .style-warning .mat-simple-snackbar-action {
+    color: black;
 }

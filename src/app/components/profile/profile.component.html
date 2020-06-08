@@ -43,34 +43,34 @@
             </mat-card>
         </div>
 
-        <div fxLayout.xs="row" fxLayoutGap="0.5%" fxLayoutAlign="space-evenly" class="my-custom-theme">
+        <div fxLayout.xs="row" fxLayoutGap="0.5%" fxLayoutAlign="space-evenly" class="my-custom-theme" *ngIf="userDetails?.role == 'student'">
             <mat-card fxFlex="50%">
                 <mat-card-header>
                     <mat-card-title>Mijn Bubbel</mat-card-title>
                 </mat-card-header><br>
-                <img mat-card-image src="https://f1.pngfuel.com/png/724/363/759/cartoon-speech-bubble-soap-bubble-speech-balloon-pink-circle-material-property-sphere-magenta-png-clip-art.png"
-                    alt="bubbel voorbeeld">
+                
                 <mat-card-content>
+                    <mean-bubble-visualisation></mean-bubble-visualisation>
                     <button mat-flat-button [routerLink]="'/bubble-details'" [ngClass]="{'my-custom-theme': true}" color="accent">Meer details</button>
                 </mat-card-content>
             </mat-card>
 
             <mat-card fxFlex="50%">
                 <mat-card-header>
-                    <mat-card-title>Trofeeën</mat-card-title>
-                    <mat-card-subtitle>Trofee met de meeste voortgang</mat-card-subtitle>
+                    <mat-card-title>Badges</mat-card-title>
+                    <mat-card-subtitle>Badge met de meeste voortgang</mat-card-subtitle>
                 </mat-card-header>
                 <mat-card-content>
                     <table class="UItable">
-                        <tr >
-                            <td *ngIf="milestoneShown.name !='Gefeliciteerd'">
+                        <tr *ngIf="milestoneShown.name !='Gefeliciteerd'">
+                            <td>
                                 <strong>{{milestoneShown.name}}</strong><br>
                                 {{milestoneShown.description}}<br>
                                 Voortgang: {{userDetails?.milestones[milestoneShown.index]}}/{{milestoneShown.maxValue}}
                             </td>
                         </tr>
                     </table><br>
-                    <button mat-button [routerLink]="'/trophies'">Alle trofeeën</button>
+                    <button mat-button [routerLink]="'/badges'">Alle badges</button>
                 </mat-card-content>
             </mat-card>
         </div>

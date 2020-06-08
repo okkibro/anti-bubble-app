@@ -4,14 +4,75 @@
     <div class="containerDiv" fxLayoutGap="0.5%" fxLayout="column" fxLayoutAlign="space-evenly">
         <div fxLayout.xs="row" fxLayoutGap="0.5%" fxLayoutAlign="space-evenly">
             <mat-card fxFlex="100%">
-                <mat-card-header>
-                    <mat-card-title class="welcomeHeader">Welkom!</mat-card-title>
+                <mat-card-header *ngIf="currentClass == undefined">
+                    <mat-card-title class="welcomeHeader">Klas Overzicht</mat-card-title>
+                    <a mat-flat-button [ngClass]="{'my-custom-theme': true}" color="accent"
+                        (click)="onClickOpenForm()">Maak een nieuwe klas aan</a>
+                </mat-card-header>
+                <mat-card-header *ngIf="currentClass">
+                    <mat-card-title> Klassen Overzicht </mat-card-title>
                     <mat-card-subtitle>
-                        Breaking Bubbles is een online webpagina waar leerlingen zich bewust kunnen worden van hun
-                        filterbubbel.<br>
-                        Dit wordt bereikt door middel van lessen die in de klas met de docent(e) worden afgenomen.
+                        Overzicht van alle spelers van klas {{currentClass?.title}}, code: {{currentClass?.code}}.
                     </mat-card-subtitle>
                 </mat-card-header>
+                <mat-card-content *ngIf="currentClass != undefined">
+                    <table *ngIf="currentClass" class="UItable" id="table">
+                        <tr>
+                            <th>Naam</th>
+                            <th>Status</th>
+                        </tr>
+                        <tr *ngFor="let classmate of classmates">
+                            <td>{{ classmate.firstName }}</td>
+                            <td>Online</td>
+                            <td><button mat-button [routerLink]="'/classmateProfile/' + classmate._id" class="abutton">
+                                    Bekijk Profiel </button></td>
+                        </tr>
+                    </table>
+                </mat-card-content>
+                <form [hidden]="!openform" name="classForm" class="example-form" [formGroup]="classForm"
+                    (ngSubmit)="createClass()">
+                    <table class="UItable">
+                        <tr>
+                            <td>
+                                <mat-form-field class="example-full-width">
+                                    <mat-label>Klassennaam</mat-label>
+                                    <input matInput placeholder="klassennaam" formControlName="classTitle" required>
+                                    <mat-error *ngIf="classForm.get('classTitle').hasError('required')">
+                                        Klassennaam is <strong>verplicht</strong>
+                                    </mat-error>
+                                </mat-form-field>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <mat-form-field class="example-full-width">
+                                    <mat-label>Jaar</mat-label>
+                                    <input matInput placeholder="Jaar" formControlName="classYear" required>
+                                    <mat-error *ngIf="classForm.get('classYear').hasError('required')">
+                                        Jaar is <strong>verplicht</strong>
+                                    </mat-error>
+                                </mat-form-field>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <mat-label>Niveau:*</mat-label>
+                                <mat-radio-group class="role-radio-group" formControlName="classLevel">
+                                    <mat-radio-button class="role-radio-button" value="VMBO" color="primary">VMBO
+                                    </mat-radio-button>
+                                    <mat-radio-button class="role-radio-button" value="HAVO" color="primary">HAVO
+                                    </mat-radio-button>
+                                    <mat-radio-button class="role-radio-button" value="VWO" color="primary">VWO
+                                    </mat-radio-button>
+                                </mat-radio-group>
+                            </td>
+                        </tr>
+                    </table>
+                    <mat-card-actions>
+                        <button mat-raised-button type="submit" [disabled]="!classForm.valid"
+                            color="primary">Aanmaken</button>
+                    </mat-card-actions>
+                </form>
             </mat-card>
         </div>
     </div>

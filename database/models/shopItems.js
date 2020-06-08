@@ -12,7 +12,11 @@ let shopSchema = new Schema({
         type: String,
         required: true
     },
-    image: {
+    previewImage: {
+        type: String,
+        required: true
+    },
+    fullImage: {
         type: String,
         required: true
     },
