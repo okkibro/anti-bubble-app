@@ -5,6 +5,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { User } from '../../models/user';
 import { milestones } from '../../../../constants';
 import { Milestone } from 'src/app/models/milestone';
+import { ClassesService } from 'src/app/services/classes.service';
 
 @Component({
     selector: 'mean-profile',
@@ -23,8 +24,9 @@ export class ProfileComponent implements OnInit {
     },{
         validator: this.passwordMatchValidator
     });
+    userClassTitle;
 
-    constructor(private auth: AuthenticationService, private fb: FormBuilder, private snackbar: MatSnackBar) {}
+    constructor(private auth: AuthenticationService, private fb: FormBuilder, private snackbar: MatSnackBar, private classService: ClassesService) {}
     
     ngOnInit() {
         //Show badge with most progress
@@ -36,6 +38,13 @@ export class ProfileComponent implements OnInit {
             index: 0,
             maxValue: 0
         }
+
+        // Get user's class
+        this.classService.getClass().subscribe((data) => {
+            if (data.succes) {
+              this.userClassTitle = data.class.title;
+            }
+          });
         
         this.auth.profile().subscribe(user => {
             this.userDetails = user;

@@ -15,6 +15,7 @@ export class LabyrinthComponent implements OnInit {
 
   userDetails: User;
   startedLabyrinth: boolean;
+  firstQuestion: boolean = true;
   lastSelected;
   interval;
 
@@ -28,7 +29,7 @@ export class LabyrinthComponent implements OnInit {
       this.userDetails = user;
 
       this.sessionService.performedLabyrinth(this.userDetails.email).subscribe(data => {
-        if (data.succes) {
+        if (data.succes) {  // labyrinth boolean is set to true. Player now has a bubble and can join activity sessions.
           this.router.navigate(['home']);
         } else {
           // TODO: opvangen fout tijdens doorlopen van doolhof
@@ -43,8 +44,8 @@ export class LabyrinthComponent implements OnInit {
 
   startLabyrinth() {
     this.startedLabyrinth = true;
-    this.startTimer(10); // labyrinth activity is 5 minutes, therefore 300 seconds
-    // this.nextQuestion();
+    this.startTimer(300); // labyrinth activity is 5 minutes, therefore 300 seconds
+    this.nextQuestion();
   }
 
   startTimer(time: number) {
@@ -64,7 +65,7 @@ export class LabyrinthComponent implements OnInit {
       } else {
         clearInterval(this.interval);
         this.snackBar.open('De tijd is op. Je wordt omgeleid naar de homepage.', 'X', { duration: 2500, panelClass: ['style-warning'], });
-        this.router.navigate(['home']); // TODO: Dit gaat echt te snel
+        this.performedLabyrinth(); // TODO: redirect naar home gaan te snel?
       }
     }, 1000);
   }
@@ -74,11 +75,15 @@ export class LabyrinthComponent implements OnInit {
   }
 
   nextQuestion() {
-    if (this.lastSelected != undefined) {
+    if (this.lastSelected == undefined) {
+      if (this.firstQuestion) { // do not save answers when displaying the first question
+        this.firstQuestion = false;
+      } else {
+        this.snackBar.open('Vul een antwoord in', 'X', { duration: 2500, panelClass: ['style-error'], });
+      }
+    } else {
       console.log("Je hebt gekozen voor: " + this.lastSelected); //TODO: sla dit antwoord ergens op
       // TODO: laat volgende vraag (en opties) zien
-    } else {
-      this.snackBar.open('Vul een antwoord in', 'X', { duration: 2500, panelClass: ['style-error'], });
     }
   }
 }
