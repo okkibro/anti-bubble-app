@@ -35,6 +35,9 @@ test:karma:
       - coverage/
   tags:
    - docker
+  only:
+   - Development
+   - Master
 
 #test:e2e:
 #  stage: test
