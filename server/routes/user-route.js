@@ -6,6 +6,7 @@ const User = mongoose.model('User');
 const sanitize = require('mongo-sanitize');
 const nodemailer = require('nodemailer');
 const crypto = require('crypto');
+const Shop = mongoose.model('Shop');
 
 const jwt = require('express-jwt');
 const auth = jwt({
@@ -24,23 +25,37 @@ router.post('/register', (req, res) => {
     user.role = sanitize(req.body.role);
     user.setPassword(sanitize(req.body.password));
     user.inventory = [];
-    user.avatar = { body:  mongoose.Types.ObjectId('5eca3c87f5a0edaaa09915e8'),
-                    pants: mongoose.Types.ObjectId('5ecfb686974e5b139cc1972e'),
-                    shirt: mongoose.Types.ObjectId('5eaa9475cc3aec14b8b6537a')
-                }
     user.milestones = [];
     user.currency = 0;
     for (let i = 0; i < 9; i++) { //TODO: change 9 to correct number when done making all the milestones
         user.milestones.push(0);
     }
+    console.log(Shop);
+    Shop.findOne({}, lichaam => { 
+        console.log(lichaam);
+        Shop.findById('5edcf97b1167982a005b977e', broek => {
+            Shop.findById('5edcbf271167982a005b9525', shirt => { 
+                user.avatar = {
+                    lichaam : lichaam,
+                    broek : broek,
+                    shirt : shirt
+                }
+                user.save(function () {
+                    let token = user.generateJwt();
+                    res.status(200).json({
+                        token: token
+                    });
+                });
+             });
+          });
+     });
+    // user.avatar = { lichaam:  mongoose.Types.ObjectId('5edcf97b1167982a005b9737'),
+    //                 broek: mongoose.Types.ObjectId('5edcf97b1167982a005b977e'),
+    //                 shirt: mongoose.Types.ObjectId('5edcbf271167982a005b9525')
+                // }
+    // user.markModified('avatar');
 
     //save the changes to the database
-    user.save(function () {
-        let token = user.generateJwt();
-        res.status(200).json({
-            token: token
-        });
-    });
 });
 
 //router to check if login details match with the database (authentication)

@@ -31,7 +31,4 @@ export class AvatarDisplayComponent implements OnInit {
     document.getElementById("medaille").setAttribute("src", this.userDetails.avatar.medaille?.fullImage); 
     });
 }
-
-@Output() myEvent = new EventEmitter();
-
 }
