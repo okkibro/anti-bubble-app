@@ -46,19 +46,26 @@ export class AvatarComponent implements OnInit {
         this.avatarService.equip(item).subscribe(data => {
             console.log(data);
             // Updates the image shown to the player without reloading the page
-            document.getElementById(data.category).setAttribute("src", data.image);
+            if(data.category == "haar"){
+                document.getElementById("haar1").setAttribute("src", data.imageFull2);
+                document.getElementById("haar2").setAttribute("src", data.imageFull);
+                console.log(data.imageFull);
+            }
+            else{
+                document.getElementById(data.category).setAttribute("src", data.imageFull);
+            }
         });
     }
 
     // Function to show the avatar, taking the object from the database
     showAvatar(){
-        document.getElementById("haar1").setAttribute("src", this.userDetails.avatar.haar1?.fullImage);
+        document.getElementById("haar1").setAttribute("src", this.userDetails.avatar.haar?.fullImage2);
         document.getElementById("lichaam").setAttribute("src", this.userDetails.avatar.body?.fullImage);
         document.getElementById("broek").setAttribute("src", this.userDetails.avatar.pants?.fullImage);
         document.getElementById("shirt").setAttribute("src", this.userDetails.avatar.shirt?.fullImage);
         document.getElementById("schoenen").setAttribute("src", this.userDetails.avatar.schoenen?.fullImage);
         document.getElementById("bril").setAttribute("src", this.userDetails.avatar.bril?.fullImage);
-        document.getElementById("haar2").setAttribute("src", this.userDetails.avatar.haar2?.fullImage);
+        document.getElementById("haar2").setAttribute("src", this.userDetails.avatar.haar?.fullImage);
         document.getElementById("hoofddeksel").setAttribute("src", this.userDetails.avatar.hoofddeksel?.fullImage);
         document.getElementById("medaille").setAttribute("src", this.userDetails.avatar.medaille?.fullImage);
         console.log(this.userDetails.avatar.body?.fullImage);   
@@ -66,8 +73,6 @@ export class AvatarComponent implements OnInit {
 
     // Changes the tab in the HTML and updates the shown items
     tabChange(value) {
-        // var currentTab = event.tab.textLabel;
-        // console.log(value);
         this.shopService.shop(value).subscribe(shop => {
             this.itemsShown = shop;
             this.filteredAvatar = this.filterAvatar();

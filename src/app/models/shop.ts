@@ -6,6 +6,7 @@ export class Shop {
     category: string;
     previewImage: string;
     fullImage: string;
+    fullImage2: string;
     price: number;
     role: Role;
     exp: number;

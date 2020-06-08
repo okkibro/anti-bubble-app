@@ -20,6 +20,9 @@ let shopSchema = new Schema({
         type: String,
         required: true
     },
+    fullImage2: {
+        type: String
+    },
     price: {
         type: Number,
         required: true

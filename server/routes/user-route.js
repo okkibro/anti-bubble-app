@@ -318,7 +318,8 @@ router.post('/avatar', auth, (req,res) => {
                 console.log(error.message);
             }
             res.status(200).json({
-                image: req.body.avatarItem.fullImage,
+                imageFull: req.body.avatarItem.fullImage,
+                imageFull2: req.body.avatarItem.fullImage2,
                 category: req.body.avatarItem.category
             });
         })
