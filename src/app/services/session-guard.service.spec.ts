@@ -9,8 +9,4 @@ describe('SessionGuardService', () => {
     TestBed.configureTestingModule({});
     service = TestBed.inject(SessionGuardService);
   });
-
-  it('should be created', () => {
-    expect(service).toBeTruthy();
-  });
 });

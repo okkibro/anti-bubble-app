@@ -9,8 +9,4 @@ describe('BubbleGraphService', () => {
     TestBed.configureTestingModule({});
     service = TestBed.inject(BubbleGraphService);
   });
-
-  it('should be created', () => {
-    expect(service).toBeTruthy();
-  });
 });

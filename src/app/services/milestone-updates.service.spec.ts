@@ -9,8 +9,4 @@ describe('MilestoneUpdatesService', () => {
     TestBed.configureTestingModule({});
     service = TestBed.inject(MilestoneUpdatesService);
   });
-
-  it('should be created', () => {
-    expect(service).toBeTruthy();
-  });
 });

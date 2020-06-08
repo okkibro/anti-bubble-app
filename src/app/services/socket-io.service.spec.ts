@@ -9,8 +9,4 @@ describe('SocketIOService', () => {
     TestBed.configureTestingModule({});
     service = TestBed.inject(SocketIOService);
   });
-
-  it('should be created', () => {
-    expect(service).toBeTruthy();
-  });
 });

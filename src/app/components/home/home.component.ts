@@ -5,7 +5,7 @@ import { FormBuilder, Validators } from "@angular/forms";
 import { User } from "../../models/user";
 import { Router } from "@angular/router";
 import { PointInteractionEventObject } from 'highcharts';
-import { DataService } from 'src/app/services/data-exchage.service';
+import { DataService } from 'src/app/services/data-exchange.service';
 import { Message } from '@angular/compiler/src/i18n/i18n_ast';
 import { MatSnackBar } from '@angular/material/snack-bar';
 

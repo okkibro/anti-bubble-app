@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { SocketIOService } from 'src/app/services/socket-io.service';
 import { Router } from '@angular/router';
-import { DataService } from 'src/app/services/data-exchage.service';
+import { DataService } from 'src/app/services/data-exchange.service';
 import { FormBuilder } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 

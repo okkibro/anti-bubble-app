@@ -9,8 +9,4 @@ describe('AuthGuardService', () => {
     TestBed.configureTestingModule({});
     service = TestBed.inject(AuthGuardService);
   });
-
-  it('should be created', () => {
-    expect(service).toBeTruthy();
-  });
 });
