@@ -16,7 +16,9 @@
                     <a mat-flat-button (click)="createSession()" [ngClass]="{'my-custom-theme': true}" color="accent"> Kies Activiteit </a>
                 </mat-card-content>
                 <mat-card-content *ngIf="userDetails?.role == 'student' && userDetails?.bubbleInit">
-                    <input [(ngModel)]="pin" placeholder="Sessie code"><br>
+                    <mat-form-field>
+                        <input matInput [(ngModel)]="pin" placeholder="Sessie code"><br>
+                    </mat-form-field>
                     <a mat-flat-button (click)="joinSession()" [ngClass]="{'my-custom-theme': true}" color="accent"> Deelnemen aan sessie </a>
                 </mat-card-content>
                 <mat-card-content *ngIf="userDetails?.role == 'student' && !userDetails?.bubbleInit">
