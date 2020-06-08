@@ -46,7 +46,7 @@
 #### Hot Fix
 + git checkout master
 + git checkout -b hotfix_branch
-work is done commits are added to the hotfix_branch
+** work is done commits are added to the hotfix_branch*
 + git checkout develop
 + git merge hotfix_branch
 + git checkout master
@@ -56,7 +56,7 @@ work is done commits are added to the hotfix_branch
 + git checkout master
 + git checkout -b develop
 + git checkout -b feature_branch
-work happens on feature branch
+** work happens on feature branch *
 + git checkout develop
 + git merge feature_branch
 + git checkout master
