@@ -18,6 +18,8 @@ export class AnswerFormComponent implements OnInit {
 
   constructor(private fb: FormBuilder, private snackBar: MatSnackBar, private socketService: SocketIOService) { }
 
+  alreadySubmitted:boolean = false;
+
   ngOnInit(): void {
   }
 
@@ -26,6 +28,7 @@ export class AnswerFormComponent implements OnInit {
     if (this.value != "") {
       this.socketService.studentSubmit(this.value);
       this.value = "";
+      this.alreadySubmitted = true; // prevents students from spamming the teacher with answers
     } else {
       this.snackBar.open('Vul een antwoord in', 'X', { duration: 2500, panelClass: ['style-error'], });
     }

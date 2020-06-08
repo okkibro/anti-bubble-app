@@ -28,14 +28,6 @@ body {
     z-index: 100;
 }
 
-.timeLeft{
-    top: 10%;
-    left: 3%;
-    float: right;
-    position: absolute;
-    z-index: 100;
-}
-
 #teacherPin {
     font-size: 66px;
 }

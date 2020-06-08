@@ -76,7 +76,7 @@ export class SessionComponent implements OnInit {
                     var submitTable = document.getElementsByClassName('submitTable')[0];
                     //var dataNode = document.createTextNode(data.player.name);
                     var tablerow = document.createElement('tr');
-                    tablerow.innerHTML = `<strong>${data.player.name}:</strong> ${data.message}`
+                    tablerow.innerHTML = `<strong>${data.player.name}:</strong> ${data.message}<br>`
                     //tablerow.appendChild(dataNode);
                     submitTable.appendChild(tablerow);
                 });

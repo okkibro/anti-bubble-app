@@ -3,5 +3,5 @@
         <mat-label>Vul hier je antwoord in</mat-label>
         <textarea matInput formControlName="getAnswer" placeholder="[antwoord]" [(ngModel)]="value" ></textarea>
     </mat-form-field><br>
-    <button mat-raised-button type="submit">Verstuur</button>
+    <button mat-raised-button type="submit" [disabled]="alreadySubmitted">Verstuur</button>
 </form>

@@ -113,6 +113,14 @@ mat-tab-group, mat-tab {
     padding: 10px;
 }
 
+.timeLeft{
+    top: 10%;
+    left: 3%;
+    float: right;
+    position: absolute;
+    z-index: 100;
+}
+
 ::ng-deep .mat-simple-snackbar-action {
     color: white;
 }

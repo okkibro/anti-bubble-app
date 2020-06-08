@@ -1,11 +1,13 @@
 <mean-nav-bar></mean-nav-bar>
 
+<p class="timeLeft">Tijd over: <br><strong>5:00</strong></p>
+
 <body>
     <div class="containerDiv" fxLayoutGap="0.5%" fxLayout="column" fxLayoutAlign="space-evenly">
         <div fxLayout.xs="row" fxLayoutGap="0.5%" fxLayoutAlign="space-evenly">
             <mat-card fxFlex="100%">
                 <mat-card-header>
-                    <mat-card-title>Dwalende Doolhof, (10 min)</mat-card-title>
+                    <mat-card-title>Dwalende Doolhof, (5 min)</mat-card-title>
                     <mat-card-subtitle>
                         Doorloop het doolhof
                     </mat-card-subtitle>
@@ -23,7 +25,17 @@
                 </mat-card-content>
 
                 <mat-card-content *ngIf="startedLabyrinth">
-                    
+                    <p id="question">Wat vind je leuk om te doen?</p>
+
+                    <mat-radio-group class="radioButtonOptions">
+                        <mat-radio-button value="Zwemmen" #zwem (change)="onItemChange(zwem.value)">Zwemmen</mat-radio-button><br>
+                        <mat-radio-button value="Leren" #leer (change)="onItemChange(leer.value)">Leren</mat-radio-button><br>
+                        <mat-radio-button value="Alpaca" #alp (change)="onItemChange(alp.value)">Alpaca's knuffelen</mat-radio-button><br>
+                        <mat-radio-button value="Niks" #niks (change)="onItemChange(niks.value)">Niks</mat-radio-button>
+                    </mat-radio-group><br>
+
+                    <button mat-flat-button (click)="nextQuestion()">Volgende</button>
+
                 </mat-card-content>
             </mat-card>
         </div>
