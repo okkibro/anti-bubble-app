@@ -17,20 +17,7 @@
     padding: 20px;
 }
 
-.avatarImage{
-    position: sticky;
-    top: 0;
-}
 
-.avatarDisplay {
-    position: absolute;
-    top: 10%;
-    left: 0%;
-    background-color: transparent;
-    border: transparent;
-    box-shadow: none;
-    z-index: 1;
-}
 
 #buttonHoofddeksel{
     background-image: url("/assets/images/Super_Map/Shop_UI/Button_hats.png");

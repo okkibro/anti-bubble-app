@@ -3,17 +3,9 @@
 <body>
 
     <div class="containerDiv" fxLayoutGap="0.2%" fxLayout="row" fxLayoutAlign="space-evenly">
-            <mat-card fxFlex="25%" class="avatarImage">            
-                <mat-card class="avatarDisplay"><img mat-card-image id="haar1"></mat-card>
-                <mat-card class="avatarDisplay"><img mat-card-image id="lichaam"></mat-card>
-                <mat-card class="avatarDisplay"><img mat-card-image id="broek"></mat-card>
-                <mat-card class="avatarDisplay"><img mat-card-image id="shirt"></mat-card>
-                <mat-card class="avatarDisplay"><img mat-card-image id="schoenen"></mat-card>
-                <mat-card class="avatarDisplay"><img mat-card-image id="bril"></mat-card>
-                <mat-card class="avatarDisplay"><img mat-card-image id="haar2"></mat-card>
-                <mat-card class="avatarDisplay"><img mat-card-image id="hoofddeksel"></mat-card>
-                <mat-card class="avatarDisplay"><img mat-card-image id="medaille"></mat-card>                   
-            </mat-card>
+        <mat-card fxFlex=25%>
+            <mean-avatar-display></mean-avatar-display>
+        </mat-card>
 
             <mat-card  id="itemCollection" fxFlex="60%"> 
                 <mat-card-content>
@@ -22,7 +14,7 @@
                     </mat-card-header><br>
                     <mat-grid-list cols="2">
                         <mat-grid-tile *ngFor = "let item of filteredAvatar" fxFlexAlign="stretch">
-                            <mat-card fxFlex="100%" fxLayout="column" fxLayoutGap="0.5%" fxFlexAlign="stretch" class="avatarDisplay">
+                            <mat-card fxFlex="100%" fxLayout="column" fxLayoutGap="0.5%" fxFlexAlign="stretch">
                                     {{item.title}}
                                     <img mat-card-image src="{{item.previewImage}}" alt="{{item.title}}" (click)="equip(item)"><br>
                             </mat-card>

@@ -1,0 +1,14 @@
+.avatarImage{
+    position: sticky;
+    top: 0;
+}
+
+.avatarDisplay {
+    position: absolute;
+    top: 10%;
+    left: 0%;
+    background-color: transparent;
+    border: transparent;
+    box-shadow: none;
+    z-index: 1;
+}
