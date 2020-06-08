@@ -41,4 +41,24 @@
 + Run ng test --code-coverage --browsers=Chrome
 + Updates automatically on save
 
+### Branches
 
+#### Hot Fix
++ git checkout master
++ git checkout -b hotfix_branch
+# work is done commits are added to the hotfix_branch
++ git checkout develop
++ git merge hotfix_branch
++ git checkout master
++ git merge hotfix_branch
+
+#### Feature
++ git checkout master
++ git checkout -b develop
++ git checkout -b feature_branch
+# work happens on feature branch
++ git checkout develop
++ git merge feature_branch
++ git checkout master
++ git merge develop
++ git branch -d feature_branch
