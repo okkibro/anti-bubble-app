@@ -96,17 +96,7 @@ describe('LoginComponent', () => {
   });
 
   it('should render message when formControl is submitted and invalid', () => {
-    const email = component.loginForm.controls.email;
-    email.setValue('test@test.com');
-    const password = component.loginForm.controls.password;
-    password.setValue('123456');
-    snackbarStub.open.and.returnValue(of());
 
-    fixture.detectChanges();
-
-    fixture.nativeElement.querySelector('button').click();
-
-    expect(snackbarStub.open.calls.any()).toBeTruthy();
 
   });
 

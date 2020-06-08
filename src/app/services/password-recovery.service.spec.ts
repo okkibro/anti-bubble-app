@@ -9,8 +9,4 @@ describe('PasswordRecoveryService', () => {
     TestBed.configureTestingModule({});
     service = TestBed.inject(PasswordRecoveryService);
   });
-
-  it('should be created', () => {
-    expect(service).toBeTruthy();
-  });
 });
