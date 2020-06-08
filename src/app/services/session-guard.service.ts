@@ -22,6 +22,9 @@ export class SessionGuardService implements CanDeactivate<SessionComponent> {
         if (confirm("Weet je zeker dat je de sessie wilt verlaten?")) {
           component.leaveSession();
           window.removeEventListener('beforeunload', component.beforeUnload);
+          if (currentState.url == '/session') {
+            clearInterval(component.interval);
+          }
           return true;
         } else {
           return false;

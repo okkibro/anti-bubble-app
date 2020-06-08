@@ -138,12 +138,12 @@ export class SessionComponent implements OnInit {
         setTimeout(() => {
             console.log("TIJD OP"); // TODO: redirect naar home ofzo en update bubblewaarden alles
         }, time * 1000);
-        let interval = setInterval(() => {
+        this.interval = setInterval(() => {
             if(time > 0) {
                 time -= 1;
                 document.getElementsByClassName('timeLeft')[0].innerHTML = `Tijd over: <br><strong>${time}</strong>`;
             } else {
-                clearInterval(interval);
+                clearInterval(this.interval);
             }
         }, 1000);
     }
