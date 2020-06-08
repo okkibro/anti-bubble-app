@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {AuthenticationService} from "../../services/authentication.service";
+import { AuthenticationService } from "../../services/authentication.service";
 import { SocketIOService } from 'src/app/services/socket-io.service';
 import { DataService } from 'src/app/services/data-exchage.service';
 import { User } from '../../models/user';
@@ -10,7 +10,7 @@ import { SessionService } from 'src/app/services/session.service';
     selector: 'mean-session',
     templateUrl: './session.component.html',
     styleUrls: ['./session.component.css',
-    '../../shared/general-styles.css']
+        '../../shared/general-styles.css']
 })
 
 export class SessionComponent implements OnInit {
@@ -21,10 +21,11 @@ export class SessionComponent implements OnInit {
     playerCount = 0;
     activity;
     gameStarted;
-    
+    interval;
+
     constructor(
-        private authenticationService: AuthenticationService, 
-        private socketService: SocketIOService, 
+        private authenticationService: AuthenticationService,
+        private socketService: SocketIOService,
         private data: DataService,
         private router: Router,
         private sessionService: SessionService,
@@ -54,7 +55,7 @@ export class SessionComponent implements OnInit {
                     tableRow.classList.add("player");
                     let table = document.getElementsByClassName("sessionTable")[0];
                     table.appendChild(tableRow); // Append the tablerow to the table
-                    
+
                     this.playerCount = this.playerCount + 1; //display number of players in top right corner
 
                 }, removedPlayer => { // Gets called when a player leaves the session
@@ -126,11 +127,31 @@ export class SessionComponent implements OnInit {
     startGame() {
         this.gameStarted = true;
         this.socketService.startGame();
+
+        // TODO: terug naar time * 60
+        let time = this.gameData?.duration; // specified time for this activity (in seconds)
+        this.startTimer(time);
+    }
+
+
+    startTimer(time: number) {
+        setTimeout(() => {
+            console.log("TIJD OP"); // TODO: redirect naar home ofzo en update bubblewaarden alles
+        }, time * 1000);
+
+        let interval = setInterval(() => {
+            if(time > 0) {
+                time -= 1;
+                console.log(time);
+            } else {
+                clearInterval(interval);
+            }
+        }, 1000);
     }
 
     pairStudentsTest() {
         this.socketService.pairStudents(false, 2, pairs => {
-            
+
         });
     }
 }
