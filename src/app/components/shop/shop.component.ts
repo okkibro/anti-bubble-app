@@ -29,7 +29,7 @@ export class ShopComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.shopService.shop("lichaam").subscribe(shop => {
+    this.shopService.shop("haar").subscribe(shop => {
       this.shopDetails = shop;
       this.authenticationService.profile().subscribe(user => {
         this.userDetails = user;

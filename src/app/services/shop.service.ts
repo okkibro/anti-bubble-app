@@ -13,7 +13,7 @@ export class ShopService {
 
   constructor(private http: HttpClient, private router: Router, private cookie: CookieService) { }
 
-  public shop(type: 'lichaam'|'hoofddeksel'|'kleding'): Observable<any> {
+  public shop(type: 'haar'|'lichaam'|'broek'|'shirt'|'schoenen'|'bril'|'hoofddeksel'|'medaille'): Observable<any> {
     return this.http.get('https://localhost:3000/shop', {headers : { id : type }});
   }
 

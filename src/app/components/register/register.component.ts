@@ -30,7 +30,8 @@ export class RegisterComponent implements OnInit {
 
     ngOnInit() { }
 
-    registerUser() {
+    // TODO: Add check if register is complete before redirecting
+    registerUser() { 
         let user = new User();
         user.firstName = this.registerForm.get('firstName').value;
         user.lastName = this.registerForm.get('lastName').value;

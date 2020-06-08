@@ -45,7 +45,7 @@ import { BubbleVisualisationComponent } from './components/bubble-visualisation/
 import { SessionOptionsComponent } from './components/session-options/session-options.component';
 import { LabyrinthComponent } from './components/labyrinth/labyrinth.component';
 import { AnswerFormComponent } from './components/answer-form/answer-form.component';
-
+import { AvatarDisplayComponent } from './components/avatar-display/avatar-display.component';
 
 @NgModule({
     declarations: [
@@ -72,6 +72,7 @@ import { AnswerFormComponent } from './components/answer-form/answer-form.compon
         SessionOptionsComponent,
         LabyrinthComponent,
         AnswerFormComponent,
+        AvatarDisplayComponent,
     ],
     imports: [
         BrowserModule,

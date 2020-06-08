@@ -16,9 +16,9 @@ export class User {
     inventory: [ShopItem];
     milestones: [Milestone];
     class: string;
-    avatar: [ShopItem];
     knowledge: [number];
     diversity: [number];
     recentMilestones: [String];
     bubbleInit: boolean;
+    avatar: any;
 }

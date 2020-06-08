@@ -8,7 +8,9 @@ let itemSchema = new Schema({
         required: true
     },
     category: String,
-    image: String,
+    imagePreview: String,
+    imageFull: String,
+    imageFull2: String,
     price: Number,
     exp: Number
 });

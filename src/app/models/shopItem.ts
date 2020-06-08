@@ -4,6 +4,7 @@ export class ShopItem {
     category: string;
     previewImage: string;
     fullImage: string;
+    fullImage2: string;
     price: number;
     exp: number;
 }

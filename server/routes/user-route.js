@@ -7,6 +7,7 @@ const Classes = mongoose.model('Classes');
 const sanitize = require('mongo-sanitize');
 const nodemailer = require('nodemailer');
 const crypto = require('crypto');
+const Shop = mongoose.model('Shop');
 
 const jwt = require('express-jwt');
 const auth = jwt({
@@ -36,14 +37,32 @@ router.post('/register', (req, res) => {
     for (let i = 0; i < 5; i++) {
         user.recentMilestones[i] = "";
     }
+    console.log(Shop);
+    Shop.findOne({}, lichaam => { 
+        console.log(lichaam);
+        Shop.findById('5edcf97b1167982a005b977e', broek => {
+            Shop.findById('5edcbf271167982a005b9525', shirt => { 
+                user.avatar = {
+                    lichaam : lichaam,
+                    broek : broek,
+                    shirt : shirt
+                }
+                user.save(function () {
+                    let token = user.generateJwt();
+                    res.status(200).json({
+                        token: token
+                    });
+                });
+             });
+          });
+     });
+    // user.avatar = { lichaam:  mongoose.Types.ObjectId('5edcf97b1167982a005b9737'),
+    //                 broek: mongoose.Types.ObjectId('5edcf97b1167982a005b977e'),
+    //                 shirt: mongoose.Types.ObjectId('5edcbf271167982a005b9525')
+                // }
+    // user.markModified('avatar');
 
     //save the changes to the database
-    user.save(function () {
-        let token = user.generateJwt();
-        res.status(200).json({
-            token: token
-        });
-    });
 });
 
 //router to check if login details match with the database (authentication)
@@ -292,7 +311,8 @@ router.post('/avatar', auth, (req,res) => {
                 console.log(error.message);
             }
             res.status(200).json({
-                image: req.body.avatarItem.fullImage,
+                imageFull: req.body.avatarItem.fullImage,
+                imageFull2: req.body.avatarItem.fullImage2,
                 category: req.body.avatarItem.category
             });
         });

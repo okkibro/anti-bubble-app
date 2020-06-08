@@ -47,7 +47,7 @@
 /* the following code will describe the rest of the (angular) page */
 body {
     /* background-image: url("../../favicon.ico"); */
-    background-image: url("../../assets/images/oud/background.png");
+    /* background-image: url("../../assets/images/oud/background.png"); */
     text-align: center;
     margin: 0;
     padding: 0;
@@ -72,6 +72,7 @@ body {
 mat-card {
     background-color: #fffcf3;
     border: 5px solid #fceca9;
+    position: relative;
 }
 
 mat-card-header {
@@ -140,7 +141,7 @@ mat-tab-group, mat-tab {
 #artisticButtonBlue {
     width: 40%;
     background: transparent;
-    background-image: url("/assets/images/Super_map/Basic_Buttons/Button_blue_rectangle.png");
+    background-image: url("/assets/images/Super_Map/Basic_Buttons/Button_Blue_Rectangle.png");
     background-repeat: round;
 }
 
