@@ -136,12 +136,18 @@ export class SessionComponent implements OnInit {
 
     startTimer(time: number) {
         setTimeout(() => {
-            console.log("TIJD OP"); // TODO: redirect naar home ofzo en update bubblewaarden alles
+            // TODO: redirect naar home ofzo en update bubblewaarden alles
         }, time * 1000);
         this.interval = setInterval(() => {
             if(time > 0) {
                 time -= 1;
-                document.getElementsByClassName('timeLeft')[0].innerHTML = `Tijd over: <br><strong>${time}</strong>`;
+                let minutes = Math.floor(time / 60);
+                let seconds = time % 60;
+                if (seconds < 10) {
+                    document.getElementsByClassName('timeLeft')[0].innerHTML = `Tijd over: <br><strong>${minutes}:0${seconds}</strong>`;
+                } else {
+                    document.getElementsByClassName('timeLeft')[0].innerHTML = `Tijd over: <br><strong>${minutes}:${seconds}</strong>`;
+                }
             } else {
                 clearInterval(this.interval);
             }

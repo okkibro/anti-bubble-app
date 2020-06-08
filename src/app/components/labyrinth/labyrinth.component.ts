@@ -13,6 +13,7 @@ import { AuthenticationService } from '../../services/authentication.service';
 export class LabyrinthComponent implements OnInit {
 
   userDetails: User;
+  startedLabyrinth: boolean;
 
   constructor(private router: Router, private sessionService: SessionService, private auth: AuthenticationService) { }
 
@@ -25,10 +26,8 @@ export class LabyrinthComponent implements OnInit {
 
       this.sessionService.performedLabyrinth(this.userDetails.email).subscribe(data => {
         if (data.succes) {
-          console.log("doolhof afgerond");
           this.router.navigate(['home']);
         } else {
-          console.log("doolhof niet afgerond");
         }
       });
     });
@@ -37,5 +36,9 @@ export class LabyrinthComponent implements OnInit {
 
   logoutButton() {
     return this.auth.logout();
+  }
+
+  startLabyrinth() {
+    this.startedLabyrinth = true;
   }
 }

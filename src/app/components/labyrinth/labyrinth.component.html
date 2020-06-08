@@ -10,7 +10,7 @@
                         Doorloop het doolhof
                     </mat-card-subtitle>
                 </mat-card-header>
-                <mat-card-content>
+                <mat-card-content *ngIf="!startedLabyrinth">
                     Je gaat een doolhof doorlopen. In dit doolhof krijg je vragen over je internetgebruik.<br>
                     Probeer ze zo eerlijk mogelijk te beantwoorden, want hiermee maak je je persoonlijke filterbubbel.<br>
                     Deze activiteit kun je slechts één keer uitvoeren. <br>
@@ -18,7 +18,12 @@
                     <img mat-card-image src="https://www.bodytolk.nl/wp-content/uploads/2018/10/Doolhof-e1540134886809.png" id="doolhof"
                     alt="tijdelijk doolhof">
                     <br>
-                    <button mat-button (click)="performedLabyrinth()">Klaar</button>
+                    <!-- <button mat-button (click)="performedLabyrinth()">Klaar</button> -->
+                    <button mat-button (click)="startLabyrinth()">Start</button>
+                </mat-card-content>
+
+                <mat-card-content *ngIf="startedLabyrinth">
+                    
                 </mat-card-content>
             </mat-card>
         </div>
