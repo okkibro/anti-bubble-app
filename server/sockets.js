@@ -128,7 +128,8 @@ function runIO(io) {
 		});
 
 		socket.on('submit', (data) => {
-			io.to(players.getPlayer(socket.id).hostID).emit('receive-submit', data);
+			let player = players.getPlayer(socket.id);
+			io.to(player.hostID).emit('receive-submit', { player: player, message: data });
 		});
 
 		socket.on('start-game', () => {

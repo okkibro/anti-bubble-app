@@ -74,9 +74,10 @@ export class SessionComponent implements OnInit {
 
                 this.socketService.listenForSubmits((data) => {
                     var submitTable = document.getElementsByClassName('submitTable')[0];
-                    var dataNode = document.createTextNode(data);
+                    //var dataNode = document.createTextNode(data.player.name);
                     var tablerow = document.createElement('tr');
-                    tablerow.appendChild(dataNode);
+                    tablerow.innerHTML = `<strong>${data.player.name}:</strong> ${data.message}`
+                    //tablerow.appendChild(dataNode);
                     submitTable.appendChild(tablerow);
                 });
             }
@@ -128,8 +129,7 @@ export class SessionComponent implements OnInit {
         this.gameStarted = true;
         this.socketService.startGame();
 
-        // TODO: terug naar time * 60
-        let time = this.gameData?.duration; // specified time for this activity (in seconds)
+        let time = this.gameData?.duration * 60; // specified time for this activity (in seconds)
         this.startTimer(time);
     }
 
@@ -138,11 +138,10 @@ export class SessionComponent implements OnInit {
         setTimeout(() => {
             console.log("TIJD OP"); // TODO: redirect naar home ofzo en update bubblewaarden alles
         }, time * 1000);
-
         let interval = setInterval(() => {
             if(time > 0) {
                 time -= 1;
-                console.log(time);
+                document.getElementsByClassName('timeLeft')[0].innerHTML = `Tijd over: <br><strong>${time}</strong>`;
             } else {
                 clearInterval(interval);
             }
