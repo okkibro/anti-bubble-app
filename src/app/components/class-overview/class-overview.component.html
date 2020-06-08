@@ -21,8 +21,7 @@
                     <tr *ngFor="let classmate of classmates">
                         <td>{{ classmate.firstName }}</td>
                         <td>Online</td>
-                        <td><button mat-button [routerLink]="'/classmateProfile/' + classmate._id" class="abutton">
-                                Bekijk Profiel </button></td>
+                        <td><a mat-flat-button [routerLink]="'/classmateProfile/' + classmate._id" [ngClass]="{'my-custom-theme': true}" color="accent"> Bekijk Profiel </a></td>
                     </tr>
                 </table>
             </mat-card-content>

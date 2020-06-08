@@ -31,15 +31,21 @@ export class TeacherOverviewComponent implements OnInit {
             this.userDetails = user;
         });
         this.classService.getClassIds().subscribe((ids) => {
+            console.log(ids);
             this.classIds = ids.classIds;
-            for (const id of this.classIds) {
-                this.classService.getSingleClass(id._id).subscribe(output => {
-                    this.classes.push(output);
-                    this.currentClass = this.classes[0].class;
-                    this.classmates = this.classes[0].classmates;
-                });
-            }
+            this.getClass(this.classIds[0].id);
         });
+    }
+
+    getClass(id): void {
+        this.classService.getSingleClass(id).subscribe(output => {
+            this.currentClass = output.class;
+            this.classmates = output.classmates;
+        });
+    }
+
+    switchClass(): void {
+        this.getClass(this.classIds[1].id);
     }
 
     createClass() {
@@ -59,10 +65,6 @@ export class TeacherOverviewComponent implements OnInit {
         } else {
             console.log('you are not eligible to create a class')
         }
-    }
-
-    switchClass() {
-        
     }
 
     onClickOpenForm(){
