@@ -46,7 +46,7 @@ export class RegisterComponent implements OnInit {
         });
     }
 
-    // Method to check if the filled in passwords match.
+    /** Method to check if the filled in passwords match. */
     passwordMatchValidator(form: FormGroup) {
         let password = form.get('password').value;
         let repeatPassword = form.get('repeatPassword').value;

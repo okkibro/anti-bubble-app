@@ -19,7 +19,7 @@ export class JoinClassComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  // Method to join a class based on the code you filled in.
+  /** Method to join a class based on the code you filled in. */
   joinClass(): void {
     this.classesService.joinClass(this.value).subscribe(data => {
       if (data.succes) {

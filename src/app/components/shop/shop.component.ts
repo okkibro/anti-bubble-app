@@ -37,7 +37,8 @@ export class ShopComponent implements OnInit {
       console.error(err);
     });
   }
-  
+
+  /** Method to change tab to show a different type of items in the shop */
   tabChange(event) {
     var currentTab = event.tab.textLabel;
     this.shopService.shop(currentTab).subscribe(shop => {
@@ -48,6 +49,7 @@ export class ShopComponent implements OnInit {
     });
   }
 
+  /** Method to buy and item from the shop and add it to the users inventory and update the milestone if needed */
   buy(item): void {
     this.shopService.buy(item).subscribe((data:any) => {  
       if (data.succes) {
@@ -70,6 +72,7 @@ export class ShopComponent implements OnInit {
     });
   }
 
+  /** Method to filter the shop based on if the user already owns the item */
   filterShop(): Shop[] {
       return this.shopDetails.filter(x => {
         return this.userDetails.inventory.find(y => y._id == x._id) == null;

@@ -50,7 +50,7 @@ export class ProfileComponent implements OnInit {
         });
     }
 
-    // Method to change you password on the profile page.
+    /** Method to change you password on the profile page. */
     changePassword() {
         let oldPassword = this.changePasswordForm.get('oldPassword').value;
         let newPassword = this.changePasswordForm.get('newPassword').value;
@@ -62,7 +62,7 @@ export class ProfileComponent implements OnInit {
         });
     }
 
-    // Method to check of the passwords given in the form match.
+    /** Method to check of the passwords given in the form match. */
     passwordMatchValidator(form: FormGroup) {
         let newpassword = form.get('newPassword').value;
         let repeatPassword = form.get('repeatPassword').value;

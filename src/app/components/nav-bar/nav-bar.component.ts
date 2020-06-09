@@ -19,7 +19,7 @@ export class NavBarComponent implements OnInit {
     })
   }
 
-  // Method to logout.
+  /** Method to logout. */ 
   logoutButton() {
     return this.authenticationService.logout();
   }

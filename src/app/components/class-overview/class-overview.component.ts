@@ -33,7 +33,7 @@ export class ClassOverviewComponent implements OnInit {
     });
   }
 
-  // Method to filter the students in a class
+  /** Method to filter the students in a class. */
   search() {
     let query:string = this.searchBar.get('query').value;
     let table = document.getElementById("table").childNodes;
@@ -46,7 +46,7 @@ export class ClassOverviewComponent implements OnInit {
     }
   }
 
-  // Method to clear the filter so all students are displayed again
+  /** Method to clear the filter so all students are displayed again. */
   clear() {
     this.value = '';
     let table = document.getElementById("table").childNodes;

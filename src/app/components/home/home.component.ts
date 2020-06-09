@@ -39,18 +39,18 @@ export class HomeComponent implements OnInit {
         })
     }
 
-    // Method to redirect a student to the labyrinth page
+    /** Method to redirect a student to the labyrinth page. */
     startLabyrinth() {
         this.router.navigate(['labyrinth']);
     }
 
-    // Method to redirect a teacher to the session page.
+    /** Method to redirect a teacher to the session page. */
     createSession() {
         // this.socketService.createSession();
         this.router.navigate(['session-options']);
     }
     
-    //Method to join a session based on the filled in code.
+    /** Method to join a session based on the filled in code. */
     joinSession() {
         const user = this.userDetails;
         this.socketService.joinSession(this.pin, user, (succes) => {

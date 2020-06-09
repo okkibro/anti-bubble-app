@@ -29,7 +29,7 @@ export class PasswordResetComponent implements OnInit {
   }
 
   //TODO: VALIDATE PASSWORDS IN FRONTEND.
-  // Method to reset your password based on th filled in passwords in the form.
+  /** Method to reset your password based on th filled in passwords in the form. */
   resetPassword() {
     let password = this.passwordResetForm.get('password').value;
     let confirmPassword = this.passwordResetForm.get('confirmPassword').value;

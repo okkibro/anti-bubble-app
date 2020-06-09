@@ -36,7 +36,7 @@ export class BadgesComponent implements OnInit {
     });
   }
 
-  // Method to calculate how far you are in completing all milestones.
+  /** Method to calculate how far you are in completing all milestones. */
   completedRatio(): string {
     return (this.completed.length / (this.completed.length + this.uncompleted.length) * 100).toFixed(0);
   }
