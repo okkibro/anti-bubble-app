@@ -15,11 +15,11 @@ const auth = jwt({
     userProperty: 'payload'
 });
 
-//router to register a user in the database
+// Post method to register a new user to the database.
 router.post('/register', (req, res) => {
-    //make a new user
+    // Make a new user.
     let user = new User();
-    //fill in data to user attributes
+    // Fill in (the required) data to user attributes.
     user.firstName = sanitize(req.body.firstName);
     user.lastName = sanitize(req.body.lastName);
     user.email = sanitize(req.body.email);
@@ -50,6 +50,7 @@ router.post('/register', (req, res) => {
                     broek : broek,
                     shirt : shirt
                 }
+                // Save the changes to the database.
                 user.save(function () {
                     let token = user.generateJwt();
                     res.status(200).json({
@@ -65,26 +66,26 @@ router.post('/register', (req, res) => {
                 // }
     // user.markModified('avatar');
 
-    //save the changes to the database
+    
 });
 
-//router to check if login details match with the database (authentication)
+// Post method to check if login details match with the database (authentication).
 router.post('/login', (req, res) => {
     passport.authenticate('local', function (err, user) {
 
-        // If Passport throws/catches an error
+        // If Passport throws/catches an error.
         if (err) {
             return res.status(404).json(err);
         }
 
-        // If no user was found
+        // If no user was found.
         if (!user) {
             return res.status(401).json({
                 message: "Authentication failed"
             });
         }
 
-        // If a user is found
+        // If a user is found.
         let token = user.generateJwt();
         res.status(200).json({
             token: token
@@ -92,14 +93,14 @@ router.post('/login', (req, res) => {
     })(req, res);
 });
 
-// router to send a password recovery email
+// Post method to send a password recovery email.
 router.post('/passwordrecovery', async (req, res) => {
 
-    // Generate Random Token
+    // Generate Random Token.
     const token = crypto.randomBytes(20).toString("hex");
     console.log(token);
 
-    // Find the user with the given email and set the token
+    // Find the user with the given email and set the token.
     User.findOne({ email: req.body.email }, (error, user) => {
         if (!user){
             console.log("no user with that email");
@@ -115,7 +116,7 @@ router.post('/passwordrecovery', async (req, res) => {
             console.log(error.message);
         }
         });
-        // Send email with link and token in the link
+        // Send email with link and token in the link.
         nodemailer.createTestAccount((error, account) => {
             if (error) {
                 return console.log(error.message);
@@ -152,9 +153,9 @@ router.post('/passwordrecovery', async (req, res) => {
     });
 });
 
-// router that checks the password recovery token and shows the reset password page or a wrong token error
+// Get method to check the password recovery token and shows the reset password page or a wrong token error.
 router.get('/reset/:token', (req, res) => {
-    // Find the user that belongs to the given token
+    // Find the user that belongs to the given token.
     User.findOne({ recoverPasswordToken: req.params.token, recoverPasswordExpires: {$gt: Date.now() } }, (error, user) => {
         if (!user) {
             console.log("wrong token or token expired");
@@ -168,9 +169,9 @@ router.get('/reset/:token', (req, res) => {
     });
 });
 
-// router that changes the password of the user belonging to the given password recovery token
+// Post method to change the password of the user belonging to the given password recovery token.
 router.post('/reset/:token', (req, res) => {
-    // Find the user that belongs to the given token
+    // Find the user that belongs to the given token.
     User.findOne({ recoverPasswordToken: req.params.token, recoverPasswordExpires: {$gt: Date.now() } }, (error, user) => {
         if (error) { return console.log(error.message); }
         if (!user) {
@@ -179,7 +180,7 @@ router.post('/reset/:token', (req, res) => {
             return res.end();
         }
 
-        // Change the password in the database
+        // Change the password in the database.
         if (req.body.password === req.body.confirmPassword) {
             user.setPassword(req.body.password, (error) => {
                 if (error) { return console.log(error.message); }
@@ -202,24 +203,21 @@ router.post('/reset/:token', (req, res) => {
     });
 });
 
-//router to get a user given an id
+// Get method to get a user from the database given an id.
 router.get('/profile', auth, (req, res) => {
-
-    // If no user ID exists in the JWT return a 401
+    // If no user ID exists in the JWT return a 401.
     if (!req.payload._id) {
         res.status(401).json({
             message: "UnauthorizedError: private profile"
         });
     } else {
-        // Otherwise continue
-        User.findById(req.payload._id)
-            .exec(function (err, user) {
+        User.findById(req.payload._id).exec(function (err, user) {
                 res.status(200).json(user);
-            });
+        });
     }
 });
 
-//router to check if email is already present in the database
+// Post method to check if email is already present in the database.
 router.post('/checkEmailTaken', (req, res) => {
     User.findOne({ email: sanitize(req.body.email) }).then(user => {
         if (user) {
@@ -234,44 +232,37 @@ router.post('/checkEmailTaken', (req, res) => {
     });
 });
 
-//router for updating a password given an email
+// Patch method to update a password given an email.
 router.patch('/updatePassword', (req, res) => {
     User.findOne({ email: sanitize(req.body.email) }).then(user => {
         if (user) {
-            //check if old password is filled in correctly
+            // Check if old password is filled in correctly.
             if (user.validatePassword(sanitize(req.body.oldPassword))) {
-                //update password in database to new password
+                // Update password in database to new password.
                 user.setPassword(sanitize(req.body.newPassword));
-                //save changes to database
+                // Save changes to database.
                 user.save();
-                //return status ok
-                return res.status(200).json({
-                    message: "password changed"
-                });
+                return res.status(200).json({ message: "password changed" });
             } else {
-                //handle error if old password doesn't match with the one in database
-                return res.status(401).json({
-                    message: "password doesn't match with old password"
-                });
+                // Handle error if old password doesn't match with the one in database.
+                return res.status(401).json({ message: "password doesn't match with old password"});
             }
         } else {
             console.log("user not found")
-            //handle error if user is not found in database
-            return res.status(401).json({
-                message: "user not found"
-            });
+            // Handle error if user is not found in database.
+            return res.status(401).json({ message: "user not found" });
         }
     });
 });
 
-// Router for getting all milestone values in an array for the logged in user
+// Get method to get all milestone values in an array for the logged in user.
 router.get('/milestone', auth, (req, res) => {
     User.findById(req.payload._id, (err, user) => {
         res.json(user.milestones);
     });
 });
 
-// Router that changes a milestone by a given value, returns the updated value and whether it is completed now or not
+// Post method to changes a milestone by a given value, returns the updated value and whether it is completed now or not
 router.post('/milestone', auth, (req, res) => {
     User.findById(req.payload._id, (err, user) => { // Get currently logged in user
         let milestone = req.body.milestone;
@@ -293,7 +284,7 @@ router.post('/milestone', auth, (req, res) => {
     })
 });
 
-// Router to post a new message to recent milestones
+// Post method to post a new message to recent milestones
 router.post('/recentMilestones', auth, (req, res) => {
     User.findById(req.payload._id, (err, user) => {
         user.recentMilestones.push(req.body.value); // Push new value into the array
@@ -304,7 +295,7 @@ router.post('/recentMilestones', auth, (req, res) => {
     })
 });
 
-//Router that adds selecter item for the avatar
+// Post method to equip the avatat with the send item
 router.post('/avatar', auth, (req,res) => {
     User.findById(req.payload._id, (err, user) => {
         user.avatar[req.body.avatarItem.category] = req.body.avatarItem;
@@ -322,11 +313,10 @@ router.post('/avatar', auth, (req,res) => {
     });
 });
 
+// Post method to update the bubble graph in the detailed profile page
+// TODO: FIX RES WITH A CORRECT STATUS AND JSON!
 router.post('/updateGraph', auth, (req, res) => {
-    User.updateOne(
-        {_id : req.payload._id},
-        {$push : {knowledge : req.body.knowledgeScore, diversity : req.body.diversityScore}},
-        () => {
+    User.updateOne({_id : req.payload._id},{$push : {knowledge : req.body.knowledgeScore, diversity : req.body.diversityScore}}, () => {
             res.json({});
         }
     );

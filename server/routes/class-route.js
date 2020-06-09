@@ -9,7 +9,7 @@ const nodemailer = require('nodemailer');
 const crypto = require('crypto');
 const jwt = require('express-jwt');
 
-// Small constant to check authentication
+// Small constant to check authentication.
 const auth = jwt({
 	secret: process.env.MY_SECRET,
 	userProperty: 'payload',
@@ -26,7 +26,7 @@ router.post('/createClass', auth, (req, res) => {
 	} else {
 		// Make a new class.
 		let classes = new Classes();
-		// Fill in data to classes attributes.
+		// Fill in (the required) data to classes attributes.
 		classes.code = sanitize(req.body.classes.code);
 		classes.level = sanitize(req.body.classes.level);
 		classes.year = sanitize(req.body.classes.year);
@@ -199,7 +199,7 @@ router.get('/classmateProfile/:id', auth, (req, res) => {
 	} else {
 		User.findById(req.payload._id, (error, user) => {
 			User.findById(req.params.id, (error, classmate) => {
-				// Check if the requested classmate exists
+				// Check if the requested classmate exists.
 				if (!classmate) {
 					res.status(404).json({message: "User's profile not found"});
 				} else if (user.role == 'student') {
