@@ -26,13 +26,9 @@
                 </mat-card-content>
 
                 <mat-card-content *ngIf="startedLabyrinth">
-                    <p id="question">Wat vind je leuk om te doen?</p>
+                    <p id="question"></p>
 
                     <mat-radio-group class="radioButtonOptions">
-                        <mat-radio-button value="Zwemmen" #zwem (change)="onItemChange(zwem.value)">Zwemmen</mat-radio-button><br>
-                        <mat-radio-button value="Leren" #leer (change)="onItemChange(leer.value)">Leren</mat-radio-button><br>
-                        <mat-radio-button value="Alpaca" #alp (change)="onItemChange(alp.value)">Alpaca's knuffelen</mat-radio-button><br>
-                        <mat-radio-button value="Niks" #niks (change)="onItemChange(niks.value)">Niks</mat-radio-button>
                     </mat-radio-group><br>
 
                     <button mat-flat-button (click)="nextQuestion(currentQuestion)" [disabled]="checkBoxCount() === 0">Volgende</button>
