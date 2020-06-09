@@ -18,10 +18,13 @@ export class LabyrinthComponent implements OnInit {
   firstQuestion: boolean = true;
   lastSelected;
   interval;
+  questions = [];
+  part: Number;
 
   constructor(private router: Router, private sessionService: SessionService, private auth: AuthenticationService, private snackBar: MatSnackBar) { }
 
   ngOnInit(): void {
+    this.part = 1;
   }
 
   performedLabyrinth() {
@@ -44,8 +47,11 @@ export class LabyrinthComponent implements OnInit {
 
   startLabyrinth() {
     this.startedLabyrinth = true;
-    this.startTimer(300); // labyrinth activity is 5 minutes, therefore 300 seconds
-    this.nextQuestion();
+    this.sessionService.getShuffledQuestions(1).subscribe(questions => {
+      this.questions = questions;
+      this.startTimer(300); // labyrinth activity is 5 minutes, therefore 300 seconds
+      this.nextQuestion();
+    })
   }
 
   startTimer(time: number) {
@@ -75,15 +81,60 @@ export class LabyrinthComponent implements OnInit {
   }
 
   nextQuestion() {
-    if (this.lastSelected == undefined) {
-      if (this.firstQuestion) { // do not save answers when displaying the first question
-        this.firstQuestion = false;
+    if (this.questions.length === 0) {
+      if (this.part === 1) {
+        this.part = 2;
+        this.sessionService.getShuffledQuestions(2).subscribe(questions => {
+          this.questions = questions;
+          this.nextQuestion();
+        });
       } else {
-        this.snackBar.open('Vul een antwoord in', 'X', { duration: 2500, panelClass: ['style-error'], });
+        this.saveQuestion();
+        console.log("labyrinth finished");
       }
     } else {
-      console.log("Je hebt gekozen voor: " + this.lastSelected); //TODO: sla dit antwoord ergens op
-      // TODO: laat volgende vraag (en opties) zien
+      this.saveQuestion();
+
+      this.showQuestion();
+
+      // if (this.lastSelected == undefined) {
+      //   if (this.firstQuestion) { // do not save answers when displaying the first question
+      //     this.firstQuestion = false;
+      //   } else {
+      //     this.snackBar.open('Vul een antwoord in', 'X', { duration: 2500, panelClass: ['style-error'], });
+      //   }
+      // } else {
+      //   console.log("Je hebt gekozen voor: " + this.lastSelected); //TODO: sla dit antwoord ergens op
+      //   // TODO: laat volgende vraag (en opties) zien
+      // }
     }
+  }
+
+  saveQuestion() {
+    let checkboxes: any = document.getElementsByClassName('option');
+    for (let i = 0; i < checkboxes.length; i++) {
+      console.log(checkboxes[i].checked)
+    } // TODO: save answers somewhere
+  }
+
+  showQuestion() {
+    // Show question on screen
+    let question = this.questions.shift();
+
+    document.getElementById('question').innerHTML = question.question;
+
+    let radioGroup = document.getElementsByClassName('radioButtonOptions')[0];
+    let options = "";
+    let type = "";
+    if (question.multipleAnswers) {
+      type = "checkbox";
+    } else {
+      type = "radio";
+    }
+    for (let i = 0; i < question.choices.length; i++) {
+      //options += `<mat-radio-button value="${question.choices[i]}" #optie${i} (change)="onItemChange(optie${i}.value)">${question.choices[i]}</mat-radio-button><br>`
+      options += `<input type="${type}" class="option" name="options">${question.choices[i]}</input><br>`
+    }
+    radioGroup.innerHTML = options;
   }
 }
