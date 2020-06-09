@@ -34,8 +34,4 @@ export class LabyrinthComponent implements OnInit {
     });
 
   }
-
-  logoutButton() {
-    return this.auth.logout();
-  }
 }

@@ -54,9 +54,4 @@ export class ClassOverviewComponent implements OnInit {
       (table[i + 1] as HTMLElement).style.display = "";
     }
   }
-
-  // Method to logout
-  logoutButton() {
-    return this.auth.logout();
-  }
 }

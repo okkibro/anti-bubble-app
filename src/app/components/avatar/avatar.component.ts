@@ -22,10 +22,6 @@ export class AvatarComponent implements OnInit {
 
     constructor(private auth: AuthenticationService, private shopService: ShopService, private avatarService: AvatarService, private avatarDisplay: AvatarDisplayComponent) { }
 
-    logoutButton() {
-        return this.auth.logout();
-    }
-
     ngOnInit() {
         this.shopService.shop("haar").subscribe(shop => {
             this.auth.profile().subscribe(user => {

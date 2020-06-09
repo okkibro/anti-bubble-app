@@ -79,9 +79,4 @@ export class BubbleDetailsComponent implements OnInit {
     })
     
   }
-  
-  // Method to logout
-  logoutButton() {
-    return this.auth.logout();
-  }
 }

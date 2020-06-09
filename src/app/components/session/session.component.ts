@@ -101,10 +101,6 @@ export class SessionComponent implements OnInit {
         return "Weet je zeker dat je de sessie wilt verlaten?";
     }
 
-    logoutButton() {
-        return this.authenticationService.logout();
-    }
-
     leaveSession() {
         this.socketService.leaveSession();
     }

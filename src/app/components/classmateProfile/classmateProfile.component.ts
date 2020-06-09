@@ -18,10 +18,6 @@ export class ClassmateProfileComponent implements OnInit {
 
   constructor(private classService: ClassesService, private auth: AuthenticationService, private route: ActivatedRoute, private router: Router) { }
 
-  logoutButton() {
-    return this.auth.logout();
-  }
-
   ngOnInit() {
     this.classService.classmateProfile(this.route.snapshot.paramMap.get("id")).subscribe(classmate => {
       this.classmate = classmate;

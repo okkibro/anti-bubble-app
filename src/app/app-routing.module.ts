@@ -11,7 +11,6 @@ import { ClassOverviewComponent } from './components/class-overview/class-overvi
 import { ClassmateProfileComponent } from './components/classmateProfile/classmateProfile.component';
 import { AvatarComponent } from './components/avatar/avatar.component';
 import { BubbleDetailsComponent } from './components/bubble-details/bubble-details.component';
-import { TeacherOrStudentComponent } from './components/teacherOrStudent/teacherOrStudent.component';
 import { TeacherOverviewComponent } from './components/teacher-overview/teacher-overview.component';
 import { AuthGuardService} from './services/auth-guard.service';
 import { ShopComponent } from './components/shop/shop.component';
@@ -34,7 +33,6 @@ const routes: Routes = [
   { path: 'classmateProfile/:id', component: ClassmateProfileComponent, canActivate: [AuthGuardService] },
   { path: 'avatar', component: AvatarComponent, canActivate: [AuthGuardService] },
   { path: 'bubble-details', component: BubbleDetailsComponent, canActivate: [AuthGuardService] },
-  { path: 'teacherOrStudent', component: TeacherOrStudentComponent },
   { path: 'teacher-overview', component: TeacherOverviewComponent, canActivate: [AuthGuardService], data: {roles: [Role.teacher]}},
   { path: 'badges', component: BadgesComponent, canActivate: [AuthGuardService] },
   { path: 'shop', component: ShopComponent, canActivate: [AuthGuardService] },

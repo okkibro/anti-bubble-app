@@ -66,9 +66,4 @@ export class HomeComponent implements OnInit {
                 this.router.navigate(['activities']);
         });
     }
-
-    // Method to logout.
-    logoutButton() {
-        return this.authenticationService.logout();
-    }
 }

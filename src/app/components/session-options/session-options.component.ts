@@ -29,8 +29,4 @@ export class SessionOptionsComponent implements OnInit {
     });
   }
 
-  logoutButton() {
-    return this.auth.logout();
-  }
-
 }

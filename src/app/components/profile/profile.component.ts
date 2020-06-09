@@ -70,9 +70,4 @@ export class ProfileComponent implements OnInit {
             form.get('repeatPassword').setErrors({ noPasswordMatch: true });
         }
     }
-
-    // Method to logout.
-    logoutButton() {
-      return this.auth.logout();
-    }
 }

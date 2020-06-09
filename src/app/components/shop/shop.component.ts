@@ -24,10 +24,6 @@ export class ShopComponent implements OnInit {
 
   constructor(private authenticationService: AuthenticationService, private shopService : ShopService, private snackBar: MatSnackBar, private milestoneUpdates: MilestoneUpdatesService) { }
 
-  logoutButton() {
-    return this.authenticationService.logout();
-  }
-
   ngOnInit(): void {
     this.shopService.shop("haar").subscribe(shop => {
       this.shopDetails = shop;
