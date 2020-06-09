@@ -17,7 +17,7 @@ const auth = jwt({
 
 //TODO: CHECK ALL STATUS CODES TO BETTER FIT THE HTTP STATUS PROTOCOL GUIDLINES
 
-// Post method to create a new class in the database.
+/** Post method to create a new class in the database. */
 router.post('/createClass', auth, (req, res) => {
 	if (!req.payload._id) {
 		res.status(401).json({
@@ -43,7 +43,7 @@ router.post('/createClass', auth, (req, res) => {
 	}
 });
 
-// Post method to join a user to a class.
+/** Post method to join a user to a class. */
 router.post('/joinClass', auth, (req, res) => {
 	// Check if you are authorized.
 	if (!req.payload._id) {
@@ -95,8 +95,8 @@ router.post('/joinClass', auth, (req, res) => {
 	}
 });
 
-// Get method to get the class a user is in.
-// 		(In case of a teacher this functions gives back the first class in the teachers class list.)
+/** Get method to get the class a user is in. 
+ 		* In case of a teacher this functions gives back the first class in the teachers class list. */
 router.get('/getClass', auth, (req, res) => {
 	// Check if you are authorized.
 	if (!req.payload._id) {
@@ -136,7 +136,7 @@ router.get('/getClass', auth, (req, res) => {
 	}
 });
 
-// Get method to get all the database class ids a user has in their class list.
+/** Get method to get all the database class ids a user has in their class list. */
 router.get('/getClassIds', auth, (req, res) => {
 	// Check if you are authorized.
 	if (!req.payload._id) {
@@ -155,7 +155,7 @@ router.get('/getClassIds', auth, (req, res) => {
 	}
 });
 
-// Get method to get a class based on the given id in the url.
+/** Get method to get a class based on the given id in the url. */
 router.get('/getSingleClass/:id', auth, (req, res) => {
 	// Check if you are authorized.
 	if (!req.payload._id) {
@@ -189,7 +189,7 @@ router.get('/getSingleClass/:id', auth, (req, res) => {
 	}
 });
 
-// Get method to get a profile of a user in your class.
+/** Get method to get a profile of a user in your class. */
 router.get('/classmateProfile/:id', auth, (req, res) => {
 	// Check if you are authorized.
 	if (!req.payload._id) {

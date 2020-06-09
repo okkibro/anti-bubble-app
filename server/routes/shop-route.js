@@ -15,7 +15,7 @@ const auth = jwt({
     userProperty: 'payload'
 });
 
-// Get method to get shop items from the database based on a query.
+/** Get method to get shop items from the database based on a query. */
 router.get('/', (req, res) => {
     var query = {
         category: req.headers.id.toLowerCase()
@@ -27,7 +27,7 @@ router.get('/', (req, res) => {
     });
 });
 
-// Post method to add item from the shop to the inventory of the user if he/she had enough currency.
+/** Post method to add item from the shop to the inventory of the user if he/she had enough currency. */
 router.post('/buy', auth, (req, res) => {
     User.findById(req.payload._id).exec(function (err, user) {
         if (user.currency >= req.body.item.price && user.inventory.find(x => x._id == req.body.item._id) == null) {
