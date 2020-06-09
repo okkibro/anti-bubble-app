@@ -13,7 +13,7 @@ import { MatExpansionModule } from '@angular/material/expansion';
 import { MatSnackBarModule} from '@angular/material/snack-bar';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatGridListModule } from '@angular/material/grid-list';
-import { MatButtonToggleModule } from '@angular/material/button-toggle';
+
 
 @NgModule({
     imports: [
@@ -31,7 +31,6 @@ import { MatButtonToggleModule } from '@angular/material/button-toggle';
         MatSnackBarModule,
         MatRadioModule,
         MatGridListModule,
-        MatButtonToggleModule,
     ],
     exports: [
         CommonModule,
@@ -48,7 +47,6 @@ import { MatButtonToggleModule } from '@angular/material/button-toggle';
         MatSnackBarModule,
         MatRadioModule,
         MatGridListModule,
-        MatButtonToggleModule,
     ],
 })
 export class CustomMaterialModule { }
