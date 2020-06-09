@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output } from '@angular/core';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { AuthenticationService } from 'src/app/services/authentication.service';
 import { User } from 'src/app/models/user';
 import { FormBuilder, Validators } from '@angular/forms';
@@ -13,8 +14,9 @@ import { ClassesService } from 'src/app/services/classes.service';
 })
 export class TeacherOverviewComponent implements OnInit {
     userDetails: User;
+    loading = true;
     classIds = [];
-    classes = [];
+    names = [];
     currentClass;
     classmates: User[];
     classForm = this.fb.group({
@@ -23,23 +25,47 @@ export class TeacherOverviewComponent implements OnInit {
         classYear: ['', Validators.required]
     });
     openform = false;
+    selectklas = false;
 
-    constructor(private authenticationService: AuthenticationService, private classService: ClassesService, private fb: FormBuilder) { }
+    constructor(private authenticationService: AuthenticationService, private classService: ClassesService, private fb: FormBuilder, private snackBar: MatSnackBar) { }
 
     ngOnInit(): void {
         this.authenticationService.profile().subscribe(user => {
             this.userDetails = user;
-        });
-        this.classService.getClassIds().subscribe((ids) => {
-            this.classIds = ids.classIds;
-            for (const id of this.classIds) {
-                this.classService.getSingleClass(id._id).subscribe(output => {
-                    this.classes.push(output);
-                    this.currentClass = this.classes[0].class;
-                    this.classmates = this.classes[0].classmates;
+            if (this.userDetails.class.length > 0) {
+                this.classService.getClassIds().subscribe((ids) => {
+                    this.classIds = ids.classIds;
+                    this.getClass(this.classIds[0]._id);
+                    this.getClassNames();
                 });
             }
         });
+    }
+
+    getClass(id): void {
+        this.classService.getSingleClass(id).subscribe((output) => {
+            if (output.succes) {
+                this.currentClass = output.class;
+                this.classmates = output.classmates;
+            }
+        });
+    }
+
+    getClassNames(): void {
+        for (const id of this.classIds) {
+            this.classService.getSingleClass(id._id).subscribe((output) => {
+                if (output.succes) {
+                    this.names.push({title: output.class.title, id: id._id});
+                }
+                if (this.names.length == this.classIds.length) {
+                    this.loading = false
+                }
+            });
+        }
+    }
+
+    switchClass(id): void {
+        this.getClass(id);
     }
 
     createClass() {
@@ -53,7 +79,13 @@ export class TeacherOverviewComponent implements OnInit {
 
             this.classService.createClass(classes, this.userDetails).subscribe((code: Number) => {
                 this.classService.joinClass(code).subscribe((output) => {
-                    console.log(output.succes, output.message);
+                    if (output.succes) {
+                        this.snackBar.open(output.message, 'X', {duration: 2500, panelClass: ['style-succes'], }).afterDismissed().subscribe(() => {
+                            window.location.reload();
+                        });
+                    } else {
+                        this.snackBar.open(output.message, 'X', {duration: 2500, panelClass: ['style-error'], });
+                    }
                 });
             });
         } else {
@@ -61,11 +93,11 @@ export class TeacherOverviewComponent implements OnInit {
         }
     }
 
-    switchClass() {
-        
+    onClickSelectKlas() {
+        this.selectklas = !this.selectklas;
     }
 
-    onClickOpenForm(){
-        this.openform = true;  
+    onClickOpenForm() {
+        this.openform = !this.openform;  
     }
 }
