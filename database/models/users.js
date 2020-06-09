@@ -82,16 +82,19 @@ let userSchema = new Schema({
     }
 });
 
+// Method to set a hashed password for a user.
 userSchema.methods.setPassword = function(password){
     this.salt = crypto.randomBytes(16).toString('hex');
     this.hash = crypto.pbkdf2Sync(password, this.salt, 1000, 64, 'sha512').toString('hex');
 };
 
+// Method to validate a password for a user.
 userSchema.methods.validatePassword = function(password) {
     let hash = crypto.pbkdf2Sync(password, this.salt, 1000, 64, 'sha512').toString('hex');
     return this.hash === hash;
 };
 
+// Method to generate a token based on the id, role, email and the secret.
 userSchema.methods.generateJwt = function() {
     return jwt.sign({
         _id: this._id,

@@ -1,4 +1,4 @@
-// angular modules
+// Angular modules.
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ReactiveFormsModule } from '@angular/forms';
@@ -11,12 +11,11 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { FormsModule } from "@angular/forms";
 
-
-// core modules
+// Core modules.
 import { CustomMaterialModule } from './shared/material.module';
 import { AppRoutingModule } from './app-routing.module';
 
-// component modules
+// Component modules.
 import { AppComponent } from './app.component';
 import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
@@ -31,11 +30,6 @@ import { ShopComponent } from './components/shop/shop.component';
 import { PasswordRecoveryComponent } from './components/password-recovery/password-recovery.component';
 import { PasswordResetComponent } from './components/password-reset/password-reset.component';
 import { BadgesComponent } from './components/badges/badges.component';
-
-// services
-import { AuthGuardService } from './services/auth-guard.service';
-import { CookieService } from 'ngx-cookie-service';
-import { SocketIOService } from './services/socket-io.service';
 import { SessionComponent } from './components/session/session.component';
 import { ActivitiesComponent } from './components/activities/activities.component';
 import { TeacherOverviewComponent } from './components/teacher-overview/teacher-overview.component';
@@ -46,6 +40,11 @@ import { SessionOptionsComponent } from './components/session-options/session-op
 import { LabyrinthComponent } from './components/labyrinth/labyrinth.component';
 import { AnswerFormComponent } from './components/answer-form/answer-form.component';
 import { AvatarDisplayComponent } from './components/avatar-display/avatar-display.component';
+
+// Services.
+import { AuthGuardService } from './services/auth-guard.service';
+import { CookieService } from 'ngx-cookie-service';
+import { SocketIOService } from './services/socket-io.service';
 
 @NgModule({
     declarations: [
