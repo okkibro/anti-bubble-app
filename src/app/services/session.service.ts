@@ -19,4 +19,8 @@ export class SessionService {
   public performedLabyrinth(email: String): Observable<any> {
     return this.http.patch('https://localhost:3000/session/updateBubbleInit', { email: email });
   }
+
+  public getShuffledQuestions(part: Number): Observable<any> {
+    return this.http.post('https://localhost:3000/session/questions', { part: part }, { headers: { Authorization: 'Bearer ' + this.cookie.get('mean-token') } });
+  }
 }

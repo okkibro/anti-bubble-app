@@ -24,7 +24,7 @@
                         </tr>
                         <tr>
                             <th>Klas</th>
-                            <td>TODO: klas toevoegen</td>
+                            <td>{{ userClassTitle }}</td>
                         </tr>
                     </table>
                 </mat-card-content>
@@ -76,55 +76,6 @@
             </mat-card>
         </div>
 
-        <!-- <mat-card fxLayout="row" fxLayoutAlign="space-evenly center">
-            <mat-accordion>
-                <mat-expansion-panel>
-                    <mat-expansion-panel-header>
-                        <mat-panel-title>
-                            Gebruikersnaam Wijzigen
-                        </mat-panel-title>
-                        <mat-panel-description>
-                            Vul je oude en nieuwe gebruikersnaam in
-                        </mat-panel-description>
-                    </mat-expansion-panel-header>
-                    <form name="changePasswordForm" [formGroup]="changePasswordForm" (ngSubmit)="changePassword()">
-                        <table align="center">
-                            <tr>
-                                <mat-form-field class="example-full-width">
-                                    <mat-label>Oude gebruikersnaam</mat-label>
-                                    <input matInput type="password" formControlName="oldPassword">
-                                    <mat-error *ngIf="changePasswordForm.get('oldPassword').hasError('required')">
-                                        Gebruikersnaam is <strong>verplicht</strong>
-                                    </mat-error>
-                                </mat-form-field>
-                            </tr>
-                            <tr>
-                                <mat-form-field class="example-full-width">
-                                    <mat-label>Nieuwe gebruikersnaam</mat-label>
-                                    <input matInput type="password" formControlName="newPassword">
-                                    <mat-error *ngIf="changePasswordForm.get('oldPassword').hasError('required')">
-                                        Wachtwoord is <strong>verplicht</strong>
-                                    </mat-error>
-                                </mat-form-field>
-                            </tr>
-                            <tr>
-                                <mat-form-field class="example-full-width">
-                                    <mat-label>Herhaal nieuwe gebruikersnaam</mat-label>
-                                    <input matInput type="password" formControlName="repeatPassword">
-                                    <mat-error
-                                        *ngIf="changePasswordForm.get('repeatPassword').hasError('noPasswordMatch')">
-                                        Gebruikersnamen komen niet overeen
-                                    </mat-error>
-                                </mat-form-field>
-                            </tr>
-                        </table>
-                        <button mat-raised-button type="submit" [disabled]="!changePasswordForm.valid"
-                            color="primary">Aanpassen</button>
-                    </form>
-                </mat-expansion-panel>
-            </mat-accordion>
-        </mat-card> -->
-        
         <mat-card fxLayout.xs="row" fxLayoutAlign="space-evenly center">
             <mat-accordion>
                 <mat-expansion-panel>

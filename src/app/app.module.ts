@@ -12,6 +12,7 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { FormsModule } from "@angular/forms";
 
 // Core modules.
+import { MatRadioModule } from '@angular/material/radio';
 import { CustomMaterialModule } from './shared/material.module';
 import { AppRoutingModule } from './app-routing.module';
 
@@ -84,6 +85,7 @@ import { SocketIOService } from './services/socket-io.service';
         MatTabsModule,
         MatProgressBarModule,
         FormsModule,
+        MatRadioModule,
     ],
     providers: [AuthGuardService, CookieService, SocketIOService],
     bootstrap: [AppComponent],

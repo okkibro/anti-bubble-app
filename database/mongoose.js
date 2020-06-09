@@ -13,4 +13,5 @@ module.exports = {
     Shop:       require('./models/shopItems'),
     Classes:    require('./models/classes'),
     Activities: require('./models/activities'),
+    Questions: require('./models/question'),
 };

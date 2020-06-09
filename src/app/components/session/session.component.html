@@ -5,7 +5,7 @@
 
     <p *ngIf="userDetails?.role == 'student'" class="sessionCode">Sessie code: <br><strong>{{pin}}</strong></p>
     <p *ngIf="userDetails?.role == 'teacher'" class="playerCount">Aantal Spelers: <br><strong>{{playerCount}}</strong></p>
-    <p *ngIf="userDetails?.role == 'teacher' && gameData?.duration != null" class="timeLeft">Tijd over: <br><strong>{{gameData?.duration * 60}}</strong></p>
+    <p *ngIf="userDetails?.role == 'teacher' && gameData?.duration != null" class="timeLeft">Tijd over: <br><strong>{{gameData?.duration}}:00</strong></p>
 
     <div class="containerDiv" fxLayoutGap="0.5%" fxLayout="column" fxLayoutAlign="space-evenly">
         <div fxLayout.xs="row" fxLayoutGap="0.5%" fxLayoutAlign="space-evenly">

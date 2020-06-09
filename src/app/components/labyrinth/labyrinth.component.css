@@ -2,3 +2,18 @@
     height: 350px;
     width: 350px;
 }
+
+#question {
+    font-size: 45px;
+    margin-bottom: 0px;
+}
+
+.radioButtonOptions {
+    display: inline-block;
+    margin: 20px;
+    padding: 10px;
+}
+
+mat-radio-button {
+    float: left;
+}
