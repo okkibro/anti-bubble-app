@@ -20,6 +20,7 @@ export class SessionService {
     return this.http.patch('https://localhost:3000/session/updateBubbleInit', { email: email });
   }
 
+  /** Method to do a POST request to get a list of question in a randomized order. */
   public getShuffledQuestions(part: Number): Observable<any> {
     return this.http.post('https://localhost:3000/session/questions', { part: part }, { headers: { Authorization: 'Bearer ' + this.cookie.get('mean-token') } });
   }
