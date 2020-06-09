@@ -1,4 +1,5 @@
 import { Component, OnInit, Output } from '@angular/core';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { AuthenticationService } from 'src/app/services/authentication.service';
 import { User } from 'src/app/models/user';
 import { FormBuilder, Validators } from '@angular/forms';
@@ -26,16 +27,18 @@ export class TeacherOverviewComponent implements OnInit {
     openform = false;
     selectklas = false;
 
-    constructor(private authenticationService: AuthenticationService, private classService: ClassesService, private fb: FormBuilder) { }
+    constructor(private authenticationService: AuthenticationService, private classService: ClassesService, private fb: FormBuilder, private snackBar: MatSnackBar) { }
 
     ngOnInit(): void {
         this.authenticationService.profile().subscribe(user => {
             this.userDetails = user;
-        });
-        this.classService.getClassIds().subscribe((ids) => {
-            this.classIds = ids.classIds;
-            this.getClass(this.classIds[0]._id);
-            this.getClassNames();
+            if (this.userDetails.class.length > 0) {
+                this.classService.getClassIds().subscribe((ids) => {
+                    this.classIds = ids.classIds;
+                    this.getClass(this.classIds[0]._id);
+                    this.getClassNames();
+                });
+            }
         });
     }
 
@@ -76,7 +79,13 @@ export class TeacherOverviewComponent implements OnInit {
 
             this.classService.createClass(classes, this.userDetails).subscribe((code: Number) => {
                 this.classService.joinClass(code).subscribe((output) => {
-                    console.log(output.succes, output.message);
+                    if (output.succes) {
+                        this.snackBar.open(output.message, 'X', {duration: 2500, panelClass: ['style-succes'], }).afterDismissed().subscribe(() => {
+                            window.location.reload();
+                        });
+                    } else {
+                        this.snackBar.open(output.message, 'X', {duration: 2500, panelClass: ['style-error'], });
+                    }
                 });
             });
         } else {
@@ -89,6 +98,6 @@ export class TeacherOverviewComponent implements OnInit {
     }
 
     onClickOpenForm() {
-        this.openform = true;  
+        this.openform = !this.openform;  
     }
 }

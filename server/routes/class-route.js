@@ -57,10 +57,7 @@ router.post('/joinClass', auth, (req, res) => {
 			} else {
 				Classes.findOne({ code: req.body.code }, (err, foundClass) => {
 					if (!foundClass) {
-						res.json({
-							succes: false,
-							message: 'Geen klas gevonden met de gegeven code',
-						});
+						res.status(200).json({succes: false, message: 'Geen klas gevonden met de gegeven code'});
 					} else {
 						if (user.role == 'student') {
 							if (user.class.length <= 0) {
@@ -83,7 +80,8 @@ router.post('/joinClass', auth, (req, res) => {
 							user.save().then(() => {
 								res.status(200).json({ succes: true, message: `Docent is succesvol toegevoegd aan de klas ${foundClass.title}` });
 							}).catch((err) => {
-								res.status(400).send(err);
+								console.log(err);
+								res.status(200).json({ succes: false, message: err });
 							});
 						}
 					}
