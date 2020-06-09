@@ -11,6 +11,7 @@ const auth = jwt({
     userProperty: 'payload'
 });
 
+// Post method to return a given activity from the database
 router.post('/activity', auth, (req, res) => {
     User.findById(req.payload._id, (err, user) => {
         if (user.role == "student") {
@@ -25,6 +26,7 @@ router.post('/activity', auth, (req, res) => {
     });
 });
 
+// Patch method to change the bubbleInit value to true if a user has completed the initial maze
 router.patch('/updateBubbleInit', (req, res) => {
     User.findOne({ email: sanitize(req.body.email) }).then(user => {
         user.bubbleInit = true;
