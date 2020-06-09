@@ -20,6 +20,8 @@ export class LabyrinthComponent implements OnInit {
   interval;
   questions = [];
   part: Number;
+  answers: [{ question: any, answer: any}] = [,];
+  currentQuestion;
 
   constructor(private router: Router, private sessionService: SessionService, private auth: AuthenticationService, private snackBar: MatSnackBar) { }
 
@@ -50,7 +52,7 @@ export class LabyrinthComponent implements OnInit {
     this.sessionService.getShuffledQuestions(1).subscribe(questions => {
       this.questions = questions;
       this.startTimer(300); // labyrinth activity is 5 minutes, therefore 300 seconds
-      this.nextQuestion();
+      this.nextQuestion(null);
     })
   }
 
@@ -80,22 +82,29 @@ export class LabyrinthComponent implements OnInit {
     this.lastSelected = value; // get selected radio button value
   }
 
-  nextQuestion() {
+  nextQuestion(prevQuestion) {
     if (this.questions.length === 0) {
       if (this.part === 1) {
         this.part = 2;
         this.sessionService.getShuffledQuestions(2).subscribe(questions => {
           this.questions = questions;
-          this.nextQuestion();
+          this.nextQuestion(prevQuestion);
         });
       } else {
-        this.saveQuestion();
+        this.saveQuestion(prevQuestion);
         console.log("labyrinth finished");
+        console.log(this.answers);
+        this.sessionService.saveAnswers(this.answers).subscribe();
       }
     } else {
-      this.saveQuestion();
+      let question = this.questions.shift();
+      this.currentQuestion = question;
 
-      this.showQuestion();
+      if (prevQuestion != null) {
+        this.saveQuestion(prevQuestion);
+      }
+
+      this.showQuestion(question);
 
       // if (this.lastSelected == undefined) {
       //   if (this.firstQuestion) { // do not save answers when displaying the first question
@@ -110,17 +119,29 @@ export class LabyrinthComponent implements OnInit {
     }
   }
 
-  saveQuestion() {
+  checkBoxCount() {
     let checkboxes: any = document.getElementsByClassName('option');
+    let count = 0;
     for (let i = 0; i < checkboxes.length; i++) {
-      console.log(checkboxes[i].checked)
-    } // TODO: save answers somewhere
+      if(checkboxes[i].checked) {
+        count++;
+      }
+    }
+    return count;
   }
 
-  showQuestion() {
-    // Show question on screen
-    let question = this.questions.shift();
+  saveQuestion(question) {
+    let checkboxes: any = document.getElementsByClassName('option');
+    let result = [];
+    for (let i = 0; i < checkboxes.length; i++) {
+      result.push(checkboxes[i].checked);
+    }
+    console.log(this.answers);
+    this.answers.push({ question: question, answer: result })
+  }
 
+  showQuestion(question) {
+    // Show question on screen
     document.getElementById('question').innerHTML = question.question;
 
     let radioGroup = document.getElementsByClassName('radioButtonOptions')[0];

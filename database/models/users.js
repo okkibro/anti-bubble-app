@@ -79,7 +79,10 @@ let userSchema = new Schema({
     bubbleInit: {
         type: Boolean,
         required: true
-    }
+    },
+    labyrinthAnswers: {
+        type: [[Boolean]],
+    },
 });
 
 userSchema.methods.setPassword = function(password){

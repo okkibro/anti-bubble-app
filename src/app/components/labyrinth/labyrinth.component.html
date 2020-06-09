@@ -35,7 +35,7 @@
                         <mat-radio-button value="Niks" #niks (change)="onItemChange(niks.value)">Niks</mat-radio-button>
                     </mat-radio-group><br>
 
-                    <button mat-flat-button (click)="nextQuestion()">Volgende</button>
+                    <button mat-flat-button (click)="nextQuestion(currentQuestion)" [disabled]="checkBoxCount() === 0">Volgende</button>
 
                 </mat-card-content>
             </mat-card>
