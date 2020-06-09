@@ -16,11 +16,12 @@ export class NavBarComponent implements OnInit {
   ngOnInit(): void {
     this.authenticationService.profile().subscribe(user => {
       this.userDetails = user;
-  })
+    })
   }
 
+  // Method to logout.
   logoutButton() {
     return this.authenticationService.logout();
-}
+  }
 
 }

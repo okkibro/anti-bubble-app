@@ -27,19 +27,19 @@ export class ProfileComponent implements OnInit {
     constructor(private auth: AuthenticationService, private fb: FormBuilder, private snackbar: MatSnackBar) {}
     
     ngOnInit() {
-        //Show badge with most progress
+        // Show badge with most progress.
 
-        // Milestone that gets shown when you have all badges
+        // Milestone that gets shown when you have all badges.
         this.milestoneShown = {
             name: "Gefeliciteerd",
             description: "Je hebt alle badges gehaald",
             index: 0,
             maxValue: 0
         }
-        
+
         this.auth.profile().subscribe(user => {
             this.userDetails = user;
-            // Loop over all milestones and find the one with the most progress that the user didnt complete yet
+            // Loop over all milestones and find the one with the most progress that the user didnt complete yet.
             for (let i = 0; i < milestones.length; i++) {
                 if (user.milestones[i] != milestones[i].maxValue && user.milestones[i] >= user.milestones[this.milestoneShown.index]) {
                     this.milestoneShown = milestones[i];
@@ -50,6 +50,7 @@ export class ProfileComponent implements OnInit {
         });
     }
 
+    // Method to change you password on the profile page.
     changePassword() {
         let oldPassword = this.changePasswordForm.get('oldPassword').value;
         let newPassword = this.changePasswordForm.get('newPassword').value;
@@ -61,15 +62,17 @@ export class ProfileComponent implements OnInit {
         });
     }
 
-    logoutButton() {
-      return this.auth.logout();
-    }
-
+    // Method to check of the passwords given in the form match.
     passwordMatchValidator(form: FormGroup) {
         let newpassword = form.get('newPassword').value;
         let repeatPassword = form.get('repeatPassword').value;
         if (newpassword != repeatPassword) {
             form.get('repeatPassword').setErrors({ noPasswordMatch: true });
         }
+    }
+
+    // Method to logout.
+    logoutButton() {
+      return this.auth.logout();
     }
 }

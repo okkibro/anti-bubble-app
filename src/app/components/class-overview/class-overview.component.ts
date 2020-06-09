@@ -24,10 +24,6 @@ export class ClassOverviewComponent implements OnInit {
 
   constructor(private classService: ClassesService, private auth: AuthenticationService, private router: Router, private fb: FormBuilder) { }
   
-  logoutButton() {
-    return this.auth.logout();
-  }
-  
   ngOnInit() {
     this.classService.getClass().subscribe((data) => {
       if (data.succes) {
@@ -37,6 +33,7 @@ export class ClassOverviewComponent implements OnInit {
     });
   }
 
+  // Method to filter the students in a class
   search() {
     let query:string = this.searchBar.get('query').value;
     let table = document.getElementById("table").childNodes;
@@ -49,11 +46,17 @@ export class ClassOverviewComponent implements OnInit {
     }
   }
 
+  // Method to clear the filter so all students are displayed again
   clear() {
     this.value = '';
     let table = document.getElementById("table").childNodes;
     for (let i:number = 0; i < this.classmates.length; i++) {
       (table[i + 1] as HTMLElement).style.display = "";
     }
+  }
+
+  // Method to logout
+  logoutButton() {
+    return this.auth.logout();
   }
 }

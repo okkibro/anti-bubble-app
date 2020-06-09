@@ -31,6 +31,7 @@ export class RegisterComponent implements OnInit {
     ngOnInit() { }
 
     // TODO: Add check if register is complete before redirecting
+    // Method to register a new user based on the information filled in on the form. 
     registerUser() { 
         let user = new User();
         user.firstName = this.registerForm.get('firstName').value;
@@ -45,6 +46,7 @@ export class RegisterComponent implements OnInit {
         });
     }
 
+    // Method to check if the filled in passwords match.
     passwordMatchValidator(form: FormGroup) {
         let password = form.get('password').value;
         let repeatPassword = form.get('repeatPassword').value;

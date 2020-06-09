@@ -25,7 +25,6 @@ import { ClassOverviewComponent } from './components/class-overview/class-overvi
 import { ClassmateProfileComponent } from './components/classmateProfile/classmateProfile.component';
 import { AvatarComponent } from './components/avatar/avatar.component';
 import { BubbleDetailsComponent } from './components/bubble-details/bubble-details.component';
-import { TeacherOrStudentComponent } from './components/teacherOrStudent/teacherOrStudent.component';
 import { ShopComponent } from './components/shop/shop.component';
 import { PasswordRecoveryComponent } from './components/password-recovery/password-recovery.component';
 import { PasswordResetComponent } from './components/password-reset/password-reset.component';
@@ -58,7 +57,6 @@ import { SocketIOService } from './services/socket-io.service';
         ClassmateProfileComponent,
         AvatarComponent,
         BubbleDetailsComponent,
-        TeacherOrStudentComponent,
         TeacherOverviewComponent,
         ShopComponent,
         NavBarComponent,

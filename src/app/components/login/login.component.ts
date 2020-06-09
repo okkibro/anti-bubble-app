@@ -24,6 +24,7 @@ export class LoginComponent implements OnInit {
 
     ngOnInit() { }
 
+    // Method to login.
     loginUser() {
         let user = new User();
         user.email = this.loginForm.get('email').value;
