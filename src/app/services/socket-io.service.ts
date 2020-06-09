@@ -16,7 +16,7 @@ export class SocketIOService {
 
     constructor(private data: DataService) { }
 
-    // Method to create a new session usig socketIO.
+    /**  Method to create a new session usig socketIO. */
     createSession(gameData) {
         this.removedListeners = false;
         this.gameData = gameData;
@@ -30,7 +30,7 @@ export class SocketIOService {
         });        
     }
 
-    // Method to join a live session.
+    /**  Method to join a live session. */
     joinSession(pin, user, join, backToHome, redirect) {
         this.hostDisconnected = false;
         this.socket.emit('player-join', {pin: pin, player: user});
@@ -55,12 +55,12 @@ export class SocketIOService {
         })
     }
 
-    // Method to send a message in the joined session.
+    /**  Method to send a message in the joined session. */
     sendMessage(message) {
         this.socket.emit('message', message);
     }
 
-    // Method to check for updates on the playerlist.
+    /**  Method to check for updates on the playerlist. */
     listenForUpdates(addPlayer, removePlayer) {
         this.socket.on('update-players', player => {
             addPlayer(player);
@@ -70,7 +70,7 @@ export class SocketIOService {
         });
     }
 
-    // Method to leave the session.
+    /**  Method to leave the session. */
     leaveSession() {
         this.socket.emit('leave');
         this.socket.on('remove-listeners', () => {
@@ -79,36 +79,36 @@ export class SocketIOService {
         });
     }
 
-    // Method to send a question.
+    /**  Method to send a question. */
     sendQuestion(question) {
         this.socket.emit('send-question', question);
     }
 
-    // Method to listen for incomming questions.
+    /**  Method to listen for incomming questions. */
     listenForQuestion(receiveQuestion) {
         this.socket.on('receive-question', (question) => {
             receiveQuestion(question);
         });
     }
 
-    // Method to submit an answer of a student.
+    /**  Method to submit an answer of a student. */
     studentSubmit(data) {
         this.socket.emit('submit', data);
     }
 
-    // Method to listen for submits.
+    /**  Method to listen for submits. */
     listenForSubmits(receiveSubmit) {
         this.socket.on('receive-submit', data => {
             receiveSubmit(data);
         });
     }
 
-    // Method to start the game
+    /**  Method to start the game */
     startGame() {
         this.socket.emit('start-game');
     }
 
-    // Method to pair students so they can chat given an groupsize.
+    /**  Method to pair students so they can chat given an groupsize. */
     pairStudents(chat, groupSize, receivePairs) {
         this.socket.emit('pair-students', chat, groupSize);
         this.socket.on('send-pairs', (pairs) => {
