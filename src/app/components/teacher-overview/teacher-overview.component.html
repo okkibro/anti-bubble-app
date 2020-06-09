@@ -15,8 +15,23 @@
                         Overzicht van alle spelers van klas {{currentClass?.title}}, code: {{currentClass?.code}}.
                     </mat-card-subtitle>
                 </mat-card-header>
-                <mat-card-content *ngIf="currentClass != undefined">
-                    <table *ngIf="currentClass" class="UItable" id="table">
+                <mat-card-content>
+                    <div *ngIf="userDetails?.class.length > 0">
+                        <button mat-raised-button [disabled]="loading" (click)="onClickSelectKlas()" [ngClass]="{'my-custom-theme': true}" color="accent"> Verander van klas</button>
+                        <div [hidden]="!selectklas">
+                            <div>
+                                <mat-button-toggle-group #group="matButtonToggleGroup">
+                                    <div *ngFor="let klas of names">
+                                        <mat-button-toggle (click)="switchClass(klas.id)">{{klas.title}}</mat-button-toggle>
+                                    </div>
+                                </mat-button-toggle-group>
+                            </div>
+                            <div>
+                                <a mat-flat-button (click)="onClickOpenForm()" [ngClass]="{'my-custom-theme': true}" color="accent">Maak een nieuwe klas aan</a>
+                            </div>
+                        </div>   
+                    </div>
+                    <table *ngIf="currentClass?.students?.length > 0" class="UItable" id="table">
                         <tr>
                             <th>Naam</th>
                             <th>Status</th>
@@ -27,6 +42,7 @@
                             <td><a mat-flat-button [routerLink]="'/classmateProfile/' + classmate._id" [ngClass]="{'my-custom-theme': true}" color="accent"> Bekijk Profiel </a></td>
                         </tr>
                     </table>
+                    <p *ngIf="currentClass?.students?.length == 0 || currentClass == undefined"> De klas heeft nog geen leerlingen</p>
                 </mat-card-content>
                 <form [hidden]="!openform" name="classForm" class="example-form" [formGroup]="classForm"
                     (ngSubmit)="createClass()">
