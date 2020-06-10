@@ -21,6 +21,7 @@ function runIO(io) {
 
 		socket.on('player-join', (params) => {
 			let gameFound = false;
+
 			// Look for a game with the entered pin
 			for (let i = 0; i < games.games.length; i++) {
 				if (params.pin == games.games[i].pin && games.games[i].gameLive == false) {
@@ -52,6 +53,7 @@ function runIO(io) {
 			socket.emit('remove-listeners');
 			let game = games.getGame(socket.id); //Finding game with socket.id
 			console.log("disconnect");
+
 			//If a game hosted by that id is found, the socket disconnected is a host
 			if (game) {
 				games.removeGame(socket.id);//Remove the game from games class
@@ -67,8 +69,10 @@ function runIO(io) {
 				io.in(game.pin).emit('host-disconnect'); //Send player back to 'join' screen
 				socket.leave(game.pin); //Socket is leaving room
 			} else {
+
 				//No game has been found, so it is a player socket that has disconnected
 				let player = players.getPlayer(socket.id); //Getting player with socket.id
+
 				//If a player has been found with that id
 				if (player) {
 					let hostId = player.hostID;//Gets id of host of the game
@@ -76,7 +80,6 @@ function runIO(io) {
 					let pin = game.pin;//Gets the pin of the game
 
 					players.removePlayer(socket.id);//Removes player from players class
-					//let playersInGame = players.getPlayers(hostId);//Gets remaining players in game
 
 					io.to(hostId).emit('remove-player', player);//Sends data to host to update screen
 					socket.leave(pin); //Player is leaving the room
@@ -89,6 +92,7 @@ function runIO(io) {
 			socket.emit('remove-listeners');
 			let game = games.getGame(socket.id); //Finding game with socket.id
 			console.log("disconnect");
+
 			//If a game hosted by that id is found, the socket disconnected is a host
 			if (game) {
 				games.removeGame(socket.id);//Remove the game from games class
@@ -104,8 +108,10 @@ function runIO(io) {
 				io.in(game.pin).emit('host-disconnect'); //Send player back to 'join' screen
 				socket.leave(game.pin); //Socket is leaving room
 			} else {
+
 				//No game has been found, so it is a player socket that has disconnected
 				let player = players.getPlayer(socket.id); //Getting player with socket.id
+
 				//If a player has been found with that id
 				if (player) {
 					let hostId = player.hostID;//Gets id of host of the game
@@ -113,7 +119,6 @@ function runIO(io) {
 					let pin = game.pin;//Gets the pin of the game
 
 					players.removePlayer(socket.id);//Removes player from players class
-					//let playersInGame = players.getPlayers(hostId);//Gets remaining players in game
 
 					io.to(hostId).emit('remove-player', player);//Sends data to host to update screen
 					socket.leave(pin); //Player is leaving the room
@@ -134,7 +139,6 @@ function runIO(io) {
 
 		socket.on('start-game', () => {
 			let game = games.getGame(socket.id);
-			// let gameName = game.gameData.game.name;
 			game.gameLive = true;
 			io.in(game.pin).emit('game-start-redirect');
 		});
@@ -143,6 +147,7 @@ function runIO(io) {
 		socket.on('pair-students', (chat, groupSize) => {
 			let playersInGame = players.getPlayers(socket.id); // Get all the players in the current game
 			playersInGame = shuffle(playersInGame); // Shuffle the player list
+			
 			// Group players into groups of the given size
 			let pairs = [];
 			let pairsIndex = 0;

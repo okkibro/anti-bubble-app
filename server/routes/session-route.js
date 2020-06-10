@@ -30,6 +30,7 @@ router.post('/activity', auth, (req, res) => {
 /** Router that updates the bubbleInit boolean of the logged in user to true. */
 router.patch('/updateBubbleInit', auth, (req, res) => {
     User.findById(req.payload._id).then(user => { // Get the logged in user.
+        
         // Set bubbleInit to true and save the schema.
         user.bubbleInit = true;
         user.save();

@@ -43,28 +43,38 @@ export class HomeComponent implements OnInit {
         return this.authenticationService.logout();
     }
 
+    /** Function that navigates the user to the labyrinth page. */
     startLabyrinth() {
         this.router.navigate(['labyrinth']);
     }
 
+    /** Function that navigates the teacher to the session-options page. */
     createSession() {
-        // this.socketService.createSession();
         this.router.navigate(['session-options']);
     }
 
+    /** Function that lets a student join a session. */
     joinSession() {
         const user = this.userDetails;
+
+        // Call the joinsession function in socketio service and define all callbacks.
         this.socketService.joinSession(this.pin, user, (succes) => {
+
+            // join callback: succes returns true if pin was correct and false when pin is incorrect.
             if (succes) {
-                this.router.navigate(['session']);
+                this.router.navigate(['session']); // On join succes, go to session page.
             } else {
-                this.snackBar.open("Er is iets mis gegaan, probeer het opnieuw", 'X', { duration: 2500, panelClass: ['style-error'], });
+                this.snackBar.open("Er is iets mis gegaan, probeer het opnieuw", 'X', { duration: 2500, panelClass: ['style-error'], }); // On join jail, show error message.
             }
         }, () => {
+
+            // backToHome callback: show message that host left and navigate to home page afterwards.
             this.snackBar.open("De host heeft de sessie verlaten, je wordt naar de home pagina geleid", 'X', { duration: 2500, panelClass: ['style-warning'] })
                 .afterDismissed().subscribe(() => { this.router.navigate(['home']) });
         }, () => {
-                this.router.navigate(['activities']);
+
+            // redirect callback: go to activities page when the game starts.
+            this.router.navigate(['activities']);
         });
     }
 }
