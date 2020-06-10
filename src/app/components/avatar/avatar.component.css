@@ -17,7 +17,11 @@
     padding: 20px;
 }
 
-
+.avatarItemDisplay {
+    background-color: transparent;
+    border: transparent;
+    box-shadow: none;
+}
 
 #buttonHoofddeksel{
     background-image: url("/assets/images/Super_Map/Shop_UI/Button_hats.png");

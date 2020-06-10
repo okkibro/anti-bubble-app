@@ -13,7 +13,9 @@
 }
 */
 
-
+.avatarSize {
+    size: 10%;
+}
 
 .UItable td{
     text-align: center;
