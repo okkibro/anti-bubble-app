@@ -37,10 +37,11 @@ router.patch('/updateBubbleInit', auth, (req, res) => {
     res.json({ succes: true });
 });
 
+/** Router that gets array of questions shuffled, based on the part given in the body of the request. */
 router.post('/questions', auth, (req, res) => {
-    Questions.find({ part: req.body.part }, (err, questions) => {
-        let result = shuffle(questions);
-        res.status(200).json(questions);
+    Questions.find({ part: req.body.part }, (err, questions) => { // Get all questions in normal order.
+        let result = shuffle(questions); // Shuffle the questions.
+        res.status(200).json(questions); // Send the questions to front-end.
 
         function shuffle(array) {
             var currentIndex = array.length, temporaryValue, randomIndex;
@@ -63,13 +64,18 @@ router.post('/questions', auth, (req, res) => {
     });
 });
 
+/** Router that saves answers to the logged in user. */
 router.post('/labyrinthAnswers', auth, (req, res) => {
-    User.findById(req.payload._id, (err, user) => {
+    User.findById(req.payload._id, (err, user) => { // Get the logged in user.
+        
+        // Loop over all questions and save corresponding answers to result based on the index of the question.
         let result = [];
         for (let i = 1; i < req.body.answers.length; i++) {
             let index = req.body.answers[i].question.id;
             result[index] = req.body.answers[i].answer;
         }
+
+        // Save the result.
         user.labyrinthAnswers = result;
         user.save(() => {
             res.status(200).json({ succes: true });
