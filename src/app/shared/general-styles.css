@@ -46,8 +46,7 @@
 
 /* the following code will describe the rest of the (angular) page */
 body {
-    /* background-image: url("../../favicon.ico"); */
-    /* background-image: url("../../assets/images/oud/background.png"); */
+    background-image: url("../..//assets/images/Super_Map/Basic_Buttons/Background.png");
     text-align: center;
     margin: 0;
     padding: 0;
@@ -135,6 +134,7 @@ mat-tab-group, mat-tab {
     color: white;
     background-color: green;
 }
+
 .bubbleImage {
     position: absolute;
     top: 10%;

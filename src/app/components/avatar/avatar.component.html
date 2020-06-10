@@ -14,9 +14,10 @@
                     </mat-card-header><br>
                     <mat-grid-list cols="2">
                         <mat-grid-tile *ngFor = "let item of filteredAvatar" fxFlexAlign="stretch">
-                            <mat-card fxFlex="100%" fxLayout="column" fxLayoutGap="0.5%" fxFlexAlign="stretch">
-                                    {{item.title}}
+                            <mat-card fxFlex="100%" fxLayout="column" fxLayoutGap="0.5%" fxFlexAlign="stretch" class='avatarItemDisplay'>
+                                <div fxLayoutAlign="center" fxFlex="50%">
                                     <img mat-card-image src="{{item.previewImage}}" alt="{{item.title}}" (click)="equip(item)"><br>
+                                </div>
                             </mat-card>
                         </mat-grid-tile>
                     </mat-grid-list> 

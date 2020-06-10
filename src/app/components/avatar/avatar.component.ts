@@ -23,7 +23,7 @@ export class AvatarComponent implements OnInit {
     constructor(private auth: AuthenticationService, private shopService: ShopService, private avatarService: AvatarService, private avatarDisplay: AvatarDisplayComponent) { }
 
     ngOnInit() {
-        this.shopService.shop("haar").subscribe(shop => {
+        this.shopService.shop("hoofddeksel").subscribe(shop => {
             this.auth.profile().subscribe(user => {
                 this.userDetails = user;
                 // Checks for items in the shop that the player bought
