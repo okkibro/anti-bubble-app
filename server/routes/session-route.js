@@ -12,22 +12,25 @@ const auth = jwt({
     userProperty: 'payload'
 });
 
+/** Router that gets an activity based on the given string in the body of the request. */
 router.post('/activity', auth, (req, res) => {
-    User.findById(req.payload._id, (err, user) => {
+    User.findById(req.payload._id, (err, user) => { // Get the logged in user.
         if (user.role == "student") {
             res.status(401).json({
-                message: "UnauthorizedError: Not a teacher"
+                message: "UnauthorizedError: Not a teacher" // Only teachers can send requests to get activities.
             });
         } else {
-            Activities.findOne({ name: req.body.activity }, (err, activity) => {
-                res.status(200).json(activity);
+            Activities.findOne({ name: req.body.activity }, (err, activity) => { // Find activity in database based on the name sent in the body.
+                res.status(200).json(activity); // Send the activity object returned by the findOne function.
             });
         }
     });
 });
 
-router.patch('/updateBubbleInit', (req, res) => {
-    User.findOne({ email: sanitize(req.body.email) }).then(user => {
+/** Router that updates the bubbleInit boolean of the logged in user to true. */
+router.patch('/updateBubbleInit', auth, (req, res) => {
+    User.findById(req.payload._id).then(user => { // Get the logged in user.
+        // Set bubbleInit to true and save the schema.
         user.bubbleInit = true;
         user.save();
     });
@@ -69,7 +72,7 @@ router.post('/labyrinthAnswers', auth, (req, res) => {
         }
         user.labyrinthAnswers = result;
         user.save(() => {
-            res.status(200);
+            res.status(200).json({ succes: true });
         });
     });
 });
