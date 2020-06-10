@@ -22,7 +22,7 @@ export class SessionGuardService implements CanDeactivate<SessionComponent> {
         if (confirm("Weet je zeker dat je de sessie wilt verlaten?")) {
           component.leaveSession();
           window.removeEventListener('beforeunload', component.beforeUnload);
-          if (currentState.url == '/session' || currentState.url == '/labyrinth') {
+          if (currentState.url == '/session' ) { // || currentState.url == '/labyrinth' --> delete if timer from labyrinth page will not be used
             clearInterval(component.interval);
           }
           return true;

@@ -15,7 +15,7 @@ export class LabyrinthComponent implements OnInit {
 
   userDetails: User;
   startedLabyrinth: boolean;
-  interval;
+  // interval;
   questions = [];
   part: Number;
   answers: [{ question: any, answer: any}] = [,];
@@ -38,7 +38,7 @@ export class LabyrinthComponent implements OnInit {
         console.log(data.succes);
         if (data.succes) {  // Labyrinth boolean is set to true. Player now has a bubble and can join activity sessions.
           this.sessionService.saveAnswers(this.answers).subscribe(() => { // Saves the answers in the database.
-            clearInterval(this.interval);
+            // clearInterval(this.interval);
             this.router.navigate(['home']);
           });
         } else {
@@ -57,41 +57,48 @@ export class LabyrinthComponent implements OnInit {
     this.startedLabyrinth = true; // Shows the question screen due to ngIfs in the HTML.
     this.sessionService.getShuffledQuestions(1).subscribe(questions => { // Get the part 1 questions from the database.
       this.questions = questions;
-      this.startTimer(300); // labyrinth activity is 5 minutes, therefore 300 seconds
+      // this.startTimer(300); // labyrinth activity is 5 minutes, therefore 300 seconds
       this.nextQuestion(null); // Show the first question, previous question does not exist so its null.
     })
   }
 
-  /** Function that handles starting the timer, showing it on screen and handling what happens when the time is up. */
-  startTimer(time: number) {
-    // Timeout that triggers when the time us up.
-    setTimeout(() => {
-      // TODO: iets
-    }, time * 1000);
-
-    // Interval that triggers every second until the time is up.
-    this.interval = setInterval(() => { // Every second...
-      if (time > 0) {
-        time -= 1; // Descrease time by 1.
-
-        // Calculate the minutes and seconds left and show the on the screen.
-        let minutes = Math.floor(time / 60);
-        let seconds = time % 60;
-        if (seconds < 10) {
-          document.getElementsByClassName('timeLeft')[0].innerHTML = `Tijd over: <br><strong>${minutes}:0${seconds}</strong>`; // add extra 0 before single digits 
-        } else {
-          document.getElementsByClassName('timeLeft')[0].innerHTML = `Tijd over: <br><strong>${minutes}:${seconds}</strong>`;
-        }
-      } else {
-
-        //When time is up clear interval, show message and go back to the home screen.
-        clearInterval(this.interval);
-        this.snackBar.open('De tijd is op. Je wordt omgeleid naar de homepage.', 'X', { duration: 2500, panelClass: ['style-warning'], }).afterDismissed().subscribe(() => {
-          this.performedLabyrinth();
-        });
-      }
-    }, 1000);
+  paused(){
+    this.snackBar.open('Doolhof gepauzeerd. Zorg dat je het voor de volgende les hebt afgemaakt.', 'X', { duration: 2500, panelClass: ['style-warning'], }).afterDismissed().subscribe(() => {
+              // opslaan waar je was
+              this.router.navigate(['home']);
+            });
   }
+
+  // /** Function that handles starting the timer, showing it on screen and handling what happens when the time is up. */
+  // startTimer(time: number) {
+  //   // Timeout that triggers when the time us up.
+  //   setTimeout(() => {
+  //     // TODO: iets
+  //   }, time * 1000);
+
+  //   // Interval that triggers every second until the time is up.
+  //   this.interval = setInterval(() => { // Every second...
+  //     if (time > 0) {
+  //       time -= 1; // Descrease time by 1.
+
+  //       // Calculate the minutes and seconds left and show the on the screen.
+  //       let minutes = Math.floor(time / 60);
+  //       let seconds = time % 60;
+  //       if (seconds < 10) {
+  //         document.getElementsByClassName('timeLeft')[0].innerHTML = `Tijd over: <br><strong>${minutes}:0${seconds}</strong>`; // add extra 0 before single digits 
+  //       } else {
+  //         document.getElementsByClassName('timeLeft')[0].innerHTML = `Tijd over: <br><strong>${minutes}:${seconds}</strong>`;
+  //       }
+  //     } else {
+
+  //       //When time is up clear interval, show message and go back to the home screen.
+  //       clearInterval(this.interval);
+  //       this.snackBar.open('De tijd is op. Je wordt omgeleid naar de homepage.', 'X', { duration: 2500, panelClass: ['style-warning'], }).afterDismissed().subscribe(() => {
+  //         this.performedLabyrinth();
+  //       });
+  //     }
+  //   }, 1000);
+  // }
 
   /** Function that shows the next question on the screen. */
   nextQuestion(prevQuestion) {

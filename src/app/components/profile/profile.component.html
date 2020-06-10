@@ -22,7 +22,7 @@
                             <th>E-mail adres</th>
                             <td>{{ userDetails?.email }}</td>
                         </tr>
-                        <tr>
+                        <tr *ngIf="userDetails?.role == 'student'">
                             <th>Klas</th>
                             <td>{{ userClassTitle }}</td>
                         </tr>
