@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { CanActivate, RouterStateSnapshot, ActivatedRouteSnapshot, Router } from '@angular/router';
-import { LabyrinthComponent } from '../components/labyrinth/labyrinth.component';
 import { AuthenticationService } from './authentication.service';
 
 @Injectable({
