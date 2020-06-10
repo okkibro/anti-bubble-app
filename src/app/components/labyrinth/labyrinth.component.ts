@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, HostListener } from '@angular/core';
 import { User } from "../../models/user";
 import { Router } from "@angular/router";
 import { SessionService } from '../../services/session.service';
@@ -16,10 +16,19 @@ export class LabyrinthComponent implements OnInit {
   userDetails: User;
   startedLabyrinth: boolean;
   // interval;
+  nextQuestionDisabled: boolean;
   questions = [];
   part: Number;
   answers: [{ question: any, answer: any}] = [,];
   currentQuestion;
+
+  @HostListener("change") function() {
+    if (this.checkBoxCount() == 0) {
+      this.nextQuestionDisabled = true;
+    } else {
+      this.nextQuestionDisabled = false;
+    }
+  };
 
   constructor(private router: Router, private sessionService: SessionService, private auth: AuthenticationService, private snackBar: MatSnackBar) { }
 
@@ -64,7 +73,7 @@ export class LabyrinthComponent implements OnInit {
 
   paused(){
     this.snackBar.open('Doolhof gepauzeerd. Zorg dat je het voor de volgende les hebt afgemaakt.', 'X', { duration: 2500, panelClass: ['style-warning'], }).afterDismissed().subscribe(() => {
-              // opslaan waar je was
+              // TODO: opslaan waar je was
               this.router.navigate(['home']);
             });
   }
@@ -102,6 +111,7 @@ export class LabyrinthComponent implements OnInit {
 
   /** Function that shows the next question on the screen. */
   nextQuestion(prevQuestion) {
+    this.nextQuestionDisabled = true;
     if (this.questions.length === 0) {
       if (this.part === 1) { 
         // If at the end of part 1, go to part 2.

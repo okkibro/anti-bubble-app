@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { Role } from './models/role'
+import { Role } from './models/role';
 
 import { HomeComponent } from './components/home/home.component';
 import { LoginComponent } from './components/login/login.component';
@@ -22,6 +22,7 @@ import { SessionGuardService } from './services/session-guard.service';
 import { SessionOptionsComponent } from './components/session-options/session-options.component';
 import { LabyrinthComponent } from './components/labyrinth/labyrinth.component';
 import { ActivitiesComponent } from './components/activities/activities.component';
+import { LabyrinthGuardService } from './services/labyrinth-guard.service';
 
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
@@ -40,7 +41,7 @@ const routes: Routes = [
   { path: 'shop', component: ShopComponent },
   { path: 'passwordrecovery', component: PasswordRecoveryComponent },
   { path: 'reset/:token', component: PasswordResetComponent },
-  { path: 'labyrinth', component: LabyrinthComponent },
+  { path: 'labyrinth', component: LabyrinthComponent, canActivate: [LabyrinthGuardService] },
   { path: 'session-options', component: SessionOptionsComponent, data: {roles: [Role.teacher]}},
   { path: 'activities', component: ActivitiesComponent, canDeactivate: [SessionGuardService] },
   // Auto redirect als je bullshit invult (Moet als laatste!)
