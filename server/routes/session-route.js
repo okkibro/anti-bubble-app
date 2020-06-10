@@ -62,4 +62,18 @@ router.post('/questions', auth, (req, res) => {
     });
 });
 
+router.post('/labyrinthAnswers', auth, (req, res) => {
+    User.findById(req.payload._id, (err, user) => {
+        let result = [];
+        for (let i = 1; i < req.body.answers.length; i++) {
+            let index = req.body.answers[i].question.id;
+            result[index] = req.body.answers[i].answer;
+        }
+        user.labyrinthAnswers = result;
+        user.save(() => {
+            res.status(200);
+        });
+    });
+});
+
 module.exports = router;

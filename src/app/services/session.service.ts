@@ -24,4 +24,8 @@ export class SessionService {
   public getShuffledQuestions(part: Number): Observable<any> {
     return this.http.post('https://localhost:3000/session/questions', { part: part }, { headers: { Authorization: 'Bearer ' + this.cookie.get('mean-token') } });
   }
+
+  public saveAnswers(answers: any): Observable<any> {
+    return this.http.post('https://localhost:3000/session/labyrinthAnswers', { answers: answers }, { headers: { Authorization: 'Bearer ' + this.cookie.get('mean-token') } });
+  }
 }

@@ -15,11 +15,11 @@ export class LabyrinthComponent implements OnInit {
 
   userDetails: User;
   startedLabyrinth: boolean;
-  firstQuestion: boolean = true;
-  lastSelected;
   interval;
   questions = [];
   part: Number;
+  answers: [{ question: any, answer: any}] = [,];
+  currentQuestion;
 
   constructor(private router: Router, private sessionService: SessionService, private auth: AuthenticationService, private snackBar: MatSnackBar) { }
 
@@ -33,6 +33,7 @@ export class LabyrinthComponent implements OnInit {
 
       this.sessionService.performedLabyrinth(this.userDetails.email).subscribe(data => {
         if (data.succes) {  // labyrinth boolean is set to true. Player now has a bubble and can join activity sessions.
+          this.sessionService.saveAnswers(this.answers).subscribe();
           this.router.navigate(['home']);
         } else {
           // TODO: opvangen fout tijdens doorlopen van doolhof
@@ -46,7 +47,7 @@ export class LabyrinthComponent implements OnInit {
     this.sessionService.getShuffledQuestions(1).subscribe(questions => {
       this.questions = questions;
       this.startTimer(300); // labyrinth activity is 5 minutes, therefore 300 seconds
-      this.nextQuestion();
+      this.nextQuestion(null);
     })
   }
 
@@ -66,57 +67,62 @@ export class LabyrinthComponent implements OnInit {
         }
       } else {
         clearInterval(this.interval);
-        this.snackBar.open('De tijd is op. Je wordt omgeleid naar de homepage.', 'X', { duration: 2500, panelClass: ['style-warning'], });
-        this.performedLabyrinth(); // TODO: redirect naar home gaan te snel?
+        this.snackBar.open('De tijd is op. Je wordt omgeleid naar de homepage.', 'X', { duration: 2500, panelClass: ['style-warning'], }).afterDismissed().subscribe(() => {
+          clearInterval(this.interval);
+          this.performedLabyrinth();
+        });
       }
     }, 1000);
   }
 
-  onItemChange(value: string) {
-    this.lastSelected = value; // get selected radio button value
-  }
-
-  nextQuestion() {
+  nextQuestion(prevQuestion) {
     if (this.questions.length === 0) {
       if (this.part === 1) {
         this.part = 2;
         this.sessionService.getShuffledQuestions(2).subscribe(questions => {
           this.questions = questions;
-          this.nextQuestion();
+          this.nextQuestion(prevQuestion);
         });
       } else {
-        this.saveQuestion();
-        console.log("labyrinth finished");
+        this.saveQuestion(prevQuestion);
+        this.sessionService.saveAnswers(this.answers).subscribe();
+        clearInterval(this.interval);
+        this.router.navigate(['home']); //TODO: Make screen that tells the user they have finished the labyrinth
       }
     } else {
-      this.saveQuestion();
+      let question = this.questions.shift();
+      this.currentQuestion = question;
 
-      this.showQuestion();
+      if (prevQuestion != null) {
+        this.saveQuestion(prevQuestion);
+      }
 
-      // if (this.lastSelected == undefined) {
-      //   if (this.firstQuestion) { // do not save answers when displaying the first question
-      //     this.firstQuestion = false;
-      //   } else {
-      //     this.snackBar.open('Vul een antwoord in', 'X', { duration: 2500, panelClass: ['style-error'], });
-      //   }
-      // } else {
-      //   console.log("Je hebt gekozen voor: " + this.lastSelected); //TODO: sla dit antwoord ergens op
-      //   // TODO: laat volgende vraag (en opties) zien
-      // }
+      this.showQuestion(question);
     }
   }
 
-  saveQuestion() {
+  checkBoxCount() {
     let checkboxes: any = document.getElementsByClassName('option');
+    let count = 0;
     for (let i = 0; i < checkboxes.length; i++) {
-      console.log(checkboxes[i].checked)
-    } // TODO: save answers somewhere
+      if(checkboxes[i].checked) {
+        count++;
+      }
+    }
+    return count;
   }
 
-  showQuestion() {
-    // Show question on screen
-    let question = this.questions.shift();
+  saveQuestion(question) {
+    let checkboxes: any = document.getElementsByClassName('option');
+    let result = [];
+    for (let i = 0; i < checkboxes.length; i++) {
+      result.push(checkboxes[i].checked);
+    }
+    this.answers.push({ question: question, answer: result })
+  }
 
+  showQuestion(question) {
+    // Show question on screen
     document.getElementById('question').innerHTML = question.question;
 
     let radioGroup = document.getElementsByClassName('radioButtonOptions')[0];
@@ -128,7 +134,6 @@ export class LabyrinthComponent implements OnInit {
       type = "radio";
     }
     for (let i = 0; i < question.choices.length; i++) {
-      //options += `<mat-radio-button value="${question.choices[i]}" #optie${i} (change)="onItemChange(optie${i}.value)">${question.choices[i]}</mat-radio-button><br>`
       options += `<input type="${type}" class="option" name="options">${question.choices[i]}</input><br>`
     }
     radioGroup.innerHTML = options;
