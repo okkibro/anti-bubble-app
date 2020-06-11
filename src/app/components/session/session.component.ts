@@ -5,6 +5,7 @@ import { DataService } from 'src/app/services/data-exchage.service';
 import { User } from '../../models/user';
 import { Router } from '@angular/router';
 import { SessionService } from 'src/app/services/session.service';
+import { beforeUnload } from '../../../../constants';
 
 @Component({
     selector: 'mean-session',
@@ -22,6 +23,8 @@ export class SessionComponent implements OnInit {
     activity;
     gameStarted;
     interval;
+    gameFinished = false;
+    leaveByHomeButton = false;
 
     constructor(
         private authenticationService: AuthenticationService,
@@ -93,7 +96,7 @@ export class SessionComponent implements OnInit {
         });
 
         // Show confirm when trying to refresh or close the current tab with an ongoing session.
-        window.addEventListener('beforeunload', this.beforeUnload);
+        window.addEventListener('beforeunload', beforeUnload);
 
         // Going to session page but not having joined a session redirects a user back to the home page.
         if (this.gameData == undefined) {
@@ -101,10 +104,10 @@ export class SessionComponent implements OnInit {
         }
     }
 
-    beforeUnload(e) {
-        e.returnValue = "Weet je zeker dat je de sessie wilt verlaten?";
-        return "Weet je zeker dat je de sessie wilt verlaten?";
-    }
+    // beforeUnload(e) {
+    //     e.returnValue = "Weet je zeker dat je de sessie wilt verlaten?";
+    //     return "Weet je zeker dat je de sessie wilt verlaten?";
+    // }
 
     logoutButton() {
         return this.authenticationService.logout();
@@ -163,7 +166,7 @@ export class SessionComponent implements OnInit {
                     document.getElementsByClassName('timeLeft')[0].innerHTML = `Tijd over: <br><strong>${minutes}:${seconds}</strong>`;
                 }
             } else {
-                clearInterval(this.interval);
+                this.stopGame();
             }
         }, 1000);
     }
@@ -173,5 +176,22 @@ export class SessionComponent implements OnInit {
         this.socketService.pairStudents(false, 2, pairs => {
             console.log(pairs);
         });
+    }
+
+    /** Function that stops the timer and game. */
+    stopGame() {
+        this.gameFinished = true;
+        clearInterval(this.interval);
+        let timeLeft = <HTMLElement[]><any>document.querySelectorAll('.timeLeft');
+        timeLeft[0].style.color = "red";
+        this.socketService.removeListeners(); // Remove all listeners so students cant submit answers.
+    }
+
+    /** Function that makes the host leave the session and the page. */
+    leaveGame() {
+        this.leaveSession();
+        this.leaveByHomeButton = true;
+        this.router.navigate(['home']);
+        window.removeEventListener('beforeunload', beforeUnload);
     }
 }

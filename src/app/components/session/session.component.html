@@ -59,9 +59,10 @@
                     <table class="submitTable">
                         
                     </table>
+                    <a mat-flat-button *ngIf= "!gameFinished" (click)="stopGame()" [ngClass]="{'my-custom-theme': true}" color="accent">Stop</a>
+                    <a mat-flat-button *ngIf= "gameFinished" (click)="leaveGame()" [ngClass]="{'my-custom-theme': true}" color="accent">Home</a>
                 </mat-card-content>
             </mat-card>
-
         </div>
     </div>
 

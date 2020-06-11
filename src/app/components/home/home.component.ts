@@ -8,6 +8,7 @@ import { PointInteractionEventObject } from 'highcharts';
 import { DataService } from 'src/app/services/data-exchage.service';
 import { Message } from '@angular/compiler/src/i18n/i18n_ast';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { beforeUnload } from '../../../../constants';
 
 @Component({
     selector: 'mean-home',
@@ -30,7 +31,7 @@ export class HomeComponent implements OnInit {
         private fb: FormBuilder,
         private router: Router,
         private data: DataService,
-        private snackBar: MatSnackBar
+        private snackBar: MatSnackBar,
     ) { }
 
     ngOnInit(): void {
@@ -70,11 +71,15 @@ export class HomeComponent implements OnInit {
 
             // backToHome callback: show message that host left and navigate to home page afterwards.
             this.snackBar.open("De host heeft de sessie verlaten, je wordt naar de home pagina geleid", 'X', { duration: 2500, panelClass: ['style-warning'] })
-                .afterDismissed().subscribe(() => { this.router.navigate(['home']) });
+                .afterDismissed().subscribe(() => {
+                    this.router.navigate(['home']);
+                });
+                window.removeEventListener('beforeunload', beforeUnload);
         }, () => {
 
             // redirect callback: go to activities page when the game starts.
             this.router.navigate(['activities']);
         });
+
     }
 }

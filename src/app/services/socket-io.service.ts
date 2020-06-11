@@ -127,4 +127,10 @@ export class SocketIOService {
             receivePairs(pairs);
         });
     }
+
+    /** Function that removes all listeners from the socket. */
+    removeListeners() {
+        this.socket.removeAllListeners();
+        this.removedListeners;
+    }
 }
