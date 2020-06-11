@@ -9,9 +9,7 @@ export class TeacherOrStudentComponent implements OnInit {
 
   constructor() { }
 
-  ngOnInit(): void {
-
-  }
+  ngOnInit(): void {  }
 
 }
 

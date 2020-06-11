@@ -61,9 +61,7 @@ export class TeacherOverviewComponent implements OnInit {
         }
     }
 
-    switchClass() {
-        
-    }
+    switchClass() { }
 
     onClickOpenForm(){
         this.openform = true;  

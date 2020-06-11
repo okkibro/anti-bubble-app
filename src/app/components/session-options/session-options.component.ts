@@ -17,8 +17,7 @@ export class SessionOptionsComponent implements OnInit {
 
   constructor(private auth: AuthenticationService, private router: Router, private socketService: SocketIOService, private sessionService: SessionService) { }
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {  }
 
   // Gets called when teacher presses create session button. gamedata contains the name of the game and time of the slider
   createSession(gameData) {

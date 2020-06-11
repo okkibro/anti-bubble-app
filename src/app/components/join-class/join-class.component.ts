@@ -16,8 +16,7 @@ export class JoinClassComponent implements OnInit {
   value;
   constructor(private fb: FormBuilder, private classesService: ClassesService, private snackBar: MatSnackBar) { }
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {  }
 
   joinClass(): void {
     this.classesService.joinClass(this.value).subscribe(data => {

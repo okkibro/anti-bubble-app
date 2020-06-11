@@ -135,9 +135,9 @@ export class SessionComponent implements OnInit {
 
 
     startTimer(time: number) {
-        setTimeout(() => {
+        setTimeout(() => {  
             console.log("TIJD OP"); // TODO: redirect naar home ofzo en update bubblewaarden alles
-        }, time * 1000);
+            }, time * 1000);
         let interval = setInterval(() => {
             if(time > 0) {
                 time -= 1;
@@ -149,9 +149,7 @@ export class SessionComponent implements OnInit {
     }
 
     pairStudentsTest() {
-        this.socketService.pairStudents(false, 2, pairs => {
-
-        });
+        this.socketService.pairStudents(false, 2, pairs => {   });
     }
 }
 

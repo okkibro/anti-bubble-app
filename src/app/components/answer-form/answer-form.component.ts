@@ -18,8 +18,7 @@ export class AnswerFormComponent implements OnInit {
 
   constructor(private fb: FormBuilder, private snackBar: MatSnackBar, private socketService: SocketIOService) { }
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {  }
 
 
   sendAnswer() {
