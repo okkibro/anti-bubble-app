@@ -81,7 +81,7 @@
                         <tr>
                             <td>
                                 <mat-label>Ik ben een:*</mat-label>
-                                <mat-radio-group class="role-radio-group" formControlName="role">
+                                <mat-radio-group class="role-radio-group" ngDefaultControl formControlName="role">
                                     <mat-radio-button class="role-radio-button" value="student" color="primary">Leerling</mat-radio-button>
                                     <mat-radio-button class="role-radio-button" value="teacher" color="primary">Docent</mat-radio-button>
                                 </mat-radio-group>
@@ -92,7 +92,7 @@
                         </tr>
                     </table>
                     <mat-card-actions>
-                        <button mat-raised-button type="submit" [disabled]="!registerForm.valid && (registerForm.get('role').value === 'student' )" color="primary">Registreer</button>
+                        <button mat-raised-button type="submit" [disabled]="!registerForm.valid" color="primary">Registreer</button>
                     </mat-card-actions>
                 </form>
             </mat-card-content>

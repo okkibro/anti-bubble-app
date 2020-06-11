@@ -8,6 +8,7 @@ import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { RouterModule } from '@angular/router';
 import { ReactiveFormsModule } from '@angular/forms';
 import { of } from 'rxjs';
+import { NO_ERRORS_SCHEMA } from '@angular/core';
 
 describe('LoginComponent', () => {
   let component: LoginComponent;
@@ -19,7 +20,7 @@ describe('LoginComponent', () => {
   const snackbarStub: jasmine.SpyObj<MatSnackBar> = jasmine.createSpyObj(
     'snackBar',
     ['open']
-  )
+  );
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -34,7 +35,8 @@ describe('LoginComponent', () => {
           provide: MatSnackBar,
           useValue: snackbarStub
         }
-      ]
+      ],
+      schemas: [ NO_ERRORS_SCHEMA ]
     }).compileComponents();
   }));
 
@@ -93,11 +95,6 @@ describe('LoginComponent', () => {
     expect(email.valid).toBeTruthy();
     expect(errors.email).toBeFalsy();
     expect(errors.pattern).toBeFalsy();
-  });
-
-  it('should render message when formControl is submitted and invalid', () => {
-
-
   });
 
   it('should invoke auth service when form is valid', () => {
