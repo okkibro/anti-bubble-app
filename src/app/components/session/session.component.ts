@@ -25,6 +25,7 @@ export class SessionComponent implements OnInit {
     interval;
     gameFinished = false;
     leaveByHomeButton = false;
+    enableQuestions: boolean = true;
 
     constructor(
         private authenticationService: AuthenticationService,
@@ -83,14 +84,7 @@ export class SessionComponent implements OnInit {
                     var tablerow = document.createElement('tr');
                     tablerow.innerHTML = `<strong>${data.player.name}:</strong> ${data.message}<br>`
                     submitTable.appendChild(tablerow);
-                });
-            }
-
-            // Students listen for incoming questions.
-            if (this.userDetails.role == "student") {
-                this.socketService.listenForQuestion(question => { // Receive question.
-                    // TODO: show question on screen of student.
-                    console.log(question);
+                    this.enableQuestions = false; // teacher cannot send any questions after having received at least one answer
                 });
             }
         });
@@ -191,7 +185,7 @@ export class SessionComponent implements OnInit {
     leaveGame() {
         this.leaveSession();
         this.leaveByHomeButton = true;
-        this.router.navigate(['home']);
         window.removeEventListener('beforeunload', beforeUnload);
+        this.router.navigate(['home']);
     }
 }

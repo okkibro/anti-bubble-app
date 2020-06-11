@@ -4,6 +4,8 @@ import { Router } from '@angular/router';
 import { DataService } from 'src/app/services/data-exchage.service';
 import { FormBuilder } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { AuthenticationService } from 'src/app/services/authentication.service';
+import { User } from '../../models/user';
 
 @Component({
   selector: 'mean-activities',
@@ -15,11 +17,23 @@ export class ActivitiesComponent implements OnInit {
 
   gameData;
   pin;
+  userDetails: User;
+  enableAnswer: boolean = false;
 
-  constructor(private socketService: SocketIOService, private router: Router, private data: DataService, private fb: FormBuilder, private snackBar: MatSnackBar) { }
+  constructor(
+    private socketService: SocketIOService,
+    private router: Router,
+    private data: DataService,
+    private fb: FormBuilder,
+    private snackBar: MatSnackBar,
+    private auth: AuthenticationService) { }
 
   ngOnInit(): void {
     this.gameData = this.getGameData();
+
+    this.auth.profile().subscribe(user => {
+      this.userDetails = user;
+    });
 
     this.data.currentMessage.subscribe(message => {
       if (message) {
@@ -33,6 +47,8 @@ export class ActivitiesComponent implements OnInit {
     if (this.gameData == undefined) {
       this.router.navigate(['home']);
     }
+
+    this.receiveQuestion(); // check whether or not a teacher has sent a question
   }
 
   beforeUnload(e) {
@@ -50,6 +66,15 @@ export class ActivitiesComponent implements OnInit {
 
   getGameData(): any {
     return this.socketService.gameData;
+  }
+
+  receiveQuestion() {
+    // Students listen for incoming questions.
+    this.socketService.listenForQuestion((question) => { // Receive question.
+      let questionDisplay = document.getElementById('receiveQuestion');
+      questionDisplay.innerHTML = question;
+      this.enableAnswer = true; // student can only answer after the teacher has submitted a question
+    });
   }
 
 }

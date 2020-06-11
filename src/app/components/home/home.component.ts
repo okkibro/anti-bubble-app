@@ -37,7 +37,7 @@ export class HomeComponent implements OnInit {
     ngOnInit(): void {
         this.authenticationService.profile().subscribe(user => {
             this.userDetails = user;
-        })
+        });
     }
 
     logoutButton() {
@@ -74,7 +74,7 @@ export class HomeComponent implements OnInit {
                 .afterDismissed().subscribe(() => {
                     this.router.navigate(['home']);
                 });
-                window.removeEventListener('beforeunload', beforeUnload);
+                 window.removeEventListener('beforeunload', beforeUnload);
         }, () => {
 
             // redirect callback: go to activities page when the game starts.

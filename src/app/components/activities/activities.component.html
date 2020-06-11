@@ -1,3 +1,4 @@
+<!-- This page represents an activity during a session on the students' devices. -->
 <mean-nav-bar></mean-nav-bar>
 
 <body>
@@ -13,13 +14,17 @@
                 </mat-card-content>
 
                 <mat-card-content *ngIf="gameData?.game.name == 'Botsende Bubbels'">
-                    {{gameData?.game.description}}
-                    <mean-answer-form></mean-answer-form>
+                    {{gameData?.game.description}}<br>
+                    <p><i>Wacht op de vraag van de docent:</i></p>
+                    <p id="receiveQuestion"><p>
+                    <mean-answer-form *ngIf="enableAnswer"></mean-answer-form>
                 </mat-card-content>
 
                 <mat-card-content *ngIf="gameData?.game.name == 'Alternatieve Antwoorden'">
-                    {{gameData?.game.description}}
-                    <mean-answer-form></mean-answer-form>
+                    {{gameData?.game.description}}<br>
+                    <p><i>Wacht op de vraag van de docent:</i></p>
+                    <p id="receiveQuestion"><p>
+                    <mean-answer-form *ngIf="enableAnswer"></mean-answer-form>
                 </mat-card-content>
 
                 <mat-card-content *ngIf="gameData?.game.name == 'Aanradend Algoritme'">
