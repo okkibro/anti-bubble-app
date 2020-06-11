@@ -24,7 +24,7 @@ export class ShopComponent implements OnInit {
 
   constructor(private authenticationService: AuthenticationService, private shopService: ShopService, private snackBar: MatSnackBar, private milestoneUpdates: MilestoneUpdatesService) { }
 
-  logoutButton() {
+  logoutButton(): void {
     return this.authenticationService.logout();
   }
 
@@ -42,7 +42,7 @@ export class ShopComponent implements OnInit {
     });
   }
 
-  tabChange(event) {
+  tabChange(event): void {
     var currentTab = event.tab.textLabel;
     this.shopService.shop(currentTab).subscribe(shop => {
       this.shopDetails = shop;

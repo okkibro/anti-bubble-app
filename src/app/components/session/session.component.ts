@@ -101,11 +101,11 @@ export class SessionComponent implements OnInit {
         return "Weet je zeker dat je de sessie wilt verlaten?";
     }
 
-    logoutButton() {
+    logoutButton(): void {
         return this.authenticationService.logout();
     }
 
-    leaveSession() {
+    leaveSession(): void {
         this.socketService.leaveSession();
     }
 
@@ -117,15 +117,15 @@ export class SessionComponent implements OnInit {
         return this.socketService.gameData;
     }
 
-    sendQuestion(question: string) {
+    sendQuestion(question: string): void {
         this.socketService.sendQuestion(question);
     }
 
-    submit(data) {
+    submit(data): void {
         this.socketService.studentSubmit(data);
     }
 
-    startGame() {
+    startGame(): void {
         this.gameStarted = true;
         this.socketService.startGame();
 
@@ -134,7 +134,7 @@ export class SessionComponent implements OnInit {
     }
 
 
-    startTimer(time: number) {
+    startTimer(time: number): void {
         setTimeout(() => {
             console.log("TIJD OP"); // TODO: redirect naar home ofzo en update bubblewaarden alles
         }, time * 1000);
@@ -148,7 +148,7 @@ export class SessionComponent implements OnInit {
         }, 1000);
     }
 
-    pairStudentsTest() {
+    pairStudentsTest(): void {
         this.socketService.pairStudents(false, 2, pairs => { });
     }
 }

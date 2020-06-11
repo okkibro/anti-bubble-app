@@ -20,7 +20,7 @@ export class SessionOptionsComponent implements OnInit {
   ngOnInit(): void { }
 
   // Gets called when teacher presses create session button. gamedata contains the name of the game and time of the slider
-  createSession(gameData) {
+  createSession(gameData): void {
     this.sessionService.getActivity(gameData?.game).subscribe(data => { // Get the entire activity data from the database
       gameData.game = data;
       this.socketService.createSession(gameData); // Create a session in socket io service and pass it the chosen activity with set options
@@ -28,7 +28,7 @@ export class SessionOptionsComponent implements OnInit {
     });
   }
 
-  logoutButton() {
+  logoutButton(): void {
     return this.auth.logout();
   }
 

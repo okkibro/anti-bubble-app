@@ -50,7 +50,7 @@ export class ProfileComponent implements OnInit {
         });
     }
 
-    changePassword() {
+    changePassword(): void {
         let oldPassword = this.changePasswordForm.get('oldPassword').value;
         let newPassword = this.changePasswordForm.get('newPassword').value;
         let email = this.userDetails.email;
@@ -61,7 +61,7 @@ export class ProfileComponent implements OnInit {
         });
     }
 
-    logoutButton() {
+    logoutButton(): void {
         return this.auth.logout();
     }
 

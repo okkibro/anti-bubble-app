@@ -17,7 +17,7 @@ export class SocketIOService {
     constructor(private data: DataService) { }
 
     // Gets called when a teacher creates a new session
-    createSession(gameData) {
+    createSession(gameData): void {
         this.removedListeners = false;
         this.gameData = gameData;
         this.socket.emit('host-join', gameData);
@@ -31,7 +31,7 @@ export class SocketIOService {
     }
 
     // Gets called when a user enters a pin and presses the join session button
-    joinSession(pin, user, join, backToHome, redirect) {
+    joinSession(pin, user, join, backToHome, redirect): void {
         this.hostDisconnected = false;
         this.socket.emit('player-join', { pin: pin, player: user });
         this.socket.on('message', (message: string) => {
@@ -55,11 +55,11 @@ export class SocketIOService {
         })
     }
 
-    sendMessage(message) {
+    sendMessage(message): void {
         this.socket.emit('message', message);
     }
 
-    listenForUpdates(addPlayer, removePlayer) {
+    listenForUpdates(addPlayer, removePlayer): void {
         this.socket.on('update-players', player => {
             addPlayer(player);
         });
@@ -68,7 +68,7 @@ export class SocketIOService {
         });
     }
 
-    leaveSession() {
+    leaveSession(): void {
         this.socket.emit('leave');
         this.socket.on('remove-listeners', () => {
             this.socket.removeAllListeners();
@@ -76,31 +76,31 @@ export class SocketIOService {
         });
     }
 
-    sendQuestion(question) {
+    sendQuestion(question): void {
         this.socket.emit('send-question', question);
     }
 
-    listenForQuestion(receiveQuestion) {
+    listenForQuestion(receiveQuestion): void {
         this.socket.on('receive-question', (question) => {
             receiveQuestion(question);
         });
     }
 
-    studentSubmit(data) {
+    studentSubmit(data): void {
         this.socket.emit('submit', data);
     }
 
-    listenForSubmits(receiveSubmit) {
+    listenForSubmits(receiveSubmit): void {
         this.socket.on('receive-submit', data => {
             receiveSubmit(data);
         });
     }
 
-    startGame() {
+    startGame(): void {
         this.socket.emit('start-game');
     }
 
-    pairStudents(chat, groupSize, receivePairs) {
+    pairStudents(chat, groupSize, receivePairs): void {
         this.socket.emit('pair-students', chat, groupSize);
         this.socket.on('send-pairs', (pairs) => {
             receivePairs(pairs);

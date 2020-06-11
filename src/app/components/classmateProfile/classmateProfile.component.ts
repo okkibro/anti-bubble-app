@@ -18,7 +18,7 @@ export class ClassmateProfileComponent implements OnInit {
 
   constructor(private classService: ClassesService, private auth: AuthenticationService, private route: ActivatedRoute, private router: Router) { }
 
-  logoutButton() {
+  logoutButton(): void {
     return this.auth.logout();
   }
 

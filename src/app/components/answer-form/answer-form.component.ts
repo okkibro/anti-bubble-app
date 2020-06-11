@@ -21,7 +21,7 @@ export class AnswerFormComponent implements OnInit {
   ngOnInit(): void { }
 
 
-  sendAnswer() {
+  sendAnswer(): void {
     if (this.value != "") {
       this.socketService.studentSubmit(this.value);
       this.value = "";

@@ -44,7 +44,7 @@ export class AvatarComponent implements OnInit {
     }
 
     // Assigns an item to the user's avatar in the database
-    equip(item) {
+    equip(item): void {
         this.avatarService.equip(item).subscribe(data => {
             console.log(data);
             // Updates the image shown to the player without reloading the page
@@ -60,7 +60,7 @@ export class AvatarComponent implements OnInit {
     }
 
     // Changes the tab in the HTML and updates the shown items
-    tabChange(value) {
+    tabChange(value): void {
         this.shopService.shop(value).subscribe(shop => {
             this.itemsShown = shop;
             this.filteredAvatar = this.filterAvatar();

@@ -19,7 +19,7 @@ export class PasswordRecoveryComponent implements OnInit {
 
   ngOnInit() { }
 
-  sendEmail() {
+  sendEmail(): void {
     console.log("sending email...");
     let email = this.passwordRecoveryForm.get('email').value;
     this.passwordRecoveryService.sendEmail(email).subscribe(data => {

@@ -18,7 +18,7 @@ export class LabyrinthComponent implements OnInit {
 
   ngOnInit(): void { }
 
-  performedLabyrinth() {
+  performedLabyrinth(): void {
     this.auth.profile().subscribe(user => {
       this.userDetails = user;
 
@@ -34,7 +34,7 @@ export class LabyrinthComponent implements OnInit {
 
   }
 
-  logoutButton() {
+  logoutButton(): void {
     return this.auth.logout();
   }
 }

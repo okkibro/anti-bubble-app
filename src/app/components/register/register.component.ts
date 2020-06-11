@@ -31,7 +31,7 @@ export class RegisterComponent implements OnInit {
     ngOnInit() { }
 
     // TODO: Add check if register is complete before redirecting
-    registerUser() {
+    registerUser(): void {
         let user = new User();
         user.firstName = this.registerForm.get('firstName').value;
         user.lastName = this.registerForm.get('lastName').value;
@@ -44,7 +44,7 @@ export class RegisterComponent implements OnInit {
         });
     }
 
-    passwordMatchValidator(form: FormGroup) {
+    passwordMatchValidator(form: FormGroup): void {
         let password = form.get('password').value;
         let repeatPassword = form.get('repeatPassword').value;
         if (password != repeatPassword) {

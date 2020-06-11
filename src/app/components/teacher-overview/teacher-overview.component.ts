@@ -42,7 +42,7 @@ export class TeacherOverviewComponent implements OnInit {
         });
     }
 
-    createClass() {
+    createClass(): void {
         if (this.userDetails.role == 'teacher') {
             let classes = new Class();
             classes.code = Math.floor(100000 + Math.random() * 900000);;
@@ -63,7 +63,7 @@ export class TeacherOverviewComponent implements OnInit {
 
     switchClass() { }
 
-    onClickOpenForm() {
+    onClickOpenForm(): void {
         this.openform = true;
     }
 }

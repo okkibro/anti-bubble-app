@@ -17,7 +17,7 @@ export class ShopService {
     return this.http.get('https://localhost:3000/shop', { headers: { id: type } });
   }
 
-  public buy(item: ShopItem) {
+  public buy(item: ShopItem): Observable<Object> {
     return this.http.post('https://localhost:3000/shop/buy', { item: item }, { headers: { Authorization: 'Bearer ' + this.cookie.get('mean-token') } });
   }
 

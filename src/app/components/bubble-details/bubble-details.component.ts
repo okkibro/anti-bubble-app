@@ -26,7 +26,7 @@ export class BubbleDetailsComponent implements OnInit {
 
   chartOptions = {}
 
-  initChart() {
+  initChart(): void {
     this.chartOptions = {
       chart: {
         type: "spline"
@@ -72,7 +72,7 @@ export class BubbleDetailsComponent implements OnInit {
 
   constructor(private auth: AuthenticationService) { }
 
-  logoutButton() {
+  logoutButton(): void {
     return this.auth.logout();
   }
 

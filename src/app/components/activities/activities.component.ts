@@ -35,12 +35,12 @@ export class ActivitiesComponent implements OnInit {
     }
   }
 
-  beforeUnload(e) {
+  beforeUnload(e): string {
     e.returnValue = "Weet je zeker dat je de sessie wilt verlaten?";
     return "Weet je zeker dat je de sessie wilt verlaten?";
   }
 
-  leaveSession() {
+  leaveSession(): void {
     this.socketService.leaveSession();
   }
 

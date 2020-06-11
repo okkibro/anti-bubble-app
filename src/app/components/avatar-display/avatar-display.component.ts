@@ -17,7 +17,7 @@ export class AvatarDisplayComponent implements OnInit {
   }
 
   // Function to show the avatar, taking the object from the database
-  showAvatar() {
+  showAvatar(): void {
     this.auth.profile().subscribe(user => {
       this.userDetails = user
       document.getElementById("haar1").setAttribute("src", this.userDetails.avatar.haar?.fullImage2);

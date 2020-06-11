@@ -28,7 +28,7 @@ export class PasswordResetComponent implements OnInit {
     });
   }
 
-  resetPassword() {
+  resetPassword(): void {
     let password = this.passwordResetForm.get('password').value;
     let confirmPassword = this.passwordResetForm.get('confirmPassword').value;
     this.passwordRecoveryService.postNewPassword(this.route.snapshot.paramMap.get("token"), password, confirmPassword).subscribe(data => {

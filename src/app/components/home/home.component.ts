@@ -39,20 +39,20 @@ export class HomeComponent implements OnInit {
         })
     }
 
-    logoutButton() {
+    logoutButton(): void {
         return this.authenticationService.logout();
     }
 
-    startLabyrinth() {
+    startLabyrinth(): void {
         this.router.navigate(['labyrinth']);
     }
 
-    createSession() {
+    createSession(): void {
         // this.socketService.createSession();
         this.router.navigate(['session-options']);
     }
 
-    joinSession() {
+    joinSession(): void {
         const user = this.userDetails;
         this.socketService.joinSession(this.pin, user, (succes) => {
             if (succes) {

@@ -24,7 +24,7 @@ export class ClassOverviewComponent implements OnInit {
 
   constructor(private classService: ClassesService, private auth: AuthenticationService, private router: Router, private fb: FormBuilder) { }
 
-  logoutButton() {
+  logoutButton(): void {
     return this.auth.logout();
   }
 
@@ -37,7 +37,7 @@ export class ClassOverviewComponent implements OnInit {
     });
   }
 
-  search() {
+  search(): void {
     let query: string = this.searchBar.get('query').value;
     let table = document.getElementById("table").childNodes;
     for (let i: number = 0; i < this.classmates.length; i++) {
@@ -49,7 +49,7 @@ export class ClassOverviewComponent implements OnInit {
     }
   }
 
-  clear() {
+  clear(): void {
     this.value = '';
     let table = document.getElementById("table").childNodes;
     for (let i: number = 0; i < this.classmates.length; i++) {
