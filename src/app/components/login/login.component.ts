@@ -9,7 +9,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
     selector: 'mean-login',
     templateUrl: './login.component.html',
     styleUrls: ['./login.component.css',
-                '../../shared/general-styles.css']
+        '../../shared/general-styles.css']
 })
 
 // TODO: Make sure you can't see attempted password in plain text in "Network" tab in Chrome
@@ -31,7 +31,7 @@ export class LoginComponent implements OnInit {
         this.auth.login(user).subscribe(() => {
             this.router.navigate(['home']);
         }, () => {
-            this.snackBar.open("Onjuist wachtwoord of email", 'X', {duration: 2500});
+            this.snackBar.open("Onjuist wachtwoord of email", 'X', { duration: 2500 });
         });
     }
 }

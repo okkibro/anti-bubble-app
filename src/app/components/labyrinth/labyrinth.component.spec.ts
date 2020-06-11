@@ -8,9 +8,9 @@ describe('LabyrinthComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ LabyrinthComponent ]
+      declarations: [LabyrinthComponent]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

@@ -1,12 +1,12 @@
-import {Injectable} from '@angular/core';
-import {HttpClient} from '@angular/common/http';
-import {Router} from '@angular/router';
-import {Observable} from "rxjs";
-import {map} from "rxjs/operators";
-import {User} from '../models/user';
-import {Role} from '../models/role';
-import {AbstractControl, AsyncValidatorFn, ValidationErrors} from "@angular/forms";
-import {CookieService} from 'ngx-cookie-service';
+import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Router } from '@angular/router';
+import { Observable } from "rxjs";
+import { map } from "rxjs/operators";
+import { User } from '../models/user';
+import { Role } from '../models/role';
+import { AbstractControl, AsyncValidatorFn, ValidationErrors } from "@angular/forms";
+import { CookieService } from 'ngx-cookie-service';
 
 // TODO: Check for possible CSRF-attack vulnerabilities because of use of cookies
 // TODO: Add function to get user from database in this service or another
@@ -22,7 +22,7 @@ interface TokenResponse {
 export class AuthenticationService {
     private token: string;
 
-    constructor(private http: HttpClient, private router: Router, private cookie: CookieService) {}
+    constructor(private http: HttpClient, private router: Router, private cookie: CookieService) { }
 
     /** Method that saves the JWT of the user in the browser's cookies */
     private saveToken(token: string): void {
@@ -113,17 +113,17 @@ export class AuthenticationService {
 
     /** Method that updates the password of an already registered user */
     public updatePassword(email: string, oldPassword: string, newPassword: string) {
-        return this.http.patch('https://localhost:3000/user/updatePassword', {email: email, oldPassword: oldPassword, newPassword: newPassword})
+        return this.http.patch('https://localhost:3000/user/updatePassword', { email: email, oldPassword: oldPassword, newPassword: newPassword })
     }
 
     // TODO:: Check if this is necessary
-    private request(method: 'post'|'get', type: 'login'|'register'|'profile'|'getAllClassmates'|any , user?: User): Observable<any> {
+    private request(method: 'post' | 'get', type: 'login' | 'register' | 'profile' | 'getAllClassmates' | any, user?: User): Observable<any> {
         let base;
 
         if (method === 'post') {
             base = this.http.post(`https://localhost:3000/user/${type}`, user);
         } else {
-            base = this.http.get(`https://localhost:3000/user/${type}`, { headers: { Authorization: `Bearer ${this.getToken()}` }});
+            base = this.http.get(`https://localhost:3000/user/${type}`, { headers: { Authorization: `Bearer ${this.getToken()}` } });
         }
 
         return base.pipe(

@@ -17,8 +17,8 @@ export class AvatarDisplayComponent implements OnInit {
   }
 
   // Function to show the avatar, taking the object from the database
-  showAvatar(){
-      this.auth.profile().subscribe(user => {
+  showAvatar() {
+    this.auth.profile().subscribe(user => {
       this.userDetails = user
       document.getElementById("haar1").setAttribute("src", this.userDetails.avatar.haar?.fullImage2);
       document.getElementById("lichaam").setAttribute("src", this.userDetails.avatar.lichaam.fullImage);
@@ -28,8 +28,8 @@ export class AvatarDisplayComponent implements OnInit {
       document.getElementById("bril").setAttribute("src", this.userDetails.avatar.bril?.fullImage);
       document.getElementById("haar2").setAttribute("src", this.userDetails.avatar.haar?.fullImage);
       document.getElementById("hoofddeksel").setAttribute("src", this.userDetails.avatar.hoofddeksel?.fullImage);
-      document.getElementById("medaille").setAttribute("src", this.userDetails.avatar.medaille?.fullImage); 
-      });
+      document.getElementById("medaille").setAttribute("src", this.userDetails.avatar.medaille?.fullImage);
+    });
   }
 }
 /** This program has been developed by students from the bachelor Computer Science at Utrecht University within the Software Project course. © Copyright Utrecht University (Department of Information and Computing Sciences)  */

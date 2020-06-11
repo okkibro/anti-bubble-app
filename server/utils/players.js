@@ -1,32 +1,32 @@
 class Players {
-    constructor () {
+    constructor() {
         this.players = [];
     }
-    
-    addPlayer(hostID, playerID, name, gameData, email){
-        const player = {hostID, playerID, name, gameData, email};
+
+    addPlayer(hostID, playerID, name, gameData, email) {
+        const player = { hostID, playerID, name, gameData, email };
         this.players.push(player);
         return player;
     }
-    
-    removePlayer(playerID){
+
+    removePlayer(playerID) {
         const player = this.getPlayer(playerID);
 
-        if(player){
+        if (player) {
             this.players = this.players.filter((player) => player.playerID !== playerID);
         }
         return player;
     }
-    
-    getPlayer(playerID){
+
+    getPlayer(playerID) {
         return this.players.filter((player) => player.playerID === playerID)[0]
     }
-    
-    getPlayers(hostID){
+
+    getPlayers(hostID) {
         return this.players.filter((player) => player.hostID === hostID);
     }
 }
 
-module.exports = {Players};
+module.exports = { Players };
 
 /** This program has been developed by students from the bachelor Computer Science at Utrecht University within the Software Project course. © Copyright Utrecht University (Department of Information and Computing Sciences)  */

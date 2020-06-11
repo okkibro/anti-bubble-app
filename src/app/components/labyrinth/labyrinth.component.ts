@@ -16,7 +16,7 @@ export class LabyrinthComponent implements OnInit {
 
   constructor(private router: Router, private sessionService: SessionService, private auth: AuthenticationService) { }
 
-  ngOnInit(): void {  }
+  ngOnInit(): void { }
 
   performedLabyrinth() {
     this.auth.profile().subscribe(user => {

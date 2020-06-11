@@ -2,7 +2,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { PasswordRecoveryService } from '../../services/password-recovery.service';
 import { RouterModule } from '@angular/router';
 import { ActivatedRoute } from "@angular/router";
-import { ReactiveFormsModule, FormBuilder, FormsModule  } from '@angular/forms';
+import { ReactiveFormsModule, FormBuilder, FormsModule } from '@angular/forms';
 
 import { PasswordResetComponent } from './password-reset.component';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
@@ -17,16 +17,16 @@ describe('PasswordResetComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ PasswordResetComponent, ActivatedRoute ],
+      declarations: [PasswordResetComponent, ActivatedRoute],
       providers: [
         {
           provide: PasswordRecoveryService,
           useValue: passwordRecoveryServiceStub
         }
       ],
-      schemas: [ NO_ERRORS_SCHEMA ]
+      schemas: [NO_ERRORS_SCHEMA]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

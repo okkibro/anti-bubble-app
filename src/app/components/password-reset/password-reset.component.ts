@@ -9,7 +9,7 @@ import { PasswordRecoveryService } from '../../services/password-recovery.servic
   selector: 'mean-password-reset',
   templateUrl: './password-reset.component.html',
   styleUrls: ['./password-reset.component.css',
-              '../../shared/general-styles.css']
+    '../../shared/general-styles.css']
 })
 export class PasswordResetComponent implements OnInit {
   passwordResetForm = this.fb.group({
@@ -33,12 +33,12 @@ export class PasswordResetComponent implements OnInit {
     let confirmPassword = this.passwordResetForm.get('confirmPassword').value;
     this.passwordRecoveryService.postNewPassword(this.route.snapshot.paramMap.get("token"), password, confirmPassword).subscribe(data => {
       if (!data.succes) {
-        this.snackBar.open(data.message, 'X', {duration: 2500, panelClass: ['style-error'], });
+        this.snackBar.open(data.message, 'X', { duration: 2500, panelClass: ['style-error'], });
       } else {
-        this.snackBar.open(data.message, 'X', {duration: 2500, panelClass: ['style-succes'], }).afterDismissed().subscribe(() => {
+        this.snackBar.open(data.message, 'X', { duration: 2500, panelClass: ['style-succes'], }).afterDismissed().subscribe(() => {
           this.router.navigate(['/login']);
         });
-        
+
       }
     });
   }

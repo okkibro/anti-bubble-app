@@ -70,7 +70,7 @@ export class BubbleDetailsComponent implements OnInit {
 
   userDetails: User;
 
-  constructor(private auth: AuthenticationService) {  }
+  constructor(private auth: AuthenticationService) { }
 
   logoutButton() {
     return this.auth.logout();

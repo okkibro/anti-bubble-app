@@ -60,7 +60,8 @@
                             <td>
                                 <mat-form-field class="example-full-width">
                                     <mat-label>Wachtwoord</mat-label>
-                                    <input matInput placeholder="Wachtwoord" formControlName="password" type=password required>
+                                    <input matInput placeholder="Wachtwoord" formControlName="password" type=password
+                                        required>
                                     <mat-error *ngIf="registerForm.get('password').hasError('required')">
                                         Wachtwoord is <strong>verplicht</strong>
                                     </mat-error>
@@ -71,7 +72,8 @@
                             <td>
                                 <mat-form-field class="example-full-width">
                                     <mat-label>Herhaal wachtwoord</mat-label>
-                                    <input matInput placeholder="Herhaal wachtwoord" formControlName="repeatPassword" type=password required>
+                                    <input matInput placeholder="Herhaal wachtwoord" formControlName="repeatPassword"
+                                        type=password required>
                                     <mat-error *ngIf="registerForm.get('repeatPassword').hasError('noPasswordMatch')">
                                         Wachtwoorden komen niet overeen
                                     </mat-error>
@@ -82,8 +84,10 @@
                             <td>
                                 <mat-label>Ik ben een:*</mat-label>
                                 <mat-radio-group class="role-radio-group" ngDefaultControl formControlName="role">
-                                    <mat-radio-button class="role-radio-button" value="student" color="primary">Leerling</mat-radio-button>
-                                    <mat-radio-button class="role-radio-button" value="teacher" color="primary">Docent</mat-radio-button>
+                                    <mat-radio-button class="role-radio-button" value="student" color="primary">Leerling
+                                    </mat-radio-button>
+                                    <mat-radio-button class="role-radio-button" value="teacher" color="primary">Docent
+                                    </mat-radio-button>
                                 </mat-radio-group>
                             </td>
                         </tr>
@@ -92,7 +96,8 @@
                         </tr>
                     </table>
                     <mat-card-actions>
-                        <button mat-raised-button type="submit" [disabled]="!registerForm.valid" color="primary">Registreer</button>
+                        <button mat-raised-button type="submit" [disabled]="!registerForm.valid"
+                            color="primary">Registreer</button>
                     </mat-card-actions>
                 </form>
             </mat-card-content>

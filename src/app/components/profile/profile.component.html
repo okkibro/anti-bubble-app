@@ -39,20 +39,23 @@
                     src="https://image.freepik.com/vrije-vector/jonge-vrouw-avatar-cartoon-karakter-profielfoto_18591-55056.jpg"
                     alt="avatar voorbeeld"> -->
                 <mat-card-content>
-                    <button mat-flat-button [routerLink]="'/avatar'" [ngClass]="{'my-custom-theme': true}" color="primary">Avatar aanpassen</button>
+                    <button mat-flat-button [routerLink]="'/avatar'" [ngClass]="{'my-custom-theme': true}"
+                        color="primary">Avatar aanpassen</button>
                 </mat-card-content>
             </mat-card>
         </div>
 
-        <div fxLayout.xs="row" fxLayoutGap="0.5%" fxLayoutAlign="space-evenly" class="my-custom-theme" *ngIf="userDetails?.role == 'student'">
+        <div fxLayout.xs="row" fxLayoutGap="0.5%" fxLayoutAlign="space-evenly" class="my-custom-theme"
+            *ngIf="userDetails?.role == 'student'">
             <mat-card fxFlex="50%">
                 <mat-card-header>
                     <mat-card-title>Mijn Bubbel</mat-card-title>
                 </mat-card-header><br>
-                
+
                 <mat-card-content>
                     <mean-bubble-visualisation></mean-bubble-visualisation>
-                    <button mat-flat-button [routerLink]="'/bubble-details'" [ngClass]="{'my-custom-theme': true}" color="accent">Meer details</button>
+                    <button mat-flat-button [routerLink]="'/bubble-details'" [ngClass]="{'my-custom-theme': true}"
+                        color="accent">Meer details</button>
                 </mat-card-content>
             </mat-card>
 
@@ -124,7 +127,7 @@
                 </mat-expansion-panel>
             </mat-accordion>
         </mat-card> -->
-        
+
         <mat-card fxLayout.xs="row" fxLayoutAlign="space-evenly center">
             <mat-accordion>
                 <mat-expansion-panel>

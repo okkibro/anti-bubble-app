@@ -36,7 +36,7 @@ describe('LoginComponent', () => {
           useValue: snackbarStub
         }
       ],
-      schemas: [ NO_ERRORS_SCHEMA ]
+      schemas: [NO_ERRORS_SCHEMA]
     }).compileComponents();
   }));
 
@@ -107,8 +107,8 @@ describe('LoginComponent', () => {
     fixture.detectChanges();
 
     let user = new User();
-        user.email = email.value;
-        user.password = password.value;
+    user.email = email.value;
+    user.password = password.value;
 
     fixture.nativeElement.querySelector('button').click();
 

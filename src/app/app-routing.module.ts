@@ -13,7 +13,7 @@ import { AvatarComponent } from './components/avatar/avatar.component';
 import { BubbleDetailsComponent } from './components/bubble-details/bubble-details.component';
 import { TeacherOrStudentComponent } from './components/teacherOrStudent/teacherOrStudent.component';
 import { TeacherOverviewComponent } from './components/teacher-overview/teacher-overview.component';
-import { AuthGuardService} from './services/auth-guard.service';
+import { AuthGuardService } from './services/auth-guard.service';
 import { ShopComponent } from './components/shop/shop.component';
 import { PasswordRecoveryComponent } from './components/password-recovery/password-recovery.component';
 import { PasswordResetComponent } from './components/password-reset/password-reset.component';
@@ -25,23 +25,23 @@ import { ActivitiesComponent } from './components/activities/activities.componen
 
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
-  { path: 'home', component: HomeComponent, canActivate: [AuthGuardService]},
+  { path: 'home', component: HomeComponent, canActivate: [AuthGuardService] },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'session', component: SessionComponent, canDeactivate: [SessionGuardService] },
-  { path: 'profile', component: ProfileComponent, canActivate: [AuthGuardService]},
+  { path: 'profile', component: ProfileComponent, canActivate: [AuthGuardService] },
   { path: 'class-overview', component: ClassOverviewComponent },
   { path: 'classmateProfile/:id', component: ClassmateProfileComponent },
   { path: 'avatar', component: AvatarComponent },
   { path: 'bubble-details', component: BubbleDetailsComponent },
   { path: 'teacherOrStudent', component: TeacherOrStudentComponent },
-  { path: 'teacher-overview', component: TeacherOverviewComponent, canActivate: [AuthGuardService], data: {roles: [Role.teacher]}},
+  { path: 'teacher-overview', component: TeacherOverviewComponent, canActivate: [AuthGuardService], data: { roles: [Role.teacher] } },
   { path: 'badges', component: BadgesComponent },
   { path: 'shop', component: ShopComponent },
   { path: 'passwordrecovery', component: PasswordRecoveryComponent },
   { path: 'reset/:token', component: PasswordResetComponent },
   { path: 'labyrinth', component: LabyrinthComponent },
-  { path: 'session-options', component: SessionOptionsComponent, data: {roles: [Role.teacher]}},
+  { path: 'session-options', component: SessionOptionsComponent, data: { roles: [Role.teacher] } },
   { path: 'activities', component: ActivitiesComponent, canDeactivate: [SessionGuardService] },
   // Auto redirect als je bullshit invult (Moet als laatste!)
   { path: '**', redirectTo: '/login', pathMatch: 'full' },

@@ -33,7 +33,7 @@ export class ClassesService {
   }
 
   public classmateProfile(id: string): Observable<any> {
-    return this.http.get(`https://localhost:3000/class/classmateProfile/${id}`, { headers: { Authorization: 'Bearer ' + this.cookie.get('mean-token') }})
+    return this.http.get(`https://localhost:3000/class/classmateProfile/${id}`, { headers: { Authorization: 'Bearer ' + this.cookie.get('mean-token') } })
   }
 }
 

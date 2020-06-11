@@ -7,32 +7,41 @@
             <mean-avatar-display></mean-avatar-display>
         </mat-card>
 
-            <mat-card  id="itemCollection" fxFlex="60%"> 
-                <mat-card-content>
-                    <mat-card-header>
-                        <mat-card-title>Avatar Wijzigen</mat-card-title>
-                    </mat-card-header><br>
-                    <mat-grid-list cols="2">
-                        <mat-grid-tile *ngFor = "let item of filteredAvatar" fxFlexAlign="stretch">
-                            <mat-card fxFlex="100%" fxLayout="column" fxLayoutGap="0.5%" fxFlexAlign="stretch">
-                                    {{item.title}}
-                                    <img mat-card-image src="{{item.previewImage}}" alt="{{item.title}}" (click)="equip(item)"><br>
-                            </mat-card>
-                        </mat-grid-tile>
-                    </mat-grid-list> 
-                </mat-card-content>
-            </mat-card>
+        <mat-card id="itemCollection" fxFlex="60%">
+            <mat-card-content>
+                <mat-card-header>
+                    <mat-card-title>Avatar Wijzigen</mat-card-title>
+                </mat-card-header><br>
+                <mat-grid-list cols="2">
+                    <mat-grid-tile *ngFor="let item of filteredAvatar" fxFlexAlign="stretch">
+                        <mat-card fxFlex="100%" fxLayout="column" fxLayoutGap="0.5%" fxFlexAlign="stretch">
+                            {{item.title}}
+                            <img mat-card-image src="{{item.previewImage}}" alt="{{item.title}}"
+                                (click)="equip(item)"><br>
+                        </mat-card>
+                    </mat-grid-tile>
+                </mat-grid-list>
+            </mat-card-content>
+        </mat-card>
 
         <mat-card fxFlex="15%">
             <mat-grid-list cols="1">
-                <mat-grid-tile><button mat-flat-button class="buttons" (click)="tabChange('Hoofddeksel')"   id="buttonHoofddeksel"  [disableRipple]="true">Hoofddeksel  </button></mat-grid-tile>
-                <mat-grid-tile><button mat-flat-button class="buttons" (click)="tabChange('Haar')"          id="buttonHaar"         [disableRipple]="true">Haar         </button></mat-grid-tile>
-                <mat-grid-tile><button mat-flat-button class="buttons" (click)="tabChange('Bril')"          id="buttonBril"         [disableRipple]="true">Bril         </button></mat-grid-tile>
-                <mat-grid-tile><button mat-flat-button class="buttons" (click)="tabChange('Lichaam')"       id="buttonLichaam"      [disableRipple]="true">Lichaam      </button></mat-grid-tile>
-                <mat-grid-tile><button mat-flat-button class="buttons" (click)="tabChange('Shirt')"         id="buttonShirt"        [disableRipple]="true">Shirt        </button></mat-grid-tile>
-                <mat-grid-tile><button mat-flat-button class="buttons" (click)="tabChange('Broek')"         id="buttonBroek"        [disableRipple]="true">Broek        </button></mat-grid-tile>
-                <mat-grid-tile><button mat-flat-button class="buttons" (click)="tabChange('Schoenen')"      id="buttonSchoenen"     [disableRipple]="true">Schoenen     </button></mat-grid-tile>
-                <mat-grid-tile><button mat-flat-button class="buttons" (click)="tabChange('Medaille')"      id="buttonMedaille"     [disableRipple]="true">Medaille     </button></mat-grid-tile>
+                <mat-grid-tile><button mat-flat-button class="buttons" (click)="tabChange('Hoofddeksel')"
+                        id="buttonHoofddeksel" [disableRipple]="true">Hoofddeksel </button></mat-grid-tile>
+                <mat-grid-tile><button mat-flat-button class="buttons" (click)="tabChange('Haar')" id="buttonHaar"
+                        [disableRipple]="true">Haar </button></mat-grid-tile>
+                <mat-grid-tile><button mat-flat-button class="buttons" (click)="tabChange('Bril')" id="buttonBril"
+                        [disableRipple]="true">Bril </button></mat-grid-tile>
+                <mat-grid-tile><button mat-flat-button class="buttons" (click)="tabChange('Lichaam')" id="buttonLichaam"
+                        [disableRipple]="true">Lichaam </button></mat-grid-tile>
+                <mat-grid-tile><button mat-flat-button class="buttons" (click)="tabChange('Shirt')" id="buttonShirt"
+                        [disableRipple]="true">Shirt </button></mat-grid-tile>
+                <mat-grid-tile><button mat-flat-button class="buttons" (click)="tabChange('Broek')" id="buttonBroek"
+                        [disableRipple]="true">Broek </button></mat-grid-tile>
+                <mat-grid-tile><button mat-flat-button class="buttons" (click)="tabChange('Schoenen')"
+                        id="buttonSchoenen" [disableRipple]="true">Schoenen </button></mat-grid-tile>
+                <mat-grid-tile><button mat-flat-button class="buttons" (click)="tabChange('Medaille')"
+                        id="buttonMedaille" [disableRipple]="true">Medaille </button></mat-grid-tile>
             </mat-grid-list>
         </mat-card>
 
@@ -41,7 +50,5 @@
         </button>
     </div>
 </body>
-
-/** This program has been developed by students from the bachelor Computer Science at Utrecht University within the Software Project course. © Copyright Utrecht University (Department of Information and Computing Sciences)  */
 
 <!-- This program has been developed by students from the bachelor Computer Science at Utrecht University within the Software Project course. © Copyright Utrecht University (Department of Information and Computing Sciences)  -->

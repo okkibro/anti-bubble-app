@@ -9,7 +9,7 @@ import { ClassesService } from '../../services/classes.service';
   selector: 'mean-class-overview',
   templateUrl: './class-overview.component.html',
   styleUrls: ['./class-overview.component.css',
-              '../../shared/general-styles.css']
+    '../../shared/general-styles.css']
 })
 export class ClassOverviewComponent implements OnInit {
 
@@ -23,11 +23,11 @@ export class ClassOverviewComponent implements OnInit {
   public value: string;
 
   constructor(private classService: ClassesService, private auth: AuthenticationService, private router: Router, private fb: FormBuilder) { }
-  
+
   logoutButton() {
     return this.auth.logout();
   }
-  
+
   ngOnInit() {
     this.classService.getClass().subscribe((data) => {
       if (data.succes) {
@@ -38,9 +38,9 @@ export class ClassOverviewComponent implements OnInit {
   }
 
   search() {
-    let query:string = this.searchBar.get('query').value;
+    let query: string = this.searchBar.get('query').value;
     let table = document.getElementById("table").childNodes;
-    for (let i:number = 0; i < this.classmates.length; i++) {
+    for (let i: number = 0; i < this.classmates.length; i++) {
       if (this.classmates[i].firstName.includes(query) || this.classmates[i].lastName.includes(query)) {
         (table[i + 1] as HTMLElement).style.display = "";
       } else {
@@ -52,7 +52,7 @@ export class ClassOverviewComponent implements OnInit {
   clear() {
     this.value = '';
     let table = document.getElementById("table").childNodes;
-    for (let i:number = 0; i < this.classmates.length; i++) {
+    for (let i: number = 0; i < this.classmates.length; i++) {
       (table[i + 1] as HTMLElement).style.display = "";
     }
   }

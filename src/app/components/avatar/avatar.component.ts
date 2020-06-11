@@ -44,16 +44,16 @@ export class AvatarComponent implements OnInit {
     }
 
     // Assigns an item to the user's avatar in the database
-    equip(item){
+    equip(item) {
         this.avatarService.equip(item).subscribe(data => {
             console.log(data);
             // Updates the image shown to the player without reloading the page
-            if(data.category == "haar"){
+            if (data.category == "haar") {
                 document.getElementById("haar1").setAttribute("src", data.imageFull2);
                 document.getElementById("haar2").setAttribute("src", data.imageFull);
                 console.log(data.imageFull);
             }
-            else{
+            else {
                 document.getElementById(data.category).setAttribute("src", data.imageFull);
             }
         });
@@ -72,8 +72,8 @@ export class AvatarComponent implements OnInit {
     // Filtering the avatar items to only show the items in the inventory/that the player bought
     filterAvatar(): AvatarComponent[] {
         return this.itemsShown.filter(x => {
-          return this.userDetails.inventory.find(y => x._id == y._id) != null
-        });  
+            return this.userDetails.inventory.find(y => x._id == y._id) != null
+        });
     }
 }
 

@@ -5,9 +5,9 @@ const User = mongoose.model('User');
 const sanitize = require('mongo-sanitize');
 
 passport.use(new LocalStrategy({
-        usernameField: 'email'
-    },
-    function(username, password, done) {
+    usernameField: 'email'
+},
+    function (username, password, done) {
         User.findOne({ email: sanitize(username) }, function (err, user) {
             if (err) {
                 return done(err);

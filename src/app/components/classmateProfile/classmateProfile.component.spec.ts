@@ -8,9 +8,9 @@ describe('ClassmateProfileComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ClassmateProfileComponent ]
+      declarations: [ClassmateProfileComponent]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

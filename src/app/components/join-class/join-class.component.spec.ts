@@ -8,9 +8,9 @@ describe('JoinClassComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ JoinClassComponent ]
+      declarations: [JoinClassComponent]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

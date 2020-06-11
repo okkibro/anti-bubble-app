@@ -38,14 +38,14 @@ router.post('/register', (req, res) => {
         user.recentMilestones[i] = "";
     }
     console.log(Shop);
-    Shop.findOne({}, lichaam => { 
+    Shop.findOne({}, lichaam => {
         console.log(lichaam);
         Shop.findById('5edcf97b1167982a005b977e', broek => {
-            Shop.findById('5edcbf271167982a005b9525', shirt => { 
+            Shop.findById('5edcbf271167982a005b9525', shirt => {
                 user.avatar = {
-                    lichaam : lichaam,
-                    broek : broek,
-                    shirt : shirt
+                    lichaam: lichaam,
+                    broek: broek,
+                    shirt: shirt
                 }
                 user.save(function () {
                     let token = user.generateJwt();
@@ -53,13 +53,13 @@ router.post('/register', (req, res) => {
                         token: token
                     });
                 });
-             });
-          });
-     });
+            });
+        });
+    });
     // user.avatar = { lichaam:  mongoose.Types.ObjectId('5edcf97b1167982a005b9737'),
     //                 broek: mongoose.Types.ObjectId('5edcf97b1167982a005b977e'),
     //                 shirt: mongoose.Types.ObjectId('5edcbf271167982a005b9525')
-                // }
+    // }
     // user.markModified('avatar');
 
     //save the changes to the database
@@ -98,9 +98,9 @@ router.post('/passwordrecovery', async (req, res) => {
 
     // Find the user with the given email and set the token
     User.findOne({ email: req.body.email }, (error, user) => {
-        if (!user){
+        if (!user) {
             console.log("no user with that email");
-            res.json({ succes: false, message: "Geen gebruiker gevonden met het gegeven email adres"});
+            res.json({ succes: false, message: "Geen gebruiker gevonden met het gegeven email adres" });
             return res.end();
         }
 
@@ -108,9 +108,9 @@ router.post('/passwordrecovery', async (req, res) => {
         user.recoverPasswordExpires = Date.now() + 360000;
 
         user.save((error) => {
-        if (error){
-            console.log(error.message);
-        }
+            if (error) {
+                console.log(error.message);
+            }
         });
         // Send email with link and token in the link
         nodemailer.createTestAccount((error, account) => {
@@ -123,11 +123,11 @@ router.post('/passwordrecovery', async (req, res) => {
                 port: account.smtp.port,
                 secure: account.smtp.secure,
                 auth: {
-                user: account.user, // generated ethereal user
-                pass: account.pass // generated ethereal password
+                    user: account.user, // generated ethereal user
+                    pass: account.pass // generated ethereal password
                 }
             });
-        
+
             let mailOptions = {
                 from: 'Anti Bubble App <' + account.user + '>',
                 to: req.body.email,
@@ -135,14 +135,14 @@ router.post('/passwordrecovery', async (req, res) => {
                 text: "",
                 html: "<h1>Password Recovery</h1><p>Reset Password by clicking on the following link: https://" + req.headers.host + "/reset/" + token // html body
             };
-            
+
             transporter.sendMail(mailOptions, (error, info) => {
                 if (error) {
                     return console.log(error.message);
                 }
                 console.log(nodemailer.getTestMessageUrl(info));
             });
-            
+
             res.json({ succes: true, message: "Email succesvol verzonden" })
             return res.status(200).end();
         });
@@ -152,7 +152,7 @@ router.post('/passwordrecovery', async (req, res) => {
 // router that checks the password recovery token and shows the reset password page or a wrong token error
 router.get('/reset/:token', (req, res) => {
     // Find the user that belongs to the given token
-    User.findOne({ recoverPasswordToken: req.params.token, recoverPasswordExpires: {$gt: Date.now() } }, (error, user) => {
+    User.findOne({ recoverPasswordToken: req.params.token, recoverPasswordExpires: { $gt: Date.now() } }, (error, user) => {
         if (!user) {
             console.log("wrong token or token expired");
             res.json({ correct: false });
@@ -168,7 +168,7 @@ router.get('/reset/:token', (req, res) => {
 // router that changes the password of the user belonging to the given password recovery token
 router.post('/reset/:token', (req, res) => {
     // Find the user that belongs to the given token
-    User.findOne({ recoverPasswordToken: req.params.token, recoverPasswordExpires: {$gt: Date.now() } }, (error, user) => {
+    User.findOne({ recoverPasswordToken: req.params.token, recoverPasswordExpires: { $gt: Date.now() } }, (error, user) => {
         if (error) { return console.log(error.message); }
         if (!user) {
             console.log("wrong token or token expired");
@@ -274,7 +274,7 @@ router.post('/milestone', auth, (req, res) => {
         let milestone = req.body.milestone;
         let completed = false;
         if (user.milestones[milestone.index] == milestone.maxValue) { // Check if milestone is already completed
-            res.json( { updatedValue: milestone.maxValue, completed: completed } ); // Return completed false because it was already completed
+            res.json({ updatedValue: milestone.maxValue, completed: completed }); // Return completed false because it was already completed
         } else {
             user.milestones[milestone.index] += req.body.value; // Add value to milestone
             if (user.milestones[milestone.index] >= milestone.maxValue) { // Check if you surpassed the max value
@@ -284,7 +284,7 @@ router.post('/milestone', auth, (req, res) => {
             // Mark and save changes
             user.markModified('milestones');
             user.save(() => {
-                res.json( { updatedValue: user.milestones[milestone.index], completed: completed } );
+                res.json({ updatedValue: user.milestones[milestone.index], completed: completed });
             });
         }
     })
@@ -302,12 +302,12 @@ router.post('/recentMilestones', auth, (req, res) => {
 });
 
 //Router that adds selecter item for the avatar
-router.post('/avatar', auth, (req,res) => {
+router.post('/avatar', auth, (req, res) => {
     User.findById(req.payload._id, (err, user) => {
         user.avatar[req.body.avatarItem.category] = req.body.avatarItem;
         user.markModified('avatar');
-        user.save((error) => { 
-            if (error){
+        user.save((error) => {
+            if (error) {
                 console.log(error.message);
             }
             res.status(200).json({
@@ -321,8 +321,8 @@ router.post('/avatar', auth, (req,res) => {
 
 router.post('/updateGraph', auth, (req, res) => {
     User.updateOne(
-        {_id : req.payload._id},
-        {$push : {knowledge : req.body.knowledgeScore, diversity : req.body.diversityScore}},
+        { _id: req.payload._id },
+        { $push: { knowledge: req.body.knowledgeScore, diversity: req.body.diversityScore } },
         () => {
             res.json({});
         }

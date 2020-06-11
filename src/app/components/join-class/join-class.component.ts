@@ -7,7 +7,8 @@ import { MatSnackBar } from '@angular/material/snack-bar';
   selector: 'mean-join-class',
   templateUrl: './join-class.component.html',
   styleUrls: ['./join-class.component.css',
-              '../../shared/general-styles.css']})
+    '../../shared/general-styles.css']
+})
 
 export class JoinClassComponent implements OnInit {
   classCodeField = this.fb.group({
@@ -16,16 +17,16 @@ export class JoinClassComponent implements OnInit {
   value;
   constructor(private fb: FormBuilder, private classesService: ClassesService, private snackBar: MatSnackBar) { }
 
-  ngOnInit(): void {  }
+  ngOnInit(): void { }
 
   joinClass(): void {
     this.classesService.joinClass(this.value).subscribe(data => {
       if (data.succes) {
-        this.snackBar.open(data.message, 'X', {duration: 2500, panelClass: ['style-succes'], }).afterDismissed().subscribe(()=>{
+        this.snackBar.open(data.message, 'X', { duration: 2500, panelClass: ['style-succes'], }).afterDismissed().subscribe(() => {
           window.location.reload();
         });
       } else {
-        this.snackBar.open(data.message, 'X', {duration: 2500, panelClass: ['style-error'], });
+        this.snackBar.open(data.message, 'X', { duration: 2500, panelClass: ['style-error'], });
       }
     });
   }

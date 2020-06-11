@@ -12,15 +12,15 @@ export class PasswordRecoveryService {
 
   public sendEmail(email: string): Observable<any> {
     return this.http.post<any>('https://localhost:3000/user/passwordrecovery', {
-     email:email
+      email: email
     });
   }
 
-  public getResetPage(token: string) : Observable<any> {
+  public getResetPage(token: string): Observable<any> {
     return this.http.get<any>(`https://localhost:3000/user/reset/${token}`)
   }
 
-  public postNewPassword(token: string, password: string, confirmPassword: string) : Observable<any> {
+  public postNewPassword(token: string, password: string, confirmPassword: string): Observable<any> {
     return this.http.post<any>(`https://localhost:3000/user/reset/${token}`, {
       password: password,
       confirmPassword: confirmPassword

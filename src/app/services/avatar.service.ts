@@ -11,8 +11,8 @@ export class AvatarService {
 
   constructor(private http: HttpClient, private cookie: CookieService) { }
 
-  equip(item): Observable<any>{
-    return this.http.post('https://localhost:3000/user/avatar', { avatarItem: item }, { headers: { Authorization: 'Bearer ' + this.cookie.get('mean-token')}});
+  equip(item): Observable<any> {
+    return this.http.post('https://localhost:3000/user/avatar', { avatarItem: item }, { headers: { Authorization: 'Bearer ' + this.cookie.get('mean-token') } });
   }
 }
 

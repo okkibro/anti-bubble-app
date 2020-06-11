@@ -8,9 +8,9 @@ describe('AvatarDisplayComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ AvatarDisplayComponent ]
+      declarations: [AvatarDisplayComponent]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

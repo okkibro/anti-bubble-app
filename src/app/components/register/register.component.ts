@@ -1,8 +1,8 @@
-import {Component, OnInit} from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {AuthenticationService} from '../../services/authentication.service';
-import {Router} from '@angular/router';
-import {User} from '../../models/user';
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AuthenticationService } from '../../services/authentication.service';
+import { Router } from '@angular/router';
+import { User } from '../../models/user';
 import { Role } from 'src/app/models/role';
 
 @Component({
@@ -22,16 +22,16 @@ export class RegisterComponent implements OnInit {
         repeatPassword: ['', Validators.required],
         classCode: ['',],
     },
-    {
-        validator: this.passwordMatchValidator
-    });
+        {
+            validator: this.passwordMatchValidator
+        });
 
     constructor(private auth: AuthenticationService, private router: Router, private fb: FormBuilder) { }
 
     ngOnInit() { }
 
     // TODO: Add check if register is complete before redirecting
-    registerUser() { 
+    registerUser() {
         let user = new User();
         user.firstName = this.registerForm.get('firstName').value;
         user.lastName = this.registerForm.get('lastName').value;

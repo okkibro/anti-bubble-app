@@ -10,7 +10,7 @@ import { Milestone } from 'src/app/models/milestone';
     selector: 'mean-profile',
     templateUrl: './profile.component.html',
     styleUrls: ['./profile.component.css',
-                '../../shared/general-styles.css']
+        '../../shared/general-styles.css']
 })
 
 export class ProfileComponent implements OnInit {
@@ -20,12 +20,12 @@ export class ProfileComponent implements OnInit {
         oldPassword: ['', Validators.required],
         newPassword: ['', Validators.required],
         repeatPassword: ['', Validators.required]
-    },{
+    }, {
         validator: this.passwordMatchValidator
     });
 
-    constructor(private auth: AuthenticationService, private fb: FormBuilder, private snackbar: MatSnackBar) {}
-    
+    constructor(private auth: AuthenticationService, private fb: FormBuilder, private snackbar: MatSnackBar) { }
+
     ngOnInit() {
         //Show badge with most progress
 
@@ -36,7 +36,7 @@ export class ProfileComponent implements OnInit {
             index: 0,
             maxValue: 0
         }
-        
+
         this.auth.profile().subscribe(user => {
             this.userDetails = user;
             // Loop over all milestones and find the one with the most progress that the user didnt complete yet
@@ -55,14 +55,14 @@ export class ProfileComponent implements OnInit {
         let newPassword = this.changePasswordForm.get('newPassword').value;
         let email = this.userDetails.email;
         this.auth.updatePassword(email, oldPassword, newPassword).subscribe(() => {
-            this.snackbar.open("Wachtwoord is aangepast!", "X", {duration: 2500})
+            this.snackbar.open("Wachtwoord is aangepast!", "X", { duration: 2500 })
         }, (err) => {
             console.error(err);
         });
     }
 
     logoutButton() {
-      return this.auth.logout();
+        return this.auth.logout();
     }
 
     passwordMatchValidator(form: FormGroup) {

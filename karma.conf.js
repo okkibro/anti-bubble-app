@@ -3,7 +3,7 @@
 
 const process = require('process');
 
-module.exports = function(config) {
+module.exports = function (config) {
   config.set({
 
     // base path that will be used to resolve all patterns (eg. files, exclude)
@@ -41,7 +41,7 @@ module.exports = function(config) {
 
     coverageIstanbulReporter: {
       dir: require("path").join(__dirname, "../coverage"),
-      reports: [ 'html', 'lcovonly', "text-summary" ],
+      reports: ['html', 'lcovonly', "text-summary"],
       fixWebpackSourcePaths: true
     },
 

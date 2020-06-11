@@ -26,8 +26,8 @@ export class SessionGuardService implements CanDeactivate<SessionComponent> {
         } else {
           return false;
         }
-      } else { 
-        return true; 
+      } else {
+        return true;
       }
     }
   }

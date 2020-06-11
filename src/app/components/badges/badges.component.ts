@@ -7,7 +7,7 @@ import { User } from '../../models/user';
   selector: 'mean-badges',
   templateUrl: './badges.component.html',
   styleUrls: ['./badges.component.css',
-              '../../shared/general-styles.css']
+    '../../shared/general-styles.css']
 })
 export class BadgesComponent implements OnInit {
 
@@ -23,9 +23,9 @@ export class BadgesComponent implements OnInit {
       this.userDetails = user;
       for (let i = 0; i < milestones.length; i++) { // Loop over all milestones and sort them into the arrays
         if (milestones[i].maxValue == user.milestones[i]) {
-          this.completed.push({ index: i, milestone: milestones[i]})
+          this.completed.push({ index: i, milestone: milestones[i] })
         } else {
-          this.uncompleted.push({ index: i, milestone: milestones[i]})
+          this.uncompleted.push({ index: i, milestone: milestones[i] })
         }
       }
       this.value = this.completedRatio(); // Set value of progressbar

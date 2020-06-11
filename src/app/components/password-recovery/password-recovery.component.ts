@@ -8,7 +8,7 @@ import { PasswordRecoveryService } from '../../services/password-recovery.servic
   selector: 'mean-password-recovery',
   templateUrl: './password-recovery.component.html',
   styleUrls: ['./password-recovery.component.css',
-              '../../shared/general-styles.css']
+    '../../shared/general-styles.css']
 })
 export class PasswordRecoveryComponent implements OnInit {
   passwordRecoveryForm = this.fb.group({
@@ -23,10 +23,10 @@ export class PasswordRecoveryComponent implements OnInit {
     console.log("sending email...");
     let email = this.passwordRecoveryForm.get('email').value;
     this.passwordRecoveryService.sendEmail(email).subscribe(data => {
-      if (!data.succes){
-        this.snackBar.open(data.message, 'X' , { duration: 2500, panelClass: ['style-error'] });
+      if (!data.succes) {
+        this.snackBar.open(data.message, 'X', { duration: 2500, panelClass: ['style-error'] });
       } else {
-        this.snackBar.open(data.message, 'X' , { duration: 2500, panelClass: ['style-succes']})
+        this.snackBar.open(data.message, 'X', { duration: 2500, panelClass: ['style-succes'] })
       }
     });
   }

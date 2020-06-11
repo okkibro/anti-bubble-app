@@ -3,7 +3,7 @@ import { AuthenticationService } from '../../services/authentication.service';
 import { HttpClientModule } from '@angular/common/http';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { RouterModule } from '@angular/router';
-import { ReactiveFormsModule, FormsModule  } from '@angular/forms';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { User } from '../../models/user';
 import { of } from 'rxjs';
 
@@ -21,7 +21,7 @@ describe('RegisterComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ RegisterComponent],
+      declarations: [RegisterComponent],
       imports: [HttpClientModule, HttpClientTestingModule, RouterModule.forRoot([]), ReactiveFormsModule, FormsModule],
       providers: [
         {
@@ -29,9 +29,9 @@ describe('RegisterComponent', () => {
           useValue: authRegisterStub
         }
       ],
-      schemas: [ NO_ERRORS_SCHEMA ]
+      schemas: [NO_ERRORS_SCHEMA]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {
@@ -149,11 +149,11 @@ describe('RegisterComponent', () => {
     fixture.detectChanges();
 
     let user = new User();
-        user.firstName = firstName.value;
-        user.lastName = lastName.value;
-        user.email = email.value;
-        user.role = role.value;
-        user.password = password.value;
+    user.firstName = firstName.value;
+    user.lastName = lastName.value;
+    user.email = email.value;
+    user.role = role.value;
+    user.password = password.value;
 
 
     fixture.nativeElement.querySelector('button').click();
