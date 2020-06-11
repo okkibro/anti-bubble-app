@@ -21,6 +21,7 @@
 
 + Clone repository from https://git.science.uu.nl/breaking-bubbles/anti-bubble-app.git
     + Can be done by using the *git clone [url]* function with **[Git](https://git-scm.com/)**
++ Acquire the ".env" file from the secret holder and add this to the root of the application
 + Be sure you have started MongoDB service before running the application
 + Navigate to project folder
 + Run ```npm install``` on your folder
