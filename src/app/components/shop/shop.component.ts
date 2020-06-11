@@ -1,9 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthenticationService } from '../../services/authentication.service';
-import { Router } from '@angular/router';
 import { Shop } from '../../models/shop';
 import { ShopService } from 'src/app/services/shop.service';
-import { BuiltinType, CompileTemplateMetadata } from '@angular/compiler';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { User } from '../../models/user';
 import { MilestoneUpdatesService } from '../../services/milestone-updates.service'

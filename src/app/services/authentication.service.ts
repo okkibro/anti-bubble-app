@@ -1,13 +1,13 @@
-import {Injectable} from '@angular/core';
-import {HttpClient} from '@angular/common/http';
-import {Router} from '@angular/router';
-import {Observable} from "rxjs";
-import {map} from "rxjs/operators";
-import {User} from '../models/user';
-import {Role} from '../models/role';
-import {AbstractControl, AsyncValidatorFn, ValidationErrors} from "@angular/forms";
-import {CookieService} from 'ngx-cookie-service';
-import {tokenData} from "../models/tokenData";
+import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Router } from '@angular/router';
+import { Observable } from "rxjs";
+import { map } from "rxjs/operators";
+import { User } from '../models/user';
+import { Role } from '../models/role';
+import { AbstractControl, AsyncValidatorFn, ValidationErrors } from "@angular/forms";
+import { CookieService } from 'ngx-cookie-service';
+import { tokenData } from "../models/tokenData";
 
 interface TokenResponse {
     token: string;

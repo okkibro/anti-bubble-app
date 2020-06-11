@@ -1,21 +1,18 @@
 // Angular modules.
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { ReactiveFormsModule } from '@angular/forms';
-import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { HttpClientModule } from "@angular/common/http";
 import { HighchartsChartModule } from 'highcharts-angular';
 import { FlexLayoutModule } from "@angular/flex-layout";
 import { MatSliderModule } from '@angular/material/slider';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
-import { FormsModule } from "@angular/forms";
-
 // Core modules.
 import { MatRadioModule } from '@angular/material/radio';
 import { CustomMaterialModule } from './shared/material.module';
 import { AppRoutingModule } from './app-routing.module';
-
 // Component modules.
 import { AppComponent } from './app.component';
 import { LoginComponent } from './components/login/login.component';
@@ -40,7 +37,6 @@ import { SessionOptionsComponent } from './components/session-options/session-op
 import { LabyrinthComponent } from './components/labyrinth/labyrinth.component';
 import { AnswerFormComponent } from './components/answer-form/answer-form.component';
 import { AvatarDisplayComponent } from './components/avatar-display/avatar-display.component';
-
 // Services.
 import { AuthGuardService } from './services/auth-guard.service';
 import { CookieService } from 'ngx-cookie-service';
