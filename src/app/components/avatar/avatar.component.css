@@ -56,6 +56,8 @@
 }
 
 .buttons {
+    -webkit-text-fill-color: transparent;
+    -webkit-text-stroke: transparent 0.1em;
     height:68%;
     background: transparent;
     background-repeat: round;

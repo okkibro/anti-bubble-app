@@ -1,3 +1,25 @@
+@import url('https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap');
+
+* {
+    font-family: 'Fredoka One', cursive; 
+    /* NOTE: text-fill-color paints the text once more over the actual text. This can have unwanted side effects that should be fixed in local css */
+    -webkit-text-fill-color: white;
+    -webkit-text-stroke: #41596c 0.2em;
+    paint-order: stroke fill;
+    text-shadow: 0.1em 0.1em #41596c;
+    color: white;
+    font-size: 105%;
+}
+
+.mat-icon {
+    font-family: 'Material Icons', normal; 
+    -webkit-text-fill-color: white;
+    -webkit-text-stroke: #41596c 0.1em;
+    paint-order: stroke fill;
+    color: white;
+    font-size: 105%;
+}
+
 /* the following things define the toolbar*/
 #logoutButton {
     color: black;
@@ -69,8 +91,8 @@ body {
 }
 
 mat-card {
-    background-color: #fffcf3;
-    border: 5px solid #fceca9;
+    background-color: #fff2f3;
+    border: 5px solid #dd6d59;
     position: relative;
 }
 
@@ -81,6 +103,10 @@ mat-card-header {
 mat-card button{
     background-color: #addadb;
     width: 40%;
+}
+
+mat-card a:hover{
+    background-color: #8ab0b1;
 }
 
 mat-card img{
@@ -149,7 +175,7 @@ mat-tab-group, mat-tab {
 #artisticButtonBlue {
     width: 40%;
     background: transparent;
-    background-image: url("/assets/images/Super_Map/Basic_Buttons/Button_Blue_Rectangle.png");
+    background-image: url("/assets/images/Super_Map/Basic_Buttons/Button_Yellow_Rectangle.png");
     background-repeat: round;
 }
 
