@@ -22,7 +22,11 @@ export class LoginComponent implements OnInit {
 
     constructor(private auth: AuthenticationService, private router: Router, private fb: FormBuilder, private snackBar: MatSnackBar) { }
 
-    ngOnInit() { }
+    ngOnInit() {
+        if (this.auth.isLoggedIn()) {
+            this.router.navigate(['home']);
+        }
+    }
 
     /** Method to login. */ 
     loginUser() {
