@@ -70,14 +70,14 @@ router.post('/login', (req, res) => {
     })(req, res);
 });
 
-// router to send a password recovery email
+// Router to send a password recovery email.
 router.post('/passwordrecovery', async (req, res) => {
 
-    // Generate Random Token
+    // Generate Random Token.
     const token = crypto.randomBytes(20).toString("hex");
     console.log(token);
 
-    // Find the user with the given email and set the token
+    // Find the user with the given email and set the token.
     User.findOne({ email: req.body.email }, (error, user) => {
         if (!user){
             console.log("no user with that email");
@@ -93,7 +93,8 @@ router.post('/passwordrecovery', async (req, res) => {
             console.log(error.message);
         }
         });
-        // Send email with link and token in the link
+
+        // Send email with link and token in the link.
         nodemailer.createTestAccount((error, account) => {
             if (error) {
                 return console.log(error.message);
@@ -130,9 +131,10 @@ router.post('/passwordrecovery', async (req, res) => {
     });
 });
 
-// router that checks the password recovery token and shows the reset password page or a wrong token error
+// Router that checks the password recovery token and shows the reset password page or a wrong token error.
 router.get('/reset/:token', (req, res) => {
-    // Find the user that belongs to the given token
+
+    // Find the user that belongs to the given token.
     User.findOne({ recoverPasswordToken: req.params.token, recoverPasswordExpires: {$gt: Date.now() } }, (error, user) => {
         if (!user) {
             console.log("wrong token or token expired");
@@ -146,9 +148,10 @@ router.get('/reset/:token', (req, res) => {
     });
 });
 
-// router that changes the password of the user belonging to the given password recovery token
+// Router that changes the password of the user belonging to the given password recovery token.
 router.post('/reset/:token', (req, res) => {
-    // Find the user that belongs to the given token
+
+    // Find the user that belongs to the given token.
     User.findOne({ recoverPasswordToken: req.params.token, recoverPasswordExpires: {$gt: Date.now() } }, (error, user) => {
         if (error) { return console.log(error.message); }
         if (!user) {
@@ -157,7 +160,7 @@ router.post('/reset/:token', (req, res) => {
             return res.end();
         }
 
-        // Change the password in the database
+        // Change the password in the database.
         if (req.body.password === req.body.confirmPassword) {
             user.setPassword(req.body.password, (error) => {
                 if (error) { return console.log(error.message); }
