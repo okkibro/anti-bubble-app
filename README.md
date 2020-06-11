@@ -6,7 +6,6 @@
 + **/database**: *Contains mongoose Schemas*
 + **/server**: *Files to be used on server-side*
     * **/routes**: *Declared routes to be imported on ```index.js```*
-+ **/license**: *Feel free to use. Repo comes with MIT license* 
 + **/index.js**: *File that is used to start the node server*
 
 
