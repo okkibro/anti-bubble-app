@@ -27,10 +27,10 @@ export class TeacherOverviewComponent implements OnInit {
     openform = false;
     selectklas = false;
 
-    constructor(private authenticationService: AuthenticationService, private classService: ClassesService, private fb: FormBuilder, private snackBar: MatSnackBar) { }
+    constructor(private auth: AuthenticationService, private classService: ClassesService, private fb: FormBuilder, private snackBar: MatSnackBar) { }
 
     ngOnInit(): void {
-        this.authenticationService.profile().subscribe(user => {
+        this.auth.profile().subscribe(user => {
             this.userDetails = user;
             if (this.userDetails.class.length > 0) {
                 this.classService.getClassIds().subscribe((ids) => {

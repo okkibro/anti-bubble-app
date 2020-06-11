@@ -11,17 +11,17 @@ import { User } from 'src/app/models/user';
 export class NavBarComponent implements OnInit {
   userDetails: User;
 
-  constructor(private authenticationService: AuthenticationService,) { }
+  constructor(private auth: AuthenticationService,) { }
 
   ngOnInit(): void {
-    this.authenticationService.profile().subscribe(user => {
+    this.auth.profile().subscribe(user => {
       this.userDetails = user;
     })
   }
 
   /** Method to logout. */ 
   logoutButton() {
-    return this.authenticationService.logout();
+    return this.auth.logout();
   }
 
 }

@@ -22,12 +22,12 @@ export class ShopComponent implements OnInit {
   shopDetails: Shop[];
   filteredShop: Shop[];
 
-  constructor(private authenticationService: AuthenticationService, private shopService : ShopService, private snackBar: MatSnackBar, private milestoneUpdates: MilestoneUpdatesService) { }
+  constructor(private auth: AuthenticationService, private shopService : ShopService, private snackBar: MatSnackBar, private milestoneUpdates: MilestoneUpdatesService) { }
 
   ngOnInit(): void {
     this.shopService.shop("haar").subscribe(shop => {
       this.shopDetails = shop;
-      this.authenticationService.profile().subscribe(user => {
+      this.auth.profile().subscribe(user => {
         this.userDetails = user;
         this.filteredShop = this.filterShop();
       }, (err) => {
