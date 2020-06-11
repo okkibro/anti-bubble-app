@@ -27,14 +27,14 @@
 + Run ```ng build``` on here to generate Angular necessary files. Output files are by default created on ```/dist``` subfolder
 + Now run ```node index.js``` This is the last step and if everything goes right, server will start listening for requests
     + You can also install **[nodemon]** (```npm install -g nodemon```) to have auto refresh when working on the backend
-    + When you work on the frontend and you want auto refresh use ```ng serve```
-+ You can open your browser and navigate to localhost:3000 to see if application works
+    + When you work on the frontend and you want auto refresh use ```npm start```
++ You can open your browser and navigate to localhost:4200 to see if application works
 
 ### Normal usage
 + Be sure you have started MongoDB
 + Navigate to project folder
-+ Run ```node index.js```
-+ Open browser and navigate to localhost:3000
++ Run ```npm start```
++ Open browser and navigate to localhost:4200
 
 
 ### Running test locally
