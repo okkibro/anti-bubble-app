@@ -39,7 +39,6 @@ export class RegisterComponent implements OnInit {
         user.email = this.registerForm.get('email').value;
         user.role = this.registerForm.get('role').value;
         user.password = this.registerForm.get('password').value;
-        user.classCode = this.registerForm.get('classCode').value;
 
         this.auth.register(user).subscribe(() => {
             this.router.navigate(['login']);
