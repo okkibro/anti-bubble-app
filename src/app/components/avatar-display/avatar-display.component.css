@@ -8,3 +8,20 @@
     box-shadow: none;
     /* z-index: 1; */
 }
+
+.mat-card {
+    position: relative;
+    height: 30em;
+    margin: auto;
+    background-color: transparent;
+    border: transparent;
+    box-shadow: none;
+}
+
+.mat-card img {
+    position: absolute;
+    width: calc(var(--height));
+    height: 100%;
+    margin-top: -1.8em; /* Half the height */
+    margin-left: -6.5em; /* Half the width */
+}
