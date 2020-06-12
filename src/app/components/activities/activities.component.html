@@ -15,21 +15,23 @@
 
                 <mat-card-content *ngIf="gameData?.game.name == 'Botsende Bubbels'">
                     {{gameData?.game.description}}<br>
-                    <p *ngIf="team != undefined && team.length != 0">Je zit in een team met: <ul>
-                        <li *ngFor="let teamMember of team">
-                            {{teamMember.name}}
-                        </li>
-                    </ul>
+                    <div *ngIf="team != undefined && team.length != 0" id="teammates"> Je zit in een team met:<br>
+                        <ul>
+                            <li *ngFor="let teamMember of team">
+                                {{teamMember.name}}
+                            </li>
+                        </ul>
+                    </div>
                     <p><i>Wacht op de vraag van de docent:</i></p>
-                    <p id="receiveQuestion"><p>
+                    <p id="receiveQuestion"></p>
                     <mean-answer-form *ngIf="enableAnswer"></mean-answer-form>
                 </mat-card-content>
 
                 <mat-card-content *ngIf="gameData?.game.name == 'Alternatieve Antwoorden'">
                     {{gameData?.game.description}}<br>
                     <p><i>Wacht op de vraag van de docent:</i></p>
-                    <p id="receiveQuestion"><p>
-                    <mean-answer-form *ngIf="enableAnswer"></mean-answer-form>
+                    <p id="receiveQuestion"></p>
+                            <mean-answer-form *ngIf="enableAnswer"></mean-answer-form>
                 </mat-card-content>
 
                 <mat-card-content *ngIf="gameData?.game.name == 'Aanradend Algoritme'">

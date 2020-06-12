@@ -3,3 +3,16 @@
     font-size: 25px;
     margin: 5px;
 }
+
+#teammates {
+    margin-top: 10px;
+    display: inline-block;
+}
+
+ul {
+    list-style-type: none;
+}
+
+li {
+    position: inline-block; 
+};
