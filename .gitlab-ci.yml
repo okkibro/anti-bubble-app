@@ -19,7 +19,8 @@ build:
   tags:
    - docker
   only:
-   - unit-tests
+   - master
+   - Development
 
 test:karma:
   stage: test
@@ -34,6 +35,9 @@ test:karma:
       - coverage/
   tags:
    - docker
+  only:
+   - master
+   - Development
 
 #test:e2e:
 #  stage: test
