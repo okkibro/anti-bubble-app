@@ -21,6 +21,9 @@
                             </mat-card>
                         </mat-grid-tile>
                     </mat-grid-list> 
+                    <button mat-button [routerLink]="'/profile'">
+                        <mat-icon>keyboard_backspace</mat-icon> Terug naar profiel
+                    </button>
                 </mat-card-content>
             </mat-card>
 
@@ -36,9 +39,5 @@
                 <mat-grid-tile><button mat-flat-button class="buttons" (click)="tabChange('Medaille')"      id="buttonMedaille"     [disableRipple]="true">Medaille     </button></mat-grid-tile>
             </mat-grid-list>
         </mat-card>
-
-        <button mat-button [routerLink]="'/profile'">
-            <mat-icon>keyboard_backspace</mat-icon> Terug naar profiel
-        </button>
     </div>
 </body>
