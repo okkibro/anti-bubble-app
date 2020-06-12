@@ -99,6 +99,12 @@ export class SocketIOService {
         });
     }
 
+    listenForTeam(receiveTeam) {
+        this.socket.on('receive-team', (team) => {
+            receiveTeam(team);
+        });
+    }
+
     /** Function that submits an answer to the teacher. */
     studentSubmit(data) {
         this.socket.emit('submit', data);
@@ -121,8 +127,8 @@ export class SocketIOService {
     /** Function that pairs students in groups of the given groupsize.
      *  receivePairs is called when the ser has created the teams and sent them back.
      */
-    pairStudents(chat, groupSize, receivePairs) {
-        this.socket.emit('pair-students', chat, groupSize);
+    pairStudents(groups, groupSize, receivePairs) {
+        this.socket.emit('pair-students', groups, groupSize);
         this.socket.on('send-pairs', (pairs) => {
             receivePairs(pairs);
         });

@@ -19,6 +19,7 @@ export class ActivitiesComponent implements OnInit {
   pin;
   userDetails: User;
   enableAnswer: boolean = false;
+  team;
 
   constructor(
     private socketService: SocketIOService,
@@ -49,6 +50,8 @@ export class ActivitiesComponent implements OnInit {
     }
 
     this.receiveQuestion(); // check whether or not a teacher has sent a question
+
+    this.receiveTeam();
   }
 
   beforeUnload(e) {
@@ -74,6 +77,12 @@ export class ActivitiesComponent implements OnInit {
       let questionDisplay = document.getElementById('receiveQuestion');
       questionDisplay.innerHTML = question;
       this.enableAnswer = true; // student can only answer after the teacher has submitted a question
+    });
+  }
+
+  receiveTeam() {
+    this.socketService.listenForTeam((team) => {
+      this.team = team;
     });
   }
 

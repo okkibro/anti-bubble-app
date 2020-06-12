@@ -15,6 +15,11 @@
 
                 <mat-card-content *ngIf="gameData?.game.name == 'Botsende Bubbels'">
                     {{gameData?.game.description}}<br>
+                    <p *ngIf="team != undefined && team.length != 0">Je zit in een team met: <ul>
+                        <li *ngFor="let teamMember of team">
+                            {{teamMember.name}}
+                        </li>
+                    </ul>
                     <p><i>Wacht op de vraag van de docent:</i></p>
                     <p id="receiveQuestion"><p>
                     <mean-answer-form *ngIf="enableAnswer"></mean-answer-form>

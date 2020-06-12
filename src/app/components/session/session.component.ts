@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { AuthenticationService } from "../../services/authentication.service";
 import { SocketIOService } from 'src/app/services/socket-io.service';
 import { DataService } from 'src/app/services/data-exchage.service';
@@ -26,6 +26,8 @@ export class SessionComponent implements OnInit {
     gameFinished = false;
     leaveByHomeButton = false;
     enableQuestions: boolean = true;
+    pairs;
+    randomGroups: boolean = false;
 
     constructor(
         private authenticationService: AuthenticationService,
@@ -57,6 +59,12 @@ export class SessionComponent implements OnInit {
                     let tableRow = document.createElement("tr");
                     tableRow.appendChild(document.createTextNode(newPlayer.firstName + " " + newPlayer.lastName));
                     tableRow.classList.add("player");
+                    let input = document.createElement("input");
+                    input.setAttribute("placeholder", "Team nr");
+                    input.setAttribute("id", newPlayer.email);
+                    input.setAttribute("type", "number");
+                    input.classList.add("teamInput");
+                    tableRow.appendChild(input);
                     let table = document.getElementsByClassName("sessionTable")[0];
                     table.appendChild(tableRow); // Append the tablerow to the table.
 
@@ -138,7 +146,44 @@ export class SessionComponent implements OnInit {
         this.socketService.startGame();
 
         let time = this.gameData?.duration * 60; // specified time for this activity (in seconds)
+        this.initGame(this.gameData.game.name);
         this.startTimer(time);
+    }
+
+    initGame(game: string) {
+        switch (game) {
+            case "Naamloos Nieuws": break;
+            case "Botsende Bubbels":
+                if (this.randomGroups) {
+                    this.pairStudents(null, 2, (pairs) => {
+                        this.pairs = pairs;
+                    });
+                } else {
+                    let pairs:String[][] = [];
+                    let i = 0;
+                    let inputs:any = document.getElementsByClassName("teamInput");
+                    let playerList = this.players;
+                    while (playerList.length > 0) {
+                        let player = playerList.shift();
+                        pairs[i] = [player];
+                        let inputField:any = document.getElementById(player.email);
+                        for (let j = 0; j < inputs.length; j++) {
+                            if (inputs[j].id != player.email && inputs[j].value === inputField.value) {
+                                pairs[i].push(playerList.filter(x => x.email === inputs[j].id)[0]);
+                                playerList = playerList.filter(x => x.email != inputs[j].id);
+                            }
+                        }
+                        i++;
+                    }
+                    this.pairStudents(pairs, 2, (pairs) => {
+                        this.pairs = pairs;
+                        console.log(this.pairs);
+                    })
+                }
+                break;
+            case "Alternatieve Antwoorden": break;
+            case "Aanradend Algoritme": break;
+        }
     }
 
     /** Function that makes timer count down at the top of the screen. */
@@ -150,7 +195,7 @@ export class SessionComponent implements OnInit {
         // Create an interval that calls the given function every second. 
         // The function updates the value of the time at the top of the screen to be 1 second less than the previous second it was called.
         this.interval = setInterval(() => {
-            if(time > 0) {
+            if (time > 0) {
                 time -= 1;
                 let minutes = Math.floor(time / 60);
                 let seconds = time % 60;
@@ -165,10 +210,10 @@ export class SessionComponent implements OnInit {
         }, 1000);
     }
 
-    /** Test function that tests if pairStudents works. */
-    pairStudentsTest() {
-        this.socketService.pairStudents(false, 2, pairs => {
-            console.log(pairs);
+    /** Function that groups students. */
+    pairStudents(groups: String[][], groupSize: Number, receivePairs) {
+        this.socketService.pairStudents(groups, groupSize, pairs => {
+            receivePairs(pairs);
         });
     }
 

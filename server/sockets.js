@@ -144,51 +144,58 @@ function runIO(io) {
 		});
 
 		// Listener that will divide students into groups
-		socket.on('pair-students', (chat, groupSize) => {
-			let playersInGame = players.getPlayers(socket.id); // Get all the players in the current game
-			playersInGame = shuffle(playersInGame); // Shuffle the player list
-			
-			// Group players into groups of the given size
+		socket.on('pair-students', (groups, groupSize) => {
 			let pairs = [];
-			let pairsIndex = 0;
-			let remainderIndex = 0;
+			if (groups == null) {
+				let playersInGame = players.getPlayers(socket.id); // Get all the players in the current game
+				playersInGame = shuffle(playersInGame); // Shuffle the player list
 
-			while (playersInGame.length > 0) {
-				pairs[pairsIndex] = [];
-				for (let a = 0; a < groupSize; a++) {
-					pairs[pairsIndex].push(playersInGame.shift());
-				}
-				if (remainderIndex < playersInGame.length % groupSize) {
-					pairs[pairsIndex].push(playersInGame.shift());
-					remainderIndex++;
-				}
-				pairsIndex++;
-			}
+				// Group players into groups of the given size
+				let pairsIndex = 0;
+				let remainderIndex = 0;
 
-			if (chat) {
-				//todo: make chat
+				while (playersInGame.length > 0) {
+					pairs[pairsIndex] = [];
+					for (let a = 0; a < groupSize; a++) {
+						pairs[pairsIndex].push(playersInGame.shift());
+					}
+					if (remainderIndex < playersInGame.length % groupSize) {
+						pairs[pairsIndex].push(playersInGame.shift());
+						remainderIndex++;
+					}
+					pairsIndex++;
+				}
+			} else {
+				pairs = groups;
 			}
 
 			socket.emit('send-pairs', pairs);
 
+			for (let i = 0; i < pairs.length; i++) {
+				for (let j = 0; j < pairs[i].length; j++) {
+					let teamMembers = pairs[i].filter(x => x.email != pairs[i][j].email);
+					socket.to(pairs[i][j].playerID).emit('receive-team', teamMembers);
+				}
+			}
+
 			function shuffle(array) {
 				var currentIndex = array.length, temporaryValue, randomIndex;
-			  
+
 				// While there remain elements to shuffle...
 				while (0 !== currentIndex) {
-			  
-				  // Pick a remaining element...
-				  randomIndex = Math.floor(Math.random() * currentIndex);
-				  currentIndex -= 1;
-			  
-				  // And swap it with the current element.
-				  temporaryValue = array[currentIndex];
-				  array[currentIndex] = array[randomIndex];
-				  array[randomIndex] = temporaryValue;
+
+					// Pick a remaining element...
+					randomIndex = Math.floor(Math.random() * currentIndex);
+					currentIndex -= 1;
+
+					// And swap it with the current element.
+					temporaryValue = array[currentIndex];
+					array[currentIndex] = array[randomIndex];
+					array[randomIndex] = temporaryValue;
 				}
-			  
+
 				return array;
-			  }
+			}
 		});
 	});
 }
