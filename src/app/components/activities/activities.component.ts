@@ -6,6 +6,7 @@ import { FormBuilder } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { AuthenticationService } from 'src/app/services/authentication.service';
 import { User } from '../../models/user';
+import { beforeUnload } from '../../../../constants';
 
 @Component({
   selector: 'mean-activities',
@@ -43,7 +44,7 @@ export class ActivitiesComponent implements OnInit {
       }
     });
 
-    window.addEventListener('beforeunload', this.beforeUnload);
+    window.addEventListener('beforeunload', beforeUnload);
 
     if (this.gameData == undefined) {
       this.router.navigate(['home']);
@@ -52,11 +53,6 @@ export class ActivitiesComponent implements OnInit {
     this.receiveQuestion(); // check whether or not a teacher has sent a question
 
     this.receiveTeam();
-  }
-
-  beforeUnload(e) {
-    e.returnValue = "Weet je zeker dat je de sessie wilt verlaten?";
-    return "Weet je zeker dat je de sessie wilt verlaten?";
   }
 
   leaveSession() {
