@@ -24,6 +24,7 @@ export class SessionOptionsComponent implements OnInit {
   createSession(gameData) {
     this.sessionService.getActivity(gameData?.game).subscribe(data => { // Get the entire activity data from the database
       gameData.game = data;
+      console.log(gameData.teams);
       this.socketService.createSession(gameData); // Create a session in socket io service and pass it the chosen activity with set options
       this.router.navigate(['session']); // Navigate to session page
     });
