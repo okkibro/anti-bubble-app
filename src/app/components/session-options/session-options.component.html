@@ -81,9 +81,17 @@
                                             class="slideBar" #naamloosSlider></mat-slider>
                                     </td>
                                 </tr>
+                                <tr>
+                                    <th>Teams:</th>
+                                    <td>
+                                        <mat-radio-group [(ngModel)]="teamOptionNN">
+                                            <mat-radio-button class="teamOptionButton" *ngFor="let teamChoice of teamOptions" [value]="teamChoice">{{teamChoice}} <br></mat-radio-button>
+                                        </mat-radio-group>
+                                    </td>
+                                </tr>
                             </table>
                             <br>
-                            <button (click)="createSession({game : 'Naamloos Nieuws', duration : naamloosSlider.value})"
+                            <button (click)="createSession({game : 'Naamloos Nieuws', duration : naamloosSlider.value, teams: teamOptionNN})"
                                 mat-button>Start Sessie</button>
                         </mat-expansion-panel-content>
                     </mat-expansion-panel>
@@ -125,17 +133,15 @@
                                 <tr>
                                     <th>Teams:</th>
                                     <td>
-                                        <mat-radio-group name="teamChoice" ngModel required #teamChoice="ngModel" >
-                                            <mat-radio-button value="random" checked #random>Willekeurig</mat-radio-button><br> <!-- TODO: by default deze geselecteerd -->
-                                            <mat-radio-button value="manually">Zelf samenstellen</mat-radio-button>
+                                        <mat-radio-group [(ngModel)]="teamOptionBB">
+                                            <mat-radio-button class="teamOptionButton" *ngFor="let teamChoice of teamOptions" [value]="teamChoice">{{teamChoice}} <br></mat-radio-button>
                                         </mat-radio-group>
                                     </td>
                                 </tr>
                             </table>
                             <br>
                             <button
-                                (click)="createSession({game : 'Botsende Bubbels', duration : botsendeSlider.value, teams : teamChoice.value})"
-                                [disabled]="teamChoice.value == ''"
+                                (click)="createSession({game : 'Botsende Bubbels', duration : botsendeSlider.value, teams : teamOptionBB})"
                                 mat-button>Start Sessie</button>
                         </mat-expansion-panel-content>
                     </mat-expansion-panel>
@@ -176,16 +182,15 @@
                                 <tr>
                                     <th>Teams:</th>
                                     <td>
-                                        <mat-radio-group name="teamChoice2" ngModel required #teamChoice2="ngModel" >
-                                            <mat-radio-button value="random" checked>Willekeurig</mat-radio-button><br> <!-- TODO: by default deze geselecteerd -->
-                                            <mat-radio-button value="manually">Zelf samenstellen</mat-radio-button>
+                                        <mat-radio-group [(ngModel)]="teamOptionAA">
+                                            <mat-radio-button class="teamOptionButton" *ngFor="let teamChoice of teamOptions" [value]="teamChoice">{{teamChoice}} <br></mat-radio-button>
                                         </mat-radio-group>
                                     </td>
                                 </tr>
                             </table>
                             <br>
                             <button
-                                (click)="createSession({game : 'Alternatieve Antwoorden', duration : alternatieveSlider.value, teams: teamChoice2.value})"
+                                (click)="createSession({game : 'Alternatieve Antwoorden', duration : alternatieveSlider.value, teams: teamOptionAA})"
                                 mat-button>Start Sessie</button>
                         </mat-expansion-panel-content>
                     </mat-expansion-panel>
