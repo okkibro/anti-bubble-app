@@ -2,6 +2,7 @@
 
 <body>
 
+    <div class="containerDiv" fxLayoutGap="0.2%" fxLayout="column" fxLayoutAlign="space-evenly">
     <div class="containerDiv" fxLayoutGap="0.2%" fxLayout="row" fxLayoutAlign="space-evenly">
         <mat-card fxFlex=25%>
             <mean-avatar-display></mean-avatar-display>
@@ -10,7 +11,7 @@
             <mat-card  id="itemCollection" fxFlex="60%"> 
                 <mat-card-content>
                     <mat-card-header>
-                        <mat-card-title>Avatar Wijzigen</mat-card-title>
+                        <mat-card-title class="avatarSize">Avatar Wijzigen</mat-card-title>
                     </mat-card-header><br>
                     <mat-grid-list cols="2">
                         <mat-grid-tile *ngFor = "let item of filteredAvatar" fxFlexAlign="stretch">
@@ -36,9 +37,13 @@
                 <mat-grid-tile><button mat-flat-button class="buttons" (click)="tabChange('Medaille')"      id="buttonMedaille"     [disableRipple]="true">Medaille     </button></mat-grid-tile>
             </mat-grid-list>
         </mat-card>
-
-        <button mat-button [routerLink]="'/profile'">
-            <mat-icon>keyboard_backspace</mat-icon> Terug naar profiel
-        </button>
     </div>
+    <button mat-button [routerLink]="'/profile'">
+        <mat-icon>keyboard_backspace</mat-icon> Terug naar profiel
+    </button>
+</div>
 </body>
+
+<!-- This program has been developed by students from the bachelor Computer Science at Utrecht University 
+    within the Software Project course. © Copyright Utrecht University (Department of Information and 
+    Computing Sciences)  -->
