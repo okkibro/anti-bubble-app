@@ -1,8 +1,8 @@
-/* The following code alters the mat-cards to layer over each other and display the avatar.  */
+/* The following code alters the mat-cards to layer over each other and display the avatar. */
 .avatarDisplay {
     position: absolute;
-    top: 10%;
-    left: 0%;
+    top: 35%;
+    left: 5%;
     background-color: transparent;
     border: transparent;
     box-shadow: none;

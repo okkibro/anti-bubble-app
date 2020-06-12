@@ -2,7 +2,8 @@
 
 <body>
 
-    <div class="containerDiv" fxLayoutGap="0.2%" fxLayout="row" fxLayoutAlign="space-evenly start">
+    <div class="containerDiv" fxLayoutGap="0.2%" fxLayout="column" fxLayoutAlign="space-evenly">
+    <div class="containerDiv" fxLayoutGap="0.2%" fxLayout="row" fxLayoutAlign="space-evenly">
         <mat-card fxFlex=25%>
             <mean-avatar-display></mean-avatar-display>
         </mat-card>
@@ -40,4 +41,12 @@
             </mat-grid-list>
         </mat-card>
     </div>
+    <button mat-button [routerLink]="'/profile'">
+        <mat-icon>keyboard_backspace</mat-icon> Terug naar profiel
+    </button>
+</div>
 </body>
+
+<!-- This program has been developed by students from the bachelor Computer Science at Utrecht University 
+    within the Software Project course. © Copyright Utrecht University (Department of Information and 
+    Computing Sciences)  -->

@@ -13,8 +13,8 @@
 }
 */
 
-.avatarSize {
-    size: 10%;
+mean-avatar-display mat-card img{
+    width: 15%;
 }
 
 .UItable td{
