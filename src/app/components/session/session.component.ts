@@ -27,7 +27,7 @@ export class SessionComponent implements OnInit {
     leaveByHomeButton = false;
     enableQuestions: boolean = true;
     pairs;
-    randomGroups: boolean = false;
+    randomGroups: boolean;
 
     constructor(
         private authenticationService: AuthenticationService,
@@ -39,14 +39,15 @@ export class SessionComponent implements OnInit {
 
     ngOnInit(): void {
         this.gameStarted = false;
+        this.randomGroups = true;
         this.gameData = this.getGameData();
         if (this.gameData == undefined) {
             
             // Going to session page but not having joined a session redirects a user back to the home page.
             this.router.navigate(['home']);
         } else {
-            if (this.gameData.teams != undefined && this.gameData.teams === "random") {
-                this.randomGroups = true;
+            if (this.gameData.teams != undefined && this.gameData.teams === "manually") {
+                this.randomGroups = false;
             }
     
             // Get pin of the session from the dataservice
