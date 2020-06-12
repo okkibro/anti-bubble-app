@@ -126,7 +126,7 @@
                                     <th>Teams:</th>
                                     <td>
                                         <mat-radio-group name="teamChoice" ngModel required #teamChoice="ngModel" >
-                                            <mat-radio-button value="random" checked>Willekeurig</mat-radio-button><br> <!-- TODO: by default deze geselecteerd -->
+                                            <mat-radio-button value="random" checked #random>Willekeurig</mat-radio-button><br> <!-- TODO: by default deze geselecteerd -->
                                             <mat-radio-button value="manually">Zelf samenstellen</mat-radio-button>
                                         </mat-radio-group>
                                     </td>
@@ -135,6 +135,7 @@
                             <br>
                             <button
                                 (click)="createSession({game : 'Botsende Bubbels', duration : botsendeSlider.value, teams : teamChoice.value})"
+                                [disabled]="teamChoice.value == ''"
                                 mat-button>Start Sessie</button>
                         </mat-expansion-panel-content>
                     </mat-expansion-panel>
