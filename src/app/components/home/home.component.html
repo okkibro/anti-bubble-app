@@ -1,5 +1,4 @@
 <mean-nav-bar></mean-nav-bar>
-
 <body>
     <div class="containerDiv" fxLayoutGap="0.5%" fxLayout="column" fxLayoutAlign="space-evenly">
         <div fxLayout.xs="row" fxLayoutGap="0.5%" fxLayoutAlign="space-evenly">
@@ -26,54 +25,50 @@
                 </mat-card-content>
             </mat-card>
         </div>
-
-    <div fxLayout.xs="row" fxLayoutGap="0.5%" fxLayoutAlign="space-evenly">
-        <mat-card fxFlex="40%">
-            <mat-card-header>
-                <mat-card-title>Klas updates</mat-card-title>
-                <!-- Of nieuws? Klas activiteiten? -->
-            </mat-card-header>
-            <mat-card-content>
-                <table class="UItable">
-                    <tr>
-                        <th>Per1</th>
-                        <td>Heeft spel X gespeeld!</td>
-                    </tr>
-                    <tr>
-                        <th>Per2</th>
-                        <td>Heeft 5 muntjes verdiend!</td>
-                    </tr>
-                    <tr>
-                        <th>Per3</th>
-                        <td>Heeft meegedaan aan de laatste klas sessie!</td>
-                    </tr>
-                </table>
-            </mat-card-content>
-        </mat-card>
-
-        <mat-card fxFlex="40%">
-            <mat-card-header>
-                <mat-card-title>Scorebord</mat-card-title>
-            </mat-card-header>
-            <mat-card-content>
-                <table class="UItable">
-                    <tr *ngFor="let milestone of userDetails?.recentMilestones; let i = index;">
-                        <td>{{userDetails?.recentMilestones[4 - i]}}</td>
-                    </tr>
-                </table>
-            </mat-card-content>
-        </mat-card>
-        <mat-card fxFlex="20%">
-            <mat-card-header>Aantal munten</mat-card-header>
-            <mat-card-content class="number">
-                    {{ userDetails?.currency }}
-            </mat-card-content>
-            <a mat-flat-button [routerLink]="'/shop'" theme="alternative" [ngClass]="{'my-custom-theme': true}" color="primary">Ga naar winkel</a>
-        </mat-card>
+        <div fxLayout.xs="column" fxLayoutGap="0.5%" fxLayoutAlign="space-evenly">
+            <mat-card fxFlex="40%">
+                <mat-card-header>
+                    <mat-card-title>Klas updates</mat-card-title>
+                </mat-card-header>
+                <mat-card-content>
+                    <table class="UItable">
+                        <tr>
+                            <th>Per1</th>
+                            <td>Heeft spel X gespeeld!</td>
+                        </tr>
+                        <tr>
+                            <th>Per2</th>
+                            <td>Heeft 5 muntjes verdiend!</td>
+                        </tr>
+                        <tr>
+                            <th>Per3</th>
+                            <td>Heeft meegedaan aan de laatste klas sessie!</td>
+                        </tr>
+                    </table>
+                </mat-card-content>
+            </mat-card>
+            <mat-card fxFlex="40%">
+                <mat-card-header>
+                    <mat-card-title>Scorebord</mat-card-title>
+                </mat-card-header>
+                <mat-card-content>
+                    <table class="UItable">
+                        <tr *ngFor="let milestone of userDetails?.recentMilestones; let i = index;">
+                            <td>{{userDetails?.recentMilestones[4 - i]}}</td>
+                        </tr>
+                    </table>
+                </mat-card-content>
+            </mat-card>
+            <mat-card fxFlex="20%">
+                <mat-card-header>Aantal munten</mat-card-header>
+                <mat-card-content class="number">
+                        {{ userDetails?.currency }}
+                </mat-card-content>
+                <a mat-flat-button [routerLink]="'/shop'"  [ngClass]="{'my-custom-theme': true}" color="primary">Ga naar winkel</a>
+            </mat-card>
+        </div>
     </div>
-</div>
 </body>
-
 <footer>
     <p> &copy; Utrecht University (ICS)</p>
 </footer>

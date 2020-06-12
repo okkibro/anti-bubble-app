@@ -21,15 +21,12 @@
 }
 
 .navBarAng div {
-    display: fixed;
     flex: 1 1 auto;
     text-align: center;
 }
 
 .navitems button {
-    padding-left: 30px;
-    padding-right: 30px;
-
+    padding: 0 30px;
     color: white;
 }
 
@@ -46,7 +43,7 @@
 
 /* the following code will describe the rest of the (angular) page */
 body {
-    background-image: url("../..//assets/images/Super_Map/Basic_Buttons/Background.png");
+    background-image: url("../../assets/images/Super_Map/Basic_Buttons/Background.png");
     text-align: center;
     margin: 0;
     padding: 0;
@@ -66,6 +63,7 @@ body {
     text-align: center;
     align-items: center; 
     background-color: #addadb;
+    margin: 5px 0;
 }
 
 mat-card {
@@ -86,7 +84,7 @@ mat-card button{
 mat-card img{
     object-fit: cover; 
     width: 50%; 
-    height: width;
+    height: 50%;
 }
 
 mat-tab-group, mat-tab {
@@ -138,7 +136,7 @@ mat-tab-group, mat-tab {
 .bubbleImage {
     position: absolute;
     top: 10%;
-    left: 0%;
+    left: 0;
     background-color: transparent;
     border: transparent;
     box-shadow: none;
@@ -148,9 +146,7 @@ mat-tab-group, mat-tab {
 /* Apply this id for blue buttons designed by the artists */
 #artisticButtonBlue {
     width: 40%;
-    background: transparent;
-    background-image: url("/assets/images/Super_Map/Basic_Buttons/Button_Blue_Rectangle.png");
-    background-repeat: round;
+    background: transparent url("../../assets/images/Super_Map/Basic_Buttons/Button_Blue_Rectangle.png") round;
 }
 
 ::ng-deep .style-warning {

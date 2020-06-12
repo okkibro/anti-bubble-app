@@ -71,7 +71,6 @@ export class AuthenticationService {
     public getRole(): Role {
         return this.getTokenData().role;
     }
-    
 
     /** Method to POST to the backend API to check if a given email is already present in the database. */
     public checkEmailTaken(email: string) {
