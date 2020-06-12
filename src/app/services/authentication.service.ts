@@ -20,7 +20,7 @@ interface TokenResponse {
 export class AuthenticationService {
     private token: string;
 
-    constructor(private http: HttpClient, private router: Router, private cookie: CookieService) {}
+    constructor(private http: HttpClient, private router: Router, private cookie: CookieService) { }
 
     /** Method to save the JWT of the user in the browser's cookies. */
     private saveToken(token: string): void {
@@ -67,32 +67,11 @@ export class AuthenticationService {
         }
     }
 
-    /** Method to check whether the user is a teacher. */
-    public isTeacher(): boolean {
-        const user = this.getTokenData();
-        if (user && this.isLoggedIn()) {
-            return user.role === Role.teacher;
-        } else {
-            return false;
-        }
-    }
-
-    /** Method to check whether the user is a student. */
-    public isStudent(): boolean {
-        const user = this.getTokenData();
-        if (user && this.isLoggedIn()) {
-            return user.role === Role.student;
-        } else {
-            return false;
-        }
-    }
-
     /** Method to checks the role of the user. */
     public getRole(): Role {
         return this.getTokenData().role;
     }
-
-    // TODO: Add debouncing to reduce HTTP-requests for below 2 methods
+    
 
     /** Method to POST to the backend API to check if a given email is already present in the database. */
     public checkEmailTaken(email: string) {
@@ -104,7 +83,11 @@ export class AuthenticationService {
         return (control: AbstractControl): Observable<ValidationErrors | null> => {
             return this.checkEmailTaken(control.value).pipe(
                 map(res => {
-                    return res.hasOwnProperty('emailTaken') == true ? { emailTaken: true } : null;
+                    if (res['emailTaken'] == false) {
+                        return null;
+                    } else {
+                        return { emailTaken: true };
+                    }
                 })
             );
         };
