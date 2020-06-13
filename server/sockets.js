@@ -146,10 +146,9 @@ function runIO(io) {
 		// Listener that will divide students into groups
 		socket.on('pair-students', (groups, groupSize) => {
 			let pairs = [];
-			if (groups == null) {
-				let playersInGame = players.getPlayers(socket.id); // Get all the players in the current game
+			let playersInGame = players.getPlayers(socket.id); // Get all the players in the current game
+			if (groups == null) { // Teacher selected create random groups			 
 				playersInGame = shuffle(playersInGame); // Shuffle the player list
-
 				// Group players into groups of the given size
 				let pairsIndex = 0;
 				let remainderIndex = 0;
@@ -165,8 +164,16 @@ function runIO(io) {
 					}
 					pairsIndex++;
 				}
-			} else {
-				pairs = groups;
+			} else { // Teacher manually created groups
+
+				for (let i = 0; i < groups.length; i++) {
+					pairs[i] = [];
+					for (let j = 0; j < groups[i].length; j++) {
+						pairs[i].push(playersInGame.find(x => {
+							return x.email == groups[i][j].email
+						}));
+					}
+				}
 			}
 
 			socket.emit('send-pairs', pairs);

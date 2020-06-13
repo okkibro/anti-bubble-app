@@ -50,9 +50,9 @@ export class ActivitiesComponent implements OnInit {
       this.router.navigate(['home']);
     }
 
-    this.receiveQuestion(); // check whether or not a teacher has sent a question
+    this.receiveQuestion(); // Check whether or not a teacher has sent a question
 
-    this.receiveTeam();
+    this.receiveTeam(); // Get teams from teacher's input
   }
 
   leaveSession() {

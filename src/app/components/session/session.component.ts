@@ -43,6 +43,7 @@ export class SessionComponent implements OnInit {
         this.gameStarted = false;
         this.randomGroups = true;
         this.gameData = this.getGameData();
+        
         if (this.gameData == undefined) {
 
             // Going to session page but not having joined a session redirects a user back to the home page.
@@ -109,7 +110,7 @@ export class SessionComponent implements OnInit {
                         var tablerow = document.createElement('tr');
                         tablerow.innerHTML = `<strong>${data.player.name}:</strong> ${data.message}<br>`
                         submitTable.appendChild(tablerow);
-                        this.enableQuestions = false; // teacher cannot send any questions after having received at least one answer
+                        this.enableQuestions = false; // Teacher cannot send any questions after having received at least one answer
                     });
                 }
             });
@@ -169,37 +170,45 @@ export class SessionComponent implements OnInit {
 
     initGame(game: string) {
         switch (game) {
-            case "Naamloos Nieuws": break; // TODO: NN werkt met groepen van 4 --> maken
+            case "Naamloos Nieuws": 
+            this.pairStudents(null, 4, (pairs) => {
+                this.pairs = pairs;
+            });
+            break; 
+
             case "Botsende Bubbels":
-                if (this.randomGroups) {
-                    this.pairStudents(null, 2, (pairs) => {
-                        this.pairs = pairs;
-                    });
-                } else {
-                    let pairs: String[][] = [];
-                    let i = 0;
-                    let inputs: any = document.getElementsByClassName("teamInput");
-                    let playerList = this.players;
-                    while (playerList.length > 0) {
-                        let player = playerList.shift();
-                        pairs[i] = [player];
-                        let inputField: any = document.getElementById(player.email);
-                        for (let j = 0; j < inputs.length; j++) {
-                            if (inputs[j].id != player.email && inputs[j].value === inputField.value) {
-                                pairs[i].push(playerList.filter(x => x.email === inputs[j].id)[0]);
-                                playerList = playerList.filter(x => x.email != inputs[j].id);
-                            }
-                        }
-                        i++;
-                    }
-                    this.pairStudents(pairs, 2, (pairs) => {
-                        this.pairs = pairs;
-                        console.log(this.pairs);
-                    })
-                }
+                this.getPairs();
                 break;
             case "Alternatieve Antwoorden": break;
             case "Aanradend Algoritme": break;
+        }
+    }
+
+    getPairs() {
+        if (this.randomGroups) {
+            this.pairStudents(null, 2, (pairs) => {
+                this.pairs = pairs;
+            });
+        } else {
+            let pairs: String[][] = [];
+            let i = 0;
+            let inputs: any = document.getElementsByClassName("teamInput");
+            let playerList = this.players;
+            while (playerList.length > 0) {
+                let player = playerList.shift();
+                pairs[i] = [player];
+                let inputField: any = document.getElementById(player.email);
+                for (let j = 0; j < inputs.length; j++) {
+                    if (inputs[j].id != player.email && inputs[j].value === inputField.value) {
+                        pairs[i].push(playerList.filter(x => x.email === inputs[j].id)[0]);
+                        playerList = playerList.filter(x => x.email != inputs[j].id);
+                    }
+                }
+                i++;
+            }
+            this.pairStudents(pairs, 2, (pairs) => {
+                this.pairs = pairs;
+            })
         }
     }
 
