@@ -33,7 +33,6 @@ mat-card-header {
 
 mat-card button{
     background-color: #addadb;
-    width: 40%;
 }
 
 mat-card a:hover{
@@ -115,4 +114,8 @@ mat-tab-group, mat-tab {
 
 ::ng-deep .style-warning .mat-simple-snackbar-action {
     color: black;
+}
+
+.footer {
+    text-align: center;
 }

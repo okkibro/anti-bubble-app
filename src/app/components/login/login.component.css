@@ -6,3 +6,18 @@
     color: white;
     background-color: red;
 }
+
+mat-card-actions {
+    margin-bottom: 0;
+}
+
+mat-card-content {
+    margin-bottom: 0;
+}
+
+mat-divider {
+    width: 250px !important;
+    margin: 0 auto;
+    position: unset !important;
+    left: unset !important;
+}

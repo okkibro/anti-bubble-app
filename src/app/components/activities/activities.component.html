@@ -1,32 +1,33 @@
-<mean-nav-bar></mean-nav-bar>
-
-<body>
-    <div class="containerDiv" fxLayoutGap="0.5%" fxLayout="column" fxLayoutAlign="space-evenly">
-        <div fxLayout.xs="row" fxLayoutGap="0.5%" fxLayoutAlign="space-evenly">
-            <mat-card fxFlex="100%">
-                <mat-card-header>
-                    <mat-card-title class="welcomeHeader">{{gameData?.game.name}}</mat-card-title>
-                </mat-card-header>
-
-                <mat-card-content *ngIf="gameData?.game.name == 'Naamloos Nieuws'">
-                    {{gameData?.game.description}}
-                </mat-card-content>
-
-                <mat-card-content *ngIf="gameData?.game.name == 'Botsende Bubbels'">
-                    {{gameData?.game.description}}
-                    <mean-answer-form></mean-answer-form>
-                </mat-card-content>
-
-                <mat-card-content *ngIf="gameData?.game.name == 'Alternatieve Antwoorden'">
-                    {{gameData?.game.description}}
-                    <mean-answer-form></mean-answer-form>
-                </mat-card-content>
-
-                <mat-card-content *ngIf="gameData?.game.name == 'Aanradend Algoritme'">
-                    {{gameData?.game.description}}
-                </mat-card-content>
-
-            </mat-card>
-        </div>
-    </div>
-</body>
+<mat-sidenav-container>
+    <mat-sidenav #sidenav [autoFocus]="false">
+        <mean-sidenav (sidenavClose)="sidenav.close()"></mean-sidenav>
+    </mat-sidenav>
+    <mat-sidenav-content>
+        <mean-toolbar (sidenavToggle)="sidenav.toggle()"></mean-toolbar>
+        <body>
+            <div class="containerDiv" fxLayoutGap="10px" fxLayout="column" fxLayoutAlign="space-evenly">
+                <div fxLayout.xs="row" fxLayoutGap="10px" fxLayoutAlign="space-evenly">
+                    <mat-card fxFlex="100%">
+                        <mat-card-header>
+                            <mat-card-title class="welcomeHeader">{{gameData?.game.name}}</mat-card-title>
+                        </mat-card-header>
+                        <mat-card-content *ngIf="gameData?.game.name == 'Naamloos Nieuws'">
+                            {{gameData?.game.description}}
+                        </mat-card-content>
+                        <mat-card-content *ngIf="gameData?.game.name == 'Botsende Bubbels'">
+                            {{gameData?.game.description}}
+                            <mean-answer-form></mean-answer-form>
+                        </mat-card-content>
+                        <mat-card-content *ngIf="gameData?.game.name == 'Alternatieve Antwoorden'">
+                            {{gameData?.game.description}}
+                            <mean-answer-form></mean-answer-form>
+                        </mat-card-content>
+                        <mat-card-content *ngIf="gameData?.game.name == 'Aanradend Algoritme'">
+                            {{gameData?.game.description}}
+                        </mat-card-content>
+                    </mat-card>
+                </div>
+            </div>
+        </body>
+    </mat-sidenav-content>
+</mat-sidenav-container>

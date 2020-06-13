@@ -1,97 +1,103 @@
-<mean-nav-bar></mean-nav-bar>
-
-<body>
-    <div class="containerDiv" fxLayoutGap="0.5%" fxLayout="column" fxLayoutAlign="space-evenly">
-        <div fxLayout.xs="row" fxLayoutGap="0.5%" fxLayoutAlign="space-evenly">
-            <mat-card fxFlex="100%">
-                <mat-card-header *ngIf="currentClass == undefined">
-                    <mat-card-title class="welcomeHeader">Klas Overzicht</mat-card-title>
-                    <a mat-flat-button [ngClass]="{'my-custom-theme': true}" color="accent"
-                        (click)="onClickOpenForm()">Maak een nieuwe klas aan</a>
-                </mat-card-header>
-                <mat-card-header *ngIf="currentClass">
-                    <mat-card-title> Klassen Overzicht </mat-card-title>
-                    <mat-card-subtitle>
-                        Overzicht van alle spelers van klas {{currentClass?.title}}, code: {{currentClass?.code}}.
-                    </mat-card-subtitle>
-                </mat-card-header>
-                <mat-card-content>
-                    <div *ngIf="userDetails?.class.length > 0">
-                        <button mat-raised-button [disabled]="loading" (click)="onClickSelectKlas()" [ngClass]="{'my-custom-theme': true}" color="accent"> Verander van klas</button>
-                        <div [hidden]="!selectklas">
-                            <div>
-                                <mat-button-toggle-group #group="matButtonToggleGroup">
-                                    <div *ngFor="let klas of names">
-                                        <mat-button-toggle (click)="switchClass(klas.id)">{{klas.title}}</mat-button-toggle>
+<mat-sidenav-container>
+    <mat-sidenav #sidenav [autoFocus]="false">
+        <mean-sidenav (sidenavClose)="sidenav.close()"></mean-sidenav>
+    </mat-sidenav>
+    <mat-sidenav-content>
+        <mean-toolbar (sidenavToggle)="sidenav.toggle()"></mean-toolbar>
+        <body>
+            <div class="containerDiv" fxLayoutGap="10px" fxLayout="column" fxLayoutAlign="space-evenly">
+                <div fxLayout.xs="row" fxLayoutGap="10px" fxLayoutAlign="space-evenly">
+                    <mat-card fxFlex="100%">
+                        <mat-card-header *ngIf="currentClass == undefined">
+                            <mat-card-title class="welcomeHeader">Klas Overzicht</mat-card-title>
+                            <a mat-flat-button [ngClass]="{'my-custom-theme': true}" color="accent"
+                                (click)="onClickOpenForm()">Maak een nieuwe klas aan</a>
+                        </mat-card-header>
+                        <mat-card-header *ngIf="currentClass">
+                            <mat-card-title> Klassen Overzicht </mat-card-title>
+                            <mat-card-subtitle>
+                                Overzicht van alle spelers van klas {{currentClass?.title}}, code: {{currentClass?.code}}.
+                            </mat-card-subtitle>
+                        </mat-card-header>
+                        <mat-card-content>
+                            <div *ngIf="userDetails?.class.length > 0">
+                                <button mat-raised-button [disabled]="loading" (click)="onClickSelectKlas()" [ngClass]="{'my-custom-theme': true}" color="accent"> Verander van klas</button>
+                                <div [hidden]="!selectklas">
+                                    <div>
+                                        <mat-button-toggle-group #group="matButtonToggleGroup">
+                                            <div *ngFor="let klas of names">
+                                                <mat-button-toggle (click)="switchClass(klas.id)">{{klas.title}}</mat-button-toggle>
+                                            </div>
+                                        </mat-button-toggle-group>
                                     </div>
-                                </mat-button-toggle-group>
+                                    <div>
+                                        <a mat-flat-button (click)="onClickOpenForm()" [ngClass]="{'my-custom-theme': true}" color="accent">Maak een nieuwe klas aan</a>
+                                    </div>
+                                </div>
                             </div>
-                            <div>
-                                <a mat-flat-button (click)="onClickOpenForm()" [ngClass]="{'my-custom-theme': true}" color="accent">Maak een nieuwe klas aan</a>
-                            </div>
-                        </div>   
-                    </div>
-                    <table *ngIf="currentClass?.students?.length > 0" class="UItable" id="table">
-                        <tr>
-                            <th>Naam</th>
-                            <th>Status</th>
-                        </tr>
-                        <tr *ngFor="let classmate of classmates">
-                            <td>{{ classmate.firstName }}</td>
-                            <td>Online</td>
-                            <td><a mat-flat-button [routerLink]="'/classmateProfile/' + classmate._id" [ngClass]="{'my-custom-theme': true}" color="accent"> Bekijk Profiel </a></td>
-                        </tr>
-                    </table>
-                    <p *ngIf="currentClass?.students?.length == 0 || currentClass == undefined"> De klas heeft nog geen leerlingen</p>
-                </mat-card-content>
-                <form [hidden]="!openform" name="classForm" class="example-form" [formGroup]="classForm"
-                    (ngSubmit)="createClass()">
-                    <table class="UItable">
-                        <tr>
-                            <td>
-                                <mat-form-field class="example-full-width">
-                                    <mat-label>Klassennaam</mat-label>
-                                    <input matInput placeholder="klassennaam" formControlName="classTitle" required>
-                                    <mat-error *ngIf="classForm.get('classTitle').hasError('required')">
-                                        Klassennaam is <strong>verplicht</strong>
-                                    </mat-error>
-                                </mat-form-field>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <mat-form-field class="example-full-width">
-                                    <mat-label>Jaar</mat-label>
-                                    <input matInput placeholder="Jaar" formControlName="classYear" required>
-                                    <mat-error *ngIf="classForm.get('classYear').hasError('required')">
-                                        Jaar is <strong>verplicht</strong>
-                                    </mat-error>
-                                </mat-form-field>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <mat-label>Niveau:*</mat-label>
-                                <mat-radio-group class="role-radio-group" formControlName="classLevel">
-                                    <mat-radio-button class="role-radio-button" value="VMBO" color="primary">VMBO
-                                    </mat-radio-button>
-                                    <mat-radio-button class="role-radio-button" value="HAVO" color="primary">HAVO
-                                    </mat-radio-button>
-                                    <mat-radio-button class="role-radio-button" value="VWO" color="primary">VWO
-                                    </mat-radio-button>
-                                </mat-radio-group>
-                            </td>
-                        </tr>
-                    </table>
-                    <mat-card-actions>
-                        <button mat-raised-button type="submit" [disabled]="!classForm.valid"
-                            color="primary">Aanmaken</button>
-                    </mat-card-actions>
-                </form>
-            </mat-card>
-        </div>
-    </div>
-</body>
-<footer>
-    <p> &copy; Utrecht University (ICS)</p>
-</footer>
+                            <table *ngIf="currentClass?.students?.length > 0" class="UItable" id="table">
+                                <tr>
+                                    <th>Naam</th>
+                                    <th>Status</th>
+                                </tr>
+                                <tr *ngFor="let classmate of classmates">
+                                    <td>{{ classmate.firstName }}</td>
+                                    <td>Online</td>
+                                    <td><a mat-flat-button [routerLink]="'/classmateProfile/' + classmate._id" [ngClass]="{'my-custom-theme': true}" color="accent"> Bekijk Profiel </a></td>
+                                </tr>
+                            </table>
+                            <p *ngIf="currentClass?.students?.length == 0 || currentClass == undefined"> De klas heeft nog geen leerlingen</p>
+                        </mat-card-content>
+                        <form [hidden]="!openform" name="classForm" class="example-form" [formGroup]="classForm"
+                            (ngSubmit)="createClass()">
+                            <table class="UItable">
+                                <tr>
+                                    <td>
+                                        <mat-form-field class="example-full-width">
+                                            <mat-label>Klassennaam</mat-label>
+                                            <input matInput placeholder="klassennaam" formControlName="classTitle" required>
+                                            <mat-error *ngIf="classForm.get('classTitle').hasError('required')">
+                                                Klassennaam is <strong>verplicht</strong>
+                                            </mat-error>
+                                        </mat-form-field>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <mat-form-field class="example-full-width">
+                                            <mat-label>Jaar</mat-label>
+                                            <input matInput placeholder="Jaar" formControlName="classYear" required>
+                                            <mat-error *ngIf="classForm.get('classYear').hasError('required')">
+                                                Jaar is <strong>verplicht</strong>
+                                            </mat-error>
+                                        </mat-form-field>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <mat-label>Niveau:*</mat-label>
+                                        <mat-radio-group class="role-radio-group" formControlName="classLevel">
+                                            <mat-radio-button class="role-radio-button" value="VMBO" color="primary">VMBO
+                                            </mat-radio-button>
+                                            <mat-radio-button class="role-radio-button" value="HAVO" color="primary">HAVO
+                                            </mat-radio-button>
+                                            <mat-radio-button class="role-radio-button" value="VWO" color="primary">VWO
+                                            </mat-radio-button>
+                                        </mat-radio-group>
+                                    </td>
+                                </tr>
+                            </table>
+                            <mat-card-actions>
+                                <button mat-raised-button type="submit" [disabled]="!classForm.valid"
+                                    color="primary">Aanmaken</button>
+                            </mat-card-actions>
+                        </form>
+                    </mat-card>
+                </div>
+            </div>
+        </body>
+        <footer class="footer">
+            <p> &copy; Utrecht University (ICS)</p>
+        </footer>
+    </mat-sidenav-content>
+</mat-sidenav-container>

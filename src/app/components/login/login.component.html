@@ -1,24 +1,20 @@
 <mat-toolbar color="primary">
     <mat-toolbar-row>
         <span>Anti Bubble</span>
-        <span class="example-fill-remaining-space"></span>
-        <span class="align-center"></span>
-        <span class="example-spacer"></span>
     </mat-toolbar-row>
 </mat-toolbar>
-
 <body>
-    <div class="containerDiv" fxLayoutGap="0.5%" fxLayout="column" fxLayoutAlign="space-evenly">
+    <div class="containerDiv" fxLayoutGap="10px" fxLayout="column" fxLayoutAlign="space-evenly">
         <mat-card>
             <mat-card-header>
                 <mat-card-title>Login</mat-card-title>
             </mat-card-header>
             <mat-card-content>
-                <form class="example-form" [formGroup]="loginForm" (ngSubmit)="loginUser()">
-                    <table class="example-full-width" class="UItable">
+                <form [formGroup]="loginForm" (ngSubmit)="loginUser()">
+                    <table class="UItable">
                         <tr>
                             <td>
-                                <mat-form-field class="example-full-width">
+                                <mat-form-field>
                                     <mat-label>Email</mat-label>
                                     <input matInput placeholder="Email" formControlName="email" type="email" required>
                                     <mat-error
@@ -33,7 +29,7 @@
                         </tr>
                         <tr>
                             <td>
-                                <mat-form-field class="example-full-width">
+                                <mat-form-field>
                                     <mat-label>Wachtwoord</mat-label>
                                     <input matInput placeholder="Wachtwoord" formControlName="password" type="password"
                                         required />
@@ -46,25 +42,24 @@
                         <tr>
                             *Velden met een (*) zijn verplicht.
                         </tr>
-                        <tr>
-                            <a href="./passwordrecovery">
-                                Wachtwoord Vergeten?
-                            </a>
-                        </tr>
                     </table>
                     <mat-card-actions>
-                        <button mat-raised-button type="submit" [disabled]="!loginForm.valid"
-                            color="primary">Login</button>
+                        <button mat-raised-button type="submit" [disabled]="!loginForm.valid" color="primary">Login</button>
                     </mat-card-actions>
                 </form>
             </mat-card-content>
-            
-            <button mat-button [routerLink]="'/register'">Maak een account</button>
-
+            <mat-divider></mat-divider>
+            <mat-card-actions>
+                <button mat-button [routerLink]="'/passwordrecovery'">Wachtwoord vergeten?</button>
+            </mat-card-actions>
+            <mat-divider></mat-divider>
+            <mat-card-actions>
+                <button mat-button [routerLink]="'/register'">Maak een account</button>
+            </mat-card-actions>
         </mat-card>
     </div>
 </body>
 
-<footer>
+<footer class="footer">
     <p> &copy; Utrecht University (ICS)</p>
 </footer>
