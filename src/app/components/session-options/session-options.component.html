@@ -81,14 +81,6 @@
                                             class="slideBar" #naamloosSlider></mat-slider>
                                     </td>
                                 </tr>
-                                <tr>
-                                    <th>Teams:</th>
-                                    <td>
-                                        <mat-radio-group [(ngModel)]="teamOptionNN">
-                                            <mat-radio-button class="teamOptionButton" *ngFor="let teamChoice of teamOptions" [value]="teamChoice">{{teamChoice}} <br></mat-radio-button>
-                                        </mat-radio-group>
-                                    </td>
-                                </tr>
                             </table>
                             <br>
                             <button (click)="createSession({game : 'Naamloos Nieuws', duration : naamloosSlider.value, teams: teamOptionNN})"

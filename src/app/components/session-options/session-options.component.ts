@@ -17,7 +17,6 @@ export class SessionOptionsComponent implements OnInit {
   userDetails: User;
 
   teamOptions: string[] = ['Willekeurig', 'Handmatig'];
-  teamOptionNN: string;
   teamOptionBB: string;
   teamOptionAA: string;
 
@@ -25,7 +24,6 @@ export class SessionOptionsComponent implements OnInit {
 
   ngOnInit() { 
     // set the default value for building teams on random
-    this.teamOptionNN = 'Willekeurig';
     this.teamOptionBB = 'Willekeurig';
     this.teamOptionAA = 'Willekeurig';
   }
