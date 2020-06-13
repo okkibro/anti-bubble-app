@@ -30,7 +30,6 @@ import { BadgesComponent } from './components/badges/badges.component';
 import { SessionComponent } from './components/session/session.component';
 import { ActivitiesComponent } from './components/activities/activities.component';
 import { TeacherOverviewComponent } from './components/teacher-overview/teacher-overview.component';
-import { NavBarComponent } from './components/nav-bar/nav-bar.component';
 import { JoinClassComponent } from './components/join-class/join-class.component';
 import { BubbleVisualisationComponent } from './components/bubble-visualisation/bubble-visualisation.component';
 import { SessionOptionsComponent } from './components/session-options/session-options.component';
@@ -41,6 +40,10 @@ import { AvatarDisplayComponent } from './components/avatar-display/avatar-displ
 import { AuthGuardService } from './services/auth-guard.service';
 import { CookieService } from 'ngx-cookie-service';
 import { SocketIOService } from './services/socket-io.service';
+import { MatSidenavModule } from "@angular/material/sidenav";
+import { MatListModule } from "@angular/material/list";
+import { ToolbarComponent } from './components/toolbar/toolbar.component';
+import { SidenavComponent } from './components/sidenav/sidenav.component';
 
 @NgModule({
     declarations: [
@@ -56,7 +59,6 @@ import { SocketIOService } from './services/socket-io.service';
         BubbleDetailsComponent,
         TeacherOverviewComponent,
         ShopComponent,
-        NavBarComponent,
         ActivitiesComponent,
         PasswordRecoveryComponent,
         PasswordResetComponent,
@@ -67,6 +69,8 @@ import { SocketIOService } from './services/socket-io.service';
         LabyrinthComponent,
         AnswerFormComponent,
         AvatarDisplayComponent,
+        ToolbarComponent,
+        SidenavComponent,
     ],
     imports: [
         BrowserModule,
@@ -82,6 +86,8 @@ import { SocketIOService } from './services/socket-io.service';
         MatProgressBarModule,
         FormsModule,
         MatRadioModule,
+        MatSidenavModule,
+        MatListModule,
     ],
     providers: [AuthGuardService, CookieService, SocketIOService],
     bootstrap: [AppComponent],

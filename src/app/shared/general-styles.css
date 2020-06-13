@@ -1,69 +1,3 @@
-@import url('https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap');
-
-* {
-    font-family: 'Fredoka One', cursive; 
-    /* NOTE: text-fill-color paints the text once more over the actual text. This can have unwanted side effects that should be fixed in local css */
-    -webkit-text-fill-color: white;
-    -webkit-text-stroke: #41596c 0.2em;
-    paint-order: stroke fill;
-    text-shadow: 0.1em 0.1em #41596c;
-    color: white;
-    font-size: 105%;
-}
-
-.mat-icon {
-    font-family: 'Material Icons', normal; 
-    -webkit-text-fill-color: white;
-    -webkit-text-stroke: #41596c 0.1em;
-    paint-order: stroke fill;
-    color: white;
-    font-size: 105%;
-}
-
-/* the following things define the toolbar*/
-#logoutButton {
-    color: black;
-    background-color: lightskyblue;
-    position: sticky;
-    display: inline-flex;
-    justify-content: center;
-    align-items: center;
-    height: 60px;
-    width: 60px;
-    right: 15px;
-    text-align: center;
-    font-size: 15px;
-    border-radius: 100%;
-}
-
-.navBarAng {
-    position: sticky;
-    top: 0;
-    z-index: 100;
-}
-
-.navBarAng div {
-    flex: 1 1 auto;
-    text-align: center;
-}
-
-.navitems button {
-    padding: 0 30px;
-    color: white;
-}
-
-.navBarAng button:hover {
-    color:  #fbe0d0;
-}
-
-.logo {
-    text-decoration: underline;
-    text-decoration-color:  #fbe0d0;
-    position: absolute;
-}
-
-
-/* the following code will describe the rest of the (angular) page */
 body {
     background-image: url("../../assets/images/Super_Map/Basic_Buttons/Background.png");
     text-align: center;
@@ -71,8 +5,7 @@ body {
     padding: 0;
     height: 100%;
     width: 100%;
-    background-size: auto;  
-
+    background-size: auto;
     display: flex;
     justify-content: center;
     align-items: center; 
@@ -85,7 +18,7 @@ body {
     text-align: center;
     align-items: center; 
     background-color: #addadb;
-    margin: 5px 0;
+    margin: 10px 0;
 }
 
 mat-card {
@@ -172,9 +105,7 @@ mat-tab-group, mat-tab {
 /* Apply this id for blue buttons designed by the artists */
 #artisticButtonBlue {
     width: 40%;
-    background: transparent;
-    background-image: url("/assets/images/Super_Map/Basic_Buttons/Button_Yellow_Rectangle.png");
-    background-repeat: round;
+    background: transparent url("../../assets/images/Super_Map/Basic_Buttons/Button_Yellow_Rectangle.png") round;
 }
 
 ::ng-deep .style-warning {
