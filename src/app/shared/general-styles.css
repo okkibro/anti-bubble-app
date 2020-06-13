@@ -137,7 +137,7 @@ mat-tab-group, mat-tab {
     z-index: 1;
 }
 
-/* Apply this id for blue buttons designed by the artists */
+/* Apply this id for blue buttons designed by the artists. */
 #artisticButtonBlue {
     width: 40%;
     background: transparent;
@@ -152,4 +152,45 @@ mat-tab-group, mat-tab {
 
 ::ng-deep .style-warning .mat-simple-snackbar-action {
     color: black;
+}
+
+/* The following ID's are for the shop and avatar category buttons with an image. */
+#buttonHoofddeksel{
+    background-image: url("/assets/images/Super_Map/Shop_UI/Button_Hats.png");
+}
+
+#buttonHaar {
+    background-image: url("/assets/images/Super_Map/Shop_UI/Button_Hair.png");
+}
+
+#buttonBril {
+    background-image: url("/assets/images/Super_Map/Shop_UI/Button_Glasses.png");
+}
+
+#buttonLichaam {
+    background-image: url("/assets/images/Super_Map/Shop_UI/Button_Skincolor.png");
+}
+
+#buttonShirt {
+    background-image: url("/assets/images/Super_Map/Shop_UI/Button_Shirt.png");
+}
+
+#buttonBroek {
+    background-image: url("/assets/images/Super_Map/Shop_UI/Button_Pants.png");
+}
+
+#buttonSchoenen {
+    background-image: url("/assets/images/Super_Map/Shop_UI/Button_Shoes.png");
+}
+
+#buttonMedaille {
+    background-image: url("/assets/images/Super_Map/Shop_UI/Button_Medals.png");
+}
+
+/* Class for shaping the rest of the avatar and shop category buttons. */
+.buttons {
+    height:68%;
+    background: transparent;
+    background-repeat: round;
+    color: transparent;
 }
