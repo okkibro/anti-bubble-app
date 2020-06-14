@@ -7,6 +7,8 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { AuthenticationService } from 'src/app/services/authentication.service';
 import { User } from '../../models/user';
 import { beforeUnload } from '../../../../constants';
+import { Articles } from '../../models/articles';
+import { SessionService } from 'src/app/services/session.service';
 
 @Component({
   selector: 'mean-activities',
@@ -21,6 +23,7 @@ export class ActivitiesComponent implements OnInit {
   userDetails: User;
   enableAnswer: boolean = false;
   team;
+  articleImages = [];
 
   constructor(
     private socketService: SocketIOService,
@@ -28,6 +31,7 @@ export class ActivitiesComponent implements OnInit {
     private data: DataService,
     private fb: FormBuilder,
     private snackBar: MatSnackBar,
+    private sessionService: SessionService,
     private auth: AuthenticationService) { }
 
   ngOnInit(): void {
@@ -50,9 +54,31 @@ export class ActivitiesComponent implements OnInit {
       this.router.navigate(['home']);
     }
 
+    if (this.gameData != undefined && this.gameData.game.name == 'Naamloos Nieuws') {
+      this.naamloosNieuws();
+    }
+
     this.receiveQuestion(); // Check whether or not a teacher has sent a question
 
     this.receiveTeam(); // Get teams from teacher's input
+  }
+
+  naamloosNieuws() {
+    let articles = this.sessionService.getArticles();
+    let articleDetails = []; // Store article details in array
+     // Store image sources of articles in array
+    articles.forEach((data) => {
+      for (let i = 0; i < data.length; i ++) {
+        this.articleImages.push(data[i].image);
+        articleDetails.push(data[i]);
+      }
+    });
+   // console.log(articleIamges[3]);
+
+    // let articleSpace = document.getElementsByClassName("article")[0];
+    // let image = document.createElement("image");
+    // image.setAttribute("src", "this.articlesData.image");
+    // articleSpace.appendChild(image);
   }
 
   leaveSession() {

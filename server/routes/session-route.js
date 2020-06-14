@@ -5,12 +5,21 @@ const Activities = mongoose.model('Activities');
 const User = mongoose.model('User');
 const sanitize = require('mongo-sanitize');
 const Questions = mongoose.model('Questions');
+const Articles = mongoose.model('Articles');
 
 const jwt = require('express-jwt');
 const auth = jwt({
     secret: process.env.MY_SECRET,
     userProperty: 'payload'
 });
+
+
+router.get('/articles', auth, (req, res) => {
+    Articles.find({}, (err, articles) => { 
+        res.json(articles); 
+    });
+});
+
 
 /** Router that gets an activity based on the given string in the body of the request. */
 router.post('/activity', auth, (req, res) => {
@@ -30,7 +39,7 @@ router.post('/activity', auth, (req, res) => {
 /** Router that updates the bubbleInit boolean of the logged in user to true. */
 router.patch('/updateBubbleInit', auth, (req, res) => {
     User.findById(req.payload._id).then(user => { // Get the logged in user.
-        
+
         // Set bubbleInit to true and save the schema.
         user.bubbleInit = true;
         user.save();
@@ -68,7 +77,7 @@ router.post('/questions', auth, (req, res) => {
 /** Router that saves answers to the logged in user. */
 router.post('/labyrinthAnswers', auth, (req, res) => {
     User.findById(req.payload._id, (err, user) => { // Get the logged in user.
-        
+
         // Loop over all questions and save corresponding answers to result based on the index of the question.
         let result = [];
         for (let i = 1; i < req.body.answers.length; i++) {

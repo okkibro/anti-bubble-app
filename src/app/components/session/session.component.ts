@@ -171,9 +171,9 @@ export class SessionComponent implements OnInit {
     initGame(game: string) {
         switch (game) {
             case "Naamloos Nieuws": 
-            this.pairStudents(null, 4, (pairs) => {
-                this.pairs = pairs;
-            });
+            // this.pairStudents(null, 4, (pairs) => {
+            //     this.pairs = pairs;
+            // });
             break; 
 
             case "Botsende Bubbels":
