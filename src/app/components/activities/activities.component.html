@@ -11,7 +11,7 @@
 
                 <mat-card-content *ngIf="gameData?.game.name == 'Naamloos Nieuws'">
                     {{gameData?.game.description}}   
-                     <img class="article" mat-card-image *ngFor="let image of articleImages" src= "{{image}}" alt="">  
+                     <img class="article" mat-card-image *ngFor="let image of articleImages" src= "{{image}}" alt="Deel van artikel">  
                 </mat-card-content>
 
                 <mat-card-content *ngIf="gameData?.game.name == 'Botsende Bubbels'">

@@ -14,10 +14,20 @@ const auth = jwt({
 });
 
 
+/** Router that gets the articles from the database */
 router.get('/articles', auth, (req, res) => {
-    Articles.find({}, (err, articles) => { 
-        res.json(articles); 
+    User.findById(req.payload._id, (err, user) => { // Get the logged in user.
+        if (user.role == "teacher") {
+            res.status(401).json({
+                message: "UnauthorizedError: Not a student" // Only students can send requests to get articles.
+            });
+        } else {
+            Articles.find({}, (err, articles) => {
+                res.status(200).json(articles); // Send all article data from the database.
+            });
+        }
     });
+
 });
 
 
