@@ -1,71 +1,75 @@
 <!--This page represents the session page. It has a session pin, with which students can join the activity. The teacher has a overview page of all the students that join-->
-<mean-nav-bar></mean-nav-bar>
+<mat-sidenav-container>
+    <mat-sidenav #sidenav [autoFocus]="false">
+        <mean-sidenav (sidenavClose)="sidenav.close()"></mean-sidenav>
+    </mat-sidenav>
+    <mat-sidenav-content>
+        <mean-toolbar (sidenavToggle)="sidenav.toggle()"></mean-toolbar>
+        <body>
+            <p *ngIf="userDetails?.role == 'student'" class="sessionCode">Sessie code: <br><strong>{{pin}}</strong></p>
+            <p *ngIf="userDetails?.role == 'teacher'" class="playerCount">Aantal Spelers: <br><strong>{{playerCount}}</strong></p>
+            <p *ngIf="userDetails?.role == 'teacher' && gameData?.duration != null" class="timeLeft">Tijd over: <br><strong>{{gameData?.duration}}:00</strong></p>
 
-<body>
+            <div class="containerDiv" fxLayoutGap="10px" fxLayout="column" fxLayoutAlign="space-evenly">
+                <div fxLayout.xs="row" fxLayoutGap="10px" fxLayoutAlign="space-evenly">
+                    <mat-card fxFlex=80% *ngIf="userDetails?.role == 'teacher' && !gameStarted">
+                        <!-- <button (click)="pairStudentsTest()">GetPlayers</button> -->
+                        <mat-card-header class="matCardHeader">
+                            <mat-card-title>Sessie code</mat-card-title>
+                            <mat-card-subtitle id="gameChoice" *ngIf="gameData?.duration != null">{{gameData?.game.name}},
+                                ({{gameData?.duration}} min)</mat-card-subtitle>
+                            <mat-card-subtitle id="gameChoice" *ngIf="gameData?.duration == null">{{gameData?.game.name}}
+                            </mat-card-subtitle>
+                        </mat-card-header>
+                        <mat-card-content>
+                            <table class="sessionTable">
+                                <tr>
+                                    <td id="teacherPin">{{pin}}</td>
+                                </tr>
+                                <tr>
+                                    <button (click)="startGame()" mat-button id="startButton">Start!</button>
+                                </tr>
+                            </table>
+                        </mat-card-content>
+                    </mat-card>
 
-    <p *ngIf="userDetails?.role == 'student'" class="sessionCode">Sessie code: <br><strong>{{pin}}</strong></p>
-    <p *ngIf="userDetails?.role == 'teacher'" class="playerCount">Aantal Spelers: <br><strong>{{playerCount}}</strong></p>
-    <p *ngIf="userDetails?.role == 'teacher' && gameData?.duration != null" class="timeLeft">Tijd over: <br><strong>{{gameData?.duration}}:00</strong></p>
+                    <mat-card fxFlex=80% *ngIf="userDetails?.role == 'student'">
+                        <mat-card-header class="matCardHeader">
+                            <mat-card-title>{{gameData?.game.name}}</mat-card-title>
+                            <mat-card-subtitle>Wacht tot de docent de activiteit start</mat-card-subtitle>
+                        </mat-card-header>
+                        <mat-card-content>
 
-    <div class="containerDiv" fxLayoutGap="10px" fxLayout="column" fxLayoutAlign="space-evenly">
-        <div fxLayout.xs="row" fxLayoutGap="10px" fxLayoutAlign="space-evenly">
-            <mat-card fxFlex=80% *ngIf="userDetails?.role == 'teacher' && !gameStarted">
-                <!-- <button (click)="pairStudentsTest()">GetPlayers</button> -->
-                <mat-card-header class="matCardHeader">
-                    <mat-card-title>Sessie code</mat-card-title>
-                    <mat-card-subtitle id="gameChoice" *ngIf="gameData?.duration != null">{{gameData?.game.name}},
-                        ({{gameData?.duration}} min)</mat-card-subtitle>
-                    <mat-card-subtitle id="gameChoice" *ngIf="gameData?.duration == null">{{gameData?.game.name}}
-                    </mat-card-subtitle>
-                </mat-card-header>
-                <mat-card-content>
-                    <table class="sessionTable">
-                        <tr>
-                            <td id="teacherPin">{{pin}}</td>
-                        </tr>
-                        <tr>
-                            <button (click)="startGame()" mat-button id="startButton">Start!</button>
-                        </tr>
-                    </table>
-                </mat-card-content>
-            </mat-card>
+                            {{gameData?.game.description}} <br>
 
-            <mat-card fxFlex=80% *ngIf="userDetails?.role == 'student'">
-                <mat-card-header class="matCardHeader">
-                    <mat-card-title>{{gameData?.game.name}}</mat-card-title>
-                    <mat-card-subtitle>Wacht tot de docent de activiteit start</mat-card-subtitle>
-                </mat-card-header>
-                <mat-card-content>
+                            <pre>
+                              /`·.¸
+                                /¸...¸`:·
+                            ¸.·´  ¸   `·.¸.·´;
+                           : © ;:´;      ¸  ;
+                            `·.¸ `·  ¸.·´\`·¸;
+                                `\\´´\¸.·´
+                            </pre>
 
-                    {{gameData?.game.description}} <br>
+                        </mat-card-content>
+                    </mat-card>
 
-                    <pre>
-                      /`·.¸
-                        /¸...¸`:·
-                    ¸.·´  ¸   `·.¸.·´;
-                   : © ;:´;      ¸  ;
-                    `·.¸ `·  ¸.·´\`·¸;
-                        `\\´´\¸.·´  
-                    </pre>
+                    <mat-card fxFlex=80% *ngIf="userDetails?.role == 'teacher' && gameStarted">
+                        <mat-card-header class="matCardHeader">
+                            <mat-card-title>Antwoorden</mat-card-title>
+                        </mat-card-header>
+                        <mat-card-content>
+                            <table class="submitTable">
 
-                </mat-card-content>
-            </mat-card>
-            
-            <mat-card fxFlex=80% *ngIf="userDetails?.role == 'teacher' && gameStarted">
-                <mat-card-header class="matCardHeader">
-                    <mat-card-title>Antwoorden</mat-card-title>
-                </mat-card-header>
-                <mat-card-content>
-                    <table class="submitTable">
-                        
-                    </table>
-                </mat-card-content>
-            </mat-card>
+                            </table>
+                        </mat-card-content>
+                    </mat-card>
 
-        </div>
-    </div>
-
-</body>
-<footer class="footer">
-    <p> &copy; Utrecht University (ICS)</p>
-</footer>
+                </div>
+            </div>
+        </body>
+        <footer class="footer">
+            <p> &copy; Utrecht University (ICS)</p>
+        </footer>
+    </mat-sidenav-content>
+</mat-sidenav-container>

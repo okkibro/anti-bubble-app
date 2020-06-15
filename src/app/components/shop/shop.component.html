@@ -1,47 +1,52 @@
-<mean-nav-bar></mean-nav-bar>
+<mat-sidenav-container>
+    <mat-sidenav #sidenav [autoFocus]="false">
+        <mean-sidenav (sidenavClose)="sidenav.close()"></mean-sidenav>
+    </mat-sidenav>
+    <mat-sidenav-content>
+        <mean-toolbar (sidenavToggle)="sidenav.toggle()"></mean-toolbar>
+        <body>
+            <div class="containerDiv" fxLayoutGap="10px" fxLayout="column" fxLayoutAlign="space-evenly">
+                <div fxLayout.xs="row" fxLayoutGap="10px" fxLayoutAlign="space-evenly">
+                    <mat-card fxFlex="100%">
+                        <mat-card-header>
+                            <mat-card-title class="welcomeHeader">Winkel</mat-card-title>
+                        </mat-card-header>
+                    </mat-card>
+                </div>
 
-<body>
-    <div class="containerDiv" fxLayoutGap="10px" fxLayout="column" fxLayoutAlign="space-evenly">
-        <div fxLayout.xs="row" fxLayoutGap="10px" fxLayoutAlign="space-evenly">
-            <mat-card fxFlex="100%">
-                <mat-card-header>
-                    <mat-card-title class="welcomeHeader">Winkel</mat-card-title>
-                </mat-card-header>
-            </mat-card>
-        </div>
-       
-        <div fxLayout.xs="row"  fxLayoutGap="10px" fxLayoutAlign="space-evenly">
-            <mat-card  id="itemCollection" fxFlex="100%"> 
-                <mat-card-content>
-                    <mat-tab-group (selectedTabChange)="tabChange($event)">
-                        <mat-tab label="Haar"></mat-tab>
-                        <mat-tab label="Lichaam"></mat-tab>
-                        <mat-tab label="Broek"></mat-tab>
-                        <mat-tab label="Shirt"></mat-tab>
-                        <mat-tab label="Schoenen"></mat-tab>
-                        <mat-tab label="Bril"></mat-tab>
-                        <mat-tab label="Hoofddeksel"></mat-tab>
-                        <mat-tab label="Medaille"></mat-tab>
-                    </mat-tab-group>
-                    <mat-grid-list cols="4">
-                        <mat-grid-tile *ngFor = "let item of filteredShop" fxFlexAlign="stretch">
-                                <mat-card fxFlex="100%" fxLayout="column" fxLayoutGap="10px" fxFlexAlign="stretch" >
-                                <mat-card-title fxFlex="20%">{{ item.title }}</mat-card-title>
-                                <div fxLayoutAlign="center" fxFlex="50%">
-                                    <img mat-card-image src= "{{ item.previewImage }}" alt="{{ item.title }}"> 
-                                </div>  
-                                   <mat-card-footer fxFlex="20%">
-                                        <button (click)="buy(item)" id="artisticButtonBlue" mat-flat-button [ngClass]="{'my-custom-theme': true}" color="primary">{{ item.price }} <mat-icon>payment</mat-icon></button>
-                                   </mat-card-footer>
-                                </mat-card>
-                        </mat-grid-tile>
-                    </mat-grid-list> 
-                </mat-card-content>
-            </mat-card>
-        </div>
-    </div>
-</body>
-
-<footer class="footer">
-    <p> &copy; Utrecht University (ICS)</p>
-</footer>
+                <div fxLayout.xs="row"  fxLayoutGap="10px" fxLayoutAlign="space-evenly">
+                    <mat-card  id="itemCollection" fxFlex="100%">
+                        <mat-card-content>
+                            <mat-tab-group (selectedTabChange)="tabChange($event)">
+                                <mat-tab label="Haar"></mat-tab>
+                                <mat-tab label="Lichaam"></mat-tab>
+                                <mat-tab label="Broek"></mat-tab>
+                                <mat-tab label="Shirt"></mat-tab>
+                                <mat-tab label="Schoenen"></mat-tab>
+                                <mat-tab label="Bril"></mat-tab>
+                                <mat-tab label="Hoofddeksel"></mat-tab>
+                                <mat-tab label="Medaille"></mat-tab>
+                            </mat-tab-group>
+                            <mat-grid-list cols="4">
+                                <mat-grid-tile *ngFor = "let item of filteredShop" fxFlexAlign="stretch">
+                                        <mat-card fxFlex="100%" fxLayout="column" fxLayoutGap="10px" fxFlexAlign="stretch" >
+                                        <mat-card-title fxFlex="20%">{{ item.title }}</mat-card-title>
+                                        <div fxLayoutAlign="center" fxFlex="50%">
+                                            <img mat-card-image src= "{{ item.previewImage }}" alt="{{ item.title }}">
+                                        </div>
+                                           <mat-card-footer fxFlex="20%">
+                                                <button (click)="buy(item)" id="artisticButtonBlue" mat-flat-button [ngClass]="{'my-custom-theme': true}" color="primary">{{ item.price }} <mat-icon>payment</mat-icon></button>
+                                           </mat-card-footer>
+                                        </mat-card>
+                                </mat-grid-tile>
+                            </mat-grid-list>
+                        </mat-card-content>
+                    </mat-card>
+                </div>
+            </div>
+        </body>
+        <footer class="footer">
+            <p> &copy; Utrecht University (ICS)</p>
+        </footer>
+    </mat-sidenav-content>
+</mat-sidenav-container>
