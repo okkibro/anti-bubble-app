@@ -1,0 +1,29 @@
+.avatarDisplay {
+    position: absolute;
+    top: 35%;
+    left: 5%;
+    background-color: transparent;
+    border: transparent;
+    box-shadow: none;
+    /* z-index: 1; */
+}
+
+.mat-card {
+    position: relative;
+    height: 30em;
+    margin: auto;
+    background-color: transparent;
+    border: transparent;
+    box-shadow: none;
+}
+
+.mat-card img {
+    position: absolute;
+    width: calc(var(--height));
+    height: 100%;
+    margin-top: -1.5em;
+    margin-left: -16.2em;
+}
+
+
+
