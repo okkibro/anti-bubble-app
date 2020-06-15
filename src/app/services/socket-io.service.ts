@@ -100,8 +100,8 @@ export class SocketIOService {
     }
 
     listenForTeam(receiveTeam) {
-        this.socket.on('receive-team', team => {
-            receiveTeam(team);
+        this.socket.on('receive-team', (team, article) => {
+            receiveTeam(team, article);
         });
     }
 
@@ -127,8 +127,8 @@ export class SocketIOService {
     /** Function that pairs students in groups of the given groupsize.
      *  receivePairs is called when the ser has created the teams and sent them back.
      */
-    pairStudents(groups, groupSize, receivePairs) {
-        this.socket.emit('pair-students', groups, groupSize);
+    pairStudents(groups, groupSize, articles, receivePairs) {
+        this.socket.emit('pair-students', groups, groupSize, articles);
         this.socket.on('send-pairs', (pairs) => {
             receivePairs(pairs);
         });

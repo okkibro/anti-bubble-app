@@ -17,7 +17,7 @@ const auth = jwt({
 /** Router that gets the articles from the database */
 router.get('/articles', auth, (req, res) => {
     User.findById(req.payload._id, (err, user) => { // Get the logged in user.
-        if (user.role == "teacher") {
+        if (/*user.role == "teacher"*/false) {
             res.status(401).json({
                 message: "UnauthorizedError: Not a student" // Only students can send requests to get articles.
             });

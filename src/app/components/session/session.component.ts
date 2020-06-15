@@ -7,6 +7,7 @@ import { Router } from '@angular/router';
 import { SessionService } from 'src/app/services/session.service';
 import { beforeUnload } from '../../../../constants';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { Articles } from 'src/app/models/articles';
 
 @Component({
     selector: 'mean-session',
@@ -159,57 +160,66 @@ export class SessionComponent implements OnInit {
         if (this.playerCount == 0) { // teacher wants to start a game without any players in it
             this.snackBar.open('Er zitten nog geen spelers in de sessie', 'X', { duration: 2500, panelClass: ['style-error'], });
         } else {
-            this.gameStarted = true;
-            this.socketService.startGame();
-
-            let time = this.gameData?.duration * 60; // specified time for this activity (in seconds)
-            this.initGame(this.gameData.game.name);
-            this.startTimer(time);
+            if (this.initGame(this.gameData.game.name)) {
+                this.gameStarted = true;
+                this.socketService.startGame();
+    
+                let time = this.gameData?.duration * 60; // specified time for this activity (in seconds)
+                this.startTimer(time);
+            }
         }
     }
 
-    initGame(game: string) {
+    initGame(game: string): Boolean {
         switch (game) {
             case "Naamloos Nieuws": 
-            // this.pairStudents(null, 4, (pairs) => {
-            //     this.pairs = pairs;
-            // });
-            break; 
+            this.sessionService.getArticles().subscribe((articles) => { // Get articles from database
+                if (this.playerCount < 6) {
+                    this.snackBar.open("Er moeten minstens 6 leerlingen meedoen met deze activiteit", "X", { duration: 2500, panelClass: ['style-error'] });
+                    return false;
+                } else { 
+                    this.pairStudents(null, 3, articles, (pairs) => {
+                        this.pairs = pairs;
+                    });
+                    return true;
+                }
+            });
 
             case "Botsende Bubbels":
                 this.getPairs();
                 break;
             case "Alternatieve Antwoorden": break;
             case "Aanradend Algoritme": break;
+            default: return true;
         }
     }
 
     getPairs() {
-        if (this.randomGroups) {
-            this.pairStudents(null, 2, (pairs) => {
-                this.pairs = pairs;
-            });
-        } else {
-            let pairs: String[][] = [];
-            let i = 0;
-            let inputs: any = document.getElementsByClassName("teamInput");
-            let playerList = this.players;
-            while (playerList.length > 0) {
-                let player = playerList.shift();
-                pairs[i] = [player];
-                let inputField: any = document.getElementById(player.email);
-                for (let j = 0; j < inputs.length; j++) {
-                    if (inputs[j].id != player.email && inputs[j].value === inputField.value) {
-                        pairs[i].push(playerList.filter(x => x.email === inputs[j].id)[0]);
-                        playerList = playerList.filter(x => x.email != inputs[j].id);
-                    }
-                }
-                i++;
-            }
-            this.pairStudents(pairs, 2, (pairs) => {
-                this.pairs = pairs;
-            })
-        }
+        // if (this.randomGroups) {
+        //     this.pairStudents(null, 2, null, (pairs) => {
+        //         this.pairs = pairs;
+        //     });
+        // } else {
+        //     let pairs: String[][] = [];
+        //     let i = 0;
+        //     let inputs: any = document.getElementsByClassName("teamInput");
+        //     let playerList = this.players;
+        //     while (playerList.length > 0) {
+        //         let player = playerList.shift();
+        //         pairs[i] = [player];
+        //         let inputField: any = document.getElementById(player.email);
+        //         for (let j = 0; j < inputs.length; j++) {
+        //             if (inputs[j].id != player.email && inputs[j].value === inputField.value) {
+        //                 pairs[i].push(playerList.filter(x => x.email === inputs[j].id)[0]);
+        //                 playerList = playerList.filter(x => x.email != inputs[j].id);
+        //             }
+        //         }
+        //         i++;
+        //     }
+        //     this.pairStudents(pairs, 2, null, (pairs) => {
+        //         this.pairs = pairs;
+        //     })
+        // }
     }
 
     /** Function that makes timer count down at the top of the screen. */
@@ -237,8 +247,8 @@ export class SessionComponent implements OnInit {
     }
 
     /** Function that groups students. */
-    pairStudents(groups: String[][], groupSize: Number, receivePairs) {
-        this.socketService.pairStudents(groups, groupSize, pairs => {
+    pairStudents(groups: String[][], groupSize: Number, articles: Articles, receivePairs) {
+        this.socketService.pairStudents(groups, groupSize, articles, pairs => {
             receivePairs(pairs);
         });
     }
