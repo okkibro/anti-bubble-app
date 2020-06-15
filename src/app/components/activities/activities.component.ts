@@ -64,14 +64,19 @@ export class ActivitiesComponent implements OnInit {
   }
 
   naamloosNieuws() {
-    let articles = this.sessionService.getArticles(); // Get articles from database
-    let articleDetails = []; // Store article details in array
-    articles.forEach((data) => {
-      for (let i = 0; i < data.length; i ++) {
-        this.articleImages.push(data[i].image); // Store the image sources in another page
-        articleDetails.push(data[i]);
-      }
-    });
+    this.sessionService.getArticles().subscribe((articles) => { // Get articles from database
+      
+      let articleDetails = []; // Store article details in array
+
+      articles.forEach((data) => {
+        this.articleImages.push(data.image);
+        // for (let i = 0; i < data.length; i ++) {
+        //   this.articleImages.push(data[i].image); // Store the image sources in another page
+        //   articleDetails.push(data[i]);
+        // }
+      });
+    }); 
+
 
     // let articleSpace = document.getElementsByClassName("article")[0];
     // let image = document.createElement("image");

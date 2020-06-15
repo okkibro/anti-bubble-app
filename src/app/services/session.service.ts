@@ -15,10 +15,10 @@ export class SessionService {
     return this.http.post('https://localhost:3000/session/activity', { activity: activity }, { headers: { Authorization: 'Bearer ' + this.cookie.get('mean-token') } });
   }
 
-    /** Function that sends an HTTP get request to obtain the articles for the 'Naamloos Nieuws' activity */
-    public getArticles(): Observable<any> {
-      return this.http.get('https://localhost:3000/session/articles', { headers: { Authorization: 'Bearer ' + this.cookie.get('mean-token') } });
-    }
+  /** Function that sends an HTTP get request to obtain the articles for the 'Naamloos Nieuws' activity */
+  public getArticles(): Observable<any> {
+    return this.http.get('https://localhost:3000/session/articles', { headers: { Authorization: 'Bearer ' + this.cookie.get('mean-token') } });
+  }
 
   /** Function that sends an HTTP patch request that sets the bubbleInit of the logged in user to true. */
   public performedLabyrinth(): Observable<any> {
