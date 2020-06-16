@@ -1,11 +1,8 @@
-import { Component, OnInit, ContentChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { AuthenticationService } from '../../services/authentication.service';
 import { User } from '../../models/user';
-import { Variable } from '@angular/compiler/src/render3/r3_ast';
-import { MatTab } from '@angular/material/tabs';
 import { ShopService } from 'src/app/services/shop.service';
 import { AvatarService } from 'src/app/services/avatar.service';
-import { arrayMax } from 'highcharts';
 import { AvatarDisplayComponent } from '../avatar-display/avatar-display.component';
 
 @Component({

@@ -1,9 +1,8 @@
-import {Component, OnInit} from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {AuthenticationService} from '../../services/authentication.service';
-import {Router} from '@angular/router';
-import {User} from '../../models/user';
-import { Role } from 'src/app/models/role';
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AuthenticationService } from '../../services/authentication.service';
+import { Router } from '@angular/router';
+import { User } from '../../models/user';
 
 @Component({
     selector: 'mean-register',
@@ -16,7 +15,11 @@ export class RegisterComponent implements OnInit {
     registerForm = this.fb.group({
         firstName: ['', Validators.required],
         lastName: ['', Validators.required],
-        email: ['', [Validators.required, Validators.email], this.auth.uniqueEmailValidator()],
+        email: ['', {
+            validators: [Validators.required, Validators.email],
+            asyncValidators: [this.auth.uniqueEmailValidator()],
+            updateOn: 'blur'
+        }],
         role: ['', Validators.required],
         password: ['', Validators.required],
         repeatPassword: ['', Validators.required],
@@ -31,7 +34,7 @@ export class RegisterComponent implements OnInit {
     ngOnInit() { }
 
     // TODO: Add check if register is complete before redirecting
-    // Method to register a new user based on the information filled in on the form. 
+    /** Method to register a new user based on the information filled in on the form. */
     registerUser() { 
         let user = new User();
         user.firstName = this.registerForm.get('firstName').value;

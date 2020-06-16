@@ -1,12 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthenticationService } from '../../services/authentication.service';
 import { SocketIOService } from '../../services/socket-io.service';
-import { FormBuilder, Validators } from "@angular/forms";
+import { FormBuilder } from "@angular/forms";
 import { User } from "../../models/user";
 import { Router } from "@angular/router";
-import { PointInteractionEventObject } from 'highcharts';
 import { DataService } from 'src/app/services/data-exchange.service';
-import { Message } from '@angular/compiler/src/i18n/i18n_ast';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
@@ -19,13 +17,9 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 export class HomeComponent implements OnInit {
     userDetails: User;
     pin: string;
-    isTeacher: boolean = this.authenticationService.isTeacher();
-    joinSessionForm = this.fb.group({
-        sessionCode: ['', Validators.required]
-    });
 
     constructor(
-        private authenticationService: AuthenticationService,
+        private auth: AuthenticationService,
         private socketService: SocketIOService,
         private fb: FormBuilder,
         private router: Router,
@@ -34,7 +28,7 @@ export class HomeComponent implements OnInit {
     ) { }
 
     ngOnInit(): void {
-        this.authenticationService.profile().subscribe(user => {
+        this.auth.profile().subscribe(user => {
             this.userDetails = user;
         })
     }

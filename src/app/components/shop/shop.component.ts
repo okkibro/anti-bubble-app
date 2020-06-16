@@ -1,9 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthenticationService } from '../../services/authentication.service';
-import { Router } from '@angular/router';
 import { Shop } from '../../models/shop';
 import { ShopService } from 'src/app/services/shop.service';
-import { BuiltinType, CompileTemplateMetadata } from '@angular/compiler';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { User } from '../../models/user';
 import { MilestoneUpdatesService } from '../../services/milestone-updates.service'
@@ -22,12 +20,12 @@ export class ShopComponent implements OnInit {
   shopDetails: Shop[];
   filteredShop: Shop[];
 
-  constructor(private authenticationService: AuthenticationService, private shopService : ShopService, private snackBar: MatSnackBar, private milestoneUpdates: MilestoneUpdatesService) { }
+  constructor(private auth: AuthenticationService, private shopService : ShopService, private snackBar: MatSnackBar, private milestoneUpdates: MilestoneUpdatesService) { }
 
   ngOnInit(): void {
     this.shopService.shop("haar").subscribe(shop => {
       this.shopDetails = shop;
-      this.authenticationService.profile().subscribe(user => {
+      this.auth.profile().subscribe(user => {
         this.userDetails = user;
         this.filteredShop = this.filterShop();
       }, (err) => {

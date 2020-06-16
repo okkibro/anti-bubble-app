@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from "@angular/router";
-import { Router } from '@angular/router';
-import { Validators, FormBuilder } from '@angular/forms';
+import { ActivatedRoute, Router } from "@angular/router";
+import { FormBuilder, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { PasswordRecoveryService } from '../../services/password-recovery.service';
 

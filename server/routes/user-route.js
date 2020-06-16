@@ -226,7 +226,7 @@ router.post('/checkEmailTaken', (req, res) => {
             });
         } else {
             return res.status(200).json({
-                emailNotTaken: true
+                emailTaken: false
             });
         }
     });

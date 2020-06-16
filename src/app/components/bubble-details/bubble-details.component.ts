@@ -1,9 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthenticationService } from '../../services/authentication.service';
 import { User } from '../../models/user';
-import * as Highcharts from 'highcharts-angular';
-
-import { analyzeAndValidateNgModules } from '@angular/compiler';
 import * as Highcharts2 from "highcharts";
 
 

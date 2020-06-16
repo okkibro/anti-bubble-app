@@ -1,59 +1,11 @@
-/* the following things define the toolbar*/
-#logoutButton {
-    color: black;
-    background-color: lightskyblue;
-    position: sticky;
-    display: inline-flex;
-    justify-content: center;
-    align-items: center;
-    height: 60px;
-    width: 60px;
-    right: 15px;
-    text-align: center;
-    font-size: 15px;
-    border-radius: 100%;
-}
-
-.navBarAng {
-    position: sticky;
-    top: 0;
-    z-index: 100;
-}
-
-.navBarAng div {
-    display: fixed;
-    flex: 1 1 auto;
-    text-align: center;
-}
-
-.navitems button {
-    padding-left: 30px;
-    padding-right: 30px;
-
-    color: white;
-}
-
-.navBarAng button:hover {
-    color:  #fbe0d0;
-}
-
-.logo {
-    text-decoration: underline;
-    text-decoration-color:  #fbe0d0;
-    position: absolute;
-}
-
-
-/* the following code will describe the rest of the (angular) page */
 body {
-    background-image: url("../..//assets/images/Super_Map/Basic_Buttons/Background.png");
+    background-image: url("../../assets/images/Super_Map/Basic_Buttons/Background.png");
     text-align: center;
     margin: 0;
     padding: 0;
     height: 100%;
     width: 100%;
-    background-size: auto;  
-
+    background-size: auto;
     display: flex;
     justify-content: center;
     align-items: center; 
@@ -66,11 +18,12 @@ body {
     text-align: center;
     align-items: center; 
     background-color: #addadb;
+    margin: 10px 0;
 }
 
 mat-card {
-    background-color: #fffcf3;
-    border: 5px solid #fceca9;
+    background-color: #fff2f3;
+    border: 5px solid #dd6d59;
     position: relative;
 }
 
@@ -80,13 +33,16 @@ mat-card-header {
 
 mat-card button{
     background-color: #addadb;
-    width: 40%;
+}
+
+mat-card a:hover{
+    background-color: #8ab0b1;
 }
 
 mat-card img{
     object-fit: cover; 
     width: 50%; 
-    height: width;
+    height: 50%;
 }
 
 mat-tab-group, mat-tab {
@@ -138,7 +94,7 @@ mat-tab-group, mat-tab {
 .bubbleImage {
     position: absolute;
     top: 10%;
-    left: 0%;
+    left: 0;
     background-color: transparent;
     border: transparent;
     box-shadow: none;
@@ -148,9 +104,7 @@ mat-tab-group, mat-tab {
 /* Apply this id for blue buttons designed by the artists */
 #artisticButtonBlue {
     width: 40%;
-    background: transparent;
-    background-image: url("/assets/images/Super_Map/Basic_Buttons/Button_Blue_Rectangle.png");
-    background-repeat: round;
+    background: transparent url("../../assets/images/Super_Map/Basic_Buttons/Button_Yellow_Rectangle.png") round;
 }
 
 ::ng-deep .style-warning {
@@ -160,4 +114,8 @@ mat-tab-group, mat-tab {
 
 ::ng-deep .style-warning .mat-simple-snackbar-action {
     color: black;
+}
+
+.footer {
+    text-align: center;
 }

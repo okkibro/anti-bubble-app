@@ -1,4 +1,4 @@
-import { Component, OnInit, ContentChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { milestones } from '../../../../constants';
 import { AuthenticationService } from '../../services/authentication.service';
 import { User } from '../../models/user';

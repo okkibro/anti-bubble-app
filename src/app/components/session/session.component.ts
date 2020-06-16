@@ -24,7 +24,7 @@ export class SessionComponent implements OnInit {
     interval;
 
     constructor(
-        private authenticationService: AuthenticationService,
+        private auth: AuthenticationService,
         private socketService: SocketIOService,
         private data: DataService,
         private router: Router,
@@ -43,7 +43,7 @@ export class SessionComponent implements OnInit {
             }
         });
 
-        this.authenticationService.profile().subscribe(user => {
+        this.auth.profile().subscribe(user => {
             this.userDetails = user;
 
             if (this.userDetails.role == "teacher") {

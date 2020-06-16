@@ -1,0 +1,26 @@
+<mat-list fxLayout="column" class="sidenav">
+    <button mat-button [routerLink]="'/home'" (click)="onSidenavClose()">
+        <i class="material-icons">home</i>
+        Home
+    </button>
+    <mat-divider></mat-divider>
+    <button *ngIf="userDetails?.role == 'teacher'" mat-button [routerLink]="'/teacher-overview'" (click)="onSidenavClose()">
+        <i class="material-icons">class</i>
+        Klas Overzicht
+    </button>
+    <mat-divider *ngIf="userDetails?.role == 'teacher'"></mat-divider>
+    <button *ngIf="userDetails?.role == 'student'" mat-button [routerLink]="'/class-overview'" (click)="onSidenavClose()">
+        <i class="material-icons">class</i>
+        Klas Overzicht
+    </button>
+    <mat-divider *ngIf="userDetails?.role == 'student'"></mat-divider>
+    <button mat-button [routerLink]="'/profile'" (click)="onSidenavClose()">
+        <i class="material-icons">person</i>
+        Profiel
+    </button>
+    <mat-divider></mat-divider>
+    <button mat-button (click)="logoutButton()">
+        <i class="material-icons">login</i>
+        Log uit
+    </button>
+</mat-list>
