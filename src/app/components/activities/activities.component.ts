@@ -100,8 +100,8 @@ export class ActivitiesComponent implements OnInit {
   }
 
   receiveTeam() {
-    this.socketService.listenForTeam((team, article) => {
-      console.log(team, article);
+    this.socketService.listenForTeam((team, article, leaders) => {
+      console.log(leaders);
       this.team = team;
       let articleSpace = document.getElementsByClassName("article")[0];
       let image = document.createElement("img");

@@ -44,7 +44,7 @@ export class SessionComponent implements OnInit {
         this.gameStarted = false;
         this.randomGroups = true;
         this.gameData = this.getGameData();
-        
+
         if (this.gameData == undefined) {
 
             // Going to session page but not having joined a session redirects a user back to the home page.
@@ -160,37 +160,43 @@ export class SessionComponent implements OnInit {
         if (this.playerCount == 0) { // teacher wants to start a game without any players in it
             this.snackBar.open('Er zitten nog geen spelers in de sessie', 'X', { duration: 2500, panelClass: ['style-error'], });
         } else {
-            if (this.initGame(this.gameData.game.name)) {
+            if (this.canStart(this.gameData.game.name)) {
                 this.gameStarted = true;
                 this.socketService.startGame();
-    
+                this.initGame(this.gameData.game.name);
                 let time = this.gameData?.duration * 60; // specified time for this activity (in seconds)
                 this.startTimer(time);
             }
         }
     }
 
-    initGame(game: string): Boolean {
+    canStart(game: string): Boolean {
         switch (game) {
-            case "Naamloos Nieuws": 
-            this.sessionService.getArticles().subscribe((articles) => { // Get articles from database
+            case "Naamloos Nieuws":
                 if (this.playerCount < 6) {
                     this.snackBar.open("Er moeten minstens 6 leerlingen meedoen met deze activiteit", "X", { duration: 2500, panelClass: ['style-error'] });
                     return false;
-                } else { 
-                    this.pairStudents(null, 3, articles, (pairs) => {
-                        this.pairs = pairs;
-                    });
+                } else {
                     return true;
                 }
-            });
+        }
+    }
+
+    initGame(game: string) {
+        switch (game) {
+            case "Naamloos Nieuws":
+                this.sessionService.getArticles().subscribe((articles) => { // Get articles from database
+                    this.pairStudents(null, 3, articles, (pairs) => {
+                        this.pairs = pairs;
+                        console.log(pairs);
+                    });
+                });
 
             case "Botsende Bubbels":
                 this.getPairs();
                 break;
             case "Alternatieve Antwoorden": break;
             case "Aanradend Algoritme": break;
-            default: return true;
         }
     }
 

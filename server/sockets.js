@@ -147,6 +147,7 @@ function runIO(io) {
 		socket.on('pair-students', (groups, groupSize, articles) => {
 			let pairs = [];
 			let articleList = [];
+			let leaders = [];
 			let playersInGame = players.getPlayers(socket.id); // Get all the players in the current game
 			if (groups == null) { // Teacher selected create random groups			 
 				playersInGame = shuffle(playersInGame); // Shuffle the player list
@@ -159,8 +160,13 @@ function runIO(io) {
 					articleList[pairsIndex] = [];
 					parts = articles.filter(x => x.articlenr === pairsIndex)
 					for (let a = 0; a < groupSize; a++) {
-						pairs[pairsIndex].push(playersInGame.shift());
-						articleList[pairsIndex].push(parts.shift());
+						let player = playersInGame.shift();
+						pairs[pairsIndex].push(player);
+						let article = parts.shift();
+						if (article.part === 1) {
+							leaders.push(player);
+						}
+						articleList[pairsIndex].push(article);
 					}
 					if (remainderIndex < playersInGame.length % groupSize) {
 						pairs[pairsIndex].push(playersInGame.shift());
@@ -187,7 +193,7 @@ function runIO(io) {
 				for (let j = 0; j < pairs[i].length; j++) {
 					let teamMembers = pairs[i].filter(x => x.email != pairs[i][j].email);
 					let article = articleList[i][j];
-					socket.to(pairs[i][j].playerID).emit('receive-team', teamMembers, article);
+					socket.to(pairs[i][j].playerID).emit('receive-team', teamMembers, article, leaders);
 				}
 			}
 

@@ -100,8 +100,8 @@ export class SocketIOService {
     }
 
     listenForTeam(receiveTeam) {
-        this.socket.on('receive-team', (team, article) => {
-            receiveTeam(team, article);
+        this.socket.on('receive-team', (team, article, leaders) => {
+            receiveTeam(team, article, leaders);
         });
     }
 
