@@ -24,42 +24,43 @@
 }
 
 #buttonHoofddeksel{
-    background-image: url("/assets/images/Super_Map/Shop_UI/Button_hats.png");
+    background-image: url("../../../assets/images/Super_map/Shop_UI/Button_hats.png");
 }
 
 #buttonHaar {
-    background-image: url("/assets/images/Super_Map/Shop_UI/Button_hair.png");
+    background-image: url("../../../assets/images/Super_map/Shop_UI/Button_hair.png");
 }
 
 #buttonBril {
-    background-image: url("/assets/images/Super_Map/Shop_UI/Button_glasses.png");
+    background-image: url("../../../assets/images/Super_map/Shop_UI/Button_glasses.png");
 }
 
+/* Replace with correct image */
 #buttonLichaam {
-    background-image: url("/assets/images/Super_Map/Shop_UI");
+    background-image: url("../../../assets/images/Super_map/Shop_UI/Button_glasses.png");
 }
 
 #buttonShirt {
-    background-image: url("/assets/images/Super_Map/Shop_UI/Button_Shirt.png");
+    background-image: url("../../../assets/images/Super_map/Shop_UI/Button_Shirt.png");
 }
 
 #buttonBroek {
-    background-image: url("/assets/images/Super_Map/Shop_UI/Button_pants.png");
+    background-image: url("../../../assets/images/Super_map/Shop_UI/Button_pants.png");
 }
 
 #buttonSchoenen {
-    background-image: url("/assets/images/Super_Map/Shop_UI/Button_shoes.png");
+    background-image: url("../../../assets/images/Super_map/Shop_UI/Button_shoes.png");
 }
 
+/* Replace with correct image */
 #buttonMedaille {
-    background-image: url("/assets/images/Super_ap/Shop_UI/");
+    background-image: url("../../../assets/images/Super_map/Shop_UI/Button_glasses.png");
 }
 
 .buttons {
     -webkit-text-fill-color: transparent;
-    -webkit-text-stroke: transparent 0.1em;
+    -webkit-text-stroke: 0.1em transparent;
     height:68%;
-    background: transparent;
-    background-repeat: round;
+    background: transparent round;
     color: transparent;
 }

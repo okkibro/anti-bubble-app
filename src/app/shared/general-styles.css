@@ -1,5 +1,5 @@
 body {
-    background-image: url("../../assets/images/Super_Map/Basic_Buttons/Background.png");
+    background-image: url("../../assets/images/Super_map/Basic_Buttons/Background.png");
     text-align: center;
     margin: 0;
     padding: 0;
@@ -104,7 +104,7 @@ mat-tab-group, mat-tab {
 /* Apply this id for blue buttons designed by the artists */
 #artisticButtonBlue {
     width: 40%;
-    background: transparent url("../../assets/images/Super_Map/Basic_Buttons/Button_Yellow_Rectangle.png") round;
+    background: transparent url("../../assets/images/Super_map/Basic_Buttons/Button_Yellow_Rectangle.png") round;
 }
 
 ::ng-deep .style-warning {
