@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { AuthenticationService } from '../../services/authentication.service';
 import { SocketIOService } from 'src/app/services/socket-io.service';
 import { Router } from '@angular/router';
 import { User } from '../../models/user';
 import { SessionService } from 'src/app/services/session.service';
+import { MatRadioButton } from '@angular/material/radio';
 
 @Component({
   selector: 'mean-session-options',
@@ -15,9 +16,16 @@ export class SessionOptionsComponent implements OnInit {
 
   userDetails: User;
 
+  teamOptions: string[] = ['Willekeurig', 'Handmatig'];
+  teamOptionBB: string;
+  teamOptionAA: string;
+
   constructor(private auth: AuthenticationService, private router: Router, private socketService: SocketIOService, private sessionService: SessionService) { }
 
-  ngOnInit(): void {
+  ngOnInit() { 
+    // set the default value for building teams on random
+    this.teamOptionBB = 'Willekeurig';
+    this.teamOptionAA = 'Willekeurig';
   }
 
   // Gets called when teacher presses create session button. gamedata contains the name of the game and time of the slider

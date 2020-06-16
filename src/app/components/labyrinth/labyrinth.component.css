@@ -14,6 +14,14 @@
     padding: 10px;
 }
 
+#stopButton {
+    right: 3%;
+    top: 10%;
+    float: right;
+    width: 50px;
+    position: absolute;
+}
+
 mat-radio-button {
     float: left;
 }

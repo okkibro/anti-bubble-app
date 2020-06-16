@@ -9,6 +9,8 @@
             <p *ngIf="userDetails?.role == 'student'" class="sessionCode">Sessie code: <br><strong>{{pin}}</strong></p>
             <p *ngIf="userDetails?.role == 'teacher'" class="playerCount">Aantal Spelers: <br><strong>{{playerCount}}</strong></p>
             <p *ngIf="userDetails?.role == 'teacher' && gameData?.duration != null" class="timeLeft">Tijd over: <br><strong>{{gameData?.duration}}:00</strong></p>
+<!--This page represents the session page. It has a session pin, with which students can join the activity. It is also the teacher's activity page during a session -->
+<mean-nav-bar></mean-nav-bar>
 
             <div class="containerDiv" fxLayoutGap="10px" fxLayout="column" fxLayoutAlign="space-evenly">
                 <div fxLayout.xs="row" fxLayoutGap="10px" fxLayoutAlign="space-evenly">
@@ -61,6 +63,7 @@
                         <mat-card-content>
                             <table class="submitTable">
 
+<<<<<<< HEAD
                             </table>
                         </mat-card-content>
                     </mat-card>
@@ -73,3 +76,55 @@
         </footer>
     </mat-sidenav-content>
 </mat-sidenav-container>
+=======
+                </mat-card-content>
+            </mat-card>
+            
+            <mat-card fxFlex=80% *ngIf="userDetails?.role == 'teacher' && gameStarted">
+                <mat-card-header class="matCardHeader">
+                    <mat-card-title>{{gameData?.game.name}}</mat-card-title>
+                    <mat-card-subtitle *ngIf="!enableQuestions">Antwoorden</mat-card-subtitle>
+                </mat-card-header>
+
+
+                <mat-card-content *ngIf="gameData?.game.name == 'Naamloos Nieuws'"> <!-- TODO: deze heeft een andere game finished -->
+                    <table class="submitTable"></table>
+                    TODO: maak dit. <br>
+                    <br>
+                    <button mat-flat-button *ngIf= "!gameFinished" (click)="stopGame()" [ngClass]="{'my-custom-theme': true}" color="accent">Stop Activiteit</button>
+                    <button mat-flat-button *ngIf= "gameFinished" (click)="leaveGame()" [ngClass]="{'my-custom-theme': true}" color="accent">Home</button>
+                </mat-card-content>
+
+
+                <mat-card-content *ngIf="gameData?.game.name == 'Botsende Bubbels'">
+                    <mean-answer-form *ngIf="enableQuestions"></mean-answer-form> 
+                    <table class="submitTable"></table>
+                    <br>
+                    <button mat-flat-button *ngIf= "!gameFinished" (click)="stopGame()" [ngClass]="{'my-custom-theme': true}" color="accent">Stop Activiteit</button>
+                    <button mat-flat-button *ngIf= "gameFinished" (click)="leaveGame()" [ngClass]="{'my-custom-theme': true}" color="accent">Home</button>
+                </mat-card-content>
+
+
+                <mat-card-content *ngIf="gameData?.game.name == 'Alternatieve Antwoorden'">
+                    <mean-answer-form *ngIf="enableQuestions"></mean-answer-form> 
+                    <table class="submitTable"></table>
+                    <br>
+                    <button mat-flat-button *ngIf= "!gameFinished" (click)="stopGame()" [ngClass]="{'my-custom-theme': true}" color="accent">Stop Activiteit</button>
+                    <button mat-flat-button *ngIf= "gameFinished" (click)="leaveGame()" [ngClass]="{'my-custom-theme': true}" color="accent">Home</button>
+                </mat-card-content>
+
+
+                <mat-card-content *ngIf="gameData?.game.name == 'Aanradend Algoritme'"> <!-- TODO: deze heeft een andere game finished -->
+                    TODO: Video/poppetje laten zien of iets. <br>
+                    <button mat-flat-button *ngIf= "!gameFinished" (click)="stopGame()" [ngClass]="{'my-custom-theme': true}" color="accent">Stop Activiteit</button>
+                    <button mat-flat-button *ngIf= "gameFinished" (click)="leaveGame()" [ngClass]="{'my-custom-theme': true}" color="accent">Home</button>
+                </mat-card-content>
+            </mat-card>
+        </div>
+    </div>
+
+</body>
+<footer>
+    <p> &copy; Utrecht University (ICS)</p>
+</footer>
+>>>>>>> origin/Session-Activities

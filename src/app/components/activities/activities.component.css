@@ -1,0 +1,23 @@
+#receiveQuestion {
+    font-weight: bold;
+    font-size: 25px;
+    margin: 5px;
+}
+
+#teammates {
+    margin-top: 0px;
+    display: inline-block;
+}
+
+ul {
+    padding-left: 10px;
+}
+
+li {
+    position: inline-block; 
+};
+
+#article {
+    width: 250px;
+    height: 250px;
+}

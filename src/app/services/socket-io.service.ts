@@ -29,7 +29,11 @@ export class SocketIOService {
         });        
     }
 
-    /**  Method to join a live session. */
+    /** Method that adds the given user to the session with the given pin. 
+     *  join gets called at the end and returns whether the join was a succes or not.
+     *  backToHome gets called when the host disconnects.
+     *  redirect gets called when the game starts.
+     */
     joinSession(pin, user, join, backToHome, redirect) {
         this.hostDisconnected = false;
         this.socket.emit('player-join', {pin: pin, player: user});
@@ -59,7 +63,10 @@ export class SocketIOService {
         this.socket.emit('message', message);
     }
 
-    /**  Method to check for updates on the playerlist. */
+    /** Method that listens for updates on players joining and leaving.
+     *  addPlayer gets called when a player joins.
+     *  removePlayer gets called when a player leaves.
+     */
     listenForUpdates(addPlayer, removePlayer) {
         this.socket.on('update-players', player => {
             addPlayer(player);
@@ -69,7 +76,7 @@ export class SocketIOService {
         });
     }
 
-    /**  Method to leave the session. */
+    /** Method that removes the student from a session. */
     leaveSession() {
         this.socket.emit('leave');
         this.socket.on('remove-listeners', () => {
@@ -78,40 +85,59 @@ export class SocketIOService {
         });
     }
 
-    /**  Method to send a question. */
+    /** Method that sends a question to all students in the session. */
     sendQuestion(question) {
         this.socket.emit('send-question', question);
     }
 
-    /**  Method to listen for incomming questions. */
+    /** Method that listens for incoming questions.
+     *  receiveQuestion gets called when a question is received from the teacher.
+     */
     listenForQuestion(receiveQuestion) {
         this.socket.on('receive-question', (question) => {
             receiveQuestion(question);
         });
     }
 
-    /**  Method to submit an answer of a student. */
+    listenForTeam(receiveTeam) {
+        this.socket.on('receive-team', (team, article, leaders) => {
+            receiveTeam(team, article, leaders);
+        });
+    }
+
+    /** Function that submits an answer to the teacher. */
     studentSubmit(data) {
         this.socket.emit('submit', data);
     }
 
-    /**  Method to listen for submits. */
+    /** Function that listens for incoming answer submits.
+     *  receiveSubmit gets called when an answer from a student is received.
+     */
     listenForSubmits(receiveSubmit) {
         this.socket.on('receive-submit', data => {
             receiveSubmit(data);
         });
     }
 
-    /**  Method to start the game */
+    /** Function that starts the game. Making it unable for new students to join. */
     startGame() {
         this.socket.emit('start-game');
     }
 
-    /**  Method to pair students so they can chat given an groupsize. */
-    pairStudents(chat, groupSize, receivePairs) {
-        this.socket.emit('pair-students', chat, groupSize);
-        this.socket.on('send-pairs', (pairs) => {
-            receivePairs(pairs);
+    /** Function that pairs students in groups of the given groupsize.
+     *  receivePairs is called when the ser has created the teams and sent them back.
+     */
+    pairStudents(groups, groupSize, articles, receivePairs) {
+        this.socket.emit('pair-students', groups, groupSize, articles);
+        this.socket.on('send-pairs', (pairs, leaders) => {
+            console.log(2, leaders);
+            receivePairs(pairs, leaders);
         });
+    }
+
+    /** Function that removes all listeners from the socket. */
+    removeListeners() {
+        this.socket.removeAllListeners();
+        this.removedListeners;
     }
 }

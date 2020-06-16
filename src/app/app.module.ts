@@ -11,6 +11,9 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 // Core modules.
 import { MatRadioModule } from '@angular/material/radio';
+import {MatSelectModule} from '@angular/material/select';
+
+// core modules
 import { CustomMaterialModule } from './shared/material.module';
 import { AppRoutingModule } from './app-routing.module';
 // Component modules.
@@ -88,6 +91,7 @@ import { SidenavComponent } from './components/sidenav/sidenav.component';
         MatRadioModule,
         MatSidenavModule,
         MatListModule,
+        MatSelectModule,
     ],
     providers: [AuthGuardService, CookieService, SocketIOService],
     bootstrap: [AppComponent],

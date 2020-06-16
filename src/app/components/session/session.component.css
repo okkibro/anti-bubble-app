@@ -25,6 +25,10 @@ body {
     z-index: 100;
 }
 
+.submitTable {
+    margin: 20px;
+}
+
 #teacherPin {
     font-size: 66px;
 }

@@ -21,7 +21,8 @@ function runIO(io) {
 
 		socket.on('player-join', (params) => {
 			let gameFound = false;
-			// Look for a game with the entered pin.
+
+			// Look for a game with the entered pin
 			for (let i = 0; i < games.games.length; i++) {
 				if (params.pin == games.games[i].pin && games.games[i].gameLive == false) {
 					let hostId = games.games[i].hostID;
@@ -75,8 +76,7 @@ function runIO(io) {
 					let game = games.getGame(hostId);// Gets game data with hostId.
 					let pin = game.pin;// Gets the pin of the game.
 
-					players.removePlayer(socket.id);// Removes player from players class.
-					//let playersInGame = players.getPlayers(hostId);//Gets remaining players in game
+					players.removePlayer(socket.id);//Removes player from players class
 
 					io.to(hostId).emit('remove-player', player);// Sends data to host to update screen.
 					socket.leave(pin); // Player is leaving the room.
@@ -112,8 +112,7 @@ function runIO(io) {
 					let game = games.getGame(hostId); // Gets game data with hostId.
 					let pin = game.pin; // Gets the pin of the game.
 
-					players.removePlayer(socket.id); // Removes player from players class.
-					//let playersInGame = players.getPlayers(hostId);//Gets remaining players in game
+					players.removePlayer(socket.id);//Removes player from players class
 
 					io.to(hostId).emit('remove-player', player); // Sends data to host to update screen.
 					socket.leave(pin); // Player is leaving the room.
@@ -134,56 +133,83 @@ function runIO(io) {
 
 		socket.on('start-game', () => {
 			let game = games.getGame(socket.id);
-			// let gameName = game.gameData.game.name;
 			game.gameLive = true;
 			io.in(game.pin).emit('game-start-redirect');
 		});
 
 		// Listener that will divide students into groups.
-		socket.on('pair-students', (chat, groupSize) => {
-			let playersInGame = players.getPlayers(socket.id); // Get all the players in the current game.
-			playersInGame = shuffle(playersInGame); // Shuffle the player list.
-			// Group players into groups of the given size.
+		socket.on('pair-students', (groups, groupSize, articles) => {
 			let pairs = [];
-			let pairsIndex = 0;
-			let remainderIndex = 0;
+			let articleList = [];
+			let leaders = [];
+			let playersInGame = players.getPlayers(socket.id); // Get all the players in the current game.
+			if (groups == null) { // Teacher selected create random groups.		 
+				playersInGame = shuffle(playersInGame); // Shuffle the player list.
+				// Group players into groups of the given size.
+				let pairsIndex = 0;
+				let remainderIndex = 0;
 
-			while (playersInGame.length > 0) {
-				pairs[pairsIndex] = [];
-				for (let a = 0; a < groupSize; a++) {
-					pairs[pairsIndex].push(playersInGame.shift());
+				while (playersInGame.length > 0) {
+					pairs[pairsIndex] = [];
+					articleList[pairsIndex] = [];
+					parts = articles.filter(x => x.articlenr === pairsIndex)
+					for (let a = 0; a < groupSize; a++) {
+						let player = playersInGame.shift();
+						pairs[pairsIndex].push(player);
+						let article = parts.shift();
+						if (article.part === 1) {
+							leaders.push(player);
+						}
+						articleList[pairsIndex].push(article);
+					}
+					if (remainderIndex < playersInGame.length % groupSize) {
+						pairs[pairsIndex].push(playersInGame.shift());
+						articleList[pairsIndex].push(parts.shift());
+						remainderIndex++;
+					}
+					pairsIndex++;
 				}
-				if (remainderIndex < playersInGame.length % groupSize) {
-					pairs[pairsIndex].push(playersInGame.shift());
-					remainderIndex++;
+			} else { // Teacher manually created groups
+
+				for (let i = 0; i < groups.length; i++) {
+					pairs[i] = [];
+					for (let j = 0; j < groups[i].length; j++) {
+						pairs[i].push(playersInGame.find(x => {
+							return x.email == groups[i][j].email
+						}));
+					}
 				}
-				pairsIndex++;
 			}
 
-			if (chat) {
-				//todo: make chat
-			}
+			console.log(leaders);
+			socket.emit('send-pairs', pairs, leaders);
 
-			socket.emit('send-pairs', pairs);
+			for (let i = 0; i < pairs.length; i++) {
+				for (let j = 0; j < pairs[i].length; j++) {
+					let teamMembers = pairs[i].filter(x => x.email != pairs[i][j].email);
+					let article = articleList[i][j];
+					socket.to(pairs[i][j].playerID).emit('receive-team', teamMembers, article, leaders);
+				}
+			}
 
 			function shuffle(array) {
 				var currentIndex = array.length, temporaryValue, randomIndex;
-			  
+
 				// While there remain elements to shuffle...
 				while (0 !== currentIndex) {
-			  
-				  // Pick a remaining element...
-				  randomIndex = Math.floor(Math.random() * currentIndex);
-				  currentIndex -= 1;
-			  
-				  // And swap it with the current element.
-				  temporaryValue = array[currentIndex];
-				  array[currentIndex] = array[randomIndex];
-				  array[randomIndex] = temporaryValue;
+
+					// Pick a remaining element...
+					randomIndex = Math.floor(Math.random() * currentIndex);
+					currentIndex -= 1;
+
+					// And swap it with the current element.
+					temporaryValue = array[currentIndex];
+					array[currentIndex] = array[randomIndex];
+					array[randomIndex] = temporaryValue;
 				}
-			  
+
 				return array;
-			  }
+			}
 		});
 	});
 }

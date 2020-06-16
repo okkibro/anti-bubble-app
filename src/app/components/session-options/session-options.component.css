@@ -25,6 +25,11 @@ mat-panel-title {
     width: 75%;
 }
 
+.teamOptionButton {
+    display: block;
+    padding: 5px;
+}
+
 ::ng-deep .mat-accent .mat-slider-thumb {
     background-color: red;
 } 

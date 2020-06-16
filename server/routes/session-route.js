@@ -5,6 +5,7 @@ const Activities = mongoose.model('Activities');
 const User = mongoose.model('User');
 const sanitize = require('mongo-sanitize');
 const Questions = mongoose.model('Questions');
+const Articles = mongoose.model('Articles');
 
 const jwt = require('express-jwt');
 const auth = jwt({
@@ -12,34 +13,55 @@ const auth = jwt({
     userProperty: 'payload'
 });
 
-/** Post method to return a given activity from the database. */
-router.post('/activity', auth, (req, res) => {
-    User.findById(req.payload._id, (err, user) => {
-        if (user.role == "student") {
+
+
+/** Get method to get the articles from the database */
+router.get('/articles', auth, (req, res) => {
+    User.findById(req.payload._id, (err, user) => { // Get the logged in user.
+        if (/*user.role == "teacher"*/false) {
             res.status(401).json({
-                message: "UnauthorizedError: Not a teacher"
+                message: "UnauthorizedError: Not a student" // Only students can send requests to get articles.
             });
         } else {
-            Activities.findOne({ name: req.body.activity }, (err, activity) => {
-                res.status(200).json(activity);
+            Articles.find({}, (err, articles) => {
+                res.status(200).json(articles); // Send all article data from the database.
+            });
+        }
+    });
+
+});
+
+/** Post method to return a given activity from the database. */
+router.post('/activity', auth, (req, res) => {
+    User.findById(req.payload._id, (err, user) => { // Get the logged in user.
+        if (user.role == "student") {
+            res.status(401).json({
+                message: "UnauthorizedError: Not a teacher" // Only teachers can send requests to get activities.
+            });
+        } else {
+            Activities.findOne({ name: req.body.activity }, (err, activity) => { // Find activity in database based on the name sent in the body.
+                res.status(200).json(activity); // Send the activity object returned by the findOne function.
             });
         }
     });
 });
 
 /** Patch method to change the bubbleInit value to true if a user has completed the initial maze. */
-router.patch('/updateBubbleInit', (req, res) => {
-    User.findOne({ email: sanitize(req.body.email) }).then(user => {
+router.patch('/updateBubbleInit', auth, (req, res) => {
+    User.findById(req.payload._id).then(user => { // Get the logged in user.
+
+        // Set bubbleInit to true and save the schema.
         user.bubbleInit = true;
         user.save();
     });
     res.json({ succes: true });
 });
 
+/** Post method to get the array of questions shuffled, based on the part given in the body of the request. */
 router.post('/questions', auth, (req, res) => {
-    Questions.find({ part: req.body.part }, (err, questions) => {
-        let result = shuffle(questions);
-        res.status(200).json(questions);
+    Questions.find({ part: req.body.part }, (err, questions) => { // Get all questions in normal order.
+        let result = shuffle(questions); // Shuffle the questions.
+        res.status(200).json(questions); // Send the questions to front-end.
 
         function shuffle(array) {
             var currentIndex = array.length, temporaryValue, randomIndex;
@@ -62,16 +84,21 @@ router.post('/questions', auth, (req, res) => {
     });
 });
 
+/** Post method to save answers to the logged in user. */
 router.post('/labyrinthAnswers', auth, (req, res) => {
-    User.findById(req.payload._id, (err, user) => {
+    User.findById(req.payload._id, (err, user) => { // Get the logged in user.
+
+        // Loop over all questions and save corresponding answers to result based on the index of the question.
         let result = [];
         for (let i = 1; i < req.body.answers.length; i++) {
             let index = req.body.answers[i].question.id;
             result[index] = req.body.answers[i].answer;
         }
+
+        // Save the result.
         user.labyrinthAnswers = result;
         user.save(() => {
-            res.status(200);
+            res.status(200).json({ succes: true });
         });
     });
 });

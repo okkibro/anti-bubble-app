@@ -116,6 +116,7 @@ router.post('/passwordrecovery', async (req, res) => {
             console.log(error.message);
         }
         });
+        
         // Send email with link and token in the link.
         nodemailer.createTestAccount((error, account) => {
             if (error) {

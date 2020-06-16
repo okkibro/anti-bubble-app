@@ -19,6 +19,8 @@ export class PasswordResetComponent implements OnInit {
   constructor(private route: ActivatedRoute, private router: Router, private fb: FormBuilder, private snackBar: MatSnackBar, private passwordRecoveryService: PasswordRecoveryService) { }
 
   ngOnInit(): void {
+
+    // Check if token is correct, otherwise navigate back to login.
     this.passwordRecoveryService.getResetPage(this.route.snapshot.paramMap.get("token")).subscribe((data) => {
       if (data.correct) {
       } else {
@@ -30,8 +32,12 @@ export class PasswordResetComponent implements OnInit {
   //TODO: VALIDATE PASSWORDS IN FRONTEND.
   /** Method to reset your password based on th filled in passwords in the form. */
   resetPassword() {
+
+    // Get password and confirm from the form.
     let password = this.passwordResetForm.get('password').value;
     let confirmPassword = this.passwordResetForm.get('confirmPassword').value;
+
+    // Send password and confirm to back-end which will return whether it was a succes and the message to show the user.
     this.passwordRecoveryService.postNewPassword(this.route.snapshot.paramMap.get("token"), password, confirmPassword).subscribe(data => {
       if (!data.succes) {
         this.snackBar.open(data.message, 'X', {duration: 2500, panelClass: ['style-error'], });
@@ -39,7 +45,6 @@ export class PasswordResetComponent implements OnInit {
         this.snackBar.open(data.message, 'X', {duration: 2500, panelClass: ['style-succes'], }).afterDismissed().subscribe(() => {
           this.router.navigate(['/login']);
         });
-        
       }
     });
   }

@@ -4,9 +4,9 @@
     </mat-sidenav>
     <mat-sidenav-content>
         <mean-toolbar (sidenavToggle)="sidenav.toggle()"></mean-toolbar>
+<!-- CHECK IF SOME HTML IS REDUNDENT -->
         <body>
             <div class="containerDiv" fxLayoutGap="10px" fxLayout="column" fxLayoutAlign="space-evenly">
-
                 <div fxLayout.xs="column" fxLayoutGap="10px" fxLayoutAlign="space-evenly">
                     <mat-card fxFlex="50%">
                         <mat-card-header>
@@ -33,98 +33,131 @@
                             </table>
                         </mat-card-content>
                     </mat-card>
-
                     <mat-card fxFlex="50%">
                         <mat-card-header>
                             <mat-card-title>Avatar</mat-card-title>
                         </mat-card-header><br>
                         <mat-card-content>
                             <mean-avatar-display class="avatarSize"></mean-avatar-display>
-                            <button mat-flat-button [routerLink]="'/avatar'" [ngClass]="{'my-custom-theme': true}" color="primary">Avatar aanpassen</button>
+                            <button mat-flat-button [routerLink]="'/avatar'" [ngClass]="{'my-custom-theme': true}"
+                                color="primary">Avatar aanpassen</button>
                         </mat-card-content>
                     </mat-card>
                 </div>
-
-                <div fxLayout.xs="column" fxLayoutGap="10px" fxLayoutAlign="space-evenly" class="my-custom-theme" *ngIf="userDetails?.role == 'student'">
+                <div fxLayout.xs="row" fxLayoutGap="0.5%" fxLayoutAlign="space-evenly">
                     <mat-card fxFlex="50%">
                         <mat-card-header>
-                            <mat-card-title>Mijn Bubbel</mat-card-title>
-                        </mat-card-header><br>
-
-                        <mat-card-content>
-                            <mean-bubble-visualisation></mean-bubble-visualisation>
-                            <button mat-flat-button [routerLink]="'/bubble-details'" [ngClass]="{'my-custom-theme': true}" color="accent">Meer details</button>
-                        </mat-card-content>
-                    </mat-card>
-
-                    <mat-card fxFlex="50%">
-                        <mat-card-header>
-                            <mat-card-title>Badges</mat-card-title>
-                            <mat-card-subtitle>Badge met de meeste voortgang</mat-card-subtitle>
+                            <mat-card-title>Profiel</mat-card-title>
                         </mat-card-header>
                         <mat-card-content>
                             <table class="UItable">
-                                <tr *ngIf="milestoneShown.name !='Gefeliciteerd'">
-                                    <td>
-                                        <strong>{{milestoneShown.name}}</strong><br>
-                                        {{milestoneShown.description}}<br>
-                                        Voortgang: {{userDetails?.milestones[milestoneShown.index]}}/{{milestoneShown.maxValue}}
-                                    </td>
+                                <tr>
+                                    <th>Gebruikersnaam</th>
+                                    <td>{{ userDetails?.firstName }}</td>
                                 </tr>
-                            </table><br>
-                            <button mat-button [routerLink]="'/badges'">Alle badges</button>
+                                <tr>
+                                    <th>Volledige naam</th>
+                                    <td>{{ userDetails?.firstName }} {{ userDetails?.lastName }}</td>
+                                </tr>
+                                <tr>
+                                    <th>E-mail adres</th>
+                                    <td>{{ userDetails?.email }}</td>
+                                </tr>
+                                <tr *ngIf="userDetails?.role == 'student'">
+                                    <th>Klas</th>
+                                    <td>{{ userClassTitle }}</td>
+                                </tr>
+                            </table>
                         </mat-card-content>
                     </mat-card>
-                </div>
 
-                <mat-card fxLayout.xs="column" fxLayoutAlign="space-evenly center">
-                    <mat-accordion>
-                        <mat-expansion-panel>
-                            <mat-expansion-panel-header>
-                                <mat-panel-title>
-                                    Wachtwoord Aanpassen
-                                </mat-panel-title>
-                                <mat-panel-description>
-                                    Vul je oude en nieuwe wachtwoord in
-                                </mat-panel-description>
-                            </mat-expansion-panel-header>
-                            <form name="changePasswordForm" [formGroup]="changePasswordForm" (ngSubmit)="changePassword()">
-                                <table class="change-password-table">
-                                    <tr>
-                                        <mat-form-field>
-                                            <mat-label>Oude wachtwoord</mat-label>
-                                            <input matInput type="password" formControlName="oldPassword">
-                                            <mat-error *ngIf="changePasswordForm.get('oldPassword').hasError('required')">
-                                                Wachtwoord is <strong>verplicht</strong>
-                                            </mat-error>
-                                        </mat-form-field>
+                    <div fxLayout.xs="column" fxLayoutGap="10px" fxLayoutAlign="space-evenly" class="my-custom-theme"
+                        *ngIf="userDetails?.role == 'student'">
+                        <mat-card fxFlex="50%">
+                            <mat-card-header>
+                                <mat-card-title>Mijn Bubbel</mat-card-title>
+                            </mat-card-header><br>
+
+                            <mat-card-content>
+                                <mean-bubble-visualisation></mean-bubble-visualisation>
+                                <button mat-flat-button [routerLink]="'/bubble-details'"
+                                    [ngClass]="{'my-custom-theme': true}" color="accent">Meer details</button>
+                            </mat-card-content>
+                        </mat-card>
+
+                        <mat-card fxFlex="50%">
+                            <mat-card-header>
+                                <mat-card-title>Badges</mat-card-title>
+                                <mat-card-subtitle>Badge met de meeste voortgang</mat-card-subtitle>
+                            </mat-card-header>
+                            <mat-card-content>
+                                <table class="UItable">
+                                    <tr *ngIf="milestoneShown.name !='Gefeliciteerd'">
+                                        <td>
+                                            <strong>{{milestoneShown.name}}</strong><br>
+                                            {{milestoneShown.description}}<br>
+                                            Voortgang:
+                                            {{userDetails?.milestones[milestoneShown.index]}}/{{milestoneShown.maxValue}}
+                                        </td>
                                     </tr>
-                                    <tr>
-                                        <mat-form-field>
-                                            <mat-label>Nieuw wachtwoord</mat-label>
-                                            <input matInput type="password" formControlName="newPassword">
-                                            <mat-error *ngIf="changePasswordForm.get('oldPassword').hasError('required')">
-                                                Wachtwoord is <strong>verplicht</strong>
-                                            </mat-error>
-                                        </mat-form-field>
-                                    </tr>
-                                    <tr>
-                                        <mat-form-field>
-                                            <mat-label>Herhaal nieuw wachtwoord</mat-label>
-                                            <input matInput type="password" formControlName="repeatPassword">
-                                            <mat-error
-                                                *ngIf="changePasswordForm.get('repeatPassword').hasError('noPasswordMatch')">
-                                                Wachtwoorden komen niet overeen
-                                            </mat-error>
-                                        </mat-form-field>
-                                    </tr>
-                                </table>
-                                <button mat-raised-button type="submit" [disabled]="!changePasswordForm.valid" color="primary">Aanpassen</button>
-                            </form>
-                        </mat-expansion-panel>
-                    </mat-accordion>
-                </mat-card>
-            </div>
+                                </table><br>
+                                <button mat-button [routerLink]="'/badges'">Alle badges</button>
+                            </mat-card-content>
+                        </mat-card>
+                    </div>
+
+                    <mat-card fxLayout.xs="column" fxLayoutAlign="space-evenly center">
+                        <mat-accordion>
+                            <mat-expansion-panel>
+                                <mat-expansion-panel-header>
+                                    <mat-panel-title>
+                                        Wachtwoord Aanpassen
+                                    </mat-panel-title>
+                                    <mat-panel-description>
+                                        Vul je oude en nieuwe wachtwoord in
+                                    </mat-panel-description>
+                                </mat-expansion-panel-header>
+                                <form name="changePasswordForm" [formGroup]="changePasswordForm"
+                                    (ngSubmit)="changePassword()">
+                                    <table class="change-password-table">
+                                        <tr>
+                                            <mat-form-field>
+                                                <mat-label>Oude wachtwoord</mat-label>
+                                                <input matInput type="password" formControlName="oldPassword">
+                                                <mat-error
+                                                    *ngIf="changePasswordForm.get('oldPassword').hasError('required')">
+                                                    Wachtwoord is <strong>verplicht</strong>
+                                                </mat-error>
+                                            </mat-form-field>
+                                        </tr>
+                                        <tr>
+                                            <mat-form-field>
+                                                <mat-label>Nieuw wachtwoord</mat-label>
+                                                <input matInput type="password" formControlName="newPassword">
+                                                <mat-error
+                                                    *ngIf="changePasswordForm.get('oldPassword').hasError('required')">
+                                                    Wachtwoord is <strong>verplicht</strong>
+                                                </mat-error>
+                                            </mat-form-field>
+                                        </tr>
+                                        <tr>
+                                            <mat-form-field>
+                                                <mat-label>Herhaal nieuw wachtwoord</mat-label>
+                                                <input matInput type="password" formControlName="repeatPassword">
+                                                <mat-error
+                                                    *ngIf="changePasswordForm.get('repeatPassword').hasError('noPasswordMatch')">
+                                                    Wachtwoorden komen niet overeen
+                                                </mat-error>
+                                            </mat-form-field>
+                                        </tr>
+                                    </table>
+                                    <button mat-raised-button type="submit" [disabled]="!changePasswordForm.valid"
+                                        color="primary">Aanpassen</button>
+                                </form>
+                            </mat-expansion-panel>
+                        </mat-accordion>
+                    </mat-card>
+                </div>
         </body>
         <footer class="footer">
             <p> &copy; Utrecht University (ICS)</p>

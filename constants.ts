@@ -54,3 +54,8 @@ export const milestones = [
         description: "75% van al je trofeeën behaald"
     }
 ]
+
+export function beforeUnload(e:any) {
+    e.returnValue = "Weet je zeker dat je de sessie wilt verlaten?";
+    return "Weet je zeker dat je de sessie wilt verlaten?";
+}

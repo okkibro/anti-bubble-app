@@ -22,7 +22,9 @@ export class PasswordRecoveryComponent implements OnInit {
   /** Method to send an email to the user to reset their password. */
   sendEmail() {
     console.log("sending email...");
-    let email = this.passwordRecoveryForm.get('email').value;
+    let email = this.passwordRecoveryForm.get('email').value; // Get email from the input field.
+
+    // Send email, data returns whether the action was a succes and a message to show to the user.
     this.passwordRecoveryService.sendEmail(email).subscribe(data => {
       if (!data.succes){
         this.snackBar.open(data.message, 'X' , { duration: 2500, panelClass: ['style-error'] });
