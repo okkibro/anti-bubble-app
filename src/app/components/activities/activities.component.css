@@ -16,3 +16,8 @@ ul {
 li {
     position: inline-block; 
 };
+
+#article {
+    width: 250px;
+    height: 250px;
+}

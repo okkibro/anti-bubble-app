@@ -10,22 +10,30 @@
                 </mat-card-header>
 
                 <mat-card-content *ngIf="gameData?.game.name == 'Naamloos Nieuws'">
-                    {{gameData?.game.description}}   
-                     <div class="article"></div>  
+                    {{gameData?.game.description}}
+                    <div class="article"></div>
+                    <mat-form-field *ngIf="!isLeader">
+                        <mat-label>Teams</mat-label>
+                        <mat-select [(value)]="selected">
+                            <mat-option *ngFor="let leader of leaders" value="{{leader.email}}">{{leader.name}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                    <button mat-flat-button [disabled]="selected == undefined" *ngIf="!isLeader">Verstuur</button>
                 </mat-card-content>
 
                 <mat-card-content *ngIf="gameData?.game.name == 'Botsende Bubbels'">
                     {{gameData?.game.description}}<br>
                     <p *ngIf="team != undefined && team.length != 0"> Je zit in een team met:</p>
-                    
+
                     <div id="teammates">
                         <ul>
                             <li *ngFor="let teamMember of team">
-                             {{teamMember.name}}
+                                {{teamMember.name}}
                             </li>
                         </ul>
-                    </div>    
-             
+                    </div>
+
                     <p><i>Wacht op de vraag van de docent:</i></p>
                     <p id="receiveQuestion"></p>
                     <mean-answer-form *ngIf="enableAnswer"></mean-answer-form>
@@ -35,7 +43,7 @@
                     {{gameData?.game.description}}<br>
                     <p><i>Wacht op de vraag van de docent:</i></p>
                     <p id="receiveQuestion"></p>
-                            <mean-answer-form *ngIf="enableAnswer"></mean-answer-form>
+                    <mean-answer-form *ngIf="enableAnswer"></mean-answer-form>
                 </mat-card-content>
 
                 <mat-card-content *ngIf="gameData?.game.name == 'Aanradend Algoritme'">

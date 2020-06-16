@@ -24,6 +24,9 @@ export class ActivitiesComponent implements OnInit {
   enableAnswer: boolean = false;
   team;
   articleImages = [];
+  leaders;
+  selected;
+  isLeader: Boolean = true;
 
   constructor(
     private socketService: SocketIOService,
@@ -36,10 +39,6 @@ export class ActivitiesComponent implements OnInit {
 
   ngOnInit(): void {
     this.gameData = this.getGameData();
-
-    this.auth.profile().subscribe(user => {
-      this.userDetails = user;
-    });
 
     this.data.currentMessage.subscribe(message => {
       if (message) {
@@ -101,7 +100,13 @@ export class ActivitiesComponent implements OnInit {
 
   receiveTeam() {
     this.socketService.listenForTeam((team, article, leaders) => {
-      console.log(leaders);
+      this.leaders = leaders;
+      this.auth.profile().subscribe(user => {
+        this.userDetails = user;
+        if (leaders.find(x => x.email == this.userDetails.email) == undefined) {
+          this.isLeader = false;
+        }
+      });
       this.team = team;
       let articleSpace = document.getElementsByClassName("article")[0];
       let image = document.createElement("img");

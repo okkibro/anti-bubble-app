@@ -173,7 +173,7 @@ export class SessionComponent implements OnInit {
     canStart(game: string): Boolean {
         switch (game) {
             case "Naamloos Nieuws":
-                if (this.playerCount < 6) {
+                if (this.playerCount < 1) {
                     this.snackBar.open("Er moeten minstens 6 leerlingen meedoen met deze activiteit", "X", { duration: 2500, panelClass: ['style-error'] });
                     return false;
                 } else {

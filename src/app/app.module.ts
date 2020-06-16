@@ -11,6 +11,7 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { FormsModule } from "@angular/forms";
 import { MatRadioModule } from '@angular/material/radio';
+import {MatSelectModule} from '@angular/material/select';
 
 // core modules
 import { CustomMaterialModule } from './shared/material.module';
@@ -87,6 +88,7 @@ import { AnswerFormComponent } from './components/answer-form/answer-form.compon
         MatProgressBarModule,
         FormsModule,
         MatRadioModule,
+        MatSelectModule,
     ],
     providers: [AuthGuardService, CookieService, SocketIOService],
     bootstrap: [AppComponent],
