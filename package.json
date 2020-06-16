@@ -1,7 +1,7 @@
 {
-  "name": "mean-template",
-  "version": "2.0.0",
-  "description": "A MEAN Stack (Mongo, Express, Angular, Node) simple application template",
+  "name": "anti-bubble app",
+  "version": "1.0.0",
+  "description": "A MEAN stack application that helps students learn about filter bubbles",
   "main": "index.js",
   "scripts": {
     "client": "ng serve",
@@ -11,23 +11,19 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/agonxgashi/MEAN-template.git"
+    "url": "git+https://git.science.uu.nl/breaking-bubbles/anti-bubble-app"
   },
   "keywords": [
     "mean",
-    "template",
     "angular",
     "node",
     "express",
     "simple",
-    "github"
+    "git"
   ],
-  "author": "Agon <agonxgashi@gmail.com>",
+  "author": "Team A: Anti-Bubble",
   "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/agonxgashi/MEAN-template/issues"
-  },
-  "homepage": "https://github.com/agonxgashi/MEAN-template#readme",
+  "homepage": "https://git.science.uu.nl/breaking-bubbles/anti-bubble-app/-/blob/master/README.md",
   "dependencies": {
     "@angular/animations": "^9.0.5",
     "@angular/cdk": "^9.1.1",
@@ -62,7 +58,6 @@
     "passport": "^0.4.1",
     "passport-local": "^1.0.0",
     "path": "^0.12.7",
-    "phaser": "^3.22.0",
     "rate-limiter-flexible": "^2.0.0",
     "rxjs": "~6.5.4",
     "socket.io": "^2.3.0",
