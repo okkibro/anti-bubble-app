@@ -61,17 +61,6 @@
 
                     <mat-card fxFlex=80% *ngIf="userDetails?.role == 'teacher' && gameStarted">
                         <mat-card-header class="matCardHeader">
-                            <mat-card-title>Antwoorden</mat-card-title>
-                        </mat-card-header>
-                        <mat-card-content>
-                            <table class="submitTable">
-
-                            </table>
-                        </mat-card-content>
-                    </mat-card>
-
-                    <mat-card fxFlex=80% *ngIf="userDetails?.role == 'teacher' && gameStarted">
-                        <mat-card-header class="matCardHeader">
                             <mat-card-title>{{gameData?.game.name}}</mat-card-title>
                             <mat-card-subtitle *ngIf="!enableQuestions">Antwoorden</mat-card-subtitle>
                         </mat-card-header>
