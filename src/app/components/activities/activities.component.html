@@ -1,5 +1,10 @@
 <!-- This page represents an activity during a session on the students' devices. -->
-<mean-nav-bar></mean-nav-bar>
+<mat-sidenav-container>
+    <mat-sidenav #sidenav [autoFocus]="false">
+        <mean-sidenav (sidenavClose)="sidenav.close()"></mean-sidenav>
+    </mat-sidenav>
+    <mat-sidenav-content>
+        <mean-toolbar (sidenavToggle)="sidenav.toggle()"></mean-toolbar>
 
 <body>
     <div class="containerDiv" fxLayoutGap="0.5%" fxLayout="column" fxLayoutAlign="space-evenly">
@@ -10,7 +15,7 @@
                 </mat-card-header>
 
                 <mat-card-content *ngIf="gameData?.game.name == 'Naamloos Nieuws'">
-                    {{gameData?.game.description}}
+                    {{gameData?.game.description}} <br>
                     <div class="article"></div>
                     <mat-form-field *ngIf="!isLeader">
                         <mat-label>Teams</mat-label>
@@ -18,7 +23,7 @@
                             <mat-option *ngFor="let leader of leaders" value="{{leader.email}}">{{leader.name}}
                             </mat-option>
                         </mat-select>
-                    </mat-form-field>
+                    </mat-form-field><br>
                     <button mat-flat-button [disabled]="selected == undefined" *ngIf="!isLeader"
                         (click)="submit()">Verstuur</button>
                 </mat-card-content>
