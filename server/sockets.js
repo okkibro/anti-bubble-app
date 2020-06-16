@@ -187,7 +187,8 @@ function runIO(io) {
 				}
 			}
 
-			socket.emit('send-pairs', pairs);
+			console.log(leaders);
+			socket.emit('send-pairs', pairs, leaders);
 
 			for (let i = 0; i < pairs.length; i++) {
 				for (let j = 0; j < pairs[i].length; j++) {

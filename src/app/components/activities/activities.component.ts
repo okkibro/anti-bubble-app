@@ -115,6 +115,10 @@ export class ActivitiesComponent implements OnInit {
     });
   }
 
+  submit() {
+    this.socketService.studentSubmit({ answer: this.selected });
+  }
+
 }
 
 

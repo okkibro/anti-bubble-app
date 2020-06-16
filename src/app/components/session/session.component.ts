@@ -30,6 +30,7 @@ export class SessionComponent implements OnInit {
     enableQuestions: boolean = true;
     pairs;
     randomGroups: boolean;
+    submits: any[][] = [];
 
     constructor(
         private authenticationService: AuthenticationService,
@@ -104,15 +105,15 @@ export class SessionComponent implements OnInit {
                     });
 
                     // Call function that listens for students to submit answers.
-                    this.socketService.listenForSubmits((data) => { // Receive answer from student.
+                    // this.socketService.listenForSubmits((data) => { // Receive answer from student.
 
-                        // Add answer to screen using DOM manipulation.
-                        var submitTable = document.getElementsByClassName('submitTable')[0];
-                        var tablerow = document.createElement('tr');
-                        tablerow.innerHTML = `<strong>${data.player.name}:</strong> ${data.message}<br>`
-                        submitTable.appendChild(tablerow);
-                        this.enableQuestions = false; // Teacher cannot send any questions after having received at least one answer
-                    });
+                    //     // Add answer to screen using DOM manipulation.
+                    //     var submitTable = document.getElementsByClassName('submitTable')[0];
+                    //     var tablerow = document.createElement('tr');
+                    //     tablerow.innerHTML = `<strong>${data.player.name}:</strong> ${data.message}<br>`
+                    //     submitTable.appendChild(tablerow);
+                    //     this.enableQuestions = false; // Teacher cannot send any questions after having received at least one answer
+                    // });
                 }
             });
 
@@ -186,9 +187,18 @@ export class SessionComponent implements OnInit {
         switch (game) {
             case "Naamloos Nieuws":
                 this.sessionService.getArticles().subscribe((articles) => { // Get articles from database
-                    this.pairStudents(null, 3, articles, (pairs) => {
+                    this.pairStudents(null, 3, articles, (pairs, leaders) => {
                         this.pairs = pairs;
-                        console.log(pairs);
+                        console.log(pairs, leaders);
+                        for (let i = 0; i < leaders.length; i++) {
+                            this.submits[leaders[i].email] = [];
+                        }
+
+                        this.socketService.listenForSubmits(submit => {
+                            console.log(this.submits, submit);
+                            this.submits[submit.answer].push(submit.player);
+                            console.log(this.submits);
+                        });
                     });
                 });
 
@@ -254,8 +264,9 @@ export class SessionComponent implements OnInit {
 
     /** Function that groups students. */
     pairStudents(groups: String[][], groupSize: Number, articles: Articles, receivePairs) {
-        this.socketService.pairStudents(groups, groupSize, articles, pairs => {
-            receivePairs(pairs);
+        this.socketService.pairStudents(groups, groupSize, articles, (pairs, leaders) => {
+            console.log(1, leaders);
+            receivePairs(pairs, leaders);
         });
     }
 
