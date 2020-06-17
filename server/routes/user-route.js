@@ -45,7 +45,6 @@ router.post('/register', (req, res) => {
             Shop.findById('5edcf97b1167982a005b9754', (error, shirt) => {
                 Shop.findById('5edcf97b1167982a005b9787', (error, schoenen) => {
                     Shop.find({ title: "Geen" }, (error, emptyLayers) => {
-                        console.log(emptyLayers);
                         user.avatar = {
                             haar : emptyLayers[0],
                             hoofddeksel : emptyLayers[1],
