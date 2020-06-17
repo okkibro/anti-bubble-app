@@ -23,3 +23,8 @@ mat-card-title {
     color: white;
     background-color: green;
 }
+
+.shop-buy-button {
+    width: 40%;
+    background: transparent url("../../../assets/images/Super_map/Basic_Buttons/Button_blue_Rectangle.png") round;
+}

@@ -12,7 +12,7 @@
             <p *ngIf="userDetails?.role == 'teacher' && gameData?.duration != null" class="timeLeft">Tijd over:
                 <br><strong>{{gameData?.duration}}:00</strong></p>
             <!--This page represents the session page. It has a session pin, with which students can join the activity. It is also the teacher's activity page during a session -->
-            <div class="containerDiv" fxLayoutGap="10px" fxLayout="column" fxLayoutAlign="space-evenly">
+            <div class="container-div" fxLayoutGap="10px" fxLayout="column" fxLayoutAlign="space-evenly">
                 <div fxLayout.xs="row" fxLayoutGap="10px" fxLayoutAlign="space-evenly">
                     <mat-card fxFlex=80% *ngIf="userDetails?.role == 'teacher' && !gameStarted">
                         <!-- <button (click)="pairStudentsTest()">GetPlayers</button> -->

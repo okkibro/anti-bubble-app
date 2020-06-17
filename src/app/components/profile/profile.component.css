@@ -36,3 +36,9 @@ mean-avatar-display mat-card img{
     flex-direction: column;
     justify-content: center;
 }
+
+@media (max-width: 700px) {
+    .change-password-accordion mat-panel-description {
+        display: none;
+    }
+}

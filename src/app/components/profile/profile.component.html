@@ -4,10 +4,9 @@
     </mat-sidenav>
     <mat-sidenav-content>
         <mean-toolbar (sidenavToggle)="sidenav.toggle()"></mean-toolbar>
-
         <body>
-            <div class="containerDiv" fxLayoutGap="10px" fxLayout="column" fxLayoutAlign="space-evenly">
-                <div fxLayout.xs="column" fxLayoutGap="0.5%" fxLayoutAlign="space-evenly">
+            <div class="container-div" fxLayout="column" fxLayoutGap="10px" fxLayoutAlign="space-evenly">
+                <div fxLayout.xs="column" fxLayoutGap="10px" fxLayoutAlign="space-evenly">
                     <mat-card fxFlex="50%">
                         <mat-card-header>
                             <mat-card-title>Profiel</mat-card-title>
@@ -44,19 +43,18 @@
                         </mat-card-content>
                     </mat-card>
                 </div>
-                <div fxLayout.xs="column" fxLayoutGap="10px" fxLayoutAlign="space-evenly" class="my-custom-theme"
-                    *ngIf="userDetails?.role == 'student'">
+
+                <div fxLayout.xs="column" fxLayoutGap="10px" fxLayoutAlign="space-evenly" class="my-custom-theme" *ngIf="userDetails?.role == 'student'">
                     <mat-card fxFlex="50%">
                         <mat-card-header>
                             <mat-card-title>Mijn Bubbel</mat-card-title>
-                        </mat-card-header><br>
-
+                        </mat-card-header>
                         <mat-card-content>
                             <mean-bubble-visualisation></mean-bubble-visualisation>
-                            <button mat-flat-button [routerLink]="'/bubble-details'"
-                                [ngClass]="{'my-custom-theme': true}" color="accent">Meer details</button>
+                            <button mat-flat-button [routerLink]="'/bubble-details'" [ngClass]="{'my-custom-theme': true}" color="accent">Meer details</button>
                         </mat-card-content>
                     </mat-card>
+
                     <mat-card fxFlex="50%">
                         <mat-card-header>
                             <mat-card-title>Badges</mat-card-title>
@@ -77,7 +75,8 @@
                         </mat-card-content>
                     </mat-card>
                 </div>
-                <mat-card fxLayout.xs="column" fxLayoutAlign="space-evenly center">
+
+                <mat-card class="change-password-accordion" fxLayout.xs="column" fxLayoutAlign="space-evenly center">
                     <mat-accordion>
                         <mat-expansion-panel>
                             <mat-expansion-panel-header>

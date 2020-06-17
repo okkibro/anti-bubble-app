@@ -28,7 +28,7 @@ export class LabyrinthComponent implements OnInit {
     } else {
       this.nextQuestionDisabled = false;
     }
-  };
+  }
 
   constructor(private router: Router, private sessionService: SessionService, private auth: AuthenticationService, private snackBar: MatSnackBar) { }
 

@@ -5,7 +5,7 @@
     <mat-sidenav-content>
         <mean-toolbar (sidenavToggle)="sidenav.toggle()"></mean-toolbar>
         <body>
-            <div class="containerDiv" fxLayoutGap="0%" fxLayout="column" fxLayoutAlign="space-evenly">
+            <div class="container-div" fxLayoutGap="10px" fxLayout="column" fxLayoutAlign="space-evenly">
                 <div fxLayout.xs="row" fxLayoutGap="10px" fxLayoutAlign="space-evenly">
                     <mat-card fxFlex="100%">
                         <mat-card-header>
@@ -40,7 +40,7 @@
                                             <td  *ngFor="let milestoneCompleted of uncompleted">
                                                 <strong>{{milestoneCompleted.milestone.name}}</strong><br>
                                                 {{milestoneCompleted.milestone.description}}<br>
-                                                Voortgang: {{userDetails?.milestones[milestoneCompleted.index]}}/{{milestoneCompleted.milestone.maxValue}}
+                                                <i>Voortgang: {{userDetails?.milestones[milestoneCompleted.index]}}/{{milestoneCompleted.milestone.maxValue}}</i>
                                             </td>
                                         </tr>
                                     </table>
@@ -49,9 +49,6 @@
                         </mat-card-content>
                     </mat-card>
                 </div>
-                <button mat-button [routerLink]="'/profile'">
-                    <mat-icon>keyboard_backspace</mat-icon> Terug naar profiel
-                </button>
             </div>
         </body>
         <footer class="footer">

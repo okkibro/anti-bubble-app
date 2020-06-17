@@ -5,7 +5,7 @@
     <mat-sidenav-content>
         <mean-toolbar (sidenavToggle)="sidenav.toggle()"></mean-toolbar>
         <body>
-            <div class="containerDiv" fxLayoutGap="10px" fxLayout="column" fxLayoutAlign="space-evenly">
+            <div class="container-div" fxLayoutGap="10px" fxLayout="column" fxLayoutAlign="space-evenly">
                 <mat-card *ngIf="userClassTitle">
                     <mat-card-header>
                         <mat-card-title> Klassen Overzicht </mat-card-title>
@@ -64,6 +64,7 @@
                         </mat-accordion>
                     </mat-card-content>
                 </mat-card>
+
                 <div *ngIf="userClassTitle == undefined">
                     <mean-join-class></mean-join-class>
                 </div>
@@ -74,30 +75,3 @@
         </footer>
     </mat-sidenav-content>
 </mat-sidenav-container>
-
-<!-- <tr>
-        <td>{{ userDetails?.firstName }}</td>
-        <td>Online</td>
-        <td><button mat-flat-button [routerLink]="'/classmateProfile'" [ngClass]="{'my-custom-theme': true}" color="primary"> Bekijk Profiel </button></td>
-    </tr>
-    <tr>
-        <td>[Naam 2]</td>
-        <td>Offline</td>
-        <td><button mat-flat-button [ngClass]="{'my-custom-theme': true}" color="primary">Bekijk profiel</button></td>
-    </tr>
-    <tr>
-        <td>[Naam 3]</td>
-        <td>Offline</td>
-        <td><button mat-flat-button [ngClass]="{'my-custom-theme': true}" color="primary">Bekijk profiel</button></td>
-    </tr>
-    <tr>
-        <td>[Naam 4]</td>
-        <td>Online</td>
-        <td><button mat-flat-button [ngClass]="{'my-custom-theme': true}" color="primary">Bekijk profiel</button></td>
-    </tr>
-    <tr>
-        <td>[Naam 5]</td>
-        <td>Offline</td>
-        <td><button mat-flat-button [ngClass]="{'my-custom-theme': true}" color="primary">Bekijk profiel</button></td>
-    </tr>
-</table> -->

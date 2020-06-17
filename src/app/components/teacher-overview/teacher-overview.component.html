@@ -5,7 +5,7 @@
     <mat-sidenav-content>
         <mean-toolbar (sidenavToggle)="sidenav.toggle()"></mean-toolbar>
         <body>
-            <div class="containerDiv" fxLayoutGap="10px" fxLayout="column" fxLayoutAlign="space-evenly">
+            <div class="container-div" fxLayoutGap="10px" fxLayout="column" fxLayoutAlign="space-evenly">
                 <div fxLayout.xs="row" fxLayoutGap="10px" fxLayoutAlign="space-evenly">
                     <mat-card fxFlex="100%">
                         <mat-card-header *ngIf="currentClass == undefined">
@@ -53,7 +53,7 @@
                             <table class="UItable">
                                 <tr>
                                     <td>
-                                        <mat-form-field class="example-full-width">
+                                        <mat-form-field>
                                             <mat-label>Klassennaam</mat-label>
                                             <input matInput placeholder="klassennaam" formControlName="classTitle" required>
                                             <mat-error *ngIf="classForm.get('classTitle').hasError('required')">
@@ -64,7 +64,7 @@
                                 </tr>
                                 <tr>
                                     <td>
-                                        <mat-form-field class="example-full-width">
+                                        <mat-form-field>
                                             <mat-label>Jaar</mat-label>
                                             <input matInput placeholder="Jaar" formControlName="classYear" required>
                                             <mat-error *ngIf="classForm.get('classYear').hasError('required')">
