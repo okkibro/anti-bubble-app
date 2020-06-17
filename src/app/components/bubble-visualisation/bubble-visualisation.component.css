@@ -23,4 +23,9 @@
     height: 100%;
     margin-top: -1.5em;
     margin-left: -16.2em;
+    opacity: 0.5;
+}
+
+#overlay {
+    opacity: 1;
 }
