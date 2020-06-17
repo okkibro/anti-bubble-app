@@ -1,5 +1,9 @@
-.welcomeHeader{
+.welcomeHeader {
     font-size: xx-large;
+}
+
+.currency {
+    font-size: larger;
 }
 
 mat-card-title {

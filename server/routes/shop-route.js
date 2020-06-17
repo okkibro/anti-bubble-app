@@ -21,13 +21,19 @@ router.get('/', (req, res) => {
         category: req.headers.id.toLowerCase()
     }
 
-    console.log(req.headers.id);
-    Shop.find(query).exec(function (err, shop) {
+    Shop.find(query)
+        .exec(function (err, shop) {
             res.status(200).json(shop);
     });
 });
 
-/** Post method to add item from the shop to the inventory of the user if he/she had enough currency. */
+router.get('/getBaseInventory', auth, (req, res) => {
+    Shop.find({initial: true})
+        .exec(function (err, shop) {
+            res.status(200).json(shop);
+        });
+});
+
 router.post('/buy', auth, (req, res) => {
     User.findById(req.payload._id) // Get the logged in user.
             .exec(function (err, user) {

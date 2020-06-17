@@ -15,6 +15,8 @@
 .profile-table td {
     text-align: left;
     padding: 5px 0;
+mean-avatar-display mat-card img{
+    width: 15%;
 }
 
 .profile-table .top-data {

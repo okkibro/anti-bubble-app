@@ -6,6 +6,7 @@ import { User } from '../../models/user';
 import { milestones } from '../../../../constants';
 import { Milestone } from 'src/app/models/milestone';
 import { ClassesService } from 'src/app/services/classes.service';
+import { Shop } from 'src/app/models/shop';
 
 @Component({
     selector: 'mean-profile',
