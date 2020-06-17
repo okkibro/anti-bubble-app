@@ -61,22 +61,6 @@ mat-tab-group, mat-tab {
     padding: 10px;    
 }
 
-.sessionTable, .submitTable {
-    display: inline-block;
-}
-
-.sessionTable, .submitTable th, td {
-    padding: 10px;
-}
-
-.timeLeft{
-    top: 10%;
-    left: 3%;
-    float: right;
-    position: absolute;
-    z-index: 100;
-}
-
 ::ng-deep .mat-simple-snackbar-action {
     color: white;
 }
@@ -91,17 +75,6 @@ mat-tab-group, mat-tab {
     background-color: green;
 }
 
-.bubbleImage {
-    position: absolute;
-    top: 10%;
-    left: 0;
-    background-color: transparent;
-    border: transparent;
-    box-shadow: none;
-    z-index: 1;
-}
-
-/* Apply this id for blue buttons designed by the artists. */
 #artisticButtonBlue {
     width: 40%;
     background: transparent url("../../assets/images/Super_map/Basic_Buttons/Button_Yellow_Rectangle.png") round;
