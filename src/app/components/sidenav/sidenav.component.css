@@ -1,7 +1,23 @@
+.sidenav {
+    background-color: #A7473B;
+    color: white;
+}
+
 .sidenav button {
     text-align: left;
+    height: 50px;
+}
+
+.sidenav img {
+    height: 36px;
+    padding-left: 5px;
 }
 
 mat-divider {
     margin: 0 5px;
+    border-top-color: white;
+}
+
+mat-list {
+    padding-top: 0;
 }

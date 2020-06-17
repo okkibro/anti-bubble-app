@@ -1,9 +1,10 @@
 <mat-toolbar color="primary" class="toolbar">
     <button mat-icon-button (click)="onToggleSidenav()" fxHide.gt-sm>
-        <mat-icon>menu</mat-icon>
+        <i class="material-icons">menu</i>
+        <img src="assets/images/Super_map/Other/logo.png" alt="">
     </button>
     <div class="nav-items" fxHide.lt-md>
-        <button mat-button [routerLink]="'/home'" fxFlex="20">Anti-Bubble</button>
+        <button mat-button [routerLink]="'/home'" fxFlex="20"> Anti-Bubble <img src="assets/images/Super_map/Other/logo.png" alt=""> </button>
         <button mat-button [routerLink]="'/home'" fxFlex="20" fxFlexOffset="20"> Home </button>
         <button *ngIf="userDetails?.role == 'teacher'" mat-button [routerLink]="'/teacher-overview'" fxFlex="20"> Klas Overzicht </button>
         <button *ngIf="userDetails?.role == 'student'" mat-button [routerLink]="'/class-overview'" fxFlex="20"> Klas Overzicht </button>

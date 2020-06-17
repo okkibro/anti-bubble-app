@@ -24,3 +24,8 @@
 .number{
     font-size: 70px;
 }
+
+.shop-card a {
+    display: flex;
+    justify-content: center;
+}

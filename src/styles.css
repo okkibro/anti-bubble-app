@@ -4,3 +4,7 @@
 body {
     margin: 0;
 }
+
+.mat-drawer {
+    background-color: #A7473B !important;
+}

@@ -60,7 +60,7 @@
 .buttons {
     -webkit-text-fill-color: transparent;
     -webkit-text-stroke: 0.1em transparent;
-    height:68%;
+    height: 68%;
     background: transparent round;
     color: transparent;
 }

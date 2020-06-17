@@ -1,4 +1,9 @@
 <mat-list fxLayout="column" class="sidenav">
+    <button mat-button (click)="onSidenavClose()">
+        <i class="material-icons">menu</i>
+        <img src="assets/images/Super_map/Other/logo.png" alt="">
+    </button>
+    <mat-divider></mat-divider>
     <button mat-button [routerLink]="'/home'" (click)="onSidenavClose()">
         <i class="material-icons">home</i>
         Home
@@ -23,4 +28,5 @@
         <i class="material-icons">login</i>
         Log uit
     </button>
+    <mat-divider></mat-divider>
 </mat-list>
