@@ -297,10 +297,10 @@ export class SessionComponent implements OnInit {
                 for (let i = 0; i < this.leaders.length; i++) {
                     let team = document.createElement("tr");
                     team.innerHTML = `<strong>Team ${i + 1}</strong><br>`;
-                    team.innerHTML += `${this.leaders[i].name} Source: ${this.sources[i]}<br>`;
+                    team.innerHTML += `Speler 1: ${this.leaders[i].name}<br> <i>Source: ${this.sources[i]}<i><br><br>`;
                     let teamSubmits = this.submits[this.leaders[i].email]
                     for (let j = 0; j < teamSubmits.length; j++) {
-                        team.innerHTML += `${teamSubmits[j].player.name} Source: ${teamSubmits[j].source }<br>`;
+                        team.innerHTML += `Speler ${j + 2}: ${teamSubmits[j].player.name}<br> <i>Source: ${teamSubmits[j].source }<i><br><br>`;
                     }
                     table.appendChild(team);
                 }
