@@ -106,7 +106,7 @@ mat-tab-group, mat-tab {
     width: 40%;
     background: transparent url("../../assets/images/Super_Map/Basic_Buttons/Button_Yellow_Rectangle.png") round;
 }
-
+/* 
 ::ng-deep .style-warning {
     color: black;
     background-color: yellow;
@@ -114,7 +114,7 @@ mat-tab-group, mat-tab {
 
 ::ng-deep .style-warning .mat-simple-snackbar-action {
     color: black;
-}
+} */
 
 .footer {
     text-align: center;
