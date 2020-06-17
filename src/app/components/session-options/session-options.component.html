@@ -141,21 +141,10 @@
                                                 </mat-slider>
                                             </td>
                                         </tr>
-                                        <tr>
-                                            <th>Teams:</th>
-                                            <td>
-                                                <mat-radio-group [(ngModel)]="teamOptionBB">
-                                                    <mat-radio-button class="teamOptionButton"
-                                                        *ngFor="let teamChoice of teamOptions" [value]="teamChoice">
-                                                        {{teamChoice}} <br>
-                                                    </mat-radio-button>
-                                                </mat-radio-group>
-                                            </td>
-                                        </tr>
                                     </table>
                                     <br>
                                     <button
-                                        (click)="createSession({game : 'Botsende Bubbels', duration : botsendeSlider.value, teams : teamOptionBB})"
+                                        (click)="createSession({game : 'Botsende Bubbels', duration : botsendeSlider.value})"
                                         mat-button>Start Sessie</button>
                                 </mat-expansion-panel-content>
                             </mat-expansion-panel>

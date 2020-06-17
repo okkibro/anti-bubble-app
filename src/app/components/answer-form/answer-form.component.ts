@@ -50,7 +50,7 @@ export class AnswerFormComponent implements OnInit {
       this.socketService.sendQuestion(this.question);
       this.question = "";
     } else {
-      this.snackBar.open('Vul een vraag in', 'X', { duration: 2500, panelClass: ['style-error'], });
+      this.snackBar.open('Vul een onderwerp in', 'X', { duration: 2500, panelClass: ['style-error'], });
     }
   }
 }
