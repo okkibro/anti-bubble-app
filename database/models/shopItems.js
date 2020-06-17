@@ -26,6 +26,10 @@ let shopSchema = new Schema({
     price: {
         type: Number,
         required: true
+    },
+    initial: {
+        type: Boolean,
+        required: true
     }
 });
 

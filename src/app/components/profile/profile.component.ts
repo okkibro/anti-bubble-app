@@ -5,6 +5,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { User } from '../../models/user';
 import { milestones } from '../../../../constants';
 import { Milestone } from 'src/app/models/milestone';
+import { Shop } from 'src/app/models/shop';
 
 @Component({
     selector: 'mean-profile',

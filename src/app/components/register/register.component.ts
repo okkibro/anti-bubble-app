@@ -4,6 +4,7 @@ import {AuthenticationService} from '../../services/authentication.service';
 import {Router} from '@angular/router';
 import {User} from '../../models/user';
 import { Role } from 'src/app/models/role';
+import { ShopService } from 'src/app/services/shop.service';
 
 @Component({
     selector: 'mean-register',
@@ -26,7 +27,7 @@ export class RegisterComponent implements OnInit {
         validator: this.passwordMatchValidator
     });
 
-    constructor(private auth: AuthenticationService, private router: Router, private fb: FormBuilder) { }
+    constructor(private auth: AuthenticationService, private router: Router, private fb: FormBuilder, private shop: ShopService) { }
 
     ngOnInit() { }
 
@@ -41,7 +42,12 @@ export class RegisterComponent implements OnInit {
         user.classCode = this.registerForm.get('classCode').value;
 
         this.auth.register(user).subscribe(() => {
-            this.router.navigate(['login']);
+            this.shop.getBaseInventory().subscribe(data => {
+                for(let i = 0 ; i < data.length ; i++) {
+                    this.shop.buy(data[i]).subscribe();
+                }
+                this.router.navigate(['login']);
+            });
         });
     }
 

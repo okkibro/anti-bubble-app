@@ -156,41 +156,56 @@ mat-tab-group, mat-tab {
 
 /* The following ID's are for the shop and avatar category buttons with an image. */
 #buttonHoofddeksel{
+    background: transparent;
     background-image: url("/assets/images/Super_Map/Shop_UI/Button_Hats.png");
+    background-repeat: round;
 }
 
 #buttonHaar {
+    background: transparent;
     background-image: url("/assets/images/Super_Map/Shop_UI/Button_Hair.png");
+    background-repeat: round;
 }
 
 #buttonBril {
+    background: transparent;
     background-image: url("/assets/images/Super_Map/Shop_UI/Button_Glasses.png");
+    background-repeat: round;
 }
 
 #buttonLichaam {
+    background: transparent;
     background-image: url("/assets/images/Super_Map/Shop_UI/Button_Skincolor.png");
+    background-repeat: round;
 }
 
 #buttonShirt {
+    background: transparent;
     background-image: url("/assets/images/Super_Map/Shop_UI/Button_Shirt.png");
+    background-repeat: round;
 }
 
 #buttonBroek {
+    background: transparent;
     background-image: url("/assets/images/Super_Map/Shop_UI/Button_Pants.png");
+    background-repeat: round;
 }
 
 #buttonSchoenen {
+    background: transparent;
     background-image: url("/assets/images/Super_Map/Shop_UI/Button_Shoes.png");
+    background-repeat: round;
 }
 
 #buttonMedaille {
+    background: transparent;
     background-image: url("/assets/images/Super_Map/Shop_UI/Button_Medals.png");
+    background-repeat: round;
 }
 
-/* Class for shaping the rest of the avatar and shop category buttons. */
+/* Class for scaling the avatar and shop category buttons. */
 .buttons {
-    height:68%;
-    background: transparent;
-    background-repeat: round;
     color: transparent;
+    height: 5em;
+    width: calc(var(--height));
 }

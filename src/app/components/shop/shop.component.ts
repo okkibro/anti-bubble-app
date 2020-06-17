@@ -8,6 +8,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { User } from '../../models/user';
 import { MilestoneUpdatesService } from '../../services/milestone-updates.service'
 import { milestones } from '../../../../constants';
+import { basename } from 'path';
 
 @Component({
     selector: 'mean-shop',
@@ -21,6 +22,7 @@ export class ShopComponent implements OnInit {
   userDetails: User;
   shopDetails: Shop[];
   filteredShop: Shop[];
+  succesWindow: boolean = false;
 
   constructor(private authenticationService: AuthenticationService, private shopService : ShopService, private snackBar: MatSnackBar, private milestoneUpdates: MilestoneUpdatesService) { }
 
@@ -34,6 +36,11 @@ export class ShopComponent implements OnInit {
       this.authenticationService.profile().subscribe(user => {
         this.userDetails = user;
         this.filteredShop = this.filterShop();
+        // if(this.userDetails.inventory.length < 1)
+        // {
+        //   this.addingBaseInventory();
+        // }
+        this.succesWindow = true;
       }, (err) => {
         console.error(err);
       });
@@ -41,9 +48,19 @@ export class ShopComponent implements OnInit {
       console.error(err);
     });
   }
+
+  addingBaseInventory() {
+    var baseData = this.shopService.getBaseInventory();
+    baseData.forEach(element => {
+      for(var i = 0 ; i < element.length ; i++)
+    {
+      this.buy(element[i]);
+    }
+    });
+    this.succesWindow = true;
+  }
   
   tabChange(value) {
-    // var currentTab = event.tab.textLabel;
     this.shopService.shop(value).subscribe(shop => {
         this.shopDetails = shop;
         this.filteredShop = this.filterShop();
@@ -54,7 +71,7 @@ export class ShopComponent implements OnInit {
 
   buy(item): void {
     this.shopService.buy(item).subscribe((data:any) => {  
-      if (data.succes) {
+      if (data.succes && this.succesWindow) {
         this.snackBar.open(data.message, 'X', {duration: 1000, panelClass: ['style-succes'], }).afterDismissed().subscribe(() => {
           this.milestoneUpdates.updateMilestone(milestones[2], 1).subscribe(data => {
             if (data.completed) {
@@ -68,7 +85,7 @@ export class ShopComponent implements OnInit {
             });
           });
         });;
-      } else {
+      } else if (this.succesWindow) {
         this.snackBar.open(data.message, 'X', {duration: 2500, panelClass: ['style-error'], });
       }
     });

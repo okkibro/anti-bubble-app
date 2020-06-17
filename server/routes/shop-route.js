@@ -22,8 +22,14 @@ router.get('/', (req, res) => {
         category: req.headers.id.toLowerCase()
     }
 
-    console.log(req.headers.id);
     Shop.find(query)
+        .exec(function (err, shop) {
+            res.status(200).json(shop);
+        });
+});
+
+router.get('/getBaseInventory', auth, (req, res) => {
+    Shop.find({initial: true})
         .exec(function (err, shop) {
             res.status(200).json(shop);
         });

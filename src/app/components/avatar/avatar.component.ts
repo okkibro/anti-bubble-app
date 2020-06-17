@@ -38,16 +38,15 @@ export class AvatarComponent implements OnInit {
                     }
                 }
                 this.avatarDisplay.showAvatar();
-                // avatar-display.showAvatar();
             })
         })
     }
 
-    // Assigns an item to the user's avatar in the database
+    // Assigns an item to the user's avatar in the database.
     equip(item){
         this.avatarService.equip(item).subscribe(data => {
             console.log(data);
-            // Updates the image shown to the player without reloading the page
+            // Updates the image shown to the player without reloading the page.
             if(data.category == "haar"){
                 document.getElementById("haar1").setAttribute("src", data.imageFull2);
                 document.getElementById("haar2").setAttribute("src", data.imageFull);
@@ -59,7 +58,7 @@ export class AvatarComponent implements OnInit {
         });
     }
 
-    // Changes the tab in the HTML and updates the shown items
+    // Changes the tab in the HTML and updates the shown items.
     tabChange(value) {
         this.shopService.shop(value).subscribe(shop => {
             this.itemsShown = shop;
