@@ -8,6 +8,11 @@ import { SessionService } from 'src/app/services/session.service';
 import { beforeUnload } from '../../../../constants';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Articles } from 'src/app/models/articles';
+import { TestBed } from '@angular/core/testing';
+import { MAT_SORT_HEADER_INTL_PROVIDER } from '@angular/material/sort';
+import { ɵWebAnimationsDriver } from '@angular/animations/browser';
+import { Directionality } from '@angular/cdk/bidi';
+import { getLocaleDayPeriods } from '@angular/common';
 
 @Component({
     selector: 'mean-session',
@@ -31,6 +36,8 @@ export class SessionComponent implements OnInit {
     pairs;
     randomGroups: boolean;
     submits: any[][] = [];
+    leaders;
+    sources;
 
     constructor(
         private authenticationService: AuthenticationService,
@@ -183,17 +190,17 @@ export class SessionComponent implements OnInit {
         switch (game) {
             case "Naamloos Nieuws":
                 this.sessionService.getArticles().subscribe((articles) => { // Get articles from database
-                    this.pairStudents(null, 3, articles, (pairs, leaders) => {
+                    this.pairStudents(null, 3, articles, (pairs, leaders, sources) => {
+                        this.leaders = leaders;
                         this.pairs = pairs;
-                        console.log(pairs, leaders);
+                        this.sources = sources;
+                        console.log(this.sources);
                         for (let i = 0; i < leaders.length; i++) {
                             this.submits[leaders[i].email] = [];
                         }
 
                         this.socketService.listenForSubmits(submit => {
-                            console.log(this.submits, submit);
-                            this.submits[submit.answer].push(submit.player);
-                            console.log(this.submits);
+                            this.submits[submit.message.answer].push({ player: submit.player, source: submit.message.data.article.source });
                         });
                     });
                 });
@@ -260,9 +267,8 @@ export class SessionComponent implements OnInit {
 
     /** Function that groups students. */
     pairStudents(groups: String[][], groupSize: Number, articles: Articles, receivePairs) {
-        this.socketService.pairStudents(groups, groupSize, articles, (pairs, leaders) => {
-            console.log(1, leaders);
-            receivePairs(pairs, leaders);
+        this.socketService.pairStudents(groups, groupSize, articles, (pairs, leaders, sources) => {
+            receivePairs(pairs, leaders, sources);
         });
     }
 
@@ -273,6 +279,7 @@ export class SessionComponent implements OnInit {
         let timeLeft = <HTMLElement[]><any>document.querySelectorAll('.timeLeft');
         timeLeft[0].style.color = "red";
         this.socketService.removeListeners(); // Remove all listeners so students cant submit answers.
+        this.showAnswersonScreen(this.gameData.game.name);
     }
 
     /** Function that makes the host leave the session and the page. */
@@ -281,5 +288,24 @@ export class SessionComponent implements OnInit {
         this.leaveByHomeButton = true;
         window.removeEventListener('beforeunload', beforeUnload);
         this.router.navigate(['home']);
+    }
+
+    showAnswersonScreen(game: String) {
+        switch (game) {
+            case "Naamloos Nieuws":
+                let table = document.getElementsByClassName("submitTable")[0];
+                for (let i = 0; i < this.leaders.length; i++) {
+                    let team = document.createElement("tr");
+                    team.innerHTML = `<strong>Team ${i + 1}</strong><br>`;
+                    team.innerHTML += `${this.leaders[i].name} Source: ${this.sources[i]}<br>`;
+                    let teamSubmits = this.submits[this.leaders[i].email]
+                    for (let j = 0; j < teamSubmits.length; j++) {
+                        team.innerHTML += `${teamSubmits[j].player.name} Source: ${teamSubmits[j].source }<br>`;
+                    }
+                    table.appendChild(team);
+                }
+                break;
+            default: break;
+        }
     }
 }

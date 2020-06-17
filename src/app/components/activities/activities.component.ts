@@ -27,6 +27,8 @@ export class ActivitiesComponent implements OnInit {
   leaders;
   selected;
   isLeader: Boolean = true;
+  submitted: Boolean = false;
+  article;
 
   constructor(
     private socketService: SocketIOService,
@@ -101,6 +103,7 @@ export class ActivitiesComponent implements OnInit {
   receiveTeam() {
     this.socketService.listenForTeam((team, article, leaders) => {
       this.leaders = leaders;
+      this.article = article;
       this.auth.profile().subscribe(user => {
         this.userDetails = user;
         if (leaders.find(x => x.email == this.userDetails.email) == undefined) {
@@ -118,8 +121,9 @@ export class ActivitiesComponent implements OnInit {
     });
   }
 
-  submit() {
-    this.socketService.studentSubmit({ answer: this.selected });
+  submit(data) {
+    this.submitted = true;
+    this.socketService.studentSubmit({ answer: this.selected, data: data });
   }
 
 }
