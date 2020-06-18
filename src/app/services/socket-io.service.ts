@@ -139,4 +139,14 @@ export class SocketIOService {
         this.socket.removeAllListeners();
         this.removedListeners;
     }
+
+    activateStudentButton(player) {
+        this.socket.emit('reactivate-button', player);
+    }
+
+    reactivateButton(reactivate) {
+        this.socket.on('reactivate', () => {
+            reactivate();
+        });
+    }
 }

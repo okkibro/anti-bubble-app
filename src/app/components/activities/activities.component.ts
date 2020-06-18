@@ -62,6 +62,10 @@ export class ActivitiesComponent implements OnInit {
     this.receiveQuestion(); // Check whether or not a teacher has sent a question
 
     this.receiveTeam(); // Get teams from teacher's input
+
+    this.socketService.reactivateButton(() => {
+      this.enableAnswer = true;
+    });
   }
 
   naamloosNieuws() {

@@ -124,6 +124,10 @@ export class SessionComponent implements OnInit {
                         deleteButton.style.backgroundColor = "red";
                         deleteButton.style.color = "white";
                         deleteButton.innerHTML = "X";
+                        deleteButton.addEventListener("click", () => {
+                           deleteButton.parentElement.remove();
+                           this.socketService.activateStudentButton(data.player);
+                        });
                         tablerow.innerHTML = `<strong>${data.player.name}:</strong> ${data.message} `
                         tablerow.appendChild(deleteButton);
                         tablerow.appendChild(breakLine);

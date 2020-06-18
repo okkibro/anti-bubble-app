@@ -212,6 +212,10 @@ function runIO(io) {
 				return array;
 			}
 		});
+
+		socket.on('reactivate-button', (player) => {
+			socket.to(player.playerID).emit('reactivate');
+		});
 	});
 }
 
