@@ -117,7 +117,16 @@ export class SessionComponent implements OnInit {
                         // Add answer to screen using DOM manipulation.
                         var submitTable = document.getElementsByClassName('submitTable')[0];
                         var tablerow = document.createElement('tr');
-                        tablerow.innerHTML = `<strong>${data.player.name}:</strong> ${data.message}<br>`
+                        var breakLine = document.createElement('br');
+                        var deleteButton = document.createElement('button');
+                        deleteButton.style.width = "25px";
+                        deleteButton.style.height = "25px";
+                        deleteButton.style.backgroundColor = "red";
+                        deleteButton.style.color = "white";
+                        deleteButton.innerHTML = "X";
+                        tablerow.innerHTML = `<strong>${data.player.name}:</strong> ${data.message} `
+                        tablerow.appendChild(deleteButton);
+                        tablerow.appendChild(breakLine);
                         submitTable.appendChild(tablerow);
                         this.enableQuestions = false; // Teacher cannot send any questions after having received at least one answer
                     });
