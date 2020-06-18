@@ -21,10 +21,10 @@
                                 <mat-expansion-panel-header>
                                     <mat-panel-title>Dwalende Doolhof</mat-panel-title>
                                 </mat-expansion-panel-header>
-                                <mat-expansion-panel-content>
+                                <div>
                                     Dit is de eerste activiteit die de leerlingen moeten doorlopen.<br>
                                     <i>Let erop dat deze activiteit maar eenmalig kan worden uitgevoerd!</i>
-                                    <table class="sessionOptionsTable">
+                                    <table class="session-options-table">
                                         <tr>
                                             <th>Soort activiteit:</th>
                                             <td>Individueel</td>
@@ -53,15 +53,15 @@
                                         </tr>
                                     </table><br>
                                     De leerlingen kunnen deze activiteit zelf starten op de homepage.
-                                </mat-expansion-panel-content>
+                                </div>
                             </mat-expansion-panel>
 
                             <mat-expansion-panel hideToggle="true">
                                 <mat-expansion-panel-header>
                                     <mat-panel-title>Naamloos Nieuws</mat-panel-title>
                                 </mat-expansion-panel-header>
-                                <mat-expansion-panel-content>
-                                    <table class="sessionOptionsTable">
+                                <div>
+                                    <table class="session-options-table">
                                         <tr>
                                             <th>Soort activiteit:</th>
                                             <td>Klassikaal</td>
@@ -99,15 +99,15 @@
                                     <button
                                         (click)="createSession({game : 'Naamloos Nieuws', duration : naamloosSlider.value})"
                                         mat-button>Start Sessie</button>
-                                </mat-expansion-panel-content>
+                                </div>
                             </mat-expansion-panel>
 
                             <mat-expansion-panel hideToggle="true">
                                 <mat-expansion-panel-header>
                                     <mat-panel-title>Botsende Bubbels</mat-panel-title>
                                 </mat-expansion-panel-header>
-                                <mat-expansion-panel-content>
-                                    <table class="sessionOptionsTable">
+                                <div>
+                                    <table class="session-options-table">
                                         <tr>
                                             <th>Soort activiteit:</th>
                                             <td>Klassikaal</td>
@@ -145,9 +145,8 @@
                                             <th>Teams:</th>
                                             <td>
                                                 <mat-radio-group [(ngModel)]="teamOptionBB">
-                                                    <mat-radio-button class="teamOptionButton"
-                                                        *ngFor="let teamChoice of teamOptions" [value]="teamChoice">
-                                                        {{teamChoice}} <br>
+                                                    <mat-radio-button class="team-option-button" *ngFor="let teamChoice of teamOptions" [value]="teamChoice" color="primary">
+                                                        {{teamChoice}}
                                                     </mat-radio-button>
                                                 </mat-radio-group>
                                             </td>
@@ -157,15 +156,15 @@
                                     <button
                                         (click)="createSession({game : 'Botsende Bubbels', duration : botsendeSlider.value, teams : teamOptionBB})"
                                         mat-button>Start Sessie</button>
-                                </mat-expansion-panel-content>
+                                </div>
                             </mat-expansion-panel>
 
                             <mat-expansion-panel hideToggle="true">
                                 <mat-expansion-panel-header>
                                     <mat-panel-title>Alternatieve Antwoorden</mat-panel-title>
                                 </mat-expansion-panel-header>
-                                <mat-expansion-panel-content>
-                                    <table class="sessionOptionsTable">
+                                <div>
+                                    <table class="session-options-table">
                                         <tr>
                                             <th>Soort activiteit:</th>
                                             <td>Individueel</td>
@@ -203,9 +202,8 @@
                                             <th>Teams:</th>
                                             <td>
                                                 <mat-radio-group [(ngModel)]="teamOptionAA">
-                                                    <mat-radio-button class="teamOptionButton"
-                                                        *ngFor="let teamChoice of teamOptions" [value]="teamChoice">
-                                                        {{teamChoice}} <br>
+                                                    <mat-radio-button class="team-option-button" *ngFor="let teamChoice of teamOptions" [value]="teamChoice" color="primary">
+                                                        {{teamChoice}}
                                                     </mat-radio-button>
                                                 </mat-radio-group>
                                             </td>
@@ -215,14 +213,14 @@
                                     <button
                                         (click)="createSession({game : 'Alternatieve Antwoorden', duration : alternatieveSlider.value, teams: teamOptionAA})"
                                         mat-button>Start Sessie</button>
-                                </mat-expansion-panel-content>
+                                </div>
                             </mat-expansion-panel>
                             <mat-expansion-panel hideToggle="true">
                                 <mat-expansion-panel-header>
                                     <mat-panel-title>Aanradend Algoritme</mat-panel-title>
                                 </mat-expansion-panel-header>
-                                <mat-expansion-panel-content>
-                                    <table class="sessionOptionsTable">
+                                <div>
+                                    <table class="session-options-table">
                                         <tr>
                                             <th>Soort activiteit:</th>
                                             <td>Klassikaal</td>
@@ -266,7 +264,7 @@
                                     <br>
                                     <button (click)="createSession({game : 'Aanradend Algoritme'})" mat-button>Start
                                         Sessie</button>
-                                </mat-expansion-panel-content>
+                                </div>
                             </mat-expansion-panel>
                         </mat-accordion>
                     </mat-card-content>

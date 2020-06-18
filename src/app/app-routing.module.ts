@@ -8,7 +8,7 @@ import { RegisterComponent } from './components/register/register.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { SessionComponent } from "./components/session/session.component";
 import { ClassOverviewComponent } from './components/class-overview/class-overview.component';
-import { ClassmateProfileComponent } from './components/classmateProfile/classmateProfile.component';
+import { ClassmateProfileComponent } from './components/classmate-profile/classmate-profile.component';
 import { AvatarComponent } from './components/avatar/avatar.component';
 import { BubbleDetailsComponent } from './components/bubble-details/bubble-details.component';
 import { TeacherOverviewComponent } from './components/teacher-overview/teacher-overview.component';
@@ -31,7 +31,7 @@ const routes: Routes = [
   { path: 'session', component: SessionComponent, canDeactivate: [SessionGuardService] },
   { path: 'profile', component: ProfileComponent, canActivate: [AuthGuardService]},
   { path: 'class-overview', component: ClassOverviewComponent, canActivate: [AuthGuardService] },
-  { path: 'classmateProfile/:id', component: ClassmateProfileComponent, canActivate: [AuthGuardService] },
+  { path: 'classmate-profile/:id', component: ClassmateProfileComponent, canActivate: [AuthGuardService] },
   { path: 'avatar', component: AvatarComponent, canActivate: [AuthGuardService] },
   { path: 'bubble-details', component: BubbleDetailsComponent, canActivate: [AuthGuardService] },
   { path: 'teacher-overview', component: TeacherOverviewComponent, canActivate: [AuthGuardService], data: {roles: [Role.teacher]}},

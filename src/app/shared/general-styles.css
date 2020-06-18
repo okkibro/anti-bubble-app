@@ -27,22 +27,15 @@ mat-card-header {
     display: inline-block;
 }
 
-mat-card a:hover{
-    background-color: #8ab0b1;
-}
-
 mat-card img{
     object-fit: cover; 
     width: 50%; 
     height: 50%;
 }
 
-mat-tab-group,
-mat-tab {
-    text-align: center;
-    justify-content: center;
-    align-items: center; 
-    display: flex;
+mat-card button {
+    color: white;
+    background: transparent url("../../assets/images/Super_map/Basic_Buttons/Button_red_rectangle.png") round;
 }
 
 .UItable {
@@ -52,29 +45,6 @@ mat-tab {
 .UItable th, td {
     text-align: left;
     padding: 10px;    
-}
-
-::ng-deep .mat-simple-snackbar-action {
-    color: white;
-}
-
-::ng-deep .style-error {
-    color: white;
-    background-color: red;
-}
-
-::ng-deep .style-succes {
-    color: white;
-    background-color: green;
-}
-
-::ng-deep .style-warning {
-    color: black;
-    background-color: yellow;
-}
-
-::ng-deep .style-warning .mat-simple-snackbar-action {
-    color: black;
 }
 
 .footer {
@@ -112,11 +82,4 @@ mat-tab {
 
 #buttonMedaille {
     background: transparent url("../../assets/images/Super_map/Shop_UI/Button_Medals.png") round;
-}
-
-/* Class for scaling the avatar and shop category buttons. */
-.buttons {
-    color: transparent;
-    height: 5em;
-    width: calc(var(--height));
 }

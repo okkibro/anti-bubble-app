@@ -11,12 +11,12 @@
     <mat-divider></mat-divider>
     <button *ngIf="userDetails?.role == 'teacher'" mat-button [routerLink]="'/teacher-overview'" (click)="onSidenavClose()">
         <i class="material-icons">class</i>
-        Klas Overzicht
+        Klas overzicht
     </button>
     <mat-divider *ngIf="userDetails?.role == 'teacher'"></mat-divider>
     <button *ngIf="userDetails?.role == 'student'" mat-button [routerLink]="'/class-overview'" (click)="onSidenavClose()">
         <i class="material-icons">class</i>
-        Klas Overzicht
+        Klas overzicht
     </button>
     <mat-divider *ngIf="userDetails?.role == 'student'"></mat-divider>
     <button mat-button [routerLink]="'/profile'" (click)="onSidenavClose()">

@@ -8,7 +8,7 @@
             <div class="container-div" fxLayoutGap="10px" fxLayout="column" fxLayoutAlign="space-evenly">
                 <mat-card *ngIf="userClassTitle">
                     <mat-card-header>
-                        <mat-card-title> Klassen Overzicht </mat-card-title>
+                        <mat-card-title> Klas overzicht </mat-card-title>
                         <mat-card-subtitle>
                             Overzicht van alle spelers van klas {{userClassTitle}}.
                         </mat-card-subtitle>
@@ -20,48 +20,24 @@
                         <table class="UItable" id="table">
                             <tr>
                                 <th>Naam</th>
-                                <th>Status</th>
                             </tr>
                             <tr *ngFor="let classmate of classmates">
                                 <td>{{ classmate.firstName }}</td>
-                                <td>Online</td>
-                                <td><a mat-flat-button [routerLink]="'/classmateProfile/' + classmate._id" [ngClass]="{'my-custom-theme': true}" color="accent"> Bekijk Profiel </a></td>
+                                <td><button mat-button [routerLink]="'/classmate-profile/' + classmate._id" > Bekijk Profiel </button></td>
                             </tr>
                         </table>
                     </mat-card-content>
                 </mat-card>
 
-                <mat-card class="searchBar" [formGroup]="searchBar" *ngIf="userClassTitle">
+                <mat-card [formGroup]="searchBar" *ngIf="userClassTitle">
                     <mat-card-header>
                         <mat-card-title>Zoek klasgenoot</mat-card-title>
                     </mat-card-header>
                     <mat-card-content>
-                        <mat-form-field>
+                        <mat-form-field class="classmate-search">
                             <input type="text" matInput formControlName="query" [(ngModel)]="value" placeholder="Zoek hier">
-                            <button mat-button *ngIf="value" matSuffix mat-icon-button aria-label="Clear" (click)="clear()">
-                                <mat-icon>close</mat-icon>
-                            </button>
                         </mat-form-field>
-                        <button mat-flat-button [ngClass]="{'my-custom-theme': true}" color="primary" (click)="search()">Go</button>
-                        <mat-accordion>
-                            <mat-expansion-panel>
-                                <mat-expansion-panel-header>
-                                    <mat-panel-title>
-                                        Klas tonen
-                                    </mat-panel-title>
-                                </mat-expansion-panel-header>
-                                <table class="UItable">
-                                    <tr>
-                                        <th>Voornaam</th>
-                                        <th>Achternaam</th>
-                                    </tr>
-                                    <tr>
-                                        <td>Klasgenoot</td>
-                                        <td>1</td>
-                                    </tr>
-                                </table>
-                            </mat-expansion-panel>
-                        </mat-accordion>
+                        <button mat-button (click)="search()"><i class="material-icons">search</i></button>
                     </mat-card-content>
                 </mat-card>
 

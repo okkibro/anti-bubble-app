@@ -1,8 +1,4 @@
-<mat-toolbar color="primary">
-    <mat-toolbar-row>
-        <span>Anti Bubble</span>
-    </mat-toolbar-row>
-</mat-toolbar>
+<mean-not-logged-in-toolbar></mean-not-logged-in-toolbar>
 <body>
     <div class="container-div" fxLayoutGap="10px" fxLayout="column" fxLayoutAlign="space-evenly">
         <mat-card>
@@ -31,8 +27,7 @@
                             <td>
                                 <mat-form-field>
                                     <mat-label>Wachtwoord</mat-label>
-                                    <input matInput placeholder="Wachtwoord" formControlName="password" type="password"
-                                        required />
+                                    <input matInput placeholder="Wachtwoord" formControlName="password" type="password" required>
                                     <mat-error *ngIf="loginForm.get('password').hasError('required')">
                                         Wachtwoord is <strong>verplicht</strong>
                                     </mat-error>
@@ -40,11 +35,11 @@
                             </td>
                         </tr>
                         <tr>
-                            *Velden met een (*) zijn verplicht.
+                            Velden met een (*) zijn verplicht.
                         </tr>
                     </table>
                     <mat-card-actions>
-                        <button mat-raised-button type="submit" [disabled]="!loginForm.valid" color="primary">Login</button>
+                        <button mat-button type="submit" [disabled]="!loginForm.valid" color="primary">Login</button>
                     </mat-card-actions>
                 </form>
             </mat-card-content>
@@ -59,7 +54,6 @@
         </mat-card>
     </div>
 </body>
-
 <footer class="footer">
     <p> &copy; Utrecht University (ICS)</p>
 </footer>

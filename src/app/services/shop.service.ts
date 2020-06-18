@@ -4,7 +4,6 @@ import { Router } from '@angular/router';
 import { Observable } from "rxjs";
 import { ShopItem } from '../models/shopItem';
 import { CookieService } from 'ngx-cookie-service';
-import { User } from '../models/user';
 
 @Injectable({
   providedIn: 'root'

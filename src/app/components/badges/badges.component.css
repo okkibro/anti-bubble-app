@@ -1,4 +1,4 @@
-.progressBar {
+.progress-bar {
     width: 50%;
     display: inline-block;
 }
@@ -14,4 +14,12 @@
     text-align: center;
     display: inline-block;
     width: 150px;
+}
+
+mat-tab-group,
+mat-tab {
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    display: flex;
 }

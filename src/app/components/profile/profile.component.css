@@ -1,12 +1,3 @@
-::ng-deep .mat-simple-snackbar-action {
-    color: white;
-}
-
-::ng-deep .mat-snack-bar-container {
-    color: white;
-    background-color: rgb(0, 160, 0);
-}
-
 .profile-table {
     border-spacing: 20px 0;
     margin: 0 auto;
@@ -17,10 +8,6 @@
     padding: 5px 0;
 }
 
-mean-avatar-display mat-card img{
-    width: 15%;
-}
-
 .profile-table .top-data {
     font-weight: bold;
 }
@@ -29,6 +16,10 @@ mean-avatar-display mat-card img{
     .profile-table td {
         display: table-row;
     }
+}
+
+mean-avatar-display mat-card img{
+    width: 15%;
 }
 
 .change-password-table {

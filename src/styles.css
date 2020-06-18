@@ -8,3 +8,45 @@ body {
 .mat-drawer {
     background-color: #A7473B !important;
 }
+
+.style-error {
+    color: white !important;
+    background-color: red !important;
+}
+
+.style-succes {
+    color: white !important;
+    background-color: green !important;
+}
+
+.style-warning {
+    color: black !important;
+    background-color: yellow !important;
+}
+
+.mat-slider-thumb,
+.mat-slider-track-fill,
+.mat-slider-thumb-label {
+    background-color: #A7473B !important;
+}
+
+.mat-slider-thumb-label-text {
+    color: white !important;
+}
+
+.mat-focused .mat-form-field-label {
+    color: #AED9DC !important;
+}
+.mat-focused:not(.mat-form-field-invalid) .mat-form-field-ripple {
+    background-color: #AED9DC !important;
+}
+
+.mat-error,
+.mat-form-field-invalid .mat-form-field-label,
+.mat-form-field-invalid {
+    color: red !important;
+}
+
+.mat-form-field-invalid .mat-form-field-ripple {
+    background-color: red !important;
+}

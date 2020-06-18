@@ -1,0 +1,19 @@
+.classmate-profile-table {
+    border-spacing: 20px 0;
+    margin: 0 auto;
+}
+
+.classmate-profile-table td {
+    text-align: left;
+    padding: 5px 0;
+}
+
+.classmate-profile-table .top-data {
+    font-weight: bold;
+}
+
+@media (max-width: 900px) {
+    .classmate-profile-table td {
+        display: table-row;
+    }
+}

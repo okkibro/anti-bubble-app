@@ -1,12 +1,8 @@
 .toolbar {
     height: 50px;
-    box-shadow: 0 3px 10px 0 rgba(0,0,0,0.40);
+    box-shadow: 0 3px 10px 0 rgba(0, 0 ,0, 0.40);
     z-index: 2;
     position: relative;
-}
-
-.toolbar button:hover {
-    color:  #fbe0d0;
 }
 
 .toolbar img {

@@ -15,19 +15,19 @@
                             <table class="profile-table">
                                 <tr>
                                     <td class="top-data">Gebruikersnaam</td>
-                                    <td class="bottom-data">{{ userDetails?.firstName }}</td>
+                                    <td>{{ userDetails?.firstName }}</td>
                                 </tr>
                                 <tr>
                                     <td class="top-data">Volledige naam</td>
-                                    <td class="bottom-data">{{ userDetails?.firstName }} {{ userDetails?.lastName }}</td>
+                                    <td>{{ userDetails?.firstName }} {{ userDetails?.lastName }}</td>
                                 </tr>
                                 <tr>
                                     <td class="top-data">E-mail adres</td>
-                                    <td class="bottom-data">{{ userDetails?.email }}</td>
+                                    <td>{{ userDetails?.email }}</td>
                                 </tr>
                                 <tr *ngIf="userDetails?.role == 'student'">
                                     <td class="top-data">Klas</td>
-                                    <td class="bottom-data">{{ userClassTitle }}</td>
+                                    <td>{{ userClassTitle }}</td>
                                 </tr>
                             </table>
                         </mat-card-content>
@@ -37,9 +37,8 @@
                             <mat-card-title>Avatar</mat-card-title>
                         </mat-card-header><br>
                         <mat-card-content>
-                            <mean-avatar-display class="avatarSize"></mean-avatar-display>
-                            <button mat-flat-button [routerLink]="'/avatar'" [ngClass]="{'my-custom-theme': true}"
-                                color="primary">Avatar aanpassen</button>
+                            <mean-avatar-display></mean-avatar-display>
+                            <button mat-button [routerLink]="'/avatar'">Avatar aanpassen</button>
                         </mat-card-content>
                     </mat-card>
                 </div>
@@ -51,7 +50,7 @@
                         </mat-card-header>
                         <mat-card-content>
                             <mean-bubble-visualisation></mean-bubble-visualisation>
-                            <button mat-flat-button [routerLink]="'/bubble-details'" [ngClass]="{'my-custom-theme': true}" color="accent">Meer details</button>
+                            <button mat-button [routerLink]="'/bubble-details'">Meer details</button>
                         </mat-card-content>
                     </mat-card>
 
@@ -66,12 +65,14 @@
                                     <td>
                                         <strong>{{milestoneShown.name}}</strong><br>
                                         {{milestoneShown.description}}<br>
-                                        Voortgang:
+                                        <i>Voortgang:</i>
                                         {{userDetails?.milestones[milestoneShown.index]}}/{{milestoneShown.maxValue}}
                                     </td>
                                 </tr>
-                            </table><br>
-                            <button mat-button [routerLink]="'/badges'">Alle badges</button>
+                            </table>
+                            <mat-card-footer>
+                                <button mat-button [routerLink]="'/badges'">Alle badges</button>
+                            </mat-card-footer>
                         </mat-card-content>
                     </mat-card>
                 </div>
@@ -121,8 +122,7 @@
                                         </mat-form-field>
                                     </tr>
                                 </table>
-                                <button mat-raised-button type="submit" [disabled]="!changePasswordForm.valid"
-                                    color="primary">Aanpassen</button>
+                                <button mat-button type="submit" [disabled]="!changePasswordForm.valid">Aanpassen</button>
                             </form>
                         </mat-expansion-panel>
                     </mat-accordion>

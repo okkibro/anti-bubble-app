@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { AuthenticationService } from "../../services/authentication.service";
 import { SocketIOService } from 'src/app/services/socket-io.service';
 import { DataService } from 'src/app/services/data-exchange.service';

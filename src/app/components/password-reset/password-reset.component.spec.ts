@@ -1,8 +1,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { PasswordRecoveryService } from '../../services/password-recovery.service';
-import { RouterModule } from '@angular/router';
-import { ActivatedRoute } from "@angular/router";
-import { ReactiveFormsModule, FormBuilder, FormsModule  } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
 
 import { PasswordResetComponent } from './password-reset.component';
 import { NO_ERRORS_SCHEMA } from '@angular/core';

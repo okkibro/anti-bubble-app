@@ -27,10 +27,7 @@ router.post('/register', (req, res) => {
     user.setPassword(sanitize(req.body.password));
     user.inventory = [];
     user.milestones = [];
-    user.bubbleInit = true;
-    if (user.role == 'student') {
-        user.bubbleInit = false;
-    }
+    user.bubbleInit = user.role !== 'student';
     user.currency = 0;
     user.class = [];
 
@@ -280,7 +277,7 @@ router.post('/milestone', auth, (req, res) => {
     User.findById(req.payload._id, (err, user) => { // Get currently logged in user
         let milestone = req.body.milestone;
         let completed = false;
-        if (user.milestones[milestone.index] == milestone.maxValue) { // Check if milestone is already completed
+        if (user.milestones[milestone.index] === milestone.maxValue) { // Check if milestone is already completed
             res.json({ updatedValue: milestone.maxValue, completed: completed }); // Return completed false because it was already completed
         } else {
             user.milestones[milestone.index] += req.body.value; // Add value to milestone

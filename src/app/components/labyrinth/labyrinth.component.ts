@@ -1,4 +1,4 @@
-import { Component, OnInit, HostListener } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 import { User } from "../../models/user";
 import { Router } from "@angular/router";
 import { SessionService } from '../../services/session.service';

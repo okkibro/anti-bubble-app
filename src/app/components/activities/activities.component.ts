@@ -7,7 +7,6 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { AuthenticationService } from 'src/app/services/authentication.service';
 import { User } from '../../models/user';
 import { beforeUnload } from '../../../../constants';
-import { Articles } from '../../models/articles';
 import { SessionService } from 'src/app/services/session.service';
 
 @Component({

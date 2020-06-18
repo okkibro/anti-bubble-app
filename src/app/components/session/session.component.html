@@ -70,10 +70,8 @@
                             <table class="submitTable"></table>
                             TODO: maak dit. <br>
                             <br>
-                            <button mat-flat-button *ngIf="!gameFinished" (click)="stopGame()"
-                                [ngClass]="{'my-custom-theme': true}" color="accent">Stop Activiteit</button>
-                            <button mat-flat-button *ngIf="gameFinished" (click)="leaveGame()"
-                                [ngClass]="{'my-custom-theme': true}" color="accent">Home</button>
+                            <button mat-button *ngIf="!gameFinished" (click)="stopGame()" >Stop Activiteit</button>
+                            <button mat-button *ngIf="gameFinished" (click)="leaveGame()" >Home</button>
                         </mat-card-content>
 
 
@@ -81,10 +79,8 @@
                             <mean-answer-form *ngIf="enableQuestions"></mean-answer-form>
                             <table class="submitTable"></table>
                             <br>
-                            <button mat-flat-button *ngIf="!gameFinished" (click)="stopGame()"
-                                [ngClass]="{'my-custom-theme': true}" color="accent">Stop Activiteit</button>
-                            <button mat-flat-button *ngIf="gameFinished" (click)="leaveGame()"
-                                [ngClass]="{'my-custom-theme': true}" color="accent">Home</button>
+                            <button mat-button *ngIf="!gameFinished" (click)="stopGame()" >Stop Activiteit</button>
+                            <button mat-button *ngIf="gameFinished" (click)="leaveGame()" >Home</button>
                         </mat-card-content>
 
 
@@ -92,20 +88,16 @@
                             <mean-answer-form *ngIf="enableQuestions"></mean-answer-form>
                             <table class="submitTable"></table>
                             <br>
-                            <button mat-flat-button *ngIf="!gameFinished" (click)="stopGame()"
-                                [ngClass]="{'my-custom-theme': true}" color="accent">Stop Activiteit</button>
-                            <button mat-flat-button *ngIf="gameFinished" (click)="leaveGame()"
-                                [ngClass]="{'my-custom-theme': true}" color="accent">Home</button>
+                            <button mat-button *ngIf="!gameFinished" (click)="stopGame()" >Stop Activiteit</button>
+                            <button mat-button *ngIf="gameFinished" (click)="leaveGame()" >Home</button>
                         </mat-card-content>
 
 
                         <mat-card-content *ngIf="gameData?.game.name == 'Aanradend Algoritme'">
                             <!-- TODO: deze heeft een andere game finished -->
                             TODO: Video/poppetje laten zien of iets. <br>
-                            <button mat-flat-button *ngIf="!gameFinished" (click)="stopGame()"
-                                [ngClass]="{'my-custom-theme': true}" color="accent">Stop Activiteit</button>
-                            <button mat-flat-button *ngIf="gameFinished" (click)="leaveGame()"
-                                [ngClass]="{'my-custom-theme': true}" color="accent">Home</button>
+                            <button mat-button *ngIf="!gameFinished" (click)="stopGame()" >Stop Activiteit</button>
+                            <button mat-button *ngIf="gameFinished" (click)="leaveGame()" >Home</button>
                         </mat-card-content>
                     </mat-card>
                 </div>

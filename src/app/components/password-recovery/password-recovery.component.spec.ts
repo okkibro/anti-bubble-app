@@ -1,7 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { PasswordRecoveryService } from '../../services/password-recovery.service';
 import { RouterModule } from '@angular/router';
-import { ReactiveFormsModule  } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { of } from 'rxjs';
 

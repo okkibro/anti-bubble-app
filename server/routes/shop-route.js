@@ -39,7 +39,7 @@ router.post('/buy', auth, (req, res) => {
             .exec(function (err, user) {
 
                 // Check if the user has enough money and hasnt bought the item yet.
-                if (user.currency >= req.body.item.price && user.inventory.find(x => x._id == req.body.item._id) == null) {
+                if (user.currency >= req.body.item.price && user.inventory.find(x => x._id === req.body.item._id) == null) {
                     user.inventory.push(req.body.item); // Add item to inventory.
                     user.currency -= req.body.item.price; // Pay the money.
                     user.save();

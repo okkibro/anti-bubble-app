@@ -10,21 +10,15 @@ mat-card-title {
    font-size: medium;
 }
 
-::ng-deep .mat-simple-snackbar-action {
-    color: white;
-}
-
-::ng-deep .style-error {
-    color: white;
-    background-color: red;
-}
-
-::ng-deep .style-succes {
-    color: white;
-    background-color: green;
-}
-
 .shop-buy-button {
     width: 40%;
     background: transparent url("../../../assets/images/Super_map/Basic_Buttons/Button_blue_Rectangle.png") round;
+}
+
+.buttons {
+    -webkit-text-fill-color: transparent;
+    -webkit-text-stroke: 0.1em transparent;
+    height: 68%;
+    background: transparent round;
+    color: transparent;
 }

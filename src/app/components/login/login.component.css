@@ -1,12 +1,3 @@
-::ng-deep .mat-simple-snackbar-action {
-    color: white;
-}
-
-::ng-deep .mat-snack-bar-container {
-    color: white;
-    background-color: red;
-}
-
 mat-card-actions {
     margin-bottom: 0;
 }
