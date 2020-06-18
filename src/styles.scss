@@ -457,8 +457,6 @@ $alt-theme: mat-dark-theme($alt-primary, $alt-accent, $alt-warn);
   @include mat-button-theme($alt-theme);
 }
 
-
-
 // .alternative {
 //   @include mat-button-theme($alt-theme);
 //   @include mat-card-theme($alt-theme);
