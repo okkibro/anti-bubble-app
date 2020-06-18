@@ -111,29 +111,32 @@ export class SessionComponent implements OnInit {
                         this.playerCount = this.playerCount - 1; // Display number of players in top right corner.
                     });
 
-                    // Call function that listens for students to submit answers.
-                    this.socketService.listenForSubmits((data) => { // Receive answer from student.
+                    if (this.gameData.game.name != "Naamloos Nieuws") { // Naamloos Nieuws works with a different submit system
 
-                        // Add answer to screen using DOM manipulation.
-                        var submitTable = document.getElementsByClassName('submitTable')[0];
-                        var tablerow = document.createElement('tr');
-                        var breakLine = document.createElement('br');
-                        var deleteButton = document.createElement('button');
-                        deleteButton.style.width = "25px";
-                        deleteButton.style.height = "25px";
-                        deleteButton.style.backgroundColor = "red";
-                        deleteButton.style.color = "white";
-                        deleteButton.innerHTML = "X";
-                        deleteButton.addEventListener("click", () => {
-                           deleteButton.parentElement.remove();
-                           this.socketService.activateStudentButton(data.player);
+                        // Call function that listens for students to submit answers.
+                        this.socketService.listenForSubmits((data) => { // Receive answer from student.
+
+                            // Add answer to screen using DOM manipulation.
+                            var submitTable = document.getElementsByClassName('submitTable')[0];
+                            var tablerow = document.createElement('tr');
+                            var breakLine = document.createElement('br');
+                            var deleteButton = document.createElement('button');
+                            deleteButton.style.width = "25px";
+                            deleteButton.style.height = "25px";
+                            deleteButton.style.backgroundColor = "red";
+                            deleteButton.style.color = "white";
+                            deleteButton.innerHTML = "X";
+                            deleteButton.addEventListener("click", () => {
+                                deleteButton.parentElement.remove();
+                                this.socketService.activateStudentButton(data.player);
+                            });
+                            tablerow.innerHTML = `<strong>${data.player.name}:</strong> ${data.message} `
+                            tablerow.appendChild(deleteButton);
+                            tablerow.appendChild(breakLine);
+                            submitTable.appendChild(tablerow);
+                            this.enableQuestions = false; // Teacher cannot send any questions after having received at least one answer
                         });
-                        tablerow.innerHTML = `<strong>${data.player.name}:</strong> ${data.message} `
-                        tablerow.appendChild(deleteButton);
-                        tablerow.appendChild(breakLine);
-                        submitTable.appendChild(tablerow);
-                        this.enableQuestions = false; // Teacher cannot send any questions after having received at least one answer
-                    });
+                    }
                 }
             });
 
@@ -310,7 +313,7 @@ export class SessionComponent implements OnInit {
                     team.innerHTML += `Speler 1: ${this.leaders[i].name}<br> <i>Source: ${this.sources[i]}<i><br><br>`;
                     let teamSubmits = this.submits[this.leaders[i].email]
                     for (let j = 0; j < teamSubmits.length; j++) {
-                        team.innerHTML += `Speler ${j + 2}: ${teamSubmits[j].player.name}<br> <i>Source: ${teamSubmits[j].source }<i><br><br>`;
+                        team.innerHTML += `Speler ${j + 2}: ${teamSubmits[j].player.name}<br> <i>Source: ${teamSubmits[j].source}<i><br><br>`;
                     }
                     table.appendChild(team);
                 }

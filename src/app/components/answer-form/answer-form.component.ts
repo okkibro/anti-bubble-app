@@ -31,6 +31,10 @@ export class AnswerFormComponent implements OnInit {
     this.auth.profile().subscribe(user => {
       this.userDetails = user;
     })
+
+    this.socketService.reactivateButton(() => { // Reactivate the option to answer after the teacher has deleted the answer
+      this.alreadySubmitted = false;
+    });
   }
 
   // this method lets students submit an answer to the teacher (digiboard).

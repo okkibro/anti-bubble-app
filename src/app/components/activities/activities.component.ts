@@ -55,32 +55,9 @@ export class ActivitiesComponent implements OnInit {
       this.router.navigate(['home']);
     }
 
-    if (this.gameData != undefined && this.gameData.game.name == 'Naamloos Nieuws') {
-      this.naamloosNieuws();
-    }
-
     this.receiveQuestion(); // Check whether or not a teacher has sent a question
 
     this.receiveTeam(); // Get teams from teacher's input
-
-    this.socketService.reactivateButton(() => {
-      this.enableAnswer = true;
-    });
-  }
-
-  naamloosNieuws() {
-    this.sessionService.getArticles().subscribe((articles) => { // Get articles from database
-
-      articles.forEach((data) => {
-        this.articleImages.push(data.image);
-      });
-    });
-
-
-    // let articleSpace = document.getElementsByClassName("article")[0];
-    // let image = document.createElement("image");
-    // image.setAttribute("src", "this.articlesData.image");
-    // articleSpace.appendChild(image);
   }
 
   leaveSession() {
