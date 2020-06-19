@@ -33,53 +33,21 @@ mat-card img{
     height: 50%;
 }
 
-mat-card button {
+.general-link,
+.general-button {
     color: white;
     background: transparent url("../../assets/images/Super_map/Basic_Buttons/Button_red_rectangle.png") round;
 }
 
-.UItable {
+.general-table {
     display: inline-block;
 }
 
-.UItable th, td {
+.general-table th, td {
     text-align: left;
     padding: 10px;    
 }
 
 .footer {
     text-align: center;
-}
-
-/* The following ID's are for the shop and avatar category buttons with an image. */
-#buttonHoofddeksel {
-    background: transparent url("../../assets/images/Super_map/Shop_UI/Button_Hats.png") round;
-}
-
-#buttonHaar {
-    background: transparent url("../../assets/images/Super_map/Shop_UI/Button_Hair.png") round;
-}
-
-#buttonBril {
-    background: transparent url("../../assets/images/Super_map/Shop_UI/Button_Glasses.png") round;
-}
-
-#buttonLichaam {
-    background: transparent url("../../assets/images/Super_map/Shop_UI/Button_Skincolor.png") round;
-}
-
-#buttonShirt {
-    background: transparent url("../../assets/images/Super_map/Shop_UI/Button_Shirt.png") round;
-}
-
-#buttonBroek {
-    background: transparent url("../../assets/images/Super_map/Shop_UI/Button_Pants.png") round;
-}
-
-#buttonSchoenen {
-    background: transparent url("../../assets/images/Super_map/Shop_UI/Button_Shoes.png") round;
-}
-
-#buttonMedaille {
-    background: transparent url("../../assets/images/Super_map/Shop_UI/Button_Medals.png") round;
 }

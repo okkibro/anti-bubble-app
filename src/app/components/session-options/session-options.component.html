@@ -96,9 +96,9 @@
                                         </tr>
                                     </table>
                                     <br>
-                                    <button
-                                        (click)="createSession({game : 'Naamloos Nieuws', duration : naamloosSlider.value})"
-                                        mat-button>Start Sessie</button>
+                                    <button mat-button class="general-button"
+                                            (click)="createSession({game : 'Naamloos Nieuws', duration : naamloosSlider.value})">
+                                        Start sessie</button>
                                 </div>
                             </mat-expansion-panel>
 
@@ -153,9 +153,9 @@
                                         </tr>
                                     </table>
                                     <br>
-                                    <button
-                                        (click)="createSession({game : 'Botsende Bubbels', duration : botsendeSlider.value, teams : teamOptionBB})"
-                                        mat-button>Start Sessie</button>
+                                    <button mat-button class="general-button"
+                                            (click)="createSession({game : 'Botsende Bubbels', duration : botsendeSlider.value, teams : teamOptionBB})">
+                                        Start sessie</button>
                                 </div>
                             </mat-expansion-panel>
 
@@ -210,9 +210,9 @@
                                         </tr>
                                     </table>
                                     <br>
-                                    <button
-                                        (click)="createSession({game : 'Alternatieve Antwoorden', duration : alternatieveSlider.value, teams: teamOptionAA})"
-                                        mat-button>Start Sessie</button>
+                                    <button mat-button class="general-button"
+                                            (click)="createSession({game : 'Alternatieve Antwoorden', duration : alternatieveSlider.value, teams: teamOptionAA})">
+                                        Start sessie</button>
                                 </div>
                             </mat-expansion-panel>
                             <mat-expansion-panel hideToggle="true">
@@ -262,8 +262,7 @@
                                         </tr>
                                     </table>
                                     <br>
-                                    <button (click)="createSession({game : 'Aanradend Algoritme'})" mat-button>Start
-                                        Sessie</button>
+                                    <button mat-button class="general-button" (click)="createSession({game : 'Aanradend Algoritme'})">Start sessie</button>
                                 </div>
                             </mat-expansion-panel>
                         </mat-accordion>
@@ -271,3 +270,8 @@
                 </mat-card>
             </div>
         </body>
+        <footer class="footer">
+            <p> &copy; Utrecht University (ICS)</p>
+        </footer>
+    </mat-sidenav-content>
+</mat-sidenav-container>

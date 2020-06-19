@@ -7,7 +7,7 @@
             </mat-card-header>
             <mat-card-content>
                 <form name="registerForm" class="example-form" [formGroup]="registerForm" (ngSubmit)="registerUser()">
-                    <table class="UItable">
+                    <table class="general-table">
                         <tr>
                             <td>
                                 <mat-form-field>
@@ -84,7 +84,7 @@
                         </tr>
                     </table>
                     <mat-card-actions>
-                        <button mat-button type="submit" [disabled]="!registerForm.valid" color="primary">Registreer</button>
+                        <button mat-button class="general-button" type="submit" [disabled]="!registerForm.valid" color="primary">Registreer</button>
                     </mat-card-actions>
                 </form>
             </mat-card-content>

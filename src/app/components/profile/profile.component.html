@@ -38,7 +38,7 @@
                         </mat-card-header><br>
                         <mat-card-content>
                             <mean-avatar-display></mean-avatar-display>
-                            <button mat-button [routerLink]="'/avatar'">Avatar aanpassen</button>
+                            <a mat-button class="general-link" [routerLink]="'/avatar'">Avatar aanpassen</a>
                         </mat-card-content>
                     </mat-card>
                 </div>
@@ -50,7 +50,7 @@
                         </mat-card-header>
                         <mat-card-content>
                             <mean-bubble-visualisation></mean-bubble-visualisation>
-                            <button mat-button [routerLink]="'/bubble-details'">Meer details</button>
+                            <a mat-button class="general-link" [routerLink]="'/bubble-details'">Meer details</a>
                         </mat-card-content>
                     </mat-card>
 
@@ -60,7 +60,7 @@
                             <mat-card-subtitle>Badge met de meeste voortgang</mat-card-subtitle>
                         </mat-card-header>
                         <mat-card-content>
-                            <table class="UItable">
+                            <table class="general-table">
                                 <tr *ngIf="milestoneShown.name !='Gefeliciteerd'">
                                     <td>
                                         <strong>{{milestoneShown.name}}</strong><br>
@@ -71,7 +71,7 @@
                                 </tr>
                             </table>
                             <mat-card-footer>
-                                <button mat-button [routerLink]="'/badges'">Alle badges</button>
+                                <a mat-button class="general-link" [routerLink]="'/badges'">Alle badges</a>
                             </mat-card-footer>
                         </mat-card-content>
                     </mat-card>
@@ -122,7 +122,7 @@
                                         </mat-form-field>
                                     </tr>
                                 </table>
-                                <button mat-button type="submit" [disabled]="!changePasswordForm.valid">Aanpassen</button>
+                                <button mat-button class="general-button" type="submit" [disabled]="!changePasswordForm.valid">Aanpassen</button>
                             </form>
                         </mat-expansion-panel>
                     </mat-accordion>

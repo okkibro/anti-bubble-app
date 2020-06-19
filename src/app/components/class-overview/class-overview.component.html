@@ -17,13 +17,14 @@
 
                 <mat-card *ngIf="userClassTitle">
                     <mat-card-content>
-                        <table class="UItable" id="table">
+                        <table class="general-table" id="table">
                             <tr>
                                 <th>Naam</th>
+                                <th></th>
                             </tr>
                             <tr *ngFor="let classmate of classmates">
                                 <td>{{ classmate.firstName }}</td>
-                                <td><button mat-button [routerLink]="'/classmate-profile/' + classmate._id" > Bekijk Profiel </button></td>
+                                <td><a mat-button class="general-link" [routerLink]="'/classmate-profile/' + classmate._id" > Bekijk Profiel </a></td>
                             </tr>
                         </table>
                     </mat-card-content>
@@ -37,7 +38,7 @@
                         <mat-form-field class="classmate-search">
                             <input type="text" matInput formControlName="query" [(ngModel)]="value" placeholder="Zoek hier">
                         </mat-form-field>
-                        <button mat-button (click)="search()"><i class="material-icons">search</i></button>
+                        <button mat-button class="general-button" (click)="search()"><mat-icon>search</mat-icon></button>
                     </mat-card-content>
                 </mat-card>
 

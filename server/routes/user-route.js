@@ -3,7 +3,6 @@ const router = express.Router();
 const mongoose = require('mongoose');
 const passport = require("passport");
 const User = mongoose.model('User');
-const Classes = mongoose.model('Classes');
 const sanitize = require('mongo-sanitize');
 const nodemailer = require('nodemailer');
 const crypto = require('crypto');
@@ -66,16 +65,6 @@ router.post('/register', (req, res) => {
             });
         });
     });
-
-
-
-    // user.avatar = { lichaam:  mongoose.Types.ObjectId('5edcf97b1167982a005b9737'),
-    //                 broek: mongoose.Types.ObjectId('5edcf97b1167982a005b977e'),
-    //                 shirt: mongoose.Types.ObjectId('5edcbf271167982a005b9525')
-    // }
-    // user.markModified('avatar');
-
-    
 });
 
 /** Post method to check if login details match with the database (authentication). */
@@ -112,7 +101,6 @@ router.post('/passwordrecovery', async (req, res) => {
     // Find the user with the given email and set the token.
     User.findOne({ email: req.body.email }, (error, user) => {
         if (!user) {
-            console.log("no user with that email");
             res.json({ succes: false, message: "Geen gebruiker gevonden met het gegeven email adres" });
             return res.end();
         }
@@ -190,24 +178,20 @@ router.post('/reset/:token', (req, res) => {
             return res.end();
         }
 
-        // Change the password in the database.
-        if (req.body.password === req.body.confirmPassword) {
-            user.setPassword(req.body.password, (error) => {
-                if (error) { return console.log(error.message); }
-            });
-        } else {
-            console.log("password and confirmation are not the same");
-            res.json({ succes: false, message: "wachtwoord en bevestiging zijn niet hetzelfde" });
-            return res.end();
-        }
+        user.setPassword(req.body.password, (error) => {
+            if (error) {
+                return console.log(error.message);
+            }
+        });
 
         user.recoverPasswordToken = undefined;
         user.recoverPasswordExpires = undefined;
 
         user.save((error) => {
-            if (error) { return console.log(error.message); }
-            console.log("password change succesful");
-            res.json({ succes: true, message: "wachtwoord succesvol veranderd" });
+            if (error) {
+                return console.log(error.message);
+            }
+            res.json({ succes: true, message: "Wachtwoord succesvol verandert" });
             res.status(200).end();
         });
     });

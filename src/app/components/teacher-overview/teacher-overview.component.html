@@ -10,7 +10,7 @@
                     <mat-card fxFlex="100%">
                         <mat-card-header *ngIf="currentClass == undefined">
                             <mat-card-title class="welcomeHeader">Klas overzicht</mat-card-title>
-                            <button mat-button (click)="onClickOpenForm()">Maak een nieuwe klas aan</button>
+                            <button class="general-button" mat-button (click)="onClickOpenForm()">Maak een nieuwe klas aan</button>
                         </mat-card-header>
                         <mat-card-header *ngIf="currentClass">
                             <mat-card-title> Klas overzicht </mat-card-title>
@@ -20,7 +20,7 @@
                         </mat-card-header>
                         <mat-card-content>
                             <div *ngIf="userDetails?.class.length > 0">
-                                <button mat-button [disabled]="loading" (click)="onClickSelectKlas()" > Verander van klas</button>
+                                <button mat-button class="general-button" [disabled]="loading" (click)="onClickSelectKlas()">Verander van klas</button>
                                 <div [hidden]="!selectklas">
                                     <div>
                                         <mat-button-toggle-group #group="matButtonToggleGroup">
@@ -30,24 +30,25 @@
                                         </mat-button-toggle-group>
                                     </div>
                                     <div>
-                                        <button mat-button (click)="onClickOpenForm()" >Maak een nieuwe klas aan</button>
+                                        <button class="general-button" mat-button (click)="onClickOpenForm()">Maak een nieuwe klas aan</button>
                                     </div>
                                 </div>
                             </div>
-                            <table *ngIf="currentClass?.students?.length > 0" class="UItable" id="table">
+                            <table *ngIf="currentClass?.students?.length > 0" class="general-table">
                                 <tr>
                                     <th>Naam</th>
+                                    <th></th>
                                 </tr>
                                 <tr *ngFor="let classmate of classmates">
                                     <td>{{ classmate.firstName }}</td>
-                                    <td><button mat-button [routerLink]="'/classmate-profile/' + classmate._id" > Bekijk Profiel </button></td>
+                                    <td><a mat-button class="general-link" [routerLink]="'/classmate-profile/' + classmate._id">Bekijk Profiel</a></td>
                                 </tr>
                             </table>
-                            <p class="no-students-header" *ngIf="currentClass?.students?.length == 0 || currentClass == undefined"> De klas heeft nog geen leerlingen</p>
+                            <p class="no-students-header" *ngIf="currentClass?.students?.length == 0 || currentClass == undefined">De klas heeft nog geen leerlingen</p>
                         </mat-card-content>
                         <form [hidden]="!openform" name="classForm" class="example-form" [formGroup]="classForm"
                             (ngSubmit)="createClass()">
-                            <table class="UItable">
+                            <table class="general-table">
                                 <tr>
                                     <td>
                                         <mat-form-field>
@@ -85,7 +86,7 @@
                                 </tr>
                             </table>
                             <mat-card-actions>
-                                <button mat-button type="submit" [disabled]="!classForm.valid">Aanmaken</button>
+                                <button class="general-button" mat-button type="submit" [disabled]="!classForm.valid">Aanmaken</button>
                             </mat-card-actions>
                         </form>
                     </mat-card>

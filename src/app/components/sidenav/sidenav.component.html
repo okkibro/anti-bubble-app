@@ -1,31 +1,31 @@
 <mat-list fxLayout="column" class="sidenav">
     <button mat-button (click)="onSidenavClose()">
-        <i class="material-icons">menu</i>
+        <mat-icon>menu</mat-icon>
         <img src="assets/images/Super_map/Other/logo.png" alt="">
     </button>
     <mat-divider></mat-divider>
     <button mat-button [routerLink]="'/home'" (click)="onSidenavClose()">
-        <i class="material-icons">home</i>
+        <mat-icon>home</mat-icon>
         Home
     </button>
     <mat-divider></mat-divider>
-    <button *ngIf="userDetails?.role == 'teacher'" mat-button [routerLink]="'/teacher-overview'" (click)="onSidenavClose()">
-        <i class="material-icons">class</i>
+    <button mat-button [routerLink]="'/teacher-overview'" *ngIf="userDetails?.role == 'teacher'" (click)="onSidenavClose()">
+        <mat-icon>class</mat-icon>
         Klas overzicht
     </button>
     <mat-divider *ngIf="userDetails?.role == 'teacher'"></mat-divider>
-    <button *ngIf="userDetails?.role == 'student'" mat-button [routerLink]="'/class-overview'" (click)="onSidenavClose()">
-        <i class="material-icons">class</i>
+    <button mat-button [routerLink]="'/class-overview'" *ngIf="userDetails?.role == 'student'" (click)="onSidenavClose()">
+        <mat-icon>class</mat-icon>
         Klas overzicht
     </button>
     <mat-divider *ngIf="userDetails?.role == 'student'"></mat-divider>
     <button mat-button [routerLink]="'/profile'" (click)="onSidenavClose()">
-        <i class="material-icons">person</i>
+        <mat-icon>person</mat-icon>
         Profiel
     </button>
     <mat-divider></mat-divider>
     <button mat-button (click)="logoutButton()">
-        <i class="material-icons">login</i>
+        <mat-icon>login</mat-icon>
         Log uit
     </button>
     <mat-divider></mat-divider>

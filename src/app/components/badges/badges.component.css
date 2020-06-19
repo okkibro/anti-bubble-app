@@ -3,13 +3,13 @@
     display: inline-block;
 }
 
-.UItable {
+.general-table {
     padding: 10px;
     border-spacing: 70px 0;
     margin: 10px;
 }
 
-.UItable td{
+.general-table td{
     padding: 20px;
     text-align: center;
     display: inline-block;
