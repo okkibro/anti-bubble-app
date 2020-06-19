@@ -28,6 +28,14 @@ router.post('/register', (req, res) => {
     user.inventory = [];
     user.milestones = [];
     user.bubbleInit = true;
+    user.bubble = {
+        online:     0,
+        social:     0,
+        mainstream: 0,
+        categorie1: 0,
+        categorie2: 0,
+        techSavvy:  0,
+    }
     if (user.role == 'student') {
         user.bubbleInit = false;
     }

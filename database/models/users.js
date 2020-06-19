@@ -83,6 +83,19 @@ let userSchema = new Schema({
     labyrinthAnswers: {
         type: [[Boolean]],
     },
+    bubble: {
+        type: {
+            online:     Number,
+            social:     Number,
+            mainstream: Number,
+
+            categorie1: Number,
+            categorie2: Number,
+
+            techSavvy:  Number,
+        },
+        required: true
+    },
 });
 
 // Method to set a hashed password for a user.
