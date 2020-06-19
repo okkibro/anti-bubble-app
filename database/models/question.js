@@ -6,6 +6,7 @@ let questionSchema = new Schema({
     question: String,
     part: Number,
     choices: [String],
+    choiceConsequence: [String],
     multipleAnswers: Boolean,
 });
 

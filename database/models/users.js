@@ -65,13 +65,6 @@ let userSchema = new Schema({
         },
         required: false
     },
-    knowledge: {
-        type: [Number]
-    },
-
-    diversity: {
-        type: [Number]
-    },
     recentMilestones: {
         type: [String],
         required: true
@@ -89,8 +82,10 @@ let userSchema = new Schema({
             social:     Number,
             mainstream: Number,
 
-            categorie1: Number,
-            categorie2: Number,
+            category1:  Number,
+            category2:  Number,
+
+            knowledge:  Number,
 
             techSavvy:  Number,
         },

@@ -21,4 +21,5 @@ export class User {
     recentMilestones: [String];
     bubbleInit: boolean;
     avatar: any;
+    bubble: any;
 }

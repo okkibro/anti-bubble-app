@@ -4,6 +4,7 @@ import { Router } from "@angular/router";
 import { SessionService } from '../../services/session.service';
 import { AuthenticationService } from '../../services/authentication.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { BubbleGraphService } from 'src/app/services/bubble-graph.service';
 
 @Component({
   selector: 'mean-labyrinth',
@@ -30,7 +31,7 @@ export class LabyrinthComponent implements OnInit {
     }
   };
 
-  constructor(private router: Router, private sessionService: SessionService, private auth: AuthenticationService, private snackBar: MatSnackBar) { }
+  constructor(private router: Router, private sessionService: SessionService, private auth: AuthenticationService, private snackBar: MatSnackBar, private bubbleService: BubbleGraphService) { }
 
   ngOnInit(): void {
     // Start the labyrinth in part 1.
@@ -152,6 +153,7 @@ export class LabyrinthComponent implements OnInit {
     for (let i = 0; i < checkboxes.length; i++) { // Loop over all the checkboxes.
       result.push(checkboxes[i].checked); // Save checked in result array.
     }
+    this.updateBubble(result, question)
     this.answers.push({ question: question, answer: result }); // Push the result with its corresponding question to this.answers.
   }
 
@@ -170,5 +172,16 @@ export class LabyrinthComponent implements OnInit {
       options += `<input type="${type}" class="option" name="options">${question.choices[i]}</input><br>` // Add a checkbox/radiobutton to options.
     }
     radioGroup.innerHTML = options; // Place all checkboxes/radiobuttons on the screen.
+  }
+
+  /** Function that updates bubble values based on the answer given */
+  updateBubble(result, question) {
+    let consequences = question.choiceConsequence;
+    for (let i = 0; i < result.length; i++){
+      if(result[i] && consequences[i] != ""){
+        console.log(consequences[i]);
+        this.bubbleService.updateBubble(consequences[i]).subscribe();
+      }
+    }
   }
 }

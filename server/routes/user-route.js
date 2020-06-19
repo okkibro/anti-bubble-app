@@ -34,6 +34,7 @@ router.post('/register', (req, res) => {
         mainstream: 0,
         categorie1: 0,
         categorie2: 0,
+        knowledge:  0,
         techSavvy:  0,
     }
     if (user.role == 'student') {
@@ -331,4 +332,19 @@ router.post('/updateGraph', auth, (req, res) => {
     );
 });
 
+/** Post method to update user bubble */
+router.post('/updateBubble', auth, (req, res) => {
+    User.findById(req.payload._id, (err, user) => {
+        console.log(user.bubble[req.body.bubbleConsequence]);
+        user.bubble[req.body.bubbleConsequence]++;
+        console.log(user.bubble[req.body.bubbleConsequence]);
+        user.markModified('bubble');
+        user.save((error) => { 
+            if (error){
+                console.log(error.message);
+            }
+            res.status(200).json({message: "done"});
+        });
+    });
+});
 module.exports = router;
