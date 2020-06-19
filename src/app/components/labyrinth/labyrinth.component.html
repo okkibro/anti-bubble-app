@@ -26,8 +26,6 @@
                                 src="https://www.bodytolk.nl/wp-content/uploads/2018/10/Doolhof-e1540134886809.png"
                                 id="doolhof" alt="tijdelijk doolhof">
                             <br>
-                            <button mat-button (click)="performedLabyrinth()">Klaar</button> wordt aangeroepen als tijd
-                            op is
                             <button mat-button (click)="startLabyrinth()">Start</button>
                         </mat-card-content>
 
@@ -36,8 +34,13 @@
 
                             <p id="question"></p>
 
-                            <mat-radio-group class="radioButtonOptions">
-                            </mat-radio-group><br>
+                            <div class="radioOptions"></div> <br>
+
+                            <!-- <mat-radio-group class="radioButtonOptions">
+                               <mat-radio-button class="radioButton" value='1'></mat-radio-button>    *ngFor="let option of questionOptions" 
+                               <mat-radio-button class="radioButton" value="2"></mat-radio-button> 
+                               <mat-radio-button class="radioButton" value="3"></mat-radio-button> 
+                            </mat-radio-group><br> -->
 
                             <button mat-flat-button (click)="nextQuestion(currentQuestion)"
                                 [disabled]="nextQuestionDisabled">Volgende</button>

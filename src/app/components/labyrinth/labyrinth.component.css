@@ -6,6 +6,7 @@
 #question {
     font-size: 45px;
     margin-bottom: 0px;
+    margin-top: 5px;
 }
 
 .radioButtonOptions {
@@ -16,7 +17,7 @@
 
 #stopButton {
     right: 3%;
-    top: 10%;
+    top: 4%;
     float: right;
     width: 50px;
     position: absolute;
