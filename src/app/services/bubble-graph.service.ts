@@ -18,7 +18,6 @@ export class BubbleGraphService {
 
   /** Method to do a POST request to the backend to update the bubble statistics of a user */
   public updateBubble(consequence : String){
-    console.log(consequence);
     return this.http.post("https://localhost:3000/user/updateBubble", {bubbleConsequence : consequence}, {headers :  { Authorization: 'Bearer ' + this.cookie.get('mean-token')}}); 
   }
 }

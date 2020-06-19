@@ -335,9 +335,7 @@ router.post('/updateGraph', auth, (req, res) => {
 /** Post method to update user bubble */
 router.post('/updateBubble', auth, (req, res) => {
     User.findById(req.payload._id, (err, user) => {
-        console.log(user.bubble[req.body.bubbleConsequence]);
         user.bubble[req.body.bubbleConsequence]++;
-        console.log(user.bubble[req.body.bubbleConsequence]);
         user.markModified('bubble');
         user.save((error) => { 
             if (error){
