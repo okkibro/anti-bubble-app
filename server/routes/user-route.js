@@ -32,8 +32,8 @@ router.post('/register', (req, res) => {
         online:     0,
         social:     0,
         mainstream: 0,
-        categorie1: 0,
-        categorie2: 0,
+        category1:  0,
+        category2:  0,
         knowledge:  0,
         techSavvy:  0,
     }
