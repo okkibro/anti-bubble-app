@@ -1,4 +1,4 @@
-import { Component, OnInit, HostListener } from '@angular/core';
+import { Component, OnInit, HostListener, Input } from '@angular/core';
 import { User } from "../../models/user";
 import { Router } from "@angular/router";
 import { SessionService } from '../../services/session.service';
@@ -167,8 +167,27 @@ export class LabyrinthComponent implements OnInit {
       type = "radio";
     }
     for (let i = 0; i < question.choices.length; i++) { // For each question...
-      options += `<input type="${type}" class="option" name="options">${question.choices[i]}</input><br>` // Add a checkbox/radiobutton to options.
+      if (question.choices[i].startsWith("/assets/")) {
+        options += `<input type="${type}" class="option" name="options"><img src="${question.choices[i]}" id="image${i}"></img></input><br>` // Add a checkbox/radiobutton to options.
+      } else {
+        options += `<input type="${type}" class="option" name="options">${question.choices[i]}</input><br>` // Add a checkbox/radiobutton to options.
+      }
     }
     radioGroup.innerHTML = options; // Place all checkboxes/radiobuttons on the screen.
+
+    for (let i = 0; i < question.choices.length; i++) {
+      let image = document.getElementById(`image${i}`);
+      if (image != null) {
+        image.addEventListener("click", () => {
+          let checkbox:any = document.getElementsByClassName("option")[i];
+          checkbox.checked = !checkbox.checked;
+          if (this.checkBoxCount() == 0) {
+            this.nextQuestionDisabled = true;
+          } else {
+            this.nextQuestionDisabled = false;
+          }
+        });
+      }
+    }
   }
 }

@@ -185,6 +185,7 @@ export class SessionComponent implements OnInit {
         }
     }
 
+    /** Function that takes the game name and will return whether the game can start or not. */
     canStart(game: string): Boolean {
         switch (game) {
             case "Naamloos Nieuws":
@@ -199,17 +200,17 @@ export class SessionComponent implements OnInit {
         }
     }
 
+    /** Function that initializes the game based on the given game name. */
     initGame(game: string) {
         switch (game) {
             case "Naamloos Nieuws":
-                this.sessionService.getArticles().subscribe((articles) => { // Get articles from database
-                    this.pairStudents(null, 3, articles, (pairs, leaders, sources) => {
+                this.sessionService.getArticles().subscribe((articles) => { // Get articles from database.
+                    this.pairStudents(null, 3, articles, (pairs, leaders, sources) => { // Divide students in groups of 3.
                         this.leaders = leaders;
                         this.pairs = pairs;
                         this.sources = sources;
-                        console.log(this.sources);
                         for (let i = 0; i < leaders.length; i++) {
-                            this.submits[leaders[i].email] = [];
+                            this.submits[leaders[i].email] = []; // Make a list in submits for every leader.
                         }
 
                         this.socketService.listenForSubmits(submit => {

@@ -140,10 +140,12 @@ export class SocketIOService {
         this.removedListeners;
     }
 
+    /** Function that will make a player's inactive button active again. */
     activateStudentButton(player) {
         this.socket.emit('reactivate-button', player);
     }
 
+    /** Function that will take a callback that will be called when the player's answer got deleted by the teacher. */
     reactivateButton(reactivate) {
         this.socket.on('reactivate', () => {
             reactivate();

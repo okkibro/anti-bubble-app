@@ -213,6 +213,7 @@ function runIO(io) {
 			}
 		});
 
+		// This will make the given player's button active again when the teacher removes their answer.
 		socket.on('reactivate-button', (player) => {
 			socket.to(player.playerID).emit('reactivate');
 		});
