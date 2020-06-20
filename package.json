@@ -1,5 +1,5 @@
 {
-  "name": "anti-bubble app",
+  "name": "anti_bubble_app",
   "version": "1.0.0",
   "description": "A MEAN stack application that helps students learn about filter bubbles",
   "main": "index.js",
