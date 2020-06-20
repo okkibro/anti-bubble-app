@@ -12,15 +12,18 @@ import { MatSnackBar } from '@angular/material/snack-bar';
                 '../../shared/general-styles.css']
 })
 
-// TODO: Make sure you can't see attempted password in plain text in "Network" tab in Chrome
-
 export class LoginComponent implements OnInit {
     loginForm = this.fb.group({
         email: ['', [Validators.required, Validators.email]],
         password: ['', Validators.required],
     });
 
-    constructor(private auth: AuthenticationService, private router: Router, private fb: FormBuilder, private snackBar: MatSnackBar) { }
+    constructor(
+        private auth: AuthenticationService,
+        private router: Router,
+        private fb: FormBuilder,
+        private snackBar: MatSnackBar
+    ) { }
 
     ngOnInit() {
         if (this.auth.isLoggedIn()) {
@@ -36,7 +39,7 @@ export class LoginComponent implements OnInit {
         this.auth.login(user).subscribe(() => {
             this.router.navigate(['home']);
         }, () => {
-            this.snackBar.open("Onjuist wachtwoord of email", 'X', {duration: 2500});
+            this.snackBar.open("Onjuist wachtwoord of email", 'X', { duration: 2500, panelClass: ['style-error'] });
         });
     }
 }

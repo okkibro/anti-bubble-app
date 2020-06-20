@@ -236,15 +236,15 @@ router.patch('/updatePassword', (req, res) => {
                 user.setPassword(sanitize(req.body.newPassword));
                 // Save changes to database.
                 user.save();
-                return res.status(200).json({ message: "password changed" });
+                return res.status(200).json({ succes: true, message: "Wachtwoord succesvol verandert" });
             } else {
                 // Handle error if old password doesn't match with the one in database.
-                return res.status(401).json({ message: "password doesn't match with old password"});
+                return res.status(200).json({ success: false, message: "Oude wachtwoord is niet correct"});
             }
         } else {
             console.log("user not found")
             // Handle error if user is not found in database.
-            return res.status(401).json({ message: "user not found" });
+            return res.status(401).json({ succes: false, message: "User not found" });
         }
     });
 });

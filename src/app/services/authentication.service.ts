@@ -93,7 +93,7 @@ export class AuthenticationService {
     }
 
     /** Method to update the password of an already registered user. */ 
-    public updatePassword(email: string, oldPassword: string, newPassword: string) {
+    public updatePassword(email: string, oldPassword: string, newPassword: string): Observable<any> {
         return this.http.patch('https://localhost:3000/user/updatePassword', {email: email, oldPassword: oldPassword, newPassword: newPassword})
     }
 

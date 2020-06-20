@@ -6,47 +6,43 @@
         <mean-toolbar (sidenavToggle)="sidenav.toggle()"></mean-toolbar>
         <body>
             <div class="container-div" fxLayoutGap="10px" fxLayout="column" fxLayoutAlign="space-evenly">
-                <div fxLayout.xs="row" fxLayoutGap="10px" fxLayoutAlign="space-evenly">
-                    <mat-card fxFlex="100%">
-                        <mat-card-header>
-                            <mat-card-title class="welcomeHeader">Winkel</mat-card-title>
-                        </mat-card-header><br>
-                        <mat-card-content  class="currency">
-                            Aantal munten <br>
-                            <b>{{ userDetails?.currency }}</b>
-                        </mat-card-content>
-                    </mat-card>
-                </div>
+                <mat-card>
+                    <mat-card-header>
+                        <mat-card-title class="welcomeHeader">Winkel</mat-card-title>
+                    </mat-card-header><br>
+                    <mat-card-content class="currency">
+                        Aantal munten <br>
+                        <b>{{ userDetails?.currency }}</b>
+                    </mat-card-content>
+                </mat-card>
 
-                <div fxLayout.xs="row"  fxLayoutGap="10px" fxLayoutAlign="space-evenly">
-                    <mat-card  id="itemCollection" fxFlex="100%">
-                        <mat-card-content>
-                            <mat-grid-list cols="8">
-                                <mat-grid-tile><button mat-button class="category-change-button" (click)="tabChange('Hoofddeksel')"   id="buttonHoofddeksel"  [disableRipple]="true">Hoofddeksel  </button></mat-grid-tile>
-                                <mat-grid-tile><button mat-button class="category-change-button" (click)="tabChange('Haar')"          id="buttonHaar"         [disableRipple]="true">Haar         </button></mat-grid-tile>
-                                <mat-grid-tile><button mat-button class="category-change-button" (click)="tabChange('Bril')"          id="buttonBril"         [disableRipple]="true">Bril         </button></mat-grid-tile>
-                                <mat-grid-tile><button mat-button class="category-change-button" (click)="tabChange('Shirt')"         id="buttonShirt"        [disableRipple]="true">Shirt        </button></mat-grid-tile>
-                                <mat-grid-tile><button mat-button class="category-change-button" (click)="tabChange('Broek')"         id="buttonBroek"        [disableRipple]="true">Broek        </button></mat-grid-tile>
-                                <mat-grid-tile><button mat-button class="category-change-button" (click)="tabChange('Schoenen')"      id="buttonSchoenen"     [disableRipple]="true">Schoenen     </button></mat-grid-tile>
-                                <mat-grid-tile><button mat-button class="category-change-button" (click)="tabChange('Medaille')"      id="buttonMedaille"     [disableRipple]="true">Medaille     </button></mat-grid-tile>
-                            </mat-grid-list>
+                <mat-card>
+                    <mat-card-content>
+                        <mat-grid-list cols="8" gdAlignRows="space-evenly">
+                            <mat-grid-tile><button mat-button class="category-change-button" (click)="tabChange('Hoofddeksel')"   id="buttonHoofddeksel"  [disableRipple]="true"></button></mat-grid-tile>
+                            <mat-grid-tile><button mat-button class="category-change-button" (click)="tabChange('Haar')"          id="buttonHaar"         [disableRipple]="true"></button></mat-grid-tile>
+                            <mat-grid-tile><button mat-button class="category-change-button" (click)="tabChange('Bril')"          id="buttonBril"         [disableRipple]="true"></button></mat-grid-tile>
+                            <mat-grid-tile><button mat-button class="category-change-button" (click)="tabChange('Shirt')"         id="buttonShirt"        [disableRipple]="true"></button></mat-grid-tile>
+                            <mat-grid-tile><button mat-button class="category-change-button" (click)="tabChange('Broek')"         id="buttonBroek"        [disableRipple]="true"></button></mat-grid-tile>
+                            <mat-grid-tile><button mat-button class="category-change-button" (click)="tabChange('Schoenen')"      id="buttonSchoenen"     [disableRipple]="true"></button></mat-grid-tile>
+                            <mat-grid-tile><button mat-button class="category-change-button" (click)="tabChange('Medaille')"      id="buttonMedaille"     [disableRipple]="true"></button></mat-grid-tile>
+                        </mat-grid-list>
 
-                            <mat-grid-list cols="4">
-                                <mat-grid-tile *ngFor = "let item of filteredShop" fxFlexAlign="stretch">
-                                        <mat-card fxFlex="100%" fxLayout="column" fxLayoutGap="10px" fxFlexAlign="stretch">
-                                            <mat-card-title fxFlex="20%">{{ item.title }}</mat-card-title>
-                                            <div fxLayoutAlign="center" fxFlex="50%">
-                                                <img mat-card-image src= "{{ item.previewImage }}" alt="{{ item.title }}">
-                                            </div>
-                                           <mat-card-footer fxFlex="20%">
-                                                <button mat-button (click)="buy(item)" class="shop-buy-button">{{ item.price }} <mat-icon>payment</mat-icon></button>
-                                           </mat-card-footer>
-                                        </mat-card>
-                                </mat-grid-tile>
-                            </mat-grid-list>
-                        </mat-card-content>
-                    </mat-card>
-                </div>
+                        <mat-grid-list cols="5" gutterSize="10px">
+                            <mat-grid-tile *ngFor = "let item of filteredShop" fxFlexAlign="stretch">
+                                <mat-card fxLayout="column" fxFlexAlign="stretch">
+                                    <mat-card-title fxFlex="10%">{{ item.title }}</mat-card-title>
+                                    <div fxFlex="60%">
+                                        <img mat-card-image src="{{ item.previewImage }}" alt="{{ item.title }}">
+                                    </div>
+                                   <mat-card-footer fxFlex="10%">
+                                        <button mat-button (click)="buy(item)" class="shop-buy-button">{{ item.price }} <mat-icon>payment</mat-icon></button>
+                                   </mat-card-footer>
+                                </mat-card>
+                            </mat-grid-tile>
+                        </mat-grid-list>
+                    </mat-card-content>
+                </mat-card>
             </div>
         </body>
         <footer class="footer">

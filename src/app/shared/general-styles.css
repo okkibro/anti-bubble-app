@@ -27,12 +27,6 @@ mat-card-header {
     display: inline-block;
 }
 
-mat-card img{
-    object-fit: cover; 
-    width: 50%; 
-    height: 50%;
-}
-
 .general-link,
 .general-button {
     color: white;

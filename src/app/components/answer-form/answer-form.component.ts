@@ -6,51 +6,51 @@ import { User } from '../../models/user';
 import { AuthenticationService } from 'src/app/services/authentication.service';
 
 @Component({
-  selector: 'mean-answer-form',
-  templateUrl: './answer-form.component.html',
-  styleUrls: ['./answer-form.component.css',
-    '../../shared/general-styles.css']
+    selector: 'mean-answer-form',
+    templateUrl: './answer-form.component.html',
+    styleUrls: ['./answer-form.component.css',
+        '../../shared/general-styles.css']
 })
 export class AnswerFormComponent implements OnInit {
 
-  answer = "";
-  question = "";
-  getAnswerForm = this.fb.group({
-    getAnswer: ['', []]
-  });
-  sendQuestionsForm = this.fb.group({
-    getQuestion: ['', []]
-  });
-  userDetails: User;
+    answer = "";
+    question = "";
+    getAnswerForm = this.fb.group({
+        getAnswer: ['', []]
+    });
+    sendQuestionsForm = this.fb.group({
+        getQuestion: ['', []]
+    });
+    userDetails: User;
 
-  constructor(private fb: FormBuilder, private snackBar: MatSnackBar, private socketService: SocketIOService, private auth: AuthenticationService) { }
+    constructor(private fb: FormBuilder, private snackBar: MatSnackBar, private socketService: SocketIOService, private auth: AuthenticationService) { }
 
-  alreadySubmitted:boolean = false;
+    alreadySubmitted:boolean = false;
 
-  ngOnInit(): void {
-    this.auth.profile().subscribe(user => {
-      this.userDetails = user;
-    })
-  }
-
-  // this method lets students submit an answer to the teacher (digiboard).
-  sendAnswer() {
-    if (this.answer != "") {
-      this.socketService.studentSubmit(this.answer);
-      this.answer = "";
-      this.alreadySubmitted = true; // prevents students from spamming the teacher with answers
-    } else {
-      this.snackBar.open('Vul een antwoord in', 'X', { duration: 2500, panelClass: ['style-error'], });
+    ngOnInit(): void {
+        this.auth.profile().subscribe(user => {
+            this.userDetails = user;
+        })
     }
-  }
 
-  // this method lets a teacher submit a question to all of the students in the session.
-  sendQuestion() {
-    if (this.question != "") {
-      this.socketService.sendQuestion(this.question);
-      this.question = "";
-    } else {
-      this.snackBar.open('Vul een vraag in', 'X', { duration: 2500, panelClass: ['style-error'], });
+    // this method lets students submit an answer to the teacher (digiboard).
+    sendAnswer() {
+        if (this.answer != "") {
+            this.socketService.studentSubmit(this.answer);
+            this.answer = "";
+            this.alreadySubmitted = true; // prevents students from spamming the teacher with answers
+        } else {
+            this.snackBar.open('Vul een antwoord in', 'X', { duration: 2500, panelClass: ['style-error'] });
+        }
     }
-  }
+
+    // this method lets a teacher submit a question to all of the students in the session.
+    sendQuestion() {
+        if (this.question != "") {
+            this.socketService.sendQuestion(this.question);
+            this.question = "";
+        } else {
+            this.snackBar.open('Vul een vraag in', 'X', { duration: 2500, panelClass: ['style-error'] });
+        }
+    }
 }

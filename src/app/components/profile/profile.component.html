@@ -82,7 +82,7 @@
                         <mat-expansion-panel>
                             <mat-expansion-panel-header>
                                 <mat-panel-title>
-                                    Wachtwoord Aanpassen
+                                    Wachtwoord aanpassen
                                 </mat-panel-title>
                                 <mat-panel-description>
                                     Vul je oude en nieuwe wachtwoord in
@@ -106,7 +106,7 @@
                                             <mat-label>Nieuw wachtwoord</mat-label>
                                             <input matInput type="password" formControlName="newPassword">
                                             <mat-error
-                                                *ngIf="changePasswordForm.get('oldPassword').hasError('required')">
+                                                *ngIf="changePasswordForm.get('newPassword').hasError('required')">
                                                 Wachtwoord is <strong>verplicht</strong>
                                             </mat-error>
                                         </mat-form-field>

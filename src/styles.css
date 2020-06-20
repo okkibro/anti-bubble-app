@@ -14,14 +14,26 @@ body {
     background-color: red !important;
 }
 
+.style-error .mat-button-wrapper {
+    color: white !important;
+}
+
 .style-succes {
     color: white !important;
     background-color: green !important;
 }
 
+.style-succes .mat-button-wrapper {
+    color: white !important;
+}
+
 .style-warning {
     color: black !important;
     background-color: yellow !important;
+}
+
+.style-warning .mat-button-wrapper {
+    color: black !important;
 }
 
 .mat-slider-thumb,
@@ -34,15 +46,17 @@ body {
     color: white !important;
 }
 
-.mat-focused .mat-form-field-label {
-    color: #AED9DC !important;
+.mat-focused .mat-form-field-label,
+.mat-focused:not(.mat-form-field-invalid) .mat-form-field-required-marker {
+    color: #948c8d !important;
 }
 .mat-focused:not(.mat-form-field-invalid) .mat-form-field-ripple {
-    background-color: #AED9DC !important;
+    background-color: #948c8d !important;
 }
 
 .mat-error,
 .mat-form-field-invalid .mat-form-field-label,
+.mat-form-field-invalid .mat-form-field-required-marker,
 .mat-form-field-invalid {
     color: red !important;
 }

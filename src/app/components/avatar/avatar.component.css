@@ -1,29 +1,9 @@
-.general-table {
-    padding: 10px;
-    border-spacing: 70px 0;
-    margin: 10px;
-}
-
-.general-table td{
-    padding: 25px;
-    text-align: center;
-    display: inline-block;
-}
-
-.general-table img {
-    object-fit: cover;
-    width: 100px;
-    height: width;
-    padding: 20px;
-}
-
-.avatarItemDisplay {
+.avatar-item-display {
     background-color: transparent;
     border: transparent;
     box-shadow: none;
 }
 
-/* The following ID's are for the category buttons with an image. */
 #buttonHoofddeksel {
     background: transparent url("../../../assets/images/Super_map/Shop_UI/Button_Hats.png") round;
 }
@@ -57,9 +37,13 @@
 }
 
 .category-change-button {
-    -webkit-text-fill-color: transparent;
-    -webkit-text-stroke: 0.1em transparent;
-    height: 68%;
-    background: transparent round;
-    color: transparent;
+    height: 75%;
+    width: 75%;
+    padding: 0;
+    min-width: unset;
+}
+
+mat-card img {
+    height: 75%;
+    width: 75%;
 }
