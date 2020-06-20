@@ -87,14 +87,13 @@ router.post('/labyrinthAnswers', auth, (req, res) => {
 		// Get the logged in user.
 
 		// Loop over all questions and save corresponding answers to result based on the index of the question.
-		let result = [];
 		for (let i = 1; i < req.body.answers.length; i++) {
 			let index = req.body.answers[i].question.id;
-			result[index] = req.body.answers[i].answer;
+			user.labyrinthAnswers[index] = req.body.answers[i].answer;
 		}
+		user.markModified('labyrinthAnswers');
 
 		// Save the result.
-		user.labyrinthAnswers = result;
 		user.save(() => {
 			res.status(200).json({ succes: true });
 		});
