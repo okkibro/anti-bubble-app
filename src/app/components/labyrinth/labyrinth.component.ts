@@ -168,13 +168,14 @@ export class LabyrinthComponent implements OnInit {
     }
     for (let i = 0; i < question.choices.length; i++) { // For each question...
       if (question.choices[i].startsWith("/assets/")) {
-        options += `<input type="${type}" class="option" name="options"><img src="${question.choices[i]}" id="image${i}"></img></input><br>` // Add a checkbox/radiobutton to options.
+        options += `<input type="${type}" class="option" name="options"><img src="${question.choices[i]}" id="image${i}"></img></input><br>` // Add an image to options.
       } else {
         options += `<input type="${type}" class="option" name="options">${question.choices[i]}</input><br>` // Add a checkbox/radiobutton to options.
       }
     }
     radioGroup.innerHTML = options; // Place all checkboxes/radiobuttons on the screen.
 
+    // Go over all images and add click event to check/uncheck checkboxes.
     for (let i = 0; i < question.choices.length; i++) {
       let image = document.getElementById(`image${i}`);
       if (image != null) {

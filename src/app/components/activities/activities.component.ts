@@ -102,6 +102,7 @@ export class ActivitiesComponent implements OnInit {
     });
   }
 
+  /** Function that submits an answer and data to the teacher. */
   submit(data) {
     this.submitted = true;
     this.socketService.studentSubmit({ answer: this.selected, data: data });
