@@ -35,7 +35,11 @@
                             <p id="question"></p>
 
                             <mat-radio-group class="radioButtonOptions" [(ngModel)]="optionSelected" *ngIf="questionLoaded">
-                               <mat-radio-button (change)="selectedOption()" *ngFor="let option of questionOptions; let i = index"  class="radioButton" [value]='i'></mat-radio-button>
+                                <p *ngFor="let option of questionOptions; let i = index"> <!-- Used for layout purposes -->
+                                    <mat-radio-button (change)="selectedOption()"  class="radioButton" [value]='i'>
+                                        <p class="textInRadioButton"></p>
+                                    </mat-radio-button>
+                                </p>
                             </mat-radio-group><br>
 
                             <button mat-flat-button (click)="nextQuestion(currentQuestion)"

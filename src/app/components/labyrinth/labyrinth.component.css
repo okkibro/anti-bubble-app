@@ -11,8 +11,15 @@
 
 .radioButtonOptions {
     display: inline-block;
-    margin: 20px;
-    padding: 10px;
+    margin: 15px;
+}
+
+.textInRadioButton {
+    margin: 5px;
+}
+
+.radioButton {
+    text-align: center;
 }
 
 #stopButton {

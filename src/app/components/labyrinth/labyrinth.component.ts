@@ -132,23 +132,25 @@ export class LabyrinthComponent implements OnInit {
 
     // let options = "";
     let radioButton = document.getElementsByClassName("radioButton");
+    let textArea = document.getElementsByClassName("textInRadioButton");
     for (let i = 0; i < question.choices.length; i++) { // For each question...
       if (question.choices[i].startsWith("/assets/")) {
         //let radioButton = document.createElement("mat-radio-button");
         setTimeout(() => {
-          //options += `<img src="${question.choices[i]}" id="image${i}" (click)="selectedOption()">`// Add a checkbox/radiobutton to options.
           let image = document.createElement("img");
-          image.setAttribute("width", "250px");
-          image.setAttribute("height", "350px");
+          image.setAttribute("width", "300px");
+          image.setAttribute("height", "400px");
           image.addEventListener("click", this.selectedOption);
           image.id = "image" + i;
           image.setAttribute("src", question.choices[i]);
-          radioButton[i].appendChild(image);
+
+          textArea[i].appendChild(image);
+          // radioButton[i].appendChild(image);
         }, 1);
       } else {
         setTimeout(() => {
-          radioButton[i].appendChild(document.createTextNode(question.choices[i]));
-          // radioButton[i].appendChild(document.createElement("br"));
+          textArea[i].appendChild(document.createTextNode(question.choices[i]));
+          // radioButton[i].appendChild(document.createTextNode(question.choices[i]));
         }, 1);
       }
     } 
