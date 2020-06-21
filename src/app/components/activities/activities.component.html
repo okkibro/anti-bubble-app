@@ -26,7 +26,6 @@
                             </mat-form-field>
                             <button mat-button class="general-button" [disabled]="selected == undefined"
                                 *ngIf="!isLeader" (click)="submit({ article: article })">Verstuur</button>
-                            </mat-form-field>
                         </mat-card-content>
 
                         <mat-card-content *ngIf="gameData?.game.name == 'Botsende Bubbels'">

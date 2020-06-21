@@ -56,4 +56,5 @@ export class AnswerFormComponent implements OnInit {
     } else {
       this.snackBar.open('Vul een onderwerp in', 'X', { duration: 2500, panelClass: ['style-error'], });
     }
+  }
 }
