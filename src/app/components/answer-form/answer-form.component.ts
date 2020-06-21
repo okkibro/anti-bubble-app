@@ -27,13 +27,17 @@ export class AnswerFormComponent implements OnInit {
 
     alreadySubmitted:boolean = false;
 
-    ngOnInit(): void {
-        this.auth.profile().subscribe(user => {
-            this.userDetails = user;
-        })
-    }
+  ngOnInit(): void {
+    this.auth.profile().subscribe(user => {
+      this.userDetails = user;
+    })
 
-    // this method lets students submit an answer to the teacher (digiboard).
+    this.socketService.reactivateButton(() => { // Reactivate the option to answer after the teacher has deleted the answer
+      this.alreadySubmitted = false;
+    });
+  }
+
+    // This method lets students submit an answer to the teacher (digiboard).
     sendAnswer() {
         if (this.answer != "") {
             this.socketService.studentSubmit(this.answer);
@@ -44,13 +48,12 @@ export class AnswerFormComponent implements OnInit {
         }
     }
 
-    // this method lets a teacher submit a question to all of the students in the session.
-    sendQuestion() {
-        if (this.question != "") {
-            this.socketService.sendQuestion(this.question);
-            this.question = "";
-        } else {
-            this.snackBar.open('Vul een vraag in', 'X', { duration: 2500, panelClass: ['style-error'] });
-        }
+  // This method lets a teacher submit a question to all of the students in the session.
+  sendQuestion() {
+    if (this.question != "") {
+      this.socketService.sendQuestion(this.question);
+      this.question = "";
+    } else {
+      this.snackBar.open('Vul een onderwerp in', 'X', { duration: 2500, panelClass: ['style-error'], });
     }
 }

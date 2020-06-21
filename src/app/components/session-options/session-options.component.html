@@ -97,7 +97,7 @@
                                     </table>
                                     <br>
                                     <button mat-button class="general-button"
-                                            (click)="createSession({game : 'Naamloos Nieuws', duration : naamloosSlider.value})">
+                                        (click)="createSession({game : 'Naamloos Nieuws', duration : naamloosSlider.value})">
                                         Start sessie</button>
                                 </div>
                             </mat-expansion-panel>
@@ -141,22 +141,12 @@
                                                 </mat-slider>
                                             </td>
                                         </tr>
-                                        <tr>
-                                            <th>Teams:</th>
-                                            <td>
-                                                <mat-radio-group [(ngModel)]="teamOptionBB">
-                                                    <mat-radio-button class="team-option-button" *ngFor="let teamChoice of teamOptions" [value]="teamChoice" color="primary">
-                                                        {{teamChoice}}
-                                                    </mat-radio-button>
-                                                </mat-radio-group>
-                                            </td>
-                                        </tr>
                                     </table>
                                     <br>
-                                    <button mat-button class="general-button"
-                                            (click)="createSession({game : 'Botsende Bubbels', duration : botsendeSlider.value, teams : teamOptionBB})">
-                                        Start sessie</button>
-                                </div>
+                                    <button mat-button class="general-button" (click)="createSession({game : 'Botsende Bubbels', duration : botsendeSlider.value})">
+                                        Start sessie
+                                    </button>
+                                    </mat-expansion-panel-content>
                             </mat-expansion-panel>
 
                             <mat-expansion-panel hideToggle="true">
@@ -202,7 +192,9 @@
                                             <th>Teams:</th>
                                             <td>
                                                 <mat-radio-group [(ngModel)]="teamOptionAA">
-                                                    <mat-radio-button class="team-option-button" *ngFor="let teamChoice of teamOptions" [value]="teamChoice" color="primary">
+                                                    <mat-radio-button class="team-option-button"
+                                                        *ngFor="let teamChoice of teamOptions" [value]="teamChoice"
+                                                        color="primary">
                                                         {{teamChoice}}
                                                     </mat-radio-button>
                                                 </mat-radio-group>
@@ -211,7 +203,7 @@
                                     </table>
                                     <br>
                                     <button mat-button class="general-button"
-                                            (click)="createSession({game : 'Alternatieve Antwoorden', duration : alternatieveSlider.value, teams: teamOptionAA})">
+                                        (click)="createSession({game : 'Alternatieve Antwoorden', duration : alternatieveSlider.value, teams: teamOptionAA})">
                                         Start sessie</button>
                                 </div>
                             </mat-expansion-panel>
@@ -262,7 +254,8 @@
                                         </tr>
                                     </table>
                                     <br>
-                                    <button mat-button class="general-button" (click)="createSession({game : 'Aanradend Algoritme'})">Start sessie</button>
+                                    <button mat-button class="general-button"
+                                        (click)="createSession({game : 'Aanradend Algoritme'})">Start sessie</button>
                                 </div>
                             </mat-expansion-panel>
                         </mat-accordion>

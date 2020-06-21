@@ -4,8 +4,8 @@
     margin: 5px;
 }
 
-#teammates {
-    margin-top: 0;
+.teammates ul {
+    margin-top: 0px;
     display: inline-block;
 }
 

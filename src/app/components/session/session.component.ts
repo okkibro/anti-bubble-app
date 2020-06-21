@@ -8,6 +8,11 @@ import { SessionService } from 'src/app/services/session.service';
 import { beforeUnload } from '../../../../constants';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Articles } from 'src/app/models/articles';
+import { TestBed } from '@angular/core/testing';
+import { MAT_SORT_HEADER_INTL_PROVIDER } from '@angular/material/sort';
+import { ɵWebAnimationsDriver } from '@angular/animations/browser';
+import { Directionality } from '@angular/cdk/bidi';
+import { getLocaleDayPeriods } from '@angular/common';
 
 @Component({
     selector: 'mean-session',
@@ -27,10 +32,12 @@ export class SessionComponent implements OnInit {
     interval;
     gameFinished = false;
     leaveByHomeButton = false;
-    enableQuestions: boolean = true;
+    enableQuestions: boolean = false;
     pairs;
     randomGroups: boolean;
     submits: any[][] = [];
+    leaders;
+    sources;
 
     constructor(
         private authenticationService: AuthenticationService,
@@ -104,16 +111,32 @@ export class SessionComponent implements OnInit {
                         this.playerCount = this.playerCount - 1; // Display number of players in top right corner.
                     });
 
-                    // Call function that listens for students to submit answers.
-                    // this.socketService.listenForSubmits((data) => { // Receive answer from student.
+                    if (this.gameData.game.name != "Naamloos Nieuws") { // Naamloos Nieuws works with a different submit system
 
-                    //     // Add answer to screen using DOM manipulation.
-                    //     var submitTable = document.getElementsByClassName('submitTable')[0];
-                    //     var tablerow = document.createElement('tr');
-                    //     tablerow.innerHTML = `<strong>${data.player.name}:</strong> ${data.message}<br>`
-                    //     submitTable.appendChild(tablerow);
-                    //     this.enableQuestions = false; // Teacher cannot send any questions after having received at least one answer
-                    // });
+                        // Call function that listens for students to submit answers.
+                        this.socketService.listenForSubmits((data) => { // Receive answer from student.
+
+                            // Add answer to screen using DOM manipulation.
+                            var submitTable = document.getElementsByClassName('submitTable')[0];
+                            var tablerow = document.createElement('tr');
+                            var breakLine = document.createElement('br');
+                            var deleteButton = document.createElement('button');
+                            deleteButton.style.width = "25px";
+                            deleteButton.style.height = "25px";
+                            deleteButton.style.backgroundColor = "red";
+                            deleteButton.style.color = "white";
+                            deleteButton.innerHTML = "X";
+                            deleteButton.addEventListener("click", () => {
+                                deleteButton.parentElement.remove();
+                                this.socketService.activateStudentButton(data.player);
+                            });
+                            tablerow.innerHTML = `<strong>${data.player.name}:</strong> ${data.message} `
+                            tablerow.appendChild(deleteButton);
+                            tablerow.appendChild(breakLine);
+                            submitTable.appendChild(tablerow);
+                            this.enableQuestions = false; // Teacher cannot send any questions after having received at least one answer
+                        });
+                    }
                 }
             });
 
@@ -121,11 +144,6 @@ export class SessionComponent implements OnInit {
             window.addEventListener('beforeunload', beforeUnload);
         }
     }
-
-    // beforeUnload(e) {
-    //     e.returnValue = "Weet je zeker dat je de sessie wilt verlaten?";
-    //     return "Weet je zeker dat je de sessie wilt verlaten?";
-    // }
 
     /** Function that calls the leave session function in the socket io service. */
     leaveSession() {
@@ -161,45 +179,48 @@ export class SessionComponent implements OnInit {
                 this.gameStarted = true;
                 this.socketService.startGame();
                 this.initGame(this.gameData.game.name);
-                let time = this.gameData?.duration * 60; // specified time for this activity (in seconds)
+                let time = this.gameData?.duration * 60; // Specified time for this activity (in seconds)
                 this.startTimer(time);
             }
         }
     }
 
+    /** Function that takes the game name and will return whether the game can start or not. */
     canStart(game: string): Boolean {
         switch (game) {
             case "Naamloos Nieuws":
-                if (this.playerCount < 1) {
+                if (this.playerCount < 6) {
                     this.snackBar.open("Er moeten minstens 6 leerlingen meedoen met deze activiteit", "X", { duration: 2500, panelClass: ['style-error'] });
                     return false;
                 } else {
                     return true;
                 }
+            case "Botsende Bubbels":
+                return true;
         }
     }
 
+    /** Function that initializes the game based on the given game name. */
     initGame(game: string) {
         switch (game) {
             case "Naamloos Nieuws":
-                this.sessionService.getArticles().subscribe((articles) => { // Get articles from database
-                    this.pairStudents(null, 3, articles, (pairs, leaders) => {
+                this.sessionService.getArticles().subscribe((articles) => { // Get articles from database.
+                    this.pairStudents(null, 3, articles, (pairs, leaders, sources) => { // Divide students in groups of 3.
+                        this.leaders = leaders;
                         this.pairs = pairs;
-                        console.log(pairs, leaders);
+                        this.sources = sources;
                         for (let i = 0; i < leaders.length; i++) {
-                            this.submits[leaders[i].email] = [];
+                            this.submits[leaders[i].email] = []; // Make a list in submits for every leader.
                         }
 
                         this.socketService.listenForSubmits(submit => {
-                            console.log(this.submits, submit);
-                            this.submits[submit.answer].push(submit.player);
-                            console.log(this.submits);
+                            this.submits[submit.message.answer].push({ player: submit.player, source: submit.message.data.article.source });
                         });
                     });
                 });
 
             case "Botsende Bubbels":
-                this.getPairs();
+                this.enableQuestions = true;
                 break;
             case "Alternatieve Antwoorden": break;
             case "Aanradend Algoritme": break;
@@ -260,9 +281,8 @@ export class SessionComponent implements OnInit {
 
     /** Function that groups students. */
     pairStudents(groups: String[][], groupSize: Number, articles: Articles, receivePairs) {
-        this.socketService.pairStudents(groups, groupSize, articles, (pairs, leaders) => {
-            console.log(1, leaders);
-            receivePairs(pairs, leaders);
+        this.socketService.pairStudents(groups, groupSize, articles, (pairs, leaders, sources) => {
+            receivePairs(pairs, leaders, sources);
         });
     }
 
@@ -273,6 +293,7 @@ export class SessionComponent implements OnInit {
         let timeLeft = <HTMLElement[]><any>document.querySelectorAll('.timeLeft');
         timeLeft[0].style.color = "red";
         this.socketService.removeListeners(); // Remove all listeners so students cant submit answers.
+        this.showAnswersonScreen(this.gameData.game.name);
     }
 
     /** Function that makes the host leave the session and the page. */
@@ -281,5 +302,24 @@ export class SessionComponent implements OnInit {
         this.leaveByHomeButton = true;
         window.removeEventListener('beforeunload', beforeUnload);
         this.router.navigate(['home']);
+    }
+
+    showAnswersonScreen(game: String) {
+        switch (game) {
+            case "Naamloos Nieuws":
+                let table = document.getElementsByClassName("submitTable")[0];
+                for (let i = 0; i < this.leaders.length; i++) {
+                    let team = document.createElement("tr");
+                    team.innerHTML = `<strong>Team ${i + 1}</strong><br>`;
+                    team.innerHTML += `Speler 1: ${this.leaders[i].name}<br> <i>Source: ${this.sources[i]}<i><br><br>`;
+                    let teamSubmits = this.submits[this.leaders[i].email]
+                    for (let j = 0; j < teamSubmits.length; j++) {
+                        team.innerHTML += `Speler ${j + 2}: ${teamSubmits[j].player.name}<br> <i>Source: ${teamSubmits[j].source}<i><br><br>`;
+                    }
+                    table.appendChild(team);
+                }
+                break;
+            default: break;
+        }
     }
 }

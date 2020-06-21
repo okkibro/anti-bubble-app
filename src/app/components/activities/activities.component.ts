@@ -26,6 +26,8 @@ export class ActivitiesComponent implements OnInit {
   leaders;
   selected;
   isLeader: Boolean = true;
+  submitted: Boolean = false;
+  article;
 
   constructor(
     private socketService: SocketIOService,
@@ -52,28 +54,9 @@ export class ActivitiesComponent implements OnInit {
       this.router.navigate(['home']);
     }
 
-    if (this.gameData != undefined && this.gameData.game.name == 'Naamloos Nieuws') {
-      this.naamloosNieuws();
-    }
-
     this.receiveQuestion(); // Check whether or not a teacher has sent a question
 
     this.receiveTeam(); // Get teams from teacher's input
-  }
-
-  naamloosNieuws() {
-    this.sessionService.getArticles().subscribe((articles) => { // Get articles from database
-
-      articles.forEach((data) => {
-        this.articleImages.push(data.image);
-      });
-    });
-
-
-    // let articleSpace = document.getElementsByClassName("article")[0];
-    // let image = document.createElement("image");
-    // image.setAttribute("src", "this.articlesData.image");
-    // articleSpace.appendChild(image);
   }
 
   leaveSession() {
@@ -100,6 +83,7 @@ export class ActivitiesComponent implements OnInit {
   receiveTeam() {
     this.socketService.listenForTeam((team, article, leaders) => {
       this.leaders = leaders;
+      this.article = article;
       this.auth.profile().subscribe(user => {
         this.userDetails = user;
         if (leaders.find(x => x.email == this.userDetails.email) == undefined) {
@@ -110,12 +94,17 @@ export class ActivitiesComponent implements OnInit {
       let articleSpace = document.getElementsByClassName("article")[0];
       let image = document.createElement("img");
       image.setAttribute("src", article.image);
+      image.setAttribute("width", "200px");
+      image.setAttribute("height", "200px");
       articleSpace.appendChild(image);
+
     });
   }
 
-  submit() {
-    this.socketService.studentSubmit({ answer: this.selected });
+  /** Function that submits an answer and data to the teacher. */
+  submit(data) {
+    this.submitted = true;
+    this.socketService.studentSubmit({ answer: this.selected, data: data });
   }
 
 }

@@ -81,7 +81,7 @@ let userSchema = new Schema({
         required: true
     },
     labyrinthAnswers: {
-        type: [[Boolean]],
+        type: [Number],
     },
 });
 

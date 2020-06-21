@@ -8,8 +8,8 @@
 
 <form *ngIf="userDetails?.role == 'teacher'" [formGroup]="sendQuestionsForm" (ngSubmit)="sendQuestion()">
     <mat-form-field>
-        <mat-label>Vul hier je vraag in</mat-label>
-        <textarea matInput formControlName="getQuestion" placeholder="[vraag]" [(ngModel)]="question" ></textarea>
+        <mat-label>Vul hier een onderwerp in</mat-label>
+        <textarea matInput formControlName="getQuestion" placeholder="[onderwerp]" [(ngModel)]="question" ></textarea>
     </mat-form-field><br>
     <button mat-button class="general-button" type="submit">Verstuur</button>
 </form>

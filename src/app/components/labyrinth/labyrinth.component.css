@@ -6,17 +6,25 @@
 #question {
     font-size: 45px;
     margin-bottom: 0px;
+    margin-top: 5px;
 }
 
 .radioButtonOptions {
     display: inline-block;
-    margin: 20px;
-    padding: 10px;
+    margin: 15px;
+}
+
+.textInRadioButton {
+    margin: 5px;
+}
+
+.radioButton {
+    text-align: center;
 }
 
 #stopButton {
     right: 3%;
-    top: 10%;
+    top: 4%;
     float: right;
     width: 50px;
     position: absolute;

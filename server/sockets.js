@@ -142,6 +142,7 @@ function runIO(io) {
 			let pairs = [];
 			let articleList = [];
 			let leaders = [];
+			let sources = [];
 			let playersInGame = players.getPlayers(socket.id); // Get all the players in the current game.
 			if (groups == null) { // Teacher selected create random groups.		 
 				playersInGame = shuffle(playersInGame); // Shuffle the player list.
@@ -159,6 +160,7 @@ function runIO(io) {
 						let article = parts.shift();
 						if (article.part === 1) {
 							leaders.push(player);
+							sources.push(article.source);
 						}
 						articleList[pairsIndex].push(article);
 					}
@@ -181,8 +183,7 @@ function runIO(io) {
 				}
 			}
 
-			console.log(leaders);
-			socket.emit('send-pairs', pairs, leaders);
+			socket.emit('send-pairs', pairs, leaders, sources);
 
 			for (let i = 0; i < pairs.length; i++) {
 				for (let j = 0; j < pairs[i].length; j++) {
@@ -210,6 +211,11 @@ function runIO(io) {
 
 				return array;
 			}
+		});
+
+		// This will make the given player's button active again when the teacher removes their answer.
+		socket.on('reactivate-button', (player) => {
+			socket.to(player.playerID).emit('reactivate');
 		});
 	});
 }
