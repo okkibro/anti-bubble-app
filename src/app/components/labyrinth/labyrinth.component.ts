@@ -65,14 +65,20 @@ export class LabyrinthComponent implements OnInit {
     this.startedLabyrinth = true; // Shows the question screen due to ngIfs in the HTML.
     this.sessionService.getShuffledQuestions(1).subscribe(questions => { // Get the part 1 questions from the database.
       this.questions = questions;
-      this.nextQuestion(null); // Show the first question, previous question does not exist so its null.
+      this.auth.profile().subscribe(user => {
+        this.userDetails = user;
+        this.nextQuestion(null); // Show the first question, previous question does not exist so its null.
+      });
     })
   }
 
   paused() {
-    this.snackBar.open('Doolhof gepauzeerd. Zorg dat je het voor de volgende les hebt afgemaakt.', 'X', { duration: 2500, panelClass: ['style-warning'], }).afterDismissed().subscribe(() => {
-      // TODO: opslaan waar je was
-      this.router.navigate(['home']);
+
+    console.log(this.answers);
+    this.sessionService.saveAnswers(this.answers).subscribe(() => {
+      this.snackBar.open('Doolhof gepauzeerd. Zorg dat je het voor de volgende les hebt afgemaakt.', 'X', { duration: 2500, panelClass: ['style-warning'], }).afterDismissed().subscribe(() => {
+        this.router.navigate(['home']);
+      });
     });
   }
 
@@ -96,12 +102,17 @@ export class LabyrinthComponent implements OnInit {
     } else {
       let question = this.questions.shift(); // Get next question from array.
       this.currentQuestion = question;
-
+      
       if (prevQuestion != null) {
         this.saveQuestion(prevQuestion); // If its not the first question, save previous question.
       }
 
-      this.showQuestion(question); // Show the qustion on the screen.
+      if (this.userDetails.labyrinthAnswers[question.id] != undefined && this.userDetails.labyrinthAnswers[question.id] != null) {
+        this.nextQuestion(null);
+      } else {
+        this.showQuestion(question); // Show the qustion on the screen.
+      }
+
     }
   }
 
@@ -121,7 +132,7 @@ export class LabyrinthComponent implements OnInit {
   saveQuestion(question) {
     let optionsel = this.optionSelected; // Temporary variable to save the selected option.
     this.optionSelected = ""; // Deselecting radio button when going to the next question.
-    this.answers.push({ question: question, answer: optionsel}); // Push the result with its corresponding question to this.answers.
+    this.answers.push({ question: question, answer: optionsel }); // Push the result with its corresponding question to this.answers.
   }
 
   /** Function that shows a question on the screen. */
@@ -153,7 +164,7 @@ export class LabyrinthComponent implements OnInit {
           // radioButton[i].appendChild(document.createTextNode(question.choices[i]));
         }, 1);
       }
-    } 
+    }
 
   }
 
