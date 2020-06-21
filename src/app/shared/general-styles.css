@@ -1,3 +1,20 @@
+@import url('https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap');
+
+.mat-card-title, .mat-card-subtitle {
+    font-family: 'Fredoka One', cursive; 
+    /* NOTE: text-fill-color paints the text once more over the actual text. This can have unwanted side effects that should be fixed in local css */
+    -webkit-text-fill-color: white;
+    -webkit-text-stroke: 1px #41596c;
+    paint-order: fill stroke;
+    text-shadow: 1px 1px #41596c;
+    color: white;
+    font-size: 40px;
+}
+
+.mat-card-subtitle {
+    font-size: 20px;
+}
+
 body {
     background-image: url("../../assets/images/Super_map/Basic_Buttons/Background.png");
     text-align: center;

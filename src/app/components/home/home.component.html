@@ -4,29 +4,36 @@
     </mat-sidenav>
     <mat-sidenav-content>
         <mean-toolbar (sidenavToggle)="sidenav.toggle()"></mean-toolbar>
+
         <body>
             <div class="container-div" fxLayoutGap="10px" fxLayout="column" fxLayoutAlign="space-evenly">
                 <div fxLayout.xs="row" fxLayoutGap="10px" fxLayoutAlign="space-evenly">
                     <mat-card fxFlex="100%">
                         <mat-card-header>
-                            <mat-card-title class="welcomeHeader">Welkom!</mat-card-title>
+                            <mat-card-title>Welkom!</mat-card-title>
                             <mat-card-subtitle>
-                                Breaking Bubbles is een online webpagina waar leerlingen zich bewust kunnen worden van hun
+                                Breaking Bubbles is een online webpagina waar leerlingen zich bewust kunnen worden van
+                                hun
                                 filterbubbel.<br>
-                                Dit wordt bereikt door middel van lessen die in de klas met de docent(e) worden afgenomen.
+                                Dit wordt bereikt door middel van lessen die in de klas met de docent(e) worden
+                                afgenomen.
                             </mat-card-subtitle>
                         </mat-card-header>
                         <mat-card-content *ngIf="userDetails?.role == 'teacher'">
-                            <button mat-button class="general-button" (click)="createSession()"> Kies Activiteit </button>
+                            <button mat-button class="general-button" (click)="createSession()"> Kies Activiteit
+                            </button>
                         </mat-card-content>
-                        <mat-card-content class="join-session" *ngIf="userDetails?.role == 'student' && userDetails?.bubbleInit">
+                        <mat-card-content class="join-session"
+                            *ngIf="userDetails?.role == 'student' && userDetails?.bubbleInit">
                             <mat-form-field>
                                 <input matInput [(ngModel)]="pin" placeholder="Sessie code" type="number">
                             </mat-form-field>
-                            <button mat-button class="general-button" (click)="joinSession()"> Deelnemen aan sessie </button>
+                            <button mat-button class="general-button" (click)="joinSession()"> Deelnemen aan sessie
+                            </button>
                         </mat-card-content>
                         <mat-card-content *ngIf="userDetails?.role == 'student' && !userDetails?.bubbleInit">
-                            <button mat-button class="general-button" (click)="startLabyrinth()"> Start Dwalende Doolhof </button>
+                            <button mat-button class="general-button" (click)="startLabyrinth()"> Start Dwalende Doolhof
+                            </button>
                         </mat-card-content>
                     </mat-card>
                 </div>
@@ -65,7 +72,11 @@
                         </mat-card-content>
                     </mat-card>
                     <mat-card fxFlex="20%" class="shop-card">
-                        <mat-card-header>Aantal munten</mat-card-header>
+                        <mat-card-header>
+                            <mat-card-title>
+                                Aantal munten
+                            </mat-card-title>
+                        </mat-card-header>
                         <mat-card-content class="number">
                             {{ userDetails?.currency }}
                         </mat-card-content>
