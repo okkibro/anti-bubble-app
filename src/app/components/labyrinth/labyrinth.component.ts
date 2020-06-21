@@ -47,7 +47,6 @@ export class LabyrinthComponent implements OnInit {
       this.userDetails = user;
 
       this.sessionService.performedLabyrinth().subscribe(data => {
-        console.log(data.succes);
         if (data.succes) {  // Labyrinth boolean is set to true. Player now has a bubble and can join activity sessions.
           this.snackBar.open('Je bent bij het eind aangekomen. Je antwoorden zijn opgeslagen.', 'X', { duration: 2500, panelClass: ['style-warning'], });
           this.sessionService.saveAnswers(this.answers).subscribe(() => { // Saves the answers in the database.
@@ -73,8 +72,6 @@ export class LabyrinthComponent implements OnInit {
   }
 
   paused() {
-
-    console.log(this.answers);
     this.sessionService.saveAnswers(this.answers).subscribe(() => {
       this.snackBar.open('Doolhof gepauzeerd. Zorg dat je het voor de volgende les hebt afgemaakt.', 'X', { duration: 2500, panelClass: ['style-warning'], }).afterDismissed().subscribe(() => {
         this.router.navigate(['home']);
@@ -141,12 +138,10 @@ export class LabyrinthComponent implements OnInit {
     this.questionOptions = question.choices;
     this.questionLoaded = true;
 
-    // let options = "";
-    let radioButton = document.getElementsByClassName("radioButton");
+    // let radioButton = document.getElementsByClassName("radioButton");
     let textArea = document.getElementsByClassName("textInRadioButton");
     for (let i = 0; i < question.choices.length; i++) { // For each question...
       if (question.choices[i].startsWith("/assets/")) {
-        //let radioButton = document.createElement("mat-radio-button");
         setTimeout(() => {
           let image = document.createElement("img");
           image.setAttribute("width", "300px");
@@ -156,12 +151,10 @@ export class LabyrinthComponent implements OnInit {
           image.setAttribute("src", question.choices[i]);
 
           textArea[i].appendChild(image);
-          // radioButton[i].appendChild(image);
         }, 1);
       } else {
         setTimeout(() => {
           textArea[i].appendChild(document.createTextNode(question.choices[i]));
-          // radioButton[i].appendChild(document.createTextNode(question.choices[i]));
         }, 1);
       }
     }
