@@ -12,7 +12,6 @@
                         <mat-card-header>
                             <mat-card-title>Mijn Bubbel</mat-card-title>
                         </mat-card-header><br>
-                        <mean-bubble-visualisation></mean-bubble-visualisation>
                     </mat-card>
                     <mat-card fxFlex="50%">
                         <mat-card-header>
@@ -35,6 +34,12 @@
                 </div>
 
                 <div fxLayout.xs="column" fxLayoutGap="10px" fxLayoutAlign="space-evenly">
+                    <mat-card-content>
+                        <mean-bubble-visualisation></mean-bubble-visualisation>
+                    </mat-card-content>
+                </div>
+
+                <div fxLayout.xs="row" fxLayoutGap="10px" fxLayoutAlign="space-evenly">
                     <mat-card fxFlex="100%">
                         <mat-card-content>
                             <highcharts-chart class="chart" [Highcharts]="charts" [constructorType]="chartConstructor"

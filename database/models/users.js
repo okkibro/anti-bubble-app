@@ -65,13 +65,6 @@ let userSchema = new Schema({
         },
         required: false
     },
-    knowledge: {
-        type: [Number]
-    },
-
-    diversity: {
-        type: [Number]
-    },
     recentMilestones: {
         type: [String],
         required: true
@@ -82,6 +75,21 @@ let userSchema = new Schema({
     },
     labyrinthAnswers: {
         type: [Number],
+    },
+    bubble: {
+        type: {
+            online:     Number,
+            social:     Number,
+            mainstream: Number,
+
+            category1:  Number,
+            category2:  Number,
+
+            knowledge:  Number,
+
+            techSavvy:  Number,
+        },
+        required: true
     },
 });
 

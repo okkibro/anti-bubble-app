@@ -26,7 +26,19 @@ router.post('/register', (req, res) => {
     user.setPassword(sanitize(req.body.password));
     user.inventory = [];
     user.milestones = [];
-    user.bubbleInit = user.role !== 'student';
+    user.bubbleInit = true;
+    user.bubble = {
+        online:     0,
+        social:     0,
+        mainstream: 0,
+        category1:  0,
+        category2:  0,
+        knowledge:  0,
+        techSavvy:  0,
+    }
+    if (user.role == 'student') {
+        user.bubbleInit = false;
+    }
     user.currency = 0;
     user.class = [];
 
@@ -319,4 +331,17 @@ router.post('/updateGraph', auth, (req, res) => {
     );
 });
 
+/** Post method to update user bubble */
+router.post('/updateBubble', auth, (req, res) => {
+    User.findById(req.payload._id, (err, user) => {
+        user.bubble[req.body.bubbleConsequence]++;
+        user.markModified('bubble');
+        user.save((error) => { 
+            if (error){
+                console.log(error.message);
+            }
+            res.status(200).json({message: "done"});
+        });
+    });
+});
 module.exports = router;

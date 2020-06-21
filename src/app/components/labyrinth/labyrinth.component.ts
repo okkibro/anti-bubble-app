@@ -5,6 +5,7 @@ import { SessionService } from '../../services/session.service';
 import { AuthenticationService } from '../../services/authentication.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatRadioButton } from '@angular/material/radio';
+import { BubbleGraphService } from 'src/app/services/bubble-graph.service';
 
 @Component({
   selector: 'mean-labyrinth',
@@ -33,7 +34,7 @@ export class LabyrinthComponent implements OnInit {
   //   }
   // };
 
-  constructor(private router: Router, private sessionService: SessionService, private auth: AuthenticationService, private snackBar: MatSnackBar) { }
+  constructor(private router: Router, private sessionService: SessionService, private auth: AuthenticationService, private snackBar: MatSnackBar, private bubbleService: BubbleGraphService) { }
 
   ngOnInit(): void {
     // Start the labyrinth in part 1.
@@ -127,9 +128,13 @@ export class LabyrinthComponent implements OnInit {
 
   /** Function that saves a question to this.answers. */
   saveQuestion(question) {
-    let optionsel = this.optionSelected; // Temporary variable to save the selected option.
-    this.optionSelected = ""; // Deselecting radio button when going to the next question.
-    this.answers.push({ question: question, answer: optionsel }); // Push the result with its corresponding question to this.answers.
+    let checkboxes: any = document.getElementsByClassName('option'); // Get all checkboxes in an array.
+    let result = [];
+    for (let i = 0; i < checkboxes.length; i++) { // Loop over all the checkboxes.
+      result.push(checkboxes[i].checked); // Save checked in result array.
+    }
+    this.updateBubble(result, question)
+    this.answers.push({ question: question, answer: result }); // Push the result with its corresponding question to this.answers.
   }
 
   /** Function that shows a question on the screen. */
@@ -163,5 +168,16 @@ export class LabyrinthComponent implements OnInit {
 
   selectedOption() {
     this.nextQuestionDisabled = false;
+  }
+
+  /** Function that updates bubble values based on the answer given */
+  updateBubble(result, question) {
+    let consequences = question.choiceConsequence;
+    for (let i = 0; i < result.length; i++){
+      if(result[i] && consequences[i] != ""){
+        console.log(consequences[i]);
+        this.bubbleService.updateBubble(consequences[i]).subscribe();
+      }
+    }
   }
 }

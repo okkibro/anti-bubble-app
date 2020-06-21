@@ -22,4 +22,5 @@ export class User {
     bubbleInit: boolean;
     avatar: any;
     labyrinthAnswers: [number];
+    bubble: any;
 }

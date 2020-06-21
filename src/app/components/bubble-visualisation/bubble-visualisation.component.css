@@ -13,7 +13,9 @@
     height: 175px;
     margin-top: 10px;
     margin-left: -86px;
+    opacity: 0.5;
 }
 
-
-
+#overlay {
+    opacity: 1;
+}
