@@ -4,6 +4,7 @@
     </mat-sidenav>
     <mat-sidenav-content>
         <mean-toolbar (sidenavToggle)="sidenav.toggle()"></mean-toolbar>
+
         <body>
             <div class="container-div" fxLayoutGap="10px" fxLayout="column" fxLayoutAlign="space-evenly">
                 <div fxLayout.xs="column" fxLayoutGap="10px" fxLayoutAlign="space-evenly">
@@ -33,32 +34,12 @@
                     </mat-card>
                 </div>
 
-                    <mat-card fxFlex="50%">
-                        <mat-card-header>
-                            <mat-card-title>Percentages</mat-card-title>
-                            <mat-card-subtitle>Je percentages op dit moment</mat-card-subtitle>
-                        </mat-card-header>
-                        <mat-card-content>
-                            <table class="general-table">
-                                <tr>
-                                    <th>Diversiteit van de inhoud (geel): </th>
-                                    <td> {{userDetails?.diversity[userDetails?.diversity.length-1]}}% </td>
-                                </tr>
-                                <tr>
-                                    <th>Kennis en bewustzijn van filter bubbles (blauw): </th>
-                                    <td> {{userDetails?.knowledge[userDetails?.knowledge.length-1]}}% </td>
-                                </tr>
-                            </table>
-                        </mat-card-content>
-                    </mat-card>
-                </div>
-
                 <div fxLayout.xs="column" fxLayoutGap="10px" fxLayoutAlign="space-evenly">
                     <mat-card fxFlex="100%">
                         <mat-card-content>
                             <highcharts-chart class="chart" [Highcharts]="charts" [constructorType]="chartConstructor"
-                                              [options]="chartOptions" [callbackFunction]="chartCallback" [(update)]="updateFlag"
-                                              [oneToOne]="oneToOneFlag" [runOutsideAngular]="runOutsideAngularFlag">
+                                [options]="chartOptions" [callbackFunction]="chartCallback" [(update)]="updateFlag"
+                                [oneToOne]="oneToOneFlag" [runOutsideAngular]="runOutsideAngularFlag">
                             </highcharts-chart>
                         </mat-card-content>
                     </mat-card>
