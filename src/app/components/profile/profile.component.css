@@ -1,18 +1,35 @@
-::ng-deep .mat-simple-snackbar-action {
-    color: white;
+.profile-table {
+    border-spacing: 20px 0;
+    margin: 0 auto;
 }
 
-::ng-deep .mat-snack-bar-container {
-    color: white;
-    background-color: rgb(0, 160, 0);
+.profile-table td {
+    text-align: left;
+    padding: 5px 0;
 }
 
-.UItable {
-    border-spacing: 30px 0;
+.profile-table .top-data {
+    font-weight: bold;
+}
+
+@media (max-width: 900px) {
+    .profile-table td {
+        display: table-row;
+    }
+}
+
+mean-avatar-display mat-card img{
+    width: 15%;
 }
 
 .change-password-table {
     display: flex;
     flex-direction: column;
     justify-content: center;
+}
+
+@media (max-width: 700px) {
+    .change-password-accordion mat-panel-description {
+        display: none;
+    }
 }

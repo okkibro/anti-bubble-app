@@ -1,6 +1,5 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-
-import { ClassmateProfileComponent } from './classmateProfile.component';
+import { ClassmateProfileComponent } from './classmate-profile.component';
 
 describe('ClassmateProfileComponent', () => {
   let component: ClassmateProfileComponent;

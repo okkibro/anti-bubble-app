@@ -21,19 +21,25 @@ router.get('/', (req, res) => {
         category: req.headers.id.toLowerCase()
     }
 
-    console.log(req.headers.id);
-    Shop.find(query).exec(function (err, shop) {
+    Shop.find(query)
+        .exec(function (err, shop) {
             res.status(200).json(shop);
     });
 });
 
-/** Post method to add item from the shop to the inventory of the user if he/she had enough currency. */
+router.get('/getBaseInventory', auth, (req, res) => {
+    Shop.find({initial: true})
+        .exec(function (err, shop) {
+            res.status(200).json(shop);
+        });
+});
+
 router.post('/buy', auth, (req, res) => {
     User.findById(req.payload._id) // Get the logged in user.
             .exec(function (err, user) {
 
                 // Check if the user has enough money and hasnt bought the item yet.
-                if (user.currency >= req.body.item.price && user.inventory.find(x => x._id == req.body.item._id) == null) {
+                if (user.currency >= req.body.item.price && user.inventory.find(x => x._id === req.body.item._id) == null) {
                     user.inventory.push(req.body.item); // Add item to inventory.
                     user.currency -= req.body.item.price; // Pay the money.
                     user.save();

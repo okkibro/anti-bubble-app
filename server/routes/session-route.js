@@ -27,7 +27,7 @@ router.get('/articles', auth, (req, res) => {
 router.post('/activity', auth, (req, res) => {
 	User.findById(req.payload._id, (err, user) => {
 		// Get the logged in user.
-		if (user.role == 'student') {
+		if (user.role === 'student') {
 			res.status(401).json({
 				message: 'UnauthorizedError: Not a teacher', // Only teachers can send requests to get activities.
 			});

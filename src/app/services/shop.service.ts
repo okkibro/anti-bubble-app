@@ -23,4 +23,8 @@ export class ShopService {
     return this.http.post('https://localhost:3000/shop/buy', { item: item }, { headers: { Authorization: 'Bearer ' + this.cookie.get('mean-token')}});
   }
 
+  public getBaseInventory(): Observable<any> {
+    return this.http.get('https://localhost:3000/shop/getBaseInventory', { headers: { Authorization: 'Bearer ' + this.cookie.get('mean-token')}});
+  }
+
 }

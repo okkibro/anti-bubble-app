@@ -1,4 +1,4 @@
-import { Component, OnInit, HostListener } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 import { User } from "../../models/user";
 import { Router } from "@angular/router";
 import { SessionService } from '../../services/session.service';
@@ -28,7 +28,7 @@ export class LabyrinthComponent implements OnInit {
     } else {
       this.nextQuestionDisabled = false;
     }
-  };
+  }
 
   constructor(private router: Router, private sessionService: SessionService, private auth: AuthenticationService, private snackBar: MatSnackBar) { }
 

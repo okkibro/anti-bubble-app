@@ -11,8 +11,7 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 // Core modules.
 import { MatRadioModule } from '@angular/material/radio';
-import {MatSelectModule} from '@angular/material/select';
-
+import { MatSelectModule } from '@angular/material/select';
 // core modules
 import { CustomMaterialModule } from './shared/material.module';
 import { AppRoutingModule } from './app-routing.module';
@@ -23,7 +22,7 @@ import { RegisterComponent } from './components/register/register.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { HomeComponent } from './components/home/home.component';
 import { ClassOverviewComponent } from './components/class-overview/class-overview.component';
-import { ClassmateProfileComponent } from './components/classmateProfile/classmateProfile.component';
+import { ClassmateProfileComponent } from './components/classmate-profile/classmate-profile.component';
 import { AvatarComponent } from './components/avatar/avatar.component';
 import { BubbleDetailsComponent } from './components/bubble-details/bubble-details.component';
 import { ShopComponent } from './components/shop/shop.component';
@@ -47,6 +46,7 @@ import { MatSidenavModule } from "@angular/material/sidenav";
 import { MatListModule } from "@angular/material/list";
 import { ToolbarComponent } from './components/toolbar/toolbar.component';
 import { SidenavComponent } from './components/sidenav/sidenav.component';
+import { NotLoggedInToolbarComponent } from './components/not-logged-in-toolbar/not-logged-in-toolbar.component';
 
 @NgModule({
     declarations: [
@@ -74,6 +74,7 @@ import { SidenavComponent } from './components/sidenav/sidenav.component';
         AvatarDisplayComponent,
         ToolbarComponent,
         SidenavComponent,
+        NotLoggedInToolbarComponent,
     ],
     imports: [
         BrowserModule,

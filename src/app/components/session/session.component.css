@@ -17,7 +17,8 @@ body {
     display: inline-block;
 }
 
-.sessionCode, .playerCount {
+.sessionCode,
+.playerCount {
     top: 10%;
     right: 3%;
     float: right;
@@ -27,6 +28,17 @@ body {
 
 .submitTable {
     margin: 20px;
+}
+
+.sessionTable,
+.submitTable {
+    display: inline-block;
+}
+
+.sessionTable,
+.submitTable th,
+td {
+    padding: 10px;
 }
 
 #teacherPin {
@@ -41,4 +53,12 @@ body {
     font-size: 30px;
     margin-top: 10px;
     margin-bottom: 20px;
+}
+
+.timeLeft {
+    top: 10%;
+    left: 3%;
+    float: right;
+    position: absolute;
+    z-index: 100;
 }

@@ -5,10 +5,9 @@
     </mat-sidenav>
     <mat-sidenav-content>
         <mean-toolbar (sidenavToggle)="sidenav.toggle()"></mean-toolbar>
-
         <body>
-            <div class="containerDiv" fxLayoutGap="0.5%" fxLayout="column" fxLayoutAlign="space-evenly">
-                <div fxLayout.xs="row" fxLayoutGap="0.5%" fxLayoutAlign="space-evenly">
+            <div class="container-div" fxLayoutGap="10px" fxLayout="column" fxLayoutAlign="space-evenly">
+                <div fxLayout.xs="row" fxLayoutGap="10px" fxLayoutAlign="space-evenly">
                     <mat-card fxFlex="100%">
                         <mat-card-header>
                             <mat-card-title class="welcomeHeader">{{gameData?.game.name}}</mat-card-title>
@@ -24,8 +23,7 @@
                                     </mat-option>
                                 </mat-select>
                             </mat-form-field>
-                            <button mat-flat-button [disabled]="selected == undefined" *ngIf="!isLeader"
-                                (click)="submit()">Verstuur</button>
+                            <button mat-button class="general-button" [disabled]="selected == undefined" *ngIf="!isLeader" (click)="submit()">Verstuur</button>
                         </mat-card-content>
 
                         <mat-card-content *ngIf="gameData?.game.name == 'Botsende Bubbels'">

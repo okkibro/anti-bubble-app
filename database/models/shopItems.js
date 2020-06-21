@@ -1,6 +1,4 @@
 const mongoose = require('mongoose');
-const crypto = require('crypto');
-const jwt = require('jsonwebtoken');
 const Schema = mongoose.Schema;
 
 let shopSchema = new Schema({
@@ -25,6 +23,10 @@ let shopSchema = new Schema({
     },
     price: {
         type: Number,
+        required: true
+    },
+    initial: {
+        type: Boolean,
         required: true
     }
 });

@@ -1,21 +1,61 @@
-.welcomeHeader{
+.welcomeHeader {
     font-size: xx-large;
+}
+
+.currency {
+    font-size: larger;
 }
 
 mat-card-title {
    font-size: medium;
 }
 
-::ng-deep .mat-simple-snackbar-action {
-    color: white;
+.shop-buy-button {
+    width: 40%;
+    background: transparent url("../../../assets/images/Super_map/Basic_Buttons/Button_blue_Rectangle.png") round;
 }
 
-::ng-deep .style-error {
-    color: white;
-    background-color: red;
+.category-change-button {
+    height: 75%;
+    width: 75%;
+    padding: 0;
+    min-width: unset;
 }
 
-::ng-deep .style-succes {
-    color: white;
-    background-color: green;
+mat-card img {
+    margin-top: 0;
+    height: 100%;
+    width: 60%;
+}
+
+#buttonHoofddeksel {
+    background: transparent url("../../../assets/images/Super_map/Shop_UI/Button_Hats.png") round;
+}
+
+#buttonHaar {
+    background: transparent url("../../../assets/images/Super_map/Shop_UI/Button_Hair.png") round;
+}
+
+#buttonBril {
+    background: transparent url("../../../assets/images/Super_map/Shop_UI/Button_Glasses.png") round;
+}
+
+#buttonLichaam {
+    background: transparent url("../../../assets/images/Super_map/Shop_UI/Button_Skincolor.png") round;
+}
+
+#buttonShirt {
+    background: transparent url("../../../assets/images/Super_map/Shop_UI/Button_Shirt.png") round;
+}
+
+#buttonBroek {
+    background: transparent url("../../../assets/images/Super_map/Shop_UI/Button_Pants.png") round;
+}
+
+#buttonSchoenen {
+    background: transparent url("../../../assets/images/Super_map/Shop_UI/Button_Shoes.png") round;
+}
+
+#buttonMedaille {
+    background: transparent url("../../../assets/images/Super_map/Shop_UI/Button_Medals.png") round;
 }

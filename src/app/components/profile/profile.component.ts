@@ -24,12 +24,16 @@ export class ProfileComponent implements OnInit {
     },{
         validator: this.passwordMatchValidator
     });
-    userClassTitle;
+    userClassTitle: string;
 
-    constructor(private auth: AuthenticationService, private fb: FormBuilder, private snackbar: MatSnackBar, private classService: ClassesService) {}
+    constructor(
+        private auth: AuthenticationService,
+        private fb: FormBuilder,
+        private snackbar: MatSnackBar,
+        private classService: ClassesService
+    ) {}
     
     ngOnInit() {
-        // Show badge with most progress.
 
         // Milestone that gets shown when you have all badges.
         this.milestoneShown = {
@@ -42,9 +46,9 @@ export class ProfileComponent implements OnInit {
         // Get user's class
         this.classService.getClass().subscribe((data) => {
             if (data.succes) {
-              this.userClassTitle = data.class.title;
+                this.userClassTitle = data.class.title;
             }
-          });
+        });
         
         this.auth.profile().subscribe(user => {
             this.userDetails = user;
@@ -61,13 +65,19 @@ export class ProfileComponent implements OnInit {
 
     /** Method to change you password on the profile page. */
     changePassword() {
+        let email = this.userDetails.email;
         let oldPassword = this.changePasswordForm.get('oldPassword').value;
         let newPassword = this.changePasswordForm.get('newPassword').value;
-        let email = this.userDetails.email;
-        this.auth.updatePassword(email, oldPassword, newPassword).subscribe(() => {
-            this.snackbar.open("Wachtwoord is aangepast!", "X", {duration: 2500})
-        }, (err) => {
-            console.error(err);
+        this.auth.updatePassword(email, oldPassword, newPassword).subscribe(data => {
+            if (data.succes) {
+                this.snackbar.open(data.message, "X", { duration: 2500, panelClass: ['style-succes']}).afterDismissed().subscribe(()=>{
+                    window.location.reload();
+                });
+            } else {
+                this.snackbar.open(data.message, 'X', {duration: 2500, panelClass: ['style-error'] }).afterDismissed().subscribe(()=>{
+                    window.location.reload();
+                });
+            }
         });
     }
 

@@ -62,9 +62,9 @@ router.post('/joinClass', auth, (req, res) => {
 						res.status(200).json({succes: false, message: 'Geen klas gevonden met de gegeven code', err: err});
 					} else {
 						// Check if your role is a student. (students can only be in one class!).
-						if (user.role == 'student') {
+						if (user.role === 'student') {
 							if (user.class.length <= 0) {
-								if (foundClass.students.find((x) => x._id == req.payload._id) != undefined) {
+								if (foundClass.students.find((x) => x._id === req.payload._id) !== undefined) {
 									res.status(200).json({ succes: false, message: 'Je zit al in klas: ' + foundClass.title });
 								} else {
 									foundClass.students.push(user);
@@ -119,7 +119,7 @@ router.get('/getClass', auth, (req, res) => {
 								User.findById(student._id, (error, classmate) => {
 									classmates.push(classmate);
 									// Check if all classmates are pushed to the list.
-									if (classmates.length == numberOfMembers) {
+									if (classmates.length === numberOfMembers) {
 										res.status(200).json({ succes: true, class: foundClass, classmates: classmates });
 									}
 								});
@@ -173,7 +173,7 @@ router.get('/getSingleClass/:id', auth, (req, res) => {
 						User.findById(student._id, (error, classmate) => {
 							classmates.push(classmate);
 							// Check if all classmates are pushed to the list.
-							if (classmates.length == numberOfMembers) {
+							if (classmates.length === numberOfMembers) {
 								res.status(200).json({ succes: true, class: foundClass, classmates: classmates });
 							}
 						});
@@ -202,11 +202,11 @@ router.get('/classmateProfile/:id', auth, (req, res) => {
 				// Check if the requested classmate exists.
 				if (!classmate) {
 					res.status(404).json({message: "User's profile not found"});
-				} else if (user.role == 'student') {
+				} else if (user.role === 'student') {
 					// Check if the classmate is actually in the same class.
 					userId = user.class[0]._id.toString();
 					classmateId = classmate.class[0]._id.toString();
-					if (userId != classmateId) {
+					if (userId !== classmateId) {
 						res.status(401).json({message: "Not authorized to see user's profile"});
 					} else {
 						res.status(200).json(classmate);

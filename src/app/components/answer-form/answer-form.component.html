@@ -1,16 +1,16 @@
 <form *ngIf="userDetails?.role == 'student'" [formGroup]="getAnswerForm" (ngSubmit)="sendAnswer()">
-    <mat-form-field class="example-full-width">
+    <mat-form-field>
         <mat-label>Vul hier je antwoord in</mat-label>
         <textarea matInput formControlName="getAnswer" placeholder="[antwoord]" [(ngModel)]="answer" ></textarea>
     </mat-form-field><br>
-    <button mat-raised-button type="submit" [disabled]="alreadySubmitted">Verstuur</button>
+    <button mat-button class="general-button" type="submit" [disabled]="alreadySubmitted">Verstuur</button>
 </form>
 
 <form *ngIf="userDetails?.role == 'teacher'" [formGroup]="sendQuestionsForm" (ngSubmit)="sendQuestion()">
-    <mat-form-field class="example-full-width">
+    <mat-form-field>
         <mat-label>Vul hier je vraag in</mat-label>
         <textarea matInput formControlName="getQuestion" placeholder="[vraag]" [(ngModel)]="question" ></textarea>
     </mat-form-field><br>
-    <button mat-raised-button type="submit">Verstuur</button>
+    <button mat-button class="general-button" type="submit">Verstuur</button>
 </form>
 

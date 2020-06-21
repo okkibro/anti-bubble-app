@@ -1,17 +1,25 @@
-.progressBar {
+.progress-bar {
     width: 50%;
     display: inline-block;
 }
 
-.UItable {
+.general-table {
     padding: 10px;
     border-spacing: 70px 0;
     margin: 10px;
 }
 
-.UItable td{
-    padding: 25px;
+.general-table td{
+    padding: 20px;
     text-align: center;
     display: inline-block;
-    width: 20%;
+    width: 150px;
+}
+
+mat-tab-group,
+mat-tab {
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    display: flex;
 }

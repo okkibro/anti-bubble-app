@@ -4,16 +4,16 @@ mat-panel-title {
     font-weight: bold;
 }
 
-.sessionOptionsTable td{
+.session-options-table td{
     width: 50%;
 }
 
-.sessionOptionsTable th{
+.session-options-table th{
     text-align: center;
     width: 10%;
 }
 
-.sessionOptionsTable {
+.session-options-table {
     margin: 10px;
     display: inline-block;
     width: 75%;
@@ -25,17 +25,7 @@ mat-panel-title {
     width: 75%;
 }
 
-.teamOptionButton {
+.team-option-button {
     display: block;
     padding: 5px;
 }
-
-::ng-deep .mat-accent .mat-slider-thumb {
-    background-color: red;
-} 
-::ng-deep .mat-accent .mat-slider-thumb-label {
-    background-color: black;
-} 
-::ng-deep .mat-accent .mat-slider-track-fill {
-    background-color: red;
-} 

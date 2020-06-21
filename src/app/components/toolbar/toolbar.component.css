@@ -1,19 +1,15 @@
 .toolbar {
     height: 50px;
-    box-shadow: 0 3px 10px 0 rgba(0,0,0,0.40);
+    box-shadow: 0 3px 10px 0 rgba(0, 0 ,0, 0.40);
     z-index: 2;
     position: relative;
 }
 
-.toolbar button:hover {
-    color:  #fbe0d0;
+.toolbar img {
+    height: 36px;
+    padding-left: 5px;
 }
 
 .nav-items {
     flex: 1 1 auto;
-}
-
-.nav-items button {
-    padding: 0 30px;
-    color: white;
 }

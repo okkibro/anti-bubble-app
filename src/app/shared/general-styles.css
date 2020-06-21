@@ -1,17 +1,13 @@
 body {
-    background-image: url("../../assets/images/Super_Map/Basic_Buttons/Background.png");
+    background-image: url("../../assets/images/Super_map/Basic_Buttons/Background.png");
     text-align: center;
-    margin: 0;
-    padding: 0;
-    height: 100%;
-    width: 100%;
     background-size: auto;
     display: flex;
     justify-content: center;
     align-items: center; 
 }
 
-.containerDiv {
+.container-div {
     height: 100%;
     width: 80%;
     justify-content: center;
@@ -31,89 +27,19 @@ mat-card-header {
     display: inline-block;
 }
 
-mat-card button{
-    background-color: #addadb;
+.general-link,
+.general-button {
+    color: white;
+    background: transparent url("../../assets/images/Super_map/Basic_Buttons/Button_red_rectangle.png") round;
 }
 
-mat-card a:hover{
-    background-color: #8ab0b1;
-}
-
-mat-card img{
-    object-fit: cover; 
-    width: 50%; 
-    height: 50%;
-}
-
-mat-tab-group, mat-tab {
-    text-align: center;
-    justify-content: center;
-    align-items: center; 
-    display: flex;
-}
-
-.UItable {
+.general-table {
     display: inline-block;
 }
 
-.UItable th, td {
+.general-table th, td {
     text-align: left;
     padding: 10px;    
-}
-
-.sessionTable, .submitTable {
-    display: inline-block;
-}
-
-.sessionTable, .submitTable th, td {
-    padding: 10px;
-}
-
-.timeLeft{
-    top: 10%;
-    left: 3%;
-    float: right;
-    position: absolute;
-    z-index: 100;
-}
-
-::ng-deep .mat-simple-snackbar-action {
-    color: white;
-}
-
-::ng-deep .style-error {
-    color: white;
-    background-color: red;
-}
-
-::ng-deep .style-succes {
-    color: white;
-    background-color: green;
-}
-
-.bubbleImage {
-    position: absolute;
-    top: 10%;
-    left: 0;
-    background-color: transparent;
-    border: transparent;
-    box-shadow: none;
-    z-index: 1;
-}
-
-/* Apply this id for blue buttons designed by the artists */
-#artisticButtonBlue {
-    width: 40%;
-    background: transparent url("../../assets/images/Super_Map/Basic_Buttons/Button_Yellow_Rectangle.png") round;
-}
-
-::ng-deep .style-warning {
-    color: black;
-    background-color: yellow;
-}
-
-::ng-deep .style-warning .mat-simple-snackbar-action {
-    color: black;
 }
 
 .footer {

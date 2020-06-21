@@ -4,30 +4,29 @@
     </mat-sidenav>
     <mat-sidenav-content>
         <mean-toolbar (sidenavToggle)="sidenav.toggle()"></mean-toolbar>
-
         <body>
-            <div class="containerDiv" fxLayoutGap="10px" fxLayout="column" fxLayoutAlign="space-evenly">
-                <div fxLayout.xs="row" fxLayoutGap="0.5%" fxLayoutAlign="space-evenly">
+            <div class="container-div" fxLayout="column" fxLayoutGap="10px" fxLayoutAlign="space-evenly">
+                <div fxLayout.xs="column" fxLayoutGap="10px" fxLayoutAlign="space-evenly">
                     <mat-card fxFlex="50%">
                         <mat-card-header>
                             <mat-card-title>Profiel</mat-card-title>
                         </mat-card-header>
                         <mat-card-content>
-                            <table class="UItable">
+                            <table class="profile-table">
                                 <tr>
-                                    <th>Gebruikersnaam</th>
+                                    <td class="top-data">Gebruikersnaam</td>
                                     <td>{{ userDetails?.firstName }}</td>
                                 </tr>
                                 <tr>
-                                    <th>Volledige naam</th>
+                                    <td class="top-data">Volledige naam</td>
                                     <td>{{ userDetails?.firstName }} {{ userDetails?.lastName }}</td>
                                 </tr>
                                 <tr>
-                                    <th>E-mail adres</th>
+                                    <td class="top-data">E-mail adres</td>
                                     <td>{{ userDetails?.email }}</td>
                                 </tr>
                                 <tr *ngIf="userDetails?.role == 'student'">
-                                    <th>Klas</th>
+                                    <td class="top-data">Klas</td>
                                     <td>{{ userClassTitle }}</td>
                                 </tr>
                             </table>
@@ -38,51 +37,52 @@
                             <mat-card-title>Avatar</mat-card-title>
                         </mat-card-header><br>
                         <mat-card-content>
-                            <mean-avatar-display class="avatarSize"></mean-avatar-display>
-                            <button mat-flat-button [routerLink]="'/avatar'" [ngClass]="{'my-custom-theme': true}"
-                                color="primary">Avatar aanpassen</button>
+                            <mean-avatar-display></mean-avatar-display>
+                            <a mat-button class="general-link" [routerLink]="'/avatar'">Avatar aanpassen</a>
                         </mat-card-content>
                     </mat-card>
                 </div>
-                <div fxLayout.xs="row" fxLayoutGap="10px" fxLayoutAlign="space-evenly" class="my-custom-theme"
-                    *ngIf="userDetails?.role == 'student'">
+
+                <div fxLayout.xs="column" fxLayoutGap="10px" fxLayoutAlign="space-evenly" class="my-custom-theme" *ngIf="userDetails?.role == 'student'">
                     <mat-card fxFlex="50%">
                         <mat-card-header>
                             <mat-card-title>Mijn Bubbel</mat-card-title>
-                        </mat-card-header><br>
-
+                        </mat-card-header>
                         <mat-card-content>
                             <mean-bubble-visualisation></mean-bubble-visualisation>
-                            <button mat-flat-button [routerLink]="'/bubble-details'"
-                                [ngClass]="{'my-custom-theme': true}" color="accent">Meer details</button>
+                            <a mat-button class="general-link" [routerLink]="'/bubble-details'">Meer details</a>
                         </mat-card-content>
                     </mat-card>
+
                     <mat-card fxFlex="50%">
                         <mat-card-header>
                             <mat-card-title>Badges</mat-card-title>
                             <mat-card-subtitle>Badge met de meeste voortgang</mat-card-subtitle>
                         </mat-card-header>
                         <mat-card-content>
-                            <table class="UItable">
+                            <table class="general-table">
                                 <tr *ngIf="milestoneShown.name !='Gefeliciteerd'">
                                     <td>
                                         <strong>{{milestoneShown.name}}</strong><br>
                                         {{milestoneShown.description}}<br>
-                                        Voortgang:
+                                        <i>Voortgang:</i>
                                         {{userDetails?.milestones[milestoneShown.index]}}/{{milestoneShown.maxValue}}
                                     </td>
                                 </tr>
-                            </table><br>
-                            <button mat-button [routerLink]="'/badges'">Alle badges</button>
+                            </table>
+                            <mat-card-footer>
+                                <a mat-button class="general-link" [routerLink]="'/badges'">Alle badges</a>
+                            </mat-card-footer>
                         </mat-card-content>
                     </mat-card>
                 </div>
-                <mat-card fxLayout.xs="column" fxLayoutAlign="space-evenly center">
+
+                <mat-card class="change-password-accordion" fxLayout.xs="column" fxLayoutAlign="space-evenly center">
                     <mat-accordion>
                         <mat-expansion-panel>
                             <mat-expansion-panel-header>
                                 <mat-panel-title>
-                                    Wachtwoord Aanpassen
+                                    Wachtwoord aanpassen
                                 </mat-panel-title>
                                 <mat-panel-description>
                                     Vul je oude en nieuwe wachtwoord in
@@ -106,7 +106,7 @@
                                             <mat-label>Nieuw wachtwoord</mat-label>
                                             <input matInput type="password" formControlName="newPassword">
                                             <mat-error
-                                                *ngIf="changePasswordForm.get('oldPassword').hasError('required')">
+                                                *ngIf="changePasswordForm.get('newPassword').hasError('required')">
                                                 Wachtwoord is <strong>verplicht</strong>
                                             </mat-error>
                                         </mat-form-field>
@@ -122,8 +122,7 @@
                                         </mat-form-field>
                                     </tr>
                                 </table>
-                                <button mat-raised-button type="submit" [disabled]="!changePasswordForm.valid"
-                                    color="primary">Aanpassen</button>
+                                <button mat-button class="general-button" type="submit" [disabled]="!changePasswordForm.valid">Aanpassen</button>
                             </form>
                         </mat-expansion-panel>
                     </mat-accordion>

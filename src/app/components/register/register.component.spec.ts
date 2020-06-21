@@ -3,7 +3,7 @@ import { AuthenticationService } from '../../services/authentication.service';
 import { HttpClientModule } from '@angular/common/http';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { RouterModule } from '@angular/router';
-import { ReactiveFormsModule, FormsModule  } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { User } from '../../models/user';
 import { of } from 'rxjs';
 
