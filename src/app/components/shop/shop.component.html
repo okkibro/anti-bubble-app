@@ -31,7 +31,7 @@
                         <mat-grid-list cols="5" gutterSize="10px">
                             <mat-grid-tile *ngFor = "let item of filteredShop" fxFlexAlign="stretch">
                                 <mat-card fxLayout="column" fxFlexAlign="stretch">
-                                    <mat-card-title fxFlex="10%">{{ item.title }}</mat-card-title>
+                                    <mat-card-subtitle fxFlex="10%">{{ item.title }}</mat-card-subtitle>
                                     <div fxFlex="60%">
                                         <img mat-card-image src="{{ item.previewImage }}" alt="{{ item.title }}">
                                     </div>

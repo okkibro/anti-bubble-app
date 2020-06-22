@@ -28,20 +28,19 @@ router.get('/', (req, res) => {
 });
 
 router.get('/getBaseInventory', auth, (req, res) => {
-    Shop.find({initial: true})
-        .exec(function (err, shop) {
-            res.status(200).json(shop);
-        });
+    Shop.find({initial: true}).exec(function (err, shop) {
+        res.status(200).json(shop);
+    });
 });
 
 router.post('/buy', auth, (req, res) => {
     User.findById(req.payload._id) // Get the logged in user.
             .exec(function (err, user) {
-
                 // Check if the user has enough money and hasnt bought the item yet.
                 if (user.currency >= req.body.item.price && user.inventory.find(x => x._id === req.body.item._id) == null) {
                     user.inventory.push(req.body.item); // Add item to inventory.
                     user.currency -= req.body.item.price; // Pay the money.
+                    user.markModified('inventory');
                     user.save();
                     res.status(200).json( { succes: true, message: `Je hebt ${req.body.item.title} succesvol gekocht!` } ); // Show succes message.
                 } else {

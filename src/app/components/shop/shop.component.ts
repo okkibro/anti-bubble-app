@@ -14,9 +14,6 @@ import { milestones } from '../../../../constants';
         '../../shared/general-styles.css']
 })
 
-
-
-
 export class ShopComponent implements OnInit {
     userDetails: User;
     shopDetails: Shop[];

@@ -42,7 +42,7 @@ export class BubbleVisualisationComponent implements OnInit {
 
   /** Function that returns the name (from the second array) of the highest value from the first array, */
   getHighestIndex(inputValues, nameValues){
-    let currentMax = 0;
+    let currentMax = -1;
     let currentName = "wrong";
     for (let i = 0; i < inputValues.length; i++){
       if (inputValues[i] > currentMax){
