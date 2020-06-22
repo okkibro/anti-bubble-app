@@ -26,14 +26,14 @@ export class BubbleVisualisationComponent implements OnInit {
   /** Function that updates the visual representation of a users bubble based on their statistics. */
   updateBubble() {
     let rightValues = [this.userDetails.bubble.mainstream, this.userDetails.bubble.social,this.userDetails.bubble.online];
-    let rightValuePaths = ["/assets/images/ Super_Map/Bubble_UI/UI_Bubble_Turquoise.png", "/assets/images/ Super_Map/Bubble_UI/UI_Bubble_Green.png", "/assets/images/ Super_Map/Bubble_UI/UI_Bubble_Purple.png"];
+    let rightValuePaths = ["/assets/images/Super_Map/Bubble_UI/UI_Bubble_Turquoise.png", "/assets/images/Super_Map/Bubble_UI/UI_Bubble_Green.png", "/assets/images/Super_Map/Bubble_UI/UI_Bubble_Purple.png"];
     let rightHighestRated = this.getHighestIndex(rightValues, rightValuePaths);
 
     let rightHalf = document.getElementById("rightHalf");
     rightHalf.setAttribute("src", rightHighestRated);
 
     let leftValues = [this.userDetails.bubble.category1, this.userDetails.bubble.category2];
-    let leftValuePaths = ["/assets/images/ Super_Map/Bubble_UI/UI_Bubble_Blue.png", "/assets/images/ Super_Map/Bubble_UI/UI_Bubble_Orange.png"];
+    let leftValuePaths = ["/assets/images/Super_Map/Bubble_UI/UI_Bubble_Blue.png", "/assets/images/Super_Map/Bubble_UI/UI_Bubble_Orange.png"];
     let leftHighestRated = this.getHighestIndex(leftValues, leftValuePaths);
 
     let leftHalf = document.getElementById("leftHalf");
