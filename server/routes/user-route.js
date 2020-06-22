@@ -334,7 +334,13 @@ router.post('/updateGraph', auth, (req, res) => {
 /** Post method to update user bubble */
 router.post('/updateBubble', auth, (req, res) => {
     User.findById(req.payload._id, (err, user) => {
-        user.bubble[req.body.bubbleConsequence]++;
+        for (q of req.body.answers) {
+            if (q != null) {
+                if (q.question.choiceConsequence[q.answer] != '') {
+                    user.bubble[q.question.choiceConsequence[q.answer]] += q.question.values[q.answer];
+                }
+            }
+        }
         user.markModified('bubble');
         user.save((error) => { 
             if (error){

@@ -51,7 +51,9 @@ export class LabyrinthComponent implements OnInit {
         if (data.succes) {  // Labyrinth boolean is set to true. Player now has a bubble and can join activity sessions.
           this.snackBar.open('Je bent bij het eind aangekomen. Je antwoorden zijn opgeslagen.', 'X', { duration: 2500, panelClass: ['style-warning'], });
           this.sessionService.saveAnswers(this.answers).subscribe(() => { // Saves the answers in the database.
-            this.router.navigate(['home']);
+            this.bubbleService.updateBubble(this.answers).subscribe(() => {
+              this.router.navigate(['home']);
+            });
           });
         } else {
           // TODO: opvangen fout tijdens doorlopen van doolhof
@@ -75,7 +77,9 @@ export class LabyrinthComponent implements OnInit {
   paused() {
     this.sessionService.saveAnswers(this.answers).subscribe(() => {
       this.snackBar.open('Doolhof gepauzeerd. Zorg dat je het voor de volgende les hebt afgemaakt.', 'X', { duration: 2500, panelClass: ['style-warning'], }).afterDismissed().subscribe(() => {
-        this.router.navigate(['home']);
+        this.bubbleService.updateBubble(this.answers).subscribe(() => {
+          this.router.navigate(['home']);
+        });
       });
     });
   }
@@ -128,12 +132,8 @@ export class LabyrinthComponent implements OnInit {
 
   /** Function that saves a question to this.answers. */
   saveQuestion(question) {
-    let checkboxes: any = document.getElementsByClassName('option'); // Get all checkboxes in an array.
-    let result = [];
-    for (let i = 0; i < checkboxes.length; i++) { // Loop over all the checkboxes.
-      result.push(checkboxes[i].checked); // Save checked in result array.
-    }
-    this.updateBubble(result, question)
+    let result = this.optionSelected; // Temporary variable to save the selected option.
+    this.optionSelected = ""; // Deselecting radio button when going to the next question.
     this.answers.push({ question: question, answer: result }); // Push the result with its corresponding question to this.answers.
   }
 
@@ -168,16 +168,5 @@ export class LabyrinthComponent implements OnInit {
 
   selectedOption() {
     this.nextQuestionDisabled = false;
-  }
-
-  /** Function that updates bubble values based on the answer given */
-  updateBubble(result, question) {
-    let consequences = question.choiceConsequence;
-    for (let i = 0; i < result.length; i++){
-      if(result[i] && consequences[i] != ""){
-        console.log(consequences[i]);
-        this.bubbleService.updateBubble(consequences[i]).subscribe();
-      }
-    }
   }
 }

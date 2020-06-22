@@ -26,11 +26,11 @@
                                 src="https://www.bodytolk.nl/wp-content/uploads/2018/10/Doolhof-e1540134886809.png"
                                 id="doolhof" alt="tijdelijk doolhof">
                             <br>
-                            <button mat-button (click)="startLabyrinth()">Start</button>
+                            <button mat-button class="general-button" (click)="startLabyrinth()">Start</button>
                         </mat-card-content>
 
                         <mat-card-content *ngIf="startedLabyrinth">
-                            <button mat-button id="stopButton" (click)="paused()">Stop</button>
+                            <button mat-button class="general-button" id="stopButton" (click)="paused()">Stop</button>
 
                             <p id="question"></p>
 
@@ -42,8 +42,7 @@
                                 </p>
                             </mat-radio-group><br>
 
-                            <button mat-button (click)="nextQuestion(currentQuestion)"
-                                [disabled]="nextQuestionDisabled">Volgende</button>
+                            <button mat-button class="general-button" (click)="nextQuestion(currentQuestion)" [disabled]="nextQuestionDisabled"> Volgende </button>
 
                         </mat-card-content>
                     </mat-card>
