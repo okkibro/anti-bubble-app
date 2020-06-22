@@ -1,3 +1,9 @@
+/*
+ * This program has been developed by students from the bachelor Computer Science at Utrecht University
+ * within the Software Project course. © Copyright Utrecht University (Department of Information and
+ * Computing Sciences)
+ */
+
 // This file can be replaced during build by using the `fileReplacements` array.
 // `ng build --prod` replaces `environment.ts` with `environment.prod.ts`.
 // The list of file replacements can be found in `angular.json`.
