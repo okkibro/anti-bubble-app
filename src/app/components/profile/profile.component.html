@@ -32,7 +32,7 @@
                             </table>
                         </mat-card-content>
                     </mat-card>
-                    <mat-card fxFlex="50%">
+                    <mat-card fxFlex="50%" *ngIf="userDetails?.role == 'student'">
                         <mat-card-header>
                             <mat-card-title>Badges</mat-card-title>
                             <mat-card-subtitle>Badge met de meeste voortgang</mat-card-subtitle>
@@ -56,8 +56,8 @@
                     </mat-card>
                 </div>
 
-                <div fxLayout.xs="column" fxLayoutGap="10px" fxLayoutAlign="space-evenly" class="my-custom-theme" *ngIf="userDetails?.role == 'student'">
-                    <mat-card fxFlex="50%">
+                <div fxLayout.xs="column" fxLayoutGap="10px" fxLayoutAlign="space-evenly" class="my-custom-theme">
+                    <mat-card fxFlex="50%" *ngIf="userDetails?.role == 'student'">
                         <mat-card-header>
                             <mat-card-title>Mijn Bubbel</mat-card-title>
                         </mat-card-header>
