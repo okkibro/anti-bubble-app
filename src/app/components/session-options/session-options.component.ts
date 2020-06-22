@@ -27,7 +27,7 @@ export class SessionOptionsComponent implements OnInit {
 
   // Gets called when teacher presses create session button. gamedata contains the name of the game and time of the slider
   createSession(gameData) {
-    this.sessionService.getActivity(gameData?.game).subscribe(data => { // Get the entire activity data from the database
+    this.sessionService.getActivity(gameData.game).subscribe(data => { // Get the entire activity data from the database
       gameData.game = data;
       this.socketService.createSession(gameData); // Create a session in socket io service and pass it the chosen activity with set options
       this.router.navigate(['session']); // Navigate to session page

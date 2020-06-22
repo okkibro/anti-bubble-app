@@ -31,7 +31,7 @@
                                     <td id="teacherPin">{{pin}}</td>
                                 </tr>
                                 <tr>
-                                    <button (click)="startGame()" mat-button id="startButton">Start!</button>
+                                    <button mat-button class="general-button" (click)="startGame()" id="startButton">Start!</button>
                                 </tr>
                             </table>
                         </mat-card-content>
@@ -69,8 +69,8 @@
                             <!-- TODO: deze heeft een andere game finished -->
                             <table class="submitTable"></table>
                             <br>
-                            <button mat-button *ngIf="!gameFinished" (click)="stopGame()" >Stop Activiteit</button>
-                            <button mat-button *ngIf="gameFinished" (click)="leaveGame()" >Home</button>
+                            <button mat-button class="general-button" *ngIf="!gameFinished" (click)="stopGame()" >Stop Activiteit</button>
+                            <button mat-button class="general-button" *ngIf="gameFinished" (click)="leaveGame()" >Home</button>
                         </mat-card-content>
 
 
@@ -78,8 +78,8 @@
                             <mean-answer-form *ngIf="enableQuestions"></mean-answer-form>
                             <table class="submitTable"></table>
                             <br>
-                            <button mat-button *ngIf="!gameFinished" (click)="stopGame()" >Stop Activiteit</button>
-                            <button mat-button *ngIf="gameFinished" (click)="leaveGame()" >Home</button>
+                            <button mat-button class="general-button" *ngIf="!gameFinished" (click)="stopGame()" >Stop Activiteit</button>
+                            <button mat-button class="general-button" *ngIf="gameFinished" (click)="leaveGame()" >Home</button>
                         </mat-card-content>
 
 
@@ -87,16 +87,16 @@
                             <mean-answer-form *ngIf="enableQuestions"></mean-answer-form>
                             <table class="submitTable"></table>
                             <br>
-                            <button mat-button *ngIf="!gameFinished" (click)="stopGame()" >Stop Activiteit</button>
-                            <button mat-button *ngIf="gameFinished" (click)="leaveGame()" >Home</button>
+                            <button mat-button class="general-button" *ngIf="!gameFinished" (click)="stopGame()" >Stop Activiteit</button>
+                            <button mat-button class="general-button" *ngIf="gameFinished" (click)="leaveGame()" >Home</button>
                         </mat-card-content>
 
 
                         <mat-card-content *ngIf="gameData?.game.name == 'Aanradend Algoritme'">
                             <!-- TODO: deze heeft een andere game finished -->
                             TODO: Video/poppetje laten zien of iets. <br>
-                            <button mat-button *ngIf="!gameFinished" (click)="stopGame()" >Stop Activiteit</button>
-                            <button mat-button *ngIf="gameFinished" (click)="leaveGame()" >Home</button>
+                            <button mat-button class="general-button" *ngIf="!gameFinished" (click)="stopGame()" >Stop Activiteit</button>
+                            <button mat-button class="general-button" *ngIf="gameFinished" (click)="leaveGame()" >Home</button>
                         </mat-card-content>
                     </mat-card>
                 </div>

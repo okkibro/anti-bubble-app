@@ -13,15 +13,23 @@ import * as Highcharts2 from "highcharts";
 export class BubbleDetailsComponent implements OnInit {
 
   charts = Highcharts2;
-
   chartConstructor = 'chart'; // optional string, defaults to 'chart'
-
   chartCallback = function (chart) { } // optional function, defaults to null
   updateFlag = false; // optional boolean
   oneToOneFlag = true; // optional boolean, defaults to false
   runOutsideAngularFlag = false; // optional boolean, defaults to false
-
   chartOptions = {}
+  userDetails: User;
+
+  constructor(private auth: AuthenticationService) {}
+  
+  ngOnInit() {
+    this.auth.profile().subscribe(user => {
+      this.userDetails = user;
+      this.initChart();
+    })
+    
+  }
 
   initChart() {
     this.chartOptions = {
@@ -62,18 +70,5 @@ export class BubbleDetailsComponent implements OnInit {
         }
       ]
     };
-  }
-
-
-  userDetails: User;
-
-  constructor(private auth: AuthenticationService) {}
-  
-  ngOnInit() {
-    this.auth.profile().subscribe(user => {
-      this.userDetails = user;
-      this.initChart();
-    })
-    
   }
 }

@@ -34,28 +34,6 @@
                     </mat-card>
                     <mat-card fxFlex="50%">
                         <mat-card-header>
-                            <mat-card-title>Avatar</mat-card-title>
-                        </mat-card-header><br>
-                        <mat-card-content>
-                            <mean-avatar-display></mean-avatar-display>
-                            <a mat-button class="general-link" [routerLink]="'/avatar'">Avatar aanpassen</a>
-                        </mat-card-content>
-                    </mat-card>
-                </div>
-
-                <div fxLayout.xs="column" fxLayoutGap="10px" fxLayoutAlign="space-evenly" class="my-custom-theme" *ngIf="userDetails?.role == 'student'">
-                    <mat-card fxFlex="50%">
-                        <mat-card-header>
-                            <mat-card-title>Mijn Bubbel</mat-card-title>
-                        </mat-card-header>
-                        <mat-card-content>
-                            <mean-bubble-visualisation></mean-bubble-visualisation>
-                            <a mat-button class="general-link" [routerLink]="'/bubble-details'">Meer details</a>
-                        </mat-card-content>
-                    </mat-card>
-
-                    <mat-card fxFlex="50%">
-                        <mat-card-header>
                             <mat-card-title>Badges</mat-card-title>
                             <mat-card-subtitle>Badge met de meeste voortgang</mat-card-subtitle>
                         </mat-card-header>
@@ -73,6 +51,28 @@
                             <mat-card-footer>
                                 <a mat-button class="general-link" [routerLink]="'/badges'">Alle badges</a>
                             </mat-card-footer>
+                            <br>
+                        </mat-card-content>
+                    </mat-card>
+                </div>
+
+                <div fxLayout.xs="column" fxLayoutGap="10px" fxLayoutAlign="space-evenly" class="my-custom-theme" *ngIf="userDetails?.role == 'student'">
+                    <mat-card fxFlex="50%">
+                        <mat-card-header>
+                            <mat-card-title>Mijn Bubbel</mat-card-title>
+                        </mat-card-header>
+                        <mat-card-content>
+                            <mean-bubble-visualisation></mean-bubble-visualisation>
+                            <a mat-button class="general-link" [routerLink]="'/bubble-details'">Meer details</a>
+                        </mat-card-content>
+                    </mat-card>
+                    <mat-card fxFlex="50%">
+                        <mat-card-header>
+                            <mat-card-title>Avatar</mat-card-title>
+                        </mat-card-header><br>
+                        <mat-card-content>
+                            <mean-avatar-display></mean-avatar-display>
+                            <a mat-button class="general-link" [routerLink]="'/avatar'">Avatar aanpassen</a>
                         </mat-card-content>
                     </mat-card>
                 </div>

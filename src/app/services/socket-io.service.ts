@@ -18,6 +18,7 @@ export class SocketIOService {
     /**  Method to create a new session usig socketIO. */
     createSession(gameData) {
         this.removedListeners = false;
+        console.log(gameData)
         this.gameData = gameData;
         this.socket.emit('host-join', gameData);
         this.socket.on('players', (players: []) => {
