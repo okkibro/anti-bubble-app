@@ -1,10 +1,9 @@
-import { Component, OnInit, HostListener, Input } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { User } from "../../models/user";
 import { Router } from "@angular/router";
 import { SessionService } from '../../services/session.service';
 import { AuthenticationService } from '../../services/authentication.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { MatRadioButton } from '@angular/material/radio';
 import { BubbleGraphService } from 'src/app/services/bubble-graph.service';
 
 @Component({

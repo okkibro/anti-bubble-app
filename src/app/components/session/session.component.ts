@@ -8,11 +8,6 @@ import { SessionService } from 'src/app/services/session.service';
 import { beforeUnload } from '../../../../constants';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Articles } from 'src/app/models/articles';
-import { TestBed } from '@angular/core/testing';
-import { MAT_SORT_HEADER_INTL_PROVIDER } from '@angular/material/sort';
-import { ɵWebAnimationsDriver } from '@angular/animations/browser';
-import { Directionality } from '@angular/cdk/bidi';
-import { getLocaleDayPeriods } from '@angular/common';
 
 @Component({
     selector: 'mean-session',

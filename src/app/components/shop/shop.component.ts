@@ -20,7 +20,12 @@ export class ShopComponent implements OnInit {
     filteredShop: Shop[];
     succesWindow: boolean = false;
 
-    constructor(private auth: AuthenticationService, private shopService : ShopService, private snackBar: MatSnackBar, private milestoneUpdates: MilestoneUpdatesService) { }
+    constructor(
+        private auth: AuthenticationService,
+        private shopService : ShopService,
+        private snackBar: MatSnackBar,
+        private milestoneUpdates: MilestoneUpdatesService
+    ) { }
 
     ngOnInit(): void {
         this.shopService.shop("hoofddeksel").subscribe(shop => {
@@ -28,10 +33,6 @@ export class ShopComponent implements OnInit {
             this.auth.profile().subscribe(user => {
                 this.userDetails = user;
                 this.filteredShop = this.filterShop();
-                // if(this.userDetails.inventory.length < 1)
-                // {
-                //   this.addingBaseInventory();
-                // }
                 this.succesWindow = true;
             }, (err) => {
                 console.error(err);
@@ -41,17 +42,7 @@ export class ShopComponent implements OnInit {
         });
     }
 
-    addingBaseInventory() {
-        let baseData = this.shopService.getBaseInventory();
-        baseData.forEach(element => {
-            for(let i = 0 ; i < element.length ; i++)
-            {
-                this.buy(element[i]);
-            }
-        });
-        this.succesWindow = true;
-    }
-
+    /** Method to change categoty of items you are looking at in the shop */
     tabChange(value) {
         this.shopService.shop(value).subscribe(shop => {
             this.shopDetails = shop;
