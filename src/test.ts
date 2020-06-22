@@ -1,3 +1,9 @@
+/*
+ * This program has been developed by students from the bachelor Computer Science at Utrecht University
+ * within the Software Project course. © Copyright Utrecht University (Department of Information and
+ * Computing Sciences)
+ */
+
 // This file is required by karma.conf.js and loads recursively all the .spec and framework files
 
 import 'zone.js/dist/zone-testing';

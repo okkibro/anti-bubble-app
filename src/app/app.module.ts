@@ -1,3 +1,9 @@
+/*
+ * This program has been developed by students from the bachelor Computer Science at Utrecht University
+ * within the Software Project course. © Copyright Utrecht University (Department of Information and
+ * Computing Sciences)
+ */
+
 // Angular modules.
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
