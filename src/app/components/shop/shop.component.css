@@ -12,7 +12,7 @@ mat-card-title {
 
 .shop-buy-button {
     width: 40%;
-    background: transparent url("../../../assets/images/Super_map/Basic_Buttons/Button_blue_Rectangle.png") round;
+    background: transparent url("../../../assets/images/ Super_Map/Basic_Buttons/Button_blue_Rectangle.png") round;
 }
 
 .category-change-button {
@@ -29,33 +29,33 @@ mat-card img {
 }
 
 #buttonHoofddeksel {
-    background: transparent url("../../../assets/images/Super_map/Shop_UI/Button_Hats.png") round;
+    background: transparent url("../../../assets/images/ Super_Map/Shop_UI/Button_Hats.png") round;
 }
 
 #buttonHaar {
-    background: transparent url("../../../assets/images/Super_map/Shop_UI/Button_Hair.png") round;
+    background: transparent url("../../../assets/images/ Super_Map/Shop_UI/Button_Hair.png") round;
 }
 
 #buttonBril {
-    background: transparent url("../../../assets/images/Super_map/Shop_UI/Button_Glasses.png") round;
+    background: transparent url("../../../assets/images/ Super_Map/Shop_UI/Button_Glasses.png") round;
 }
 
 #buttonLichaam {
-    background: transparent url("../../../assets/images/Super_map/Shop_UI/Button_Skincolor.png") round;
+    background: transparent url("../../../assets/images/ Super_Map/Shop_UI/Button_Skincolor.png") round;
 }
 
 #buttonShirt {
-    background: transparent url("../../../assets/images/Super_map/Shop_UI/Button_Shirt.png") round;
+    background: transparent url("../../../assets/images/ Super_Map/Shop_UI/Button_Shirt.png") round;
 }
 
 #buttonBroek {
-    background: transparent url("../../../assets/images/Super_map/Shop_UI/Button_Pants.png") round;
+    background: transparent url("../../../assets/images/ Super_Map/Shop_UI/Button_Pants.png") round;
 }
 
 #buttonSchoenen {
-    background: transparent url("../../../assets/images/Super_map/Shop_UI/Button_Shoes.png") round;
+    background: transparent url("../../../assets/images/ Super_Map/Shop_UI/Button_Shoes.png") round;
 }
 
 #buttonMedaille {
-    background: transparent url("../../../assets/images/Super_map/Shop_UI/Button_Medals.png") round;
+    background: transparent url("../../../assets/images/ Super_Map/Shop_UI/Button_Medals.png") round;
 }
