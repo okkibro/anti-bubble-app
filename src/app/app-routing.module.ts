@@ -39,7 +39,7 @@ const routes: Routes = [
   { path: 'class-overview', component: ClassOverviewComponent, canActivate: [AuthGuardService] },
   { path: 'classmate-profile/:id', component: ClassmateProfileComponent, canActivate: [AuthGuardService] },
   { path: 'avatar', component: AvatarComponent, canActivate: [AuthGuardService] },
-  { path: 'bubble-details', component: BubbleDetailsComponent, canActivate: [AuthGuardService] },
+  { path: 'bubble-details', component: BubbleDetailsComponent, canActivate: [AuthGuardService], data: { roles: [Role.student] }},
   { path: 'teacher-overview', component: TeacherOverviewComponent, canActivate: [AuthGuardService], data: { roles: [Role.teacher] }},
   { path: 'badges', component: BadgesComponent, canActivate: [AuthGuardService] },
   { path: 'shop', component: ShopComponent, canActivate: [AuthGuardService] },
@@ -49,7 +49,7 @@ const routes: Routes = [
   { path: 'session-options', component: SessionOptionsComponent, data: { roles: [Role.teacher] }},
   { path: 'activities', component: ActivitiesComponent, canDeactivate: [SessionGuardService] },
 
-  // Auto redirect als je bullshit invult (moet als laatste).
+  // Automatically redirect to login page when user inputs a wrong URL.
   { path: '**', redirectTo: '/login', pathMatch: 'full' },
 ];
 

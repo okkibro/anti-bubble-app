@@ -10,14 +10,14 @@ import { Observable } from 'rxjs';
 import { CookieService } from 'ngx-cookie-service';
 
 @Injectable({
-  providedIn: 'root'
+    providedIn: 'root'
 })
 export class AvatarService {
 
-  constructor(private http: HttpClient, private cookie: CookieService) { }
+    constructor(private http: HttpClient, private cookie: CookieService) { }
 
-  /** Method to do a POST request to the backend to equip and item on the avatar of the user. */ 
-  equip(item): Observable<any>{
-    return this.http.post('https://localhost:3000/user/avatar', { avatarItem: item }, { headers: { Authorization: 'Bearer ' + this.cookie.get('mean-token') }});
-  }
+    /** Method to do a POST request to the backend to equip and item on the avatar of the user. */
+    equip(item): Observable<any>{
+        return this.http.post('https://localhost:3000/user/avatar', { avatarItem: item }, { headers: { Authorization: 'Bearer ' + this.cookie.get('mean-token') }});
+    }
 }

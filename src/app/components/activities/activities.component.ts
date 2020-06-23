@@ -110,7 +110,6 @@ export class ActivitiesComponent implements OnInit {
         this.submitted = true;
         this.socketService.studentSubmit({ answer: this.selected, data: data });
     }
-
 }
 
 

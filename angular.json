@@ -94,8 +94,7 @@
             "scripts": []
           }
         }
-
-      }
+}
     }
   },
   "defaultProject": "client",

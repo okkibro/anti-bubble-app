@@ -127,8 +127,7 @@ export class LabyrinthComponent implements OnInit {
                 // Show the qustion on the screen.
                 this.showQuestion(question);
             }
-
-        }
+}
     }
 
     /** Method that saves a question to this.answers. */
@@ -171,8 +170,7 @@ export class LabyrinthComponent implements OnInit {
                 }, 1);
             }
         }
-
-    }
+}
 
     selectedOption() {
         this.nextQuestionDisabled = false;

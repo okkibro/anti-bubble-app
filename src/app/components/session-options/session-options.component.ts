@@ -51,5 +51,4 @@ export class SessionOptionsComponent implements OnInit {
             this.router.navigate(['session']);
         });
     }
-
 }

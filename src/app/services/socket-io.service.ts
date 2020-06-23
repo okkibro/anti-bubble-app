@@ -50,7 +50,9 @@ export class SocketIOService {
         this.socket.on('join-succes', (gameData) => {
             this.data.changeMessage(pin);
             this.gameData = gameData;
-            join(true); // After player-join return succes to the angular component.
+
+            // After player-join return succes to the angular component.
+            join(true);
         });
         this.socket.on('join-failure', () => {
             join(false);
@@ -58,7 +60,9 @@ export class SocketIOService {
         this.socket.on('host-disconnect', () => {
             this.hostDisconnected = true;
             this.socket.removeAllListeners();
-            backToHome(); // When the host disconnects, call the function that sends the player back to the home screen.
+
+            // When the host disconnects, call the function that sends the player back to the home screen.
+            backToHome();
         });
         this.socket.on('game-start-redirect', () => {
             redirect();
@@ -162,6 +166,7 @@ export class SocketIOService {
         });
     }
 
+    /** Method that will finish a session */
     finishGame() {
         this.socket.emit('finish-game');
     }
