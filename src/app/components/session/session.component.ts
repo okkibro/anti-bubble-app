@@ -5,7 +5,7 @@
  */
 
 import { Component, OnInit } from '@angular/core';
-import { AuthenticationService } from "../../services/authentication.service";
+import { AuthenticationService } from '../../services/authentication.service';
 import { SocketIOService } from 'src/app/services/socket-io.service';
 import { DataService } from 'src/app/services/data-exchange.service';
 import { User } from '../../models/user';
@@ -60,7 +60,7 @@ export class SessionComponent implements OnInit {
             // Going to session page but not having joined a session redirects a user back to the home page.
             this.router.navigate(['home']);
         } else {
-            if (this.gameData.teams != undefined && this.gameData.teams === "Handmatig") {
+            if (this.gameData.teams != undefined && this.gameData.teams === 'Handmatig') {
                 this.randomGroups = false;
             }
 
@@ -75,68 +75,89 @@ export class SessionComponent implements OnInit {
             this.authenticationService.profile().subscribe(user => {
                 this.userDetails = user;
 
-                if (this.userDetails.role == "teacher") {
-                    this.socketService.listenForUpdates(newPlayer => { // Callback that gets called whenever a player connects with the session.
-                        this.players.push(newPlayer); // Add player to the list.
+                if (this.userDetails.role == 'teacher') {
+
+                    // Callback that gets called whenever a player connects with the session.
+                    this.socketService.listenForUpdates(newPlayer => {
+
+                        // Add player to the list.
+                        this.players.push(newPlayer);
+
                         // Create a tablerow with a textnode that contains the player's name.
-                        let tableRow = document.createElement("tr");
-                        tableRow.appendChild(document.createTextNode(newPlayer.firstName + " " + newPlayer.lastName));
-                        tableRow.classList.add("player");
-                        // Create a input field where the teacher can group teams manually
+                        let tableRow = document.createElement('tr');
+                        tableRow.appendChild(document.createTextNode(newPlayer.firstName + ' ' + newPlayer.lastName));
+                        tableRow.classList.add('player');
+
+                        // Create a input field where the teacher can group teams manually.
                         if (!this.randomGroups) {
-                            let input = document.createElement("input");
-                            let space = document.createTextNode(": ");
-                            input.setAttribute("placeholder", "Team nr.");
-                            input.setAttribute("id", newPlayer.email);
-                            input.setAttribute("type", "number");
-                            input.setAttribute("min", "1"); // no groups with negative numbers
-                            input.classList.add("teamInput");
+                            let input = document.createElement('input');
+                            let space = document.createTextNode(': ');
+                            input.setAttribute('placeholder', 'Team nr.');
+                            input.setAttribute('id', newPlayer.email);
+                            input.setAttribute('type', 'number');
+
+                            // No groups with negative numbers.
+                            input.setAttribute('min', '1');
+                            input.classList.add('teamInput');
                             tableRow.appendChild(space);
                             tableRow.appendChild(input);
                         }
-                        let table = document.getElementsByClassName("sessionTable")[0];
-                        table.appendChild(tableRow); // Append the tablerow to the table.
+                        let table = document.getElementsByClassName('sessionTable')[0];
+                        // Append the tablerow to the table.
+                        table.appendChild(tableRow);
 
-                        this.playerCount = this.playerCount + 1; //Display number of players in top right corner.
+                        //Display number of players in top right corner.
+                        this.playerCount = this.playerCount + 1;
 
-                    }, removedPlayer => { // Gets called when a player leaves the session.
-                        this.players = this.players.filter(x => x.email != removedPlayer.email); // Remove player from the list.
+                        // Gets called when a player leaves the session.
+                    }, removedPlayer => {
+
+                        // Remove player from the list.
+                        this.players = this.players.filter(x => x.email != removedPlayer.email);
 
                         // Remove player from DOM.
-                        let htmlPlayers = document.getElementsByClassName("player"); // Get all tr's with class player.
+                        // Get all tr's with class player.
+                        let htmlPlayers = document.getElementsByClassName('player');
                         for (let i = 0; i < htmlPlayers.length; i++) {
-                            if (htmlPlayers[i].childNodes[0].textContent == removedPlayer.name) { // If the name is equal to removed player.
+
+                            // If the name is equal to removed player.
+                            if (htmlPlayers[i].childNodes[0].textContent == removedPlayer.name) {
                                 htmlPlayers[i].remove(); // Remove the node.
                             }
                         }
 
-                        this.playerCount = this.playerCount - 1; // Display number of players in top right corner.
+                        // Display number of players in top right corner.
+                        this.playerCount = this.playerCount - 1;
                     });
 
-                    if (this.gameData.game.name != "Naamloos Nieuws") { // Naamloos Nieuws works with a different submit system
+                    // Naamloos Nieuws works with a different submit system
+                    if (this.gameData.game.name != 'Naamloos Nieuws') {
 
                         // Call function that listens for students to submit answers.
-                        this.socketService.listenForSubmits((data) => { // Receive answer from student.
+                        // Receive answer from student.
+                        this.socketService.listenForSubmits((data) => {
 
                             // Add answer to screen using DOM manipulation.
-                            var submitTable = document.getElementsByClassName('submitTable')[0];
-                            var tablerow = document.createElement('tr');
-                            var breakLine = document.createElement('br');
-                            var deleteButton = document.createElement('button');
-                            deleteButton.style.width = "25px";
-                            deleteButton.style.height = "25px";
-                            deleteButton.style.backgroundColor = "red";
-                            deleteButton.style.color = "white";
-                            deleteButton.innerHTML = "X";
-                            deleteButton.addEventListener("click", () => {
+                            let submitTable = document.getElementsByClassName('submitTable')[0];
+                            let tablerow = document.createElement('tr');
+                            let breakLine = document.createElement('br');
+                            let deleteButton = document.createElement('button');
+                            deleteButton.style.width = '25px';
+                            deleteButton.style.height = '25px';
+                            deleteButton.style.backgroundColor = 'red';
+                            deleteButton.style.color = 'white';
+                            deleteButton.innerHTML = 'X';
+                            deleteButton.addEventListener('click', () => {
                                 deleteButton.parentElement.remove();
                                 this.socketService.activateStudentButton(data.player);
                             });
-                            tablerow.innerHTML = `<strong>${data.player.name}:</strong> ${data.message} `
+                            tablerow.innerHTML = `<strong>${ data.player.name}:</strong> ${ data.message} `
                             tablerow.appendChild(deleteButton);
                             tablerow.appendChild(breakLine);
                             submitTable.appendChild(tablerow);
-                            this.enableQuestions = false; // Teacher cannot send any questions after having received at least one answer
+
+                            // Teacher cannot send any questions after having received at least one answer
+                            this.enableQuestions = false;
                         });
                     }
                 }
@@ -174,14 +195,18 @@ export class SessionComponent implements OnInit {
 
     /** Function that starts the game. Making it unable for students to join the session. */
     startGame() {
-        if (this.playerCount == 0) { // teacher wants to start a game without any players in it
+
+        // teacher wants to start a game without any players in it
+        if (this.playerCount == 0) {
             this.snackBar.open('Er zitten nog geen spelers in de sessie', 'X', { duration: 2500, panelClass: ['style-error'], });
         } else {
             if (this.canStart(this.gameData.game.name)) {
                 this.gameStarted = true;
                 this.socketService.startGame();
                 this.initGame(this.gameData.game.name);
-                let time = this.gameData?.duration * 60; // Specified time for this activity (in seconds)
+
+                // Specified time for this activity (in seconds)
+                let time = this.gameData?.duration * 60;
                 this.startTimer(time);
             }
         }
@@ -190,14 +215,14 @@ export class SessionComponent implements OnInit {
     /** Function that takes the game name and will return whether the game can start or not. */
     canStart(game: string): Boolean {
         switch (game) {
-            case "Naamloos Nieuws":
+            case 'Naamloos Nieuws':
                 if (this.playerCount < 3) {
-                    this.snackBar.open("Er moeten minstens 6 leerlingen meedoen met deze activiteit", "X", { duration: 2500, panelClass: ['style-error'] });
+                    this.snackBar.open('Er moeten minstens 6 leerlingen meedoen met deze activiteit', 'X', { duration: 2500, panelClass: ['style-error'] });
                     return false;
                 } else {
                     return true;
                 }
-            case "Botsende Bubbels":
+            case 'Botsende Bubbels':
                 return true;
         }
     }
@@ -205,15 +230,21 @@ export class SessionComponent implements OnInit {
     /** Function that initializes the game based on the given game name. */
     initGame(game: string) {
         switch (game) {
-            case "Naamloos Nieuws":
-                this.sessionService.getArticles().subscribe((articles) => { // Get articles from database.
-                    this.pairStudents(null, 3, articles, (pairs, leaders, sourceSubject) => { // Divide students in groups of 3.
+            case 'Naamloos Nieuws':
+
+                // Get articles from database.
+                this.sessionService.getArticles().subscribe((articles) => {
+
+                    // Divide students in groups of 3.
+                    this.pairStudents(null, 3, articles, (pairs, leaders, sourceSubject) => {
                         this.leaders = leaders;
                         this.pairs = pairs;
                         this.sources = sourceSubject.sources;
                         this.subjects = sourceSubject.subjects;
                         for (let i = 0; i < leaders.length; i++) {
-                            this.submits[leaders[i].email] = []; // Make a list in submits for every leader.
+
+                            // Make a list in submits for every leader.
+                            this.submits[leaders[i].email] = [];
                         }
 
                         this.socketService.listenForSubmits(submit => {
@@ -225,41 +256,14 @@ export class SessionComponent implements OnInit {
                         });
                     });
                 });
+                break;
 
-            case "Botsende Bubbels":
+            case 'Botsende Bubbels':
                 this.enableQuestions = true;
                 break;
-            case "Alternatieve Antwoorden": break;
-            case "Aanradend Algoritme": break;
+            case 'Alternatieve Antwoorden': break;
+            case 'Aanradend Algoritme': break;
         }
-    }
-
-    getPairs() {
-        // if (this.randomGroups) {
-        //     this.pairStudents(null, 2, null, (pairs) => {
-        //         this.pairs = pairs;
-        //     });
-        // } else {
-        //     let pairs: String[][] = [];
-        //     let i = 0;
-        //     let inputs: any = document.getElementsByClassName("teamInput");
-        //     let playerList = this.players;
-        //     while (playerList.length > 0) {
-        //         let player = playerList.shift();
-        //         pairs[i] = [player];
-        //         let inputField: any = document.getElementById(player.email);
-        //         for (let j = 0; j < inputs.length; j++) {
-        //             if (inputs[j].id != player.email && inputs[j].value === inputField.value) {
-        //                 pairs[i].push(playerList.filter(x => x.email === inputs[j].id)[0]);
-        //                 playerList = playerList.filter(x => x.email != inputs[j].id);
-        //             }
-        //         }
-        //         i++;
-        //     }
-        //     this.pairStudents(pairs, 2, null, (pairs) => {
-        //         this.pairs = pairs;
-        //     })
-        // }
     }
 
     /** Function that makes timer count down at the top of the screen. */
@@ -298,8 +302,10 @@ export class SessionComponent implements OnInit {
         this.gameFinished = true;
         clearInterval(this.interval);
         let timeLeft = <HTMLElement[]><any>document.querySelectorAll('.timeLeft');
-        timeLeft[0].style.color = "red";
-        this.socketService.removeListeners(); // Remove all listeners so students cant submit answers.
+        timeLeft[0].style.color = 'red';
+
+        // Remove all listeners so students cant submit answers.
+        this.socketService.removeListeners();
         this.showAnswersonScreen(this.gameData.game.name);
         this.finishGame();
     }
@@ -314,10 +320,10 @@ export class SessionComponent implements OnInit {
 
     showAnswersonScreen(game: String) {
         switch (game) {
-            case "Naamloos Nieuws":
-                let table = document.getElementsByClassName("submitTable")[0];
+            case 'Naamloos Nieuws':
+                let table = document.getElementsByClassName('submitTable')[0];
                 for (let i = 0; i < this.leaders.length; i++) {
-                    let team = document.createElement("tr");
+                    let team = document.createElement('tr');
                     team.innerHTML = `<strong>Team ${i + 1}</strong><br>`;
                     team.innerHTML += `Speler 1: ${this.leaders[i].name}<br> <i>Onderwerp: ${this.subjects[i]}</i> <br> <i>Source: ${this.sources[i]}<i><br><br>`;
                     let teamSubmits = this.submits[this.leaders[i].email]

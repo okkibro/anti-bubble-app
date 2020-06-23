@@ -21,7 +21,12 @@ export class PasswordRecoveryComponent implements OnInit {
         email: ['', [Validators.required, Validators.email]],
     });
 
-    constructor(private passwordRecoveryService: PasswordRecoveryService, private router: Router, private fb: FormBuilder, private snackBar: MatSnackBar) { }
+    constructor(
+        private passwordRecoveryService: PasswordRecoveryService,
+        private router: Router,
+        private fb: FormBuilder,
+        private snackBar: MatSnackBar
+    ) { }
 
     ngOnInit() { }
 
@@ -31,7 +36,7 @@ export class PasswordRecoveryComponent implements OnInit {
 
         // Send email, data returns whether the action was a succes and a message to show to the user.
         this.passwordRecoveryService.sendEmail(email).subscribe(data => {
-            if (!data.succes){
+            if (!data.succes) {
                 this.snackBar.open(data.message, 'X' , { duration: 2500, panelClass: ['style-error'] });
             } else {
                 this.snackBar.open(data.message, 'X' , { duration: 2500, panelClass: ['style-succes']})

@@ -5,7 +5,7 @@
  */
 
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from "@angular/router";
+import { ActivatedRoute, Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { PasswordRecoveryService } from '../../services/password-recovery.service';
@@ -36,7 +36,7 @@ export class PasswordResetComponent implements OnInit {
     ngOnInit(): void {
 
         // Check if token is correct, otherwise navigate back to login.
-        this.passwordRecoveryService.getResetPage(this.route.snapshot.paramMap.get("token")).subscribe((data) => {
+        this.passwordRecoveryService.getResetPage(this.route.snapshot.paramMap.get('token')).subscribe((data) => {
             if (data.correct) {
             } else {
                 this.router.navigate(['/login']);
@@ -53,11 +53,11 @@ export class PasswordResetComponent implements OnInit {
         let repeatPassword = this.passwordResetForm.get('repeatPassword').value;
 
         // Send password and confirm to back-end which will return whether it was a succes and the message to show the user.
-        this.passwordRecoveryService.postNewPassword(this.route.snapshot.paramMap.get("token"), password, repeatPassword).subscribe(data => {
+        this.passwordRecoveryService.postNewPassword(this.route.snapshot.paramMap.get('token'), password, repeatPassword).subscribe(data => {
             if (!data.succes) {
-                this.snackBar.open(data.message, 'X', {duration: 2500, panelClass: ['style-error'], });
+                this.snackBar.open(data.message, 'X', { duration: 2500, panelClass: ['style-error'], });
             } else {
-                this.snackBar.open(data.message, 'X', {duration: 2500, panelClass: ['style-succes'], }).afterDismissed().subscribe(() => {
+                this.snackBar.open(data.message, 'X', { duration: 2500, panelClass: ['style-succes'], }).afterDismissed().subscribe(() => {
                     this.router.navigate(['/login']);
                 });
             }

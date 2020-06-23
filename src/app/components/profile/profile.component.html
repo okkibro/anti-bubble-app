@@ -47,10 +47,10 @@
                             <table class="general-table">
                                 <tr *ngIf="milestoneShown.name !='Gefeliciteerd'">
                                     <td>
-                                        <strong>{{milestoneShown.name}}</strong><br>
-                                        {{milestoneShown.description}}<br>
+                                        <strong>{{ milestoneShown.name }}</strong><br>
+                                        {{ milestoneShown.description }}<br>
                                         <i>Voortgang:</i>
-                                        {{userDetails?.milestones[milestoneShown.index]}}/{{milestoneShown.maxValue}}
+                                        {{ userDetails?.milestones[milestoneShown.index] }}/{{ milestoneShown.maxValue }}
                                     </td>
                                 </tr>
                             </table>

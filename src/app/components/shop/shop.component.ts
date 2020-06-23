@@ -28,13 +28,13 @@ export class ShopComponent implements OnInit {
 
     constructor(
         private auth: AuthenticationService,
-        private shopService : ShopService,
+        private shopService: ShopService,
         private snackBar: MatSnackBar,
         private milestoneUpdates: MilestoneUpdatesService
     ) { }
 
     ngOnInit(): void {
-        this.shopService.shop("hoofddeksel").subscribe(shop => {
+        this.shopService.shop('hoofddeksel').subscribe(shop => {
             this.shopDetails = shop;
             this.auth.profile().subscribe(user => {
                 this.userDetails = user;
@@ -62,7 +62,7 @@ export class ShopComponent implements OnInit {
     buy(item): void {
         this.shopService.buy(item).subscribe((data:any) => {
             if (data.succes && this.succesWindow) {
-                this.snackBar.open(data.message, 'X', {duration: 1000, panelClass: ['style-succes'], }).afterDismissed().subscribe(() => {
+                this.snackBar.open(data.message, 'X', { duration: 1000, panelClass: ['style-succes'], }).afterDismissed().subscribe(() => {
                     this.milestoneUpdates.updateMilestone(milestones[2], 1).subscribe(data => {
                         if (data.completed) {
                             this.milestoneUpdates.updateRecent(`${new Date().toLocaleDateString()}: Je hebt de badge 'Gierige Gerrie' verdiend!`).subscribe();
@@ -76,7 +76,7 @@ export class ShopComponent implements OnInit {
                     });
                 });
             } else if (this.succesWindow) {
-                this.snackBar.open(data.message, 'X', {duration: 2500, panelClass: ['style-error'], });
+                this.snackBar.open(data.message, 'X', { duration: 2500, panelClass: ['style-error'], });
             }
         });
     }

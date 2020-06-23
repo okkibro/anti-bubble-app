@@ -29,11 +29,11 @@ export class JoinClassComponent implements OnInit {
     joinClass(): void {
         this.classesService.joinClass(this.value).subscribe(data => {
             if (data.succes) {
-                this.snackBar.open(data.message, 'X', {duration: 2500, panelClass: ['style-succes'] }).afterDismissed().subscribe(()=>{
+                this.snackBar.open(data.message, 'X', { duration: 2500, panelClass: ['style-succes'] }).afterDismissed().subscribe(()=>{
                     window.location.reload();
                 });
             } else {
-                this.snackBar.open(data.message, 'X', {duration: 2500, panelClass: ['style-error'] });
+                this.snackBar.open(data.message, 'X', { duration: 2500, panelClass: ['style-error'] });
             }
         });
     }

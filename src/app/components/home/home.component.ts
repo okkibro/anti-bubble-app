@@ -7,9 +7,9 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthenticationService } from '../../services/authentication.service';
 import { SocketIOService } from '../../services/socket-io.service';
-import { FormBuilder } from "@angular/forms";
-import { User } from "../../models/user";
-import { Router } from "@angular/router";
+import { FormBuilder } from '@angular/forms';
+import { User } from '../../models/user';
+import { Router } from '@angular/router';
 import { DataService } from 'src/app/services/data-exchange.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { beforeUnload } from '../../../../constants';
@@ -59,16 +59,18 @@ export class HomeComponent implements OnInit {
         // Call the joinsession function in socketio service and define all callbacks.
         this.socketService.joinSession(this.pin, user, (succes) => {
 
-            // join callback: succes returns true if pin was correct and false when pin is incorrect.
+            // Join callback: succes returns true if pin was correct and false when pin is incorrect.
             if (succes) {
                 this.router.navigate(['session']); // On join succes, go to session page.
             } else {
-                this.snackBar.open("Er is iets mis gegaan, probeer het opnieuw", 'X', { duration: 2500, panelClass: ['style-error'], }); // On join jail, show error message.
+
+                // On join jail, show error message.
+                this.snackBar.open('Er is iets mis gegaan, probeer het opnieuw', 'X', { duration: 2500, panelClass: ['style-error'], });
             }
         }, () => {
 
             // backToHome callback: show message that host left and navigate to home page afterwards.
-            this.snackBar.open("De host heeft de sessie verlaten, je wordt naar de home pagina geleid", 'X', { duration: 2500, panelClass: ['style-warning'] })
+            this.snackBar.open('De host heeft de sessie verlaten, je wordt naar de home pagina geleid', 'X', { duration: 2500, panelClass: ['style-warning'] })
                 .afterDismissed().subscribe(() => {
                     this.router.navigate(['home']);
                 });

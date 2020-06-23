@@ -21,7 +21,7 @@
                         <mat-card-header *ngIf="currentClass">
                             <mat-card-title> Klas overzicht </mat-card-title>
                             <mat-card-subtitle>
-                                Overzicht van alle spelers van klas {{currentClass?.title}}, code: {{currentClass?.code}}.
+                                Overzicht van alle spelers van klas {{ currentClass?.title }}, code: {{ currentClass?.code }}.
                             </mat-card-subtitle>
                         </mat-card-header>
                         <mat-card-content>
@@ -31,7 +31,7 @@
                                     <div>
                                         <mat-button-toggle-group #group="matButtonToggleGroup">
                                             <div *ngFor="let klas of names">
-                                                <mat-button-toggle (click)="switchClass(klas.id)">{{klas.title}}</mat-button-toggle>
+                                                <mat-button-toggle (click)="switchClass(klas.id)">{{ klas.title }}</mat-button-toggle>
                                             </div>
                                         </mat-button-toggle-group>
                                     </div>

@@ -42,7 +42,8 @@ export class ActivitiesComponent implements OnInit {
     private fb: FormBuilder,
     private snackBar: MatSnackBar,
     private sessionService: SessionService,
-    private auth: AuthenticationService) { }
+    private auth: AuthenticationService
+  ) { }
 
   ngOnInit(): void {
     this.gameData = this.getGameData();
@@ -98,11 +99,11 @@ export class ActivitiesComponent implements OnInit {
         }
       });
       this.team = team;
-      let articleSpace = document.getElementsByClassName("article")[0];
-      let image = document.createElement("img");
-      image.setAttribute("src", article.image);
-      //image.setAttribute("width", "200px");
-      image.setAttribute("height", "200px");
+      let articleSpace = document.getElementsByClassName('article')[0];
+      let image = document.createElement('img');
+      image.setAttribute('src', article.image);
+      //image.setAttribute('width', '200px');
+      image.setAttribute('height', '200px');
       articleSpace.appendChild(image);
 
     });

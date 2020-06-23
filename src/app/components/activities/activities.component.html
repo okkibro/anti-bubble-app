@@ -17,16 +17,16 @@
                 <div fxLayout.xs="row" fxLayoutGap="10px" fxLayoutAlign="space-evenly">
                     <mat-card fxFlex="100%">
                         <mat-card-header>
-                            <mat-card-title  >{{gameData?.game.name}}</mat-card-title>
+                            <mat-card-title  >{{ gameData?.game.name }}</mat-card-title>
                         </mat-card-header>
 
                         <mat-card-content *ngIf="gameData?.game.name == 'Naamloos Nieuws'">
-                            {{gameData?.game.description}}
+                            {{ gameData?.game.description }}
                             <div class="article"></div>
                             <mat-form-field *ngIf="!isLeader">
                                 <mat-label>Teams</mat-label>
                                 <mat-select [(value)]="selected">
-                                    <mat-option *ngFor="let leader of leaders" value="{{leader.email}}">{{leader.name}}
+                                    <mat-option *ngFor="let leader of leaders" value="{{ leader.email }}">{{ leader.name }}
                                     </mat-option>
                                 </mat-select>
                             </mat-form-field>
@@ -35,7 +35,7 @@
                         </mat-card-content>
 
                         <mat-card-content *ngIf="gameData?.game.name == 'Botsende Bubbels'">
-                            {{gameData?.game.description}}<br>
+                            {{ gameData?.game.description }}<br>
                             <p><i>Wacht op het onderwerp van de docent:</i></p>
                             <p id="receiveQuestion"></p><br>
 
@@ -52,13 +52,13 @@
                         </mat-card-content>
 
                         <mat-card-content *ngIf="gameData?.game.name == 'Alternatieve Antwoorden'">
-                            {{gameData?.game.description}}<br>
+                            {{ gameData?.game.description }}<br>
                             <p *ngIf="team != undefined && team.length != 0"> Je zit in een team met:</p>
 
                             <div class="teammates">
                                 <ul>
                                     <li *ngFor="let teamMember of team">
-                                        {{teamMember.name}}
+                                        {{ teamMember.name }}
                                     </li>
                                 </ul>
                             </div>
@@ -68,7 +68,7 @@
                         </mat-card-content>
 
                         <mat-card-content *ngIf="gameData?.game.name == 'Aanradend Algoritme'">
-                            {{gameData?.game.description}}
+                            {{ gameData?.game.description }}
                         </mat-card-content>
 
                     </mat-card>

@@ -6,7 +6,7 @@
 
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from "rxjs";
+import { Observable } from 'rxjs';
 import { CookieService } from 'ngx-cookie-service';
 
 @Injectable({
@@ -17,13 +17,13 @@ export class BubbleGraphService {
   constructor(private http: HttpClient, private cookie: CookieService) { }
 
   /** Method to do a POST request to the backend to update the 'bubble-graph' of the user. */ 
-  public updateGraph(knowledge : Number, diversity : Number): Observable<any> {
-    return this.http.post("https://localhost:3000/user/updateGraph", {knowledgeScore : knowledge, diversityScore : diversity}, {headers :  { Authorization: 'Bearer ' + this.cookie.get('mean-token')}});
+  public updateGraph(knowledge: Number, diversity: Number): Observable<any> {
+    return this.http.post('https://localhost:3000/user/updateGraph', { knowledgeScore: knowledge, diversityScore: diversity }, { headers:  { Authorization: 'Bearer ' + this.cookie.get('mean-token') }});
   }
 
   /** Method to do a POST request to the backend to update the bubble statistics of a user */
-  public updateBubble(answers : [{ question: any, answer: any }]){
+  public updateBubble(answers: [{ question: any, answer: any }]) {
     console.log(answers);
-    return this.http.post("https://localhost:3000/user/updateBubble", {answers : answers}, {headers :  { Authorization: 'Bearer ' + this.cookie.get('mean-token')}}); 
+    return this.http.post('https://localhost:3000/user/updateBubble', { answers: answers }, { headers:  { Authorization: 'Bearer ' + this.cookie.get('mean-token') }});
   }
 }

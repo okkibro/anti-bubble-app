@@ -7,7 +7,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthenticationService } from '../../services/authentication.service';
 import { User } from '../../models/user';
-import { ActivatedRoute, Router } from "@angular/router";
+import { ActivatedRoute, Router } from '@angular/router';
 import { ClassesService } from 'src/app/services/classes.service';
 
 @Component({
@@ -28,7 +28,7 @@ export class ClassmateProfileComponent implements OnInit {
     { }
 
     ngOnInit() {
-        this.classService.classmateProfile(this.route.snapshot.paramMap.get("id")).subscribe(classmate => {
+        this.classService.classmateProfile(this.route.snapshot.paramMap.get('id')).subscribe(classmate => {
             this.classmate = classmate;
 
             // Get classmate's class

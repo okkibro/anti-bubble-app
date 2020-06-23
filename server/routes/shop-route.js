@@ -4,16 +4,11 @@
  * Computing Sciences)
  */
 
-const express = require("express");
+const express = require('express');
 const router = express.Router();
 const mongoose = require('mongoose');
-const passport = require("passport");
 const Shop = mongoose.model('Shop');
-const sanitize = require('mongo-sanitize');
-const nodemailer = require('nodemailer');
-const crypto = require('crypto');
 const User = mongoose.model('User');
-const Item = mongoose.model('Item');
 
 const jwt = require('express-jwt');
 const auth = jwt({
@@ -23,7 +18,7 @@ const auth = jwt({
 
 /** Get method to get shop items from the database based on a query. */
 router.get('/', (req, res) => {
-    var query = {
+    let query = {
         category: req.headers.id.toLowerCase()
     }
 
@@ -34,7 +29,7 @@ router.get('/', (req, res) => {
 });
 
 router.get('/getBaseInventory', auth, (req, res) => {
-    Shop.find({initial: true}).exec(function (err, shop) {
+    Shop.find({ initial: true }).exec(function (err, shop) {
         res.status(200).json(shop);
     });
 });
@@ -48,16 +43,16 @@ router.post('/buy', auth, (req, res) => {
                     user.currency -= req.body.item.price; // Pay the money.
                     user.markModified('inventory');
                     user.save();
-                    res.status(200).json( { succes: true, message: `Je hebt ${req.body.item.title} succesvol gekocht!` } ); // Show succes message.
+                    res.status(200).json({ succes: true, message: `Je hebt ${req.body.item.title} succesvol gekocht!` }); // Show succes message.
                 } else {
                     if (user.currency < req.body.item.price) {
 
                         // If not enough money, show appropriate message.
-                        res.status(200).json( { succes: false, message: `Je hebt niet genoeg geld om ${req.body.item.title} te kopen` } );
+                        res.status(200).json({ succes: false, message: `Je hebt niet genoeg geld om ${req.body.item.title} te kopen` });
                     } else {
 
                         // Else show message that item has already been bought.
-                        res.status(200).json( { succes: false, message: `Je hebt ${req.body.item.title} al gekocht` } );
+                        res.status(200).json({ succes: false, message: `Je hebt ${req.body.item.title} al gekocht` });
                     }
                 }
             });

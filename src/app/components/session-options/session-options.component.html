@@ -102,7 +102,7 @@
                                     </table>
                                     <br>
                                     <button mat-button class="general-button"
-                                        (click)="createSession({game : 'Naamloos Nieuws', duration : naamloosSlider.value})">
+                                        (click)="createSession({ game: 'Naamloos Nieuws', duration: naamloosSlider.value })">
                                         Start sessie</button>
                                 </div>
                             </mat-expansion-panel>
@@ -149,7 +149,7 @@
                                     </table>
                                     <br>
                                     <button mat-button class="general-button"
-                                        (click)="createSession({game : 'Botsende Bubbels', duration : botsendeSlider.value})">
+                                        (click)="createSession({ game: 'Botsende Bubbels', duration: botsendeSlider.value })">
                                         Start sessie
                                     </button>
                                 </div>
@@ -201,7 +201,7 @@
                                                     <mat-radio-button class="team-option-button"
                                                         *ngFor="let teamChoice of teamOptions" [value]="teamChoice"
                                                         color="primary">
-                                                        {{teamChoice}}
+                                                        {{ teamChoice }}
                                                     </mat-radio-button>
                                                 </mat-radio-group>
                                             </td>
@@ -209,7 +209,7 @@
                                     </table>
                                     <br>
                                     <button mat-button class="general-button"
-                                        (click)="createSession({game : 'Alternatieve Antwoorden', duration : alternatieveSlider.value, teams: teamOptionAA})">
+                                        (click)="createSession({ game: 'Alternatieve Antwoorden', duration: alternatieveSlider.value, teams: teamOptionAA })">
                                         Start sessie</button>
                                 </div>
                             </mat-expansion-panel>
@@ -261,7 +261,7 @@
                                     </table>
                                     <br>
                                     <button mat-button class="general-button"
-                                        (click)="createSession({game : 'Aanradend Algoritme'})">Start sessie</button>
+                                        (click)="createSession({ game: 'Aanradend Algoritme' })">Start sessie</button>
                                 </div>
                             </mat-expansion-panel>
                         </mat-accordion>
