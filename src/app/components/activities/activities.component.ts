@@ -86,6 +86,7 @@ export class ActivitiesComponent implements OnInit {
     });
   }
 
+  /** Function that  */
   receiveTeam() {
     this.socketService.listenForTeam((team, article, leaders) => {
       this.leaders = leaders;
@@ -100,7 +101,7 @@ export class ActivitiesComponent implements OnInit {
       let articleSpace = document.getElementsByClassName("article")[0];
       let image = document.createElement("img");
       image.setAttribute("src", article.image);
-      image.setAttribute("width", "200px");
+      //image.setAttribute("width", "200px");
       image.setAttribute("height", "200px");
       articleSpace.appendChild(image);
 

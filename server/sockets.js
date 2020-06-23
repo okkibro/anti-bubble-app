@@ -149,6 +149,7 @@ function runIO(io) {
 			let articleList = [];
 			let leaders = [];
 			let sources = [];
+			let subjects = []
 			let playersInGame = players.getPlayers(socket.id); // Get all the players in the current game.
 			if (groups == null) { // Teacher selected create random groups.		 
 				playersInGame = shuffle(playersInGame); // Shuffle the player list.
@@ -167,6 +168,7 @@ function runIO(io) {
 						if (article.part === 1) {
 							leaders.push(player);
 							sources.push(article.source);
+							subjects.push(article.subject);
 						}
 						articleList[pairsIndex].push(article);
 					}
@@ -188,8 +190,8 @@ function runIO(io) {
 					}
 				}
 			}
-
-			socket.emit('send-pairs', pairs, leaders, sources);
+			
+			socket.emit('send-pairs', pairs, leaders, sources, subjects);
 
 			for (let i = 0; i < pairs.length; i++) {
 				for (let j = 0; j < pairs[i].length; j++) {

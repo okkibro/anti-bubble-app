@@ -136,8 +136,8 @@ export class SocketIOService {
      */
     pairStudents(groups, groupSize, articles, receivePairs) {
         this.socket.emit('pair-students', groups, groupSize, articles);
-        this.socket.on('send-pairs', (pairs, leaders, sources) => {
-            receivePairs(pairs, leaders, sources);
+        this.socket.on('send-pairs', (pairs, leaders, sources, subjects) => {
+            receivePairs(pairs, leaders, { sources: sources, subjects: subjects });
         });
     }
 

@@ -12,6 +12,7 @@ let articlesSchema = new Schema({
     part: Number,
     image: String,
     source: String,
+    subject: String,
 });
 
 module.exports = mongoose.model('Articles', articlesSchema);
