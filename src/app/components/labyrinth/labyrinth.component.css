@@ -11,7 +11,7 @@
 
 #question {
     font-size: 45px;
-    margin-bottom: 0px;
+    margin-bottom: 0;
     margin-top: 5px;
 }
 
@@ -20,12 +20,9 @@
     margin: 15px;
 }
 
-.textInRadioButton {
-    margin: 5px;
-}
-
 .radioButton {
     text-align: center;
+    margin: 3px 0 3px 3px;
 }
 
 #stopButton {

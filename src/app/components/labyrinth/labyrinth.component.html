@@ -11,7 +11,6 @@
     </mat-sidenav>
     <mat-sidenav-content>
         <mean-toolbar (sidenavToggle)="sidenav.toggle()"></mean-toolbar>
-
         <body>
             <div class="container-div" fxLayoutGap="10px" fxLayout="column" fxLayoutAlign="space-evenly">
                 <div fxLayout.xs="row" fxLayoutGap="10px" fxLayoutAlign="space-evenly">
@@ -42,8 +41,8 @@
 
                             <mat-radio-group class="radioButtonOptions" [(ngModel)]="optionSelected" *ngIf="questionLoaded">
                                 <p *ngFor="let option of questionOptions; let i = index"> <!-- Used for layout purposes -->
-                                    <mat-radio-button (change)="selectedOption()"  class="radioButton" [value]='i'>
-                                        <p class="textInRadioButton"></p>
+                                    <mat-radio-button (change)="selectedOption()" class="radioButton" color="primary" [value]='i'>
+                                        <span class="textInRadioButton"></span>
                                     </mat-radio-button>
                                 </p>
                             </mat-radio-group><br>
