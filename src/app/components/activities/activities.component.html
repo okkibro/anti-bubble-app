@@ -30,7 +30,7 @@
                                     </mat-option>
                                 </mat-select>
                             </mat-form-field>
-                            <button mat-button class="general-button" [disabled]="selected == undefined"
+                            <button mat-button class="general-button" [disabled]="selected == undefined || submitted"
                                 *ngIf="!isLeader" (click)="submit({ article: article })">Verstuur</button>
                         </mat-card-content>
 
