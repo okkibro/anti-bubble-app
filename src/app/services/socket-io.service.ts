@@ -115,12 +115,12 @@ export class SocketIOService {
         });
     }
 
-    /** Function that submits an answer to the teacher. */
+    /** Method that submits an answer to the teacher. */
     studentSubmit(data) {
         this.socket.emit('submit', data);
     }
 
-    /** Function that listens for incoming answer submits.
+    /** Method that listens for incoming answer submits.
      *  receiveSubmit gets called when an answer from a student is received.
      */
     listenForSubmits(receiveSubmit) {
@@ -129,12 +129,12 @@ export class SocketIOService {
         });
     }
 
-    /** Function that starts the game. Making it unable for new students to join. */
+    /** Method that starts the game. Making it unable for new students to join. */
     startGame() {
         this.socket.emit('start-game');
     }
 
-    /** Function that pairs students in groups of the given groupsize.
+    /** Method that pairs students in groups of the given groupsize.
      *  receivePairs is called when the ser has created the teams and sent them back.
      */
     pairStudents(groups, groupSize, articles, receivePairs) {
@@ -144,18 +144,18 @@ export class SocketIOService {
         });
     }
 
-    /** Function that removes all listeners from the socket. */
+    /** Method that removes all listeners from the socket. */
     removeListeners() {
         this.socket.removeAllListeners();
         this.removedListeners;
     }
 
-    /** Function that will make a player's inactive button active again. */
+    /** Method that will make a player's inactive button active again. */
     activateStudentButton(player) {
         this.socket.emit('reactivate-button', player);
     }
 
-    /** Function that will take a callback that will be called when the player's answer got deleted by the teacher. */
+    /** Method that will take a callback that will be called when the player's answer got deleted by the teacher. */
     reactivateButton(reactivate) {
         this.socket.on('reactivate', () => {
             reactivate();

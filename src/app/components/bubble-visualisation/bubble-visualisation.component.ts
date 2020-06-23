@@ -29,7 +29,7 @@ export class BubbleVisualisationComponent implements OnInit {
 
   }
 
-  /** Function that updates the visual representation of a users bubble based on their statistics. */
+  /** Method that updates the visual representation of a users bubble based on their statistics. */
   updateBubble() {
     let rightValues = [this.userDetails.bubble.mainstream, this.userDetails.bubble.social,this.userDetails.bubble.online];
     let rightValuePaths = ['/assets/images/Super_Map/Bubble_UI/UI_Bubble_Turquoise.png', '/assets/images/Super_Map/Bubble_UI/UI_Bubble_Green.png', '/assets/images/Super_Map/Bubble_UI/UI_Bubble_Purple.png'];
@@ -46,7 +46,7 @@ export class BubbleVisualisationComponent implements OnInit {
     leftHalf.setAttribute('src', leftHighestRated);
   }
 
-  /** Function that returns the name (from the second array) of the highest value from the first array, */
+  /** Method that returns the name (from the second array) of the highest value from the first array, */
   getHighestIndex(inputValues, nameValues) {
     let currentMax = -1;
     let currentName = 'wrong';

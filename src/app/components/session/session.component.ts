@@ -103,6 +103,7 @@ export class SessionComponent implements OnInit {
                             tableRow.appendChild(input);
                         }
                         let table = document.getElementsByClassName('sessionTable')[0];
+                        
                         // Append the tablerow to the table.
                         table.appendChild(tableRow);
 
@@ -168,32 +169,32 @@ export class SessionComponent implements OnInit {
         }
     }
 
-    /** Function that calls the leave session function in the socket io service. */
+    /** Method that calls the leave session function in the socket io service. */
     leaveSession() {
         this.socketService.leaveSession();
     }
 
-    /** Function that returns if a student leaving the session was caused by the host disconnecting. */
+    /** Method that returns if a student leaving the session was caused by the host disconnecting. */
     isHostDisconnected(): boolean {
         return this.socketService.hostDisconnected;
     }
 
-    /** Function that returns the game data. */
+    /** Method that returns the game data. */
     getGameData(): any {
         return this.socketService.gameData;
     }
 
-    /** Function that sends the passed question to all students in the session. */
+    /** Method that sends the passed question to all students in the session. */
     sendQuestion(question: string) {
         this.socketService.sendQuestion(question);
     }
 
-    /** Function that submits the passed answer to the host of the session. */
+    /** Method that submits the passed answer to the host of the session. */
     submit(data) {
         this.socketService.studentSubmit(data);
     }
 
-    /** Function that starts the game. Making it unable for students to join the session. */
+    /** Method that starts the game. Making it unable for students to join the session. */
     startGame() {
 
         // teacher wants to start a game without any players in it
@@ -212,7 +213,7 @@ export class SessionComponent implements OnInit {
         }
     }
 
-    /** Function that takes the game name and will return whether the game can start or not. */
+    /** Method that takes the game name and will return whether the game can start or not. */
     canStart(game: string): Boolean {
         switch (game) {
             case 'Naamloos Nieuws':
@@ -227,7 +228,7 @@ export class SessionComponent implements OnInit {
         }
     }
 
-    /** Function that initializes the game based on the given game name. */
+    /** Method that initializes the game based on the given game name. */
     initGame(game: string) {
         switch (game) {
             case 'Naamloos Nieuws':
@@ -266,7 +267,7 @@ export class SessionComponent implements OnInit {
         }
     }
 
-    /** Function that makes timer count down at the top of the screen. */
+    /** Method that makes timer count down at the top of the screen. */
     startTimer(time: number) {
         setTimeout(() => {
             this.finishGame();
@@ -290,14 +291,14 @@ export class SessionComponent implements OnInit {
         }, 1000);
     }
 
-    /** Function that groups students. */
+    /** Method that groups students. */
     pairStudents(groups: String[][], groupSize: Number, articles: Articles, receivePairs) {
         this.socketService.pairStudents(groups, groupSize, articles, (pairs, leaders, sources) => {
             receivePairs(pairs, leaders, sources);
         });
     }
 
-    /** Function that stops the timer and game. */
+    /** Method that stops the timer and game. */
     stopGame() {
         this.gameFinished = true;
         clearInterval(this.interval);
@@ -310,7 +311,7 @@ export class SessionComponent implements OnInit {
         this.finishGame();
     }
 
-    /** Function that makes the host leave the session and the page. */
+    /** Method that makes the host leave the session and the page. */
     leaveGame() {
         this.leaveSession();
         this.leaveByHomeButton = true;

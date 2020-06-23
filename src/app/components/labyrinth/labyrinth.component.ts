@@ -131,7 +131,7 @@ export class LabyrinthComponent implements OnInit {
         }
     }
 
-    /** Function that saves a question to this.answers. */
+    /** Method that saves a question to this.answers. */
     saveQuestion(question) {
 
         // Temporary variable to save the selected option.
@@ -144,7 +144,7 @@ export class LabyrinthComponent implements OnInit {
         this.answers.push({ question: question, answer: result });
     }
 
-    /** Function that shows a question on the screen. */
+    /** Method that shows a question on the screen. */
     showQuestion(question) {
 
         // Set question title.

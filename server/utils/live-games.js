@@ -9,7 +9,7 @@ class LiveGames {
         this.games = [];
     }
     
-    /** Function that adds a gane ti tge kust if ganes. 
+    /** Method that adds a gane ti tge kust if ganes.
      * gameLive says whether the game has started or not. 
      * gameData contains the name and options of the game being played. */
     addGame(pin, hostID, gameLive, gameData) {
@@ -23,7 +23,7 @@ class LiveGames {
         return game;
     }
     
-    /** Function that removes a game from the list of gasmes. */
+    /** Method that removes a game from the list of gasmes. */
     removeGame(hostID) {
         const game = this.getGame(hostID);
 
@@ -33,7 +33,7 @@ class LiveGames {
         return game;
     }
     
-    /** Function that gets a game based on the host's ID given. */
+    /** Method that gets a game based on the host's ID given. */
     getGame(hostID) {
         return this.games.filter((game) => game.hostID === hostID)[0]
     }

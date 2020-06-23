@@ -121,8 +121,12 @@ router.post('/labyrinthAnswers', auth, (req, res) => {
 
 /** Post method to change currency amount for the logged in user. */
 router.post('/earnMoney', auth, (req, res) => {
-	User.findById(req.payload._id, (err, user) => {	// Get logged in user.
-		user.currency += req.body.money; // Increase currency.
+
+	// Get logged in user.
+	User.findById(req.payload._id, (err, user) => {
+
+		// Increase currency.
+		user.currency += req.body.money;
 		user.save(() => {
 			res.status(200);
 		});

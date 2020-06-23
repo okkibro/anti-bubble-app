@@ -16,104 +16,100 @@ import { beforeUnload } from '../../../../constants';
 import { SessionService } from 'src/app/services/session.service';
 
 @Component({
-  selector: 'mean-activities',
-  templateUrl: './activities.component.html',
-  styleUrls: ['./activities.component.css',
-    '../../shared/general-styles.css']
+    selector: 'mean-activities',
+    templateUrl: './activities.component.html',
+    styleUrls: ['./activities.component.css',
+        '../../shared/general-styles.css']
 })
 export class ActivitiesComponent implements OnInit {
 
-  gameData;
-  pin;
-  userDetails: User;
-  enableAnswer: boolean = false;
-  team;
-  articleImages = [];
-  leaders;
-  selected;
-  isLeader: Boolean = true;
-  submitted: Boolean = false;
-  article;
+    gameData;
+    pin;
+    userDetails: User;
+    enableAnswer: boolean = false;
+    team;
+    leaders;
+    selected;
+    isLeader: Boolean = true;
+    submitted: Boolean = false;
+    article;
 
-  constructor(
-    private socketService: SocketIOService,
-    private router: Router,
-    private data: DataService,
-    private fb: FormBuilder,
-    private snackBar: MatSnackBar,
-    private sessionService: SessionService,
-    private auth: AuthenticationService
-  ) { }
+    constructor(
+        private socketService: SocketIOService,
+        private router: Router,
+        private data: DataService,
+        private fb: FormBuilder,
+        private snackBar: MatSnackBar,
+        private sessionService: SessionService,
+        private auth: AuthenticationService
+    ) { }
 
-  ngOnInit(): void {
-    this.gameData = this.getGameData();
+    ngOnInit(): void {
+        this.gameData = this.getGameData();
 
-    this.data.currentMessage.subscribe(message => {
-      if (message) {
-        this.pin = message;
-        this.socketService.pin = message;
-      }
-    });
+        this.data.currentMessage.subscribe(message => {
+            if (message) {
+                this.pin = message;
+                this.socketService.pin = message;
+            }
+        });
 
-    window.addEventListener('beforeunload', beforeUnload);
+        window.addEventListener('beforeunload', beforeUnload);
 
-    if (this.gameData == undefined) {
-      this.router.navigate(['home']);
+        if (this.gameData == undefined) {
+            this.router.navigate(['home']);
+        }
+
+        // Check whether or not a teacher has sent a question
+        this.receiveQuestion();
+
+        // Get teams from teacher's input
+        this.receiveTeam();
     }
 
-    this.receiveQuestion(); // Check whether or not a teacher has sent a question
+    getGameData(): any {
+        return this.socketService.gameData;
+    }
 
-    this.receiveTeam(); // Get teams from teacher's input
-  }
+    receiveQuestion() {
 
-  leaveSession() {
-    this.socketService.leaveSession();
-  }
+        // Students listen for incoming questions.
+        // Receive question.
+        this.socketService.listenForQuestion((question) => {
+            let questionDisplay = document.getElementById('receiveQuestion');
+            questionDisplay.innerHTML = question;
 
-  isHostDisconnected(): boolean {
-    return this.socketService.hostDisconnected;
-  }
+            // Student can only answer after the teacher has submitted a question.
+            this.enableAnswer = true;
+        });
+    }
 
-  getGameData(): any {
-    return this.socketService.gameData;
-  }
+    /** Method that listens for teammembers */
+    receiveTeam() {
+        this.socketService.listenForTeam((team, article, leaders) => {
+            this.leaders = leaders;
+            this.article = article;
+            this.auth.profile().subscribe(user => {
+                this.userDetails = user;
+                if (leaders.find(x => x.email == this.userDetails.email) == undefined) {
+                    this.isLeader = false;
+                }
+            });
+            this.team = team;
+            let articleSpace = document.getElementsByClassName('article')[0];
+            let image = document.createElement('img');
+            image.setAttribute('src', article.image);
+            image.setAttribute('height', '200px');
+            articleSpace.appendChild(image);
 
-  receiveQuestion() {
-    // Students listen for incoming questions.
-    this.socketService.listenForQuestion((question) => { // Receive question.
-      let questionDisplay = document.getElementById('receiveQuestion');
-      questionDisplay.innerHTML = question;
-      this.enableAnswer = true; // student can only answer after the teacher has submitted a question
-    });
-  }
+        });
+    }
 
-  /** Function that listens for teammembers */
-  receiveTeam() {
-    this.socketService.listenForTeam((team, article, leaders) => {
-      this.leaders = leaders;
-      this.article = article;
-      this.auth.profile().subscribe(user => {
-        this.userDetails = user;
-        if (leaders.find(x => x.email == this.userDetails.email) == undefined) {
-          this.isLeader = false;
-        }
-      });
-      this.team = team;
-      let articleSpace = document.getElementsByClassName('article')[0];
-      let image = document.createElement('img');
-      image.setAttribute('src', article.image);
-      //image.setAttribute('width', '200px');
-      image.setAttribute('height', '200px');
-      articleSpace.appendChild(image);
-
-    });
-  }
-
-  /** Function that submits an answer and data to the teacher. */
-  submit(data) {
-    this.submitted = true;
-    this.socketService.studentSubmit({ answer: this.selected, data: data });
-  }
+    /** Method that submits an answer and data to the teacher. */
+    submit(data) {
+        this.submitted = true;
+        this.socketService.studentSubmit({ answer: this.selected, data: data });
+    }
 
 }
 
