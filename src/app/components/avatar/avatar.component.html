@@ -25,7 +25,7 @@
                             <mat-grid-tile *ngFor = "let item of filteredAvatar">
                                 <mat-card fxFlex="100%" fxLayout="column" fxLayoutGap="10px" class='avatar-item-display'>
                                     <div fxLayoutAlign="center" fxFlex="33%">
-                                        <img mat-card-image src="{{item.previewImage}}" alt="{{item.title}}" (click)="equip(item)"><br>
+                                        <img mat-card-image src="{{ item.previewImage }}" alt="{{ item.title }}" (click)="equip(item)"><br>
                                     </div>
                                 </mat-card>
                             </mat-grid-tile>

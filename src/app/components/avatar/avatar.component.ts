@@ -23,12 +23,18 @@ export class AvatarComponent implements OnInit {
     itemsShown = [];
     filteredAvatar = [];
 
-    constructor(private auth: AuthenticationService, private shopService: ShopService, private avatarService: AvatarService, private avatarDisplay: AvatarDisplayComponent) { }
+    constructor(
+        private auth: AuthenticationService,
+        private shopService: ShopService,
+        private avatarService: AvatarService,
+        private avatarDisplay: AvatarDisplayComponent
+    ) { }
 
     ngOnInit() {
-        this.shopService.shop("hoofddeksel").subscribe(shop => {
+        this.shopService.shop('hoofddeksel').subscribe(shop => {
             this.auth.profile().subscribe(user => {
                 this.userDetails = user;
+
                 // Checks for items in the shop that the player bought
                 for (let i = 0; i < shop.length; i++) {
                     if (user.inventory.find(x => x._id == shop[i]._id) != null) {
@@ -41,21 +47,22 @@ export class AvatarComponent implements OnInit {
         })
     }
 
-    // Assigns an item to the user's avatar in the database.
-    equip(item){
+    /** Method that assigns an item to the user's avatar in the database. */
+    equip(item) {
         this.avatarService.equip(item).subscribe(data => {
+
             // Updates the image shown to the player without reloading the page.
-            if(data.category == "haar"){
-                document.getElementById("haar1").setAttribute("src", data.imageFull2);
-                document.getElementById("haar2").setAttribute("src", data.imageFull);
+            if (data.category == 'haar') {
+                document.getElementById('haar1').setAttribute('src', data.imageFull2);
+                document.getElementById('haar2').setAttribute('src', data.imageFull);
             }
             else{
-                document.getElementById(data.category).setAttribute("src", data.imageFull);
+                document.getElementById(data.category).setAttribute('src', data.imageFull);
             }
         });
     }
 
-    // Changes the tab in the HTML and updates the shown items.
+    /** Method to change the tab in the HTML and updates the shown items. */
     tabChange(value) {
         this.shopService.shop(value).subscribe(shop => {
             this.itemsShown = shop;
@@ -65,7 +72,7 @@ export class AvatarComponent implements OnInit {
         });
     }
 
-    // Filtering the avatar items to only show the items in the inventory/that the player bought
+    /** Method to filter the avatar items to only show the items in the inventory/that the player bought. */
     filterAvatar(): AvatarComponent[] {
         return this.itemsShown.filter(x => {
           return this.userDetails.inventory.find(y => x._id == y._id) != null

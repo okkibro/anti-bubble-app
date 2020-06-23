@@ -36,7 +36,11 @@ export class RegisterComponent implements OnInit {
         validator: this.passwordMatchValidator
     });
 
-    constructor(private auth: AuthenticationService, private router: Router, private fb: FormBuilder, private shop: ShopService) { }
+    constructor(private auth: AuthenticationService,
+                private router: Router,
+                private fb: FormBuilder,
+                private shop: ShopService
+    ) { }
 
     ngOnInit() { }
 
@@ -52,7 +56,7 @@ export class RegisterComponent implements OnInit {
 
         this.auth.register(user).subscribe(() => {
             this.shop.getBaseInventory().subscribe(data => {
-                for(let i = 0 ; i < data.length ; i++) {
+                for (let i = 0 ; i < data.length ; i++) {
                     this.shop.buy(data[i]).subscribe();
                 }
                 this.router.navigate(['login']);

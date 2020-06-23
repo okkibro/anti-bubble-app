@@ -43,8 +43,8 @@ export class ProfileComponent implements OnInit {
 
         // Milestone that gets shown when you have all badges.
         this.milestoneShown = {
-            name: "Gefeliciteerd",
-            description: "Je hebt alle badges gehaald",
+            name: 'Gefeliciteerd',
+            description: 'Je hebt alle badges gehaald',
             index: 0,
             maxValue: 0
         }
@@ -76,11 +76,11 @@ export class ProfileComponent implements OnInit {
         let newPassword = this.changePasswordForm.get('newPassword').value;
         this.auth.updatePassword(email, oldPassword, newPassword).subscribe(data => {
             if (data.succes) {
-                this.snackbar.open(data.message, "X", { duration: 2500, panelClass: ['style-succes']}).afterDismissed().subscribe(()=>{
+                this.snackbar.open(data.message, 'X', { duration: 2500, panelClass: ['style-succes']}).afterDismissed().subscribe(()=>{
                     window.location.reload();
                 });
             } else {
-                this.snackbar.open(data.message, 'X', {duration: 2500, panelClass: ['style-error'] }).afterDismissed().subscribe(()=>{
+                this.snackbar.open(data.message, 'X', { duration: 2500, panelClass: ['style-error'] }).afterDismissed().subscribe(()=>{
                     window.location.reload();
                 });
             }

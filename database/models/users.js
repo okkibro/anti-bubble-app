@@ -41,7 +41,7 @@ let userSchema = new Schema({
     recoverPasswordExpires: Date,
     inventory: {
         type: [{
-            item: {type: Schema.ObjectId, ref: 'Item'}
+            item: { type: Schema.ObjectId, ref: 'Item' }
         }],
         required: true
     },
@@ -54,7 +54,7 @@ let userSchema = new Schema({
     },
     class: {
         type: [{
-            item: {type: Schema.ObjectId, ref: 'Class'}
+            item: { type: Schema.ObjectId, ref: 'Class' }
         }],
     },
     avatar: {
@@ -100,7 +100,7 @@ let userSchema = new Schema({
 });
 
 // Method to set a hashed password for a user.
-userSchema.methods.setPassword = function(password){
+userSchema.methods.setPassword = function(password) {
     this.salt = crypto.randomBytes(16).toString('hex');
     this.hash = crypto.pbkdf2Sync(password, this.salt, 1000, 64, 'sha512').toString('hex');
 };

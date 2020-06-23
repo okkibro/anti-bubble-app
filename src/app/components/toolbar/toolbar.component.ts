@@ -5,8 +5,8 @@
  */
 
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { User } from "../../models/user";
-import { AuthenticationService } from "../../services/authentication.service";
+import { User } from '../../models/user';
+import { AuthenticationService } from '../../services/authentication.service';
 
 @Component({
     selector: 'mean-toolbar',

@@ -27,7 +27,7 @@ let classSchema = new Schema({
     },
     students: {
         type: [{
-            item: {type: Schema.ObjectId, ref: 'User'}
+            item: { type: Schema.ObjectId, ref: 'User' }
         }],
         required: true
     },

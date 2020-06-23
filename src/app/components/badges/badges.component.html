@@ -19,8 +19,8 @@
                         </mat-card-header>
                         <mat-card-content>
 
-                            Je hebt nu {{completedRatio()}}% van alle badges behaald.<br>
-                            <mat-progress-bar mode="determinate" role="progressbar" class="progress-bar" value="{{value}}" aria-valuemin="0" aria-valuemax="100">=</mat-progress-bar>
+                            Je hebt nu {{ completedRatio() }}% van alle badges behaald.<br>
+                            <mat-progress-bar mode="determinate" role="progressbar" class="progress-bar" value="{{ value }}" aria-valuemin="0" aria-valuemax="100">=</mat-progress-bar>
                         </mat-card-content>
                     </mat-card>
                 </div>
@@ -33,8 +33,8 @@
                                     <table class="general-table">
                                         <tr >
                                             <td *ngFor="let milestoneCompleted of completed">
-                                                <strong>{{milestoneCompleted.milestone.name}}</strong><br>
-                                                {{milestoneCompleted.milestone.description}}
+                                                <strong>{{ milestoneCompleted.milestone.name }}</strong><br>
+                                                {{ milestoneCompleted.milestone.description }}
                                             </td>
                                         </tr>
                                     </table>
@@ -44,9 +44,9 @@
                                     <table class="general-table">
                                         <tr>
                                             <td  *ngFor="let milestoneCompleted of uncompleted">
-                                                <strong>{{milestoneCompleted.milestone.name}}</strong><br>
-                                                {{milestoneCompleted.milestone.description}}<br>
-                                                <i>Voortgang: {{userDetails?.milestones[milestoneCompleted.index]}}/{{milestoneCompleted.milestone.maxValue}}</i>
+                                                <strong>{{ milestoneCompleted.milestone.name }}</strong><br>
+                                                {{ milestoneCompleted.milestone.description }}<br>
+                                                <i>Voortgang: {{ userDetails?.milestones[milestoneCompleted.index] }}/{{ milestoneCompleted.milestone.maxValue }}</i>
                                             </td>
                                         </tr>
                                     </table>

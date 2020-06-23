@@ -4,10 +4,10 @@
  * Computing Sciences)
  */
 
-const express = require("express");
+const express = require('express');
 const router = express.Router();
 const mongoose = require('mongoose');
-const passport = require("passport");
+const passport = require('passport');
 const User = mongoose.model('User');
 const sanitize = require('mongo-sanitize');
 const nodemailer = require('nodemailer');
@@ -22,8 +22,10 @@ const auth = jwt({
 
 /** Post method to register a new user to the database. */
 router.post('/register', (req, res) => {
+
     // Make a new user.
     let user = new User();
+
     // Fill in (the required) data to user attributes.
     user.firstName = sanitize(req.body.firstName);
     user.lastName = sanitize(req.body.lastName);
@@ -42,7 +44,7 @@ router.post('/register', (req, res) => {
         knowledge:  0,
         techSavvy:  0,
     }
-    if (user.role == 'student') {
+    if (user.role === 'student') {
         user.bubbleInit = false;
     }
     user.currency = 0;
@@ -53,7 +55,7 @@ router.post('/register', (req, res) => {
     }
     user.recentMilestones = []
     for (let i = 0; i < 5; i++) {
-        user.recentMilestones[i] = "";
+        user.recentMilestones[i] = '';
     }
 
     // Building the basic avatar upon registering.
@@ -61,16 +63,16 @@ router.post('/register', (req, res) => {
         Shop.findById('5edcf97b1167982a005b977b', (error, broek) => {
             Shop.findById('5edcf97b1167982a005b9754', (error, shirt) => {
                 Shop.findById('5edcf97b1167982a005b9787', (error, schoenen) => {
-                    Shop.find({ title: "Geen" }, (error, emptyLayers) => {
+                    Shop.find({ title: 'Geen' }, (error, emptyLayers) => {
                         user.avatar = {
-                            haar : emptyLayers[0],
-                            hoofddeksel : emptyLayers[1],
-                            bril : emptyLayers[2],
-                            lichaam : lichaam,
-                            broek : broek,
-                            shirt : shirt,
-                            schoenen : schoenen,
-                            medaille : emptyLayers[3]
+                            haar: emptyLayers[0],
+                            hoofddeksel: emptyLayers[1],
+                            bril: emptyLayers[2],
+                            lichaam: lichaam,
+                            broek: broek,
+                            shirt: shirt,
+                            schoenen: schoenen,
+                            medaille: emptyLayers[3]
                         }
                         user.save(function () {
                             let token = user.generateJwt();
@@ -97,7 +99,7 @@ router.post('/login', (req, res) => {
         // If no user was found.
         if (!user) {
             return res.status(401).json({
-                message: "Authentication failed"
+                message: 'Authentication failed'
             });
         }
 
@@ -113,13 +115,13 @@ router.post('/login', (req, res) => {
 router.post('/passwordrecovery', async (req, res) => {
 
     // Generate Random Token.
-    const token = crypto.randomBytes(20).toString("hex");
+    const token = crypto.randomBytes(20).toString('hex');
     console.log(token);
 
     // Find the user with the given email and set the token.
     User.findOne({ email: req.body.email }, (error, user) => {
         if (!user) {
-            res.json({ succes: false, message: "Geen gebruiker gevonden met het gegeven email adres" });
+            res.json({ succes: false, message: 'Geen gebruiker gevonden met het gegeven email adres' });
             return res.end();
         }
 
@@ -143,17 +145,22 @@ router.post('/passwordrecovery', async (req, res) => {
                 port: account.smtp.port,
                 secure: account.smtp.secure,
                 auth: {
-                    user: account.user, // generated ethereal user
-                    pass: account.pass // generated ethereal password
+                    // Generated ethereal user.
+                    user: account.user,
+
+                    // Fenerated ethereal password.
+                    pass: account.pass
                 }
             });
 
             let mailOptions = {
                 from: 'Anti Bubble App <' + account.user + '>',
                 to: req.body.email,
-                subject: "Password Recovery",
-                text: "",
-                html: "<h1>Password Recovery</h1><p>Reset Password by clicking on the following link: https://" + req.headers.host + "/reset/" + token // html body
+                subject: 'Password Recovery',
+                text: '',
+
+                // Html body.
+                html: '<h1>Password Recovery</h1><p>Reset Password by clicking on the following link: https://' + req.headers.host + '/reset/' + token
             };
 
             transporter.sendMail(mailOptions, (error, info) => {
@@ -163,7 +170,7 @@ router.post('/passwordrecovery', async (req, res) => {
                 console.log(nodemailer.getTestMessageUrl(info));
             });
 
-            res.json({ succes: true, message: "Email succesvol verzonden" })
+            res.json({ succes: true, message: 'Email succesvol verzonden' })
             return res.status(200).end();
         });
     });
@@ -171,14 +178,15 @@ router.post('/passwordrecovery', async (req, res) => {
 
 /** Get method to check the password recovery token and shows the reset password page or a wrong token error. */
 router.get('/reset/:token', (req, res) => {
+
     // Find the user that belongs to the given token
     User.findOne({ recoverPasswordToken: req.params.token, recoverPasswordExpires: { $gt: Date.now() } }, (error, user) => {
         if (!user) {
-            console.log("wrong token or token expired");
+            console.log('wrong token or token expired');
             res.json({ correct: false });
             res.status(200).end();
         } else {
-            console.log("correct token");
+            console.log('correct token');
             res.json({ correct: true });
             res.status(200).end();
         }
@@ -187,12 +195,13 @@ router.get('/reset/:token', (req, res) => {
 
 /** Post method to change the password of the user belonging to the given password recovery token. */
 router.post('/reset/:token', (req, res) => {
+
     // Find the user that belongs to the given token
     User.findOne({ recoverPasswordToken: req.params.token, recoverPasswordExpires: { $gt: Date.now() } }, (error, user) => {
         if (error) { return console.log(error.message); }
         if (!user) {
-            console.log("wrong token or token expired");
-            res.json({ succes: false, message: "wrong token or token expired" });
+            console.log('wrong token or token expired');
+            res.json({ succes: false, message: 'wrong token or token expired' });
             return res.end();
         }
 
@@ -209,7 +218,7 @@ router.post('/reset/:token', (req, res) => {
             if (error) {
                 return console.log(error.message);
             }
-            res.json({ succes: true, message: "Wachtwoord succesvol verandert" });
+            res.json({ succes: true, message: 'Wachtwoord succesvol verandert' });
             res.status(200).end();
         });
     });
@@ -217,10 +226,11 @@ router.post('/reset/:token', (req, res) => {
 
 /** Get method to get a user from the database given an id. */
 router.get('/profile', auth, (req, res) => {
+
     // If no user ID exists in the JWT return a 401.
     if (!req.payload._id) {
         res.status(401).json({
-            message: "UnauthorizedError: private profile"
+            message: 'UnauthorizedError: private profile'
         });
     } else {
         User.findById(req.payload._id).exec(function (err, user) {
@@ -248,21 +258,26 @@ router.post('/checkEmailTaken', (req, res) => {
 router.patch('/updatePassword', (req, res) => {
     User.findOne({ email: sanitize(req.body.email) }).then(user => {
         if (user) {
+
             // Check if old password is filled in correctly.
             if (user.validatePassword(sanitize(req.body.oldPassword))) {
+
                 // Update password in database to new password.
                 user.setPassword(sanitize(req.body.newPassword));
+
                 // Save changes to database.
                 user.save();
-                return res.status(200).json({ succes: true, message: "Wachtwoord succesvol verandert" });
+                return res.status(200).json({ succes: true, message: 'Wachtwoord succesvol verandert.' });
             } else {
+
                 // Handle error if old password doesn't match with the one in database.
-                return res.status(200).json({ success: false, message: "Oude wachtwoord is niet correct"});
+                return res.status(200).json({ success: false, message: 'Oude wachtwoord is niet correct.'});
             }
         } else {
-            console.log("user not found")
+            console.log('User not found.')
+
             // Handle error if user is not found in database.
-            return res.status(401).json({ succes: false, message: "User not found" });
+            return res.status(401).json({ succes: false, message: 'User not found.' });
         }
     });
 });
@@ -276,18 +291,31 @@ router.get('/milestone', auth, (req, res) => {
 
 /** Post method to changes a milestone by a given value, returns the updated value and whether it is completed now or not */
 router.post('/milestone', auth, (req, res) => {
-    User.findById(req.payload._id, (err, user) => { // Get currently logged in user
+
+    // Get currently logged in user.
+    User.findById(req.payload._id, (err, user) => {
         let milestone = req.body.milestone;
         let completed = false;
-        if (user.milestones[milestone.index] === milestone.maxValue) { // Check if milestone is already completed
-            res.json({ updatedValue: milestone.maxValue, completed: completed }); // Return completed false because it was already completed
+
+        // Check if milestone is already completed.
+        if (user.milestones[milestone.index] === milestone.maxValue) {
+
+            // Return completed false because it was already completed.
+            res.json({ updatedValue: milestone.maxValue, completed: completed });
         } else {
-            user.milestones[milestone.index] += req.body.value; // Add value to milestone
-            if (user.milestones[milestone.index] >= milestone.maxValue) { // Check if you surpassed the max value
-                user.milestones[milestone.index] = milestone.maxValue; // Set value to max value cause it cant be larger than max value
+
+            // Add value to milestone.
+            user.milestones[milestone.index] += req.body.value;
+
+            // Check if you surpassed the max value.
+            if (user.milestones[milestone.index] >= milestone.maxValue) {
+
+                // Set value to max value cause it cant be larger than max value.
+                user.milestones[milestone.index] = milestone.maxValue;
                 completed = true;
             }
-            // Mark and save changes
+
+            // Mark and save changes.
             user.markModified('milestones');
             user.save(() => {
                 res.json({ updatedValue: user.milestones[milestone.index], completed: completed });
@@ -299,8 +327,12 @@ router.post('/milestone', auth, (req, res) => {
 /** Post method to post a new message to recent milestones */
 router.post('/recentMilestones', auth, (req, res) => {
     User.findById(req.payload._id, (err, user) => {
-        user.recentMilestones.push(req.body.value); // Push new value into the array
-        user.recentMilestones.shift(); // Remove oldest value of the 5
+
+        // Push new value into the array.
+        user.recentMilestones.push(req.body.value);
+
+        // Remove oldest value of the 5.
+        user.recentMilestones.shift();
         user.save(() => {
             res.end();
         });
@@ -332,7 +364,7 @@ router.post('/updateGraph', auth, (req, res) => {
         { _id: req.payload._id },
         { $push: { knowledge: req.body.knowledgeScore, diversity: req.body.diversityScore } },
         () => {
-            res.json({});
+            res.json({ });
         }
     );
 });
@@ -342,17 +374,17 @@ router.post('/updateBubble', auth, (req, res) => {
     User.findById(req.payload._id, (err, user) => {
         for (q of req.body.answers) {
             if (q != null) {
-                if (q.question.choiceConsequence[q.answer] != '') {
+                if (q.question.choiceConsequence[q.answer] !== '') {
                     user.bubble[q.question.choiceConsequence[q.answer]] += q.question.values[q.answer];
                 }
             }
         }
         user.markModified('bubble');
         user.save((error) => { 
-            if (error){
+            if (error) {
                 console.log(error.message);
             }
-            res.status(200).json({message: "done"});
+            res.status(200).json({ message: 'done' });
         });
     });
 });

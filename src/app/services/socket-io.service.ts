@@ -43,7 +43,7 @@ export class SocketIOService {
      */
     joinSession(pin, user, join, backToHome, redirect) {
         this.hostDisconnected = false;
-        this.socket.emit('player-join', {pin: pin, player: user});
+        this.socket.emit('player-join', { pin: pin, player: user });
         this.socket.on('message', (message: string) => {
             console.log(message);
         });

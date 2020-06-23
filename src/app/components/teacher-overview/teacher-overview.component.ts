@@ -33,7 +33,12 @@ export class TeacherOverviewComponent implements OnInit {
     openform = false;
     selectklas = false;
 
-    constructor(private auth: AuthenticationService, private classService: ClassesService, private fb: FormBuilder, private snackBar: MatSnackBar) { }
+    constructor(
+        private auth: AuthenticationService,
+        private classService: ClassesService,
+        private fb: FormBuilder,
+        private snackBar: MatSnackBar
+    ) { }
 
     ngOnInit(): void {
         this.auth.profile().subscribe(user => {
@@ -61,16 +66,16 @@ export class TeacherOverviewComponent implements OnInit {
             this.classService.createClass(classes, this.userDetails).subscribe((code: Number) => {
                 this.classService.joinClass(code).subscribe((output) => {
                     if (output.succes) {
-                        this.snackBar.open(output.message, 'X', {duration: 2500, panelClass: ['style-succes'], }).afterDismissed().subscribe(() => {
+                        this.snackBar.open(output.message, 'X', { duration: 2500, panelClass: ['style-succes'], }).afterDismissed().subscribe(() => {
                             window.location.reload();
                         });
                     } else {
-                        this.snackBar.open(output.message, 'X', {duration: 2500, panelClass: ['style-error'], });
+                        this.snackBar.open(output.message, 'X', { duration: 2500, panelClass: ['style-error'], });
                     }
                 });
             });
         } else {
-            console.log('you are not eligible to create a class')
+            console.log('You are not eligible to create a class.')
         }
     }
 
@@ -89,7 +94,7 @@ export class TeacherOverviewComponent implements OnInit {
         for (const id of this.classIds) {
             this.classService.getSingleClass(id._id).subscribe((output) => {
                 if (output.succes) {
-                    this.names.push({title: output.class.title, id: id._id});
+                    this.names.push({ title: output.class.title, id: id._id });
                 }
                 if (this.names.length == this.classIds.length) {
                     this.loading = false

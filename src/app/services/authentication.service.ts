@@ -7,13 +7,13 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
-import { Observable } from "rxjs";
-import { map } from "rxjs/operators";
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 import { User } from '../models/user';
 import { Role } from '../models/role';
-import { AbstractControl, AsyncValidatorFn, ValidationErrors } from "@angular/forms";
+import { AbstractControl, AsyncValidatorFn, ValidationErrors } from '@angular/forms';
 import { CookieService } from 'ngx-cookie-service';
-import { tokenData } from "../models/tokenData";
+import { tokenData } from '../models/tokenData';
 
 interface TokenResponse {
     token: string;
@@ -100,7 +100,7 @@ export class AuthenticationService {
 
     /** Method to update the password of an already registered user. */ 
     public updatePassword(email: string, oldPassword: string, newPassword: string): Observable<any> {
-        return this.http.patch('https://localhost:3000/user/updatePassword', {email: email, oldPassword: oldPassword, newPassword: newPassword})
+        return this.http.patch('https://localhost:3000/user/updatePassword', { email: email, oldPassword: oldPassword, newPassword: newPassword })
     }
 
     /** POST method for registering a user */

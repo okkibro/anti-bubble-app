@@ -45,7 +45,7 @@ export class LoginComponent implements OnInit {
         this.auth.login(user).subscribe(() => {
             this.router.navigate(['home']);
         }, () => {
-            this.snackBar.open("Onjuist wachtwoord of email", 'X', { duration: 2500, panelClass: ['style-error'] });
+            this.snackBar.open('Onjuist wachtwoord of email', 'X', { duration: 2500, panelClass: ['style-error'] });
         });
     }
 }

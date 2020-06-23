@@ -9,7 +9,6 @@ const router = express.Router();
 const mongoose = require('mongoose');
 const Activities = mongoose.model('Activities');
 const User = mongoose.model('User');
-const sanitize = require('mongo-sanitize');
 const Questions = mongoose.model('Questions');
 const Articles = mongoose.model('Articles');
 
@@ -24,7 +23,9 @@ router.get('/articles', auth, (req, res) => {
 	User.findById(req.payload._id, (err, user) => {
 		// Get the logged in user.
 		Articles.find({}, (err, articles) => {
-			res.status(200).json(articles); // Send all article data from the database.
+
+			// Send all article data from the database.
+			res.status(200).json(articles);
 		});
 	});
 });
@@ -32,15 +33,20 @@ router.get('/articles', auth, (req, res) => {
 /** Post method to return a given activity from the database. */
 router.post('/activity', auth, (req, res) => {
 	User.findById(req.payload._id, (err, user) => {
+
 		// Get the logged in user.
 		if (user.role === 'student') {
 			res.status(401).json({
-				message: 'UnauthorizedError: Not a teacher', // Only teachers can send requests to get activities.
+
+				// Only teachers can send requests to get activities.
+				message: 'UnauthorizedError: Not a teacher',
 			});
 		} else {
 			Activities.findOne({ name: req.body.activity }, (err, activity) => {
+
 				// Find activity in database based on the name sent in the body.
-				res.status(200).json(activity); // Send the activity object returned by the findOne function.
+				// Send the activity object returned by the findOne function.
+				res.status(200).json(activity);
 			});
 		}
 	});
@@ -48,8 +54,9 @@ router.post('/activity', auth, (req, res) => {
 
 /** Patch method to change the bubbleInit value to true if a user has completed the initial maze. */
 router.patch('/updateBubbleInit', auth, (req, res) => {
+
+	// Get the logged in user.
 	User.findById(req.payload._id).then((user) => {
-		// Get the logged in user.
 
 		// Set bubbleInit to true and save the schema.
 		user.bubbleInit = true;
@@ -61,17 +68,22 @@ router.patch('/updateBubbleInit', auth, (req, res) => {
 /** Post method to get the array of questions shuffled, based on the part given in the body of the request. */
 router.post('/questions', auth, (req, res) => {
 	Questions.find({ part: req.body.part }, (err, questions) => {
+
 		// Get all questions in normal order.
-		let result = shuffle(questions); // Shuffle the questions.
-		res.status(200).json(questions); // Send the questions to front-end.
+		// Shuffle the questions.
+		let result = shuffle(questions);
+
+		// Send the questions to front-end.
+		res.status(200).json(questions);
 
 		function shuffle(array) {
-			var currentIndex = array.length,
+			let currentIndex = array.length,
 				temporaryValue,
 				randomIndex;
 
 			// While there remain elements to shuffle...
 			while (0 !== currentIndex) {
+
 				// Pick a remaining element...
 				randomIndex = Math.floor(Math.random() * currentIndex);
 				currentIndex -= 1;

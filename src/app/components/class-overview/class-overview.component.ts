@@ -32,8 +32,8 @@ export class ClassOverviewComponent implements OnInit {
         private classService: ClassesService,
         private auth: AuthenticationService,
         private router: Router,
-        private fb: FormBuilder)
-    { }
+        private fb: FormBuilder
+    ) { }
 
     ngOnInit() {
         this.classService.getClass().subscribe((data) => {
@@ -44,19 +44,15 @@ export class ClassOverviewComponent implements OnInit {
         });
     }
 
-    temp() {
-        console.log("temp")
-    }
-
     /** Method to filter the students in a class. */
     search() {
         let query:string = this.searchBar.get('query').value.toLowerCase();
-        let table = document.getElementById("table").childNodes;
+        let table = document.getElementById('table').childNodes;
         for (let i:number = 0; i < this.classmates.length; i++) {
             if (this.classmates[i].firstName.toLowerCase().includes(query) || this.classmates[i].lastName.toLowerCase().includes(query)) {
-                (table[i + 1] as HTMLElement).style.display = "";
+                (table[i + 1] as HTMLElement).style.display = '';
             } else {
-                (table[i + 1] as HTMLElement).style.display = "none";
+                (table[i + 1] as HTMLElement).style.display = 'none';
             }
         }
     }
@@ -64,9 +60,9 @@ export class ClassOverviewComponent implements OnInit {
     /** Method to clear the filter so all students are displayed again. */
     clear() {
         this.value = '';
-        let table = document.getElementById("table").childNodes;
+        let table = document.getElementById('table').childNodes;
         for (let i:number = 0; i < this.classmates.length; i++) {
-            (table[i + 1] as HTMLElement).style.display = "";
+            (table[i + 1] as HTMLElement).style.display = '';
         }
     }
 }

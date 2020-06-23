@@ -31,24 +31,25 @@ import { LabyrinthGuardService } from './services/labyrinth-guard.service';
 
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
-  { path: 'home', component: HomeComponent, canActivate: [AuthGuardService]},
+  { path: 'home', component: HomeComponent, canActivate: [AuthGuardService] },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'session', component: SessionComponent, canDeactivate: [SessionGuardService] },
-  { path: 'profile', component: ProfileComponent, canActivate: [AuthGuardService]},
+  { path: 'profile', component: ProfileComponent, canActivate: [AuthGuardService] },
   { path: 'class-overview', component: ClassOverviewComponent, canActivate: [AuthGuardService] },
   { path: 'classmate-profile/:id', component: ClassmateProfileComponent, canActivate: [AuthGuardService] },
   { path: 'avatar', component: AvatarComponent, canActivate: [AuthGuardService] },
   { path: 'bubble-details', component: BubbleDetailsComponent, canActivate: [AuthGuardService] },
-  { path: 'teacher-overview', component: TeacherOverviewComponent, canActivate: [AuthGuardService], data: {roles: [Role.teacher]}},
+  { path: 'teacher-overview', component: TeacherOverviewComponent, canActivate: [AuthGuardService], data: { roles: [Role.teacher] }},
   { path: 'badges', component: BadgesComponent, canActivate: [AuthGuardService] },
   { path: 'shop', component: ShopComponent, canActivate: [AuthGuardService] },
   { path: 'passwordrecovery', component: PasswordRecoveryComponent },
   { path: 'reset/:token', component: PasswordResetComponent },
   { path: 'labyrinth', component: LabyrinthComponent, canActivate: [LabyrinthGuardService] },
-  { path: 'session-options', component: SessionOptionsComponent, data: {roles: [Role.teacher]}},
+  { path: 'session-options', component: SessionOptionsComponent, data: { roles: [Role.teacher] }},
   { path: 'activities', component: ActivitiesComponent, canDeactivate: [SessionGuardService] },
-  // Auto redirect als je bullshit invult (Moet als laatste!)
+
+  // Auto redirect als je bullshit invult (moet als laatste).
   { path: '**', redirectTo: '/login', pathMatch: 'full' },
 ];
 

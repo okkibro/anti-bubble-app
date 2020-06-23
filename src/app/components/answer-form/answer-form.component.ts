@@ -19,8 +19,8 @@ import { AuthenticationService } from 'src/app/services/authentication.service';
 })
 export class AnswerFormComponent implements OnInit {
 
-    answer = "";
-    question = "";
+    answer = '';
+    question = '';
     getAnswerForm = this.fb.group({
         getAnswer: ['', []]
     });
@@ -29,38 +29,46 @@ export class AnswerFormComponent implements OnInit {
     });
     userDetails: User;
 
-    constructor(private fb: FormBuilder, private snackBar: MatSnackBar, private socketService: SocketIOService, private auth: AuthenticationService) { }
+    constructor(
+        private fb: FormBuilder,
+        private snackBar: MatSnackBar,
+        private socketService: SocketIOService,
+        private auth: AuthenticationService
+    ) { }
 
     alreadySubmitted:boolean = false;
 
-  ngOnInit(): void {
-    this.auth.profile().subscribe(user => {
-      this.userDetails = user;
-    })
+    ngOnInit(): void {
+        this.auth.profile().subscribe(user => {
+            this.userDetails = user;
+        })
 
-    this.socketService.reactivateButton(() => { // Reactivate the option to answer after the teacher has deleted the answer
-      this.alreadySubmitted = false;
-    });
-  }
+        // Reactivate the option to answer after the teacher has deleted the answer.
+        this.socketService.reactivateButton(() => {
+            this.alreadySubmitted = false;
+        });
+    }
 
-    // This method lets students submit an answer to the teacher (digiboard).
+    /** This method lets students submit an answer to the teacher (digiboard). */
     sendAnswer() {
-        if (this.answer != "") {
+        if (this.answer != '') {
             this.socketService.studentSubmit(this.answer);
-            this.answer = "";
-            this.alreadySubmitted = true; // prevents students from spamming the teacher with answers
+            this.answer = '';
+
+            // Prevents students from spamming the teacher with answers.
+            this.alreadySubmitted = true;
         } else {
             this.snackBar.open('Vul een antwoord in', 'X', { duration: 2500, panelClass: ['style-error'] });
         }
     }
 
-  // This method lets a teacher submit a question to all of the students in the session.
-  sendQuestion() {
-    if (this.question != "") {
-      this.socketService.sendQuestion(this.question);
-      this.question = "";
-    } else {
-      this.snackBar.open('Vul een onderwerp in', 'X', { duration: 2500, panelClass: ['style-error'], });
+    /** This method lets a teacher submit a question to all of the students in the session. */
+    sendQuestion() {
+        if (this.question != '') {
+            this.socketService.sendQuestion(this.question);
+            this.question = '';
+        } else {
+            this.snackBar.open('Vul een onderwerp in', 'X', { duration: 2500, panelClass: ['style-error'], });
+        }
     }
-  }
 }
