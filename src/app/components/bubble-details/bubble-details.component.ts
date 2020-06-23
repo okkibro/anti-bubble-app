@@ -61,7 +61,7 @@ export class BubbleDetailsComponent implements OnInit {
         {
           name: 'Diversiteit van de inhoud',
           color: 'yellow',
-          data: this.userDetails.diversity,
+          data: [],
           tooltip: {
             valueSuffix: "%"
           }
@@ -69,7 +69,7 @@ export class BubbleDetailsComponent implements OnInit {
         {
           name: 'Kennis en bewustzijn van filter bubbles',
           color: 'blue',
-          data: this.userDetails.knowledge,
+          data: [],
           tooltip: {
             valueSuffix: "%"
           }

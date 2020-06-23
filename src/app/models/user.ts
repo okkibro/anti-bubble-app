@@ -15,18 +15,16 @@ export class User {
     email: string;
     role: Role;
     password: string;
-    classCode: number;
     salt: string;
-    exp: number;
-    currency: number;
+    recoverPasswordToken: string;
+    recoverPasswordExpires: Date;
     inventory: [ShopItem];
+    currency: number;
     milestones: [Milestone];
-    class: string;
-    knowledge: [number];
-    diversity: [number];
-    recentMilestones: [String];
-    bubbleInit: boolean;
+    class: [string];
     avatar: any;
-    labyrinthAnswers: [number];
+    recentMilestones: [string];
+    bubbleInit: boolean;
+    labyrinthAnswers: [Number];
     bubble: any;
 }

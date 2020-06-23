@@ -44,6 +44,10 @@ export class ClassOverviewComponent implements OnInit {
         });
     }
 
+    temp() {
+        console.log("temp")
+    }
+
     /** Method to filter the students in a class. */
     search() {
         let query:string = this.searchBar.get('query').value.toLowerCase();

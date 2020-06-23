@@ -4,11 +4,8 @@
  * Computing Sciences)
  */
 
-import { Role } from './role';
-
-export class tokenData {
-    email: string;
-    role: Role;
-    exp: number;
-    iat: number;
-}
+export class Activities {
+    name: string;
+    category: string;
+    description: string;
+};

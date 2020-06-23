@@ -5,7 +5,8 @@
  */
 
 export class Articles {
-    article: number;
+    articlenr: number;
     part: number;
     image: string;
+    source: string;
 };
