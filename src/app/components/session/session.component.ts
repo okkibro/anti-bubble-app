@@ -38,6 +38,7 @@ export class SessionComponent implements OnInit {
     submits: any[][] = [];
     leaders;
     sources;
+    subjects;
 
     constructor(
         private authenticationService: AuthenticationService,
@@ -205,16 +206,21 @@ export class SessionComponent implements OnInit {
         switch (game) {
             case "Naamloos Nieuws":
                 this.sessionService.getArticles().subscribe((articles) => { // Get articles from database.
-                    this.pairStudents(null, 3, articles, (pairs, leaders, sources) => { // Divide students in groups of 3.
+                    this.pairStudents(null, 3, articles, (pairs, leaders, sourceSubject) => { // Divide students in groups of 3.
                         this.leaders = leaders;
                         this.pairs = pairs;
-                        this.sources = sources;
+                        this.sources = sourceSubject.sources;
+                        this.subjects = sourceSubject.subjects;
                         for (let i = 0; i < leaders.length; i++) {
                             this.submits[leaders[i].email] = []; // Make a list in submits for every leader.
                         }
 
                         this.socketService.listenForSubmits(submit => {
-                            this.submits[submit.message.answer].push({ player: submit.player, source: submit.message.data.article.source });
+                            this.submits[submit.message.answer].push({ 
+                                player: submit.player, 
+                                source: submit.message.data.article.source, 
+                                subject: submit.message.data.article.subject 
+                            });
                         });
                     });
                 });
@@ -311,10 +317,10 @@ export class SessionComponent implements OnInit {
                 for (let i = 0; i < this.leaders.length; i++) {
                     let team = document.createElement("tr");
                     team.innerHTML = `<strong>Team ${i + 1}</strong><br>`;
-                    team.innerHTML += `Speler 1: ${this.leaders[i].name}<br> <i>Source: ${this.sources[i]}<i><br><br>`;
+                    team.innerHTML += `Speler 1: ${this.leaders[i].name}<br> <i>Onderwerp: ${this.subjects[i]}</i> <br> <i>Source: ${this.sources[i]}<i><br><br>`;
                     let teamSubmits = this.submits[this.leaders[i].email]
                     for (let j = 0; j < teamSubmits.length; j++) {
-                        team.innerHTML += `Speler ${j + 2}: ${teamSubmits[j].player.name}<br> <i>Source: ${teamSubmits[j].source}<i><br><br>`;
+                        team.innerHTML += `Speler ${j + 2}: ${teamSubmits[j].player.name}<br> <i>Onderwerp: ${teamSubmits[j].subject}</i> <br> <i>Source: ${teamSubmits[j].source}<i><br><br>`;
                     }
                     table.appendChild(team);
                 }
