@@ -41,4 +41,9 @@ export class SessionService {
   public saveAnswers(answers: any): Observable<any> {
     return this.http.post('https://localhost:3000/session/labyrinthAnswers', { answers: answers }, { headers: { Authorization: 'Bearer ' + this.cookie.get('mean-token') } });
   }
+
+  /** Method to do a POST request to let the user earn money for the shop. */
+  public earnMoney(money: Number): Observable<any> {
+    return this.http.post('https://localhost:3000/session/earnMoney', { money: money }, { headers: { Authorization: 'Bearer ' + this.cookie.get('mean-token') } });
+  }
 }

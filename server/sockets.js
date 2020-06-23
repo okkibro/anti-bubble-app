@@ -225,6 +225,10 @@ function runIO(io) {
 		socket.on('reactivate-button', (player) => {
 			socket.to(player.playerID).emit('reactivate');
 		});
+
+		socket.on('finish-game', () => {
+			io.in(games.getGame(socket.id).pin).emit('finished-game');
+		});
 	});
 }
 

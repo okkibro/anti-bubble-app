@@ -86,7 +86,7 @@ export class ActivitiesComponent implements OnInit {
     });
   }
 
-  /** Function that  */
+  /** Function that listens for teammembers */
   receiveTeam() {
     this.socketService.listenForTeam((team, article, leaders) => {
       this.leaders = leaders;
