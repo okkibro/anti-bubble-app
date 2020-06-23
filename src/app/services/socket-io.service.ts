@@ -41,7 +41,7 @@ export class SocketIOService {
      *  backToHome gets called when the host disconnects.
      *  redirect gets called when the game starts.
      */
-    joinSession(pin, user, join, backToHome, redirect) {
+    joinSession(pin, user, join, backToHome, redirect, finishedGame) {
         this.hostDisconnected = false;
         this.socket.emit('player-join', {pin: pin, player: user});
         this.socket.on('message', (message: string) => {
@@ -62,6 +62,9 @@ export class SocketIOService {
         });
         this.socket.on('game-start-redirect', () => {
             redirect();
+        });
+        this.socket.on('finished-game', () => {
+            finishedGame();
         })
     }
 
@@ -157,5 +160,9 @@ export class SocketIOService {
         this.socket.on('reactivate', () => {
             reactivate();
         });
+    }
+
+    finishGame() {
+        this.socket.emit('finish-game');
     }
 }

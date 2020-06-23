@@ -13,6 +13,7 @@ import { Router } from "@angular/router";
 import { DataService } from 'src/app/services/data-exchange.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { beforeUnload } from '../../../../constants';
+import { SessionService } from 'src/app/services/session.service';
 
 @Component({
     selector: 'mean-home',
@@ -32,6 +33,7 @@ export class HomeComponent implements OnInit {
         private router: Router,
         private data: DataService,
         private snackBar: MatSnackBar,
+        private sessionService: SessionService,
     ) { }
 
     ngOnInit(): void {
@@ -75,6 +77,10 @@ export class HomeComponent implements OnInit {
 
             // redirect callback: go to activities page when the game starts.
             this.router.navigate(['activities']);
+        }, () => {
+
+            // finishedGame callback: earn money
+            this.sessionService.earnMoney(100).subscribe();
         });
 
     }

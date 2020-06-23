@@ -265,7 +265,7 @@ export class SessionComponent implements OnInit {
     /** Function that makes timer count down at the top of the screen. */
     startTimer(time: number) {
         setTimeout(() => {
-            // TODO: redirect naar home ofzo en update bubblewaarden alles
+            this.finishGame();
         }, time * 1000);
 
         // Create an interval that calls the given function every second. 
@@ -301,6 +301,7 @@ export class SessionComponent implements OnInit {
         timeLeft[0].style.color = "red";
         this.socketService.removeListeners(); // Remove all listeners so students cant submit answers.
         this.showAnswersonScreen(this.gameData.game.name);
+        this.finishGame();
     }
 
     /** Function that makes the host leave the session and the page. */
@@ -328,5 +329,10 @@ export class SessionComponent implements OnInit {
                 break;
             default: break;
         }
+    }
+
+    finishGame() {
+        this.sessionService.earnMoney(100).subscribe();
+        this.socketService.finishGame();
     }
 }
