@@ -9,27 +9,53 @@
     width: 350px;
 }
 
+@media (max-width: 600px) {
+    #doolhof {
+        height: 250px;
+        width: 250px;
+    }
+
+    #question {
+        font-size: 24px !important;
+    }
+
+    #desktop-stop-button {
+        display: none;
+    }
+
+    #radio-button-options {
+        flex-direction: column !important;
+    }
+}
+
 #question {
-    font-size: 45px;
+    font-size: 40px;
     margin-bottom: 0;
     margin-top: 5px;
 }
 
-.radioButtonOptions {
+.radio-button-options {
     display: inline-block;
     margin: 15px;
 }
 
-.radioButton {
+.radio-button {
     text-align: center;
     margin: 3px 0 3px 3px;
 }
 
-#stopButton {
+.stop-button {
+    background-color: red;
+    color: white;
+    border-radius: 15px;
+    width: 90px;
+    box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.7);
+}
+
+#desktop-stop-button {
     right: 3%;
     top: 4%;
     float: right;
-    width: 50px;
     position: absolute;
 }
 

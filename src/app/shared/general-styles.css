@@ -40,6 +40,12 @@ body {
     margin: 10px 0;
 }
 
+@media (max-width: 600px) {
+    .container-div {
+        width: 90%;
+    }
+}
+
 mat-card {
     background-color: #fff2f3;
     border: 5px solid #dd6d59;

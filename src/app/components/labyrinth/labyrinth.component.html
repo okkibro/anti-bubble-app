@@ -12,9 +12,9 @@
     <mat-sidenav-content>
         <mean-toolbar (sidenavToggle)="sidenav.toggle()"></mean-toolbar>
         <body>
-            <div class="container-div" fxLayoutGap="10px" fxLayout="column" fxLayoutAlign="space-evenly">
-                <div fxLayout.xs="row" fxLayoutGap="10px" fxLayoutAlign="space-evenly">
-                    <mat-card fxFlex="100%">
+            <div class="container-div">
+                <div fxLayoutGap="10px" fxLayout="column" fxLayoutAlign="space-evenly">
+                    <mat-card fxFlex="90%">
                         <mat-card-header>
                             <mat-card-title>Dwalende Doolhof</mat-card-title>
                             <mat-card-subtitle>
@@ -35,20 +35,25 @@
                         </mat-card-content>
 
                         <mat-card-content *ngIf="startedLabyrinth">
-                            <button mat-button class="general-button" id="stopButton" (click)="paused()">Stop</button>
+                            <button mat-button class="stop-button" id="desktop-stop-button" (click)="paused()">Stop</button>
 
                             <p id="question"></p>
 
-                            <mat-radio-group class="radioButtonOptions" [(ngModel)]="optionSelected" *ngIf="questionLoaded">
+                            <mat-radio-group class="radio-button-options" id="radio-button-options" [(ngModel)]="optionSelected" *ngIf="questionLoaded">
                                 <p *ngFor="let option of questionOptions; let i = index"> <!-- Used for layout purposes -->
-                                    <mat-radio-button (change)="selectedOption()" class="radioButton" color="primary" [value]='i'>
-                                        <span class="textInRadioButton"></span>
+                                    <mat-radio-button (change)="selectedOption()" class="radio-button" color="primary" [value]='i'>
+                                        <span class="answer-options"></span>
                                     </mat-radio-button>
                                 </p>
                             </mat-radio-group><br>
 
                             <button mat-button class="general-button" (click)="nextQuestion(currentQuestion)" [disabled]="nextQuestionDisabled"> Volgende </button>
 
+                        </mat-card-content>
+                    </mat-card>
+                    <mat-card *ngIf="startedLabyrinth" fxHide.gt-xs>
+                        <mat-card-content>
+                            <button mat-button class="stop-button" id="mobile-stop-button" (click)="paused()">Stop</button>
                         </mat-card-content>
                     </mat-card>
                 </div>

@@ -17,11 +17,6 @@
     font-size: 70px;
 }
 
-.shop-card a {
-    display: flex;
-    justify-content: center;
-}
-
 .join-session {
     display: flex;
     width: 200px;

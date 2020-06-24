@@ -30,6 +30,7 @@ export class LabyrinthComponent implements OnInit {
     currentQuestion;
     optionSelected;
     questionLoaded: boolean = false;
+    lastQuestionWasImage: boolean = false;
 
     constructor(
         private router: Router,
@@ -150,27 +151,51 @@ export class LabyrinthComponent implements OnInit {
         document.getElementById('question').innerHTML = question.question;
         this.questionOptions = question.choices;
         this.questionLoaded = true;
-        let textArea = document.getElementsByClassName('textInRadioButton');
+        let textArea = document.getElementsByClassName('answer-options');
 
         // For each question...
         for (let i = 0; i < question.choices.length; i++) {
+
             if (question.choices[i].startsWith('/assets/')) {
                 setTimeout(() => {
+                    let radioGroup = document.getElementById('radio-button-options');
                     let image = document.createElement('img');
-                    image.setAttribute('width', '300px');
-                    image.setAttribute('height', '400px');
+                    radioGroup.style.display = 'flex';
+                    radioGroup.style.alignItems = 'center';
+                    radioGroup.style.justifyContent = 'center';
+                    if (screen.width < 600) {
+                        image.style.maxWidth = '300px';
+                        image.style.maxHeight = '300px';
+                        image.style.paddingRight = '10px';
+                    } else {
+                        image.style.maxWidth = '500px';
+                        image.style.maxHeight = '500px';
+                        image.style.paddingRight = '15px';
+                    }
+                    image.style.width = 'auto';
+                    image.style.height = 'auto';
                     image.addEventListener('click', this.selectedOption);
                     image.id = 'image' + i;
                     image.setAttribute('src', question.choices[i]);
                     textArea[i].appendChild(image);
-                }, 1);
+                    this.lastQuestionWasImage = true;
+                }, 10);
             } else {
                 setTimeout(() => {
+
+                    // Below lines make sure that radio button questions are shown stacked, but image questions are shown
+                    // side by side.
+                    if (this.lastQuestionWasImage) {
+                        let radioGroup = document.getElementById('radio-button-options');
+                        radioGroup.style.display = 'inline-block';
+                        radioGroup.style.alignItems = 'unset';
+                        radioGroup.style.justifyContent = 'unset';
+                    }
                     textArea[i].appendChild(document.createTextNode(question.choices[i]));
-                }, 1);
+                }, 10);
             }
         }
-}
+    }
 
     selectedOption() {
         this.nextQuestionDisabled = false;
