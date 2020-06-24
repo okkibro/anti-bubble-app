@@ -8,3 +8,8 @@
     width: 100%;
     display: block;
 }
+
+.mat-card-content {
+    display: flex;
+    justify-content: center;
+}

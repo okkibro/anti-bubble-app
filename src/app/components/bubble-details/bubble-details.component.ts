@@ -36,6 +36,15 @@ export class BubbleDetailsComponent implements OnInit {
     chartOptions = {}
     userDetails: User;
 
+    /*TODO DONT MAKE THIS HARDCODED BUT READ OF USER BUBBLE HISTORY */
+    data = {online: [0,1,1,2,3,4,4],
+            social: [0,0,1,1,1,2,2],
+            mainstream: [0,0,1,2,3,3,4],
+            category1: [0,0,1,2,2,2,4],
+            category2: [0,2,3,4,4,4,4],
+            knowledge: [0,0,0,1,2,4,5],
+            techSavvy: [0,1,2,4,4,4,4]}
+
     constructor(private auth: AuthenticationService) {}
 
     ngOnInit() {
@@ -62,27 +71,67 @@ export class BubbleDetailsComponent implements OnInit {
             },
             yAxis: {
                 title: {
-                    text: 'Percentage (%)'
+                    text: 'Points'
                 },
                 visible: true,
             },
             series: [
                 {
-                    name: 'Diversiteit van de inhoud',
-                    color: 'yellow',
-                    data: [],
+                    name: 'Online',
+                    color: 'grey',
+                    data: this.data.online,
                     tooltip: {
-                        valueSuffix: '%'
+                        valueSuffix: 'pt'
                     }
                 },
                 {
-                    name: 'Kennis en bewustzijn van filter bubbles',
+                    name: 'Social',
                     color: 'blue',
-                    data: [],
+                    data: this.data.social,
                     tooltip: {
-                        valueSuffix: '%'
+                        valueSuffix: 'pt'
                     }
-                }
+                },
+                {
+                    name: 'Mainstream',
+                    color: 'green',
+                    data: this.data.mainstream,
+                    tooltip: {
+                        valueSuffix: 'pt'
+                    }
+                },
+                {
+                    name: 'Category 1',
+                    color: 'red',
+                    data: this.data.category1,
+                    tooltip: {
+                        valueSuffix: 'pt'
+                    }
+                },
+                {
+                    name: 'Category 2',
+                    color: 'blue',
+                    data: this.data.category2,
+                    tooltip: {
+                        valueSuffix: 'pt'
+                    }
+                },
+                {
+                    name: 'Knowledge',
+                    color: 'yellow',
+                    data: this.data.knowledge,
+                    tooltip: {
+                        valueSuffix: 'pt'
+                    }
+                },
+                {
+                    name: 'Techsavvyness',
+                    color: 'green',
+                    data: this.data.techSavvy,
+                    tooltip: {
+                        valueSuffix: 'pt'
+                    }
+                },
             ]
         };
     }

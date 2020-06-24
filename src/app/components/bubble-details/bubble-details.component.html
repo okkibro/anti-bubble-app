@@ -28,12 +28,32 @@
                         <mat-card-content>
                             <table class="UItable">
                                 <tr>
-                                    <th>Diversiteit van de inhoud (geel): </th>
-                                    <!-- <td> {{ userDetails?.diversity[userDetails?.diversity.length-1] }}% </td> -->
+                                    <th>Online (grijs): </th>
+                                    <td> {{ data?.online[data?.online.length-1] }}pt </td>
                                 </tr>
                                 <tr>
-                                    <th>Kennis en bewustzijn van filter bubbles (blauw): </th>
-                                    <!-- <td> {{ userDetails?.knowledge[userDetails?.knowledge.length-1] }}% </td> -->
+                                    <th>Social (blauw): </th>
+                                    <td> {{ data?.social[data?.social.length-1] }}pt </td>
+                                </tr>
+                                <tr>
+                                    <th>Mainstream (groen): </th>
+                                    <td> {{ data?.mainstream[data?.mainstream.length-1] }}pt </td>
+                                </tr>
+                                <tr>
+                                    <th>Categorie 1 (rood): </th>
+                                    <td> {{ data?.category1[data?.category1.length-1] }}pt </td>
+                                </tr>
+                                <tr>
+                                    <th>Categorie 2 (blauw): </th>
+                                    <td> {{ data?.category2[data?.category2.length-1] }}pt </td>
+                                </tr>
+                                <tr>
+                                    <th>Knowledge (geel): </th>
+                                    <td> {{ data?.knowledge[data?.knowledge.length-1] }}pt </td>
+                                </tr>
+                                <tr>
+                                    <th>Techsavvyness (groen): </th>
+                                    <td> {{ data?.techSavvy[data?.techSavvy.length-1] }}pt </td>
                                 </tr>
                             </table>
                         </mat-card-content>
