@@ -21,7 +21,7 @@ describe('PasswordResetComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ PasswordResetComponent, ActivatedRoute ],
+      declarations: [ PasswordResetComponent ],
       providers: [
         {
           provide: PasswordRecoveryService,
@@ -39,7 +39,4 @@ describe('PasswordResetComponent', () => {
     fixture.detectChanges();
   });
 
-  it('Component successfully created', () => {
-    expect(component).toBeTruthy();
-  });
 });
