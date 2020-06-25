@@ -21,16 +21,16 @@ describe('PasswordResetComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ PasswordResetComponent ],
+      declarations: [PasswordResetComponent, ActivatedRoute],
       providers: [
         {
           provide: PasswordRecoveryService,
           useValue: passwordRecoveryServiceStub
         }
       ],
-      schemas: [ NO_ERRORS_SCHEMA ]
+      schemas: [NO_ERRORS_SCHEMA]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {
@@ -39,4 +39,9 @@ describe('PasswordResetComponent', () => {
     fixture.detectChanges();
   });
 
+  it('Component successfully created', () => {
+    expect(component).toBeTruthy();
+  });
 });
+
+/** This program has been developed by students from the bachelor Computer Science at Utrecht University within the Software Project course. © Copyright Utrecht University (Department of Information and Computing Sciences)  */

@@ -33,3 +33,5 @@ export class ShopService {
         return this.http.get('https://localhost:3000/shop/getBaseInventory', { headers: { Authorization: 'Bearer ' + this.cookie.get('mean-token') }});
     }
 }
+
+/** This program has been developed by students from the bachelor Computer Science at Utrecht University within the Software Project course. © Copyright Utrecht University (Department of Information and Computing Sciences)  */

@@ -5,7 +5,7 @@
  */
 
 class LiveGames {
-    constructor () {
+    constructor() {
         this.games = [];
     }
     
@@ -33,10 +33,12 @@ class LiveGames {
         return game;
     }
     
-    /** Method that gets a game based on the host's ID given. */
+    /** Method to get the game given an id */
     getGame(hostID) {
         return this.games.filter((game) => game.hostID === hostID)[0]
     }
 }
 
 module.exports = { LiveGames };
+
+/** This program has been developed by students from the bachelor Computer Science at Utrecht University within the Software Project course. © Copyright Utrecht University (Department of Information and Computing Sciences)  */

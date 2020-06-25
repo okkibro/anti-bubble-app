@@ -11,7 +11,7 @@ import { AuthenticationService } from './authentication.service';
 @Injectable()
 export class AuthGuardService implements CanActivate {
 
-    constructor(private auth: AuthenticationService, private router: Router) {}
+    constructor(private auth: AuthenticationService, private router: Router) { }
 
     /** Method to check whether the user can access a certain page. */ 
     canActivate(route: ActivatedRouteSnapshot) {
@@ -32,3 +32,5 @@ export class AuthGuardService implements CanActivate {
         return true;
     }
 }
+
+/** This program has been developed by students from the bachelor Computer Science at Utrecht University within the Software Project course. © Copyright Utrecht University (Department of Information and Computing Sciences)  */

@@ -13,7 +13,7 @@ import { User } from '../../models/user';
   selector: 'mean-badges',
   templateUrl: './badges.component.html',
   styleUrls: ['./badges.component.css',
-              '../../shared/general-styles.css']
+    '../../shared/general-styles.css']
 })
 export class BadgesComponent implements OnInit {
 
@@ -30,9 +30,9 @@ export class BadgesComponent implements OnInit {
        // Loop over all milestones and sort them into the arrays.
       for (let i = 0; i < milestones.length; i++) {
         if (milestones[i].maxValue == user.milestones[i]) {
-          this.completed.push({ index: i, milestone: milestones[i]})
+          this.completed.push({ index: i, milestone: milestones[i] })
         } else {
-          this.uncompleted.push({ index: i, milestone: milestones[i]})
+          this.uncompleted.push({ index: i, milestone: milestones[i] })
         }
       }
       // Set value of progressbar.
@@ -48,3 +48,5 @@ export class BadgesComponent implements OnInit {
   }
 
 }
+
+/** This program has been developed by students from the bachelor Computer Science at Utrecht University within the Software Project course. © Copyright Utrecht University (Department of Information and Computing Sciences)  */

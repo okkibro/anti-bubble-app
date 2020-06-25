@@ -57,3 +57,5 @@ httpServer.listen(80, () => console.log(`HTTP server listening: http://localhost
 //SocketIO
 const io = require('socket.io').listen(server);
 const sockets = require('./server/sockets')(io);
+
+/** This program has been developed by students from the bachelor Computer Science at Utrecht University within the Software Project course. © Copyright Utrecht University (Department of Information and Computing Sciences)  */

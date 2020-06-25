@@ -42,7 +42,7 @@ describe('LoginComponent', () => {
           useValue: snackbarStub
         }
       ],
-      schemas: [ NO_ERRORS_SCHEMA ]
+      schemas: [NO_ERRORS_SCHEMA]
     }).compileComponents();
   }));
 
@@ -113,8 +113,8 @@ describe('LoginComponent', () => {
     fixture.detectChanges();
 
     let user = new User();
-        user.email = email.value;
-        user.password = password.value;
+    user.email = email.value;
+    user.password = password.value;
 
     fixture.nativeElement.querySelector('button').click();
 
@@ -122,3 +122,5 @@ describe('LoginComponent', () => {
     expect(authServiceStub.login).toHaveBeenCalledWith(user);
   });
 });
+
+/** This program has been developed by students from the bachelor Computer Science at Utrecht University within the Software Project course. © Copyright Utrecht University (Department of Information and Computing Sciences)  */

@@ -1,0 +1,62 @@
+<mean-nav-bar></mean-nav-bar>
+
+
+<body>
+    <div class="containerDiv" fxLayoutGap="0.5%" fxLayout="column" fxLayoutAlign="space-evenly">
+        <div fxLayout="row" fxLayoutGap="0.5%" fxLayoutAlign="space-evenly">
+            <mat-card fxFlex="50%">
+                <mat-card-header>
+                    <mat-card-title>Profiel</mat-card-title>
+                </mat-card-header>
+                <mat-card-content>
+                    <table class="UItable">
+                        <tr>
+                            <th>Gebruikersnaam</th>
+                            <td>{{ classmate?.firstName }}</td>
+                        </tr>
+                        <tr>
+                            <th>E-mail adres</th>
+                            <td>{{ classmate?.email }}</td>
+                        </tr>
+                        <tr>
+                            <th>Klas</th>
+                            <td>TODO: klas toevoegen</td>
+                        </tr>
+                    </table>
+                </mat-card-content>
+            </mat-card>
+
+            <mat-card fxFlex="50%">
+                <mat-card-header>
+                    <mat-card-title>Avatar</mat-card-title>
+                </mat-card-header><br>
+                <img mat-card-image
+                    src="https://image.freepik.com/vrije-vector/jonge-vrouw-avatar-cartoon-karakter-profielfoto_18591-55056.jpg"
+                    alt="avatar voorbeeld">
+            </mat-card>
+        </div>
+
+        <div fxLayout="row" fxLayoutAlign="space-evenly center">
+            <mat-card fxFlex="100%">
+                <mat-card-header>
+                    <mat-card-title>Bubbel van {{ classmate?.firstName }}</mat-card-title>
+                </mat-card-header><br>
+                <img mat-card-image
+                    src="https://f1.pngfuel.com/png/724/363/759/cartoon-speech-bubble-soap-bubble-speech-balloon-pink-circle-material-property-sphere-magenta-png-clip-art.png"
+                    alt="bubbel voorbeeld">
+            </mat-card>
+        </div>
+
+        <div fxLayout="row" fxLayoutAlign="space-evenly center">
+            <button *ngIf="user?.role == 'student'" mat-button [routerLink]="'/class-overview'">
+                <mat-icon>keyboard_backspace</mat-icon> Terug naar profiel
+            </button>
+            <button *ngIf="user?.role == 'teacher'" mat-button [routerLink]="'/teacher-overview'">
+                <mat-icon>keyboard_backspace</mat-icon> Terug naar profiel
+            </button>
+        </div>
+    </div>
+
+</body>
+
+<!-- This program has been developed by students from the bachelor Computer Science at Utrecht University within the Software Project course. © Copyright Utrecht University (Department of Information and Computing Sciences)  -->

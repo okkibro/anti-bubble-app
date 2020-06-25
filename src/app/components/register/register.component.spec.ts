@@ -27,7 +27,7 @@ describe('RegisterComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ RegisterComponent],
+      declarations: [RegisterComponent],
       imports: [HttpClientModule, HttpClientTestingModule, RouterModule.forRoot([]), ReactiveFormsModule, FormsModule],
       providers: [
         {
@@ -35,9 +35,9 @@ describe('RegisterComponent', () => {
           useValue: authRegisterStub
         }
       ],
-      schemas: [ NO_ERRORS_SCHEMA ]
+      schemas: [NO_ERRORS_SCHEMA]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {
@@ -155,11 +155,11 @@ describe('RegisterComponent', () => {
     fixture.detectChanges();
 
     let user = new User();
-        user.firstName = firstName.value;
-        user.lastName = lastName.value;
-        user.email = email.value;
-        user.role = role.value;
-        user.password = password.value;
+    user.firstName = firstName.value;
+    user.lastName = lastName.value;
+    user.email = email.value;
+    user.role = role.value;
+    user.password = password.value;
 
 
     fixture.nativeElement.querySelector('button').click();
@@ -168,3 +168,5 @@ describe('RegisterComponent', () => {
     expect(authRegisterStub.register).toHaveBeenCalledWith(user);
   });
 });
+
+/** This program has been developed by students from the bachelor Computer Science at Utrecht University within the Software Project course. © Copyright Utrecht University (Department of Information and Computing Sciences)  */

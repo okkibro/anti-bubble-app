@@ -9,7 +9,7 @@
 
 const process = require('process');
 
-module.exports = function(config) {
+module.exports = function (config) {
   config.set({
 
     // base path that will be used to resolve all patterns (eg. files, exclude)
@@ -47,7 +47,7 @@ module.exports = function(config) {
 
     coverageIstanbulReporter: {
       dir: require("path").join(__dirname, "../coverage"),
-      reports: [ 'html', 'lcovonly', "text-summary" ],
+      reports: ['html', 'lcovonly', "text-summary"],
       fixWebpackSourcePaths: true
     },
 
@@ -77,3 +77,5 @@ module.exports = function(config) {
     concurrency: Infinity
   })
 }
+
+/** This program has been developed by students from the bachelor Computer Science at Utrecht University within the Software Project course. © Copyright Utrecht University (Department of Information and Computing Sciences)  */

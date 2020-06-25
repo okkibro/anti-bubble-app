@@ -75,7 +75,9 @@ export class AvatarComponent implements OnInit {
     /** Method to filter the avatar items to only show the items in the inventory/that the player bought. */
     filterAvatar(): AvatarComponent[] {
         return this.itemsShown.filter(x => {
-          return this.userDetails.inventory.find(y => x._id == y._id) != null
-        });  
+            return this.userDetails.inventory.find(y => x._id == y._id) != null
+        });
     }
 }
+
+/** This program has been developed by students from the bachelor Computer Science at Utrecht University within the Software Project course. © Copyright Utrecht University (Department of Information and Computing Sciences)  */

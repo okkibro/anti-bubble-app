@@ -11,9 +11,9 @@ const User = mongoose.model('User');
 const sanitize = require('mongo-sanitize');
 
 passport.use(new LocalStrategy({
-        usernameField: 'email'
-    },
-    function(username, password, done) {
+    usernameField: 'email'
+},
+    function (username, password, done) {
         User.findOne({ email: sanitize(username) }, function (err, user) {
             if (err) {
                 return done(err);
@@ -31,3 +31,5 @@ passport.use(new LocalStrategy({
         });
     }
 ));
+
+/** This program has been developed by students from the bachelor Computer Science at Utrecht University within the Software Project course. © Copyright Utrecht University (Department of Information and Computing Sciences)  */

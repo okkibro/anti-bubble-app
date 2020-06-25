@@ -28,12 +28,12 @@ export class SocketIOService {
         this.gameData = gameData;
         this.socket.emit('host-join', gameData);
         this.socket.on('players', (players: []) => {
-            console.log(0,players);
+            console.log(0, players);
         });
         this.socket.on('showGamePin', (pin) => {
             this.data.changeMessage(pin);
             this.pin = pin;
-        });        
+        });
     }
 
     /** Method that adds the given user to the session with the given pin. 
@@ -171,3 +171,5 @@ export class SocketIOService {
         this.socket.emit('finish-game');
     }
 }
+
+/** This program has been developed by students from the bachelor Computer Science at Utrecht University within the Software Project course. © Copyright Utrecht University (Department of Information and Computing Sciences)  */

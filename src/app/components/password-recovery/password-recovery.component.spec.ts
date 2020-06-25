@@ -28,7 +28,7 @@ describe('PasswordRecoveryComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ PasswordRecoveryComponent ],
+      declarations: [PasswordRecoveryComponent],
       imports: [RouterModule.forRoot([]), ReactiveFormsModule, MatSnackBarModule],
       providers: [
         {
@@ -36,9 +36,9 @@ describe('PasswordRecoveryComponent', () => {
           useValue: passwordRecoveryServiceStub
         }
       ],
-      schemas: [ NO_ERRORS_SCHEMA ]
+      schemas: [NO_ERRORS_SCHEMA]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {
@@ -95,3 +95,5 @@ describe('PasswordRecoveryComponent', () => {
   });
 
 });
+
+/** This program has been developed by students from the bachelor Computer Science at Utrecht University within the Software Project course. © Copyright Utrecht University (Department of Information and Computing Sciences)  */

@@ -57,10 +57,10 @@ export class TeacherOverviewComponent implements OnInit {
     createClass() {
         if (this.userDetails.role == 'teacher') {
             let classes = new Class();
-            classes.code  = Math.floor(100000 + Math.random() * 900000);;
+            classes.code = Math.floor(100000 + Math.random() * 900000);;
             classes.level = this.classForm.get('classLevel').value;
             classes.title = this.classForm.get('classTitle').value;
-            classes.year  = this.classForm.get('classYear').value;
+            classes.year = this.classForm.get('classYear').value;
             this.openform = false;
 
             this.classService.createClass(classes, this.userDetails).subscribe((code: Number) => {
@@ -118,3 +118,5 @@ export class TeacherOverviewComponent implements OnInit {
         this.openform = !this.openform;  
     }
 }
+
+/** This program has been developed by students from the bachelor Computer Science at Utrecht University within the Software Project course. © Copyright Utrecht University (Department of Information and Computing Sciences)  */
