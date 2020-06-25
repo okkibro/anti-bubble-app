@@ -1,7 +1,7 @@
 {
-  "name": "mean-template",
-  "version": "2.0.0",
-  "description": "A MEAN Stack (Mongo, Express, Angular, Node) simple application template",
+  "name": "anti-bubble-app",
+  "version": "1.0.0",
+  "description": "A MEAN Stack (Mongo, Express, Angular, Node)  application that teacher children about filter bubbles",
   "main": "index.js",
   "scripts": {
     "client": "ng serve",
@@ -9,25 +9,14 @@
     "start": "npm-run-all -p client server",
     "test": "ng build && nodemon index.js && ng test"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/agonxgashi/MEAN-template.git"
-  },
   "keywords": [
     "mean",
-    "template",
+    "application",
     "angular",
     "node",
     "express",
-    "simple",
-    "github"
   ],
-  "author": "Agon <agonxgashi@gmail.com>",
   "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/agonxgashi/MEAN-template/issues"
-  },
-  "homepage": "https://github.com/agonxgashi/MEAN-template#readme",
   "dependencies": {
     "@angular/animations": "^9.0.5",
     "@angular/cdk": "^9.1.1",
