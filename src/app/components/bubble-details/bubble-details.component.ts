@@ -37,19 +37,13 @@ export class BubbleDetailsComponent implements OnInit {
     userDetails: User;
 
     /*TODO DONT MAKE THIS HARDCODED BUT READ OF USER BUBBLE HISTORY */
-    data = {online: [0,1,1,2,3,4,4],
-            social: [0,0,1,1,1,2,2],
-            mainstream: [0,0,1,2,3,3,4],
-            category1: [0,0,1,2,2,2,4],
-            category2: [0,2,3,4,4,4,4],
-            knowledge: [0,0,0,1,2,4,5],
-            techSavvy: [0,1,2,4,4,4,4]}
-
+    data
     constructor(private auth: AuthenticationService) {}
 
     ngOnInit() {
         this.auth.profile().subscribe(user => {
             this.userDetails = user;
+            this.data = user.bubble
             this.initChart();
         })
 
@@ -67,7 +61,7 @@ export class BubbleDetailsComponent implements OnInit {
                 text: 'Veranderingen van je bubbel over de tijd'
             },
             xAxis: {
-                categories: ['Sessie 1', 'Sessie 2', 'Sessie 3', 'Sessie 4', 'Sessie 5', 'Sessie 6', 'Sessie 7']
+                categories: ['Start', 'Sessie 1', 'Sessie 2', 'Sessie 3', 'Sessie 4', 'Sessie 5', 'Sessie 6', 'Sessie 7']
             },
             yAxis: {
                 title: {

@@ -22,6 +22,7 @@ export class BubbleVisualisationComponent implements OnInit {
   ngOnInit(): void {
     this.auth.profile().subscribe(user => {
       this.userDetails = user;
+      console.log(user.bubble);
       this.updateBubble();
     }, (err) => {
       console.error(err);
@@ -31,14 +32,20 @@ export class BubbleVisualisationComponent implements OnInit {
 
   /** Method that updates the visual representation of a users bubble based on their statistics. */
   updateBubble() {
-    let rightValues = [this.userDetails.bubble.mainstream, this.userDetails.bubble.social,this.userDetails.bubble.online];
+    let mainstream = this.userDetails.bubble.mainstream.pop();
+    let online = this.userDetails.bubble.online.pop();
+    let social = this.userDetails.bubble.social.pop();
+    let category1 = this.userDetails.bubble.category1.pop();
+    let category2 = this.userDetails.bubble.category2.pop();
+
+    let rightValues = [mainstream, social,online];
     let rightValuePaths = ['/assets/images/Super_Map/Bubble_UI/UI_Bubble_Turquoise.png', '/assets/images/Super_Map/Bubble_UI/UI_Bubble_Green.png', '/assets/images/Super_Map/Bubble_UI/UI_Bubble_Purple.png'];
     let rightHighestRated = this.getHighestIndex(rightValues, rightValuePaths);
 
     let rightHalf = document.getElementById('rightHalf');
     rightHalf.setAttribute('src', rightHighestRated);
 
-    let leftValues = [this.userDetails.bubble.category1, this.userDetails.bubble.category2];
+    let leftValues = [category1, category2];
     let leftValuePaths = ['/assets/images/Super_Map/Bubble_UI/UI_Bubble_Blue.png', '/assets/images/Super_Map/Bubble_UI/UI_Bubble_Orange.png'];
     let leftHighestRated = this.getHighestIndex(leftValues, leftValuePaths);
 
