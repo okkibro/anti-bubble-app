@@ -14,7 +14,7 @@
     "application",
     "angular",
     "node",
-    "express",
+    "express"
   ],
   "license": "MIT",
   "dependencies": {

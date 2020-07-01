@@ -36,13 +36,13 @@ router.post('/register', (req, res) => {
     user.milestones = [];
     user.bubbleInit = true;
     user.bubble = {
-        online:     0,
-        social:     0,
-        mainstream: 0,
-        category1:  0,
-        category2:  0,
-        knowledge:  0,
-        techSavvy:  0,
+        online:     [0],
+        social:     [0],
+        mainstream: [0],
+        category1:  [0],
+        category2:  [0],
+        knowledge:  [0],
+        techSavvy:  [0],
     }
     if (user.role === 'student') {
         user.bubbleInit = false;
@@ -357,28 +357,31 @@ router.post('/avatar', auth, (req,res) => {
     });
 });
 
-/** Post method to update the bubble graph in the detailed profile page */
-// TODO: FIX RES WITH A CORRECT STATUS AND JSON!
-router.post('/updateGraph', auth, (req, res) => {
-    User.updateOne(
-        { _id: req.payload._id },
-        { $push: { knowledge: req.body.knowledgeScore, diversity: req.body.diversityScore } },
-        () => {
-            res.json({ });
-        }
-    );
-});
-
-/** Post method to update user bubble */
-router.post('/updateBubble', auth, (req, res) => {
+/** Post method to update user bubble after performing/pausing the labyrinth*/
+router.post('/processAnswers', auth, (req, res) => {
     User.findById(req.payload._id, (err, user) => {
         for (q of req.body.answers) {
             if (q != null) {
                 if (q.question.choiceConsequence[q.answer] !== '') {
-                    user.bubble[q.question.choiceConsequence[q.answer]] += q.question.values[q.answer];
+                    let oldValue = user.bubble[q.question.choiceConsequence[q.answer]].pop();
+                    let newValue = oldValue + q.question.values[q.answer];
+                    if (user.bubble[q.question.choiceConsequence[q.answer]].length < 1) {
+                        user.bubble[q.question.choiceConsequence[q.answer]].push(0);
+                        user.bubble[q.question.choiceConsequence[q.answer]].push(newValue);
+                    } else {
+                        user.bubble[q.question.choiceConsequence[q.answer]].push(newValue);
+                    }
+
                 }
             }
         }
+
+        for(let cat in user.bubble) {
+            if (user.bubble[cat].length < 2) {
+                user.bubble[cat].push(0)
+            }
+        }
+        
         user.markModified('bubble');
         user.save((error) => { 
             if (error) {

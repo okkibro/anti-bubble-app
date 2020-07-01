@@ -84,16 +84,16 @@ let userSchema = new Schema({
     },
     bubble: {
         type: {
-            online:     Number,
-            social:     Number,
-            mainstream: Number,
+            online:     [Number],
+            social:     [Number],
+            mainstream: [Number],
 
-            category1:  Number,
-            category2:  Number,
+            category1:  [Number],
+            category2:  [Number],
 
-            knowledge:  Number,
+            knowledge:  [Number],
 
-            techSavvy:  Number,
+            techSavvy:  [Number],
         },
         required: true
     },

@@ -101,10 +101,8 @@ router.post('/questions', auth, (req, res) => {
 
 /** Post method to save answers to the logged in user. */
 router.post('/labyrinthAnswers', auth, (req, res) => {
+	// Get the logged in user.
 	User.findById(req.payload._id, (err, user) => {
-		// Get the logged in user.
-		console.log(req.body.answers);
-
 		// Loop over all questions and save corresponding answers to the user's answers based on the index of the question.
 		for (let i = 1; i < req.body.answers.length; i++) {
 			let index = req.body.answers[i].question.id;

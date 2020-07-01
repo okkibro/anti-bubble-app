@@ -56,7 +56,7 @@ export class LabyrinthComponent implements OnInit {
                 if (data.succes) {  // Labyrinth boolean is set to true. Player now has a bubble and can join activity sessions.
                     this.snackBar.open('Je bent bij het eind aangekomen. Je antwoorden zijn opgeslagen.', 'X', { duration: 2500, panelClass: ['style-warning'], });
                     this.sessionService.saveAnswers(this.answers).subscribe(() => { // Saves the answers in the database.
-                        this.bubbleService.updateBubble(this.answers).subscribe(() => {
+                        this.bubbleService.processLabyrinth(this.answers).subscribe(() => {
                             this.router.navigate(['home']);
                         });
                     });
@@ -83,7 +83,7 @@ export class LabyrinthComponent implements OnInit {
     paused() {
         this.sessionService.saveAnswers(this.answers).subscribe(() => {
             this.snackBar.open('Doolhof gepauzeerd. Zorg dat je het voor de volgende les hebt afgemaakt.', 'X', { duration: 2500, panelClass: ['style-warning'], }).afterDismissed().subscribe(() => {
-                this.bubbleService.updateBubble(this.answers).subscribe(() => {
+                this.bubbleService.processLabyrinth(this.answers).subscribe(() => {
                     this.router.navigate(['home']);
                 });
             });
@@ -133,15 +133,16 @@ export class LabyrinthComponent implements OnInit {
 
     /** Method that saves a question to this.answers. */
     saveQuestion(question) {
+        if (question) {
+            // Temporary variable to save the selected option.
+            let result = this.optionSelected;
 
-        // Temporary variable to save the selected option.
-        let result = this.optionSelected;
+            // Deselecting radio button when going to the next question.
+            this.optionSelected = '';
 
-        // Deselecting radio button when going to the next question.
-        this.optionSelected = '';
-
-        // Push the result with its corresponding question to this.answers.
-        this.answers.push({ question: question, answer: result });
+            // Push the result with its corresponding question to this.answers.
+            this.answers.push({ question: question, answer: result });
+        }
     }
 
     /** Method that shows a question on the screen. */
