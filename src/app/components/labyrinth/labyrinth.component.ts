@@ -192,6 +192,7 @@ export class LabyrinthComponent implements OnInit {
                         radioGroup.style.alignItems = 'unset';
                         radioGroup.style.justifyContent = 'unset';
                     }
+                    textArea[i].textContent = "";
                     textArea[i].appendChild(document.createTextNode(question.choices[i]));
                 }, 10);
             }
