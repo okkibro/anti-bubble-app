@@ -49,21 +49,18 @@ router.post('/register', (req, res) => {
     }
     user.currency = 0;
     user.class = [];
-
-    for (let i = 0; i < 9; i++) { //TODO: change 9 to correct number when done making all the milestones
-        user.milestones.push(0);
-    }
+    user.milestone = [0,0,0,0,0,0,0,0,0]
     user.recentMilestones = []
     for (let i = 0; i < 5; i++) {
         user.recentMilestones[i] = '';
     }
 
     // Building the basic avatar upon registering.
-    Shop.findById('5edcf97b1167982a005b973a', (error, lichaam) => {
-        Shop.findById('5edcf97b1167982a005b977b', (error, broek) => {
-            Shop.findById('5edcf97b1167982a005b9754', (error, shirt) => {
-                Shop.findById('5edcf97b1167982a005b9787', (error, schoenen) => {
-                    Shop.find({ title: 'Geen' }, (error, emptyLayers) => {
+    Shop.findById('5edcf97b1167982a005b973a', (err, lichaam) => {
+        Shop.findById('5edcf97b1167982a005b977b', (err, broek) => {
+            Shop.findById('5edcf97b1167982a005b9754', (err, shirt) => {
+                Shop.findById('5edcf97b1167982a005b9787', (err, schoenen) => {
+                    Shop.find({ title: 'Geen' }, (err, emptyLayers) => {
                         user.avatar = {
                             haar: emptyLayers[0],
                             hoofddeksel: emptyLayers[1],
@@ -120,59 +117,59 @@ router.post('/passwordrecovery', async (req, res) => {
 
     // Find the user with the given email and set the token.
     User.findOne({ email: req.body.email }, (error, user) => {
-        if (!user) {
-            res.json({ succes: false, message: 'Geen gebruiker gevonden met het gegeven email adres' });
-            return res.end();
-        }
+        if (!err) {
+            user.recoverPasswordToken = token;
+            user.recoverPasswordExpires = Date.now() + 360000;
 
-        user.recoverPasswordToken = token;
-        user.recoverPasswordExpires = Date.now() + 360000;
-
-        user.save((error) => {
-            if (error) {
-                console.log(error.message);
-            }
-        });
-        
-        // Send email with link and token in the link.
-        nodemailer.createTestAccount((error, account) => {
-            if (error) {
-                return console.log(error.message);
-            }
-
-            let transporter = nodemailer.createTransport({
-                host: account.smtp.host,
-                port: account.smtp.port,
-                secure: account.smtp.secure,
-                auth: {
-                    // Generated ethereal user.
-                    user: account.user,
-
-                    // Fenerated ethereal password.
-                    pass: account.pass
+            user.save((error) => {
+                if (error) {
+                    console.log(error.message);
                 }
             });
-
-            let mailOptions = {
-                from: 'Anti Bubble App <' + account.user + '>',
-                to: req.body.email,
-                subject: 'Password Recovery',
-                text: '',
-
-                // Html body.
-                html: '<h1>Password Recovery</h1><p>Reset Password by clicking on the following link: https://' + req.headers.host + '/reset/' + token
-            };
-
-            transporter.sendMail(mailOptions, (error, info) => {
+            
+            // Send email with link and token in the link.
+            nodemailer.createTestAccount((error, account) => {
                 if (error) {
                     return console.log(error.message);
                 }
-                console.log(nodemailer.getTestMessageUrl(info));
-            });
 
-            res.json({ succes: true, message: 'Email succesvol verzonden' })
-            return res.status(200).end();
-        });
+                let transporter = nodemailer.createTransport({
+                    host: account.smtp.host,
+                    port: account.smtp.port,
+                    secure: account.smtp.secure,
+                    auth: {
+                        // Generated ethereal user.
+                        user: account.user,
+
+                        // Fenerated ethereal password.
+                        pass: account.pass
+                    }
+                });
+
+                let mailOptions = {
+                    from: 'Anti Bubble App <' + account.user + '>',
+                    to: req.body.email,
+                    subject: 'Password Recovery',
+                    text: '',
+
+                    // Html body.
+                    html: '<h1>Password Recovery</h1><p>Reset Password by clicking on the following link: https://' + req.headers.host + '/reset/' + token
+                };
+
+                transporter.sendMail(mailOptions, (error, info) => {
+                    if (error) {
+                        return console.log(error.message);
+                    }
+                    console.log(nodemailer.getTestMessageUrl(info));
+                });
+
+                res.json({ succes: true, message: 'Email succesvol verzonden' })
+                return res.status(200);
+            });
+        } else {
+            res.status(200).json({ succes: false, message: 'Geen gebruiker gevonden met het gegeven email adres', error: err });
+        }
+        
     });
 });
 
@@ -180,15 +177,11 @@ router.post('/passwordrecovery', async (req, res) => {
 router.get('/reset/:token', (req, res) => {
 
     // Find the user that belongs to the given token
-    User.findOne({ recoverPasswordToken: req.params.token, recoverPasswordExpires: { $gt: Date.now() } }, (error, user) => {
-        if (!user) {
-            console.log('wrong token or token expired');
-            res.json({ correct: false });
-            res.status(200).end();
+    User.findOne({ recoverPasswordToken: req.params.token, recoverPasswordExpires: { $gt: Date.now() } }, (err, result) => {
+        if (!err) {
+            res.status(200).json({ correct: true });
         } else {
-            console.log('correct token');
-            res.json({ correct: true });
-            res.status(200).end();
+            res.status(200).json({ correct: false });
         }
     });
 });
@@ -197,30 +190,28 @@ router.get('/reset/:token', (req, res) => {
 router.post('/reset/:token', (req, res) => {
 
     // Find the user that belongs to the given token
-    User.findOne({ recoverPasswordToken: req.params.token, recoverPasswordExpires: { $gt: Date.now() } }, (error, user) => {
-        if (error) { return console.log(error.message); }
-        if (!user) {
-            console.log('wrong token or token expired');
-            res.json({ succes: false, message: 'wrong token or token expired' });
-            return res.end();
-        }
+    User.findOne({ recoverPasswordToken: req.params.token, recoverPasswordExpires: { $gt: Date.now() } }, (err, user) => {
+        if (!err) {
+            user.setPassword(req.body.password, (error) => {
+                if (error) {
+                    return console.log(error.message);
+                }
+            });
 
-        user.setPassword(req.body.password, (error) => {
-            if (error) {
-                return console.log(error.message);
-            }
-        });
+            user.recoverPasswordToken = undefined;
+            user.recoverPasswordExpires = undefined;
 
-        user.recoverPasswordToken = undefined;
-        user.recoverPasswordExpires = undefined;
-
-        user.save((error) => {
-            if (error) {
-                return console.log(error.message);
-            }
-            res.json({ succes: true, message: 'Wachtwoord succesvol verandert' });
-            res.status(200).end();
-        });
+            user.save((error) => {
+                if (error) {
+                    return console.log(error.message);
+                }
+                res.json({ succes: true, message: 'Wachtwoord succesvol verandert' });
+                res.status(200);
+            });
+        } else {
+            res.status(200).json({ succes: false, message: 'wrong token or token expired' });
+        }   
+            
     });
 });
 
@@ -327,68 +318,78 @@ router.post('/milestone', auth, (req, res) => {
 /** Post method to post a new message to recent milestones */
 router.post('/recentMilestones', auth, (req, res) => {
     User.findById(req.payload._id, (err, user) => {
-
-        // Push new value into the array.
-        user.recentMilestones.push(req.body.value);
-
-        // Remove oldest value of the 5.
-        user.recentMilestones.shift();
-        user.save(() => {
-            res.end();
-        });
+        if (!err) {
+            // Push new value into the array.
+            user.recentMilestones.push(req.body.value);
+    
+            // Remove oldest value of the 5.
+            user.recentMilestones.shift();
+            user.save(() => {
+                res.status(200);
+            });
+        } else {
+            res.status(404).json({message: err})
+        }
     })
 });
 
 /** Post method to equip the avatat with the send item */
 router.post('/avatar', auth, (req,res) => {
     User.findById(req.payload._id, (err, user) => {
-        user.avatar[req.body.avatarItem.category] = req.body.avatarItem;
-        user.markModified('avatar');
-        user.save((error) => {
-            if (error) {
-                console.log(error.message);
-            }
-            res.status(200).json({
-                imageFull: req.body.avatarItem.fullImage,
-                imageFull2: req.body.avatarItem.fullImage2,
-                category: req.body.avatarItem.category
+        if (!err) {
+            user.avatar[req.body.avatarItem.category] = req.body.avatarItem;
+            user.markModified('avatar');
+            user.save((error) => {
+                if (error) {
+                    console.log(error.message);
+                }
+                res.status(200).json({
+                    imageFull: req.body.avatarItem.fullImage,
+                    imageFull2: req.body.avatarItem.fullImage2,
+                    category: req.body.avatarItem.category
+                });
             });
-        });
+        } else {
+            res.status(404).json({message: err})
+        }
     });
 });
 
 /** Post method to update user bubble after performing/pausing the labyrinth*/
 router.post('/processAnswers', auth, (req, res) => {
     User.findById(req.payload._id, (err, user) => {
-        for (q of req.body.answers) {
-            if (q != null) {
-                if (q.question.choiceConsequence[q.answer] !== '') {
-                    let oldValue = user.bubble[q.question.choiceConsequence[q.answer]].pop();
-                    let newValue = oldValue + q.question.values[q.answer];
-                    if (user.bubble[q.question.choiceConsequence[q.answer]].length < 1) {
-                        user.bubble[q.question.choiceConsequence[q.answer]].push(0);
-                        user.bubble[q.question.choiceConsequence[q.answer]].push(newValue);
-                    } else {
-                        user.bubble[q.question.choiceConsequence[q.answer]].push(newValue);
+        if (!err) {
+            for (q of req.body.answers) {
+                if (q != null) {
+                    if (q.question.choiceConsequence[q.answer] !== '') {
+                        let oldValue = user.bubble[q.question.choiceConsequence[q.answer]].pop();
+                        let newValue = oldValue + q.question.values[q.answer];
+                        if (user.bubble[q.question.choiceConsequence[q.answer]].length < 1) {
+                            user.bubble[q.question.choiceConsequence[q.answer]].push(0);
+                            user.bubble[q.question.choiceConsequence[q.answer]].push(newValue);
+                        } else {
+                            user.bubble[q.question.choiceConsequence[q.answer]].push(newValue);
+                        }
                     }
-
                 }
             }
-        }
 
-        for(let cat in user.bubble) {
-            if (user.bubble[cat].length < 2) {
-                user.bubble[cat].push(0)
+            for(let cat in user.bubble) {
+                if (user.bubble[cat].length < 2) {
+                    user.bubble[cat].push(0)
+                }
             }
+            
+            user.markModified('bubble');
+            user.save((error) => { 
+                if (error) {
+                    console.log(error.message);
+                }
+                res.status(200);
+            });
+        } else {
+            res.status(404).json({message: err})
         }
-        
-        user.markModified('bubble');
-        user.save((error) => { 
-            if (error) {
-                console.log(error.message);
-            }
-            res.status(200).json({ message: 'done' });
-        });
     });
 });
 module.exports = router;
