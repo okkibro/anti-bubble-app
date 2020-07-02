@@ -116,7 +116,7 @@ router.post('/passwordrecovery', async (req, res) => {
     console.log(token);
 
     // Find the user with the given email and set the token.
-    User.findOne({ email: req.body.email }, (error, user) => {
+    User.findOne({ email: req.body.email }, (err, user) => {
         if (!err) {
             user.recoverPasswordToken = token;
             user.recoverPasswordExpires = Date.now() + 360000;
