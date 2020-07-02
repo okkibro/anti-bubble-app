@@ -34,7 +34,7 @@ const routes: Routes = [
   { path: 'home', component: HomeComponent, canActivate: [AuthGuardService] },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
-  { path: 'session', component: SessionComponent, canDeactivate: [SessionGuardService] },
+  { path: 'session', component: SessionComponent, canActivate: [AuthGuardService], canDeactivate: [SessionGuardService]},
   { path: 'profile', component: ProfileComponent, canActivate: [AuthGuardService] },
   { path: 'class-overview', component: ClassOverviewComponent, canActivate: [AuthGuardService] },
   { path: 'classmate-profile/:id', component: ClassmateProfileComponent, canActivate: [AuthGuardService] },
@@ -46,8 +46,8 @@ const routes: Routes = [
   { path: 'passwordrecovery', component: PasswordRecoveryComponent },
   { path: 'reset/:token', component: PasswordResetComponent },
   { path: 'labyrinth', component: LabyrinthComponent, canActivate: [LabyrinthGuardService] },
-  { path: 'session-options', component: SessionOptionsComponent, data: { roles: [Role.teacher] }},
-  { path: 'activities', component: ActivitiesComponent, canDeactivate: [SessionGuardService] },
+  { path: 'session-options', component: SessionOptionsComponent, canActivate: [AuthGuardService] , data: { roles: [Role.teacher] }},
+  { path: 'activities', component: ActivitiesComponent, canActivate: [AuthGuardService], canDeactivate: [SessionGuardService]},
 
   // Automatically redirect to login page when user inputs a wrong URL.
   { path: '**', redirectTo: '/login', pathMatch: 'full' },
