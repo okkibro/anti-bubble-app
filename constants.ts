@@ -65,4 +65,3 @@ export function beforeUnload(e:any) {
     e.returnValue = "Weet je zeker dat je de sessie wilt verlaten?";
     return "Weet je zeker dat je de sessie wilt verlaten?";
 }
-/** This program has been developed by students from the bachelor Computer Science at Utrecht University within the Software Project course. © Copyright Utrecht University (Department of Information and Computing Sciences)  */
