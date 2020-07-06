@@ -12,6 +12,8 @@ import { User } from '../../models/user';
 import { milestones } from '../../../../constants';
 import { Milestone } from 'src/app/models/milestone';
 import { ClassesService } from 'src/app/services/classes.service';
+import { Router } from '@angular/router';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 
 @Component({
     selector: 'mean-profile',
@@ -36,8 +38,10 @@ export class ProfileComponent implements OnInit {
         private auth: AuthenticationService,
         private fb: FormBuilder,
         private snackbar: MatSnackBar,
-        private classService: ClassesService
-    ) {}
+        private classService: ClassesService,
+        private router: Router,
+        private dialog: MatDialog
+    ) { }
     
     ngOnInit() {
 
@@ -94,5 +98,44 @@ export class ProfileComponent implements OnInit {
         if (newpassword != repeatPassword) {
             form.get('repeatPassword').setErrors({ noPasswordMatch: true });
         }
+    }
+
+    /** Method that opens the delete user acocunt dialog*/
+    openDeleteAccountDialog() {
+        this.dialog.open(DeleteAccountDialog);
+    }
+}
+
+@Component({
+    selector: 'delete-account-dialog',
+    templateUrl: 'delete-account-dialog.html',
+})
+
+export class DeleteAccountDialog {
+
+    constructor(
+        private auth: AuthenticationService,
+        private fb: FormBuilder,
+        private snackbar: MatSnackBar,
+        private classService: ClassesService,
+        private router: Router,
+        private dialog: MatDialog,
+        private dialogRef: MatDialogRef<DeleteAccountDialog>
+    ) { }
+
+    /** Method to delete a user's account. */
+    deleteAccount() {
+        this.auth.deleteAccount().subscribe(data => {
+            if(data.succes) {
+                this.snackbar.open(data.message, 'X', { duration: 2500, panelClass: ['style-succes']}).afterDismissed().subscribe(()=>{
+                    this.router.navigate(['login']);
+                });
+            }
+        })
+    }
+
+    /** Method to close the dialog. */
+    closeDialog(): void {
+        this.dialogRef.close();
     }
 }

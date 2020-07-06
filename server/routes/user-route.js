@@ -177,7 +177,7 @@ router.post('/passwordrecovery', async (req, res) => {
 router.get('/reset/:token', (req, res) => {
 
     // Find the user that belongs to the given token
-    User.findOne({ recoverPasswordToken: req.params.token, recoverPasswordExpires: { $gt: Date.now() } }, (err, result) => {
+    User.findOne({ recoverPasswordToken: req.params.token, recoverPasswordExpires: { $gt: Date.now() } }, (err) => {
         if (!err) {
             res.status(200).json({ correct: true });
         } else {
@@ -257,12 +257,13 @@ router.patch('/updatePassword', (req, res) => {
                 user.setPassword(sanitize(req.body.newPassword));
 
                 // Save changes to database.
+                // Save changes to database.
                 user.save();
                 return res.status(200).json({ succes: true, message: 'Wachtwoord succesvol verandert.' });
             } else {
 
                 // Handle error if old password doesn't match with the one in database.
-                return res.status(200).json({ success: false, message: 'Oude wachtwoord is niet correct.'});
+                return res.status(200).json({ success: false, message: 'Oude wachtwoord is niet correct.' });
             }
         } else {
             console.log('User not found.')
@@ -280,7 +281,7 @@ router.get('/milestone', auth, (req, res) => {
     });
 });
 
-/** Post method to changes a milestone by a given value, returns the updated value and whether it is completed now or not */
+/** Post method to changes a milestone by a given value, returns the updated value and whether it is completed now or not. */
 router.post('/milestone', auth, (req, res) => {
 
     // Get currently logged in user.
@@ -315,7 +316,7 @@ router.post('/milestone', auth, (req, res) => {
     })
 });
 
-/** Post method to post a new message to recent milestones */
+/** Post method to post a new message to recent milestones. */
 router.post('/recentMilestones', auth, (req, res) => {
     User.findById(req.payload._id, (err, user) => {
         if (!err) {
@@ -328,12 +329,12 @@ router.post('/recentMilestones', auth, (req, res) => {
                 res.status(200);
             });
         } else {
-            res.status(404).json({message: err})
+            res.status(404).json({ message: err })
         }
     })
 });
 
-/** Post method to equip the avatat with the send item */
+/** Post method to equip the avatat with the send item. */
 router.post('/avatar', auth, (req,res) => {
     User.findById(req.payload._id, (err, user) => {
         if (!err) {
@@ -350,12 +351,12 @@ router.post('/avatar', auth, (req,res) => {
                 });
             });
         } else {
-            res.status(404).json({message: err})
+            res.status(404).json({ message: err })
         }
     });
 });
 
-/** Post method to update user bubble after performing/pausing the labyrinth*/
+/** Post method to update user bubble after performing/pausing the labyrinth. */
 router.post('/processAnswers', auth, (req, res) => {
     User.findById(req.payload._id, (err, user) => {
         if (!err) {
@@ -388,8 +389,21 @@ router.post('/processAnswers', auth, (req, res) => {
                 res.status(200);
             });
         } else {
-            res.status(404).json({message: err})
+            res.status(404).json({ message: err })
         }
     });
 });
+
+/** Post method to update user bubble after performing/pausing the labyrinth. */
+router.post('/deleteAccount', auth, (req, res) => {
+    User.findById(req.payload._id, (err, user) => {
+        if(!err) {
+            User.deleteOne({ '_id': req.payload._id });
+            res.status(200).json({ succes: true, message: 'Account is succesvol verwijderd en je zal naar de inlogpagina verwezen worden.' });
+        } else {
+            res.status(404).json({ succes: false, message: err });
+        }
+    });
+});
+
 module.exports = router;

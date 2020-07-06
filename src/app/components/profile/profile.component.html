@@ -10,10 +10,11 @@
     </mat-sidenav>
     <mat-sidenav-content>
         <mean-toolbar (sidenavToggle)="sidenav.toggle()"></mean-toolbar>
+
         <body>
             <div class="container-div" fxLayout="column" fxLayoutGap="10px" fxLayoutAlign="space-evenly">
                 <div fxLayout.xs="column" fxLayoutGap="10px" fxLayoutAlign="space-evenly">
-                    <mat-card fxFlex="50%">
+                    <mat-card fxFlex="50%" fxFlex.xs="100%">
                         <mat-card-header>
                             <mat-card-title>Profiel</mat-card-title>
                         </mat-card-header>
@@ -38,7 +39,7 @@
                             </table>
                         </mat-card-content>
                     </mat-card>
-                    <mat-card fxFlex="50%" *ngIf="userDetails?.role == 'student'">
+                    <mat-card fxFlex="50%" fxFlex.xs="100%" *ngIf="userDetails?.role == 'student'">
                         <mat-card-header>
                             <mat-card-title>Badges</mat-card-title>
                             <mat-card-subtitle>Badge met de meeste voortgang</mat-card-subtitle>
@@ -62,8 +63,8 @@
                     </mat-card>
                 </div>
 
-                <div fxLayout.xs="column" fxLayoutGap="10px" fxLayoutAlign="space-evenly" class="my-custom-theme">
-                    <mat-card fxFlex="50%" *ngIf="userDetails?.role == 'student'">
+                <div fxLayout.xs="column" fxLayoutGap="10px" fxLayoutAlign="space-evenly">
+                    <mat-card fxFlex="50%" fxFlex.xs="100%" *ngIf="userDetails?.role == 'student'">
                         <mat-card-header>
                             <mat-card-title>Mijn Bubbel</mat-card-title>
                         </mat-card-header>
@@ -94,8 +95,7 @@
                                     Vul je oude en nieuwe wachtwoord in
                                 </mat-panel-description>
                             </mat-expansion-panel-header>
-                            <form name="changePasswordForm" [formGroup]="changePasswordForm"
-                                (ngSubmit)="changePassword()">
+                            <form name="changePasswordForm" [formGroup]="changePasswordForm" (ngSubmit)="changePassword()">
                                 <table class="change-password-table">
                                     <tr>
                                         <mat-form-field>
@@ -132,6 +132,9 @@
                             </form>
                         </mat-expansion-panel>
                     </mat-accordion>
+                </mat-card>
+                <mat-card fxLayout.xs="column" fxLayoutAlign="space-evenly center">
+                    <button mat-button class="delete-button" (click)="openDeleteAccountDialog()">Verwijder account</button>
                 </mat-card>
             </div>
         </body>

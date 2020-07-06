@@ -14,6 +14,7 @@ import { Role } from '../models/role';
 import { AbstractControl, AsyncValidatorFn, ValidationErrors } from '@angular/forms';
 import { CookieService } from 'ngx-cookie-service';
 import { tokenData } from '../models/tokenData';
+import { environment } from 'src/environments/environment';
 
 interface TokenResponse {
     token: string;
@@ -80,7 +81,7 @@ export class AuthenticationService {
 
     /** Method to POST to the backend API to check if a given email is already present in the database. */
     public checkEmailTaken(email: string) {
-        return this.http.post('https://localhost:3000/user/checkEmailTaken', { email: email });
+        return this.http.post(`${environment.ENDPOINT}/user/checkEmailTaken`, { email: email });
     }
 
     /** A async validator method to check if an email is already taken. */ 
@@ -100,12 +101,12 @@ export class AuthenticationService {
 
     /** Method to update the password of an already registered user. */ 
     public updatePassword(email: string, oldPassword: string, newPassword: string): Observable<any> {
-        return this.http.patch('https://localhost:3000/user/updatePassword', { email: email, oldPassword: oldPassword, newPassword: newPassword })
+        return this.http.patch(`${environment.ENDPOINT}/user/updatePassword`, { email: email, oldPassword: oldPassword, newPassword: newPassword })
     }
 
     /** POST method for registering a user */
     public register(user: User): Observable<any> {
-        return this.http.post(`https://localhost:3000/user/register`, user).pipe(
+        return this.http.post(`${environment.ENDPOINT}/user/register`, user).pipe(
             map((data: TokenResponse) => {
                 this.saveToken(data.token);
             })
@@ -114,7 +115,7 @@ export class AuthenticationService {
 
     /** POST method for logging in a user */
     public login(user: User): Observable<any> {
-        return this.http.post(`https://localhost:3000/user/login`, user).pipe(
+        return this.http.post(`${environment.ENDPOINT}/user/login`, user).pipe(
             map((data: TokenResponse) => {
                 this.saveToken(data.token);
             })
@@ -123,6 +124,11 @@ export class AuthenticationService {
 
     /** GET method for fetching a user's profile */
     public profile(): Observable<any> {
-        return this.http.get(`https://localhost:3000/user/profile`, { headers: { Authorization: `Bearer ${this.getToken()}` } });
+        return this.http.get(`${environment.ENDPOINT}/user/profile`, { headers: { Authorization: `Bearer ${this.getToken()}` }});
+    }
+
+    /** POST method for deleting a user's account.*/
+    public deleteAccount(): Observable<any> {
+        return this.http.post(`${environment.ENDPOINT}/user/deleteAccount`,  { }, { headers: { Authorization: `Bearer ${this.getToken()}` }});
     }
 }

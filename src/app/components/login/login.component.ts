@@ -33,7 +33,7 @@ export class LoginComponent implements OnInit {
 
     ngOnInit() {
         if (this.auth.isLoggedIn()) {
-            //this.router.navigate(['home']);  --> TERUGZETTEN!
+            this.router.navigate(['home']);
         }
     }
 
