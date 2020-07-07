@@ -8,4 +8,4 @@ export class Activities {
     name: string;
     category: string;
     description: string;
-};
+}

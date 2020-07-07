@@ -8,11 +8,12 @@ const express = require('express');
 const router = express.Router();
 const mongoose = require('mongoose');
 const passport = require('passport');
-const User = mongoose.model('User');
 const sanitize = require('mongo-sanitize');
 const nodemailer = require('nodemailer');
 const crypto = require('crypto');
 const Shop = mongoose.model('Shop');
+const User = mongoose.model('User');
+const Class = mongoose.model('Classes');
 
 const jwt = require('express-jwt');
 const auth = jwt({
@@ -153,7 +154,8 @@ router.post('/passwordrecovery', async (req, res) => {
                     text: '',
 
                     // Html body.
-                    html: '<h1>Password Recovery</h1><p>Reset Password by clicking on the following link: https://' + req.headers.host + '/reset/' + token
+                    html: '<h1>Password Recovery</h1>' +
+                        '<p>Reset Password by clicking on the following link: https://' + req.headers.host + '/reset/' + token + '</p>'
                 };
 
                 transporter.sendMail(mailOptions, (error, info) => {
@@ -375,7 +377,7 @@ router.post('/processAnswers', auth, (req, res) => {
                 }
             }
 
-            for(let cat in user.bubble) {
+            for (let cat in user.bubble) {
                 if (user.bubble[cat].length < 2) {
                     user.bubble[cat].push(0)
                 }
@@ -395,10 +397,19 @@ router.post('/processAnswers', auth, (req, res) => {
 });
 
 /** Post method to update user bubble after performing/pausing the labyrinth. */
-router.post('/deleteAccount', auth, (req, res) => {
+router.delete('/deleteAccount', auth, (req, res) => {
     User.findById(req.payload._id, (err, user) => {
-        if(!err) {
-            User.deleteOne({ '_id': req.payload._id });
+        if (!err) {
+            user.deleteOne({ _id: req.payload._id });
+            for (let klas of user.class) {
+                Class.findById(klas._id, (err, userKlas) => {
+                    if (!err) {
+                        //userKlas.update({ _id: userKlas._id }, { $pull: { students: {_id: user._id}}});
+                    } else {
+                        res.status(404).json({ succes: false, message: err });
+                    }
+                });
+            }
             res.status(200).json({ succes: true, message: 'Account is succesvol verwijderd en je zal naar de inlogpagina verwezen worden.' });
         } else {
             res.status(404).json({ succes: false, message: err });

@@ -11,4 +11,4 @@ export class Class {
     title: string;
     students: [number];
     teacher: number;
-};
+}

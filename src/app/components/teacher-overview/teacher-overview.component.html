@@ -70,7 +70,7 @@
                                     <td>
                                         <mat-form-field>
                                             <mat-label>Jaar</mat-label>
-                                            <input matInput placeholder="Jaar" formControlName="classYear" required>
+                                            <input matInput placeholder="Jaar" formControlName="classYear" type="number" required>
                                             <mat-error *ngIf="classForm.get('classYear').hasError('required')">
                                                 Jaar is <strong>verplicht</strong>
                                             </mat-error>

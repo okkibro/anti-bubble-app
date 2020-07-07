@@ -127,8 +127,9 @@ export class DeleteAccountDialog {
     deleteAccount() {
         this.auth.deleteAccount().subscribe(data => {
             if(data.succes) {
-                this.snackbar.open(data.message, 'X', { duration: 2500, panelClass: ['style-succes']}).afterDismissed().subscribe(()=>{
-                    this.router.navigate(['login']);
+                this.dialogRef.close();
+                this.snackbar.open(data.message, 'X', { duration: 2500, panelClass: ['style-succes']}).afterDismissed().subscribe(()=> {
+                    //this.auth.logout();
                 });
             }
         })
