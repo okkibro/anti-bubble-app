@@ -34,7 +34,7 @@ export class ClassesService {
         return this.http.get(`${environment.ENDPOINT}/class/getClass`, { headers: { Authorization: 'Bearer ' + this.cookie.get('mean-token') }});
     }
 
-    /** Method to do a GET request to get all the class ids in the class list of a user (Only user for teachers). */
+    /** Method to do a GET request to get all the class ids in the class list of a user (only used for teachers). */
     public getClassIds(): Observable<any> {
         return this.http.get(`${environment.ENDPOINT}/class/getClassIds`, { headers: { Authorization: 'Bearer ' + this.cookie.get('mean-token') }});
     }

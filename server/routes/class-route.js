@@ -49,6 +49,7 @@ router.post('/createClass', auth, (req, res) => {
 
 /** Post method to join a user to a class. */
 router.post('/joinClass', auth, (req, res) => {
+
 	// Check if you are authorized.
 	if (!req.payload._id) {
 		res.status(401).json({
@@ -61,13 +62,15 @@ router.post('/joinClass', auth, (req, res) => {
 				res.status(200).json({ succes: false, message: err });
 			} else {
 				Classes.findOne({ code: req.body.code }, (err, foundClass) => {
+
 					// Check the code corresponds with an existing.
 					if (!foundClass) {
 						res.status(200).json({ succes: false, message: 'Geen klas gevonden met de gegeven code', err: err });
 					} else {
+
 						// Check if your role is a student. (students can only be in one class!).
 						if (user.role === 'student') {
-							if (user.class.length <= 0) {
+							if (user.classArray.length <= 0) {
 								if (foundClass.students.find((x) => x._id === req.payload._id) !== undefined) {
 									res.status(200).json({ succes: false, message: 'Je zit al in klas: ' + foundClass.title });
 								} else {
@@ -75,7 +78,7 @@ router.post('/joinClass', auth, (req, res) => {
 									foundClass.save().catch((err) => {
 										res.status(400).send(err);
 									});
-									user.class.push(foundClass);
+									user.classArray.push(foundClass);
 									user.save().catch((err) => {
 										res.status(400).send(err);
 									});
@@ -85,7 +88,7 @@ router.post('/joinClass', auth, (req, res) => {
 
 							// Teacher can be the teacher of multiple classes.
 						} else {
-							user.class.push(foundClass);
+							user.classArray.push(foundClass);
 							user.save().then(() => {
 								res.status(200).json({ succes: true, message: `Docent is succesvol toegevoegd aan de klas ${foundClass.title}` });
 							}).catch((err) => {
@@ -114,8 +117,8 @@ router.get('/getClass', auth, (req, res) => {
 				console.log(err);
 				res.status(200).json({ succes: false, message: err });
 			} else {
-				if (user.class[0]) {
-					Classes.findById(user.class[0], (err, foundClass) => {
+				if (user.classArray[0]) {
+					Classes.findById(user.classArray[0], (err, foundClass) => {
 						let numberOfMembers = foundClass.students.length;
 
 						// Check if there are students in this class.
@@ -156,7 +159,7 @@ router.get('/getClassIds', auth, (req, res) => {
 				console.log(err);
 				res.status(200).json({ succes: false, message: err });
 			} else {
-				res.status(200).json({ classIds: user.class });
+				res.status(200).json({ classIds: user.classArray });
 			}
 		});
 	}
@@ -213,8 +216,8 @@ router.get('/classmateProfile/:id', auth, (req, res) => {
 					if (!errorC) {
  						if (user.role === 'student') {
 							// Check if the classmate is actually in the same class.
-							let userId = user.class[0]._id.toString();
-							let classmateId = classmate.class[0]._id.toString();
+							let userId = user.classArray[0]._id.toString();
+							let classmateId = classmate.classArray[0]._id.toString();
 							if (userId !== classmateId) {
 								res.status(401).json({ message: "Not authorized to see user's profile" });
 							} else {

@@ -129,7 +129,7 @@ export class DeleteAccountDialog {
             if(data.succes) {
                 this.dialogRef.close();
                 this.snackbar.open(data.message, 'X', { duration: 2500, panelClass: ['style-succes']}).afterDismissed().subscribe(()=> {
-                    //this.auth.logout();
+                    // this.auth.logout();
                 });
             }
         })

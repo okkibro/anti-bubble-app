@@ -37,19 +37,19 @@ router.post('/register', (req, res) => {
     user.milestones = [];
     user.bubbleInit = true;
     user.bubble = {
-        online:     [0],
-        social:     [0],
+        online: [0],
+        social: [0],
         mainstream: [0],
-        category1:  [0],
-        category2:  [0],
-        knowledge:  [0],
-        techSavvy:  [0],
+        category1: [0],
+        category2: [0],
+        knowledge: [0],
+        techSavvy: [0],
     }
     if (user.role === 'student') {
         user.bubbleInit = false;
     }
     user.currency = 0;
-    user.class = [];
+    user.classArray = [];
     user.milestone = [0,0,0,0,0,0,0,0,0]
     user.recentMilestones = []
     for (let i = 0; i < 5; i++) {
@@ -259,7 +259,6 @@ router.patch('/updatePassword', (req, res) => {
                 user.setPassword(sanitize(req.body.newPassword));
 
                 // Save changes to database.
-                // Save changes to database.
                 user.save();
                 return res.status(200).json({ succes: true, message: 'Wachtwoord succesvol verandert.' });
             } else {
@@ -396,19 +395,47 @@ router.post('/processAnswers', auth, (req, res) => {
     });
 });
 
-/** Post method to update user bubble after performing/pausing the labyrinth. */
+/** Delete method for deleting a user's account */
 router.delete('/deleteAccount', auth, (req, res) => {
     User.findById(req.payload._id, (err, user) => {
-        if (!err) {
-            user.deleteOne({ _id: req.payload._id });
-            for (let klas of user.class) {
-                Class.findById(klas._id, (err, userKlas) => {
-                    if (!err) {
-                        //userKlas.update({ _id: userKlas._id }, { $pull: { students: {_id: user._id}}});
-                    } else {
-                        res.status(404).json({ succes: false, message: err });
-                    }
-                });
+
+        // Delete user document from 'users' collection.
+        User.findByIdAndDelete({ _id: req.payload._id }).exec();
+        if (!err && user != null) {
+            if (user.role === 'student') {
+
+                // Delete user from 'students' array of class he was apart of (if he was apart of a class).
+                if (user.classArray.length > 0) {
+                    Class.findById(user.classArray[0], (err, userKlas) => {
+                        if (!err && userKlas != null) {
+                            Class.findByIdAndUpdate({ _id: userKlas._id }, { $pull: { students: { _id: user._id }}}).exec();
+                            userKlas.save();
+                        } else {
+                            res.status(404).json({ succes: false, message: err });
+                        }
+                    });
+                }
+            } else if (user.role === 'teacher') {
+
+                // Delete each class created by the teacher and update the student's 'classArray' to make sure they aren't
+                // apart of a deleted class.
+                for (let klas of user.classArray) {
+                    Class.findById(klas._id, (err, userKlas) => {
+                        if (!err && userKlas != null) {
+                            Class.findByIdAndDelete({ _id: userKlas._id }).exec();
+                            User.findOne({ 'classArray._id': userKlas._id }, (err, classMember) => {
+                                if (!err && classMember != null) {
+                                    User.findByIdAndUpdate({ _id: classMember._id }, { $pull: { classArray: { _id: userKlas._id }}}).exec();
+                                    classMember.save();
+                                } else {
+                                    res.status(404).json({ succes: false, message: err });
+                                }
+                            });
+                        } else {
+                            res.status(404).json({ succes: false, message: err });
+                        }
+                    });
+                }
             }
             res.status(200).json({ succes: true, message: 'Account is succesvol verwijderd en je zal naar de inlogpagina verwezen worden.' });
         } else {

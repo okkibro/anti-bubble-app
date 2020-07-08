@@ -51,7 +51,7 @@ let userSchema = new Schema({
         type: [Number],
         required: true
     },
-    class: {
+    classArray: {
         type: [{
             item: { type: Schema.ObjectId, ref: 'Class' }
         }],
