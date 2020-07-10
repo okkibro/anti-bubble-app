@@ -423,10 +423,12 @@ router.delete('/deleteAccount', auth, (req, res) => {
                     Class.findById(klas._id, (err, userKlas) => {
                         if (!err && userKlas != null) {
                             Class.findByIdAndDelete({ _id: userKlas._id }).exec();
-                            User.findOne({ 'classArray._id': userKlas._id }, (err, classMember) => {
-                                if (!err && classMember != null) {
-                                    User.findByIdAndUpdate({ _id: classMember._id }, { $pull: { classArray: { _id: userKlas._id }}}).exec();
-                                    classMember.save();
+                            User.find({ 'classArray._id': userKlas._id, role: 'student' }, (err, classMembers) => {
+                                if (!err && classMembers.length > 0) {
+                                    for (let classMember of classMembers) {
+                                        User.findByIdAndUpdate({ _id: classMember._id }, { $pull: { classArray: { _id: userKlas._id }}}).exec();
+                                        classMember.save();
+                                    }
                                 } else {
                                     res.status(404).json({ succes: false, message: err });
                                 }
@@ -437,7 +439,7 @@ router.delete('/deleteAccount', auth, (req, res) => {
                     });
                 }
             }
-            res.status(200).json({ succes: true, message: 'Account is succesvol verwijderd en je zal naar de inlogpagina verwezen worden.' });
+            res.status(200).json({ succes: true, message: 'Account is succesvol verwijderd en je zal naar de inlogpagina worden verwezen.' });
         } else {
             res.status(404).json({ succes: false, message: err });
         }

@@ -4,7 +4,7 @@
  * Computing Sciences)
  */
 
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { AuthenticationService } from '../../services/authentication.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -13,7 +13,7 @@ import { milestones } from '../../../../constants';
 import { Milestone } from 'src/app/models/milestone';
 import { ClassesService } from 'src/app/services/classes.service';
 import { Router } from '@angular/router';
-import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 @Component({
     selector: 'mean-profile',
@@ -102,7 +102,7 @@ export class ProfileComponent implements OnInit {
 
     /** Method that opens the delete user acocunt dialog*/
     openDeleteAccountDialog() {
-        this.dialog.open(DeleteAccountDialog);
+        this.dialog.open(DeleteAccountDialog, { data: { role: this.userDetails?.role }});
     }
 }
 
@@ -120,7 +120,8 @@ export class DeleteAccountDialog {
         private classService: ClassesService,
         private router: Router,
         private dialog: MatDialog,
-        private dialogRef: MatDialogRef<DeleteAccountDialog>
+        private dialogRef: MatDialogRef<DeleteAccountDialog>,
+        @Inject(MAT_DIALOG_DATA) public data: any
     ) { }
 
     /** Method to delete a user's account. */
@@ -128,8 +129,8 @@ export class DeleteAccountDialog {
         this.auth.deleteAccount().subscribe(data => {
             if(data.succes) {
                 this.dialogRef.close();
-                this.snackbar.open(data.message, 'X', { duration: 2500, panelClass: ['style-succes']}).afterDismissed().subscribe(()=> {
-                    // this.auth.logout();
+                this.snackbar.open(data.message, 'X', { duration: 2500, panelClass: ['style-succes']}).afterDismissed().subscribe(() => {
+                    this.auth.logout();
                 });
             }
         })
