@@ -12,7 +12,7 @@ import { HomeComponent } from './components/home/home.component';
 import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
 import { ProfileComponent } from './components/profile/profile.component';
-import { SessionComponent } from "./components/session/session.component";
+import { SessionComponent } from './components/session/session.component';
 import { ClassOverviewComponent } from './components/class-overview/class-overview.component';
 import { ClassmateProfileComponent } from './components/classmate-profile/classmate-profile.component';
 import { AvatarComponent } from './components/avatar/avatar.component';

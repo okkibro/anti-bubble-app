@@ -9,4 +9,4 @@ export class Articles {
     part: number;
     image: string;
     source: string;
-};
+}

@@ -25,7 +25,7 @@
                             </mat-card-subtitle>
                         </mat-card-header>
                         <mat-card-content>
-                            <div *ngIf="userDetails?.class.length > 0">
+                            <div *ngIf="userDetails.classArray.length > 0">
                                 <button mat-button class="general-button" [disabled]="loading" (click)="onClickSelectKlas()">Verander van klas</button>
                                 <div [hidden]="!selectklas">
                                     <div>
@@ -70,7 +70,7 @@
                                     <td>
                                         <mat-form-field>
                                             <mat-label>Jaar</mat-label>
-                                            <input matInput placeholder="Jaar" formControlName="classYear" required>
+                                            <input matInput placeholder="Jaar" formControlName="classYear" type="number" required>
                                             <mat-error *ngIf="classForm.get('classYear').hasError('required')">
                                                 Jaar is <strong>verplicht</strong>
                                             </mat-error>

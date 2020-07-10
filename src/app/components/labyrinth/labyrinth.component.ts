@@ -53,11 +53,16 @@ export class LabyrinthComponent implements OnInit {
             this.userDetails = user;
 
             this.sessionService.performedLabyrinth().subscribe(data => {
-                if (data.succes) {  // Labyrinth boolean is set to true. Player now has a bubble and can join activity sessions.
-                    this.snackBar.open('Je bent bij het eind aangekomen. Je antwoorden zijn opgeslagen.', 'X', { duration: 2500, panelClass: ['style-warning'], });
-                    this.sessionService.saveAnswers(this.answers).subscribe(() => { // Saves the answers in the database.
-                        this.bubbleService.processLabyrinth(this.answers).subscribe(() => {
-                            this.router.navigate(['home']);
+
+                // Labyrinth boolean is set to true. Player now has a bubble and can join activity sessions.
+                if (data.succes) {
+                    this.snackBar.open('Je bent bij het eind aangekomen. Je antwoorden zijn opgeslagen.', 'X', { duration: 2500, panelClass: ['style-warning'] }).afterDismissed().subscribe(()=> {
+
+                        // Saves the answers in the database.
+                        this.sessionService.saveAnswers(this.answers).subscribe(() => {
+                            this.bubbleService.processLabyrinth(this.answers).subscribe(() => {
+                                this.router.navigate(['home']);
+                            });
                         });
                     });
                 } else {
@@ -69,12 +74,18 @@ export class LabyrinthComponent implements OnInit {
 
     /** Method that starts the labyrinth. */
     startLabyrinth() {
-        this.startedLabyrinth = true; // Shows the question screen due to ngIfs in the HTML.
-        this.sessionService.getShuffledQuestions(1).subscribe(questions => { // Get the part 1 questions from the database.
+
+        // Shows the question screen due to ngIfs in the HTML.
+        this.startedLabyrinth = true;
+
+        // Get the part 1 questions from the database.
+        this.sessionService.getShuffledQuestions(1).subscribe(questions => {
             this.questions = questions;
             this.auth.profile().subscribe(user => {
                 this.userDetails = user;
-                this.nextQuestion(null); // Show the first question, previous question does not exist so its null.
+
+                // Show the first question, previous question does not exist so its null.
+                this.nextQuestion(null);
             });
         })
     }
@@ -192,7 +203,7 @@ export class LabyrinthComponent implements OnInit {
                         radioGroup.style.alignItems = 'unset';
                         radioGroup.style.justifyContent = 'unset';
                     }
-                    textArea[i].textContent = "";
+                    textArea[i].textContent = '';
                     textArea[i].appendChild(document.createTextNode(question.choices[i]));
                 }, 10);
             }

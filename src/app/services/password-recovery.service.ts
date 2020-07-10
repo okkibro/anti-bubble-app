@@ -7,6 +7,7 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
     providedIn: 'root',
@@ -16,21 +17,16 @@ export class PasswordRecoveryService {
 
     /** Method to do a POST request to send an email to reset your password. */
     public sendEmail(email: string): Observable<any> {
-        return this.http.post<any>('https://localhost:3000/user/passwordrecovery', {
-            email: email,
-        });
+        return this.http.post<any>(`${environment.ENDPOINT}/user/passwordrecovery`, { email: email });
     }
 
     /** Method to do a GET request to load the restPage. */
     public getResetPage(token: string): Observable<any> {
-        return this.http.get<any>(`https://localhost:3000/user/reset/${token}`);
+        return this.http.get<any>(`${environment.ENDPOINT}/user/reset/${token}`);
     }
 
     /** Method to do a POST request to reset the password of user to the new password. */
     public postNewPassword(token: string, password: string, repeatPassword: string): Observable<any> {
-        return this.http.post<any>(`https://localhost:3000/user/reset/${token}`, {
-            password: password,
-            repeatPassword: repeatPassword,
-        });
+        return this.http.post<any>(`${environment.ENDPOINT}/user/reset/${token}`, { password: password, repeatPassword: repeatPassword });
     }
 }

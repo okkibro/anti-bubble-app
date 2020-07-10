@@ -8,7 +8,6 @@ const mongoose = require('mongoose');
 const crypto = require('crypto');
 const jwt = require('jsonwebtoken');
 const Schema = mongoose.Schema;
-const Item = mongoose.model('Item');
 
 let userSchema = new Schema({
     firstName: {
@@ -52,22 +51,22 @@ let userSchema = new Schema({
         type: [Number],
         required: true
     },
-    class: {
+    classArray: {
         type: [{
             item: { type: Schema.ObjectId, ref: 'Class' }
         }],
     },
     avatar: {
         type: {
-            hair1:      Schema.ObjectId, ref: 'Item', 
-            body:       Schema.ObjectId, ref: 'Item', required: true,
-            pants:      Schema.ObjectId, ref: 'Item', required: true,
-            shirt:      Schema.ObjectId, ref: 'Item', required: true,
-            shoes:      Schema.ObjectId, ref: 'Item',
-            glasses:    Schema.ObjectId, ref: 'Item',
-            hair2:      Schema.ObjectId, ref: 'Item',
-            hat:        Schema.ObjectId, ref: 'Item',
-            medal:      Schema.ObjectId, ref: 'Item'
+            hair1: Schema.ObjectId, ref: 'Item',
+            body: Schema.ObjectId, ref: 'Item', required: true,
+            pants: Schema.ObjectId, ref: 'Item', required: true,
+            shirt: Schema.ObjectId, ref: 'Item', required: true,
+            shoes: Schema.ObjectId, ref: 'Item',
+            glasses: Schema.ObjectId, ref: 'Item',
+            hair2: Schema.ObjectId, ref: 'Item',
+            hat: Schema.ObjectId, ref: 'Item',
+            medal: Schema.ObjectId, ref: 'Item'
         },
         required: false
     },
@@ -84,16 +83,13 @@ let userSchema = new Schema({
     },
     bubble: {
         type: {
-            online:     [Number],
-            social:     [Number],
+            online: [Number],
+            social: [Number],
             mainstream: [Number],
-
-            category1:  [Number],
-            category2:  [Number],
-
-            knowledge:  [Number],
-
-            techSavvy:  [Number],
+            category1: [Number],
+            category2: [Number],
+            knowledge: [Number],
+            techSavvy: [Number],
         },
         required: true
     },

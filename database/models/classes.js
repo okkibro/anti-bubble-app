@@ -32,8 +32,7 @@ let classSchema = new Schema({
         required: true
     },
     teacher: {
-        type: Schema.ObjectId,
-            ref: 'User',
+        type: Schema.ObjectId, ref: 'User',
         required: true
     }
 });

@@ -21,7 +21,7 @@ export class User {
     inventory: [ShopItem];
     currency: number;
     milestones: [Milestone];
-    class: [string];
+    classArray: [string];
     avatar: any;
     recentMilestones: [string];
     bubbleInit: boolean;

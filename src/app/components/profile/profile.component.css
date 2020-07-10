@@ -39,3 +39,9 @@ mean-avatar-display mat-card img{
         display: none;
     }
 }
+
+.delete-button {
+    background-color: red;
+    color: white;
+    border-radius: 10px;
+}

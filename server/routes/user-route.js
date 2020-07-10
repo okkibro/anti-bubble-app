@@ -8,11 +8,12 @@ const express = require('express');
 const router = express.Router();
 const mongoose = require('mongoose');
 const passport = require('passport');
-const User = mongoose.model('User');
 const sanitize = require('mongo-sanitize');
 const nodemailer = require('nodemailer');
 const crypto = require('crypto');
 const Shop = mongoose.model('Shop');
+const User = mongoose.model('User');
+const Class = mongoose.model('Classes');
 
 const jwt = require('express-jwt');
 const auth = jwt({
@@ -36,19 +37,19 @@ router.post('/register', (req, res) => {
     user.milestones = [];
     user.bubbleInit = true;
     user.bubble = {
-        online:     [0],
-        social:     [0],
+        online: [0],
+        social: [0],
         mainstream: [0],
-        category1:  [0],
-        category2:  [0],
-        knowledge:  [0],
-        techSavvy:  [0],
+        category1: [0],
+        category2: [0],
+        knowledge: [0],
+        techSavvy: [0],
     }
     if (user.role === 'student') {
         user.bubbleInit = false;
     }
     user.currency = 0;
-    user.class = [];
+    user.classArray = [];
     user.milestone = [0,0,0,0,0,0,0,0,0]
     user.recentMilestones = []
     for (let i = 0; i < 5; i++) {
@@ -153,7 +154,8 @@ router.post('/passwordrecovery', async (req, res) => {
                     text: '',
 
                     // Html body.
-                    html: '<h1>Password Recovery</h1><p>Reset Password by clicking on the following link: https://' + req.headers.host + '/reset/' + token
+                    html: '<h1>Password Recovery</h1>' +
+                        '<p>Reset Password by clicking on the following link: https://' + req.headers.host + '/reset/' + token + '</p>'
                 };
 
                 transporter.sendMail(mailOptions, (error, info) => {
@@ -177,7 +179,7 @@ router.post('/passwordrecovery', async (req, res) => {
 router.get('/reset/:token', (req, res) => {
 
     // Find the user that belongs to the given token
-    User.findOne({ recoverPasswordToken: req.params.token, recoverPasswordExpires: { $gt: Date.now() } }, (err, result) => {
+    User.findOne({ recoverPasswordToken: req.params.token, recoverPasswordExpires: { $gt: Date.now() } }, (err) => {
         if (!err) {
             res.status(200).json({ correct: true });
         } else {
@@ -262,7 +264,7 @@ router.patch('/updatePassword', (req, res) => {
             } else {
 
                 // Handle error if old password doesn't match with the one in database.
-                return res.status(200).json({ success: false, message: 'Oude wachtwoord is niet correct.'});
+                return res.status(200).json({ success: false, message: 'Oude wachtwoord is niet correct.' });
             }
         } else {
             console.log('User not found.')
@@ -280,7 +282,7 @@ router.get('/milestone', auth, (req, res) => {
     });
 });
 
-/** Post method to changes a milestone by a given value, returns the updated value and whether it is completed now or not */
+/** Post method to changes a milestone by a given value, returns the updated value and whether it is completed now or not. */
 router.post('/milestone', auth, (req, res) => {
 
     // Get currently logged in user.
@@ -315,7 +317,7 @@ router.post('/milestone', auth, (req, res) => {
     })
 });
 
-/** Post method to post a new message to recent milestones */
+/** Post method to post a new message to recent milestones. */
 router.post('/recentMilestones', auth, (req, res) => {
     User.findById(req.payload._id, (err, user) => {
         if (!err) {
@@ -328,12 +330,12 @@ router.post('/recentMilestones', auth, (req, res) => {
                 res.status(200);
             });
         } else {
-            res.status(404).json({message: err})
+            res.status(404).json({ message: err })
         }
     })
 });
 
-/** Post method to equip the avatat with the send item */
+/** Post method to equip the avatat with the send item. */
 router.post('/avatar', auth, (req,res) => {
     User.findById(req.payload._id, (err, user) => {
         if (!err) {
@@ -350,12 +352,12 @@ router.post('/avatar', auth, (req,res) => {
                 });
             });
         } else {
-            res.status(404).json({message: err})
+            res.status(404).json({ message: err })
         }
     });
 });
 
-/** Post method to update user bubble after performing/pausing the labyrinth*/
+/** Post method to update user bubble after performing/pausing the labyrinth. */
 router.post('/processAnswers', auth, (req, res) => {
     User.findById(req.payload._id, (err, user) => {
         if (!err) {
@@ -374,7 +376,7 @@ router.post('/processAnswers', auth, (req, res) => {
                 }
             }
 
-            for(let cat in user.bubble) {
+            for (let cat in user.bubble) {
                 if (user.bubble[cat].length < 2) {
                     user.bubble[cat].push(0)
                 }
@@ -388,8 +390,60 @@ router.post('/processAnswers', auth, (req, res) => {
                 res.status(200);
             });
         } else {
-            res.status(404).json({message: err})
+            res.status(404).json({ message: err })
         }
     });
 });
+
+/** Delete method for deleting a user's account */
+router.delete('/deleteAccount', auth, (req, res) => {
+    User.findById(req.payload._id, (err, user) => {
+
+        // Delete user document from 'users' collection.
+        User.findByIdAndDelete({ _id: req.payload._id }).exec();
+        if (!err && user != null) {
+            if (user.role === 'student') {
+
+                // Delete user from 'students' array of class he was apart of (if he was apart of a class).
+                if (user.classArray.length > 0) {
+                    Class.findById(user.classArray[0], (err, userKlas) => {
+                        if (!err && userKlas != null) {
+                            Class.findByIdAndUpdate({ _id: userKlas._id }, { $pull: { students: { _id: user._id }}}).exec();
+                            userKlas.save();
+                        } else {
+                            res.status(404).json({ succes: false, message: err });
+                        }
+                    });
+                }
+            } else if (user.role === 'teacher') {
+
+                // Delete each class created by the teacher and update the student's 'classArray' to make sure they aren't
+                // apart of a deleted class.
+                for (let klas of user.classArray) {
+                    Class.findById(klas._id, (err, userKlas) => {
+                        if (!err && userKlas != null) {
+                            Class.findByIdAndDelete({ _id: userKlas._id }).exec();
+                            User.find({ 'classArray._id': userKlas._id, role: 'student' }, (err, classMembers) => {
+                                if (!err && classMembers.length > 0) {
+                                    for (let classMember of classMembers) {
+                                        User.findByIdAndUpdate({ _id: classMember._id }, { $pull: { classArray: { _id: userKlas._id }}}).exec();
+                                        classMember.save();
+                                    }
+                                } else {
+                                    res.status(404).json({ succes: false, message: err });
+                                }
+                            });
+                        } else {
+                            res.status(404).json({ succes: false, message: err });
+                        }
+                    });
+                }
+            }
+            res.status(200).json({ succes: true, message: 'Account is succesvol verwijderd en je zal naar de inlogpagina worden verwezen.' });
+        } else {
+            res.status(404).json({ succes: false, message: err });
+        }
+    });
+});
+
 module.exports = router;

@@ -36,9 +36,8 @@ export class BubbleDetailsComponent implements OnInit {
     chartOptions = {}
     userDetails: User;
 
-    /*TODO DONT MAKE THIS HARDCODED BUT READ OF USER BUBBLE HISTORY */
     data
-    constructor(private auth: AuthenticationService) {}
+    constructor(private auth: AuthenticationService) { }
 
     ngOnInit() {
         this.auth.profile().subscribe(user => {
@@ -46,7 +45,6 @@ export class BubbleDetailsComponent implements OnInit {
             this.data = user.bubble
             this.initChart();
         })
-
     }
 
     initChart() {
