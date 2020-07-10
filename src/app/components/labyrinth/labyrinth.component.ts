@@ -65,8 +65,6 @@ export class LabyrinthComponent implements OnInit {
                             });
                         });
                     });
-                } else {
-                    // TODO: opvangen fout tijdens doorlopen van doolhof
                 }
             });
         });

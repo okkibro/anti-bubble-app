@@ -44,7 +44,6 @@ export class PasswordResetComponent implements OnInit {
         });
     }
 
-    //TODO: VALIDATE PASSWORDS IN FRONTEND.
     /** Method to reset your password based on th filled in passwords in the form. */
     resetPassword() {
 

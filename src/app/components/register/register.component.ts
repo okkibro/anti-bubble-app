@@ -44,7 +44,6 @@ export class RegisterComponent implements OnInit {
 
     ngOnInit() { }
 
-    // TODO: Add check if register is complete before redirecting
     /** Method to register a new user based on the information filled in on the form. */
     registerUser() { 
         let user = new User();
@@ -54,13 +53,15 @@ export class RegisterComponent implements OnInit {
         user.role = this.registerForm.get('role').value;
         user.password = this.registerForm.get('password').value;
 
-        this.auth.register(user).subscribe(() => {
+        this.auth.register(user).subscribe(data => {
             this.shop.getBaseInventory().subscribe(data => {
                 for (let i = 0 ; i < data.length ; i++) {
                     this.shop.buy(data[i]).subscribe();
                 }
-                this.router.navigate(['login']);
             });
+            if (data.token) {
+                this.router.navigate(['login']);
+            }
         });
     }
 

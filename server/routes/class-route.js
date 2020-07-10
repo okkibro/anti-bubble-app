@@ -18,8 +18,6 @@ const auth = jwt({
 	userProperty: 'payload',
 });
 
-//TODO: CHECK ALL STATUS CODES TO BETTER FIT THE HTTP STATUS PROTOCOL GUIDLINES
-
 /** Post method to create a new class in the database. */
 router.post('/createClass', auth, (req, res) => {
 	if (!req.payload._id) {

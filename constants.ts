@@ -32,7 +32,7 @@ export const milestones = [
     {
         index: 4,
         name: 'Shoppaholic',
-        maxValue: 158, //todo: dit getal correct de hoeveelheid items in de shop laten representeren
+        maxValue: 158,
         description: 'Alle items uit de shop gekocht'
     },
     {
