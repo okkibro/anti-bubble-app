@@ -24,12 +24,8 @@ export class SocketIOService {
     /**  Method to create a new session usig socketIO. */
     createSession(gameData) {
         this.removedListeners = false;
-        console.log(gameData)
         this.gameData = gameData;
         this.socket.emit('host-join', gameData);
-        this.socket.on('players', (players: []) => {
-            console.log(0, players);
-        });
         this.socket.on('showGamePin', (pin) => {
             this.data.changeMessage(pin);
             this.pin = pin;
@@ -44,9 +40,6 @@ export class SocketIOService {
     joinSession(pin, user, join, backToHome, redirect, finishedGame) {
         this.hostDisconnected = false;
         this.socket.emit('player-join', { pin: pin, player: user });
-        this.socket.on('message', (message: string) => {
-            console.log(message);
-        });
         this.socket.on('join-succes', (gameData) => {
             this.data.changeMessage(pin);
             this.gameData = gameData;

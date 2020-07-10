@@ -114,7 +114,6 @@ router.post('/passwordrecovery', async (req, res) => {
 
     // Generate Random Token.
     const token = crypto.randomBytes(20).toString('hex');
-    console.log(token);
 
     // Find the user with the given email and set the token.
     User.findOne({ email: req.body.email }, (err, user) => {
@@ -124,14 +123,14 @@ router.post('/passwordrecovery', async (req, res) => {
 
             user.save((error) => {
                 if (error) {
-                    console.log(error.message);
+                    return res.status(500).json({ succes: false, message: error });
                 }
             });
             
             // Send email with link and token in the link.
             nodemailer.createTestAccount((error, account) => {
                 if (error) {
-                    return console.log(error.message);
+                    return res.status(500).json({ succes: false, message: error });
                 }
 
                 let transporter = nodemailer.createTransport({
@@ -160,7 +159,7 @@ router.post('/passwordrecovery', async (req, res) => {
 
                 transporter.sendMail(mailOptions, (error, info) => {
                     if (error) {
-                        return console.log(error.message);
+                        return res.status(500).json({ succes: false, message: error });
                     }
                     console.log(nodemailer.getTestMessageUrl(info));
                 });
@@ -196,7 +195,7 @@ router.post('/reset/:token', (req, res) => {
         if (!err) {
             user.setPassword(req.body.password, (error) => {
                 if (error) {
-                    return console.log(error.message);
+                    res.status(500).json({ succes: false, message: error });
                 }
             });
 
@@ -205,13 +204,13 @@ router.post('/reset/:token', (req, res) => {
 
             user.save((error) => {
                 if (error) {
-                    return console.log(error.message);
+                    res.status(500).json({ succes: false, message: error });
                 }
-                res.json({ succes: true, message: 'Wachtwoord succesvol verandert' });
+                res.json({ succes: true, message: 'Wachtwoord succesvol verandert.' });
                 res.status(200);
             });
         } else {
-            res.status(200).json({ succes: false, message: 'wrong token or token expired' });
+            res.status(200).json({ succes: false, message: 'Verkeerde of reeds verlopen token.' });
         }   
             
     });
@@ -267,7 +266,6 @@ router.patch('/updatePassword', (req, res) => {
                 return res.status(200).json({ success: false, message: 'Oude wachtwoord is niet correct.' });
             }
         } else {
-            console.log('User not found.')
 
             // Handle error if user is not found in database.
             return res.status(401).json({ succes: false, message: 'User not found.' });
@@ -343,7 +341,7 @@ router.post('/avatar', auth, (req,res) => {
             user.markModified('avatar');
             user.save((error) => {
                 if (error) {
-                    console.log(error.message);
+                    return res.status(500).json({ succes: false, message: error });
                 }
                 res.status(200).json({
                     imageFull: req.body.avatarItem.fullImage,
@@ -385,7 +383,7 @@ router.post('/processAnswers', auth, (req, res) => {
             user.markModified('bubble');
             user.save((error) => { 
                 if (error) {
-                    console.log(error.message);
+                    return res.status(500).json({ succes: false, message: error });
                 }
                 res.status(200);
             });

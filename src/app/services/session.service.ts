@@ -19,7 +19,6 @@ export class SessionService {
 
     /** Method to do a POST request to get the given activity. */
     public getActivity(activity: String): Observable<any> {
-        console.log(activity);
         return this.http.post(`${environment.ENDPOINT}/session/activity`, { activity: activity }, { headers: { Authorization: 'Bearer ' + this.cookie.get('mean-token') } });
     }
 

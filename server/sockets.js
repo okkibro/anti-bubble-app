@@ -11,10 +11,6 @@ let players = new Players();
 
 function runIO(io) {
 	io.on('connection', (socket) => {
-		socket.on('disconnect', () => {
-			console.log('user disconnected');
-		});
-
 		socket.on('host-join', (gameData) => {
 
 			// Generate pin.
@@ -25,7 +21,6 @@ function runIO(io) {
 
 			// Host's socket joins the game room.
 			socket.join(pin);
-			console.log('Game created with pin:', pin);
 			socket.emit('showGamePin', pin);
 		});
 
@@ -38,7 +33,6 @@ function runIO(io) {
 					let hostId = games.games[i].hostID;
 					gameFound = true;
 					if (players.getPlayers(hostId).find(x => x.email === params.player.email) !== undefined) {
-						console.log(`Player ${params.player.email} already in game ${params.pin}`);
 						socket.emit('join-failure');
 					} else {
 
@@ -57,13 +51,11 @@ function runIO(io) {
 				}
 			}
 			if (!gameFound) {
-				console.log('Invalid Pin');
 				socket.emit('join-failure');
 			}
 		});
 
 		socket.on('message', (message) => {
-			console.log(message);
 			io.sockets.emit('message', `server: ${message}`);
 		});
 
@@ -72,14 +64,12 @@ function runIO(io) {
 
 			// Finding game with socket.id.
 			let game = games.getGame(socket.id);
-			console.log('disconnect');
 
 			// If a game hosted by that id is found, the socket disconnected is a host.
 			if (game) {
 
 				// Remove the game from games class.
 				games.removeGame(socket.id);
-				console.log('Game ended with pin:', game.pin);
 
 				// Getting all players in the game.
 				let playersToRemove = players.getPlayers(game.hostID);
@@ -133,7 +123,6 @@ function runIO(io) {
 
 			// Finding game with socket.id.
 			let game = games.getGame(socket.id);
-			console.log('disconnect');
 
 
 			// If a game hosted by that id is found, the socket disconnected is a host.
@@ -141,7 +130,6 @@ function runIO(io) {
 
 				// Remove the game from games class.
 				games.removeGame(socket.id);
-				console.log('Game ended with pin:', game.pin);
 
 				// Getting all players in the game.
 				let playersToRemove = players.getPlayers(game.hostID);

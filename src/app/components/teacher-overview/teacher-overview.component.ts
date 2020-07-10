@@ -74,8 +74,6 @@ export class TeacherOverviewComponent implements OnInit {
                     }
                 });
             });
-        } else {
-            console.log('You are not eligible to create a class.')
         }
     }
 

@@ -58,7 +58,6 @@ router.post('/joinClass', auth, (req, res) => {
 	} else {
 		User.findById(req.payload._id, (err, user) => {
 			if (err) {
-				console.log(err);
 				res.status(200).json({ succes: false, message: err });
 			} else {
 				Classes.findOne({ code: req.body.code }, (err, foundClass) => {
@@ -92,7 +91,6 @@ router.post('/joinClass', auth, (req, res) => {
 							user.save().then(() => {
 								res.status(200).json({ succes: true, message: `Docent is succesvol toegevoegd aan de klas ${foundClass.title}` });
 							}).catch((err) => {
-								console.log(err);
 								res.status(200).json({ succes: false, message: err });
 							});
 						}
@@ -114,7 +112,6 @@ router.get('/getClass', auth, (req, res) => {
 	} else {
 		User.findById(req.payload._id, async (err, user) => {
 			if (err) {
-				console.log(err);
 				res.status(200).json({ succes: false, message: err });
 			} else {
 				if (user.classArray[0]) {
@@ -156,7 +153,6 @@ router.get('/getClassIds', auth, (req, res) => {
 	} else {
 		User.findById(req.payload._id, (err, user) => {
 			if (err) {
-				console.log(err);
 				res.status(200).json({ succes: false, message: err });
 			} else {
 				res.status(200).json({ classIds: user.classArray });
@@ -194,7 +190,6 @@ router.get('/getSingleClass/:id', auth, (req, res) => {
 					res.status(200).json({ succes: true, class: foundClass, classmates: [] });
 				}
 			} else {
-				console.log(err);
 				res.status(200).json({ succes: false, message: err });
 			}
 		});

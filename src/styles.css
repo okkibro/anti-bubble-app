@@ -60,6 +60,10 @@ body {
     background-color: #948c8d !important;
 }
 
+.mat-input-element {
+    caret-color: #948c8d !important;
+}
+
 .mat-error,
 .mat-form-field-invalid .mat-form-field-label,
 .mat-form-field-invalid .mat-form-field-required-marker,
