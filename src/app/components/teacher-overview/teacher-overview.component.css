@@ -4,13 +4,13 @@
  * Computing Sciences)
  */
 
-.role-radio-group {
+.radio-group {
     display: flex;
     flex-direction: column;
     margin: 5px 0;
 }
 
-.role-radio-button {
+.radio-button {
     margin: 5px;
 }
 

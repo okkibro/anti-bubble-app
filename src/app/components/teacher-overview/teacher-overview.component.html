@@ -25,11 +25,11 @@
                             </mat-card-subtitle>
                         </mat-card-header>
                         <mat-card-content>
-                            <div *ngIf="userDetails.classArray.length > 0">
+                            <div *ngIf="userDetails?.classArray.length > 0">
                                 <button mat-button class="general-button" [disabled]="loading" (click)="onClickSelectKlas()">Verander van klas</button>
                                 <div [hidden]="!selectklas">
                                     <div>
-                                        <mat-button-toggle-group #group="matButtonToggleGroup">
+                                        <mat-button-toggle-group>
                                             <div *ngFor="let klas of names">
                                                 <mat-button-toggle (click)="switchClass(klas.id)">{{ klas.title }}</mat-button-toggle>
                                             </div>
@@ -52,14 +52,13 @@
                             </table>
                             <p class="no-students-header" *ngIf="currentClass?.students?.length == 0 || currentClass == undefined">De klas heeft nog geen leerlingen</p>
                         </mat-card-content>
-                        <form [hidden]="!openform" name="classForm" class="example-form" [formGroup]="classForm"
-                            (ngSubmit)="createClass()">
+                        <form [hidden]="!openform" name="classForm"  [formGroup]="classForm" (ngSubmit)="createClass()">
                             <table class="general-table">
                                 <tr>
                                     <td>
                                         <mat-form-field>
                                             <mat-label>Klassennaam</mat-label>
-                                            <input matInput placeholder="klassennaam" formControlName="classTitle" required>
+                                            <input matInput placeholder="Klassennaam" formControlName="classTitle" required>
                                             <mat-error *ngIf="classForm.get('classTitle').hasError('required')">
                                                 Klassennaam is <strong>verplicht</strong>
                                             </mat-error>
@@ -68,25 +67,24 @@
                                 </tr>
                                 <tr>
                                     <td>
-                                        <mat-form-field>
-                                            <mat-label>Jaar</mat-label>
-                                            <input matInput placeholder="Jaar" formControlName="classYear" type="number" required>
-                                            <mat-error *ngIf="classForm.get('classYear').hasError('required')">
-                                                Jaar is <strong>verplicht</strong>
-                                            </mat-error>
-                                        </mat-form-field>
+                                        <mat-label>Niveau *</mat-label>
+                                        <mat-radio-group class="radio-group" formControlName="classLevel" required>
+                                            <mat-radio-button class="radio-button" value="VMBO" color="primary" [disabled]="classForm.get('classYear').value == 5 || classForm.get('classYear').value == 6">VMBO</mat-radio-button>
+                                            <mat-radio-button class="radio-button" value="HAVO" color="primary" [disabled]="classForm.get('classYear').value == 5">HAVO</mat-radio-button>
+                                            <mat-radio-button class="radio-button" value="VWO" color="primary">VWO</mat-radio-button>
+                                        </mat-radio-group>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>
-                                        <mat-label>Niveau:*</mat-label>
-                                        <mat-radio-group class="role-radio-group" formControlName="classLevel">
-                                            <mat-radio-button class="role-radio-button" value="VMBO" color="primary">VMBO
-                                            </mat-radio-button>
-                                            <mat-radio-button class="role-radio-button" value="HAVO" color="primary">HAVO
-                                            </mat-radio-button>
-                                            <mat-radio-button class="role-radio-button" value="VWO" color="primary">VWO
-                                            </mat-radio-button>
+                                        <mat-label>Jaar *</mat-label>
+                                        <mat-radio-group class="radio-group" formControlName="classYear" required>
+                                            <mat-radio-button class="radio-button" value="1" color="primary">1</mat-radio-button>
+                                            <mat-radio-button class="radio-button" value="2" color="primary">2</mat-radio-button>
+                                            <mat-radio-button class="radio-button" value="3" color="primary">3</mat-radio-button>
+                                            <mat-radio-button class="radio-button" value="4" color="primary">4</mat-radio-button>
+                                            <mat-radio-button class="radio-button" value="5" color="primary" [disabled]="classForm.get('classLevel').value == 'VMBO'">5</mat-radio-button>
+                                            <mat-radio-button class="radio-button" value="6" color="primary" [disabled]="classForm.get('classLevel').value == 'VMBO' || classForm.get('classLevel').value == 'HAVO'">6</mat-radio-button>
                                         </mat-radio-group>
                                     </td>
                                 </tr>

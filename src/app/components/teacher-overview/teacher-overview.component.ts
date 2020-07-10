@@ -18,6 +18,7 @@ import { ClassesService } from 'src/app/services/classes.service';
     styleUrls: ['./teacher-overview.component.css',
         '../../shared/general-styles.css']
 })
+
 export class TeacherOverviewComponent implements OnInit {
     userDetails: User;
     loading = true;
@@ -107,12 +108,12 @@ export class TeacherOverviewComponent implements OnInit {
     }
 
     /** Method to change a boolean to unhide part of the html page */
-    onClickSelectKlas() {
+    onClickSelectKlas(): void {
         this.selectklas = !this.selectklas;
     }
 
     /** Method to change a boolean to unhide part of the html page */
-    onClickOpenForm() {
+    onClickOpenForm(): void {
         this.openform = !this.openform;  
     }
 }
