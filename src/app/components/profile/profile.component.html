@@ -14,7 +14,7 @@
         <body>
             <div class="container-div" fxLayout="column" fxLayoutGap="10px" fxLayoutAlign="space-evenly">
                 <div fxLayout.xs="column" fxLayoutGap="10px" fxLayoutAlign="space-evenly">
-                    <mat-card fxFlex="50%" fxFlex.xs="100%">
+                    <mat-card fxFlex="100%">
                         <mat-card-header>
                             <mat-card-title>Profiel</mat-card-title>
                         </mat-card-header>
@@ -29,7 +29,7 @@
                                     <td>{{ userDetails?.firstName }} {{ userDetails?.lastName }}</td>
                                 </tr>
                                 <tr>
-                                    <td class="top-data">E-mail adres</td>
+                                    <td class="top-data">E-mailadres</td>
                                     <td>{{ userDetails?.email }}</td>
                                 </tr>
                                 <tr *ngIf="userDetails?.role == 'student' && userClassTitle != undefined">
@@ -73,7 +73,7 @@
                             <a mat-button class="general-link" [routerLink]="'/bubble-details'">Meer details</a>
                         </mat-card-content>
                     </mat-card>
-                    <mat-card fxFlex="50%">
+                    <mat-card fxFlex="100%">
                         <mat-card-header>
                             <mat-card-title>Avatar</mat-card-title>
                         </mat-card-header>
