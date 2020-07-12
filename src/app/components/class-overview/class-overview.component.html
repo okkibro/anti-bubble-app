@@ -30,7 +30,8 @@
                             </tr>
                             <tr *ngFor="let classmate of classmates">
                                 <td>{{ classmate.firstName }}</td>
-                                <td><a mat-button class="general-link" [routerLink]="'/classmate-profile/' + classmate._id" > Bekijk Profiel </a></td>
+                                <td *ngIf="classmate._id === userDetails._id"><a mat-button class="general-link" [routerLink]="'/profile/'" > Bekijk Profiel </a></td>
+                                <td *ngIf="classmate._id !== userDetails._id"><a mat-button class="general-link" [routerLink]="'/classmate-profile/' + classmate._id" > Bekijk Profiel </a></td>
                             </tr>
                         </table>
                     </mat-card-content>
