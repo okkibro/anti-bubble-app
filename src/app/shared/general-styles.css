@@ -22,7 +22,7 @@
 }
 
 body {
-    background-image: url("../../assets/images/Super_Map/Basic_Buttons/Background.png");
+    background-color: #addadb;
     text-align: center;
     background-size: auto;
     display: flex;
@@ -33,9 +33,7 @@ body {
 .container-div {
     height: 100%;
     width: 80%;
-    justify-content: center;
     text-align: center;
-    align-items: center; 
     background-color: #addadb;
     margin: 10px 0;
 }
