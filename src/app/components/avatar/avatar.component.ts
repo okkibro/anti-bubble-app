@@ -42,7 +42,7 @@ export class AvatarComponent implements OnInit {
                         this.filteredAvatar = this.filterAvatar();
                     }
                 }
-                this.avatarDisplay.showAvatar();
+                this.avatarDisplay.showAvatar(user);
             })
         })
     }

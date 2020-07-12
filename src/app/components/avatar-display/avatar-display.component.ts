@@ -21,23 +21,20 @@ export class AvatarDisplayComponent implements OnInit {
     ngOnInit(): void {
         this.auth.profile().subscribe(user => {
             this.userDetails = user;
-            this.showAvatar();
+            this.showAvatar(user);
         });
     }
 
     /** Method to show the avatar, taking the object from the database */
-    showAvatar() {
-        this.auth.profile().subscribe(user => {
-            this.userDetails = user
-            document.getElementById('haar1').setAttribute('src', this.userDetails.avatar.haar?.fullImage2);
-            document.getElementById('lichaam').setAttribute('src', this.userDetails.avatar.lichaam.fullImage);
-            document.getElementById('broek').setAttribute('src', this.userDetails.avatar.broek.fullImage);
-            document.getElementById('shirt').setAttribute('src', this.userDetails.avatar.shirt.fullImage);
-            document.getElementById('schoenen').setAttribute('src', this.userDetails.avatar.schoenen?.fullImage);
-            document.getElementById('bril').setAttribute('src', this.userDetails.avatar.bril?.fullImage);
-            document.getElementById('haar2').setAttribute('src', this.userDetails.avatar.haar?.fullImage);
-            document.getElementById('hoofddeksel').setAttribute('src', this.userDetails.avatar.hoofddeksel?.fullImage);
-            document.getElementById('medaille').setAttribute('src', this.userDetails.avatar.medaille?.fullImage);
-        });
+    showAvatar(user: User) {
+        document.getElementById('haar1').setAttribute('src', user.avatar.haar?.fullImage2);
+        document.getElementById('lichaam').setAttribute('src', user.avatar.lichaam.fullImage);
+        document.getElementById('broek').setAttribute('src', user.avatar.broek.fullImage);
+        document.getElementById('shirt').setAttribute('src', user.avatar.shirt.fullImage);
+        document.getElementById('schoenen').setAttribute('src', user.avatar.schoenen?.fullImage);
+        document.getElementById('bril').setAttribute('src', user.avatar.bril?.fullImage);
+        document.getElementById('haar2').setAttribute('src', user.avatar.haar?.fullImage);
+        document.getElementById('hoofddeksel').setAttribute('src', user.avatar.hoofddeksel?.fullImage);
+        document.getElementById('medaille').setAttribute('src', user.avatar.medaille?.fullImage);
     }
 }
