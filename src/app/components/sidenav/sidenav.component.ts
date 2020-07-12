@@ -5,8 +5,8 @@
  */
 
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { User } from '../../models/user';
 import { AuthenticationService } from '../../services/authentication.service';
+import { tokenData } from "../../models/tokenData";
 
 @Component({
     selector: 'mean-sidenav',
@@ -16,14 +16,12 @@ import { AuthenticationService } from '../../services/authentication.service';
 export class SidenavComponent implements OnInit {
     @Output() public sidenavClose = new EventEmitter();
 
-    userDetails: User;
+    tokenData: tokenData;
 
-    constructor(private auth: AuthenticationService,) { }
+    constructor(private auth: AuthenticationService) { }
 
     ngOnInit(): void {
-        this.auth.profile().subscribe(user => {
-            this.userDetails = user;
-        })
+        this.tokenData = this.auth.getTokenData();
     }
 
     /** Method to logout. */

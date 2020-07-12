@@ -10,6 +10,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { SocketIOService } from 'src/app/services/socket-io.service';
 import { User } from '../../models/user';
 import { AuthenticationService } from 'src/app/services/authentication.service';
+import { tokenData } from "../../models/tokenData";
 
 @Component({
     selector: 'mean-answer-form',
@@ -27,7 +28,7 @@ export class AnswerFormComponent implements OnInit {
     sendQuestionsForm = this.fb.group({
         getQuestion: ['', []]
     });
-    userDetails: User;
+    tokenData: tokenData;
 
     constructor(
         private fb: FormBuilder,
@@ -39,9 +40,7 @@ export class AnswerFormComponent implements OnInit {
     alreadySubmitted:boolean = false;
 
     ngOnInit(): void {
-        this.auth.profile().subscribe(user => {
-            this.userDetails = user;
-        })
+        this.tokenData = this.auth.getTokenData();
 
         // Reactivate the option to answer after the teacher has deleted the answer.
         this.socketService.reactivateButton(() => {

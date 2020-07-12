@@ -12,8 +12,8 @@
     <div class="nav-items" fxHide.lt-md>
         <a mat-button [routerLink]="'/home'" fxFlex="20"> Anti-Bubble <img src="../../../assets/images/Super_Map/Other/logo.png" alt=""> </a>
         <a mat-button [routerLink]="'/home'" fxFlex="20" fxFlexOffset="20"> Home </a>
-        <a mat-button [routerLink]="'/teacher-overview'" *ngIf="userDetails?.role == 'teacher'" fxFlex="20"> Klas overzicht </a>
-        <a mat-button [routerLink]="'/class-overview'" *ngIf="userDetails?.role == 'student'" fxFlex="20"> Klas overzicht </a>
+        <a mat-button [routerLink]="'/teacher-overview'" *ngIf="tokenData.role == 'teacher'" fxFlex="20"> Klas overzicht </a>
+        <a mat-button [routerLink]="'/class-overview'" *ngIf="tokenData.role == 'student'" fxFlex="20"> Klas overzicht </a>
         <a mat-button [routerLink]="'/profile'" fxFlex="20"> Profiel </a>
         <button mat-button (click)="logoutButton()" fxFlex="20" fxFlexOffset="20"> Log uit </button>
     </div>
