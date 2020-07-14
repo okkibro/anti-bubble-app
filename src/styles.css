@@ -53,7 +53,8 @@ body {
 }
 
 .mat-focused .mat-form-field-label,
-.mat-focused:not(.mat-form-field-invalid) .mat-form-field-required-marker {
+.mat-focused:not(.mat-form-field-invalid) .mat-form-field-required-marker,
+.mat-select-arrow {
     color: #948c8d !important;
 }
 .mat-focused:not(.mat-form-field-invalid) .mat-form-field-ripple {
@@ -73,4 +74,20 @@ body {
 
 .mat-form-field-invalid .mat-form-field-ripple {
     background-color: red !important;
+}
+
+.mat-primary .mat-option.mat-selected:not(.mat-option-disabled) {
+    color: black !important;
+}
+
+.mat-form-field-appearance-fill .mat-form-field-flex {
+    border-radius: 8px !important;
+}
+
+#class-select .mat-form-field-underline {
+    display: none !important;
+}
+
+#class-select .mat-form-field-wrapper {
+    padding-bottom: 0 !important;
 }

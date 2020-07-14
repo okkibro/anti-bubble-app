@@ -23,7 +23,7 @@ describe('LoginComponent', () => {
     'authService',
     ['login']
   );
-  const snackbarStub: jasmine.SpyObj<MatSnackBar> = jasmine.createSpyObj(
+  const snackBarStub: jasmine.SpyObj<MatSnackBar> = jasmine.createSpyObj(
     'snackBar',
     ['open']
   );
@@ -39,7 +39,7 @@ describe('LoginComponent', () => {
         },
         {
           provide: MatSnackBar,
-          useValue: snackbarStub
+          useValue: snackBarStub
         }
       ],
       schemas: [NO_ERRORS_SCHEMA]

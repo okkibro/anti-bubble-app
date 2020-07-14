@@ -53,15 +53,13 @@ export class RegisterComponent implements OnInit {
         user.role = this.registerForm.get('role').value;
         user.password = this.registerForm.get('password').value;
 
-        this.auth.register(user).subscribe(data => {
+        this.auth.register(user).subscribe(() => {
             this.shop.getBaseInventory().subscribe(data => {
                 for (let i = 0 ; i < data.length ; i++) {
                     this.shop.buy(data[i]).subscribe();
                 }
-            });
-            if (data.token) {
                 this.router.navigate(['login']);
-            }
+            });
         });
     }
 

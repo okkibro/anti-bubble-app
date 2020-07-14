@@ -19,7 +19,6 @@ import { BubbleGraphService } from 'src/app/services/bubble-graph.service';
         '../../shared/general-styles.css']
 })
 export class LabyrinthComponent implements OnInit {
-
     userDetails: User;
     startedLabyrinth: boolean;
     nextQuestionDisabled: boolean;
@@ -41,6 +40,9 @@ export class LabyrinthComponent implements OnInit {
     ) { }
 
     ngOnInit(): void {
+        this.auth.profile().subscribe(user => {
+            this.userDetails = user;
+        });
 
         // Start the labyrinth in part 1.
         this.part = 1;
@@ -49,24 +51,20 @@ export class LabyrinthComponent implements OnInit {
 
     /** Method that saves answers the user gave and sets their bubble initialization to true so they can join a session after this. */
     performedLabyrinth() {
-        this.auth.profile().subscribe(user => {
-            this.userDetails = user;
+        this.sessionService.performedLabyrinth().subscribe(data => {
 
-            this.sessionService.performedLabyrinth().subscribe(data => {
+            // Labyrinth boolean is set to true. Player now has a bubble and can join activity sessions.
+            if (data.succes) {
+                this.snackBar.open('Je bent bij het eind aangekomen. Je antwoorden zijn opgeslagen.', 'X', { duration: 2500, panelClass: ['style-succes'] }).afterDismissed().subscribe(() => {
 
-                // Labyrinth boolean is set to true. Player now has a bubble and can join activity sessions.
-                if (data.succes) {
-                    this.snackBar.open('Je bent bij het eind aangekomen. Je antwoorden zijn opgeslagen.', 'X', { duration: 2500, panelClass: ['style-warning'] }).afterDismissed().subscribe(()=> {
-
-                        // Saves the answers in the database.
-                        this.sessionService.saveAnswers(this.answers).subscribe(() => {
-                            this.bubbleService.processLabyrinth(this.answers).subscribe(() => {
-                                this.router.navigate(['home']);
-                            });
+                    // Saves the answers in the database.
+                    this.sessionService.saveAnswers(this.answers).subscribe(() => {
+                        this.bubbleService.processLabyrinth(this.answers).subscribe(() => {
+                            this.router.navigate(['home']);
                         });
                     });
-                }
-            });
+                });
+            }
         });
     }
 
@@ -79,16 +77,13 @@ export class LabyrinthComponent implements OnInit {
         // Get the part 1 questions from the database.
         this.sessionService.getShuffledQuestions(1).subscribe(questions => {
             this.questions = questions;
-            this.auth.profile().subscribe(user => {
-                this.userDetails = user;
 
-                // Show the first question, previous question does not exist so its null.
-                this.nextQuestion(null);
-            });
+            // Show the first question, previous question does not exist so its null.
+            this.nextQuestion(null);
         })
     }
 
-    /** Method to pasue the labytinth */
+    /** Method to pause the labyrinth */
     paused() {
         this.sessionService.saveAnswers(this.answers).subscribe(() => {
             this.snackBar.open('Doolhof gepauzeerd. Zorg dat je het voor de volgende les hebt afgemaakt.', 'X', { duration: 2500, panelClass: ['style-warning'], }).afterDismissed().subscribe(() => {
@@ -137,7 +132,7 @@ export class LabyrinthComponent implements OnInit {
                 // Show the qustion on the screen.
                 this.showQuestion(question);
             }
-}
+        }
     }
 
     /** Method that saves a question to this.answers. */

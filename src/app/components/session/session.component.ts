@@ -197,7 +197,7 @@ export class SessionComponent implements OnInit {
 
         // teacher wants to start a game without any players in it
         if (this.playerCount == 0) {
-            this.snackBar.open('Er zitten nog geen spelers in de sessie', 'X', { duration: 2500, panelClass: ['style-error'], });
+            this.snackBar.open('Er zitten nog geen spelers in de sessie', 'X', { duration: 2500, panelClass: ['style-error'] });
         } else {
             if (this.canStart(this.gameData.game.name)) {
                 this.gameStarted = true;

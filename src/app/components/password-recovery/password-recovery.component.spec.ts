@@ -21,7 +21,7 @@ describe('PasswordRecoveryComponent', () => {
     'passwService',
     ['sendEmail']
   );
-  const snackbarStub: jasmine.SpyObj<MatSnackBar> = jasmine.createSpyObj(
+  const snackBarStub: jasmine.SpyObj<MatSnackBar> = jasmine.createSpyObj(
     'snackBar',
     ['open']
   );

@@ -37,15 +37,15 @@ export class ClassOverviewComponent implements OnInit {
     ) { }
 
     ngOnInit() {
+        this.auth.profile().subscribe(user => {
+            this.userDetails = user;
+        })
         this.classService.getClass().subscribe((data) => {
             if (data.succes) {
                 this.userClassTitle = data.class.title;
                 this.classmates = data.classmates;
             }
         });
-        this.auth.profile().subscribe(user => {
-            this.userDetails = user;
-        })
     }
 
     /** Method to filter the students in a class. */

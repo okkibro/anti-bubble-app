@@ -396,13 +396,14 @@ router.post('/processAnswers', auth, (req, res) => {
 /** Delete method for deleting a user's account */
 router.delete('/deleteAccount', auth, (req, res) => {
     User.findById(req.payload._id, (err, user) => {
-
-        // Delete user document from 'users' collection.
-        User.findByIdAndDelete({ _id: req.payload._id }).exec();
         if (!err && user != null) {
+
+            // Delete user document from 'users' collection.
+            User.findByIdAndDelete({ _id: user._id }).exec();
             if (user.role === 'student') {
 
-                // Delete user from 'students' array of class he was apart of (if he was apart of a class).
+                // Delete user from 'students' array of class he was apart of (if he was apart of a class). Student document itself
+                // will be deleted so we don't have to worry about the 'classArray' here.
                 if (user.classArray.length > 0) {
                     Class.findById(user.classArray[0], (err, userKlas) => {
                         if (!err && userKlas != null) {
@@ -415,8 +416,8 @@ router.delete('/deleteAccount', auth, (req, res) => {
                 }
             } else if (user.role === 'teacher') {
 
-                // Delete each class created by the teacher and update the student's 'classArray' to make sure they aren't
-                // apart of a deleted class.
+                // Delete each class created by the teacher and update the 'classArray' of all the student of each class the teacher made
+                // to make sure no student is apart of a class that will no longer exist.
                 for (let klas of user.classArray) {
                     Class.findById(klas._id, (err, userKlas) => {
                         if (!err && userKlas != null) {

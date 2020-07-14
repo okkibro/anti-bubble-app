@@ -38,9 +38,9 @@ router.post('/createClass', auth, (req, res) => {
 
 		// Save the changes to the database.
 		classes.save().then(() => {
-			res.status(200).json(classes.code);
+			res.status(200).json({ code: classes.code, id: classes._id });
 		}).catch((err) => {
-			res.status(400).send(err);
+			res.status(400).json({ message: err });
 		});
 	}
 });
@@ -73,11 +73,11 @@ router.post('/joinClass', auth, (req, res) => {
 								} else {
 									foundClass.students.push(user);
 									foundClass.save().catch((err) => {
-										res.status(400).send(err);
+										res.status(400).json({ message: err });
 									});
 									user.classArray.push(foundClass);
 									user.save().catch((err) => {
-										res.status(400).send(err);
+										res.status(400).json({ message: err });
 									});
 									res.status(200).json({ succes: true, message: `Leerling is succesvol toegevoegd aan de klas ${foundClass.title}` });
 								}
@@ -207,7 +207,8 @@ router.get('/classmateProfile/:id', auth, (req, res) => {
 			if (!errorU) {
 				User.findById(req.params.id, (errorC, classmate) => {
 					if (!errorC) {
- 						if (user.role === 'student') {
+						if (user.role === 'student') {
+
 							// Check if the classmate is actually in the same class.
 							let userId = user.classArray[0]._id.toString();
 							let classmateId = classmate.classArray[0]._id.toString();
@@ -228,6 +229,35 @@ router.get('/classmateProfile/:id', auth, (req, res) => {
 			}
 		});
 	}
+});
+
+/** Delete method for deleting a class based on a given id. */
+router.delete('/deleteClass/:id', auth, (req, res) => {
+
+	// Find class based on id pased in URL.
+	Classes.findById(req.params.id, (err, klas) => {
+
+		// If we found a class in the database with said id delete it and continue.
+		if (!err && klas != null) {
+			Classes.findByIdAndDelete({ _id: klas._id }).exec();
+
+			// Update 'classArray' of all users that were apart of the class so they will not be members of a deleted class.
+			// We don't check for length of 'students' array since the class will always have atleast 1 memmber, namely the teacher.
+			User.find({'classArray._id': klas._id}, (err, classMembers) => {
+				if (!err && classMembers != null) {
+					for (let classMember of classMembers) {
+						User.findByIdAndUpdate({ _id: classMember._id }, { $pull: { classArray: { _id: klas._id }}}).exec();
+						classMember.save();
+					}
+				} else {
+					res.status(404).json({ succes: false, message: err });
+				}
+			});
+			res.status(200).json({ succes: true, message: 'Klas is succesvol verwijderd.' });
+		} else {
+			res.status(404).json({ succes: false, message: err });
+		}
+	});
 });
 
 module.exports = router;

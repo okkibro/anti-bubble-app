@@ -4,13 +4,16 @@
  * Computing Sciences)
  */
 
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, Input, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { AuthenticationService } from 'src/app/services/authentication.service';
 import { User } from 'src/app/models/user';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Class } from 'src/app/models/classes';
 import { ClassesService } from 'src/app/services/classes.service';
+import { Router } from "@angular/router";
+import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from "@angular/material/dialog";
+import { DeleteAccountDialog } from "../profile/profile.component";
 
 @Component({
     selector: 'mean-teacher-overview',
@@ -23,7 +26,7 @@ export class TeacherOverviewComponent implements OnInit {
     userDetails: User;
     loading = true;
     classIds = [];
-    names = [];
+    classes = [];
     currentClass;
     classmates: User[];
     classForm = this.fb.group({
@@ -38,7 +41,8 @@ export class TeacherOverviewComponent implements OnInit {
         private auth: AuthenticationService,
         private classService: ClassesService,
         private fb: FormBuilder,
-        private snackBar: MatSnackBar
+        private snackBar: MatSnackBar,
+        private dialog: MatDialog
     ) { }
 
     ngOnInit(): void {
@@ -47,8 +51,8 @@ export class TeacherOverviewComponent implements OnInit {
             if (this.userDetails.classArray.length > 0) {
                 this.classService.getClassIds().subscribe((ids) => {
                     this.classIds = ids.classIds;
-                    this.getClass(this.classIds[0]._id);
-                    this.getClassNames();
+                    this.setClass(this.classIds[0]._id);
+                    this.getClasses();
                 });
             }
         });
@@ -64,14 +68,18 @@ export class TeacherOverviewComponent implements OnInit {
             klas.year = this.classForm.get('classYear').value;
             this.openform = false;
 
-            this.classService.createClass(klas, this.userDetails).subscribe((code: Number) => {
-                this.classService.joinClass(code).subscribe((output) => {
+            this.classService.createClass(klas, this.userDetails).subscribe((data) => {
+                this.classService.joinClass(data.code).subscribe((output) => {
                     if (output.succes) {
-                        this.snackBar.open(output.message, 'X', { duration: 2500, panelClass: ['style-succes'], }).afterDismissed().subscribe(() => {
-                            window.location.reload();
+                        this.snackBar.open(output.message, 'X', { duration: 2500, panelClass: ['style-succes'] }).afterDismissed().subscribe(() => {
+                            if (this.classIds.length > 0) {
+                                this.switchClass(data.id);
+                            } else {
+                                window.location.reload();
+                            }
                         });
                     } else {
-                        this.snackBar.open(output.message, 'X', { duration: 2500, panelClass: ['style-error'], });
+                        this.snackBar.open(output.message, 'X', { duration: 2500, panelClass: ['style-error'] });
                     }
                 });
             });
@@ -79,7 +87,7 @@ export class TeacherOverviewComponent implements OnInit {
     }
 
     /** Method to set the current class based on the id. */
-    getClass(id): void {
+    setClass(id): void {
         this.classService.getSingleClass(id).subscribe((output) => {
             if (output.succes) {
                 this.currentClass = output.class;
@@ -88,14 +96,14 @@ export class TeacherOverviewComponent implements OnInit {
         });
     }
 
-    /** Method to get all class names for a teacher. */
-    getClassNames(): void {
-        for (const id of this.classIds) {
+    /** Method to get all classes for a teacher. */
+    getClasses(): void {
+        for (let id of this.classIds) {
             this.classService.getSingleClass(id._id).subscribe((output) => {
                 if (output.succes) {
-                    this.names.push({ title: output.class.title, id: id._id });
+                    this.classes.push({ title: output.class.title, id: id._id });
                 }
-                if (this.names.length == this.classIds.length) {
+                if (this.classes.length == this.classIds.length) {
                     this.loading = false
                 }
             });
@@ -104,7 +112,8 @@ export class TeacherOverviewComponent implements OnInit {
 
     /** Method to update the html to display the correct class based on the id. */
     switchClass(id): void {
-        this.getClass(id);
+        this.setClass(id);
+        this.onClickSelectKlas();
     }
 
     /** Method to change a boolean to unhide part of the html page */
@@ -115,5 +124,45 @@ export class TeacherOverviewComponent implements OnInit {
     /** Method to change a boolean to unhide part of the html page */
     onClickOpenForm(): void {
         this.openform = !this.openform;  
+    }
+
+    /** Method that opens the delete class dialog. */
+    openDeleteClassDialog() {
+        this.dialog.open(DeleteClassDialog, { data: { classToDelete: this.currentClass }});
+    }
+}
+
+@Component({
+    selector: 'delete-class-dialog',
+    templateUrl: 'delete-class-dialog.html',
+})
+
+export class DeleteClassDialog {
+
+    constructor(
+        private classService: ClassesService,
+        private dialog: MatDialog,
+        private dialogRef: MatDialogRef<DeleteClassDialog>,
+        private snackBar: MatSnackBar,
+        @Inject(MAT_DIALOG_DATA) private data: any
+    ) { }
+
+    /** Method to delete a user's account. */
+    deleteClass() {
+        this.classService.deleteClass(this.data.classToDelete._id).subscribe(data => {
+            if (data.succes) {
+                this.dialogRef.close();
+                this.snackBar.open(data.message, 'X', { duration: 2500, panelClass: ['style-succes']}).afterDismissed().subscribe(() => {
+                    window.location.reload();
+                });
+            } else {
+                this.snackBar.open('Er is iets fout gegaan, probeer het later opnieuw.', 'X', { duration: 2500, panelClass: ['style-error']});
+            }
+        })
+    }
+
+    /** Method to close the dialog. */
+    closeDialog(): void {
+        this.dialogRef.close();
     }
 }

@@ -54,9 +54,9 @@ export class PasswordResetComponent implements OnInit {
         // Send password and confirm to back-end which will return whether it was a succes and the message to show the user.
         this.passwordRecoveryService.postNewPassword(this.route.snapshot.paramMap.get('token'), password, repeatPassword).subscribe(data => {
             if (!data.succes) {
-                this.snackBar.open(data.message, 'X', { duration: 2500, panelClass: ['style-error'], });
+                this.snackBar.open(data.message, 'X', { duration: 2500, panelClass: ['style-error'] });
             } else {
-                this.snackBar.open(data.message, 'X', { duration: 2500, panelClass: ['style-succes'], }).afterDismissed().subscribe(() => {
+                this.snackBar.open(data.message, 'X', { duration: 2500, panelClass: ['style-succes'] }).afterDismissed().subscribe(() => {
                     this.router.navigate(['/login']);
                 });
             }

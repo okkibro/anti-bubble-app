@@ -20,7 +20,7 @@ export class ClassesService {
     constructor(private http: HttpClient, private cookie: CookieService) { }
 
     /** Method to do a POST request to create a new class in the database. */
-    public createClass(classes: Class, teacher: User) {
+    public createClass(classes: Class, teacher: User): Observable<any> {
         return this.http.post(`${environment.ENDPOINT}/class/createClass`, { classes: classes, teacher: teacher }, { headers: { Authorization: 'Bearer ' + this.cookie.get('mean-token') }});
     }
 
@@ -47,5 +47,10 @@ export class ClassesService {
     /** Method to do a GET request to get the profile of a classmate. */
     public classmateProfile(id: string): Observable<any> {
         return this.http.get(`${environment.ENDPOINT}/class/classmateProfile/${id}`, { headers: { Authorization: 'Bearer ' + this.cookie.get('mean-token') }});
+    }
+
+    /** DELETE method for deleting a teacher's class.*/
+    public deleteClass(id: string): Observable<any> {
+        return this.http.delete(`${environment.ENDPOINT}/class/deleteClass/${id}`, { headers: { Authorization: 'Bearer ' + this.cookie.get('mean-token') }});
     }
 }

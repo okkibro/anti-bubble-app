@@ -37,7 +37,7 @@ export class ProfileComponent implements OnInit {
     constructor(
         private auth: AuthenticationService,
         private fb: FormBuilder,
-        private snackbar: MatSnackBar,
+        private snackBar: MatSnackBar,
         private classService: ClassesService,
         private router: Router,
         private dialog: MatDialog
@@ -80,11 +80,11 @@ export class ProfileComponent implements OnInit {
         let newPassword = this.changePasswordForm.get('newPassword').value;
         this.auth.updatePassword(email, oldPassword, newPassword).subscribe(data => {
             if (data.succes) {
-                this.snackbar.open(data.message, 'X', { duration: 2500, panelClass: ['style-succes']}).afterDismissed().subscribe(()=>{
+                this.snackBar.open(data.message, 'X', { duration: 2500, panelClass: ['style-succes']}).afterDismissed().subscribe(()=>{
                     window.location.reload();
                 });
             } else {
-                this.snackbar.open(data.message, 'X', { duration: 2500, panelClass: ['style-error'] }).afterDismissed().subscribe(()=>{
+                this.snackBar.open(data.message, 'X', { duration: 2500, panelClass: ['style-error'] }).afterDismissed().subscribe(()=>{
                     window.location.reload();
                 });
             }
@@ -100,7 +100,7 @@ export class ProfileComponent implements OnInit {
         }
     }
 
-    /** Method that opens the delete user acocunt dialog*/
+    /** Method that opens the delete user acocunt dialog. */
     openDeleteAccountDialog() {
         this.dialog.open(DeleteAccountDialog, { data: { role: this.userDetails?.role }});
     }
@@ -115,11 +115,7 @@ export class DeleteAccountDialog {
 
     constructor(
         private auth: AuthenticationService,
-        private fb: FormBuilder,
-        private snackbar: MatSnackBar,
-        private classService: ClassesService,
-        private router: Router,
-        private dialog: MatDialog,
+        private snackBar: MatSnackBar,
         private dialogRef: MatDialogRef<DeleteAccountDialog>,
         @Inject(MAT_DIALOG_DATA) public data: any
     ) { }
@@ -127,9 +123,9 @@ export class DeleteAccountDialog {
     /** Method to delete a user's account. */
     deleteAccount() {
         this.auth.deleteAccount().subscribe(data => {
-            if(data.succes) {
+            if (data.succes) {
                 this.dialogRef.close();
-                this.snackbar.open(data.message, 'X', { duration: 2500, panelClass: ['style-succes']}).afterDismissed().subscribe(() => {
+                this.snackBar.open(data.message, 'X', { duration: 2500, panelClass: ['style-succes']}).afterDismissed().subscribe(() => {
                     this.auth.logout();
                 });
             }

@@ -41,11 +41,17 @@ router.post('/buy', auth, (req, res) => {
         
     // Check if the user has enough money and hasnt bought the item yet.
         if (user.currency >= req.body.item.price && user.inventory.find(x => x._id === req.body.item._id) == null) {
-            user.inventory.push(req.body.item); // Add item to inventory.
-            user.currency -= req.body.item.price; // Pay the money.
+
+            // Add item to inventory.
+            user.inventory.push(req.body.item);
+
+            // Pay the money.
+            user.currency -= req.body.item.price;
             user.markModified('inventory');
             user.save();
-            res.status(200).json({ succes: true, message: `Je hebt ${req.body.item.title} succesvol gekocht!` }); // Show succes message.
+
+            // Show succes message.
+            res.status(200).json({ succes: true, message: `Je hebt ${req.body.item.title} succesvol gekocht!` });
         } else {
             if (user.currency < req.body.item.price) {
 

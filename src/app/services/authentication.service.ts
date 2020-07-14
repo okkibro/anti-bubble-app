@@ -127,7 +127,7 @@ export class AuthenticationService {
         return this.http.get(`${environment.ENDPOINT}/user/profile`, { headers: { Authorization: `Bearer ${this.getToken()}` }});
     }
 
-    /** POST method for deleting a user's account.*/
+    /** DELETE method for deleting a user's account.*/
     public deleteAccount(): Observable<any> {
         return this.http.delete(`${environment.ENDPOINT}/user/deleteAccount`,  { headers: { Authorization: `Bearer ${this.getToken()}` }});
     }
