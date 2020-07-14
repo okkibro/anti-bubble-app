@@ -7,14 +7,14 @@
 const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
 const mongoose = require('mongoose');
-const User = mongoose.model('User');
 const sanitize = require('mongo-sanitize');
+const Users = mongoose.model('users');
 
 passport.use(new LocalStrategy({
     usernameField: 'email'
 },
     function (username, password, done) {
-        User.findOne({ email: sanitize(username) }, function (err, user) {
+        Users.findOne({ email: sanitize(username) }, function (err, user) {
             if (err) {
                 return done(err);
             }

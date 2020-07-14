@@ -7,7 +7,7 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-let shopSchema = new Schema({
+let shopsSchema = new Schema({
     title: {
         type: String,
         required: true
@@ -37,4 +37,4 @@ let shopSchema = new Schema({
     }
 });
 
-module.exports = mongoose.model('Shop', shopSchema);
+module.exports = mongoose.model('shops', shopsSchema);

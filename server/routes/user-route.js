@@ -11,9 +11,9 @@ const passport = require('passport');
 const sanitize = require('mongo-sanitize');
 const nodemailer = require('nodemailer');
 const crypto = require('crypto');
-const Shop = mongoose.model('Shop');
-const User = mongoose.model('User');
-const Class = mongoose.model('Classes');
+const Shops = mongoose.model('shops');
+const Users = mongoose.model('users');
+const Classes = mongoose.model('classes');
 
 const jwt = require('express-jwt');
 const auth = jwt({
@@ -25,7 +25,7 @@ const auth = jwt({
 router.post('/register', (req, res) => {
 
     // Make a new user.
-    let user = new User();
+    let user = new Users();
 
     // Fill in (the required) data to user attributes.
     user.firstName = sanitize(req.body.firstName);
@@ -57,11 +57,11 @@ router.post('/register', (req, res) => {
     }
 
     // Building the basic avatar upon registering.
-    Shop.findById('5edcf97b1167982a005b973a', (err, lichaam) => {
-        Shop.findById('5edcf97b1167982a005b977b', (err, broek) => {
-            Shop.findById('5edcf97b1167982a005b9754', (err, shirt) => {
-                Shop.findById('5edcf97b1167982a005b9787', (err, schoenen) => {
-                    Shop.find({ title: 'Geen' }, (err, emptyLayers) => {
+    Shops.findById('5edcf97b1167982a005b973a', (err, lichaam) => {
+        Shops.findById('5edcf97b1167982a005b977b', (err, broek) => {
+            Shops.findById('5edcf97b1167982a005b9754', (err, shirt) => {
+                Shops.findById('5edcf97b1167982a005b9787', (err, schoenen) => {
+                    Shops.find({ title: 'Geen' }, (err, emptyLayers) => {
                         user.avatar = {
                             haar: emptyLayers[0],
                             hoofddeksel: emptyLayers[1],
@@ -116,7 +116,7 @@ router.post('/passwordrecovery', async (req, res) => {
     const token = crypto.randomBytes(20).toString('hex');
 
     // Find the user with the given email and set the token.
-    User.findOne({ email: req.body.email }, (err, user) => {
+    Users.findOne({ email: req.body.email }, (err, user) => {
         if (!err) {
             user.recoverPasswordToken = token;
             user.recoverPasswordExpires = Date.now() + 360000;
@@ -178,7 +178,7 @@ router.post('/passwordrecovery', async (req, res) => {
 router.get('/reset/:token', (req, res) => {
 
     // Find the user that belongs to the given token
-    User.findOne({ recoverPasswordToken: req.params.token, recoverPasswordExpires: { $gt: Date.now() } }, (err) => {
+    Users.findOne({ recoverPasswordToken: req.params.token, recoverPasswordExpires: { $gt: Date.now() } }, (err) => {
         if (!err) {
             res.status(200).json({ correct: true });
         } else {
@@ -191,7 +191,7 @@ router.get('/reset/:token', (req, res) => {
 router.post('/reset/:token', (req, res) => {
 
     // Find the user that belongs to the given token
-    User.findOne({ recoverPasswordToken: req.params.token, recoverPasswordExpires: { $gt: Date.now() } }, (err, user) => {
+    Users.findOne({ recoverPasswordToken: req.params.token, recoverPasswordExpires: { $gt: Date.now() } }, (err, user) => {
         if (!err) {
             user.setPassword(req.body.password, (error) => {
                 if (error) {
@@ -225,7 +225,7 @@ router.get('/profile', auth, (req, res) => {
             message: 'UnauthorizedError: private profile'
         });
     } else {
-        User.findById(req.payload._id).exec(function (err, user) {
+        Users.findById(req.payload._id).exec(function (err, user) {
                 res.status(200).json(user);
         });
     }
@@ -233,7 +233,7 @@ router.get('/profile', auth, (req, res) => {
 
 /** Post method to check if email is already present in the database. */
 router.post('/checkEmailTaken', (req, res) => {
-    User.findOne({ email: sanitize(req.body.email) }).then(user => {
+    Users.findOne({ email: sanitize(req.body.email) }).then(user => {
         if (user) {
             return res.status(200).json({
                 emailTaken: true
@@ -248,7 +248,7 @@ router.post('/checkEmailTaken', (req, res) => {
 
 /** Patch method to update a password given an email. */
 router.patch('/updatePassword', (req, res) => {
-    User.findOne({ email: sanitize(req.body.email) }).then(user => {
+    Users.findOne({ email: sanitize(req.body.email) }).then(user => {
         if (user) {
 
             // Check if old password is filled in correctly.
@@ -275,7 +275,7 @@ router.patch('/updatePassword', (req, res) => {
 
 /** Get method to get all milestone values in an array for the logged in user. */
 router.get('/milestone', auth, (req, res) => {
-    User.findById(req.payload._id, (err, user) => {
+    Users.findById(req.payload._id, (err, user) => {
         res.json(user.milestones);
     });
 });
@@ -284,7 +284,7 @@ router.get('/milestone', auth, (req, res) => {
 router.post('/milestone', auth, (req, res) => {
 
     // Get currently logged in user.
-    User.findById(req.payload._id, (err, user) => {
+    Users.findById(req.payload._id, (err, user) => {
         let milestone = req.body.milestone;
         let completed = false;
 
@@ -317,7 +317,7 @@ router.post('/milestone', auth, (req, res) => {
 
 /** Post method to post a new message to recent milestones. */
 router.post('/recentMilestones', auth, (req, res) => {
-    User.findById(req.payload._id, (err, user) => {
+    Users.findById(req.payload._id, (err, user) => {
         if (!err) {
             // Push new value into the array.
             user.recentMilestones.push(req.body.value);
@@ -335,7 +335,7 @@ router.post('/recentMilestones', auth, (req, res) => {
 
 /** Post method to equip the avatat with the send item. */
 router.post('/avatar', auth, (req,res) => {
-    User.findById(req.payload._id, (err, user) => {
+    Users.findById(req.payload._id, (err, user) => {
         if (!err) {
             user.avatar[req.body.avatarItem.category] = req.body.avatarItem;
             user.markModified('avatar');
@@ -357,7 +357,7 @@ router.post('/avatar', auth, (req,res) => {
 
 /** Post method to update user bubble after performing/pausing the labyrinth. */
 router.post('/processAnswers', auth, (req, res) => {
-    User.findById(req.payload._id, (err, user) => {
+    Users.findById(req.payload._id, (err, user) => {
         if (!err) {
             for (q of req.body.answers) {
                 if (q != null) {
@@ -395,19 +395,19 @@ router.post('/processAnswers', auth, (req, res) => {
 
 /** Delete method for deleting a user's account */
 router.delete('/deleteAccount', auth, (req, res) => {
-    User.findById(req.payload._id, (err, user) => {
+    Users.findById(req.payload._id, (err, user) => {
         if (!err && user != null) {
 
             // Delete user document from 'users' collection.
-            User.findByIdAndDelete({ _id: user._id }).exec();
+            Users.findByIdAndDelete({ _id: user._id }).exec();
             if (user.role === 'student') {
 
                 // Delete user from 'students' array of class he was apart of (if he was apart of a class). Student document itself
                 // will be deleted so we don't have to worry about the 'classArray' here.
                 if (user.classArray.length > 0) {
-                    Class.findById(user.classArray[0], (err, userKlas) => {
+                    Classes.findById(user.classArray[0], (err, userKlas) => {
                         if (!err && userKlas != null) {
-                            Class.findByIdAndUpdate({ _id: userKlas._id }, { $pull: { students: { _id: user._id }}}).exec();
+                            Classes.findByIdAndUpdate({ _id: userKlas._id }, { $pull: { students: { _id: user._id }}}).exec();
                             userKlas.save();
                         } else {
                             res.status(404).json({ succes: false, message: err });
@@ -419,13 +419,13 @@ router.delete('/deleteAccount', auth, (req, res) => {
                 // Delete each class created by the teacher and update the 'classArray' of all the student of each class the teacher made
                 // to make sure no student is apart of a class that will no longer exist.
                 for (let klas of user.classArray) {
-                    Class.findById(klas._id, (err, userKlas) => {
+                    Classes.findById(klas._id, (err, userKlas) => {
                         if (!err && userKlas != null) {
-                            Class.findByIdAndDelete({ _id: userKlas._id }).exec();
-                            User.find({ 'classArray._id': userKlas._id, role: 'student' }, (err, classMembers) => {
+                            Classes.findByIdAndDelete({ _id: userKlas._id }).exec();
+                            Users.find({ 'classArray._id': userKlas._id, role: 'student' }, (err, classMembers) => {
                                 if (!err && classMembers.length > 0) {
                                     for (let classMember of classMembers) {
-                                        User.findByIdAndUpdate({ _id: classMember._id }, { $pull: { classArray: { _id: userKlas._id }}}).exec();
+                                        Users.findByIdAndUpdate({ _id: classMember._id }, { $pull: { classArray: { _id: userKlas._id }}}).exec();
                                         classMember.save();
                                     }
                                 } else {

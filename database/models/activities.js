@@ -7,10 +7,10 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-let activitySchema = new Schema({
+let activitiesSchema = new Schema({
     name: String,
     category: String,
     description: String,
 });
 
-module.exports = mongoose.model('Activities', activitySchema);
+module.exports = mongoose.model('activities', activitiesSchema);

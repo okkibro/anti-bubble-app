@@ -7,10 +7,10 @@
 const express = require('express');
 const router = express.Router();
 const mongoose = require('mongoose');
-const Activities = mongoose.model('Activities');
-const User = mongoose.model('User');
-const Questions = mongoose.model('Questions');
-const Articles = mongoose.model('Articles');
+const Activities = mongoose.model('activities');
+const Users = mongoose.model('users');
+const Questions = mongoose.model('questions');
+const Articles = mongoose.model('articles');
 
 const jwt = require('express-jwt');
 const auth = jwt({
@@ -20,7 +20,7 @@ const auth = jwt({
 
 /** Get method to get the articles from the database */
 router.get('/articles', auth, (req, res) => {
-	User.findById(req.payload._id, (err, user) => {
+	Users.findById(req.payload._id, (err, user) => {
 		// Get the logged in user.
 		Articles.find({}, (err, articles) => {
 
@@ -32,7 +32,7 @@ router.get('/articles', auth, (req, res) => {
 
 /** Post method to return a given activity from the database. */
 router.post('/activity', auth, (req, res) => {
-	User.findById(req.payload._id, (err, user) => {
+	Users.findById(req.payload._id, (err, user) => {
 
 		// Get the logged in user.
 		if (user.role === 'student') {
@@ -56,7 +56,7 @@ router.post('/activity', auth, (req, res) => {
 router.patch('/updateBubbleInit', auth, (req, res) => {
 
 	// Get the logged in user.
-	User.findById(req.payload._id).then((user) => {
+	Users.findById(req.payload._id).then((user) => {
 
 		// Set bubbleInit to true and save the schema.
 		user.bubbleInit = true;
@@ -80,7 +80,7 @@ router.post('/questions', auth, (req, res) => {
 router.post('/labyrinthAnswers', auth, (req, res) => {
 
 	// Get the logged in user.
-	User.findById(req.payload._id, (err, user) => {
+	Users.findById(req.payload._id, (err, user) => {
 		
 		// Loop over all questions and save corresponding answers to the user's answers based on the index of the question.
 		for (let i = 1; i < req.body.answers.length; i++) {
@@ -100,7 +100,7 @@ router.post('/labyrinthAnswers', auth, (req, res) => {
 router.post('/earnMoney', auth, (req, res) => {
 
 	// Get logged in user.
-	User.findById(req.payload._id, (err, user) => {
+	Users.findById(req.payload._id, (err, user) => {
 
 		// Increase currency.
 		user.currency += req.body.money;

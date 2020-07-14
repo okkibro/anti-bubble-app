@@ -7,10 +7,10 @@
 const express = require('express');
 const router = express.Router();
 const mongoose = require('mongoose');
-const User = mongoose.model('User');
-const Classes = mongoose.model('Classes');
 const sanitize = require('mongo-sanitize');
 const jwt = require('express-jwt');
+const Users = mongoose.model('users');
+const Classes = mongoose.model('classes');
 
 // Small constant to check authentication.
 const auth = jwt({
@@ -26,19 +26,19 @@ router.post('/createClass', auth, (req, res) => {
 		});
 	} else {
 		// Make a new class.
-		let classes = new Classes();
+		let klas = new Classes();
 
 		// Fill in (the required) data to classes attributes.
-		classes.code = sanitize(req.body.classes.code);
-		classes.level = sanitize(req.body.classes.level);
-		classes.year = sanitize(req.body.classes.year);
-		classes.title = sanitize(req.body.classes.title);
-		classes.teacher = sanitize(req.body.teacher);
-		classes.students = [];
+		klas.code = sanitize(req.body.classes.code);
+		klas.level = sanitize(req.body.classes.level);
+		klas.year = sanitize(req.body.classes.year);
+		klas.title = sanitize(req.body.classes.title);
+		klas.teacher = sanitize(req.body.teacher);
+		klas.students = [];
 
 		// Save the changes to the database.
-		classes.save().then(() => {
-			res.status(200).json({ code: classes.code, id: classes._id });
+		klas.save().then(() => {
+			res.status(200).json({ code: klas.code, id: klas._id });
 		}).catch((err) => {
 			res.status(400).json({ message: err });
 		});
@@ -54,7 +54,7 @@ router.post('/joinClass', auth, (req, res) => {
 			message: 'UnauthorizedError: private profile',
 		});
 	} else {
-		User.findById(req.payload._id, (err, user) => {
+		Users.findById(req.payload._id, (err, user) => {
 			if (err) {
 				res.status(200).json({ succes: false, message: err });
 			} else {
@@ -108,7 +108,7 @@ router.get('/getClass', auth, (req, res) => {
 			message: 'UnauthorizedError: private profile',
 		});
 	} else {
-		User.findById(req.payload._id, async (err, user) => {
+		Users.findById(req.payload._id, async (err, user) => {
 			if (err) {
 				res.status(200).json({ succes: false, message: err });
 			} else {
@@ -120,7 +120,7 @@ router.get('/getClass', auth, (req, res) => {
 						if (numberOfMembers > 0) {
 							let classmates = [];
 							for (let student of foundClass.students) {
-								User.findById(student._id, (error, classmate) => {
+								Users.findById(student._id, (error, classmate) => {
 									classmates.push(classmate);
 
 									// Check if all classmates are pushed to the list.
@@ -149,7 +149,7 @@ router.get('/getClassIds', auth, (req, res) => {
 			message: 'UnauthorizedError: private profile',
 		});
 	} else {
-		User.findById(req.payload._id, (err, user) => {
+		Users.findById(req.payload._id, (err, user) => {
 			if (err) {
 				res.status(200).json({ succes: false, message: err });
 			} else {
@@ -175,7 +175,7 @@ router.get('/getSingleClass/:id', auth, (req, res) => {
 				if (numberOfMembers > 0) {
 					let classmates = [];
 					for (student of foundClass.students) {
-						User.findById(student._id, (error, classmate) => {
+						Users.findById(student._id, (error, classmate) => {
 							classmates.push(classmate);
 
 							// Check if all classmates are pushed to the list.
@@ -203,9 +203,9 @@ router.get('/classmateProfile/:id', auth, (req, res) => {
 			message: 'UnauthorizedError: private profile',
 		});
 	} else {
-		User.findById(req.payload._id, (errorU, user) => {
+		Users.findById(req.payload._id, (errorU, user) => {
 			if (!errorU) {
-				User.findById(req.params.id, (errorC, classmate) => {
+				Users.findById(req.params.id, (errorC, classmate) => {
 					if (!errorC) {
 						if (user.role === 'student') {
 
@@ -243,10 +243,10 @@ router.delete('/deleteClass/:id', auth, (req, res) => {
 
 			// Update 'classArray' of all users that were apart of the class so they will not be members of a deleted class.
 			// We don't check for length of 'students' array since the class will always have atleast 1 memmber, namely the teacher.
-			User.find({'classArray._id': klas._id}, (err, classMembers) => {
+			Users.find({'classArray._id': klas._id}, (err, classMembers) => {
 				if (!err && classMembers != null) {
 					for (let classMember of classMembers) {
-						User.findByIdAndUpdate({ _id: classMember._id }, { $pull: { classArray: { _id: klas._id }}}).exec();
+						Users.findByIdAndUpdate({ _id: classMember._id }, { $pull: { classArray: { _id: klas._id }}}).exec();
 						classMember.save();
 					}
 				} else {

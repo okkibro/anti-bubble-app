@@ -7,13 +7,17 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-let questionSchema = new Schema({
-    id: Number,
-    question: String,
-    part: Number,
-    choices: [String],
-    choiceConsequence: [String],
-    multipleAnswers: Boolean,
+let itemsSchema = new Schema({
+    title: {
+        type: String,
+        required: true
+    },
+    category: String,
+    imagePreview: String,
+    imageFull: String,
+    imageFull2: String,
+    price: Number,
+    exp: Number
 });
 
-module.exports = mongoose.model('Questions', questionSchema);
+module.exports = mongoose.model('items', itemsSchema);

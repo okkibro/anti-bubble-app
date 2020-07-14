@@ -15,4 +15,4 @@ let articlesSchema = new Schema({
     subject: String,
 });
 
-module.exports = mongoose.model('Articles', articlesSchema);
+module.exports = mongoose.model('articles', articlesSchema);

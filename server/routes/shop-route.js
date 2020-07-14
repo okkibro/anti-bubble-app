@@ -7,8 +7,8 @@
 const express = require('express');
 const router = express.Router();
 const mongoose = require('mongoose');
-const Shop = mongoose.model('Shop');
-const User = mongoose.model('User');
+const Shops = mongoose.model('shops');
+const Users = mongoose.model('users');
 
 const jwt = require('express-jwt');
 const auth = jwt({
@@ -22,14 +22,14 @@ router.get('/', (req, res) => {
         category: req.headers.id.toLowerCase()
     }
 
-    Shop.find(query)
+    Shops.find(query)
         .exec(function (err, shop) {
             res.status(200).json(shop);
         });
 });
 
 router.get('/getBaseInventory', auth, (req, res) => {
-    Shop.find({ initial: true }).exec(function (err, shop) {
+    Shops.find({ initial: true }).exec(function (err, shop) {
         res.status(200).json(shop);
     });
 });
@@ -37,7 +37,7 @@ router.get('/getBaseInventory', auth, (req, res) => {
 router.post('/buy', auth, (req, res) => {
 
     // Get the logged in user.
-    User.findById(req.payload._id).exec(function (err, user) { 
+    Users.findById(req.payload._id).exec(function (err, user) { 
         
     // Check if the user has enough money and hasnt bought the item yet.
         if (user.currency >= req.body.item.price && user.inventory.find(x => x._id === req.body.item._id) == null) {

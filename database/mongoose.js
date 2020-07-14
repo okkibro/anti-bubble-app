@@ -14,11 +14,11 @@ mongoose.connect('mongodb://127.0.0.1:27017/anti-bubble', { useNewUrlParser: tru
     .catch((error) => console.log(error));
 
 module.exports = {
-    Item: require('./models/item'),
-    User: require('./models/users'),
-    Shop: require('./models/shopItems'),
-    Classes: require('./models/classes'),
-    Activities: require('./models/activities'),
-    Questions: require('./models/question'),
-    Articles: require('./models/articles'),
+    items: require('./models/items'),
+    users: require('./models/users'),
+    shops: require('./models/shops'),
+    classes: require('./models/classes'),
+    activities: require('./models/activities'),
+    questions: require('./models/questions'),
+    articles: require('./models/articles'),
 };

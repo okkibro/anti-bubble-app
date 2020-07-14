@@ -6,9 +6,9 @@
 
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
-const User = mongoose.model('User');
+const Users = mongoose.model('users');
 
-let classSchema = new Schema({
+let classesSchema = new Schema({
     code: {
         type: Number,
         required: true
@@ -27,14 +27,14 @@ let classSchema = new Schema({
     },
     students: {
         type: [{
-            item: { type: Schema.ObjectId, ref: 'User' }
+            item: { type: Schema.ObjectId, ref: 'users' }
         }],
         required: true
     },
     teacher: {
-        type: Schema.ObjectId, ref: 'User',
+        type: Schema.ObjectId, ref: 'users',
         required: true
     }
 });
 
-module.exports = mongoose.model('Classes', classSchema);
+module.exports = mongoose.model('classes', classesSchema);
