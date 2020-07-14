@@ -15,6 +15,7 @@
         <a mat-button [routerLink]="'/teacher-overview'" *ngIf="tokenData.role == 'teacher'" fxFlex="20"> Klas overzicht </a>
         <a mat-button [routerLink]="'/class-overview'" *ngIf="tokenData.role == 'student'" fxFlex="20"> Klas overzicht </a>
         <a mat-button [routerLink]="'/profile'" fxFlex="20"> Profiel </a>
+        <a mat-button [routerLink]="'/shop'" *ngIf="tokenData.role == 'student'" fxFlex="20"> Shop </a>
         <button mat-button (click)="logoutButton()" fxFlex="20" fxFlexOffset="20"> Log uit </button>
     </div>
 </mat-toolbar>

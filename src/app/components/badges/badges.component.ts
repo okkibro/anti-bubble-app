@@ -16,7 +16,6 @@ import { User } from '../../models/user';
         '../../shared/general-styles.css']
 })
 export class BadgesComponent implements OnInit {
-
     completed = [];
     uncompleted = [];
     userDetails: User;
@@ -27,6 +26,7 @@ export class BadgesComponent implements OnInit {
     ngOnInit(): void {
         this.auth.profile().subscribe(user => {
             this.userDetails = user;
+
             // Loop over all milestones and sort them into the arrays.
             for (let i = 0; i < milestones.length; i++) {
                 if (milestones[i].maxValue == user.milestones[i]) {
@@ -35,6 +35,7 @@ export class BadgesComponent implements OnInit {
                     this.uncompleted.push({ index: i, milestone: milestones[i] })
                 }
             }
+
             // Set value of progressbar.
             this.value = this.completedRatio();
         }, (err) => {
