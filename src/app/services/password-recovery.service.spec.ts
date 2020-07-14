@@ -12,7 +12,7 @@ describe('PasswordRecoveryService', () => {
   let service: PasswordRecoveryService;
 
   beforeEach(() => {
-    TestBed.configureTestingModule({});
+    TestBed.configureTestingModule({ });
     service = TestBed.inject(PasswordRecoveryService);
   });
 });

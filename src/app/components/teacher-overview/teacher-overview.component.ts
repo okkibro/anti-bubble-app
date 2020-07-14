@@ -11,9 +11,8 @@ import { User } from 'src/app/models/user';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Class } from 'src/app/models/classes';
 import { ClassesService } from 'src/app/services/classes.service';
-import { Router } from "@angular/router";
 import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from "@angular/material/dialog";
-import { DeleteAccountDialog } from "../profile/profile.component";
+import { LeaveClassDialog } from "../class-overview/class-overview.component";
 
 @Component({
     selector: 'mean-teacher-overview',
@@ -130,6 +129,11 @@ export class TeacherOverviewComponent implements OnInit {
     openDeleteClassDialog() {
         this.dialog.open(DeleteClassDialog, { data: { classToDelete: this.currentClass }});
     }
+
+    /** Method that opens the remove student from class dialog. */
+    openRemoveFromClassDialog(user: User) {
+        this.dialog.open(RemoveFromClassDialog, { data: { userId: user._id, classId: this.currentClass._id, leaving: false }});
+    }
 }
 
 @Component({
@@ -150,6 +154,41 @@ export class DeleteClassDialog {
     /** Method to delete a user's account. */
     deleteClass() {
         this.classService.deleteClass(this.data.classToDelete._id).subscribe(data => {
+            if (data.succes) {
+                this.dialogRef.close();
+                this.snackBar.open(data.message, 'X', { duration: 2500, panelClass: ['style-succes']}).afterDismissed().subscribe(() => {
+                    window.location.reload();
+                });
+            } else {
+                this.snackBar.open('Er is iets fout gegaan, probeer het later opnieuw.', 'X', { duration: 2500, panelClass: ['style-error']});
+            }
+        })
+    }
+
+    /** Method to close the dialog. */
+    closeDialog(): void {
+        this.dialogRef.close();
+    }
+}
+
+@Component({
+    selector: 'remove-from-class-dialog',
+    templateUrl: 'remove-from-class-dialog.html',
+})
+
+export class RemoveFromClassDialog {
+
+    constructor(
+        private classService: ClassesService,
+        private dialog: MatDialog,
+        private dialogRef: MatDialogRef<DeleteClassDialog>,
+        private snackBar: MatSnackBar,
+        @Inject(MAT_DIALOG_DATA) private data: any
+    ) { }
+
+    /** Method to remove a student from the current class. */
+    removeFromClass() {
+        this.classService.leaveClass(this.data.userId, this.data.classId, this.data.leaving).subscribe(data => {
             if (data.succes) {
                 this.dialogRef.close();
                 this.snackBar.open(data.message, 'X', { duration: 2500, panelClass: ['style-succes']}).afterDismissed().subscribe(() => {

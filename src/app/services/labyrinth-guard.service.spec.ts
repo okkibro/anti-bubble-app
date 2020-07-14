@@ -12,7 +12,7 @@ describe('LabyrinthGuardService', () => {
   let service: LabyrinthGuardService;
 
   beforeEach(() => {
-    TestBed.configureTestingModule({});
+    TestBed.configureTestingModule({ });
     service = TestBed.inject(LabyrinthGuardService);
   });
 

@@ -49,8 +49,13 @@ export class ClassesService {
         return this.http.get(`${environment.ENDPOINT}/class/classmateProfile/${id}`, { headers: { Authorization: 'Bearer ' + this.cookie.get('mean-token') }});
     }
 
-    /** DELETE method for deleting a teacher's class.*/
+    /** Method to do a DELETE request to delete a class.*/
     public deleteClass(id: string): Observable<any> {
         return this.http.delete(`${environment.ENDPOINT}/class/deleteClass/${id}`, { headers: { Authorization: 'Bearer ' + this.cookie.get('mean-token') }});
+    }
+
+    /** Method to do a PATCH request to leave class.*/
+    public leaveClass(userId: string, classId: string, leaving: boolean): Observable<any> {
+        return this.http.patch(`${environment.ENDPOINT}/class/leaveClass`, { userId: userId, classId: classId, leaving: leaving },{ headers: { Authorization: 'Bearer ' + this.cookie.get('mean-token') }});
     }
 }

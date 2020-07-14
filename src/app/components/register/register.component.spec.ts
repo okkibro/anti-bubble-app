@@ -128,8 +128,8 @@ describe('RegisterComponent', () => {
 
     fixture.detectChanges();
 
-    const pw1errors = pw1.errors || {};
-    const pw2errors = pw2.errors || {};
+    const pw1errors = pw1.errors || { };
+    const pw2errors = pw2.errors || { };
 
     expect(pw1errors.required).toBeFalsy();
     expect(pw2errors.required).toBeFalsy();

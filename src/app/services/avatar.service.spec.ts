@@ -12,7 +12,7 @@ describe('AvatarService', () => {
   let service: AvatarService;
 
   beforeEach(() => {
-    TestBed.configureTestingModule({});
+    TestBed.configureTestingModule({ });
     service = TestBed.inject(AvatarService);
   });
 });

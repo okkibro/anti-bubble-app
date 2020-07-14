@@ -12,7 +12,7 @@ describe('DataExchageService', () => {
   let service: DataService;
 
   beforeEach(() => {
-    TestBed.configureTestingModule({});
+    TestBed.configureTestingModule({ });
     service = TestBed.inject(DataService);
   });
 });

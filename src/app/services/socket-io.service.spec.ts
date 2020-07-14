@@ -12,7 +12,7 @@ describe('SocketIOService', () => {
   let service: SocketIOService;
 
   beforeEach(() => {
-    TestBed.configureTestingModule({});
+    TestBed.configureTestingModule({ });
     service = TestBed.inject(SocketIOService);
   });
 });

@@ -29,7 +29,7 @@ export class SessionService {
 
     /** Method to do a PATCH request to update the database of a user if they completed the initial labyrinth. */
     public performedLabyrinth(): Observable<any> {
-        return this.http.patch(`${environment.ENDPOINT}/session/updateBubbleInit`, {}, { headers: { Authorization: 'Bearer ' + this.cookie.get('mean-token') } });
+        return this.http.patch(`${environment.ENDPOINT}/session/updateBubbleInit`, { }, { headers: { Authorization: 'Bearer ' + this.cookie.get('mean-token') } });
     }
 
     /** Method to do a POST request to get all the questions given a part. */

@@ -96,7 +96,7 @@ describe('LoginComponent', () => {
   it('should validate email format correctly', () => {
     const email = component.loginForm.controls.email;
     email.setValue('test@test.com');
-    const errors = email.errors || {};
+    const errors = email.errors || { };
 
     expect(email.valid).toBeTruthy();
     expect(errors.email).toBeFalsy();

@@ -12,7 +12,7 @@ describe('SessionGuardService', () => {
   let service: SessionGuardService;
 
   beforeEach(() => {
-    TestBed.configureTestingModule({});
+    TestBed.configureTestingModule({ });
     service = TestBed.inject(SessionGuardService);
   });
 });

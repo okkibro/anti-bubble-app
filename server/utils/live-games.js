@@ -12,10 +12,10 @@ class LiveGames {
     /** Method that adds a gane ti tge kust if ganes.
      * gameLive says whether the game has started or not. 
      * gameData contains the name and options of the game being played. */
-    addGame(pin, hostID, gameLive, gameData) {
+    addGame(pin, hostId, gameLive, gameData) {
         const game = {
             pin,
-            hostID,
+            hostId,
             gameLive,
             gameData
         };
@@ -24,18 +24,18 @@ class LiveGames {
     }
     
     /** Method that removes a game from the list of gasmes. */
-    removeGame(hostID) {
-        const game = this.getGame(hostID);
+    removeGame(hostId) {
+        const game = this.getGame(hostId);
 
         if (game) {
-            this.games = this.games.filter((game) => game.hostID !== hostID);
+            this.games = this.games.filter((game) => game.hostId !== hostId);
         }
         return game;
     }
     
     /** Method to get the game given an id */
-    getGame(hostID) {
-        return this.games.filter((game) => game.hostID === hostID)[0]
+    getGame(hostId) {
+        return this.games.filter((game) => game.hostId === hostId)[0]
     }
 }
 

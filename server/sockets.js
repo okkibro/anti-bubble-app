@@ -30,14 +30,14 @@ function runIO(io) {
 			// Look for a game with the entered pin
 			for (let i = 0; i < games.games.length; i++) {
 				if (params.pin === games.games[i].pin && games.games[i].gameLive === false) {
-					let hostId = games.games[i].hostID;
+					let hostId = games.games[i].hostId;
 					gameFound = true;
 					if (players.getPlayers(hostId).find(x => x.email === params.player.email) !== undefined) {
 						socket.emit('join-failure');
 					} else {
 
 						// Add player to the list of players.
-						players.addPlayer(hostId, socket.id, `${params.player.firstName} ${params.player.lastName}`, {}, params.player.email);
+						players.addPlayer(hostId, socket.id, `${params.player.firstName} ${params.player.lastName}`, { }, params.player.email);
 
 						// Player socket joins game room.
 						socket.join(params.pin);
@@ -46,7 +46,7 @@ function runIO(io) {
 						socket.emit('join-succes', games.games[i].gameData);
 
 						// Send update to the host so the host's screen gets updated with the player's name.
-						io.to(games.games[i].hostID).emit('update-players', params.player);
+						io.to(games.games[i].hostId).emit('update-players', params.player);
 					}
 				}
 			}
@@ -72,13 +72,13 @@ function runIO(io) {
 				games.removeGame(socket.id);
 
 				// Getting all players in the game.
-				let playersToRemove = players.getPlayers(game.hostID);
+				let playersToRemove = players.getPlayers(game.hostId);
 
 				// For each player in the game.
 				for (let i = 0; i < playersToRemove.length; i++) {
 
 					// Removing each player from player class.
-					players.removePlayer(playersToRemove[i].playerID);
+					players.removePlayer(playersToRemove[i].playerId);
 				}
 
 				// Send player back to 'join' screen.
@@ -96,7 +96,7 @@ function runIO(io) {
 				if (player) {
 
 					// Gets id of host of the game.
-					let hostId = player.hostID;
+					let hostId = player.hostId;
 
 					// Gets game data with hostId.
 					let game = games.getGame(hostId);
@@ -132,13 +132,13 @@ function runIO(io) {
 				games.removeGame(socket.id);
 
 				// Getting all players in the game.
-				let playersToRemove = players.getPlayers(game.hostID);
+				let playersToRemove = players.getPlayers(game.hostId);
 
 				//For each player in the game
 				for (let i = 0; i < playersToRemove.length; i++) {
 
 					// Removing each player from player class.
-					players.removePlayer(playersToRemove[i].playerID);
+					players.removePlayer(playersToRemove[i].playerId);
 				}
 
 				// Send player back to 'join' screen.
@@ -156,7 +156,7 @@ function runIO(io) {
 				if (player) {
 
 					// Gets id of host of the game.
-					let hostId = player.hostID;
+					let hostId = player.hostId;
 
 					// Gets game data with hostId.
 					let game = games.getGame(hostId);
@@ -188,7 +188,7 @@ function runIO(io) {
 
 		socket.on('submit', (data) => {
 			let player = players.getPlayer(socket.id);
-			io.to(player.hostID).emit('receive-submit', { player: player, message: data });
+			io.to(player.hostId).emit('receive-submit', { player: player, message: data });
 		});
 
 		socket.on('start-game', () => {
@@ -259,7 +259,7 @@ function runIO(io) {
 				for (let j = 0; j < pairs[i].length; j++) {
 					let teamMembers = pairs[i].filter(x => x.email !== pairs[i][j].email);
 					let article = articleList[i][j];
-					socket.to(pairs[i][j].playerID).emit('receive-team', teamMembers, article, leaders);
+					socket.to(pairs[i][j].playerId).emit('receive-team', teamMembers, article, leaders);
 				}
 			}
 
@@ -285,7 +285,7 @@ function runIO(io) {
 
 		// This will make the given player's button active again when the teacher removes their answer.
 		socket.on('reactivate-button', (player) => {
-			socket.to(player.playerID).emit('reactivate');
+			socket.to(player.playerId).emit('reactivate');
 		});
 
 		socket.on('finish-game', () => {

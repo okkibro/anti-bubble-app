@@ -33,7 +33,7 @@ export class BubbleDetailsComponent implements OnInit {
 
     // Optional boolean, defaults to false.
     runOutsideAngularFlag = false;
-    chartOptions = {}
+    chartOptions = { }
     userDetails: User;
 
     data

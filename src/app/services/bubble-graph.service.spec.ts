@@ -12,7 +12,7 @@ describe('BubbleGraphService', () => {
   let service: BubbleGraphService;
 
   beforeEach(() => {
-    TestBed.configureTestingModule({});
+    TestBed.configureTestingModule({ });
     service = TestBed.inject(BubbleGraphService);
   });
 });

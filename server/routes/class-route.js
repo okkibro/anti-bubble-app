@@ -18,7 +18,7 @@ const auth = jwt({
 	userProperty: 'payload',
 });
 
-/** Post method to create a new class in the database. */
+/** POST method to create a new class in the database. */
 router.post('/createClass', auth, (req, res) => {
 	if (!req.payload._id) {
 		res.status(401).json({
@@ -45,7 +45,7 @@ router.post('/createClass', auth, (req, res) => {
 	}
 });
 
-/** Post method to join a user to a class. */
+/** POST method to join a user to a class. */
 router.post('/joinClass', auth, (req, res) => {
 
 	// Check if you are authorized.
@@ -99,7 +99,7 @@ router.post('/joinClass', auth, (req, res) => {
 	}
 });
 
-/** Get method to get the class a user is in.
+/** GET method to get the class a user is in.
  * In case of a teacher this functions gives back the first class in the teachers class list. */
 router.get('/getClass', auth, (req, res) => {
 	// Check if you are authorized.
@@ -141,7 +141,7 @@ router.get('/getClass', auth, (req, res) => {
 	}
 });
 
-/** Get method to get all the database class ids a user has in their class list. */
+/** GET method to get all the database class ids a user has in their class list. */
 router.get('/getClassIds', auth, (req, res) => {
 	//Check if you are authorized.
 	if (!req.payload._id) {
@@ -159,7 +159,7 @@ router.get('/getClassIds', auth, (req, res) => {
 	}
 });
 
-/** Get method to get a class based on the given id in the url. */
+/** GET method to get a class based on the given id in the url. */
 router.get('/getSingleClass/:id', auth, (req, res) => {
 	// Check if you are authorized.
 	if (!req.payload._id) {
@@ -194,7 +194,7 @@ router.get('/getSingleClass/:id', auth, (req, res) => {
 	}
 });
 
-/** Get method to get a profile of a user in your class. */
+/** GET method to get a profile of a user in your class. */
 router.get('/classmateProfile/:id', auth, (req, res) => {
 
 	// Check if you are authorized.
@@ -231,7 +231,7 @@ router.get('/classmateProfile/:id', auth, (req, res) => {
 	}
 });
 
-/** Delete method for deleting a class based on a given id. */
+/** DELETE method for deleting a class based on a given id. */
 router.delete('/deleteClass/:id', auth, (req, res) => {
 
 	// Find class based on id pased in URL.
@@ -258,6 +258,38 @@ router.delete('/deleteClass/:id', auth, (req, res) => {
 			res.status(404).json({ succes: false, message: err });
 		}
 	});
+});
+
+/** PATCH that removes a student from a class (whether initiated by the teacher or the student themselves). */
+router.patch('/leaveClass', auth, (req, res) => {
+
+	// Find the user who is leaving/being removed from the class and update their 'classArray'.
+	Users.findById(req.body.userId, (err, user) => {
+		if (!err && user != null) {
+			Users.findByIdAndUpdate({ _id: user._id }, { $pull: { classArray: { _id: req.body.classId }}}).exec();
+			user.save();
+		} else {
+			return res.status(404).json({ succes: false, message: err });
+		}
+	});
+
+	// Find the user who is leaving/being removed from the class and update their 'classArray'.
+	Classes.findById(req.body.classId, (err, klas) => {
+		if (!err && klas != null) {
+			Classes.findByIdAndUpdate({ _id: klas._id }, { $pull: { students: { _id: req.body.userId }}}).exec();
+			klas.save();
+		} else {
+			return res.status(404).json({ succes: false, message: err });
+		}
+	});
+
+	// If 'req.body.leaving' is true, the student left themselves; if it is false, they were kicked by a teacher and we
+	// return the message accrodingly.
+	if (req.body.leaving) {
+		return res.status(200).json({ succes: true, message: 'Je hebt de klas succesvol verlaten.' });
+	} else {
+		return res.status(200).json({ succes: true, message: 'Leerling is succesvol uit de klas verwijderd.' });
+	}
 });
 
 module.exports = router;

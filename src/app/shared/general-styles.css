@@ -73,7 +73,9 @@ mat-card-header {
     text-align: center;
 }
 
-.delete-button {
+.delete-button,
+.leave-button,
+.remove-button {
     background-color: red;
     color: white;
     border-radius: 10px;

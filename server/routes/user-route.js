@@ -21,7 +21,7 @@ const auth = jwt({
     userProperty: 'payload'
 });
 
-/** Post method to register a new user to the database. */
+/** POST method to register a new user to the database. */
 router.post('/register', (req, res) => {
 
     // Make a new user.
@@ -85,7 +85,7 @@ router.post('/register', (req, res) => {
     });
 });
 
-/** Post method to check if login details match with the database (authentication). */
+/** POST method to check if login details match with the database (authentication). */
 router.post('/login', (req, res) => {
     passport.authenticate('local', function (err, user) {
 
@@ -109,7 +109,7 @@ router.post('/login', (req, res) => {
     })(req, res);
 });
 
-/** Post method to send a password recovery email. */
+/** POST method to send a password recovery email. */
 router.post('/passwordrecovery', async (req, res) => {
 
     // Generate Random Token.
@@ -174,7 +174,7 @@ router.post('/passwordrecovery', async (req, res) => {
     });
 });
 
-/** Get method to check the password recovery token and shows the reset password page or a wrong token error. */
+/** GET method to check the password recovery token and shows the reset password page or a wrong token error. */
 router.get('/reset/:token', (req, res) => {
 
     // Find the user that belongs to the given token
@@ -187,7 +187,7 @@ router.get('/reset/:token', (req, res) => {
     });
 });
 
-/** Post method to change the password of the user belonging to the given password recovery token. */
+/** POST method to change the password of the user belonging to the given password recovery token. */
 router.post('/reset/:token', (req, res) => {
 
     // Find the user that belongs to the given token
@@ -216,10 +216,10 @@ router.post('/reset/:token', (req, res) => {
     });
 });
 
-/** Get method to get a user from the database given an id. */
+/** GET method to get a user from the database given an id. */
 router.get('/profile', auth, (req, res) => {
 
-    // If no user ID exists in the JWT return a 401.
+    // If no user Id exists in the JWT return a 401.
     if (!req.payload._id) {
         res.status(401).json({
             message: 'UnauthorizedError: private profile'
@@ -231,7 +231,7 @@ router.get('/profile', auth, (req, res) => {
     }
 });
 
-/** Post method to check if email is already present in the database. */
+/** POST method to check if email is already present in the database. */
 router.post('/checkEmailTaken', (req, res) => {
     Users.findOne({ email: sanitize(req.body.email) }).then(user => {
         if (user) {
@@ -246,7 +246,7 @@ router.post('/checkEmailTaken', (req, res) => {
     });
 });
 
-/** Patch method to update a password given an email. */
+/** PATCH method to update a password given an email. */
 router.patch('/updatePassword', (req, res) => {
     Users.findOne({ email: sanitize(req.body.email) }).then(user => {
         if (user) {
@@ -273,14 +273,14 @@ router.patch('/updatePassword', (req, res) => {
     });
 });
 
-/** Get method to get all milestone values in an array for the logged in user. */
+/** GET method to get all milestone values in an array for the logged in user. */
 router.get('/milestone', auth, (req, res) => {
     Users.findById(req.payload._id, (err, user) => {
         res.json(user.milestones);
     });
 });
 
-/** Post method to changes a milestone by a given value, returns the updated value and whether it is completed now or not. */
+/** POST method to changes a milestone by a given value, returns the updated value and whether it is completed now or not. */
 router.post('/milestone', auth, (req, res) => {
 
     // Get currently logged in user.
@@ -315,7 +315,7 @@ router.post('/milestone', auth, (req, res) => {
     })
 });
 
-/** Post method to post a new message to recent milestones. */
+/** POST method to post a new message to recent milestones. */
 router.post('/recentMilestones', auth, (req, res) => {
     Users.findById(req.payload._id, (err, user) => {
         if (!err) {
@@ -333,7 +333,7 @@ router.post('/recentMilestones', auth, (req, res) => {
     })
 });
 
-/** Post method to equip the avatat with the send item. */
+/** POST method to equip the avatat with the send item. */
 router.post('/avatar', auth, (req,res) => {
     Users.findById(req.payload._id, (err, user) => {
         if (!err) {
@@ -355,7 +355,7 @@ router.post('/avatar', auth, (req,res) => {
     });
 });
 
-/** Post method to update user bubble after performing/pausing the labyrinth. */
+/** POST method to update user bubble after performing/pausing the labyrinth. */
 router.post('/processAnswers', auth, (req, res) => {
     Users.findById(req.payload._id, (err, user) => {
         if (!err) {
@@ -393,7 +393,7 @@ router.post('/processAnswers', auth, (req, res) => {
     });
 });
 
-/** Delete method for deleting a user's account */
+/** DELETE method for deleting a user's account */
 router.delete('/deleteAccount', auth, (req, res) => {
     Users.findById(req.payload._id, (err, user) => {
         if (!err && user != null) {

@@ -4,12 +4,15 @@
  * Computing Sciences)
  */
 
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { AuthenticationService } from '../../services/authentication.service';
 import { Router } from '@angular/router';
 import { User } from '../../models/user';
 import { FormBuilder } from '@angular/forms';
 import { ClassesService } from '../../services/classes.service';
+import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from "@angular/material/dialog";
+import { MatSnackBar } from "@angular/material/snack-bar";
+import { DeleteClassDialog } from "../teacher-overview/teacher-overview.component";
 
 @Component({
     selector: 'mean-class-overview',
@@ -24,6 +27,7 @@ export class ClassOverviewComponent implements OnInit {
     });
 
     classmates: User[];
+    userClass;
     userClassTitle;
     userDetails: User;
 
@@ -33,7 +37,8 @@ export class ClassOverviewComponent implements OnInit {
         private classService: ClassesService,
         private auth: AuthenticationService,
         private router: Router,
-        private fb: FormBuilder
+        private fb: FormBuilder,
+        private dialog: MatDialog
     ) { }
 
     ngOnInit() {
@@ -42,6 +47,7 @@ export class ClassOverviewComponent implements OnInit {
         })
         this.classService.getClass().subscribe((data) => {
             if (data.succes) {
+                this.userClass = data.class;
                 this.userClassTitle = data.class.title;
                 this.classmates = data.classmates;
             }
@@ -68,5 +74,45 @@ export class ClassOverviewComponent implements OnInit {
         for (let i: number = 0; i < this.classmates.length; i++) {
             (table[i + 1] as HTMLElement).style.display = '';
         }
+    }
+
+    /** Method that opens the leave class dialog. */
+    openLeaveClassDialog() {
+        this.dialog.open(LeaveClassDialog, { data: { userId: this.userDetails._id, classId: this.userClass._id, leaving: true }});
+    }
+}
+
+@Component({
+    selector: 'leave-class-dialog',
+    templateUrl: 'leave-class-dialog.html',
+})
+
+export class LeaveClassDialog {
+
+    constructor(
+        private classService: ClassesService,
+        private dialog: MatDialog,
+        private dialogRef: MatDialogRef<LeaveClassDialog>,
+        private snackBar: MatSnackBar,
+        @Inject(MAT_DIALOG_DATA) public data: any
+    ) { }
+
+    /** Method to leave your class. */
+    leaveClass() {
+        this.classService.leaveClass(this.data.userId, this.data.classId, this.data.leaving).subscribe(data => {
+            if (data.succes) {
+                this.dialogRef.close();
+                this.snackBar.open(data.message, 'X', { duration: 2500, panelClass: ['style-succes']}).afterDismissed().subscribe(() => {
+                    window.location.reload();
+                });
+            } else {
+                this.snackBar.open('Er is iets fout gegaan, probeer het later opnieuw.', 'X', { duration: 2500, panelClass: ['style-error']});
+            }
+        })
+    }
+
+    /** Method to close the dialog. */
+    closeDialog(): void {
+        this.dialogRef.close();
     }
 }

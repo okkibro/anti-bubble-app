@@ -16,7 +16,7 @@ const auth = jwt({
     userProperty: 'payload'
 });
 
-/** Get method to get shop items from the database based on a query. */
+/** GET method to get shop items from the database based on a query. */
 router.get('/', (req, res) => {
     let query = {
         category: req.headers.id.toLowerCase()

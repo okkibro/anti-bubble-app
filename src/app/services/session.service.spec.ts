@@ -12,7 +12,7 @@ describe('SessionService', () => {
   let service: SessionService;
 
   beforeEach(() => {
-    TestBed.configureTestingModule({});
+    TestBed.configureTestingModule({ });
     service = TestBed.inject(SessionService);
   });
 });

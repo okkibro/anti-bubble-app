@@ -12,7 +12,7 @@ describe('ShopService', () => {
   let service: ShopService;
 
   beforeEach(() => {
-    TestBed.configureTestingModule({});
+    TestBed.configureTestingModule({ });
     service = TestBed.inject(ShopService);
   });
 });

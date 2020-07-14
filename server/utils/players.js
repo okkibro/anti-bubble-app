@@ -9,31 +9,31 @@ class Players {
         this.players = [];
     }
     
-    /** Method that adds a player to the list of players. HostID is the id of the host of the game they are in. */
-    addPlayer(hostID, playerID, name, gameData, email) {
-        const player = { hostID, playerID, name, gameData, email };
+    /** Method that adds a player to the list of players. HostId is the id of the host of the game they are in. */
+    addPlayer(hostId, playerId, name, gameData, email) {
+        const player = { hostId, playerId, name, gameData, email };
         this.players.push(player);
         return player;
     }
     
     /** Method that removes a player from the list of players. */
-    removePlayer(playerID) {
-        const player = this.getPlayer(playerID);
+    removePlayer(playerId) {
+        const player = this.getPlayer(playerId);
 
         if (player) {
-            this.players = this.players.filter((player) => player.playerID !== playerID);
+            this.players = this.players.filter((player) => player.playerId !== playerId);
         }
         return player;
     }
     
     /** Method that gets a player based on the given id. */
-    getPlayer(playerID) {
-        return this.players.filter((player) => player.playerID === playerID)[0]
+    getPlayer(playerId) {
+        return this.players.filter((player) => player.playerId === playerId)[0]
     }
     
-    /** Method that gets all players in one session based on the host's ID of that session. */
-    getPlayers(hostID) {
-        return this.players.filter((player) => player.hostID === hostID);
+    /** Method that gets all players in one session based on the host's Id of that session. */
+    getPlayers(hostId) {
+        return this.players.filter((player) => player.hostId === hostId);
     }
 }
 

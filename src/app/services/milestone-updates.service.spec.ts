@@ -12,7 +12,7 @@ describe('MilestoneUpdatesService', () => {
   let service: MilestoneUpdatesService;
 
   beforeEach(() => {
-    TestBed.configureTestingModule({});
+    TestBed.configureTestingModule({ });
     service = TestBed.inject(MilestoneUpdatesService);
   });
 });

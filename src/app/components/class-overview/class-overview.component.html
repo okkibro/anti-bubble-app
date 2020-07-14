@@ -50,6 +50,10 @@
                     </mat-card-content>
                 </mat-card>
 
+                <mat-card *ngIf="userClassTitle">
+                    <button mat-button class="leave-button" (click)="openLeaveClassDialog()">Verlaat klas</button>
+                </mat-card>
+
                 <div *ngIf="userClassTitle == undefined">
                     <mean-join-class></mean-join-class>
                 </div>
