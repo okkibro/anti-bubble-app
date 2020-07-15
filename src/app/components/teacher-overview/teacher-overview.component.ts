@@ -164,11 +164,6 @@ export class DeleteClassDialog {
             }
         })
     }
-
-    /** Method to close the dialog. */
-    closeDialog(): void {
-        this.dialogRef.close();
-    }
 }
 
 @Component({
@@ -198,10 +193,5 @@ export class RemoveFromClassDialog {
                 this.snackBar.open('Er is iets fout gegaan, probeer het later opnieuw.', 'X', { duration: 2500, panelClass: ['style-error']});
             }
         })
-    }
-
-    /** Method to close the dialog. */
-    closeDialog(): void {
-        this.dialogRef.close();
     }
 }

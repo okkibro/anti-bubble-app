@@ -108,9 +108,4 @@ export class LeaveClassDialog {
             }
         })
     }
-
-    /** Method to close the dialog. */
-    closeDialog(): void {
-        this.dialogRef.close();
-    }
 }

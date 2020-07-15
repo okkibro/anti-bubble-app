@@ -131,9 +131,4 @@ export class DeleteAccountDialog {
             }
         })
     }
-
-    /** Method to close the dialog. */
-    closeDialog(): void {
-        this.dialogRef.close();
-    }
 }
