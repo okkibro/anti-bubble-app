@@ -4,13 +4,14 @@
   ~ Computing Sciences)
   -->
 
-<mat-card [formGroup]="classCodeField">
+<mat-card>
     <mat-card-title>Word lid van een klas</mat-card-title>
     <mat-card-content class="join-class">
-        <mat-form-field>
-            <input type="number" matInput formControlName="classCode" [(ngModel)]="value"
-                placeholder="Vul hier je klascode in">
-        </mat-form-field>
-        <button mat-button class="general-button" (click)="joinClass()">Word lid</button>
+        <form [formGroup]="joinClassForm">
+            <mat-form-field>
+                <input type="number" matInput formControlName="code" placeholder="Vul hier je klascode in">
+            </mat-form-field>
+            <button mat-button class="general-button" (click)="joinClass()">Word lid</button>
+        </form>
     </mat-card-content>
 </mat-card>

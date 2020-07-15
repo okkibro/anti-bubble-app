@@ -16,18 +16,16 @@ import { MatSnackBar } from '@angular/material/snack-bar';
         '../../shared/general-styles.css']})
 
 export class JoinClassComponent implements OnInit {
-    classCodeField = this.fb.group({
-        classCode: ['', []]
+    joinClassForm = this.fb.group({
+        code: ['', []]
     });
-    value;
     constructor(private fb: FormBuilder, private classesService: ClassesService, private snackBar: MatSnackBar) { }
 
-    ngOnInit(): void {
-    }
+    ngOnInit(): void { }
 
     /** Method to join a class based on the code you filled in. */
     joinClass(): void {
-        this.classesService.joinClass(this.value).subscribe(data => {
+        this.classesService.joinClass(this.joinClassForm.get('code').value).subscribe(data => {
             if (data.succes) {
                 this.snackBar.open(data.message, 'X', { duration: 2500, panelClass: ['style-succes'] }).afterDismissed().subscribe(()=>{
                     window.location.reload();

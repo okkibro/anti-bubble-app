@@ -36,10 +36,11 @@ export class RegisterComponent implements OnInit {
             validator: this.passwordMatchValidator
         });
 
-    constructor(private auth: AuthenticationService,
-                private router: Router,
-                private fb: FormBuilder,
-                private shop: ShopService
+    constructor(
+        private auth: AuthenticationService,
+        private router: Router,
+        private fb: FormBuilder,
+        private shop: ShopService
     ) { }
 
     ngOnInit() { }

@@ -7,7 +7,7 @@
 <form *ngIf="tokenData.role == 'student'" [formGroup]="getAnswerForm" (ngSubmit)="sendAnswer()">
     <mat-form-field>
         <mat-label>Vul hier je antwoord in</mat-label>
-        <textarea matInput formControlName="getAnswer" placeholder="[antwoord]" [(ngModel)]="answer" ></textarea>
+        <textarea matInput formControlName="getAnswer" placeholder="[antwoord]"></textarea>
     </mat-form-field><br>
     <button mat-button class="general-button" type="submit" [disabled]="alreadySubmitted">Verstuur</button>
 </form>
@@ -15,7 +15,7 @@
 <form *ngIf="tokenData.role == 'teacher'" [formGroup]="sendQuestionsForm" (ngSubmit)="sendQuestion()">
     <mat-form-field>
         <mat-label>Vul hier een onderwerp in</mat-label>
-        <textarea matInput formControlName="getQuestion" placeholder="[onderwerp]" [(ngModel)]="question" ></textarea>
+        <textarea matInput formControlName="getQuestion" placeholder="[onderwerp]"></textarea>
     </mat-form-field><br>
     <button mat-button class="general-button" type="submit">Verstuur</button>
 </form>

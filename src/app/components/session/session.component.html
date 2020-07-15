@@ -12,15 +12,15 @@
         <mean-toolbar (sidenavToggle)="sidenav.toggle()"></mean-toolbar>
 
         <body>
-            <p *ngIf="tokenData.role == 'student'" class="sessionCode">Sessie code: <br><strong>{{ pin }}</strong></p>
-            <p *ngIf="tokenData.role == 'teacher'" class="playerCount">Aantal Spelers:
+            <p *ngIf="tokenData?.role == 'student'" class="sessionCode">Sessie code: <br><strong>{{ pin }}</strong></p>
+            <p *ngIf="tokenData?.role == 'teacher'" class="playerCount">Aantal Spelers:
                 <br><strong>{{ playerCount }}</strong></p>
-            <p *ngIf="tokenData.role == 'teacher' && gameData?.duration != null" class="timeLeft">Tijd over:
+            <p *ngIf="tokenData?.role == 'teacher' && gameData?.duration != null" class="timeLeft">Tijd over:
                 <br><strong>{{ gameData?.duration }}:00</strong></p>
             <!--This page represents the session page. It has a session pin, with which students can join the activity. It is also the teacher's activity page during a session -->
             <div class="container-div" fxLayoutGap="10px" fxLayout="column" fxLayoutAlign="space-evenly">
                 <div fxLayout.xs="row" fxLayoutGap="10px" fxLayoutAlign="space-evenly">
-                    <mat-card fxFlex=80% *ngIf="tokenData.role == 'teacher' && !gameStarted">
+                    <mat-card fxFlex=80% *ngIf="tokenData?.role == 'teacher' && !gameStarted">
                         <!-- <button (click)="pairStudentsTest()">GetPlayers</button> -->
                         <mat-card-header class="matCardHeader">
                             <mat-card-title>Sessie code</mat-card-title>
@@ -43,7 +43,7 @@
                         </mat-card-content>
                     </mat-card>
 
-                    <mat-card fxFlex=80% *ngIf="tokenData.role == 'student'">
+                    <mat-card fxFlex=80% *ngIf="tokenData?.role == 'student'">
                         <mat-card-header class="matCardHeader">
                             <mat-card-title>{{ gameData?.game.name }}</mat-card-title>
                             <mat-card-subtitle>Wacht tot de docent de activiteit start</mat-card-subtitle>
@@ -64,7 +64,7 @@
                         </mat-card-content>
                     </mat-card>
 
-                    <mat-card fxFlex=80% *ngIf="tokenData.role == 'teacher' && gameStarted">
+                    <mat-card fxFlex=80% *ngIf="tokenData?.role == 'teacher' && gameStarted">
                         <mat-card-header class="matCardHeader">
                             <mat-card-title>{{ gameData?.game.name }}</mat-card-title>
                             <mat-card-subtitle *ngIf="!enableQuestions">Antwoorden</mat-card-subtitle>

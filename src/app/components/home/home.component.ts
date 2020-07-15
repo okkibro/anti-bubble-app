@@ -7,7 +7,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthenticationService } from '../../services/authentication.service';
 import { SocketIOService } from '../../services/socket-io.service';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
 import { User } from '../../models/user';
 import { Router } from '@angular/router';
 import { DataService } from 'src/app/services/data-exchange.service';
@@ -24,7 +24,9 @@ import { SessionService } from 'src/app/services/session.service';
 
 export class HomeComponent implements OnInit {
     userDetails: User;
-    pin: string;
+    joinSessionForm = this.fb.group({
+        pin: ['', Validators.required]
+    });
 
     constructor(
         private auth: AuthenticationService,
@@ -57,7 +59,7 @@ export class HomeComponent implements OnInit {
         const user = this.userDetails;
 
         // Call the joinsession function in socketio service and define all callbacks.
-        this.socketService.joinSession(this.pin, user, (succes) => {
+        this.socketService.joinSession(this.joinSessionForm.get('pin').value, user, (succes) => {
 
             // Join callback: succes returns true if pin was correct and false when pin is incorrect.
             if (succes) {

@@ -36,19 +36,17 @@
 
                         <mat-card-content *ngIf="startedLabyrinth">
                             <button mat-button class="stop-button" id="desktop-stop-button" (click)="paused()">Stop</button>
-
                             <p id="question"></p>
-
-                            <mat-radio-group class="radio-button-options" id="radio-button-options" [(ngModel)]="optionSelected" *ngIf="questionLoaded">
-                                <p *ngFor="let option of questionOptions; let i = index"> <!-- Used for layout purposes -->
-                                    <mat-radio-button (change)="selectedOption()" class="radio-button" color="primary" [value]='i'>
-                                        <span class="answer-options"></span>
-                                    </mat-radio-button>
-                                </p>
-                            </mat-radio-group><br>
-
-                            <button mat-button class="general-button" (click)="nextQuestion(currentQuestion)" [disabled]="nextQuestionDisabled"> Volgende </button>
-
+                            <form [formGroup]="labyrinthQuestionForm">
+                                <mat-radio-group class="radio-button-options" id="radio-button-options" formControlName="answer" *ngIf="questionLoaded">
+                                    <p *ngFor="let option of questionOptions; let i = index"> <!-- Used for layout purposes -->
+                                        <mat-radio-button (change)="selectedOption()" class="radio-button" color="primary" [value]='i'>
+                                            <span class="answer-options"></span>
+                                        </mat-radio-button>
+                                    </p>
+                                </mat-radio-group><br>
+                                <button mat-button class="general-button" (click)="nextQuestion(currentQuestion)" [disabled]="nextQuestionDisabled"> Volgende </button>
+                            </form>
                         </mat-card-content>
                     </mat-card>
                     <mat-card *ngIf="startedLabyrinth" fxHide.gt-xs>

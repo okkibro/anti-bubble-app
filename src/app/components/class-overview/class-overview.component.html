@@ -37,16 +37,18 @@
                     </mat-card-content>
                 </mat-card>
 
-                <mat-card [formGroup]="searchBar" *ngIf="userClass?.title">
+                <mat-card *ngIf="userClass?.title">
                     <mat-card-header>
                         <mat-card-title>Zoek klasgenoot</mat-card-title>
                     </mat-card-header>
                     <mat-card-content>
-                        <mat-form-field class="classmate-search">
-                            <input type="text" matInput formControlName="query" [(ngModel)]="value" placeholder="Zoek hier" (keydown.enter)="search()">
-                        </mat-form-field>
-                        <button mat-button *ngIf="value" matSuffix mat-icon-button aria-label="Clear" (click)="clear()"><mat-icon>close</mat-icon></button>
-                        <button mat-button class="general-button" (click)="search()"><mat-icon>search</mat-icon></button>
+                        <form [formGroup]="searchForm">
+                            <mat-form-field class="classmate-search">
+                                <input type="text" matInput formControlName="query" placeholder="Zoek hier">
+                                <button type="reset" mat-button mat-icon-button matSuffix *ngIf="searchForm.get('query').value" (click)="clear()"><mat-icon>close</mat-icon></button>
+                            </mat-form-field>
+                            <button mat-button type="submit" class="general-button" (click)="search()"><mat-icon>search</mat-icon></button>
+                        </form>
                     </mat-card-content>
                 </mat-card>
 

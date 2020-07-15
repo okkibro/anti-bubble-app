@@ -13,6 +13,7 @@ import { environment } from 'src/environments/environment';
     providedIn: 'root',
 })
 export class PasswordRecoveryService {
+
     constructor(private http: HttpClient) { }
 
     /** Method to do a POST request to send an email to reset your password. */

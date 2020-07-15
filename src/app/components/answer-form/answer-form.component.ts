@@ -18,9 +18,6 @@ import { tokenData } from "../../models/tokenData";
         '../../shared/general-styles.css']
 })
 export class AnswerFormComponent implements OnInit {
-
-    answer = '';
-    question = '';
     getAnswerForm = this.fb.group({
         getAnswer: ['', []]
     });
@@ -28,6 +25,7 @@ export class AnswerFormComponent implements OnInit {
         getQuestion: ['', []]
     });
     tokenData: tokenData;
+    alreadySubmitted: boolean = false;
 
     constructor(
         private fb: FormBuilder,
@@ -36,7 +34,6 @@ export class AnswerFormComponent implements OnInit {
         private auth: AuthenticationService
     ) { }
 
-    alreadySubmitted:boolean = false;
 
     ngOnInit(): void {
         this.tokenData = this.auth.getTokenData();
@@ -49,9 +46,9 @@ export class AnswerFormComponent implements OnInit {
 
     /** This method lets students submit an answer to the teacher (digiboard). */
     sendAnswer() {
-        if (this.answer != '') {
-            this.socketService.studentSubmit(this.answer);
-            this.answer = '';
+        if (this.getAnswerForm.get('getAnswer').value != '') {
+            this.socketService.studentSubmit(this.getAnswerForm.get('getAnswer').value);
+            this.getAnswerForm.get('getAnswer').setValue('');
 
             // Prevents students from spamming the teacher with answers.
             this.alreadySubmitted = true;
@@ -62,9 +59,9 @@ export class AnswerFormComponent implements OnInit {
 
     /** This method lets a teacher submit a question to all of the students in the session. */
     sendQuestion() {
-        if (this.question != '') {
-            this.socketService.sendQuestion(this.question);
-            this.question = '';
+        if (this.sendQuestionsForm.get('getQuestion').value != '') {
+            this.socketService.sendQuestion(this.sendQuestionsForm.get('getQuestion').value);
+            this.sendQuestionsForm.get('getQuestion').setValue('');
         } else {
             this.snackBar.open('Vul een onderwerp in', 'X', { duration: 2500, panelClass: ['style-error'] });
         }

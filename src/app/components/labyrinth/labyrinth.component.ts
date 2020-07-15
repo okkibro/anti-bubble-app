@@ -11,6 +11,7 @@ import { SessionService } from '../../services/session.service';
 import { AuthenticationService } from '../../services/authentication.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { BubbleGraphService } from 'src/app/services/bubble-graph.service';
+import { FormBuilder, Validators } from '@angular/forms';
 
 @Component({
     selector: 'mean-labyrinth',
@@ -27,16 +28,19 @@ export class LabyrinthComponent implements OnInit {
     part: Number;
     answers: [{ question: any, answer: any }] = [,];
     currentQuestion;
-    optionSelected;
     questionLoaded: boolean = false;
     lastQuestionWasImage: boolean = false;
+    labyrinthQuestionForm = this.fb.group({
+        answer: ['', Validators.required]
+    });
 
     constructor(
         private router: Router,
         private sessionService: SessionService,
         private auth: AuthenticationService,
         private snackBar: MatSnackBar,
-        private bubbleService: BubbleGraphService
+        private bubbleService: BubbleGraphService,
+        private fb: FormBuilder
     ) { }
 
     ngOnInit(): void {
@@ -138,14 +142,12 @@ export class LabyrinthComponent implements OnInit {
     /** Method that saves a question to this.answers. */
     saveQuestion(question) {
         if (question) {
-            // Temporary variable to save the selected option.
-            let result = this.optionSelected;
 
             // Deselecting radio button when going to the next question.
-            this.optionSelected = '';
+            this.labyrinthQuestionForm.get('answer').setValue('');
 
             // Push the result with its corresponding question to this.answers.
-            this.answers.push({ question: question, answer: result });
+            this.answers.push({ question: question, answer: this.labyrinthQuestionForm.get('answer').value });
         }
     }
 

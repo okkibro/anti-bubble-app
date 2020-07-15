@@ -29,13 +29,13 @@
                             <button mat-button class="general-button" (click)="createSession()"> Kies Activiteit
                             </button>
                         </mat-card-content>
-                        <mat-card-content class="join-session"
-                            *ngIf="userDetails?.role == 'student' && userDetails?.bubbleInit">
-                            <mat-form-field>
-                                <input matInput [(ngModel)]="pin" placeholder="Sessie code" type="number">
-                            </mat-form-field>
-                            <button mat-button class="general-button" (click)="joinSession()"> Deelnemen aan sessie
-                            </button>
+                        <mat-card-content class="join-session" *ngIf="userDetails?.role == 'student' && userDetails?.bubbleInit">
+                            <form [formGroup]="joinSessionForm">
+                                <mat-form-field>
+                                    <input matInput formControlName="pin" placeholder="Sessie code" type="number">
+                                </mat-form-field>
+                                <button mat-button class="general-button" (click)="joinSession()">Deelnemen aan sessie</button>
+                            </form>
                         </mat-card-content>
                         <mat-card-content *ngIf="userDetails?.role == 'student' && !userDetails?.bubbleInit">
                             <button mat-button class="general-button" (click)="startLabyrinth()"> Start Dwalende Doolhof
@@ -43,6 +43,7 @@
                         </mat-card-content>
                     </mat-card>
                 </div>
+
                 <div fxLayout.xs="column" fxLayoutGap="10px" fxLayoutAlign="space-evenly">
                     <mat-card fxFlex="40%">
                         <mat-card-header>
@@ -65,6 +66,7 @@
                             </table>
                         </mat-card-content>
                     </mat-card>
+
                     <mat-card fxFlex="40%">
                         <mat-card-header>
                             <mat-card-title>Scorebord</mat-card-title>
@@ -77,6 +79,7 @@
                             </table>
                         </mat-card-content>
                     </mat-card>
+
                     <mat-card fxFlex="20%">
                         <mat-card-header>
                             <mat-card-title>Aantal munten</mat-card-title>

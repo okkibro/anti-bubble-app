@@ -21,15 +21,13 @@ import { MatSnackBar } from "@angular/material/snack-bar";
 })
 
 export class ClassOverviewComponent implements OnInit {
-    searchBar = this.fb.group({
+    searchForm = this.fb.group({
         query: ['', []]
     });
 
     classmates: User[];
     userClass;
     userDetails: User;
-
-    public value: string;
 
     constructor(
         private classService: ClassesService,
@@ -53,7 +51,7 @@ export class ClassOverviewComponent implements OnInit {
 
     /** Method to filter the students in a class. */
     search() {
-        let query: string = this.searchBar.get('query').value.toLowerCase();
+        let query: string = this.searchForm.get('query').value.toLowerCase();
         let table = document.getElementById('table').childNodes;
         for (let i: number = 0; i < this.classmates.length; i++) {
             if (this.classmates[i].firstName.toLowerCase().includes(query) || this.classmates[i].lastName.toLowerCase().includes(query)) {
@@ -66,7 +64,7 @@ export class ClassOverviewComponent implements OnInit {
 
     /** Method to clear the filter so all students are displayed again. */
     clear() {
-        this.value = '';
+        this.searchForm.get('query').setValue('');
         let table = document.getElementById('table').childNodes;
         for (let i: number = 0; i < this.classmates.length; i++) {
             (table[i + 1] as HTMLElement).style.display = '';

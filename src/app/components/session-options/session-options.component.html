@@ -197,19 +197,18 @@
                                         <tr>
                                             <th>Teams:</th>
                                             <td>
-                                                <mat-radio-group [(ngModel)]="teamOptionAA">
-                                                    <mat-radio-button class="team-option-button"
-                                                        *ngFor="let teamChoice of teamOptions" [value]="teamChoice"
-                                                        color="primary">
-                                                        {{ teamChoice }}
-                                                    </mat-radio-button>
-                                                </mat-radio-group>
+                                                <form [formGroup]="teamOptionAAForm">
+                                                    <mat-radio-group formControlName="teamOptionAA">
+                                                        <mat-radio-button  class="team-option-button" value="Willekeurig" color="primary" [checked]="true">Willekeurig</mat-radio-button>
+                                                        <mat-radio-button class="team-option-button" value="Handmatig" color="primary">Handmatig</mat-radio-button>
+                                                    </mat-radio-group>
+                                                </form>
                                             </td>
                                         </tr>
                                     </table>
                                     <br>
                                     <button mat-button class="general-button"
-                                        (click)="createSession({ game: 'Alternatieve Antwoorden', duration: alternatieveSlider.value, teams: teamOptionAA })">
+                                        (click)="createSession({ game: 'Alternatieve Antwoorden', duration: alternatieveSlider.value, teams: teamOptionAAForm.get('teamOptionAA').value })">
                                         Start sessie</button>
                                 </div>
                             </mat-expansion-panel>
