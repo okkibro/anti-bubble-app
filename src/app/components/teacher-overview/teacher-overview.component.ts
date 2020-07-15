@@ -4,7 +4,7 @@
  * Computing Sciences)
  */
 
-import { Component, Inject, Input, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { AuthenticationService } from 'src/app/services/authentication.service';
 import { User } from 'src/app/models/user';
@@ -12,7 +12,6 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { Class } from 'src/app/models/classes';
 import { ClassesService } from 'src/app/services/classes.service';
 import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from "@angular/material/dialog";
-import { LeaveClassDialog } from "../class-overview/class-overview.component";
 
 @Component({
     selector: 'mean-teacher-overview',
@@ -71,11 +70,7 @@ export class TeacherOverviewComponent implements OnInit {
                 this.classService.joinClass(data.code).subscribe((output) => {
                     if (output.succes) {
                         this.snackBar.open(output.message, 'X', { duration: 2500, panelClass: ['style-succes'] }).afterDismissed().subscribe(() => {
-                            if (this.classIds.length > 0) {
-                                this.switchClass(data.id);
-                            } else {
-                                window.location.reload();
-                            }
+                            window.location.reload();
                         });
                     } else {
                         this.snackBar.open(output.message, 'X', { duration: 2500, panelClass: ['style-error'] });

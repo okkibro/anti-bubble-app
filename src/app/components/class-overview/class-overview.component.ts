@@ -12,7 +12,6 @@ import { FormBuilder } from '@angular/forms';
 import { ClassesService } from '../../services/classes.service';
 import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from "@angular/material/dialog";
 import { MatSnackBar } from "@angular/material/snack-bar";
-import { DeleteClassDialog } from "../teacher-overview/teacher-overview.component";
 
 @Component({
     selector: 'mean-class-overview',

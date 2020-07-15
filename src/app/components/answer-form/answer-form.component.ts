@@ -8,7 +8,6 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { SocketIOService } from 'src/app/services/socket-io.service';
-import { User } from '../../models/user';
 import { AuthenticationService } from 'src/app/services/authentication.service';
 import { tokenData } from "../../models/tokenData";
 
