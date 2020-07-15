@@ -30,7 +30,7 @@
         Profiel
     </button>
     <mat-divider></mat-divider>
-    <button mat-button [routerLink]="'/shop'" (click)="onSidenavClose()">
+    <button mat-button [routerLink]="'/shop'" *ngIf="tokenData.role == 'student'" (click)="onSidenavClose()">
         <mat-icon>shopping_cart</mat-icon>
         Shop
     </button>

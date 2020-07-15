@@ -28,7 +28,6 @@ export class ClassOverviewComponent implements OnInit {
 
     classmates: User[];
     userClass;
-    userClassTitle;
     userDetails: User;
 
     public value: string;
@@ -48,7 +47,6 @@ export class ClassOverviewComponent implements OnInit {
         this.classService.getClass().subscribe((data) => {
             if (data.succes) {
                 this.userClass = data.class;
-                this.userClassTitle = data.class.title;
                 this.classmates = data.classmates;
             }
         });
@@ -78,7 +76,7 @@ export class ClassOverviewComponent implements OnInit {
 
     /** Method that opens the leave class dialog. */
     openLeaveClassDialog() {
-        this.dialog.open(LeaveClassDialog, { data: { userId: this.userDetails._id, classId: this.userClass._id, leaving: true }});
+        this.dialog.open(LeaveClassDialog, { data: { userId: this.userDetails._id, classId: this.userClass._id, classTitle: this.userClass.title, leaving: true }});
     }
 }
 

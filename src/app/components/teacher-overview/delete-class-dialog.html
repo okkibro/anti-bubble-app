@@ -6,12 +6,12 @@
 
 <h1 mat-dialog-title>Huidige klas verwijderen</h1>
 <div style="font-family: Roboto, 'Helvetica Neue', sans-serif" mat-dialog-content>
-    <p> Het verwijderen van de huidige klas zal de volgende gevolgen hebben: </p>
+    <p> Het verwijderen van <strong>{{ data.klas.title }}</strong> zal de volgende gevolgen hebben: </p>
     <ul>
         <li> Alle leerlingen die deel zijn van de klas zullen ook uit deze klas verwijderd worden. </li>
-        <li> Deze actie is <strong> niet </strong> terug te draaien. </li>
+        <li> Deze actie is <strong>niet</strong> terug te draaien. </li>
     </ul>
-    <p> Weet je zeker dat je de huidige klas wilt verwijderen? </p>
+    <p> Weet je zeker dat je <strong>{{ data.klas.title }}</strong> wilt verwijderen? </p>
 </div>
 <div mat-dialog-actions>
     <button mat-button (click)="closeDialog()">Nope</button>

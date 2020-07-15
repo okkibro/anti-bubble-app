@@ -12,16 +12,16 @@
         <mean-toolbar (sidenavToggle)="sidenav.toggle()"></mean-toolbar>
         <body>
             <div class="container-div" fxLayoutGap="10px" fxLayout="column" fxLayoutAlign="space-evenly">
-                <mat-card *ngIf="userClassTitle">
+                <mat-card *ngIf="userClass?.title">
                     <mat-card-header>
                         <mat-card-title> Klas overzicht </mat-card-title>
                         <mat-card-subtitle>
-                            Overzicht van alle spelers van klas {{ userClassTitle }}.
+                            Overzicht van alle spelers van klas {{ userClass?.title }}.
                         </mat-card-subtitle>
                     </mat-card-header>
                 </mat-card>
 
-                <mat-card *ngIf="userClassTitle">
+                <mat-card *ngIf="userClass?.title">
                     <mat-card-content>
                         <table class="general-table" id="table">
                             <tr>
@@ -37,7 +37,7 @@
                     </mat-card-content>
                 </mat-card>
 
-                <mat-card [formGroup]="searchBar" *ngIf="userClassTitle">
+                <mat-card [formGroup]="searchBar" *ngIf="userClass?.title">
                     <mat-card-header>
                         <mat-card-title>Zoek klasgenoot</mat-card-title>
                     </mat-card-header>
@@ -50,11 +50,11 @@
                     </mat-card-content>
                 </mat-card>
 
-                <mat-card *ngIf="userClassTitle">
+                <mat-card *ngIf="userClass?.title">
                     <button mat-button class="leave-button" (click)="openLeaveClassDialog()">Verlaat klas</button>
                 </mat-card>
 
-                <div *ngIf="userClassTitle == undefined">
+                <div *ngIf="userClass?.title == undefined">
                     <mean-join-class></mean-join-class>
                 </div>
             </div>

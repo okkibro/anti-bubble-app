@@ -127,12 +127,12 @@ export class TeacherOverviewComponent implements OnInit {
 
     /** Method that opens the delete class dialog. */
     openDeleteClassDialog() {
-        this.dialog.open(DeleteClassDialog, { data: { classToDelete: this.currentClass }});
+        this.dialog.open(DeleteClassDialog, { data: { klas: this.currentClass }});
     }
 
     /** Method that opens the remove student from class dialog. */
     openRemoveFromClassDialog(user: User) {
-        this.dialog.open(RemoveFromClassDialog, { data: { userId: user._id, classId: this.currentClass._id, leaving: false }});
+        this.dialog.open(RemoveFromClassDialog, { data: { user: user, klas: this.currentClass, leaving: false}});
     }
 }
 
@@ -148,12 +148,12 @@ export class DeleteClassDialog {
         private dialog: MatDialog,
         private dialogRef: MatDialogRef<DeleteClassDialog>,
         private snackBar: MatSnackBar,
-        @Inject(MAT_DIALOG_DATA) private data: any
+        @Inject(MAT_DIALOG_DATA) public data: any
     ) { }
 
     /** Method to delete a user's account. */
     deleteClass() {
-        this.classService.deleteClass(this.data.classToDelete._id).subscribe(data => {
+        this.classService.deleteClass(this.data.klas._id).subscribe(data => {
             if (data.succes) {
                 this.dialogRef.close();
                 this.snackBar.open(data.message, 'X', { duration: 2500, panelClass: ['style-succes']}).afterDismissed().subscribe(() => {
@@ -183,12 +183,12 @@ export class RemoveFromClassDialog {
         private dialog: MatDialog,
         private dialogRef: MatDialogRef<DeleteClassDialog>,
         private snackBar: MatSnackBar,
-        @Inject(MAT_DIALOG_DATA) private data: any
+        @Inject(MAT_DIALOG_DATA) public data: any
     ) { }
 
     /** Method to remove a student from the current class. */
     removeFromClass() {
-        this.classService.leaveClass(this.data.userId, this.data.classId, this.data.leaving).subscribe(data => {
+        this.classService.leaveClass(this.data.user._id, this.data.klas._id, this.data.leaving).subscribe(data => {
             if (data.succes) {
                 this.dialogRef.close();
                 this.snackBar.open(data.message, 'X', { duration: 2500, panelClass: ['style-succes']}).afterDismissed().subscribe(() => {
