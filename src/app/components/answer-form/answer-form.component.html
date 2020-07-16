@@ -15,7 +15,7 @@
 <form *ngIf="tokenData.role == 'teacher'" [formGroup]="sendQuestionsForm" (ngSubmit)="sendQuestion()">
     <mat-form-field>
         <mat-label>Vul hier een onderwerp in</mat-label>
-        <textarea matInput formControlName="getQuestion" placeholder="[onderwerp]"></textarea>
+        <textarea matInput formControlName="getQuestion" placeholder="Onderwerp"></textarea>
     </mat-form-field><br>
     <button mat-button class="general-button" type="submit">Verstuur</button>
 </form>

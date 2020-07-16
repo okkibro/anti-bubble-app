@@ -29,7 +29,7 @@
                             <tr *ngFor="let classmate of classmates">
                                 <td>{{ classmate.firstName }}</td>
                                 <td><a mat-button class="general-link" [routerLink]="'/classmate-profile/' + classmate._id">Bekijk Profiel</a></td>
-                                <td><button mat-button class="delete-button" (click)="openRemoveFromClassDialog(classmate)">Verwijder uit klas</button></td>
+                                <td><button mat-button class="general-nope-button" (click)="openRemoveFromClassDialog(classmate)">Verwijder uit klas</button></td>
                             </tr>
                         </table>
                         <p *ngIf="currentClass?.students?.length == 0 && currentClass != undefined">De klas heeft nog geen leerlingen</p>
@@ -92,7 +92,7 @@
                 </mat-card>
 
                 <mat-card *ngIf="userDetails?.classArray.length > 0">
-                    <button mat-button class="delete-button" (click)="openDeleteClassDialog()">Verwijder huidige klas</button>
+                    <button mat-button class="general-nope-button" (click)="openDeleteClassDialog()">Verwijder huidige klas</button>
                 </mat-card>
             </div>
         </body>

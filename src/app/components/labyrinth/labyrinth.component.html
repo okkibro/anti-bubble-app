@@ -4,7 +4,6 @@
   ~ Computing Sciences)
   -->
 
-<!-- This page represents the labyrinth (first activity).This page is only visible for the students. -->
 <mat-sidenav-container>
     <mat-sidenav #sidenav [autoFocus]="false">
         <mean-sidenav (sidenavClose)="sidenav.close()"></mean-sidenav>
@@ -14,7 +13,7 @@
         <body>
             <div class="container-div">
                 <div fxLayoutGap="10px" fxLayout="column" fxLayoutAlign="space-evenly">
-                    <mat-card fxFlex="90%">
+                    <mat-card>
                         <mat-card-header>
                             <mat-card-title>Dwalende Doolhof</mat-card-title>
                             <mat-card-subtitle>
@@ -35,7 +34,7 @@
                         </mat-card-content>
 
                         <mat-card-content *ngIf="startedLabyrinth">
-                            <button mat-button class="stop-button" id="desktop-stop-button" (click)="paused()">Stop</button>
+                            <button mat-button class="general-nope-button" id="desktop-stop-button" (click)="paused()">Stop</button>
                             <p id="question"></p>
                             <form [formGroup]="labyrinthQuestionForm">
                                 <mat-radio-group class="radio-button-options" id="radio-button-options" formControlName="answer" *ngIf="questionLoaded">
@@ -49,9 +48,10 @@
                             </form>
                         </mat-card-content>
                     </mat-card>
+
                     <mat-card *ngIf="startedLabyrinth" fxHide.gt-xs>
                         <mat-card-content>
-                            <button mat-button class="stop-button" id="mobile-stop-button" (click)="paused()">Stop</button>
+                            <button mat-button class="general-nope-button" id="mobile-stop-button" (click)="paused()">Stop</button>
                         </mat-card-content>
                     </mat-card>
                 </div>

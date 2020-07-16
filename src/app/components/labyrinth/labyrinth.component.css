@@ -44,13 +44,6 @@
     margin: 3px 0 3px 3px;
 }
 
-.stop-button {
-    background-color: red;
-    color: white;
-    border-radius: 10px;
-    width: 90px;
-}
-
 #desktop-stop-button {
     right: 3%;
     top: 4%;

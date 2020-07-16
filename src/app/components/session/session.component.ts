@@ -194,7 +194,7 @@ export class SessionComponent implements OnInit {
     /** Method that starts the game. Making it unable for students to join the session. */
     startGame() {
 
-        // teacher wants to start a game without any players in it
+        // Teacher wants to start a game without any players in it.
         if (this.playerCount == 0) {
             this.snackBar.open('Er zitten nog geen spelers in de sessie', 'X', { duration: 2500, panelClass: ['style-error'] });
         } else {
@@ -203,7 +203,7 @@ export class SessionComponent implements OnInit {
                 this.socketService.startGame();
                 this.initGame(this.gameData.game.name);
 
-                // Specified time for this activity (in seconds)
+                // Specified time for this activity (in seconds).
                 let time = this.gameData?.duration * 60;
                 this.startTimer(time);
             }
@@ -246,10 +246,10 @@ export class SessionComponent implements OnInit {
                         }
 
                         this.socketService.listenForSubmits(submit => {
-                            this.submits[submit.message.answer].push({ 
-                                player: submit.player, 
-                                source: submit.message.data.article.source, 
-                                subject: submit.message.data.article.subject 
+                            this.submits[submit.message.answer].push({
+                                player: submit.player,
+                                source: submit.message.data.article.source,
+                                subject: submit.message.data.article.subject
                             });
                         });
                     });
@@ -270,7 +270,7 @@ export class SessionComponent implements OnInit {
             this.finishGame();
         }, time * 1000);
 
-        // Create an interval that calls the given function every second. 
+        // Create an interval that calls the given function every second.
         // The function updates the value of the time at the top of the screen to be 1 second less than the previous second it was called.
         this.interval = setInterval(() => {
             if (time > 0) {
@@ -278,9 +278,9 @@ export class SessionComponent implements OnInit {
                 let minutes = Math.floor(time / 60);
                 let seconds = time % 60;
                 if (seconds < 10) {
-                    document.getElementsByClassName('timeLeft')[0].innerHTML = `Tijd over: <br><strong>${minutes}:0${seconds}</strong>`;
+                    document.getElementById('counter').innerHTML = `Tijd over: <br><strong>${minutes}:0${seconds}</strong>`;
                 } else {
-                    document.getElementsByClassName('timeLeft')[0].innerHTML = `Tijd over: <br><strong>${minutes}:${seconds}</strong>`;
+                    document.getElementById('counter').innerHTML = `Tijd over: <br><strong>${minutes}:${seconds}</strong>`;
                 }
             } else {
                 this.stopGame();
@@ -299,7 +299,7 @@ export class SessionComponent implements OnInit {
     stopGame() {
         this.gameFinished = true;
         clearInterval(this.interval);
-        let timeLeft = <HTMLElement[]><any>document.querySelectorAll('.timeLeft');
+        let timeLeft = <HTMLElement[]><any>document.querySelectorAll('.counter');
         timeLeft[0].style.color = 'red';
 
         // Remove all listeners so students cant submit answers.

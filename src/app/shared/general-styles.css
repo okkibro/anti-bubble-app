@@ -73,9 +73,7 @@ mat-card-header {
     text-align: center;
 }
 
-.delete-button,
-.leave-button,
-.remove-button {
+.general-nope-button {
     background-color: red;
     color: white;
     border-radius: 10px;
