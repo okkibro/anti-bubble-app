@@ -4,47 +4,16 @@
  * Computing Sciences)
  */
 
-body {
-    text-align: center;
-    margin: 0;
-    padding: 0;
-    height: 100%;
-    width: 100%;
-    background-size: auto;
-}
-
-.bodyDiv {
-    height: 100%;
-    width: 70%;
-    display: inline-block;
-}
-
-.matCardHeader {
-    display: inline-block;
-}
-
-.sessionCode,
-.playerCount {
-    top: 10%;
-    right: 3%;
-    float: right;
-    position: absolute;
-    z-index: 100;
-}
-
-.submitTable {
+.submit-table {
     margin: 20px;
 }
 
-.sessionTable,
-.submitTable {
-    display: inline-block;
-}
-
-.sessionTable,
-.submitTable th,
-td {
-    padding: 10px;
+.session-table,
+.submit-table {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }
 
 #teacherPin {
@@ -61,10 +30,7 @@ td {
     margin-bottom: 20px;
 }
 
-.timeLeft {
-    top: 10%;
-    left: 3%;
-    float: right;
-    position: absolute;
-    z-index: 100;
+.player-count,
+.time-left {
+    width: 200px;
 }

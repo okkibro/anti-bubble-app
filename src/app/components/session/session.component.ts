@@ -100,7 +100,7 @@ export class SessionComponent implements OnInit {
                         tableRow.appendChild(space);
                         tableRow.appendChild(input);
                     }
-                    let table = document.getElementsByClassName('sessionTable')[0];
+                    let table = document.getElementsByClassName('session-table')[0];
 
                     // Append the tablerow to the table.
                     table.appendChild(tableRow);
@@ -137,7 +137,7 @@ export class SessionComponent implements OnInit {
                     this.socketService.listenForSubmits((data) => {
 
                         // Add answer to screen using DOM manipulation.
-                        let submitTable = document.getElementsByClassName('submitTable')[0];
+                        let submitTable = document.getElementsByClassName('submit-table')[0];
                         let tablerow = document.createElement('tr');
                         let breakLine = document.createElement('br');
                         let deleteButton = document.createElement('button');
@@ -319,7 +319,7 @@ export class SessionComponent implements OnInit {
     showAnswersonScreen(game: String) {
         switch (game) {
             case 'Naamloos Nieuws':
-                let table = document.getElementsByClassName('submitTable')[0];
+                let table = document.getElementsByClassName('submit-table')[0];
                 for (let i = 0; i < this.leaders.length; i++) {
                     let team = document.createElement('tr');
                     team.innerHTML = `<strong>Team ${i + 1}</strong><br>`;

@@ -36,8 +36,6 @@ export class SessionOptionsComponent implements OnInit {
     /** Method that fets called when teacher presses create session button. gamedata contains the name of the game and time of the slider. */
     createSession(gameData) {
 
-        console.log(gameData);
-
         // Get the entire activity data from the database
         this.sessionService.getActivity(gameData.game).subscribe(data => {
             gameData.game = data;
