@@ -24,13 +24,13 @@ router.get('/', (req, res) => {
 
     Shops.find(query)
         .exec(function (err, shop) {
-            res.status(200).json(shop);
+            return res.status(200).json(shop);
         });
 });
 
 router.get('/getBaseInventory', auth, (req, res) => {
     Shops.find({ initial: true }).exec(function (err, shop) {
-        res.status(200).json(shop);
+        return res.status(200).json(shop);
     });
 });
 
@@ -51,16 +51,16 @@ router.post('/buy', auth, (req, res) => {
             user.save();
 
             // Show succes message.
-            res.status(200).json({ succes: true, message: `Je hebt ${req.body.item.title} succesvol gekocht!` });
+            return res.status(200).json({ succes: true, message: `Je hebt ${req.body.item.title} succesvol gekocht!` });
         } else {
             if (user.currency < req.body.item.price) {
 
                 // If not enough money, show appropriate message.
-                res.status(200).json({ succes: false, message: `Je hebt niet genoeg geld om ${req.body.item.title} te kopen` });
+                return res.status(200).json({ succes: false, message: `Je hebt niet genoeg geld om ${req.body.item.title} te kopen` });
             } else {
 
                 // Else show message that item has already been bought.
-                res.status(200).json({ succes: false, message: `Je hebt ${req.body.item.title} al gekocht` });
+                return res.status(200).json({ succes: false, message: `Je hebt ${req.body.item.title} al gekocht` });
             }
         }
     });

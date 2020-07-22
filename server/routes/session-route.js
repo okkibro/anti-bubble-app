@@ -25,7 +25,7 @@ router.get('/articles', auth, (req, res) => {
 		Articles.find({ }, (err, articles) => {
 
 			// Send all article data from the database.
-			res.status(200).json(articles);
+			return res.status(200).json(articles);
 		});
 	});
 });
@@ -36,7 +36,7 @@ router.post('/activity', auth, (req, res) => {
 
 		// Get the logged in user.
 		if (user.role === 'student') {
-			res.status(401).json({
+			return res.status(401).json({
 
 				// Only teachers can send requests to get activities.
 				message: 'UnauthorizedError: Not a teacher',
@@ -46,7 +46,7 @@ router.post('/activity', auth, (req, res) => {
 
 				// Find activity in database based on the name sent in the body.
 				// Send the activity object returned by the findOne function.
-				res.status(200).json(activity);
+				return res.status(200).json(activity);
 			});
 		}
 	});
@@ -62,16 +62,16 @@ router.patch('/updateBubbleInit', auth, (req, res) => {
 		user.bubbleInit = true;
 		user.save();
 	});
-	res.status(200).json({ succes: true });
+	return res.status(200).json({ succes: true });
 });
 
 /** POST method to get the array of questions shuffled, based on the part given in the body of the request. */
 router.post('/questions', auth, (req, res) => {
 	Questions.find({ part: req.body.part }, (err, questions) => {
 		if (!err) {
-			res.status(200).json(questions);
+			return res.status(200).json(questions);
 		} else {
-			res.status(404).json({message: err})
+			return res.status(404).json({ message: err })
 		}
 	});
 });
@@ -91,7 +91,7 @@ router.post('/labyrinthAnswers', auth, (req, res) => {
 
 		// Save the result.
 		user.save(() => {
-			res.status(200).json({ succes: true });
+			return res.status(200).json({ succes: true });
 		});
 	});
 });
@@ -105,7 +105,7 @@ router.post('/earnMoney', auth, (req, res) => {
 		// Increase currency.
 		user.currency += req.body.money;
 		user.save(() => {
-			res.status(200);
+			return res.status(200);
 		});
 	})
 });

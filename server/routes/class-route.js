@@ -21,7 +21,7 @@ const auth = jwt({
 /** POST method to create a new class in the database. */
 router.post('/createClass', auth, (req, res) => {
 	if (!req.payload._id) {
-		res.status(401).json({
+		return res.status(401).json({
 			message: 'UnauthorizedError: private profile',
 		});
 	} else {
@@ -38,9 +38,9 @@ router.post('/createClass', auth, (req, res) => {
 
 		// Save the changes to the database.
 		klas.save().then(() => {
-			res.status(200).json({ code: klas.code, id: klas._id });
+			return res.status(200).json({ code: klas.code, id: klas._id });
 		}).catch((err) => {
-			res.status(400).json({ message: err });
+			return res.status(400).json({ message: err });
 		});
 	}
 });
@@ -50,36 +50,36 @@ router.post('/joinClass', auth, (req, res) => {
 
 	// Check if you are authorized.
 	if (!req.payload._id) {
-		res.status(401).json({
+		return res.status(401).json({
 			message: 'UnauthorizedError: private profile',
 		});
 	} else {
 		Users.findById(req.payload._id, (err, user) => {
 			if (err) {
-				res.status(200).json({ succes: false, message: err });
+				return res.status(200).json({ succes: false, message: err });
 			} else {
 				Classes.findOne({ code: req.body.code }, (err, foundClass) => {
 
 					// Check the code corresponds with an existing.
 					if (!foundClass) {
-						res.status(200).json({ succes: false, message: 'Geen klas gevonden met de gegeven code', err: err });
+						return res.status(200).json({ succes: false, message: 'Geen klas gevonden met de gegeven code', err: err });
 					} else {
 
 						// Check if your role is a student. (students can only be in one class!).
 						if (user.role === 'student') {
 							if (user.classArray.length <= 0) {
 								if (foundClass.students.find((x) => x._id === req.payload._id) !== undefined) {
-									res.status(200).json({ succes: false, message: 'Je zit al in klas: ' + foundClass.title });
+									return res.status(200).json({ succes: false, message: 'Je zit al in klas: ' + foundClass.title });
 								} else {
 									foundClass.students.push(user);
 									foundClass.save().catch((err) => {
-										res.status(400).json({ message: err });
+										return res.status(400).json({ message: err });
 									});
 									user.classArray.push(foundClass);
 									user.save().catch((err) => {
-										res.status(400).json({ message: err });
+										return res.status(400).json({ message: err });
 									});
-									res.status(200).json({ succes: true, message: `Leerling is succesvol toegevoegd aan de klas ${foundClass.title}` });
+									return res.status(200).json({ succes: true, message: `Leerling is succesvol toegevoegd aan de klas ${foundClass.title}` });
 								}
 							}
 
@@ -87,9 +87,9 @@ router.post('/joinClass', auth, (req, res) => {
 						} else {
 							user.classArray.push(foundClass);
 							user.save().then(() => {
-								res.status(200).json({ succes: true, message: `Docent is succesvol toegevoegd aan de klas ${foundClass.title}` });
+								return res.status(200).json({ succes: true, message: `Docent is succesvol toegevoegd aan de klas ${foundClass.title}` });
 							}).catch((err) => {
-								res.status(200).json({ succes: false, message: err });
+								return res.status(200).json({ succes: false, message: err });
 							});
 						}
 					}
@@ -104,13 +104,13 @@ router.post('/joinClass', auth, (req, res) => {
 router.get('/getClass', auth, (req, res) => {
 	// Check if you are authorized.
 	if (!req.payload._id) {
-		res.status(401).json({
+		return res.status(401).json({
 			message: 'UnauthorizedError: private profile',
 		});
 	} else {
 		Users.findById(req.payload._id, async (err, user) => {
 			if (err) {
-				res.status(200).json({ succes: false, message: err });
+				return res.status(200).json({ succes: false, message: err });
 			} else {
 				if (user.classArray[0]) {
 					Classes.findById(user.classArray[0], (err, foundClass) => {
@@ -125,16 +125,16 @@ router.get('/getClass', auth, (req, res) => {
 
 									// Check if all classmates are pushed to the list.
 									if (classmates.length === numberOfMembers) {
-										res.status(200).json({ succes: true, class: foundClass, classmates: classmates });
+										return res.status(200).json({ succes: true, class: foundClass, classmates: classmates });
 									}
 								});
 							}
 						} else {
-							res.status(200).json({ succes: true, class: foundClass, classmates: [] });
+							return res.status(200).json({ succes: true, class: foundClass, classmates: [] });
 						}
 					});
 				} else {
-					res.status(200).json({ succes: false });
+					return res.status(200).json({ succes: false });
 				}
 			}
 		});
@@ -145,15 +145,15 @@ router.get('/getClass', auth, (req, res) => {
 router.get('/getClassIds', auth, (req, res) => {
 	//Check if you are authorized.
 	if (!req.payload._id) {
-		res.status(401).json({
+		return res.status(401).json({
 			message: 'UnauthorizedError: private profile',
 		});
 	} else {
 		Users.findById(req.payload._id, (err, user) => {
 			if (err) {
-				res.status(200).json({ succes: false, message: err });
+				return res.status(200).json({ succes: false, message: err });
 			} else {
-				res.status(200).json({ classIds: user.classArray });
+				return res.status(200).json({ classIds: user.classArray });
 			}
 		});
 	}
@@ -163,7 +163,7 @@ router.get('/getClassIds', auth, (req, res) => {
 router.get('/getSingleClass/:id', auth, (req, res) => {
 	// Check if you are authorized.
 	if (!req.payload._id) {
-		res.status(401).json({
+		return res.status(401).json({
 			message: 'UnauthorizedError: private profile',
 		});
 	} else {
@@ -180,15 +180,15 @@ router.get('/getSingleClass/:id', auth, (req, res) => {
 
 							// Check if all classmates are pushed to the list.
 							if (classmates.length === numberOfMembers) {
-								res.status(200).json({ succes: true, class: foundClass, classmates: classmates });
+								return res.status(200).json({ succes: true, class: foundClass, classmates: classmates });
 							}
 						});
 					}
 				} else {
-					res.status(200).json({ succes: true, class: foundClass, classmates: [] });
+					return res.status(200).json({ succes: true, class: foundClass, classmates: [] });
 				}
 			} else {
-				res.status(200).json({ succes: false, message: err });
+				return res.status(200).json({ succes: false, message: err });
 			}
 		});
 	}
@@ -199,7 +199,7 @@ router.get('/classmateProfile/:id', auth, (req, res) => {
 
 	// Check if you are authorized.
 	if (!req.payload._id) {
-		res.status(401).json({
+		return res.status(401).json({
 			message: 'UnauthorizedError: private profile',
 		});
 	} else {
@@ -213,19 +213,19 @@ router.get('/classmateProfile/:id', auth, (req, res) => {
 							let userId = user.classArray[0]._id.toString();
 							let classmateId = classmate.classArray[0]._id.toString();
 							if (userId !== classmateId) {
-								res.status(401).json({ message: "Not authorized to see user's profile" });
+								return res.status(401).json({ message: "Not authorized to see user's profile" });
 							} else {
-								res.status(200).json(classmate);
+								return res.status(200).json(classmate);
 							}
 						} else {
-							res.status(200).json(classmate);
+							return res.status(200).json(classmate);
 						}
 					} else {
-						res.status(404).json({ message: "Classmate's profile not found" });
+						return res.status(404).json({ message: "Classmate's profile not found" });
 					}
 				});
 			} else {
-				res.status(404).json({ message: "User's profile not found" });
+				return res.status(404).json({ message: "User's profile not found" });
 			}
 		});
 	}
@@ -250,12 +250,12 @@ router.delete('/deleteClass/:id', auth, (req, res) => {
 						classMember.save();
 					}
 				} else {
-					res.status(404).json({ succes: false, message: err });
+					return res.status(404).json({ succes: false, message: err });
 				}
 			});
-			res.status(200).json({ succes: true, message: 'Klas is succesvol verwijderd.' });
+			return res.status(200).json({ succes: true, message: 'Klas is succesvol verwijderd.' });
 		} else {
-			res.status(404).json({ succes: false, message: err });
+			return res.status(404).json({ succes: false, message: err });
 		}
 	});
 });

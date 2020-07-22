@@ -74,7 +74,7 @@ router.post('/register', (req, res) => {
                         }
                         user.save(function () {
                             let token = user.generateJwt();
-                            res.status(200).json({
+                            return res.status(200).json({
                                 token: token
                             });
                         });
@@ -103,7 +103,7 @@ router.post('/login', (req, res) => {
 
         // If a user is found.
         let token = user.generateJwt();
-        res.status(200).json({
+        return res.status(200).json({
             token: token
         });
     })(req, res);
@@ -168,7 +168,7 @@ router.post('/passwordrecovery', async (req, res) => {
                 return res.status(200);
             });
         } else {
-            res.status(200).json({ succes: false, message: 'Geen gebruiker gevonden met het gegeven email adres', error: err });
+            return res.status(200).json({ succes: false, message: 'Geen gebruiker gevonden met het gegeven email adres', error: err });
         }
         
     });
@@ -180,9 +180,9 @@ router.get('/reset/:token', (req, res) => {
     // Find the user that belongs to the given token
     Users.findOne({ recoverPasswordToken: req.params.token, recoverPasswordExpires: { $gt: Date.now() } }, (err) => {
         if (!err) {
-            res.status(200).json({ correct: true });
+            return res.status(200).json({ correct: true });
         } else {
-            res.status(200).json({ correct: false });
+            return res.status(200).json({ correct: false });
         }
     });
 });
@@ -195,7 +195,7 @@ router.post('/reset/:token', (req, res) => {
         if (!err) {
             user.setPassword(req.body.password, (error) => {
                 if (error) {
-                    res.status(500).json({ succes: false, message: error });
+                    return res.status(500).json({ succes: false, message: error });
                 }
             });
 
@@ -204,13 +204,13 @@ router.post('/reset/:token', (req, res) => {
 
             user.save((error) => {
                 if (error) {
-                    res.status(500).json({ succes: false, message: error });
+                    return res.status(500).json({ succes: false, message: error });
                 }
                 res.json({ succes: true, message: 'Wachtwoord succesvol verandert.' });
-                res.status(200);
+                return res.status(200);
             });
         } else {
-            res.status(200).json({ succes: false, message: 'Verkeerde of reeds verlopen token.' });
+            return res.status(200).json({ succes: false, message: 'Verkeerde of reeds verlopen token.' });
         }   
             
     });
@@ -221,12 +221,12 @@ router.get('/profile', auth, (req, res) => {
 
     // If no user Id exists in the JWT return a 401.
     if (!req.payload._id) {
-        res.status(401).json({
+        return res.status(401).json({
             message: 'UnauthorizedError: private profile'
         });
     } else {
         Users.findById(req.payload._id).exec(function (err, user) {
-                res.status(200).json(user);
+                return res.status(200).json(user);
         });
     }
 });
@@ -325,10 +325,10 @@ router.post('/recentMilestones', auth, (req, res) => {
             // Remove oldest value of the 5.
             user.recentMilestones.shift();
             user.save(() => {
-                res.status(200);
+                return res.status(200);
             });
         } else {
-            res.status(404).json({ message: err })
+            return res.status(404).json({ message: err })
         }
     })
 });
@@ -343,14 +343,14 @@ router.post('/avatar', auth, (req,res) => {
                 if (error) {
                     return res.status(500).json({ succes: false, message: error });
                 }
-                res.status(200).json({
+                return res.status(200).json({
                     imageFull: req.body.avatarItem.fullImage,
                     imageFull2: req.body.avatarItem.fullImage2,
                     category: req.body.avatarItem.category
                 });
             });
         } else {
-            res.status(404).json({ message: err })
+            return res.status(404).json({ message: err })
         }
     });
 });
@@ -385,10 +385,10 @@ router.post('/processAnswers', auth, (req, res) => {
                 if (error) {
                     return res.status(500).json({ succes: false, message: error });
                 }
-                res.status(200);
+                return res.status(200);
             });
         } else {
-            res.status(404).json({ message: err })
+            return res.status(404).json({ message: err })
         }
     });
 });
@@ -410,7 +410,7 @@ router.delete('/deleteAccount', auth, (req, res) => {
                             Classes.findByIdAndUpdate({ _id: userKlas._id }, { $pull: { students: { _id: user._id }}}).exec();
                             userKlas.save();
                         } else {
-                            res.status(404).json({ succes: false, message: err });
+                            return res.status(404).json({ succes: false, message: err });
                         }
                     });
                 }
@@ -429,18 +429,18 @@ router.delete('/deleteAccount', auth, (req, res) => {
                                         classMember.save();
                                     }
                                 } else {
-                                    res.status(404).json({ succes: false, message: err });
+                                    return res.status(404).json({ succes: false, message: err });
                                 }
                             });
                         } else {
-                            res.status(404).json({ succes: false, message: err });
+                            return res.status(404).json({ succes: false, message: err });
                         }
                     });
                 }
             }
-            res.status(200).json({ succes: true, message: 'Account is succesvol verwijderd en je zal naar de inlogpagina worden verwezen.' });
+            return res.status(200).json({ succes: true, message: 'Account is succesvol verwijderd en je zal naar de inlogpagina worden verwezen.' });
         } else {
-            res.status(404).json({ succes: false, message: err });
+            return res.status(404).json({ succes: false, message: err });
         }
     });
 });
