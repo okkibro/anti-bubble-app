@@ -7,6 +7,8 @@
 import { Component, OnInit } from '@angular/core';
 import { User } from '../../models/user';
 import { AuthenticationService } from 'src/app/services/authentication.service';
+import { ActivatedRoute } from "@angular/router";
+import { ClassesService } from "../../services/classes.service";
 
 @Component({
     selector: 'mean-avatar-display',
@@ -14,15 +16,19 @@ import { AuthenticationService } from 'src/app/services/authentication.service';
     styleUrls: ['./avatar-display.component.css']
 })
 export class AvatarDisplayComponent implements OnInit {
-    userDetails: User;
 
-    constructor(private auth: AuthenticationService) { }
+    constructor(private auth: AuthenticationService, private route: ActivatedRoute, private classService: ClassesService) { }
 
     ngOnInit(): void {
-        this.auth.profile().subscribe(user => {
-            this.userDetails = user;
-            this.showAvatar(user);
-        });
+        if (this.route.snapshot.paramMap.get('id')) {
+            this.classService.classmateProfile(this.route.snapshot.paramMap.get('id')).subscribe(classmate => {
+                this.showAvatar(classmate);
+            });
+        } else {
+            this.auth.profile().subscribe(user => {
+                this.showAvatar(user);
+            });
+        }
     }
 
     /** Method to show the avatar, taking the object from the database */

@@ -57,7 +57,7 @@ router.post('/register', (req, res) => {
     }
 
     // Building the basic avatar upon registering.
-    Shops.findById('5edcf97b1167982a005b973a', (err, lichaam) => {
+    Shops.findById('5edcf97b1167982a005b9737', (err, lichaam) => {
         Shops.findById('5edcf97b1167982a005b977b', (err, broek) => {
             Shops.findById('5edcf97b1167982a005b9754', (err, shirt) => {
                 Shops.findById('5edcf97b1167982a005b9787', (err, schoenen) => {
@@ -359,7 +359,7 @@ router.post('/avatar', auth, (req,res) => {
 router.post('/processAnswers', auth, (req, res) => {
     Users.findById(req.payload._id, (err, user) => {
         if (!err) {
-            for (q of req.body.answers) {
+            for (let q of req.body.answers) {
                 if (q != null) {
                     if (q.question.choiceConsequence[q.answer] !== '') {
                         let oldValue = user.bubble[q.question.choiceConsequence[q.answer]].pop();

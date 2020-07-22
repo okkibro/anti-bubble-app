@@ -7,6 +7,8 @@
 import { Component, OnInit } from '@angular/core';
 import { User } from '../../models/user';
 import { AuthenticationService } from '../../services/authentication.service';
+import { ActivatedRoute } from "@angular/router";
+import { ClassesService } from "../../services/classes.service";
 
 @Component({
     selector: 'mean-bubble-visualisation',
@@ -15,27 +17,28 @@ import { AuthenticationService } from '../../services/authentication.service';
         '../../shared/general-styles.css']
 })
 export class BubbleVisualisationComponent implements OnInit {
-    userDetails: User;
 
-    constructor(private auth: AuthenticationService) { }
+    constructor(private auth: AuthenticationService, private route: ActivatedRoute, private classService: ClassesService) { }
 
     ngOnInit(): void {
-        this.auth.profile().subscribe(user => {
-            this.userDetails = user;
-            this.updateBubble();
-        }, (err) => {
-            console.error(err);
-        });
-
+        if (this.route.snapshot.paramMap.get('id')) {
+            this.classService.classmateProfile(this.route.snapshot.paramMap.get('id')).subscribe(classmate => {
+                this.updateBubble(classmate);
+            });
+        } else {
+            this.auth.profile().subscribe(user => {
+                this.updateBubble(user);
+            });
+        }
     }
 
     /** Method that updates the visual representation of a users bubble based on their statistics. */
-    updateBubble() {
-        let mainstream = this.userDetails.bubble.mainstream.pop();
-        let online = this.userDetails.bubble.online.pop();
-        let social = this.userDetails.bubble.social.pop();
-        let category1 = this.userDetails.bubble.category1.pop();
-        let category2 = this.userDetails.bubble.category2.pop();
+    updateBubble(user: User): void {
+        let mainstream = user.bubble.mainstream.pop();
+        let online = user.bubble.online.pop();
+        let social = user.bubble.social.pop();
+        let category1 = user.bubble.category1.pop();
+        let category2 = user.bubble.category2.pop();
 
         let rightValues = [mainstream, social,online];
         let rightValuePaths = ['/assets/images/Super_Map/Bubble_UI/UI_Bubble_Turquoise.png', '/assets/images/Super_Map/Bubble_UI/UI_Bubble_Green.png', '/assets/images/Super_Map/Bubble_UI/UI_Bubble_Purple.png'];
@@ -53,7 +56,7 @@ export class BubbleVisualisationComponent implements OnInit {
     }
 
     /** Method that returns the name (from the second array) of the highest value from the first array, */
-    getHighestIndex(inputValues, nameValues) {
+    getHighestIndex(inputValues, nameValues): string {
         let currentMax = -1;
         let currentName = 'wrong';
         for (let i = 0; i < inputValues.length; i++) {
