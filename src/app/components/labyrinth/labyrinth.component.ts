@@ -143,11 +143,11 @@ export class LabyrinthComponent implements OnInit {
     saveQuestion(question) {
         if (question) {
 
-            // Deselecting radio button when going to the next question.
-            this.labyrinthQuestionForm.get('answer').setValue('');
-
             // Push the result with its corresponding question to this.answers.
             this.answers.push({ question: question, answer: this.labyrinthQuestionForm.get('answer').value });
+
+            // Deselecting radio button when going to the next question.
+            this.labyrinthQuestionForm.get('answer').setValue('');
         }
     }
 
