@@ -10,6 +10,9 @@ import { User } from '../../models/user';
 import { ShopService } from 'src/app/services/shop.service';
 import { AvatarService } from 'src/app/services/avatar.service';
 import { AvatarDisplayComponent } from '../avatar-display/avatar-display.component';
+import { SessionService } from "../../services/session.service";
+import { Title } from "@angular/platform-browser";
+import { environment } from "../../../environments/environment";
 
 @Component({
     selector: 'mean-avatar',
@@ -27,7 +30,8 @@ export class AvatarComponent implements OnInit {
         private auth: AuthenticationService,
         private shopService: ShopService,
         private avatarService: AvatarService,
-        private avatarDisplay: AvatarDisplayComponent
+        private avatarDisplay: AvatarDisplayComponent,
+        private titleService: Title
     ) { }
 
     ngOnInit() {
@@ -43,8 +47,10 @@ export class AvatarComponent implements OnInit {
                     }
                 }
                 this.avatarDisplay.showAvatar(user);
-            })
-        })
+            });
+        });
+
+        this.titleService.setTitle('Avatar' + environment.TITLE_TRAIL);
     }
 
     /** Method that assigns an item to the user's avatar in the database. */

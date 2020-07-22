@@ -14,6 +14,8 @@ import { DataService } from 'src/app/services/data-exchange.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { beforeUnload } from '../../../../constants';
 import { SessionService } from 'src/app/services/session.service';
+import { Title } from '@angular/platform-browser';
+import { environment } from 'src/environments/environment';
 
 @Component({
     selector: 'mean-home',
@@ -36,12 +38,15 @@ export class HomeComponent implements OnInit {
         private data: DataService,
         private snackBar: MatSnackBar,
         private sessionService: SessionService,
+        private titleService: Title
     ) { }
 
     ngOnInit(): void {
         this.auth.profile().subscribe(user => {
             this.userDetails = user;
         });
+
+        this.titleService.setTitle('Home' + environment.TITLE_TRAIL);
     }
 
     /** Method to redirect a student to the labyrinth page. */

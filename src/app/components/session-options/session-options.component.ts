@@ -10,6 +10,8 @@ import { SocketIOService } from 'src/app/services/socket-io.service';
 import { Router } from '@angular/router';
 import { SessionService } from 'src/app/services/session.service';
 import { FormBuilder, Validators } from "@angular/forms";
+import { environment } from "../../../environments/environment";
+import { Title } from "@angular/platform-browser";
 
 @Component({
     selector: 'mean-session-options',
@@ -28,10 +30,13 @@ export class SessionOptionsComponent implements OnInit {
         private router: Router,
         private socketService: SocketIOService,
         private sessionService: SessionService,
-        private fb: FormBuilder
+        private fb: FormBuilder,
+        private titleService: Title
     ) { }
 
-    ngOnInit() { }
+    ngOnInit() {
+        this.titleService.setTitle('Sessie opties' + environment.TITLE_TRAIL);
+    }
 
     /** Method that fets called when teacher presses create session button. gamedata contains the name of the game and time of the slider. */
     createSession(gameData) {

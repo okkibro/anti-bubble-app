@@ -14,6 +14,8 @@ import { beforeUnload } from '../../../../constants';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Articles } from 'src/app/models/articles';
 import { tokenData } from "../../models/tokenData";
+import { Title } from "@angular/platform-browser";
+import { environment } from "../../../environments/environment";
 
 @Component({
     selector: 'mean-session',
@@ -47,7 +49,8 @@ export class SessionComponent implements OnInit {
         private data: DataService,
         private router: Router,
         private sessionService: SessionService,
-        private snackBar: MatSnackBar
+        private snackBar: MatSnackBar,
+        private titleService: Title
     ) { }
 
     ngOnInit(): void {
@@ -164,6 +167,8 @@ export class SessionComponent implements OnInit {
             // Show confirm when trying to refresh or close the current tab with an ongoing session.
             window.addEventListener('beforeunload', beforeUnload);
         }
+
+        this.titleService.setTitle('Sessie' + environment.TITLE_TRAIL);
     }
 
     /** Method that calls the leave session function in the socket io service. */

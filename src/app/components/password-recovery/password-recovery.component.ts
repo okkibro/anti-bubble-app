@@ -9,6 +9,9 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { PasswordRecoveryService } from '../../services/password-recovery.service';
+import { SessionService } from "../../services/session.service";
+import { Title } from "@angular/platform-browser";
+import { environment } from "../../../environments/environment";
 
 @Component({
     selector: 'mean-password-recovery',
@@ -25,10 +28,13 @@ export class PasswordRecoveryComponent implements OnInit {
         private passwordRecoveryService: PasswordRecoveryService,
         private router: Router,
         private fb: FormBuilder,
-        private snackBar: MatSnackBar
+        private snackBar: MatSnackBar,
+        private titleService: Title
     ) { }
 
-    ngOnInit() { }
+    ngOnInit() {
+        this.titleService.setTitle('Wachtwoord vergeten' + environment.TITLE_TRAIL);
+    }
 
     /** Method to send an email to the user to reset their password. */
     sendEmail() {

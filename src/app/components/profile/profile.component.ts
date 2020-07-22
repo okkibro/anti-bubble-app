@@ -14,6 +14,9 @@ import { Milestone } from 'src/app/models/milestone';
 import { ClassesService } from 'src/app/services/classes.service';
 import { Router } from '@angular/router';
 import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { SessionService } from "../../services/session.service";
+import { Title } from "@angular/platform-browser";
+import { environment } from "../../../environments/environment";
 
 @Component({
     selector: 'mean-profile',
@@ -40,7 +43,8 @@ export class ProfileComponent implements OnInit {
         private snackBar: MatSnackBar,
         private classService: ClassesService,
         private router: Router,
-        private dialog: MatDialog
+        private dialog: MatDialog,
+        private titleService: Title
     ) { }
     
     ngOnInit() {
@@ -71,6 +75,8 @@ export class ProfileComponent implements OnInit {
         }, (err) => {
             console.error(err);
         });
+
+        this.titleService.setTitle('Profiel' + environment.TITLE_TRAIL);
     }
 
     /** Method to change you password on the profile page. */

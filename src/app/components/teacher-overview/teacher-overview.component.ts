@@ -12,6 +12,9 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { Class } from 'src/app/models/classes';
 import { ClassesService } from 'src/app/services/classes.service';
 import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from "@angular/material/dialog";
+import { environment } from "../../../environments/environment";
+import { SessionService } from "../../services/session.service";
+import { Title } from "@angular/platform-browser";
 
 @Component({
     selector: 'mean-teacher-overview',
@@ -40,7 +43,8 @@ export class TeacherOverviewComponent implements OnInit {
         private classService: ClassesService,
         private fb: FormBuilder,
         private snackBar: MatSnackBar,
-        private dialog: MatDialog
+        private dialog: MatDialog,
+        private titleService: Title
     ) { }
 
     ngOnInit(): void {
@@ -54,6 +58,8 @@ export class TeacherOverviewComponent implements OnInit {
                 });
             }
         });
+
+        this.titleService.setTitle('Docent overzicht' + environment.TITLE_TRAIL);
     }
 
     /** Method to create a new class based on the filled in information of the form and join this class based on the result of the creation method. */

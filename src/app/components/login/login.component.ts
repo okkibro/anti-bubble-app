@@ -10,6 +10,9 @@ import { AuthenticationService } from '../../services/authentication.service';
 import { Router } from '@angular/router';
 import { User } from '../../models/user';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { SessionService } from "../../services/session.service";
+import { Title } from "@angular/platform-browser";
+import { environment } from "../../../environments/environment";
 
 @Component({
     selector: 'mean-login',
@@ -28,13 +31,16 @@ export class LoginComponent implements OnInit {
         private auth: AuthenticationService,
         private router: Router,
         private fb: FormBuilder,
-        private snackBar: MatSnackBar
+        private snackBar: MatSnackBar,
+        private titleService: Title
     ) { }
 
     ngOnInit() {
         if (this.auth.isLoggedIn()) {
             this.router.navigate(['home']);
         }
+
+        this.titleService.setTitle('Login' + environment.TITLE_TRAIL);
     }
 
     /** Method to login. */ 

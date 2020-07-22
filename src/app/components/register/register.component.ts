@@ -10,6 +10,9 @@ import { AuthenticationService } from '../../services/authentication.service';
 import { Router } from '@angular/router';
 import { User } from '../../models/user';
 import { ShopService } from 'src/app/services/shop.service';
+import { environment } from "../../../environments/environment";
+import { SessionService } from "../../services/session.service";
+import { Title } from "@angular/platform-browser";
 
 @Component({
     selector: 'mean-register',
@@ -40,10 +43,13 @@ export class RegisterComponent implements OnInit {
         private auth: AuthenticationService,
         private router: Router,
         private fb: FormBuilder,
-        private shop: ShopService
+        private shop: ShopService,
+        private titleService: Title
     ) { }
 
-    ngOnInit() { }
+    ngOnInit() {
+        this.titleService.setTitle('Registreer' + environment.TITLE_TRAIL);
+    }
 
     /** Method to register a new user based on the information filled in on the form. */
     registerUser() { 

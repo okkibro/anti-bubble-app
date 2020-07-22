@@ -17,7 +17,7 @@
     <mat-divider></mat-divider>
     <button mat-button [routerLink]="'/teacher-overview'" *ngIf="tokenData.role == 'teacher'" (click)="onSidenavClose()">
         <mat-icon>class</mat-icon>
-        Klas overzicht
+        Docent overzicht
     </button>
     <mat-divider *ngIf="tokenData.role == 'teacher'"></mat-divider>
     <button mat-button [routerLink]="'/class-overview'" *ngIf="tokenData.role == 'student'" (click)="onSidenavClose()">

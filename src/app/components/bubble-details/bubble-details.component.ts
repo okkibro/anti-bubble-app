@@ -8,6 +8,9 @@ import { Component, OnInit } from '@angular/core';
 import { AuthenticationService } from '../../services/authentication.service';
 import { User } from '../../models/user';
 import * as Highcharts2 from 'highcharts';
+import { SessionService } from "../../services/session.service";
+import { Title } from "@angular/platform-browser";
+import { environment } from "../../../environments/environment";
 
 @Component({
     selector: 'mean-bubble-details',
@@ -37,14 +40,16 @@ export class BubbleDetailsComponent implements OnInit {
     userDetails: User;
 
     data
-    constructor(private auth: AuthenticationService) { }
+    constructor(private auth: AuthenticationService, private titleService: Title) { }
 
     ngOnInit() {
         this.auth.profile().subscribe(user => {
             this.userDetails = user;
             this.data = user.bubble
             this.initChart();
-        })
+        });
+
+        this.titleService.setTitle('Bubbel details' + environment.TITLE_TRAIL);
     }
 
     initChart() {

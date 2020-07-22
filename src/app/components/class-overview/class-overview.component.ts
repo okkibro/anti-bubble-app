@@ -12,6 +12,8 @@ import { FormBuilder } from '@angular/forms';
 import { ClassesService } from '../../services/classes.service';
 import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from "@angular/material/dialog";
 import { MatSnackBar } from "@angular/material/snack-bar";
+import { Title } from '@angular/platform-browser';
+import { environment } from 'src/environments/environment';
 
 @Component({
     selector: 'mean-class-overview',
@@ -34,19 +36,23 @@ export class ClassOverviewComponent implements OnInit {
         private auth: AuthenticationService,
         private router: Router,
         private fb: FormBuilder,
-        private dialog: MatDialog
+        private dialog: MatDialog,
+        private titleService: Title
     ) { }
 
     ngOnInit() {
         this.auth.profile().subscribe(user => {
             this.userDetails = user;
-        })
+        });
+
         this.classService.getClass().subscribe((data) => {
             if (data.succes) {
                 this.userClass = data.class;
                 this.classmates = data.classmates;
             }
         });
+
+        this.titleService.setTitle('Klas overzicht' + environment.TITLE_TRAIL);
     }
 
     /** Method to filter the students in a class. */

@@ -9,6 +9,9 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { PasswordRecoveryService } from '../../services/password-recovery.service';
+import { environment } from "../../../environments/environment";
+import { SessionService } from "../../services/session.service";
+import { Title } from "@angular/platform-browser";
 
 @Component({
     selector: 'mean-password-reset',
@@ -30,18 +33,20 @@ export class PasswordResetComponent implements OnInit {
         private router: Router,
         private fb: FormBuilder,
         private snackBar: MatSnackBar,
-        private passwordRecoveryService: PasswordRecoveryService
+        private passwordRecoveryService: PasswordRecoveryService,
+        private titleService: Title
     ) { }
 
     ngOnInit(): void {
 
         // Check if token is correct, otherwise navigate back to login.
         this.passwordRecoveryService.getResetPage(this.route.snapshot.paramMap.get('token')).subscribe((data) => {
-            if (data.correct) {
-            } else {
+            if (!data.correct) {
                 this.router.navigate(['/login']);
             }
         });
+
+        this.titleService.setTitle('Wachtwoord resetten' + environment.TITLE_TRAIL);
     }
 
     /** Method to reset your password based on th filled in passwords in the form. */

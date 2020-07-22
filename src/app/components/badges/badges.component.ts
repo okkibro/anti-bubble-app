@@ -8,6 +8,9 @@ import { Component, OnInit } from '@angular/core';
 import { milestones } from '../../../../constants';
 import { AuthenticationService } from '../../services/authentication.service';
 import { User } from '../../models/user';
+import { SessionService } from "../../services/session.service";
+import { Title } from "@angular/platform-browser";
+import { environment } from "../../../environments/environment";
 
 @Component({
     selector: 'mean-badges',
@@ -21,7 +24,7 @@ export class BadgesComponent implements OnInit {
     userDetails: User;
     value: string;
 
-    constructor(private auth: AuthenticationService) { }
+    constructor(private auth: AuthenticationService, private titleService: Title) { }
 
     ngOnInit(): void {
         this.auth.profile().subscribe(user => {
@@ -41,6 +44,8 @@ export class BadgesComponent implements OnInit {
         }, (err) => {
             console.error(err);
         });
+
+        this.titleService.setTitle('Badges' + environment.TITLE_TRAIL);
     }
 
     /** Method to calculate how far you are in completing all milestones. */

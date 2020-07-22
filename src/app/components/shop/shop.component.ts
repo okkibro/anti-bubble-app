@@ -12,6 +12,9 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { User } from '../../models/user';
 import { MilestoneUpdatesService } from '../../services/milestone-updates.service'
 import { milestones } from '../../../../constants';
+import { SessionService } from "../../services/session.service";
+import { Title } from "@angular/platform-browser";
+import { environment } from "../../../environments/environment";
 
 @Component({
     selector: 'mean-shop',
@@ -30,7 +33,8 @@ export class ShopComponent implements OnInit {
         private auth: AuthenticationService,
         private shopService: ShopService,
         private snackBar: MatSnackBar,
-        private milestoneUpdates: MilestoneUpdatesService
+        private milestoneUpdates: MilestoneUpdatesService,
+        private titleService: Title
     ) { }
 
     ngOnInit(): void {
@@ -46,6 +50,8 @@ export class ShopComponent implements OnInit {
         }, (err) => {
             console.error(err);
         });
+
+        this.titleService.setTitle('Shop' + environment.TITLE_TRAIL);
     }
 
     /** Method to change categoty of items you are looking at in the shop */

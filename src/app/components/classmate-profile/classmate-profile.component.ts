@@ -9,6 +9,9 @@ import { AuthenticationService } from '../../services/authentication.service';
 import { User } from '../../models/user';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ClassesService } from 'src/app/services/classes.service';
+import { environment } from "../../../environments/environment";
+import { SessionService } from "../../services/session.service";
+import { Title } from "@angular/platform-browser";
 
 @Component({
     selector: 'mean-classmate-profile',
@@ -24,7 +27,8 @@ export class ClassmateProfileComponent implements OnInit {
         private classService: ClassesService,
         private auth: AuthenticationService,
         private route: ActivatedRoute,
-        private router: Router
+        private router: Router,
+        private titleService: Title
     ) { }
 
     ngOnInit() {
@@ -41,5 +45,7 @@ export class ClassmateProfileComponent implements OnInit {
             console.error(err);
             this.router.navigate(['/home']);
         });
+
+        this.titleService.setTitle('Klasgenoot profiel' + environment.TITLE_TRAIL);
     }
 }

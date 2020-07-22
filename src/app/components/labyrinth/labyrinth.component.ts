@@ -12,6 +12,8 @@ import { AuthenticationService } from '../../services/authentication.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { BubbleGraphService } from 'src/app/services/bubble-graph.service';
 import { FormBuilder, Validators } from '@angular/forms';
+import { environment } from "../../../environments/environment";
+import { Title } from "@angular/platform-browser";
 
 @Component({
     selector: 'mean-labyrinth',
@@ -40,7 +42,8 @@ export class LabyrinthComponent implements OnInit {
         private auth: AuthenticationService,
         private snackBar: MatSnackBar,
         private bubbleService: BubbleGraphService,
-        private fb: FormBuilder
+        private fb: FormBuilder,
+        private titleService: Title
     ) { }
 
     ngOnInit(): void {
@@ -50,6 +53,8 @@ export class LabyrinthComponent implements OnInit {
 
         // Start the labyrinth in part 1.
         this.part = 1;
+
+        this.titleService.setTitle('Doolhof' + environment.TITLE_TRAIL);
     }
 
 
