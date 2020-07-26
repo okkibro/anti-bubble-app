@@ -9,8 +9,9 @@ const router = express.Router();
 const mongoose = require('mongoose');
 const Shops = mongoose.model('shops');
 const Users = mongoose.model('users');
-
 const jwt = require('express-jwt');
+
+// Small constant for authentication.
 const auth = jwt({
     secret: process.env.MY_SECRET,
     userProperty: 'payload'
@@ -18,52 +19,64 @@ const auth = jwt({
 
 /** GET method to get shop items from the database based on a query. */
 router.get('/', (req, res) => {
-    let query = {
-        category: req.headers.id.toLowerCase()
-    }
-
-    Shops.find(query)
-        .exec(function (err, shop) {
+    Shops.find({ category: req.headers.id.toLowerCase() }, (err, shop) => {
             return res.status(200).json(shop);
         });
 });
 
 router.get('/getBaseInventory', auth, (req, res) => {
-    Shops.find({ initial: true }).exec(function (err, shop) {
-        return res.status(200).json(shop);
-    });
+    // Check user is authorized to perform te action.
+    if (!req.payload._id) {
+        return res.status(401).json({ message: 'UnauthorizedError: unauthorized action' });
+    } else {
+        Shops.find({ initial: true }, (err, shop) => {
+            return res.status(200).json(shop);
+        });
+    }
 });
 
 router.post('/buy', auth, (req, res) => {
 
-    // Get the logged in user.
-    Users.findById(req.payload._id).exec(function (err, user) { 
-        
-    // Check if the user has enough money and hasnt bought the item yet.
-        if (user.currency >= req.body.item.price && user.inventory.find(x => x._id === req.body.item._id) == null) {
+    // Check user is authorized to perform te action.
+    if (!req.payload._id) {
+        return res.status(401).json({ message: 'UnauthorizedError: unauthorized action' });
+    } else {
 
-            // Add item to inventory.
-            user.inventory.push(req.body.item);
+        // Get the logged in user.
+        Users.findById(req.payload._id, (err, user) => {
 
-            // Pay the money.
-            user.currency -= req.body.item.price;
-            user.markModified('inventory');
-            user.save();
+            // Check if the user has enough money and hasnt bought the item yet.
+            if (user.currency >= req.body.item.price && user.inventory.find(x => x._id === req.body.item._id) == null) {
 
-            // Show succes message.
-            return res.status(200).json({ succes: true, message: `Je hebt ${req.body.item.title} succesvol gekocht!` });
-        } else {
-            if (user.currency < req.body.item.price) {
+                // Add item to inventory.
+                user.inventory.push(req.body.item);
 
-                // If not enough money, show appropriate message.
-                return res.status(200).json({ succes: false, message: `Je hebt niet genoeg geld om ${req.body.item.title} te kopen` });
+                // Pay the money.
+                user.currency -= req.body.item.price;
+                user.markModified('inventory');
+                user.save();
+
+                // Show succes message.
+                return res.status(200).json({
+                    succes: true,
+                    message: `Je hebt ${req.body.item.title} succesvol gekocht!`
+                });
             } else {
+                if (user.currency < req.body.item.price) {
 
-                // Else show message that item has already been bought.
-                return res.status(200).json({ succes: false, message: `Je hebt ${req.body.item.title} al gekocht` });
+                    // If not enough money, show appropriate message.
+                    return res.status(200).json({
+                        succes: false,
+                        message: `Je hebt niet genoeg geld om ${req.body.item.title} te kopen`
+                    });
+                } else {
+
+                    // Else show message that item has already been bought.
+                    return res.status(200).json({ succes: false, message: `Je hebt ${req.body.item.title} al gekocht`});
+                }
             }
-        }
-    });
+        });
+    }
 });
 
 module.exports = router;

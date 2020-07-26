@@ -12,7 +12,7 @@ const jwt = require('express-jwt');
 const Users = mongoose.model('users');
 const Classes = mongoose.model('classes');
 
-// Small constant to check authentication.
+// Small constant for authentication.
 const auth = jwt({
 	secret: process.env.MY_SECRET,
 	userProperty: 'payload',
@@ -20,10 +20,10 @@ const auth = jwt({
 
 /** POST method to create a new class in the database. */
 router.post('/createClass', auth, (req, res) => {
+
+	// Check user is authorized to perform te action.
 	if (!req.payload._id) {
-		return res.status(401).json({
-			message: 'UnauthorizedError: private profile',
-		});
+		return res.status(401).json({ message: 'UnauthorizedError: unauthorized action' });
 	} else {
 		// Make a new class.
 		let klas = new Classes();
@@ -48,11 +48,9 @@ router.post('/createClass', auth, (req, res) => {
 /** POST method to join a user to a class. */
 router.post('/joinClass', auth, (req, res) => {
 
-	// Check if you are authorized.
+	// Check user is authorized to perform te action.
 	if (!req.payload._id) {
-		return res.status(401).json({
-			message: 'UnauthorizedError: private profile',
-		});
+		return res.status(401).json({ message: 'UnauthorizedError: unauthorized action' });
 	} else {
 		Users.findById(req.payload._id, (err, user) => {
 			if (err) {
@@ -102,11 +100,10 @@ router.post('/joinClass', auth, (req, res) => {
 /** GET method to get the class a user is in.
  * In case of a teacher this functions gives back the first class in the teachers class list. */
 router.get('/getClass', auth, (req, res) => {
-	// Check if you are authorized.
+
+	// Check user is authorized to perform te action.
 	if (!req.payload._id) {
-		return res.status(401).json({
-			message: 'UnauthorizedError: private profile',
-		});
+		return res.status(401).json({ message: 'UnauthorizedError: unauthorized action' });
 	} else {
 		Users.findById(req.payload._id, async (err, user) => {
 			if (err) {
@@ -143,11 +140,10 @@ router.get('/getClass', auth, (req, res) => {
 
 /** GET method to get all the database class ids a user has in their class list. */
 router.get('/getClassIds', auth, (req, res) => {
-	//Check if you are authorized.
+
+	// Check user is authorized to perform te action.
 	if (!req.payload._id) {
-		return res.status(401).json({
-			message: 'UnauthorizedError: private profile',
-		});
+		return res.status(401).json({ message: 'UnauthorizedError: unauthorized action' });
 	} else {
 		Users.findById(req.payload._id, (err, user) => {
 			if (err) {
@@ -161,11 +157,10 @@ router.get('/getClassIds', auth, (req, res) => {
 
 /** GET method to get a class based on the given id in the url. */
 router.get('/getSingleClass/:id', auth, (req, res) => {
-	// Check if you are authorized.
+
+	// Check user is authorized to perform te action.
 	if (!req.payload._id) {
-		return res.status(401).json({
-			message: 'UnauthorizedError: private profile',
-		});
+		return res.status(401).json({ message: 'UnauthorizedError: unauthorized action' });
 	} else {
 		Classes.findById(req.params.id, (err, foundClass) => {
 			if (!err) {
@@ -197,11 +192,9 @@ router.get('/getSingleClass/:id', auth, (req, res) => {
 /** GET method to get a profile of a user in your class. */
 router.get('/classmateProfile/:id', auth, (req, res) => {
 
-	// Check if you are authorized.
+	// Check user is authorized to perform te action.
 	if (!req.payload._id) {
-		return res.status(401).json({
-			message: 'UnauthorizedError: private profile',
-		});
+		return res.status(401).json({ message: 'UnauthorizedError: private profile' });
 	} else {
 		Users.findById(req.payload._id, (errorU, user) => {
 			if (!errorU) {
@@ -234,61 +227,73 @@ router.get('/classmateProfile/:id', auth, (req, res) => {
 /** DELETE method for deleting a class based on a given id. */
 router.delete('/deleteClass/:id', auth, (req, res) => {
 
-	// Find class based on id pased in URL.
-	Classes.findById(req.params.id, (err, klas) => {
+	// Check user is authorized to perform te action.
+	if (!req.payload._id) {
+		return res.status(401).json({ message: 'UnauthorizedError: unauthorized action' });
+	} else {
 
-		// If we found a class in the database with said id delete it and continue.
-		if (!err && klas != null) {
-			Classes.findByIdAndDelete({ _id: klas._id }).exec();
+		// Find class based on id passed in URL.
+		Classes.findById(req.params.id, (err, klas) => {
 
-			// Update 'classArray' of all users that were apart of the class so they will not be members of a deleted class.
-			// We don't check for length of 'students' array since the class will always have atleast 1 memmber, namely the teacher.
-			Users.find({'classArray._id': klas._id}, (err, classMembers) => {
-				if (!err && classMembers != null) {
-					for (let classMember of classMembers) {
-						Users.findByIdAndUpdate({ _id: classMember._id }, { $pull: { classArray: { _id: klas._id }}}).exec();
-						classMember.save();
+			// If we found a class in the database with said id delete it and continue.
+			if (!err && klas != null) {
+				Classes.findByIdAndDelete({_id: klas._id}).exec();
+
+				// Update 'classArray' of all users that were apart of the class so they will not be members of a deleted class.
+				// We don't check for length of 'students' array since the class will always have atleast 1 memmber, namely the teacher.
+				Users.find({ 'classArray._id': klas._id }, (err, classMembers) => {
+					if (!err && classMembers != null) {
+						for (let classMember of classMembers) {
+							Users.findByIdAndUpdate({ _id: classMember._id }, { $pull: { classArray: { _id: klas._id }}}).exec();
+							classMember.save();
+						}
+					} else {
+						return res.status(404).json({ succes: false, message: err });
 					}
-				} else {
-					return res.status(404).json({ succes: false, message: err });
-				}
-			});
-			return res.status(200).json({ succes: true, message: 'Klas is succesvol verwijderd.' });
-		} else {
-			return res.status(404).json({ succes: false, message: err });
-		}
-	});
+				});
+				return res.status(200).json({ succes: true, message: 'Klas is succesvol verwijderd.' });
+			} else {
+				return res.status(404).json({ succes: false, message: err });
+			}
+		});
+	}
 });
 
 /** PATCH that removes a student from a class (whether initiated by the teacher or the student themselves). */
 router.patch('/leaveClass', auth, (req, res) => {
 
-	// Find the user who is leaving/being removed from the class and update their 'classArray'.
-	Users.findById(req.body.userId, (err, user) => {
-		if (!err && user != null) {
-			Users.findByIdAndUpdate({ _id: user._id }, { $pull: { classArray: { _id: req.body.classId }}}).exec();
-			user.save();
-		} else {
-			return res.status(404).json({ succes: false, message: err });
-		}
-	});
-
-	// Find the user who is leaving/being removed from the class and update their 'classArray'.
-	Classes.findById(req.body.classId, (err, klas) => {
-		if (!err && klas != null) {
-			Classes.findByIdAndUpdate({ _id: klas._id }, { $pull: { students: { _id: req.body.userId }}}).exec();
-			klas.save();
-		} else {
-			return res.status(404).json({ succes: false, message: err });
-		}
-	});
-
-	// If 'req.body.leaving' is true, the student left themselves; if it is false, they were kicked by a teacher and we
-	// return the message accrodingly.
-	if (req.body.leaving) {
-		return res.status(200).json({ succes: true, message: 'Je hebt de klas succesvol verlaten.' });
+	// Check user is authorized to perform te action.
+	if (!req.payload._id) {
+		return res.status(401).json({ message: 'UnauthorizedError: private profile' });
 	} else {
-		return res.status(200).json({ succes: true, message: 'Leerling is succesvol uit de klas verwijderd.' });
+
+		// Find the user who is leaving/being removed from the class and update their 'classArray'.
+		Users.findById(req.body.userId, (err, user) => {
+			if (!err && user != null) {
+				Users.findByIdAndUpdate({ _id: user._id }, { $pull: { classArray: { _id: req.body.classId }}}).exec();
+				user.save();
+			} else {
+				return res.status(404).json({ succes: false, message: err });
+			}
+		});
+
+		// Find the user who is leaving/being removed from the class and update their 'classArray'.
+		Classes.findById(req.body.classId, (err, klas) => {
+			if (!err && klas != null) {
+				Classes.findByIdAndUpdate({ _id: klas._id }, { $pull: { students: { _id: req.body.userId }}}).exec();
+				klas.save();
+			} else {
+				return res.status(404).json({ succes: false, message: err });
+			}
+		});
+
+		// If 'req.body.leaving' is true, the student left themselves; if it is false, they were kicked by a teacher and we
+		// return the message accrodingly.
+		if (req.body.leaving) {
+			return res.status(200).json({ succes: true, message: 'Je hebt de klas succesvol verlaten.' });
+		} else {
+			return res.status(200).json({ succes: true, message: 'Leerling is succesvol uit de klas verwijderd.' });
+		}
 	}
 });
 

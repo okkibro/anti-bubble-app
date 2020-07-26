@@ -14,8 +14,9 @@ const crypto = require('crypto');
 const Shops = mongoose.model('shops');
 const Users = mongoose.model('users');
 const Classes = mongoose.model('classes');
-
 const jwt = require('express-jwt');
+
+// Small constant for authentication.
 const auth = jwt({
     secret: process.env.MY_SECRET,
     userProperty: 'payload'
@@ -178,7 +179,7 @@ router.post('/passwordrecovery', async (req, res) => {
 router.get('/reset/:token', (req, res) => {
 
     // Find the user that belongs to the given token
-    Users.findOne({ recoverPasswordToken: req.params.token, recoverPasswordExpires: { $gt: Date.now() } }, (err) => {
+    Users.findOne({ recoverPasswordToken: req.params.token, recoverPasswordExpires: { $gt: Date.now() }}, (err) => {
         if (!err) {
             return res.status(200).json({ correct: true });
         } else {
@@ -191,7 +192,7 @@ router.get('/reset/:token', (req, res) => {
 router.post('/reset/:token', (req, res) => {
 
     // Find the user that belongs to the given token
-    Users.findOne({ recoverPasswordToken: req.params.token, recoverPasswordExpires: { $gt: Date.now() } }, (err, user) => {
+    Users.findOne({ recoverPasswordToken: req.params.token, recoverPasswordExpires: { $gt: Date.now() }}, (err, user) => {
         if (!err) {
             user.setPassword(req.body.password, (error) => {
                 if (error) {
@@ -219,11 +220,9 @@ router.post('/reset/:token', (req, res) => {
 /** GET method to get a user from the database given an id. */
 router.get('/profile', auth, (req, res) => {
 
-    // If no user Id exists in the JWT return a 401.
+    // Check user is authorized to perform te action.
     if (!req.payload._id) {
-        return res.status(401).json({
-            message: 'UnauthorizedError: private profile'
-        });
+        return res.status(401).json({ message: 'UnauthorizedError: unauthorized action' });
     } else {
         Users.findById(req.payload._id).exec(function (err, user) {
                 return res.status(200).json(user);
@@ -248,213 +247,261 @@ router.post('/checkEmailTaken', (req, res) => {
 
 /** PATCH method to update a password given an email. */
 router.patch('/updatePassword', (req, res) => {
-    Users.findOne({ email: sanitize(req.body.email) }).then(user => {
-        if (user) {
+    // Check user is authorized to perform te action.
+    if (!req.payload._id) {
+        return res.status(401).json({ message: 'UnauthorizedError: unauthorized action' });
+    } else {
+        Users.findOne({email: sanitize(req.body.email)}).then(user => {
+            if (user) {
 
-            // Check if old password is filled in correctly.
-            if (user.validatePassword(sanitize(req.body.oldPassword))) {
+                // Check if old password is filled in correctly.
+                if (user.validatePassword(sanitize(req.body.oldPassword))) {
 
-                // Update password in database to new password.
-                user.setPassword(sanitize(req.body.newPassword));
+                    // Update password in database to new password.
+                    user.setPassword(sanitize(req.body.newPassword));
 
-                // Save changes to database.
-                user.save();
-                return res.status(200).json({ succes: true, message: 'Wachtwoord succesvol verandert.' });
+                    // Save changes to database.
+                    user.save();
+                    return res.status(200).json({ succes: true, message: 'Wachtwoord succesvol verandert.' });
+                } else {
+
+                    // Handle error if old password doesn't match with the one in database.
+                    return res.status(200).json({ success: false, message: 'Oude wachtwoord is niet correct.' });
+                }
             } else {
 
-                // Handle error if old password doesn't match with the one in database.
-                return res.status(200).json({ success: false, message: 'Oude wachtwoord is niet correct.' });
+                // Handle error if user is not found in database.
+                return res.status(401).json({ succes: false, message: 'User not found.' });
             }
-        } else {
-
-            // Handle error if user is not found in database.
-            return res.status(401).json({ succes: false, message: 'User not found.' });
-        }
-    });
+        });
+    }
 });
 
 /** GET method to get all milestone values in an array for the logged in user. */
 router.get('/milestone', auth, (req, res) => {
-    Users.findById(req.payload._id, (err, user) => {
-        res.json(user.milestones);
-    });
+    // Check user is authorized to perform te action.
+    if (!req.payload._id) {
+        return res.status(401).json({ message: 'UnauthorizedError: unauthorized action' });
+    } else {
+        Users.findById(req.payload._id, (err, user) => {
+            res.json(user.milestones);
+        });
+    }
 });
 
 /** POST method to changes a milestone by a given value, returns the updated value and whether it is completed now or not. */
 router.post('/milestone', auth, (req, res) => {
 
-    // Get currently logged in user.
-    Users.findById(req.payload._id, (err, user) => {
-        let milestone = req.body.milestone;
-        let completed = false;
+    // Check user is authorized to perform te action.
+    if (!req.payload._id) {
+        return res.status(401).json({ message: 'UnauthorizedError: unauthorized action' });
+    } else {
 
-        // Check if milestone is already completed.
-        if (user.milestones[milestone.index] === milestone.maxValue) {
+        // Get currently logged in user.
+        Users.findById(req.payload._id, (err, user) => {
+            let milestone = req.body.milestone;
+            let completed = false;
 
-            // Return completed false because it was already completed.
-            res.json({ updatedValue: milestone.maxValue, completed: completed });
-        } else {
+            // Check if milestone is already completed.
+            if (user.milestones[milestone.index] === milestone.maxValue) {
 
-            // Add value to milestone.
-            user.milestones[milestone.index] += req.body.value;
+                // Return completed false because it was already completed.
+                res.json({ updatedValue: milestone.maxValue, completed: completed });
+            } else {
 
-            // Check if you surpassed the max value.
-            if (user.milestones[milestone.index] >= milestone.maxValue) {
+                // Add value to milestone.
+                user.milestones[milestone.index] += req.body.value;
 
-                // Set value to max value cause it cant be larger than max value.
-                user.milestones[milestone.index] = milestone.maxValue;
-                completed = true;
+                // Check if you surpassed the max value.
+                if (user.milestones[milestone.index] >= milestone.maxValue) {
+
+                    // Set value to max value cause it cant be larger than max value.
+                    user.milestones[milestone.index] = milestone.maxValue;
+                    completed = true;
+                }
+
+                // Mark and save changes.
+                user.markModified('milestones');
+                user.save(() => {
+                    res.json({ updatedValue: user.milestones[milestone.index], completed: completed });
+                });
             }
-
-            // Mark and save changes.
-            user.markModified('milestones');
-            user.save(() => {
-                res.json({ updatedValue: user.milestones[milestone.index], completed: completed });
-            });
-        }
-    })
+        })
+    }
 });
 
 /** POST method to post a new message to recent milestones. */
 router.post('/recentMilestones', auth, (req, res) => {
-    Users.findById(req.payload._id, (err, user) => {
-        if (!err) {
 
-            // Push new value into the array.
-            user.recentMilestones.push(req.body.value);
-    
-            // Remove oldest value of the 5.
-            user.recentMilestones.shift();
-            user.save(() => {
-                return res.status(200);
-            });
-        } else {
-            return res.status(404).json({ message: err })
-        }
-    })
+    // Check user is authorized to perform te action.
+    if (!req.payload._id) {
+        return res.status(401).json({ message: 'UnauthorizedError: unauthorized action' });
+    } else {
+        Users.findById(req.payload._id, (err, user) => {
+            if (!err) {
+
+                // Push new value into the array.
+                user.recentMilestones.push(req.body.value);
+
+                // Remove oldest value of the 5.
+                user.recentMilestones.shift();
+                user.save(() => {
+                    return res.status(200);
+                });
+            } else {
+                return res.status(404).json({ message: err })
+            }
+        });
+    }
 });
 
 /** POST method to equip the avatar with the send item. */
 router.post('/avatar', auth, (req,res) => {
-    Users.findById(req.payload._id, (err, user) => {
-        if (!err) {
-            user.avatar[req.body.avatarItem.category] = req.body.avatarItem;
-            user.markModified('avatar');
-            user.save((error) => {
-                if (error) {
-                    return res.status(500).json({ succes: false, message: error });
-                }
-                return res.status(200).json({
-                    imageFull: req.body.avatarItem.fullImage,
-                    imageFull2: req.body.avatarItem.fullImage2,
-                    category: req.body.avatarItem.category
+
+    // Check user is authorized to perform te action.
+    if (!req.payload._id) {
+        return res.status(401).json({ message: 'UnauthorizedError: unauthorized action' });
+    } else {
+        Users.findById(req.payload._id, (err, user) => {
+            if (!err) {
+                user.avatar[req.body.avatarItem.category] = req.body.avatarItem;
+                user.markModified('avatar');
+                user.save((error) => {
+                    if (error) {
+                        return res.status(500).json({ succes: false, message: error });
+                    }
+                    return res.status(200).json({
+                        imageFull: req.body.avatarItem.fullImage,
+                        imageFull2: req.body.avatarItem.fullImage2,
+                        category: req.body.avatarItem.category
+                    });
                 });
-            });
-        } else {
-            return res.status(404).json({ message: err })
-        }
-    });
+            } else {
+                return res.status(404).json({ message: err })
+            }
+        });
+    }
 });
 
 /** POST method to update user bubble after performing/pausing the labyrinth. */
 router.post('/processAnswers', auth, (req, res) => {
-    Users.findById(req.payload._id, (err, user) => {
-        if (!err) {
-            for (let q of req.body.answers) {
-                if (q != null) {
-                    if (q.question.choiceConsequence[q.answer] !== '') {
-                        let oldValue = user.bubble[q.question.choiceConsequence[q.answer]].pop();
-                        let newValue = oldValue + q.question.values[q.answer];
-                        if (user.bubble[q.question.choiceConsequence[q.answer]].length < 1) {
-                            user.bubble[q.question.choiceConsequence[q.answer]].push(0);
-                            user.bubble[q.question.choiceConsequence[q.answer]].push(newValue);
-                        } else {
-                            user.bubble[q.question.choiceConsequence[q.answer]].push(newValue);
+
+    // Check user is authorized to perform te action.
+    if (!req.payload._id) {
+        return res.status(401).json({ message: 'UnauthorizedError: unauthorized action' });
+    } else {
+        Users.findById(req.payload._id, (err, user) => {
+            if (!err) {
+                for (let q of req.body.answers) {
+                    if (q != null) {
+                        if (q.question.choiceConsequence[q.answer] !== '') {
+                            let oldValue = user.bubble[q.question.choiceConsequence[q.answer]].pop();
+                            let newValue = oldValue + q.question.values[q.answer];
+                            if (user.bubble[q.question.choiceConsequence[q.answer]].length < 1) {
+                                user.bubble[q.question.choiceConsequence[q.answer]].push(0);
+                                user.bubble[q.question.choiceConsequence[q.answer]].push(newValue);
+                            } else {
+                                user.bubble[q.question.choiceConsequence[q.answer]].push(newValue);
+                            }
                         }
                     }
                 }
-            }
 
-            for (let cat in user.bubble) {
-                if (user.bubble[cat].length < 2) {
-                    user.bubble[cat].push(0)
+                for (let cat in user.bubble) {
+                    if (user.bubble[cat].length < 2) {
+                        user.bubble[cat].push(0)
+                    }
                 }
+
+                user.markModified('bubble');
+                user.save((error) => {
+                    if (error) {
+                        return res.status(500).json({ succes: false, message: error });
+                    }
+                    return res.status(200);
+                });
+            } else {
+                return res.status(404).json({ message: err })
             }
-            
-            user.markModified('bubble');
-            user.save((error) => { 
-                if (error) {
-                    return res.status(500).json({ succes: false, message: error });
-                }
-                return res.status(200);
-            });
-        } else {
-            return res.status(404).json({ message: err })
-        }
-    });
+        });
+    }
 });
 
 /** DELETE method for deleting a user's account */
 router.delete('/deleteAccount', auth, (req, res) => {
-    Users.findById(req.payload._id, (err, user) => {
-        if (!err && user != null) {
 
-            // Delete user document from 'users' collection.
-            Users.findByIdAndDelete({ _id: user._id }).exec();
-            if (user.role === 'student') {
+    // Check user is authorized to perform te action.
+    if (!req.payload._id) {
+        return res.status(401).json({ message: 'UnauthorizedError: unauthorized action' });
+    } else {
+        Users.findById(req.payload._id, (err, user) => {
+            if (!err && user != null) {
 
-                // Delete user from 'students' array of class he was apart of (if he was apart of a class). Student document itself
-                // will be deleted so we don't have to worry about the 'classArray' here.
-                if (user.classArray.length > 0) {
-                    Classes.findById(user.classArray[0], (err, userKlas) => {
-                        if (!err && userKlas != null) {
-                            Classes.findByIdAndUpdate({ _id: userKlas._id }, { $pull: { students: { _id: user._id }}}).exec();
-                            userKlas.save();
-                        } else {
-                            return res.status(404).json({ succes: false, message: err });
-                        }
-                    });
-                }
-            } else if (user.role === 'teacher') {
+                // Delete user document from 'users' collection.
+                Users.findByIdAndDelete({ _id: user._id }).exec();
+                if (user.role === 'student') {
 
-                // Delete each class created by the teacher and update the 'classArray' of all the student of each class the teacher made
-                // to make sure no student is apart of a class that will no longer exist.
-                for (let klas of user.classArray) {
-                    Classes.findById(klas._id, (err, userKlas) => {
-                        if (!err && userKlas != null) {
-                            Classes.findByIdAndDelete({ _id: userKlas._id }).exec();
-                            Users.find({ 'classArray._id': userKlas._id, role: 'student' }, (err, classMembers) => {
-                                if (!err && classMembers.length > 0) {
-                                    for (let classMember of classMembers) {
-                                        Users.findByIdAndUpdate({ _id: classMember._id }, { $pull: { classArray: { _id: userKlas._id }}}).exec();
-                                        classMember.save();
+                    // Delete user from 'students' array of class he was apart of (if he was apart of a class). Student document itself
+                    // will be deleted so we don't have to worry about the 'classArray' here.
+                    if (user.classArray.length > 0) {
+                        Classes.findById(user.classArray[0], (err, userKlas) => {
+                            if (!err && userKlas != null) {
+                                Classes.findByIdAndUpdate({ _id: userKlas._id }, { $pull: { students: { _id: user._id }}}).exec();
+                                userKlas.save();
+                            } else {
+                                return res.status(404).json({ succes: false, message: err });
+                            }
+                        });
+                    }
+                } else if (user.role === 'teacher') {
+
+                    // Delete each class created by the teacher and update the 'classArray' of all the student of each class the teacher made
+                    // to make sure no student is apart of a class that will no longer exist.
+                    for (let klas of user.classArray) {
+                        Classes.findById(klas._id, (err, userKlas) => {
+                            if (!err && userKlas != null) {
+                                Classes.findByIdAndDelete({ _id: userKlas._id }).exec();
+                                Users.find({ 'classArray._id': userKlas._id, role: 'student' }, (err, classMembers) => {
+                                    if (!err && classMembers.length > 0) {
+                                        for (let classMember of classMembers) {
+                                            Users.findByIdAndUpdate({ _id: classMember._id }, { $pull: { classArray: { _id: userKlas._id }}}).exec();
+                                            classMember.save();
+                                        }
                                     }
-                                }
-                            });
-                        } else {
-                            return res.status(404).json({ succes: false, message: err });
-                        }
-                    });
+                                });
+                            } else {
+                                return res.status(404).json({ succes: false, message: err });
+                            }
+                        });
+                    }
                 }
+                return res.status(200).json({
+                    succes: true,
+                    message: 'Account is succesvol verwijderd en je zal naar de inlogpagina worden verwezen.'
+                });
+            } else {
+                return res.status(404).json({ succes: false, message: err });
             }
-            return res.status(200).json({ succes: true, message: 'Account is succesvol verwijderd en je zal naar de inlogpagina worden verwezen.' });
-        } else {
-            return res.status(404).json({ succes: false, message: err });
-        }
-    });
+        });
+    }
 });
 
 /** PATCH method that updates a field of the user in the database. */
 router.patch('/updateUser', auth, (req,res) => {
-    Users.findById(req.payload._id, (err, user) => {
-        if (!err && user != null) {
-            Users.findByIdAndUpdate({ _id: user._id }, { [req.body.field]: sanitize(req.body.value) }).exec();
-            user.save();
-            return res.status(200).json({ succes: true, message: 'Je profiel is succesvol bijgewerkt.' });
-        } else {
-            return res.status(404).json({ succes: false, message: err })
-        }
-    });
+    // Check user is authorized to perform te action.
+    if (!req.payload._id) {
+        return res.status(401).json({ message: 'UnauthorizedError: unauthorized action' });
+    } else {
+        Users.findById(req.payload._id, (err, user) => {
+            if (!err && user != null) {
+                Users.findByIdAndUpdate({ _id: user._id }, { [req.body.field]: sanitize(req.body.value) }).exec();
+                user.save();
+                return res.status(200).json({ succes: true, message: 'Je profiel is succesvol bijgewerkt.' });
+            } else {
+                return res.status(404).json({ succes: false, message: err })
+            }
+        });
+    }
 });
 
 module.exports = router;
