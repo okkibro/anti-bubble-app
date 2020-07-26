@@ -7,12 +7,12 @@
 <mean-not-logged-in-toolbar></mean-not-logged-in-toolbar>
 <body>
     <div class="container-div" fxLayoutGap="10px" fxLayout="column" fxLayoutAlign="space-evenly">
-        <mat-card class="example-card">
+        <mat-card>
             <mat-card-header>
                 <mat-card-title>Registreren</mat-card-title>
             </mat-card-header>
             <mat-card-content>
-                <form name="registerForm" class="example-form" [formGroup]="registerForm" (ngSubmit)="registerUser()">
+                <form name="registerForm" [formGroup]="registerForm" (ngSubmit)="registerUser()">
                     <table class="general-table">
                         <tr>
                             <td>

@@ -35,6 +35,11 @@
         Shop
     </button>
     <mat-divider *ngIf="tokenData.role == 'student'"></mat-divider>
+    <button mat-button [routerLink]="'/settings'" (click)="onSidenavClose()">
+        <mat-icon>settings</mat-icon>
+        Settings
+    </button>
+    <mat-divider></mat-divider>
     <button mat-button (click)="logoutButton()">
         <mat-icon>login</mat-icon>
         Log uit

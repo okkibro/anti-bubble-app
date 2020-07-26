@@ -28,6 +28,7 @@ import { SessionOptionsComponent } from './components/session-options/session-op
 import { LabyrinthComponent } from './components/labyrinth/labyrinth.component';
 import { ActivitiesComponent } from './components/activities/activities.component';
 import { LabyrinthGuardService } from './services/labyrinth-guard.service';
+import { SettingsComponent } from "./components/settings/settings.component";
 
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
@@ -48,6 +49,7 @@ const routes: Routes = [
   { path: 'labyrinth', component: LabyrinthComponent, canActivate: [LabyrinthGuardService] },
   { path: 'session-options', component: SessionOptionsComponent, canActivate: [AuthGuardService] , data: { roles: [Role.teacher] }},
   { path: 'activities', component: ActivitiesComponent, canActivate: [AuthGuardService], canDeactivate: [SessionGuardService]},
+  { path: 'settings', component: SettingsComponent, canActivate: [AuthGuardService]},
 
   // Automatically redirect to login page when user inputs a wrong URL.
   { path: '**', redirectTo: '/login', pathMatch: 'full' },

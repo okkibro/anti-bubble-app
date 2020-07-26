@@ -333,7 +333,7 @@ router.post('/recentMilestones', auth, (req, res) => {
     })
 });
 
-/** POST method to equip the avatat with the send item. */
+/** POST method to equip the avatar with the send item. */
 router.post('/avatar', auth, (req,res) => {
     Users.findById(req.payload._id, (err, user) => {
         if (!err) {
@@ -441,6 +441,19 @@ router.delete('/deleteAccount', auth, (req, res) => {
             return res.status(200).json({ succes: true, message: 'Account is succesvol verwijderd en je zal naar de inlogpagina worden verwezen.' });
         } else {
             return res.status(404).json({ succes: false, message: err });
+        }
+    });
+});
+
+/** PATCH method that updates a field of the user in the database. */
+router.patch('/updateUser', auth, (req,res) => {
+    Users.findById(req.payload._id, (err, user) => {
+        if (!err && user != null) {
+            Users.findByIdAndUpdate({ _id: user._id }, { [req.body.field]: sanitize(req.body.value) }).exec();
+            user.save();
+            return res.status(200).json({ succes: true, message: 'Je profiel is succesvol bijgewerkt.' });
+        } else {
+            return res.status(404).json({ succes: false, message: err })
         }
     });
 });

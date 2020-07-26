@@ -10,7 +10,6 @@
     </mat-sidenav>
     <mat-sidenav-content>
         <mean-toolbar (sidenavToggle)="sidenav.toggle()"></mean-toolbar>
-
         <body>
             <div class="container-div" fxLayout="column" fxLayoutGap="10px" fxLayoutAlign="space-evenly">
                 <div fxLayout.xs="column" fxLayoutGap="10px" fxLayoutAlign="space-evenly">
@@ -83,59 +82,6 @@
                         </mat-card-content>
                     </mat-card>
                 </div>
-
-                <mat-card class="change-password-accordion" fxLayout.xs="column" fxLayoutAlign="space-evenly center">
-                    <mat-accordion>
-                        <mat-expansion-panel>
-                            <mat-expansion-panel-header>
-                                <mat-panel-title>
-                                    Wachtwoord aanpassen
-                                </mat-panel-title>
-                                <mat-panel-description>
-                                    Vul je oude en nieuwe wachtwoord in
-                                </mat-panel-description>
-                            </mat-expansion-panel-header>
-                            <form name="changePasswordForm" [formGroup]="changePasswordForm" (ngSubmit)="changePassword()">
-                                <table class="change-password-table">
-                                    <tr>
-                                        <mat-form-field>
-                                            <mat-label>Oude wachtwoord</mat-label>
-                                            <input matInput type="password" formControlName="oldPassword">
-                                            <mat-error
-                                                *ngIf="changePasswordForm.get('oldPassword').hasError('required')">
-                                                Wachtwoord is <strong>verplicht</strong>
-                                            </mat-error>
-                                        </mat-form-field>
-                                    </tr>
-                                    <tr>
-                                        <mat-form-field>
-                                            <mat-label>Nieuw wachtwoord</mat-label>
-                                            <input matInput type="password" formControlName="newPassword">
-                                            <mat-error
-                                                *ngIf="changePasswordForm.get('newPassword').hasError('required')">
-                                                Wachtwoord is <strong>verplicht</strong>
-                                            </mat-error>
-                                        </mat-form-field>
-                                    </tr>
-                                    <tr>
-                                        <mat-form-field>
-                                            <mat-label>Herhaal nieuw wachtwoord</mat-label>
-                                            <input matInput type="password" formControlName="repeatPassword">
-                                            <mat-error
-                                                *ngIf="changePasswordForm.get('repeatPassword').hasError('noPasswordMatch')">
-                                                Wachtwoorden komen niet overeen
-                                            </mat-error>
-                                        </mat-form-field>
-                                    </tr>
-                                </table>
-                                <button mat-button class="general-button" type="submit" [disabled]="!changePasswordForm.valid">Aanpassen</button>
-                            </form>
-                        </mat-expansion-panel>
-                    </mat-accordion>
-                </mat-card>
-                <mat-card fxLayout.xs="column" fxLayoutAlign="space-evenly center">
-                    <button mat-button class="general-nope-button" (click)="openDeleteAccountDialog()">Verwijder account</button>
-                </mat-card>
             </div>
         </body>
         <footer class="footer">

@@ -15,17 +15,18 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatSliderModule } from '@angular/material/slider';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
-// Core modules.
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatListModule } from '@angular/material/list';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatSelectModule } from '@angular/material/select';
-// core modules
+// Core modules.
 import { CustomMaterialModule } from './shared/material.module';
 import { AppRoutingModule } from './app-routing.module';
 // Component modules.
 import { AppComponent } from './app.component';
 import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
-import { DeleteAccountDialog, ProfileComponent } from './components/profile/profile.component';
+import { ProfileComponent } from './components/profile/profile.component';
 import { HomeComponent } from './components/home/home.component';
 import { ClassOverviewComponent, LeaveClassDialog } from './components/class-overview/class-overview.component';
 import { ClassmateProfileComponent } from './components/classmate-profile/classmate-profile.component';
@@ -44,15 +45,15 @@ import { SessionOptionsComponent } from './components/session-options/session-op
 import { LabyrinthComponent } from './components/labyrinth/labyrinth.component';
 import { AnswerFormComponent } from './components/answer-form/answer-form.component';
 import { AvatarDisplayComponent } from './components/avatar-display/avatar-display.component';
+import { ToolbarComponent } from './components/toolbar/toolbar.component';
+import { SidenavComponent } from './components/sidenav/sidenav.component';
+import { NotLoggedInToolbarComponent } from './components/not-logged-in-toolbar/not-logged-in-toolbar.component';
+import { DeleteAccountDialog, SettingsComponent } from './components/settings/settings.component';
 // Services.
 import { AuthGuardService } from './services/auth-guard.service';
 import { CookieService } from 'ngx-cookie-service';
 import { SocketIOService } from './services/socket-io.service';
-import { MatSidenavModule } from '@angular/material/sidenav';
-import { MatListModule } from '@angular/material/list';
-import { ToolbarComponent } from './components/toolbar/toolbar.component';
-import { SidenavComponent } from './components/sidenav/sidenav.component';
-import { NotLoggedInToolbarComponent } from './components/not-logged-in-toolbar/not-logged-in-toolbar.component';
+
 
 @NgModule({
     declarations: [
@@ -84,7 +85,8 @@ import { NotLoggedInToolbarComponent } from './components/not-logged-in-toolbar/
         DeleteAccountDialog,
         DeleteClassDialog,
         LeaveClassDialog,
-        RemoveFromClassDialog
+        RemoveFromClassDialog,
+        SettingsComponent,
     ],
     imports: [
         BrowserModule,

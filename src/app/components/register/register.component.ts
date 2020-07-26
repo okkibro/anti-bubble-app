@@ -11,7 +11,6 @@ import { Router } from '@angular/router';
 import { User } from '../../models/user';
 import { ShopService } from 'src/app/services/shop.service';
 import { environment } from "../../../environments/environment";
-import { SessionService } from "../../services/session.service";
 import { Title } from "@angular/platform-browser";
 
 @Component({
