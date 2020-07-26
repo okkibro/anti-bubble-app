@@ -5,7 +5,6 @@
  */
 
 import { Component, OnInit } from '@angular/core';
-import { AuthenticationService } from '../../services/authentication.service';
 import { SocketIOService } from '../../services/socket-io.service';
 import { FormBuilder, Validators } from '@angular/forms';
 import { User } from '../../models/user';
@@ -16,6 +15,7 @@ import { beforeUnload } from '../../../../constants';
 import { SessionService } from 'src/app/services/session.service';
 import { Title } from '@angular/platform-browser';
 import { environment } from 'src/environments/environment';
+import { UserService } from "../../services/user.service";
 
 @Component({
     selector: 'mean-home',
@@ -31,18 +31,18 @@ export class HomeComponent implements OnInit {
     });
 
     constructor(
-        private auth: AuthenticationService,
         private socketService: SocketIOService,
         private fb: FormBuilder,
         private router: Router,
         private data: DataService,
         private snackBar: MatSnackBar,
         private sessionService: SessionService,
-        private titleService: Title
+        private titleService: Title,
+        private userService: UserService
     ) { }
 
     ngOnInit(): void {
-        this.auth.profile().subscribe(user => {
+        this.userService.profile().subscribe(user => {
             this.userDetails = user;
         });
 

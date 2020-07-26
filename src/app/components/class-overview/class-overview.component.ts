@@ -5,7 +5,6 @@
  */
 
 import { Component, Inject, OnInit } from '@angular/core';
-import { AuthenticationService } from '../../services/authentication.service';
 import { Router } from '@angular/router';
 import { User } from '../../models/user';
 import { FormBuilder } from '@angular/forms';
@@ -14,6 +13,7 @@ import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from "@angular/material/dial
 import { MatSnackBar } from "@angular/material/snack-bar";
 import { Title } from '@angular/platform-browser';
 import { environment } from 'src/environments/environment';
+import { UserService } from "../../services/user.service";
 
 @Component({
     selector: 'mean-class-overview',
@@ -33,15 +33,15 @@ export class ClassOverviewComponent implements OnInit {
 
     constructor(
         private classService: ClassesService,
-        private auth: AuthenticationService,
         private router: Router,
         private fb: FormBuilder,
         private dialog: MatDialog,
-        private titleService: Title
+        private titleService: Title,
+        private userService: UserService
     ) { }
 
     ngOnInit() {
-        this.auth.profile().subscribe(user => {
+        this.userService.profile().subscribe(user => {
             this.userDetails = user;
         });
 

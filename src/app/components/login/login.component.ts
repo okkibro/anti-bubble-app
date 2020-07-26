@@ -10,7 +10,6 @@ import { AuthenticationService } from '../../services/authentication.service';
 import { Router } from '@angular/router';
 import { User } from '../../models/user';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { SessionService } from "../../services/session.service";
 import { Title } from "@angular/platform-browser";
 import { environment } from "../../../environments/environment";
 

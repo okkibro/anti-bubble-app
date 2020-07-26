@@ -5,14 +5,13 @@
  */
 
 import { Component, OnInit } from '@angular/core';
-import { AuthenticationService } from '../../services/authentication.service';
 import { User } from '../../models/user';
 import { ShopService } from 'src/app/services/shop.service';
 import { AvatarService } from 'src/app/services/avatar.service';
 import { AvatarDisplayComponent } from '../avatar-display/avatar-display.component';
-import { SessionService } from "../../services/session.service";
 import { Title } from "@angular/platform-browser";
 import { environment } from "../../../environments/environment";
+import { UserService } from "../../services/user.service";
 
 @Component({
     selector: 'mean-avatar',
@@ -27,16 +26,16 @@ export class AvatarComponent implements OnInit {
     filteredAvatar = [];
 
     constructor(
-        private auth: AuthenticationService,
         private shopService: ShopService,
         private avatarService: AvatarService,
         private avatarDisplay: AvatarDisplayComponent,
-        private titleService: Title
+        private titleService: Title,
+        private userService: UserService
     ) { }
 
     ngOnInit() {
         this.shopService.shop('hoofddeksel').subscribe(shop => {
-            this.auth.profile().subscribe(user => {
+            this.userService.profile().subscribe(user => {
                 this.userDetails = user;
 
                 // Checks for items in the shop that the player bought

@@ -35,7 +35,7 @@ export class SettingsComponent implements OnInit {
         lastName: ['', ],
         email: ['', {
             validators: [Validators.email],
-            asyncValidators: [this.auth.uniqueEmailValidator()],
+            asyncValidators: [this.userService.uniqueEmailValidator()],
             updateOn: 'blur'
         }]
     });
@@ -45,18 +45,17 @@ export class SettingsComponent implements OnInit {
     editEnabledEmail: boolean = false;
 
     constructor(
-        private auth: AuthenticationService,
         private fb: FormBuilder,
         private snackBar: MatSnackBar,
         private classService: ClassesService,
         private router: Router,
         private dialog: MatDialog,
         private titleService: Title,
-        private userSerivce: UserService
+        private userService: UserService
     ) { }
 
     ngOnInit(): void {
-        this.auth.profile().subscribe(user => {
+        this.userService.profile().subscribe(user => {
             this.userDetails = user;
         });
 
@@ -68,7 +67,7 @@ export class SettingsComponent implements OnInit {
         let email = this.userDetails.email;
         let oldPassword = this.changePasswordForm.get('oldPassword').value;
         let newPassword = this.changePasswordForm.get('newPassword').value;
-        this.auth.updatePassword(email, oldPassword, newPassword).subscribe(data => {
+        this.userService.updatePassword(email, oldPassword, newPassword).subscribe(data => {
             if (data.succes) {
                 this.snackBar.open(data.message, 'X', { duration: 2500, panelClass: ['style-succes']}).afterDismissed().subscribe(()=>{
                     window.location.reload();
@@ -112,7 +111,7 @@ export class SettingsComponent implements OnInit {
 
     /** Method that updates a value of the person's profile */
     updateField(field: string, value: string): void {
-        this.userSerivce.updateUser(field, value).subscribe(data => {
+        this.userService.updateUser(field, value).subscribe(data => {
             if (data.succes) {
                 this.snackBar.open(data.message, 'X', { duration: 2500, panelClass: ['style-succes']}).afterDismissed().subscribe(() => {
                     window.location.reload();
@@ -135,6 +134,7 @@ export class DeleteAccountDialog {
 
     constructor(
         private auth: AuthenticationService,
+        private userService: UserService,
         private snackBar: MatSnackBar,
         private dialogRef: MatDialogRef<DeleteAccountDialog>,
         @Inject(MAT_DIALOG_DATA) public data: any
@@ -142,7 +142,7 @@ export class DeleteAccountDialog {
 
     /** Method to delete a user's account. */
     deleteAccount(): void {
-        this.auth.deleteAccount().subscribe(data => {
+        this.userService.deleteAccount().subscribe(data => {
             if (data.succes) {
                 this.dialogRef.close();
                 this.snackBar.open(data.message, 'X', { duration: 2500, panelClass: ['style-succes']}).afterDismissed().subscribe(() => {

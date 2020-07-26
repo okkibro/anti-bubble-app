@@ -10,10 +10,10 @@ import { Router } from '@angular/router';
 import { DataService } from 'src/app/services/data-exchange.service';
 import { FormBuilder } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { AuthenticationService } from 'src/app/services/authentication.service';
 import { User } from '../../models/user';
 import { beforeUnload } from '../../../../constants';
 import { SessionService } from 'src/app/services/session.service';
+import { UserService } from "../../services/user.service";
 
 @Component({
     selector: 'mean-activities',
@@ -22,7 +22,6 @@ import { SessionService } from 'src/app/services/session.service';
         '../../shared/general-styles.css']
 })
 export class ActivitiesComponent implements OnInit {
-
     gameData;
     pin;
     userDetails: User;
@@ -41,7 +40,7 @@ export class ActivitiesComponent implements OnInit {
         private fb: FormBuilder,
         private snackBar: MatSnackBar,
         private sessionService: SessionService,
-        private auth: AuthenticationService
+        private userService: UserService
     ) { }
 
     ngOnInit(): void {
@@ -89,7 +88,7 @@ export class ActivitiesComponent implements OnInit {
         this.socketService.listenForTeam((team, article, leaders) => {
             this.leaders = leaders;
             this.article = article;
-            this.auth.profile().subscribe(user => {
+            this.userService.profile().subscribe(user => {
                 this.userDetails = user;
                 if (leaders.find(x => x.email == this.userDetails.email) == undefined) {
                     this.isLeader = false;

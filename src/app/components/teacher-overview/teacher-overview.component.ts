@@ -13,8 +13,8 @@ import { Class } from 'src/app/models/classes';
 import { ClassesService } from 'src/app/services/classes.service';
 import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from "@angular/material/dialog";
 import { environment } from "../../../environments/environment";
-import { SessionService } from "../../services/session.service";
 import { Title } from "@angular/platform-browser";
+import { UserService } from "../../services/user.service";
 
 @Component({
     selector: 'mean-teacher-overview',
@@ -44,11 +44,12 @@ export class TeacherOverviewComponent implements OnInit {
         private fb: FormBuilder,
         private snackBar: MatSnackBar,
         private dialog: MatDialog,
-        private titleService: Title
+        private titleService: Title,
+        private userService: UserService
     ) { }
 
     ngOnInit(): void {
-        this.auth.profile().subscribe(user => {
+        this.userService.profile().subscribe(user => {
             this.userDetails = user;
             if (this.userDetails.classArray.length > 0) {
                 this.classService.getClassIds().subscribe((ids) => {

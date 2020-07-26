@@ -38,7 +38,11 @@ import { PasswordResetComponent } from './components/password-reset/password-res
 import { BadgesComponent } from './components/badges/badges.component';
 import { SessionComponent } from './components/session/session.component';
 import { ActivitiesComponent } from './components/activities/activities.component';
-import { DeleteClassDialog, RemoveFromClassDialog, TeacherOverviewComponent } from './components/teacher-overview/teacher-overview.component';
+import {
+    DeleteClassDialog,
+    RemoveFromClassDialog,
+    TeacherOverviewComponent
+} from './components/teacher-overview/teacher-overview.component';
 import { JoinClassComponent } from './components/join-class/join-class.component';
 import { BubbleVisualisationComponent } from './components/bubble-visualisation/bubble-visualisation.component';
 import { SessionOptionsComponent } from './components/session-options/session-options.component';

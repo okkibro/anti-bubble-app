@@ -6,7 +6,7 @@
 
 import { Component, OnInit } from '@angular/core';
 import { User } from '../../models/user';
-import { AuthenticationService } from '../../services/authentication.service';
+import { UserService } from '../../services/user.service';
 import { ActivatedRoute } from "@angular/router";
 import { ClassesService } from "../../services/classes.service";
 
@@ -18,7 +18,7 @@ import { ClassesService } from "../../services/classes.service";
 })
 export class BubbleVisualisationComponent implements OnInit {
 
-    constructor(private auth: AuthenticationService, private route: ActivatedRoute, private classService: ClassesService) { }
+    constructor(private userService: UserService, private route: ActivatedRoute, private classService: ClassesService) { }
 
     ngOnInit(): void {
         if (this.route.snapshot.paramMap.get('id')) {
@@ -26,7 +26,7 @@ export class BubbleVisualisationComponent implements OnInit {
                 this.updateBubble(classmate);
             });
         } else {
-            this.auth.profile().subscribe(user => {
+            this.userService.profile().subscribe(user => {
                 this.updateBubble(user);
             });
         }

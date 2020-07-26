@@ -5,16 +5,15 @@
  */
 
 import { Component, OnInit } from '@angular/core';
-import { AuthenticationService } from '../../services/authentication.service';
 import { Shop } from '../../models/shop';
 import { ShopService } from 'src/app/services/shop.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { User } from '../../models/user';
 import { MilestoneUpdatesService } from '../../services/milestone-updates.service'
 import { milestones } from '../../../../constants';
-import { SessionService } from "../../services/session.service";
 import { Title } from "@angular/platform-browser";
 import { environment } from "../../../environments/environment";
+import { UserService } from "../../services/user.service";
 
 @Component({
     selector: 'mean-shop',
@@ -30,17 +29,17 @@ export class ShopComponent implements OnInit {
     succesWindow: boolean = false;
 
     constructor(
-        private auth: AuthenticationService,
         private shopService: ShopService,
         private snackBar: MatSnackBar,
         private milestoneUpdates: MilestoneUpdatesService,
-        private titleService: Title
+        private titleService: Title,
+        private userService: UserService
     ) { }
 
     ngOnInit(): void {
         this.shopService.shop('hoofddeksel').subscribe(shop => {
             this.shopDetails = shop;
-            this.auth.profile().subscribe(user => {
+            this.userService.profile().subscribe(user => {
                 this.userDetails = user;
                 this.filteredShop = this.filterShop();
                 this.succesWindow = true;

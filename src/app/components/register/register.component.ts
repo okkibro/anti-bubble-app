@@ -12,6 +12,7 @@ import { User } from '../../models/user';
 import { ShopService } from 'src/app/services/shop.service';
 import { environment } from "../../../environments/environment";
 import { Title } from "@angular/platform-browser";
+import { UserService } from "../../services/user.service";
 
 @Component({
     selector: 'mean-register',
@@ -26,7 +27,7 @@ export class RegisterComponent implements OnInit {
         lastName: ['', Validators.required],
         email: ['', {
             validators: [Validators.required, Validators.email],
-            asyncValidators: [this.auth.uniqueEmailValidator()],
+            asyncValidators: [this.userService.uniqueEmailValidator()],
             updateOn: 'blur'
         }],
         role: ['', Validators.required],
@@ -43,7 +44,8 @@ export class RegisterComponent implements OnInit {
         private router: Router,
         private fb: FormBuilder,
         private shop: ShopService,
-        private titleService: Title
+        private titleService: Title,
+        private userService: UserService
     ) { }
 
     ngOnInit() {

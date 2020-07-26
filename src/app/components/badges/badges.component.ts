@@ -6,11 +6,10 @@
 
 import { Component, OnInit } from '@angular/core';
 import { milestones } from '../../../../constants';
-import { AuthenticationService } from '../../services/authentication.service';
 import { User } from '../../models/user';
-import { SessionService } from "../../services/session.service";
 import { Title } from "@angular/platform-browser";
 import { environment } from "../../../environments/environment";
+import { UserService } from "../../services/user.service";
 
 @Component({
     selector: 'mean-badges',
@@ -24,10 +23,10 @@ export class BadgesComponent implements OnInit {
     userDetails: User;
     value: string;
 
-    constructor(private auth: AuthenticationService, private titleService: Title) { }
+    constructor(private userService: UserService, private titleService: Title) { }
 
     ngOnInit(): void {
-        this.auth.profile().subscribe(user => {
+        this.userService.profile().subscribe(user => {
             this.userDetails = user;
 
             // Loop over all milestones and sort them into the arrays.

@@ -6,9 +6,9 @@
 
 import { Component, OnInit } from '@angular/core';
 import { User } from '../../models/user';
-import { AuthenticationService } from 'src/app/services/authentication.service';
 import { ActivatedRoute } from "@angular/router";
 import { ClassesService } from "../../services/classes.service";
+import { UserService } from "../../services/user.service";
 
 @Component({
     selector: 'mean-avatar-display',
@@ -17,7 +17,11 @@ import { ClassesService } from "../../services/classes.service";
 })
 export class AvatarDisplayComponent implements OnInit {
 
-    constructor(private auth: AuthenticationService, private route: ActivatedRoute, private classService: ClassesService) { }
+    constructor(
+        private route: ActivatedRoute,
+        private classService: ClassesService,
+        private userService: UserService
+    ) { }
 
     ngOnInit(): void {
         if (this.route.snapshot.paramMap.get('id')) {
@@ -25,7 +29,7 @@ export class AvatarDisplayComponent implements OnInit {
                 this.showAvatar(classmate);
             });
         } else {
-            this.auth.profile().subscribe(user => {
+            this.userService.profile().subscribe(user => {
                 this.showAvatar(user);
             });
         }

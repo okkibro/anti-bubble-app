@@ -5,7 +5,6 @@
  */
 
 import { Component, OnInit } from '@angular/core';
-import { AuthenticationService } from '../../services/authentication.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { User } from '../../models/user';
 import { milestones } from '../../../../constants';
@@ -14,6 +13,7 @@ import { ClassesService } from 'src/app/services/classes.service';
 import { Router } from '@angular/router';
 import { Title } from "@angular/platform-browser";
 import { environment } from "../../../environments/environment";
+import { UserService } from "../../services/user.service";
 
 @Component({
     selector: 'mean-profile',
@@ -28,11 +28,11 @@ export class ProfileComponent implements OnInit {
     userClassTitle: string;
 
     constructor(
-        private auth: AuthenticationService,
         private snackBar: MatSnackBar,
         private classService: ClassesService,
         private router: Router,
-        private titleService: Title
+        private titleService: Title,
+        private userService: UserService
     ) { }
 
     ngOnInit() {
@@ -52,7 +52,7 @@ export class ProfileComponent implements OnInit {
             }
         });
 
-        this.auth.profile().subscribe(user => {
+        this.userService.profile().subscribe(user => {
             this.userDetails = user;
             // Loop over all milestones and find the one with the most progress that the user didnt complete yet.
             for (let i = 0; i < milestones.length; i++) {

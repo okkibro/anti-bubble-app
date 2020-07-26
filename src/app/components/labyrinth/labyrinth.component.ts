@@ -14,6 +14,7 @@ import { BubbleGraphService } from 'src/app/services/bubble-graph.service';
 import { FormBuilder, Validators } from '@angular/forms';
 import { environment } from "../../../environments/environment";
 import { Title } from "@angular/platform-browser";
+import { UserService } from "../../services/user.service";
 
 @Component({
     selector: 'mean-labyrinth',
@@ -43,11 +44,12 @@ export class LabyrinthComponent implements OnInit {
         private snackBar: MatSnackBar,
         private bubbleService: BubbleGraphService,
         private fb: FormBuilder,
-        private titleService: Title
+        private titleService: Title,
+        private userService: UserService
     ) { }
 
     ngOnInit(): void {
-        this.auth.profile().subscribe(user => {
+        this.userService.profile().subscribe(user => {
             this.userDetails = user;
         });
 

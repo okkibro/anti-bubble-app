@@ -11,7 +11,6 @@ import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { User } from '../models/user';
 import { Role } from '../models/role';
-import { AbstractControl, AsyncValidatorFn, ValidationErrors } from '@angular/forms';
 import { CookieService } from 'ngx-cookie-service';
 import { tokenData } from '../models/tokenData';
 import { environment } from 'src/environments/environment';
@@ -79,30 +78,6 @@ export class AuthenticationService {
         return this.getTokenData().role;
     }
 
-    /** Method to POST to the backend API to check if a given email is already present in the database. */
-    public checkEmailTaken(email: string) {
-        return this.http.post(`${environment.ENDPOINT}/user/checkEmailTaken`, { email: email });
-    }
-
-    /** A async validator method to check if an email is already taken. */ 
-    public uniqueEmailValidator(): AsyncValidatorFn {
-        return (control: AbstractControl): Observable<ValidationErrors | null> => {
-            return this.checkEmailTaken(control.value).pipe(
-                map(res => {
-                    if (res['emailTaken'] == false) {
-                        return null;
-                    } else {
-                        return { emailTaken: true };
-                    }
-                })
-            );
-        };
-    }
-
-    /** Method to update the password of an already registered user. */ 
-    public updatePassword(email: string, oldPassword: string, newPassword: string): Observable<any> {
-        return this.http.patch(`${environment.ENDPOINT}/user/updatePassword`, { email: email, oldPassword: oldPassword, newPassword: newPassword })
-    }
 
     /** POST method for registering a user */
     public register(user: User): Observable<any> {
@@ -120,15 +95,5 @@ export class AuthenticationService {
                 this.saveToken(data.token);
             })
         );
-    }
-
-    /** GET method for fetching a user's profile */
-    public profile(): Observable<any> {
-        return this.http.get(`${environment.ENDPOINT}/user/profile`, { headers: { Authorization: `Bearer ${this.getToken()}` }});
-    }
-
-    /** DELETE method for deleting a user's account.*/
-    public deleteAccount(): Observable<any> {
-        return this.http.delete(`${environment.ENDPOINT}/user/deleteAccount`,  { headers: { Authorization: `Bearer ${this.getToken()}` }});
     }
 }

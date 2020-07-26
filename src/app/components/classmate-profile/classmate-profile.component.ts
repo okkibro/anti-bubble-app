@@ -10,7 +10,6 @@ import { User } from '../../models/user';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ClassesService } from 'src/app/services/classes.service';
 import { environment } from "../../../environments/environment";
-import { SessionService } from "../../services/session.service";
 import { Title } from "@angular/platform-browser";
 
 @Component({

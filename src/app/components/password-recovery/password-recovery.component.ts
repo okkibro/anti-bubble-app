@@ -9,7 +9,6 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { PasswordRecoveryService } from '../../services/password-recovery.service';
-import { SessionService } from "../../services/session.service";
 import { Title } from "@angular/platform-browser";
 import { environment } from "../../../environments/environment";
 
