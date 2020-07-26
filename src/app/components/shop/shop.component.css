@@ -3,26 +3,19 @@
  * within the Software Project course. © Copyright Utrecht University (Department of Information and
  * Computing Sciences)
  */
-.mat-card-subtitle {
-    font-family: initial !important;
-    /* NOTE: text-fill-color paints the text once more over the actual text. This can have unwanted side effects that should be fixed in local css */
-    -webkit-text-fill-color: initial !important;
-    -webkit-text-stroke: initial !important;
-    paint-order: initial !important;
-    text-shadow: initial !important;
-    color: initial !important;
-}
 
-.welcomeHeader {
-    font-size: xx-large;
+.mat-card-subtitle {
+    font-family: Roboto, 'Helvetica Neue', sans-serif !important;
+    /* NOTE: text-fill-color paints the text once more over the actual text. This can have unwanted side effects that should be fixed in local css */
+    -webkit-text-fill-color: unset !important;
+    -webkit-text-stroke: unset !important;
+    text-shadow: unset !important;
+    color: unset !important;
+    font-size: 16px !important;
 }
 
 .currency {
-    font-size: larger;
-}
-
-mat-card-title {
-   font-size: medium;
+    font-size: 24px;
 }
 
 .shop-buy-button {
