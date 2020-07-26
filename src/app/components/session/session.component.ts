@@ -304,8 +304,8 @@ export class SessionComponent implements OnInit {
     stopGame() {
         this.gameFinished = true;
         clearInterval(this.interval);
-        let timeLeft = <HTMLElement[]><any>document.querySelectorAll('.counter');
-        timeLeft[0].style.color = 'red';
+        let timeLeft = document.getElementById('counter');
+        timeLeft.style.color = 'red';
 
         // Remove all listeners so students cant submit answers.
         this.socketService.removeListeners();
