@@ -57,6 +57,15 @@ import { DeleteAccountDialog, SettingsComponent } from './components/settings/se
 import { AuthGuardService } from './services/auth-guard.service';
 import { CookieService } from 'ngx-cookie-service';
 import { SocketIOService } from './services/socket-io.service';
+import { SessionGuardService } from "./services/session-guard.service";
+import { AuthenticationService } from "./services/authentication.service";
+import { AvatarService } from "./services/avatar.service";
+import { BubbleGraphService } from "./services/bubble-graph.service";
+import { ClassesService } from "./services/classes.service";
+import { DataService } from "./services/data-exchange.service";
+import { MilestoneUpdatesService } from "./services/milestone-updates.service";
+import { ShopService } from "./services/shop.service";
+import { UserService } from "./services/user.service";
 
 
 @NgModule({
@@ -110,7 +119,20 @@ import { SocketIOService } from './services/socket-io.service';
         MatListModule,
         MatSelectModule,
     ],
-    providers: [AuthGuardService, CookieService, SocketIOService],
+    providers: [
+        AuthGuardService,
+        CookieService,
+        SocketIOService,
+        SessionGuardService,
+        AuthenticationService,
+        AvatarService,
+        BubbleGraphService,
+        ClassesService,
+        DataService,
+        MilestoneUpdatesService,
+        ShopService,
+        UserService
+    ],
     bootstrap: [AppComponent],
     schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })

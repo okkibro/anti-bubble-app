@@ -15,6 +15,7 @@ import { map } from "rxjs/operators";
 @Injectable({
     providedIn: 'root'
 })
+
 export class UserService {
 
     constructor(private http: HttpClient, private cookie: CookieService) { }
@@ -24,12 +25,12 @@ export class UserService {
         return this.http.delete(`${environment.ENDPOINT}/user/deleteAccount`,  { headers: { Authorization: 'Bearer ' + this.cookie.get('mean-token') }});
     }
 
-    /** Method to POST to the backend API to check if a given email is already present in the database. */
+    /** POST method to check if a given email is already present in the database. */
     public checkEmailTaken(email: string) {
         return this.http.post(`${environment.ENDPOINT}/user/checkEmailTaken`, { email: email });
     }
 
-    /** A async validator method to check if an email is already taken. */
+    /** An async validator method to check if an email is already taken. */
     public uniqueEmailValidator(): AsyncValidatorFn {
         return (control: AbstractControl): Observable<ValidationErrors | null> => {
             return this.checkEmailTaken(control.value).pipe(
@@ -49,7 +50,7 @@ export class UserService {
         return this.http.patch(`${environment.ENDPOINT}/user/updatePassword`, { email: email, oldPassword: oldPassword, newPassword: newPassword })
     }
 
-    /** Method to do a PATCH request to change name/email/etc... of a user. */
+    /** PACTH method to change name/email/etc... of a user. */
     public updateUser(field: string, value: string): Observable<any>{
         return this.http.patch(`${environment.ENDPOINT}/user/updateUser`, { field: field, value: value }, { headers: { Authorization: 'Bearer ' + this.cookie.get('mean-token') }});
     }

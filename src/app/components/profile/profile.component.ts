@@ -54,6 +54,7 @@ export class ProfileComponent implements OnInit {
 
         this.userService.profile().subscribe(user => {
             this.userDetails = user;
+
             // Loop over all milestones and find the one with the most progress that the user didnt complete yet.
             for (let i = 0; i < milestones.length; i++) {
                 if (user.milestones[i] != milestones[i].maxValue && user.milestones[i] >= user.milestones[this.milestoneShown.index]) {

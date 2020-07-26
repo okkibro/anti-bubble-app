@@ -22,6 +22,7 @@ import { UserService } from "../../services/user.service";
     styleUrls: ['./settings.component.css',
         '../../shared/general-styles.css']
 })
+
 export class SettingsComponent implements OnInit {
     changePasswordForm = this.fb.group({
         oldPassword: ['', Validators.required],
