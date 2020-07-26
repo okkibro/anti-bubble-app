@@ -75,9 +75,7 @@ router.post('/register', (req, res) => {
                         }
                         user.save(function () {
                             let token = user.generateJwt();
-                            return res.status(200).json({
-                                token: token
-                            });
+                            return res.status(200).json({ token: token });
                         });
                     });
                 });
@@ -92,21 +90,17 @@ router.post('/login', (req, res) => {
 
         // If Passport throws/catches an error.
         if (err) {
-            return res.status(404).json(err);
+            return res.status(404).json({ message: err });
         }
 
         // If no user was found.
         if (!user) {
-            return res.status(401).json({
-                message: 'Authentication failed'
-            });
+            return res.status(401).json({ message: 'Authentication failed' });
         }
 
         // If a user is found.
         let token = user.generateJwt();
-        return res.status(200).json({
-            token: token
-        });
+        return res.status(200).json({ token: token });
     })(req, res);
 });
 
@@ -165,8 +159,7 @@ router.post('/passwordrecovery', async (req, res) => {
                     console.log(nodemailer.getTestMessageUrl(info));
                 });
 
-                res.json({ succes: true, message: 'Email succesvol verzonden' })
-                return res.status(200);
+                return res.status(200).json({ succes: true, message: 'Email succesvol verzonden' })
             });
         } else {
             return res.status(200).json({ succes: false, message: 'Geen gebruiker gevonden met het gegeven email adres', error: err });
@@ -207,8 +200,7 @@ router.post('/reset/:token', (req, res) => {
                 if (error) {
                     return res.status(500).json({ succes: false, message: error });
                 }
-                res.json({ succes: true, message: 'Wachtwoord succesvol verandert.' });
-                return res.status(200);
+                return res.status(200).json({ succes: true, message: 'Wachtwoord succesvol verandert.' });
             });
         } else {
             return res.status(200).json({ succes: false, message: 'Verkeerde of reeds verlopen token.' });
@@ -234,13 +226,9 @@ router.get('/profile', auth, (req, res) => {
 router.post('/checkEmailTaken', (req, res) => {
     Users.findOne({ email: sanitize(req.body.email) }).then(user => {
         if (user) {
-            return res.status(200).json({
-                emailTaken: true
-            });
+            return res.status(200).json({ emailTaken: true });
         } else {
-            return res.status(200).json({
-                emailTaken: false
-            });
+            return res.status(200).json({ emailTaken: false });
         }
     });
 });
@@ -284,7 +272,7 @@ router.get('/milestone', auth, (req, res) => {
         return res.status(401).json({ message: 'UnauthorizedError: unauthorized action' });
     } else {
         Users.findById(req.payload._id, (err, user) => {
-            res.json(user.milestones);
+            return res.status(200).json(user.milestones);
         });
     }
 });
@@ -306,7 +294,7 @@ router.post('/milestone', auth, (req, res) => {
             if (user.milestones[milestone.index] === milestone.maxValue) {
 
                 // Return completed false because it was already completed.
-                res.json({ updatedValue: milestone.maxValue, completed: completed });
+                return res.status(200).json({ updatedValue: milestone.maxValue, completed: completed });
             } else {
 
                 // Add value to milestone.
@@ -323,7 +311,7 @@ router.post('/milestone', auth, (req, res) => {
                 // Mark and save changes.
                 user.markModified('milestones');
                 user.save(() => {
-                    res.json({ updatedValue: user.milestones[milestone.index], completed: completed });
+                    return res.status(200).json({ updatedValue: user.milestones[milestone.index], completed: completed });
                 });
             }
         })
