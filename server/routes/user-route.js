@@ -50,8 +50,8 @@ router.post('/register', (req, res) => {
     }
     user.currency = 0;
     user.classArray = [];
-    user.milestone = [0,0,0,0,0,0,0,0,0]
-    user.recentMilestones = []
+    user.milestones = [0, 0, 0, 0, 0, 0, 0, 0, 0];
+    user.recentMilestones = [];
     for (let i = 0; i < 5; i++) {
         user.recentMilestones[i] = '';
     }
@@ -319,6 +319,7 @@ router.post('/milestone', auth, (req, res) => {
 router.post('/recentMilestones', auth, (req, res) => {
     Users.findById(req.payload._id, (err, user) => {
         if (!err) {
+
             // Push new value into the array.
             user.recentMilestones.push(req.body.value);
     
@@ -428,8 +429,6 @@ router.delete('/deleteAccount', auth, (req, res) => {
                                         Users.findByIdAndUpdate({ _id: classMember._id }, { $pull: { classArray: { _id: userKlas._id }}}).exec();
                                         classMember.save();
                                     }
-                                } else {
-                                    return res.status(404).json({ succes: false, message: err });
                                 }
                             });
                         } else {
