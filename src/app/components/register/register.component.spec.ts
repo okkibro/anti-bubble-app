@@ -53,7 +53,7 @@ describe('RegisterComponent', () => {
   it('should render form with firstname, lastname, email, pw1, pw2 and radio control inputs', () => {
     const element = fixture.nativeElement;
 
-    expect(element.querySelector('.example-form')).toBeTruthy();
+    expect(element.querySelector('.register-form')).toBeTruthy();
     expect(element.querySelectorAll('input')[0]).toBeTruthy();
     expect(element.querySelectorAll('input')[1]).toBeTruthy();
     expect(element.querySelectorAll('input')[2]).toBeTruthy();

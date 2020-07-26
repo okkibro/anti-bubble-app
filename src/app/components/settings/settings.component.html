@@ -92,7 +92,7 @@
                                     Vul je oude en nieuwe wachtwoord in
                                 </mat-panel-description>
                             </mat-expansion-panel-header>
-                            <form name="changePasswordForm" [formGroup]="changePasswordForm" (ngSubmit)="changePassword()">
+                            <form [formGroup]="changePasswordForm" (ngSubmit)="changePassword()">
                                 <table class="change-password-table">
                                     <tr>
                                         <mat-form-field>

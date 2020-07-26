@@ -59,7 +59,7 @@ describe('LoginComponent', () => {
   it('should render form with email and password inputs', () => {
     const element = fixture.nativeElement;
 
-    expect(element.querySelector('.example-form')).toBeTruthy();
+    expect(element.querySelector('.login-form')).toBeTruthy();
     expect(element.querySelectorAll('input')[0]).toBeTruthy();
     expect(element.querySelectorAll('input')[1]).toBeTruthy();
     expect(element.querySelector('button')).toBeTruthy();

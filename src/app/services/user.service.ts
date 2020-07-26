@@ -50,7 +50,7 @@ export class UserService {
     }
 
     /** Method to do a PATCH request to change name/email/etc... of a user. */
-    updateUser(field: string, value: string): Observable<any>{
+    public updateUser(field: string, value: string): Observable<any>{
         return this.http.patch(`${environment.ENDPOINT}/user/updateUser`, { field: field, value: value }, { headers: { Authorization: 'Bearer ' + this.cookie.get('mean-token') }});
     }
 

@@ -54,7 +54,7 @@ describe('PasswordRecoveryComponent', () => {
   it('should render form email input', () => {
     const element = fixture.nativeElement;
 
-    expect(element.querySelector('.example-form')).toBeTruthy();
+    expect(element.querySelector('.password-recovery-form')).toBeTruthy();
     expect(element.querySelector('input')).toBeTruthy();
     expect(element.querySelector('button')).toBeTruthy();
   });
