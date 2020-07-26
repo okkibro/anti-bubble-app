@@ -17,6 +17,7 @@ import { UserService } from "../../services/user.service";
     styleUrls: ['./badges.component.css',
         '../../shared/general-styles.css']
 })
+
 export class BadgesComponent implements OnInit {
     completed = [];
     uncompleted = [];

@@ -12,6 +12,7 @@ import { environment } from 'src/environments/environment';
 @Injectable({
     providedIn: 'root'
 })
+
 export class BubbleGraphService {
 
     constructor(private http: HttpClient, private cookie: CookieService) { }

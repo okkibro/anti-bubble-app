@@ -13,6 +13,7 @@ import { tokenData } from 'src/app/models/tokenData';
     templateUrl: './toolbar.component.html',
     styleUrls: ['./toolbar.component.css']
 })
+
 export class ToolbarComponent implements OnInit {
     @Output() public sidenavToggle = new EventEmitter();
 

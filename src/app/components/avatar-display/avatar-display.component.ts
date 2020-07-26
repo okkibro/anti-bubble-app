@@ -15,6 +15,7 @@ import { UserService } from "../../services/user.service";
     templateUrl: './avatar-display.component.html',
     styleUrls: ['./avatar-display.component.css']
 })
+
 export class AvatarDisplayComponent implements OnInit {
 
     constructor(

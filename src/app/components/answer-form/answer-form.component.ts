@@ -17,6 +17,7 @@ import { tokenData } from "../../models/tokenData";
     styleUrls: ['./answer-form.component.css',
         '../../shared/general-styles.css']
 })
+
 export class AnswerFormComponent implements OnInit {
     getAnswerForm = this.fb.group({
         getAnswer: ['', []]

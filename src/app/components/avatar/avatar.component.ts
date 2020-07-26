@@ -20,6 +20,7 @@ import { UserService } from "../../services/user.service";
         '../../shared/general-styles.css'],
     providers: [AvatarDisplayComponent]
 })
+
 export class AvatarComponent implements OnInit {
     userDetails: User;
     itemsShown = [];

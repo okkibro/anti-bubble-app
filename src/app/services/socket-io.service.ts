@@ -12,6 +12,7 @@ import { DataService } from './data-exchange.service';
 @Injectable({
     providedIn: 'root'
 })
+
 export class SocketIOService {
     socket = io(environment.ENDPOINT);
     pin;

@@ -18,6 +18,7 @@ import { Title } from "@angular/platform-browser";
     styleUrls: ['./password-reset.component.css',
         '../../shared/general-styles.css']
 })
+
 export class PasswordResetComponent implements OnInit {
     passwordResetForm = this.fb.group({
         password: ['', [Validators.required]],

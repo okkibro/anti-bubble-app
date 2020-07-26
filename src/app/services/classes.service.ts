@@ -15,6 +15,7 @@ import { environment } from 'src/environments/environment';
 @Injectable({
     providedIn: 'root'
 })
+
 export class ClassesService {
 
     constructor(private http: HttpClient, private cookie: CookieService) { }

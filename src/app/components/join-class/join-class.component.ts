@@ -13,7 +13,8 @@ import { MatSnackBar } from '@angular/material/snack-bar';
     selector: 'mean-join-class',
     templateUrl: './join-class.component.html',
     styleUrls: ['./join-class.component.css',
-        '../../shared/general-styles.css']})
+        '../../shared/general-styles.css']
+})
 
 export class JoinClassComponent implements OnInit {
     joinClassForm = this.fb.group({

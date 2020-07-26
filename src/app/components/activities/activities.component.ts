@@ -21,6 +21,7 @@ import { UserService } from "../../services/user.service";
     styleUrls: ['./activities.component.css',
         '../../shared/general-styles.css']
 })
+
 export class ActivitiesComponent implements OnInit {
     gameData;
     pin;

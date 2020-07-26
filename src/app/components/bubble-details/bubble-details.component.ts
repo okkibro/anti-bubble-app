@@ -17,6 +17,7 @@ import { UserService } from "../../services/user.service";
     styleUrls: ['./bubble-details.component.css',
         '../../shared/general-styles.css']
 })
+
 export class BubbleDetailsComponent implements OnInit {
 
     charts = Highcharts2;

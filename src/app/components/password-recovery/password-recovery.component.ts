@@ -18,6 +18,7 @@ import { environment } from "../../../environments/environment";
     styleUrls: ['./password-recovery.component.css',
         '../../shared/general-styles.css']
 })
+
 export class PasswordRecoveryComponent implements OnInit {
     passwordRecoveryForm = this.fb.group({
         email: ['', [Validators.required, Validators.email]],

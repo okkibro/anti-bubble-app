@@ -11,7 +11,6 @@ import { UserService } from "./user.service";
 @Injectable({
     providedIn: 'root'
 })
-
 export class LabyrinthGuardService implements CanActivate {
 
     constructor(private userService: UserService, private router: Router) { }

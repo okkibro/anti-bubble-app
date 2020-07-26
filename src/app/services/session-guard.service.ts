@@ -12,7 +12,6 @@ import { beforeUnload } from '../../../constants';
 @Injectable({
     providedIn: 'root'
 })
-
 export class SessionGuardService implements CanDeactivate<SessionComponent> {
 
     constructor() { }

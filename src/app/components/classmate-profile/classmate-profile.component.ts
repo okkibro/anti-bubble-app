@@ -18,6 +18,7 @@ import { Title } from "@angular/platform-browser";
     styleUrls: ['./classmate-profile.component.css',
         '../../shared/general-styles.css']
 })
+
 export class ClassmateProfileComponent implements OnInit {
     classmate: User;
     classmateClassTitle: string;

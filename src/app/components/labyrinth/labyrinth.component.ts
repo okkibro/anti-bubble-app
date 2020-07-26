@@ -22,6 +22,7 @@ import { UserService } from "../../services/user.service";
     styleUrls: ['./labyrinth.component.css',
         '../../shared/general-styles.css']
 })
+
 export class LabyrinthComponent implements OnInit {
     userDetails: User;
     startedLabyrinth: boolean;

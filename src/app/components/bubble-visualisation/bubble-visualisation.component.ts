@@ -16,6 +16,7 @@ import { ClassesService } from "../../services/classes.service";
     styleUrls: ['./bubble-visualisation.component.css',
         '../../shared/general-styles.css']
 })
+
 export class BubbleVisualisationComponent implements OnInit {
 
     constructor(private userService: UserService, private route: ActivatedRoute, private classService: ClassesService) { }

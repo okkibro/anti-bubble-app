@@ -13,6 +13,7 @@ import { tokenData } from "../../models/tokenData";
     templateUrl: './sidenav.component.html',
     styleUrls: ['./sidenav.component.css']
 })
+
 export class SidenavComponent implements OnInit {
     @Output() public sidenavClose = new EventEmitter();
 
