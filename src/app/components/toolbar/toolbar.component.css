@@ -19,3 +19,12 @@
 .nav-items {
     flex: 1 1 auto;
 }
+
+.nav-items a {
+    text-align: center;
+    padding: 0;
+}
+
+.active-link {
+    border: 1px solid white;
+}
