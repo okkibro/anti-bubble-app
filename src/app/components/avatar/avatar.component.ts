@@ -25,6 +25,8 @@ export class AvatarComponent implements OnInit {
     userDetails: User;
     itemsShown = [];
     filteredAvatar = [];
+    itemCategories: string[] = ['Hoofddeksel', 'Haar', 'Bril', 'Shirt', 'Broek', 'Schoenen', 'Medaille'];
+    itemColumns: number;
 
     constructor(
         private shopService: ShopService,
@@ -50,6 +52,8 @@ export class AvatarComponent implements OnInit {
             });
         });
 
+        this.setItemColumns();
+
         this.titleService.setTitle('Avatar' + environment.TITLE_TRAIL);
     }
 
@@ -69,8 +73,8 @@ export class AvatarComponent implements OnInit {
     }
 
     /** Method to change the tab in the HTML and updates the shown items. */
-    tabChange(value) {
-        this.shopService.shop(value).subscribe(shop => {
+    tabChange(event) {
+        this.shopService.shop(event.tab.textLabel).subscribe(shop => {
             this.itemsShown = shop;
             this.filteredAvatar = this.filterAvatar();
         }, (err) => {
@@ -83,5 +87,27 @@ export class AvatarComponent implements OnInit {
         return this.itemsShown.filter(x => {
             return this.userDetails.inventory.find(y => x._id == y._id) != null
         });
+    }
+
+    /** Method that sets the initial amount of columns based on screen width. */
+    setItemColumns(): void {
+        const screenWidth = window.screen.width;
+
+        if (screenWidth >= 1000) {
+            this.itemColumns = 3;
+        } else if (screenWidth < 1000) {
+            this.itemColumns = 2;
+        }
+    }
+
+    /** Method that changes the amount of columns when the window size changes. */
+    onResize(event): void {
+        const screenWidth = event.target.innerWidth;
+
+        if (screenWidth >= 1000) {
+            this.itemColumns = 3;
+        } else if (screenWidth < 1000) {
+            this.itemColumns = 2;
+        }
     }
 }

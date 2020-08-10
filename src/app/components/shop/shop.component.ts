@@ -91,13 +91,14 @@ export class ShopComponent implements OnInit {
         });
     }
 
-    /** Method to filter the shop based on if the user already owns the item */
+    /** Method to filter the shop based on if the user already owns the item. */
     filterShop(): Shop[] {
         return this.shopDetails.filter(x => {
             return this.userDetails.inventory.find(y => y._id == x._id) == null;
         });
     }
 
+    /** Method that sets the initial amount of columns based on screen width. */
     setItemColumns(): void {
         const screenWidth = window.screen.width;
 
@@ -114,6 +115,7 @@ export class ShopComponent implements OnInit {
         }
     }
 
+    /** Method that changes the amount of columns when the window size changes. */
     onResize(event): void {
         const screenWidth = event.target.innerWidth;
 
