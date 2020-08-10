@@ -13,3 +13,14 @@
 .radio-button {
     margin: 5px;
 }
+
+#remove-student-button:before {
+    content: 'Verwijder uit klas';
+}
+
+@media (max-width: 600px) {
+    #remove-student-button:before {
+        font-family: 'Material Icons', serif;
+        content: 'person_remove';
+    }
+}
