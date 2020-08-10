@@ -18,9 +18,9 @@
                     </mat-card-header>
                     <mat-card-content>
                         <form [formGroup]="editProfileForm">
-                            <table class="profile-table">
+                            <table class="edit-profile-table">
                                 <tr>
-                                    <td class="top-data">Voornaam</td>
+                                    <th>Voornaam</th>
                                     <td *ngIf="!editEnabledFirstName">{{ userDetails?.firstName }}</td>
                                     <td *ngIf="editEnabledFirstName">
                                         <input type="text" matInput formControlName="firstName" placeholder="{{ userDetails?.firstName }}">
@@ -32,12 +32,12 @@
                                         <button mat-button class="accept-changes-button"
                                                 (click)="updateField('firstName', editProfileForm.get('firstName').value)"
                                                 [disabled]="(userDetails?.firstName == editProfileForm.get('firstName').value) || editProfileForm.get('firstName').value == ''"
-                                        >Update</button>
-                                        <button mat-button class="general-nope-button" (click)="changeEditMode('firstName')">Annuleer</button>
+                                        ></button>
+                                        <button mat-button class="discard-changes-button" (click)="changeEditMode('firstName')"></button>
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td class="top-data">Achternaam</td>
+                                    <th>Achternaam</th>
                                     <td *ngIf="!editEnabledLastName">{{ userDetails?.lastName }}</td>
                                     <td *ngIf="editEnabledLastName">
                                         <input type="text" matInput formControlName="lastName" placeholder="{{ userDetails?.lastName }}">
@@ -49,12 +49,12 @@
                                         <button mat-button class="accept-changes-button"
                                                 (click)="updateField('lastName', editProfileForm.get('lastName').value)"
                                                 [disabled]="(userDetails?.lastName == editProfileForm.get('lastName').value) || editProfileForm.get('lastName').value == ''"
-                                        >Update</button>
-                                        <button mat-button class="general-nope-button" (click)="changeEditMode('lastName')">Annuleer</button>
+                                        ></button>
+                                        <button mat-button class="discard-changes-button" (click)="changeEditMode('lastName')"></button>
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td class="top-data">E-mailadres</td>
+                                    <th>E-mailadres</th>
                                     <td *ngIf="!editEnabledEmail">{{ userDetails?.email }}</td>
                                     <td *ngIf="editEnabledEmail">
                                         <input type="email" matInput formControlName="email" placeholder="{{ userDetails?.email }}">
@@ -72,8 +72,8 @@
                                         <button mat-button class="accept-changes-button"
                                                 (click)="updateField('email', editProfileForm.get('email').value)"
                                                 [disabled]="!editProfileForm.valid || editProfileForm.get('email').value == ''"
-                                        >Update</button>
-                                        <button mat-button class="general-nope-button" (click)="changeEditMode('email')">Annuleer</button>
+                                        ></button>
+                                        <button mat-button class="discard-changes-button" (click)="changeEditMode('email')"></button>
                                     </td>
                                 </tr>
                             </table>

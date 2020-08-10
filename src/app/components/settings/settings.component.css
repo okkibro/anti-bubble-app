@@ -4,24 +4,18 @@
  * Computing Sciences)
  */
 
-.profile-table {
+.edit-profile-table {
     border-spacing: 20px 0;
     margin: 0 auto;
 }
 
-.profile-table td {
+.edit-profile-table input {
+    max-width: 100px;
+}
+
+.edit-profile-table th,
+.edit-profile-table td {
     text-align: left;
-    padding: 5px 0;
-}
-
-.profile-table .top-data {
-    font-weight: bold;
-}
-
-@media (max-width: 900px) {
-    .profile-table td {
-        display: table-row;
-    }
 }
 
 .change-password-table {
@@ -42,4 +36,42 @@
     border-radius: 5px;
     box-shadow: 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
     margin-right: 10px;
+}
+
+.accept-changes-button:before {
+    content: 'Update';
+}
+
+.discard-changes-button:before {
+    content: 'Annuleer';
+}
+
+@media (max-width: 550px) {
+    .accept-changes-button:before {
+        font-family: 'Material Icons', serif;
+        content: 'done';
+    }
+
+    .discard-changes-button:before {
+        font-family: 'Material Icons', serif;
+        content: 'clear';
+    }
+
+    .edit-profile-table .accept-changes-button,
+    .edit-profile-table .general-nope-button {
+        min-width: 32px !important;
+        padding: 0 10px !important;
+    }
+
+    .edit-profile-table {
+        width: 100%;
+        border-spacing: 0;
+    }
+}
+
+.discard-changes-button {
+    background-color: #f44336;
+    color: white;
+    border-radius: 5px;
+    box-shadow: 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
 }

@@ -64,7 +64,8 @@ mat-card-header {
     display: inline-block;
 }
 
-.general-table th, td {
+.general-table th,
+.general-table td {
     text-align: left;
     padding: 10px;    
 }
