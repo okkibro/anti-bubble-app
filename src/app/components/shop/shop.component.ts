@@ -14,6 +14,7 @@ import { milestones } from '../../../../constants';
 import { Title } from "@angular/platform-browser";
 import { environment } from "../../../environments/environment";
 import { UserService } from "../../services/user.service";
+import { min } from "rxjs/operators";
 
 @Component({
     selector: 'mean-shop',
@@ -27,6 +28,8 @@ export class ShopComponent implements OnInit {
     shopDetails: Shop[];
     filteredShop: Shop[];
     succesWindow: boolean = false;
+    itemColumns: number;
+    shopCategories: string[] = ['Hoofddeksel', 'Haar', 'Bril', 'Shirt', 'Broek', 'Schoenen', 'Medaille'];
 
     constructor(
         private shopService: ShopService,
@@ -50,12 +53,14 @@ export class ShopComponent implements OnInit {
             console.error(err);
         });
 
+        this.setItemColumns();
+
         this.titleService.setTitle('Shop' + environment.TITLE_TRAIL);
     }
 
     /** Method to change categoty of items you are looking at in the shop */
-    tabChange(value) {
-        this.shopService.shop(value).subscribe(shop => {
+    tabChange(event) {
+        this.shopService.shop(event.tab.textLabel).subscribe(shop => {
             this.shopDetails = shop;
             this.filteredShop = this.filterShop();
         }, (err) => {
@@ -91,5 +96,37 @@ export class ShopComponent implements OnInit {
         return this.shopDetails.filter(x => {
             return this.userDetails.inventory.find(y => y._id == x._id) == null;
         });
+    }
+
+    setItemColumns(): void {
+        const screenWidth = window.screen.width;
+
+        if (screenWidth >= 1280) {
+            this.itemColumns = 5;
+        } else if (screenWidth < 1280 && screenWidth >= 1050) {
+            this.itemColumns = 4;
+        } else if (screenWidth < 1050 && screenWidth >= 820) {
+            this.itemColumns = 3;
+        } else if (screenWidth < 820 && screenWidth >= 590) {
+            this.itemColumns = 2;
+        } else if (screenWidth < 500) {
+            this.itemColumns = 1;
+        }
+    }
+
+    onResize(event): void {
+        const screenWidth = event.target.innerWidth;
+
+        if (screenWidth >= 1280) {
+            this.itemColumns = 5;
+        } else if (screenWidth < 1280 && screenWidth >= 1050) {
+            this.itemColumns = 4;
+        } else if (screenWidth < 1050 && screenWidth >= 820) {
+            this.itemColumns = 3;
+        } else if (screenWidth < 820 && screenWidth >= 590) {
+            this.itemColumns = 2;
+        } else if (screenWidth < 500) {
+            this.itemColumns = 1;
+        }
     }
 }

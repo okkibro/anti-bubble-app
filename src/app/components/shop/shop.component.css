@@ -14,12 +14,15 @@
     font-size: 16px !important;
 }
 
+.mat-card-footer {
+    padding-top: 5px;
+}
+
 .currency {
     font-size: 24px;
 }
 
 .shop-buy-button {
-    width: 40%;
     background: transparent url("../../../assets/images/Super_Map/Basic_Buttons/Button_blue_Rectangle.png") round;
 }
 
@@ -34,36 +37,4 @@ mat-card img {
     margin-top: 0;
     height: 100%;
     width: 60%;
-}
-
-#buttonHoofddeksel {
-    background: transparent url("../../../assets/images/Super_Map/Shop_UI/Button_Hats.png") round;
-}
-
-#buttonHaar {
-    background: transparent url("../../../assets/images/Super_Map/Shop_UI/Button_Hair.png") round;
-}
-
-#buttonBril {
-    background: transparent url("../../../assets/images/Super_Map/Shop_UI/Button_Glasses.png") round;
-}
-
-#buttonLichaam {
-    background: transparent url("../../../assets/images/Super_Map/Shop_UI/Button_Skincolor.png") round;
-}
-
-#buttonShirt {
-    background: transparent url("../../../assets/images/Super_Map/Shop_UI/Button_Shirt.png") round;
-}
-
-#buttonBroek {
-    background: transparent url("../../../assets/images/Super_Map/Shop_UI/Button_Pants.png") round;
-}
-
-#buttonSchoenen {
-    background: transparent url("../../../assets/images/Super_Map/Shop_UI/Button_Shoes.png") round;
-}
-
-#buttonMedaille {
-    background: transparent url("../../../assets/images/Super_Map/Shop_UI/Button_Medals.png") round;
 }

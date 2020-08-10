@@ -91,3 +91,7 @@ body {
 #class-select .mat-form-field-wrapper {
     padding-bottom: 0 !important;
 }
+
+.mat-tab-header {
+    margin-bottom: 10px;
+}
