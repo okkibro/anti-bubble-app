@@ -9,7 +9,6 @@ import { SocketIOService } from 'src/app/services/socket-io.service';
 import { Router } from '@angular/router';
 import { DataService } from 'src/app/services/data-exchange.service';
 import { FormBuilder } from '@angular/forms';
-import { MatSnackBar } from '@angular/material/snack-bar';
 import { User } from '../../models/user';
 import { beforeUnload } from '../../../../constants';
 import { SessionService } from 'src/app/services/session.service';
@@ -39,7 +38,6 @@ export class ActivitiesComponent implements OnInit {
         private router: Router,
         private data: DataService,
         private fb: FormBuilder,
-        private snackBar: MatSnackBar,
         private sessionService: SessionService,
         private userService: UserService
     ) { }

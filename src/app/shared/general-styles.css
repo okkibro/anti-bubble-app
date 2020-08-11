@@ -28,7 +28,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-top: 50px !important;
+    margin-top: 50px;
 }
 
 .container-div {

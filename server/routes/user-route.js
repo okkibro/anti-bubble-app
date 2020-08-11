@@ -86,7 +86,7 @@ router.post('/register', (req, res) => {
 
 /** POST method to check if login details match with the database (authentication). */
 router.post('/login', (req, res) => {
-    passport.authenticate('local', function (err, user) {
+    passport.authenticate('local',  (err, user) => {
 
         // If Passport throws/catches an error.
         if (err) {
@@ -235,6 +235,7 @@ router.post('/checkEmailTaken', (req, res) => {
 
 /** PATCH method to update a password given an email. */
 router.patch('/updatePassword', (req, res) => {
+
     // Check user is authorized to perform te action.
     if (!req.payload._id) {
         return res.status(401).json({ message: 'UnauthorizedError: unauthorized action' });
@@ -267,6 +268,7 @@ router.patch('/updatePassword', (req, res) => {
 
 /** GET method to get all milestone values in an array for the logged in user. */
 router.get('/milestone', auth, (req, res) => {
+
     // Check user is authorized to perform te action.
     if (!req.payload._id) {
         return res.status(401).json({ message: 'UnauthorizedError: unauthorized action' });
@@ -475,7 +477,7 @@ router.delete('/deleteAccount', auth, (req, res) => {
 });
 
 /** PATCH method that updates a field of the user in the database. */
-router.patch('/updateUser', auth, (req,res) => {
+router.patch('/updateUser', auth, (req, res) => {
     // Check user is authorized to perform te action.
     if (!req.payload._id) {
         return res.status(401).json({ message: 'UnauthorizedError: unauthorized action' });

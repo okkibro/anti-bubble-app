@@ -60,7 +60,7 @@ router.post('/joinClass', auth, (req, res) => {
 
 					// Check the code corresponds with an existing.
 					if (!foundClass) {
-						return res.status(200).json({ succes: false, message: 'Geen klas gevonden met de gegeven code', err: err });
+						return res.status(200).json({ succes: false, message: 'Geen klas gevonden met de gegeven code, controleer de code en probeer het opnieuw.', err: err });
 					} else {
 
 						// Check if your role is a student. (students can only be in one class!).
@@ -269,22 +269,16 @@ router.patch('/leaveClass', auth, (req, res) => {
 
 		// Find the user who is leaving/being removed from the class and update their 'classArray'.
 		Users.findById(req.body.userId, (err, user) => {
-			if (!err && user != null) {
-				Users.findByIdAndUpdate({ _id: user._id }, { $pull: { classArray: { _id: req.body.classId }}}).exec();
-				user.save();
-			} else {
-				return res.status(404).json({ succes: false, message: err });
-			}
-		});
-
-		// Find the user who is leaving/being removed from the class and update their 'classArray'.
-		Classes.findById(req.body.classId, (err, klas) => {
-			if (!err && klas != null) {
-				Classes.findByIdAndUpdate({ _id: klas._id }, { $pull: { students: { _id: req.body.userId }}}).exec();
-				klas.save();
-			} else {
-				return res.status(404).json({ succes: false, message: err });
-			}
+			Classes.findById(req.body.classId, (err, klas) => {
+				if (!err && user != null && klas != null) {
+					Users.findByIdAndUpdate({_id: user._id}, {$pull: {classArray: {_id: req.body.classId}}}).exec();
+					user.save();
+					Classes.findByIdAndUpdate({_id: klas._id}, {$pull: {students: {_id: req.body.userId}}}).exec();
+					klas.save();
+				} else {
+					return res.status(404).json({succes: false, message: err});
+				}
+			});
 		});
 
 		// If 'req.body.leaving' is true, the student left themselves; if it is false, they were kicked by a teacher and we
