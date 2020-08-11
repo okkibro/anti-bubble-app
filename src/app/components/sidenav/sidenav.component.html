@@ -5,11 +5,10 @@
   -->
 
 <mat-list fxLayout="column" class="sidenav">
-    <button mat-button (click)="onSidenavClose()">
+    <button mat-button class="first-button" (click)="onSidenavClose()">
         <mat-icon>menu</mat-icon>
         <img src="../../../assets/images/Super_Map/Other/logo.png" alt="">
     </button>
-    <mat-divider></mat-divider>
     <button mat-button [routerLink]="'/home'" (click)="onSidenavClose()">
         <mat-icon>home</mat-icon>
         Home
@@ -30,11 +29,11 @@
         Profiel
     </button>
     <mat-divider></mat-divider>
-    <button mat-button [routerLink]="'/shop'" *ngIf="tokenData.role == 'student'" (click)="onSidenavClose()">
+    <button mat-button [routerLink]="'/shop'" (click)="onSidenavClose()">
         <mat-icon>shopping_cart</mat-icon>
         Shop
     </button>
-    <mat-divider *ngIf="tokenData.role == 'student'"></mat-divider>
+    <mat-divider></mat-divider>
     <button mat-button [routerLink]="'/settings'" (click)="onSidenavClose()">
         <mat-icon>settings</mat-icon>
         Settings

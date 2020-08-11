@@ -14,7 +14,6 @@ import { milestones } from '../../../../constants';
 import { Title } from "@angular/platform-browser";
 import { environment } from "../../../environments/environment";
 import { UserService } from "../../services/user.service";
-import { min } from "rxjs/operators";
 
 @Component({
     selector: 'mean-shop',

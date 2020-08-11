@@ -5,13 +5,19 @@
  */
 
 .sidenav {
-    background-color: #A7473B;
-    color: white;
+    background-color: #addadb;
+    color: black;
 }
 
 .sidenav button {
     text-align: left;
     height: 50px;
+}
+
+.first-button {
+    background-color: #a7473b;
+    border-radius: 0;
+    color: white;
 }
 
 .sidenav img {
@@ -20,8 +26,8 @@
 }
 
 mat-divider {
-    margin: 0 5px;
-    border-top-color: white;
+    margin: 0 8px;
+    border-top-color: black;
 }
 
 mat-list {
