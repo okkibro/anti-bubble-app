@@ -99,7 +99,9 @@ export class ShopComponent implements OnInit {
 
     /** Method that sets the initial amount of columns based on screen width. */
     setItemColumns(): void {
-        const screenWidth = window.screen.width;
+        const screenWidth = window.innerWidth;
+
+        console.log(screenWidth);
 
         if (screenWidth >= 1280) {
             this.itemColumns = 5;

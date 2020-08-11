@@ -91,7 +91,7 @@ export class AvatarComponent implements OnInit {
 
     /** Method that sets the initial amount of columns based on screen width. */
     setItemColumns(): void {
-        const screenWidth = window.screen.width;
+        const screenWidth = window.innerWidth;
 
         if (screenWidth >= 1000) {
             this.itemColumns = 3;
