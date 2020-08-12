@@ -131,7 +131,8 @@ import { UserService } from "./services/user.service";
         DataService,
         MilestoneUpdatesService,
         ShopService,
-        UserService
+        UserService,
+        SessionComponent
     ],
     bootstrap: [AppComponent],
     schemas: [CUSTOM_ELEMENTS_SCHEMA]

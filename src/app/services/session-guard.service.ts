@@ -14,7 +14,7 @@ import { beforeUnload } from '../../../constants';
 })
 export class SessionGuardService implements CanDeactivate<SessionComponent> {
 
-    constructor() { }
+    constructor(private ses: SessionComponent) { }
 
     /** Guard that activates when user tries to leave the session page. */
     canDeactivate(
@@ -29,8 +29,8 @@ export class SessionGuardService implements CanDeactivate<SessionComponent> {
         }
 
         // If player got kicked cause host disconnected or player is not in a session, then dont show the message and just leave the page.
-        if (component.isHostDisconnected() || component.pin == undefined) {
-            component.leaveSession();
+        if (this.ses.isHostDisconnected() || component.pin == undefined) {
+            this.ses.leaveSession();
             window.removeEventListener('beforeunload', beforeUnload);
             return true;
         } else {
@@ -40,7 +40,7 @@ export class SessionGuardService implements CanDeactivate<SessionComponent> {
                 if (confirm('Weet je zeker dat je de sessie wilt verlaten?')) {
 
                     // If user answered confirm, leave the session.
-                    component.leaveSession();
+                    this.ses.leaveSession();
                     window.removeEventListener('beforeunload', beforeUnload);
 
                     // || currentState.url == '/labyrinth' --> delete if timer from labyrinth page will not be used
