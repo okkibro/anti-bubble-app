@@ -21,7 +21,7 @@ const auth = jwt({
 /** POST method to create a new class in the database. */
 router.post('/createClass', auth, (req, res) => {
 
-	// Check user is authorized to perform te action.
+	// Check if user is authorized to perform the action.
 	if (!req.payload._id) {
 		return res.status(401).json({ message: 'UnauthorizedError: unauthorized action' });
 	} else {
@@ -48,7 +48,7 @@ router.post('/createClass', auth, (req, res) => {
 /** POST method to join a user to a class. */
 router.post('/joinClass', auth, (req, res) => {
 
-	// Check user is authorized to perform te action.
+	// Check if user is authorized to perform the action.
 	if (!req.payload._id) {
 		return res.status(401).json({ message: 'UnauthorizedError: unauthorized action' });
 	} else {
@@ -101,7 +101,7 @@ router.post('/joinClass', auth, (req, res) => {
  * In case of a teacher this functions gives back the first class in the teachers class list. */
 router.get('/getClass', auth, (req, res) => {
 
-	// Check user is authorized to perform te action.
+	// Check if user is authorized to perform the action.
 	if (!req.payload._id) {
 		return res.status(401).json({ message: 'UnauthorizedError: unauthorized action' });
 	} else {
@@ -117,7 +117,7 @@ router.get('/getClass', auth, (req, res) => {
 						if (numberOfMembers > 0) {
 							let classmates = [];
 							for (let student of foundClass.students) {
-								Users.findById(student._id, (error, classmate) => {
+								Users.findById(student._id, (err, classmate) => {
 									classmates.push(classmate);
 
 									// Check if all classmates are pushed to the list.
@@ -141,7 +141,7 @@ router.get('/getClass', auth, (req, res) => {
 /** GET method to get all the database class ids a user has in their class list. */
 router.get('/getClassIds', auth, (req, res) => {
 
-	// Check user is authorized to perform te action.
+	// Check if user is authorized to perform the action.
 	if (!req.payload._id) {
 		return res.status(401).json({ message: 'UnauthorizedError: unauthorized action' });
 	} else {
@@ -158,7 +158,7 @@ router.get('/getClassIds', auth, (req, res) => {
 /** GET method to get a class based on the given id in the url. */
 router.get('/getSingleClass/:id', auth, (req, res) => {
 
-	// Check user is authorized to perform te action.
+	// Check if user is authorized to perform the action.
 	if (!req.payload._id) {
 		return res.status(401).json({ message: 'UnauthorizedError: unauthorized action' });
 	} else {
@@ -170,7 +170,7 @@ router.get('/getSingleClass/:id', auth, (req, res) => {
 				if (numberOfMembers > 0) {
 					let classmates = [];
 					for (student of foundClass.students) {
-						Users.findById(student._id, (error, classmate) => {
+						Users.findById(student._id, (err, classmate) => {
 							classmates.push(classmate);
 
 							// Check if all classmates are pushed to the list.
@@ -192,7 +192,7 @@ router.get('/getSingleClass/:id', auth, (req, res) => {
 /** GET method to get a profile of a user in your class. */
 router.get('/classmateProfile/:id', auth, (req, res) => {
 
-	// Check user is authorized to perform te action.
+	// Check if user is authorized to perform the action.
 	if (!req.payload._id) {
 		return res.status(401).json({ message: 'UnauthorizedError: private profile' });
 	} else {
@@ -227,7 +227,7 @@ router.get('/classmateProfile/:id', auth, (req, res) => {
 /** DELETE method for deleting a class based on a given id. */
 router.delete('/deleteClass/:id', auth, (req, res) => {
 
-	// Check user is authorized to perform te action.
+	// Check if user is authorized to perform the action.
 	if (!req.payload._id) {
 		return res.status(401).json({ message: 'UnauthorizedError: unauthorized action' });
 	} else {
@@ -262,7 +262,7 @@ router.delete('/deleteClass/:id', auth, (req, res) => {
 /** PATCH that removes a student from a class (whether initiated by the teacher or the student themselves). */
 router.patch('/leaveClass', auth, (req, res) => {
 
-	// Check user is authorized to perform te action.
+	// Check if user is authorized to perform the action.
 	if (!req.payload._id) {
 		return res.status(401).json({ message: 'UnauthorizedError: private profile' });
 	} else {

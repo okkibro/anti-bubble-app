@@ -88,7 +88,7 @@ router.post('/register', (req, res) => {
 router.post('/login', (req, res) => {
     passport.authenticate('local',  (err, user) => {
 
-        // If Passport throws/catches an error.
+        // If Passport throws/catches an err.
         if (err) {
             return res.status(404).json({ message: err });
         }
@@ -112,20 +112,20 @@ router.post('/passwordrecovery', async (req, res) => {
 
     // Find the user with the given email and set the token.
     Users.findOne({ email: req.body.email }, (err, user) => {
-        if (!err) {
+        if (!err && user != null) {
             user.recoverPasswordToken = token;
             user.recoverPasswordExpires = Date.now() + 360000;
 
-            user.save((error) => {
-                if (error) {
-                    return res.status(500).json({ succes: false, message: error });
+            user.save((err) => {
+                if (err) {
+                    return res.status(500).json({succes: false, message: err});
                 }
             });
-            
+
             // Send email with link and token in the link.
-            nodemailer.createTestAccount((error, account) => {
-                if (error) {
-                    return res.status(500).json({ succes: false, message: error });
+            nodemailer.createTestAccount((err, account) => {
+                if (err) {
+                    return res.status(500).json({succes: false, message: err});
                 }
 
                 let transporter = nodemailer.createTransport({
@@ -152,23 +152,20 @@ router.post('/passwordrecovery', async (req, res) => {
                         '<p>Reset Password by clicking on the following link: https://' + req.headers.host + '/reset/' + token + '</p>'
                 };
 
-                transporter.sendMail(mailOptions, (error, info) => {
-                    if (error) {
-                        return res.status(500).json({ succes: false, message: error });
+                transporter.sendMail(mailOptions, (err, info) => {
+                    if (err) {
+                        return res.status(500).json({succes: false, message: err});
                     }
                     console.log(nodemailer.getTestMessageUrl(info));
                 });
 
-                return res.status(200).json({ succes: true, message: 'Email succesvol verzonden' })
             });
-        } else {
-            return res.status(200).json({ succes: false, message: 'Geen gebruiker gevonden met het gegeven email adres', error: err });
         }
-        
+        return res.status(200).json({ succes: true, message: 'Als het e-mailadres bij ons bekend is, heeft deze zojuist een link ontvangen om een nieuw wachtwoord aan te vragen, dus check je inbox.' });
     });
 });
 
-/** GET method to check the password recovery token and shows the reset password page or a wrong token error. */
+/** GET method to check the password recovery token and shows the reset password page or a wrong token err. */
 router.get('/reset/:token', (req, res) => {
 
     // Find the user that belongs to the given token
@@ -187,18 +184,18 @@ router.post('/reset/:token', (req, res) => {
     // Find the user that belongs to the given token
     Users.findOne({ recoverPasswordToken: req.params.token, recoverPasswordExpires: { $gt: Date.now() }}, (err, user) => {
         if (!err) {
-            user.setPassword(req.body.password, (error) => {
-                if (error) {
-                    return res.status(500).json({ succes: false, message: error });
+            user.setPassword(req.body.password, (err) => {
+                if (err) {
+                    return res.status(500).json({ succes: false, message: err });
                 }
             });
 
             user.recoverPasswordToken = undefined;
             user.recoverPasswordExpires = undefined;
 
-            user.save((error) => {
-                if (error) {
-                    return res.status(500).json({ succes: false, message: error });
+            user.save((err) => {
+                if (err) {
+                    return res.status(500).json({ succes: false, message: err });
                 }
                 return res.status(200).json({ succes: true, message: 'Wachtwoord succesvol verandert.' });
             });
@@ -212,7 +209,7 @@ router.post('/reset/:token', (req, res) => {
 /** GET method to get a user from the database given an id. */
 router.get('/profile', auth, (req, res) => {
 
-    // Check user is authorized to perform te action.
+    // Check if user is authorized to perform the action.
     if (!req.payload._id) {
         return res.status(401).json({ message: 'UnauthorizedError: unauthorized action' });
     } else {
@@ -236,7 +233,7 @@ router.post('/checkEmailTaken', (req, res) => {
 /** PATCH method to update a password given an email. */
 router.patch('/updatePassword', (req, res) => {
 
-    // Check user is authorized to perform te action.
+    // Check if user is authorized to perform the action.
     if (!req.payload._id) {
         return res.status(401).json({ message: 'UnauthorizedError: unauthorized action' });
     } else {
@@ -269,7 +266,7 @@ router.patch('/updatePassword', (req, res) => {
 /** GET method to get all milestone values in an array for the logged in user. */
 router.get('/milestone', auth, (req, res) => {
 
-    // Check user is authorized to perform te action.
+    // Check if user is authorized to perform the action.
     if (!req.payload._id) {
         return res.status(401).json({ message: 'UnauthorizedError: unauthorized action' });
     } else {
@@ -282,7 +279,7 @@ router.get('/milestone', auth, (req, res) => {
 /** POST method to changes a milestone by a given value, returns the updated value and whether it is completed now or not. */
 router.post('/milestone', auth, (req, res) => {
 
-    // Check user is authorized to perform te action.
+    // Check if user is authorized to perform the action.
     if (!req.payload._id) {
         return res.status(401).json({ message: 'UnauthorizedError: unauthorized action' });
     } else {
@@ -323,7 +320,7 @@ router.post('/milestone', auth, (req, res) => {
 /** POST method to post a new message to recent milestones. */
 router.post('/recentMilestones', auth, (req, res) => {
 
-    // Check user is authorized to perform te action.
+    // Check if user is authorized to perform the action.
     if (!req.payload._id) {
         return res.status(401).json({ message: 'UnauthorizedError: unauthorized action' });
     } else {
@@ -348,7 +345,7 @@ router.post('/recentMilestones', auth, (req, res) => {
 /** POST method to equip the avatar with the send item. */
 router.post('/avatar', auth, (req,res) => {
 
-    // Check user is authorized to perform te action.
+    // Check if user is authorized to perform the action.
     if (!req.payload._id) {
         return res.status(401).json({ message: 'UnauthorizedError: unauthorized action' });
     } else {
@@ -356,9 +353,9 @@ router.post('/avatar', auth, (req,res) => {
             if (!err) {
                 user.avatar[req.body.avatarItem.category] = req.body.avatarItem;
                 user.markModified('avatar');
-                user.save((error) => {
-                    if (error) {
-                        return res.status(500).json({ succes: false, message: error });
+                user.save((err) => {
+                    if (err) {
+                        return res.status(500).json({ succes: false, message: err });
                     }
                     return res.status(200).json({
                         imageFull: req.body.avatarItem.fullImage,
@@ -376,7 +373,7 @@ router.post('/avatar', auth, (req,res) => {
 /** POST method to update user bubble after performing/pausing the labyrinth. */
 router.post('/processAnswers', auth, (req, res) => {
 
-    // Check user is authorized to perform te action.
+    // Check if user is authorized to perform the action.
     if (!req.payload._id) {
         return res.status(401).json({ message: 'UnauthorizedError: unauthorized action' });
     } else {
@@ -404,9 +401,9 @@ router.post('/processAnswers', auth, (req, res) => {
                 }
 
                 user.markModified('bubble');
-                user.save((error) => {
-                    if (error) {
-                        return res.status(500).json({ succes: false, message: error });
+                user.save((err) => {
+                    if (err) {
+                        return res.status(500).json({ succes: false, message: err });
                     }
                     return res.status(200);
                 });
@@ -420,7 +417,7 @@ router.post('/processAnswers', auth, (req, res) => {
 /** DELETE method for deleting a user's account */
 router.delete('/deleteAccount', auth, (req, res) => {
 
-    // Check user is authorized to perform te action.
+    // Check if user is authorized to perform the action.
     if (!req.payload._id) {
         return res.status(401).json({ message: 'UnauthorizedError: unauthorized action' });
     } else {
@@ -478,7 +475,7 @@ router.delete('/deleteAccount', auth, (req, res) => {
 
 /** PATCH method that updates a field of the user in the database. */
 router.patch('/updateUser', auth, (req, res) => {
-    // Check user is authorized to perform te action.
+    // Check if user is authorized to perform the action.
     if (!req.payload._id) {
         return res.status(401).json({ message: 'UnauthorizedError: unauthorized action' });
     } else {

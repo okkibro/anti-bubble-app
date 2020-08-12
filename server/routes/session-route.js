@@ -22,7 +22,7 @@ const auth = jwt({
 /** GET method to get the articles from the database */
 router.get('/articles', auth, (req, res) => {
 
-	// Check user is authorized to perform te action.
+	// Check if user is authorized to perform the action.
 	if (!req.payload._id) {
 		return res.status(401).json({ message: 'UnauthorizedError: unauthorized action' });
 	} else {
@@ -40,7 +40,7 @@ router.get('/articles', auth, (req, res) => {
 /** POST method to return a given activity from the database. */
 router.post('/activity', auth, (req, res) => {
 
-	// Check user is authorized to perform te action.
+	// Check if user is authorized to perform the action.
 	if (!req.payload._id) {
 		return res.status(401).json({ message: 'UnauthorizedError: unauthorized action' });
 	} else {
@@ -66,7 +66,7 @@ router.post('/activity', auth, (req, res) => {
 /** PATCH method to change the bubbleInit value to true if a user has completed the initial maze. */
 router.patch('/updateBubbleInit', auth, (req, res) => {
 
-	// Check user is authorized to perform te action.
+	// Check if user is authorized to perform the action.
 	if (!req.payload._id) {
 		return res.status(401).json({ message: 'UnauthorizedError: unauthorized action' });
 	} else {
@@ -85,7 +85,7 @@ router.patch('/updateBubbleInit', auth, (req, res) => {
 /** POST method to get the array of questions shuffled, based on the part given in the body of the request. */
 router.post('/questions', auth, (req, res) => {
 
-	// Check user is authorized to perform te action.
+	// Check if user is authorized to perform the action.
 	if (!req.payload._id) {
 		return res.status(401).json({ message: 'UnauthorizedError: unauthorized action' });
 	} else {
@@ -102,7 +102,7 @@ router.post('/questions', auth, (req, res) => {
 /** POST method to save answers to the logged in user. */
 router.post('/labyrinthAnswers', auth, (req, res) => {
 
-	// Check user is authorized to perform te action.
+	// Check if user is authorized to perform the action.
 	if (!req.payload._id) {
 		return res.status(401).json({ message: 'UnauthorizedError: unauthorized action' });
 	} else {
@@ -128,7 +128,7 @@ router.post('/labyrinthAnswers', auth, (req, res) => {
 /** POST method to change currency amount for the logged in user. */
 router.post('/earnMoney', auth, (req, res) => {
 
-	// Check user is authorized to perform te action.
+	// Check if user is authorized to perform the action.
 	if (!req.payload._id) {
 		return res.status(401).json({ message: 'UnauthorizedError: unauthorized action' });
 	} else {

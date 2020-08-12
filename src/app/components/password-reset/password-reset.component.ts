@@ -49,7 +49,7 @@ export class PasswordResetComponent implements OnInit {
         this.titleService.setTitle('Wachtwoord resetten' + environment.TITLE_TRAIL);
     }
 
-    /** Method to reset your password based on th filled in passwords in the form. */
+    /** Method to reset your password based on the filled in passwords in the form. */
     resetPassword() {
 
         // Get password and confirm from the form.

@@ -25,7 +25,7 @@ router.get('/', (req, res) => {
 });
 
 router.get('/getBaseInventory', auth, (req, res) => {
-    // Check user is authorized to perform te action.
+    // Check if user is authorized to perform the action.
     if (!req.payload._id) {
         return res.status(401).json({ message: 'UnauthorizedError: unauthorized action' });
     } else {
@@ -37,7 +37,7 @@ router.get('/getBaseInventory', auth, (req, res) => {
 
 router.post('/buy', auth, (req, res) => {
 
-    // Check user is authorized to perform te action.
+    // Check if user is authorized to perform the action.
     if (!req.payload._id) {
         return res.status(401).json({ message: 'UnauthorizedError: unauthorized action' });
     } else {
