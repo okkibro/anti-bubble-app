@@ -144,11 +144,17 @@ export class SessionComponent implements OnInit {
                         let tablerow = document.createElement('tr');
                         let breakLine = document.createElement('br');
                         let deleteButton = document.createElement('button');
-                        deleteButton.style.width = '25px';
-                        deleteButton.style.height = '25px';
-                        deleteButton.style.backgroundColor = 'red';
+                        deleteButton.classList.add('hover');
+                        deleteButton.style.backgroundColor = '#f44336';
                         deleteButton.style.color = 'white';
-                        deleteButton.innerHTML = 'X';
+                        deleteButton.style.borderRadius = '5px';
+                        deleteButton.style.boxShadow = '0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12)';
+                        deleteButton.style.fontFamily = '\'Material Icons\', serif';
+                        deleteButton.innerHTML = 'clear';
+                        deleteButton.style.height = '25px';
+                        deleteButton.style.width = '25px';
+                        deleteButton.style.border = '0px solid transparent';
+                        deleteButton.style.cursor = 'pointer';
                         deleteButton.addEventListener('click', () => {
                             deleteButton.parentElement.remove();
                             this.socketService.activateStudentButton(data.player);
