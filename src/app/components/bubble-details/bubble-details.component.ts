@@ -10,6 +10,9 @@ import * as Highcharts2 from 'highcharts';
 import { Title } from "@angular/platform-browser";
 import { environment } from "../../../environments/environment";
 import { UserService } from "../../services/user.service";
+import { milestones } from "../../../../constants";
+import { MilestoneUpdatesService } from "../../services/milestone-updates.service";
+import { MatSnackBar } from "@angular/material/snack-bar";
 
 @Component({
     selector: 'mean-bubble-details',
@@ -19,14 +22,14 @@ import { UserService } from "../../services/user.service";
 })
 
 export class BubbleDetailsComponent implements OnInit {
-
+    data;
     charts = Highcharts2;
 
     // Optional string, defaults to 'chart'.
     chartConstructor = 'chart';
 
     // Optional function, defaults to null.
-    chartCallback = function (chart) { }
+    chartCallback = function () { }
 
     // Optional boolean.
     updateFlag = false;
@@ -39,14 +42,26 @@ export class BubbleDetailsComponent implements OnInit {
     chartOptions = { }
     userDetails: User;
 
-    data
-    constructor(private userService: UserService, private titleService: Title) { }
+
+    constructor(
+        private userService: UserService,
+        private titleService: Title,
+        private milestoneUpdates: MilestoneUpdatesService,
+        private snackBar: MatSnackBar
+    ) { }
 
     ngOnInit() {
         this.userService.profile().subscribe(user => {
             this.userDetails = user;
-            this.data = user.bubble
+            this.data = user.bubble;
             this.initChart();
+        });
+
+        this.milestoneUpdates.updateMilestone(milestones[3], 1).subscribe(data => {
+            if (data.completed) {
+                this.milestoneUpdates.updateRecent(`${new Date().toLocaleDateString()}: Je hebt de badge 'Nieuwsgierige Niels' verdiend!`).subscribe();
+                this.snackBar.open('\uD83C\uDF89 Gefeliciteerd! Je hebt de badge \'Nieuwsgierige Niels\' verdiend! \uD83C\uDF89', 'X', { duration: 4000, panelClass: ['style-succes'] });
+            }
         });
 
         this.titleService.setTitle('Bubbel details' + environment.TITLE_TRAIL);

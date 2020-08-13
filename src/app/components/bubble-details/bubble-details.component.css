@@ -13,3 +13,8 @@
     display: flex;
     justify-content: center;
 }
+
+.bubble-points-table {
+    text-align: left;
+    border-spacing: 10px 1px;
+}
