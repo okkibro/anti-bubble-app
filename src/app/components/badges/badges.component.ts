@@ -22,7 +22,7 @@ export class BadgesComponent implements OnInit {
     completed = [];
     uncompleted = [];
     userDetails: User;
-    value: string;
+    percentageComplete: string;
 
     constructor(private userService: UserService, private titleService: Title) { }
 
@@ -40,7 +40,7 @@ export class BadgesComponent implements OnInit {
             }
 
             // Set value of progressbar.
-            this.value = this.completedRatio();
+            this.percentageComplete = this.completedRatio();
         }, (err) => {
             console.error(err);
         });
