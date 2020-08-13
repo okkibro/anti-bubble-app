@@ -9,7 +9,7 @@
     <mat-card-content class="join-class">
         <form [formGroup]="joinClassForm">
             <mat-form-field>
-                <input type="number" matInput formControlName="code" placeholder="Vul hier je klascode in">
+                <input matInput formControlName="code" placeholder="Klas code" type="text" maxlength="6" (keypress)="check($event)" (paste)="$event.preventDefault()">
             </mat-form-field>
             <button mat-button class="general-button" (click)="joinClass()">Word lid</button>
         </form>

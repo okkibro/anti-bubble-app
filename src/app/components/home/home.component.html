@@ -32,7 +32,7 @@
                         <mat-card-content class="join-session" *ngIf="userDetails?.role == 'student' && userDetails?.bubbleInit">
                             <form [formGroup]="joinSessionForm">
                                 <mat-form-field>
-                                    <input matInput formControlName="pin" placeholder="Sessie code" type="number">
+                                    <input matInput formControlName="pin" placeholder="Sessie code" type="text" maxlength="6" (keypress)="check($event)" (paste)="$event.preventDefault()">
                                 </mat-form-field>
                                 <button mat-button class="general-button" (click)="joinSession()">Deelnemen aan sessie</button>
                             </form>
