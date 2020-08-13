@@ -341,7 +341,6 @@ export class SessionComponent implements OnInit {
     }
 
     finishGame() {
-        this.sessionService.earnMoney(100).subscribe();
         this.socketService.finishGame();
     }
 }

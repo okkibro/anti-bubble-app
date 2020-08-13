@@ -68,10 +68,12 @@ export class HomeComponent implements OnInit {
 
             // Join callback: succes returns true if pin was correct and false when pin is incorrect.
             if (succes) {
-                this.router.navigate(['session']); // On join succes, go to session page.
+
+                // On join succes, go to session page.
+                this.router.navigate(['session']);
             } else {
 
-                // On join jail, show error message.
+                // On join fail, show error message.
                 this.snackBar.open('Er is iets mis gegaan, probeer het opnieuw', 'X', { duration: 2500, panelClass: ['style-error'] });
             }
         }, () => {
@@ -89,7 +91,7 @@ export class HomeComponent implements OnInit {
         }, () => {
 
             // finishedGame callback: earn money
-            this.sessionService.earnMoney(100).subscribe();
+            this.sessionService.earnMoney(20).subscribe();
         });
 
     }
