@@ -17,7 +17,7 @@ body {
 
 .style-error {
     color: white !important;
-    background-color: red !important;
+    background-color: #f44336 !important;
 }
 
 .style-error .mat-button-wrapper {
@@ -26,7 +26,7 @@ body {
 
 .style-succes {
     color: white !important;
-    background-color: green !important;
+    background-color: 	#339900	 !important;
 }
 
 .style-succes .mat-button-wrapper {
@@ -35,7 +35,7 @@ body {
 
 .style-warning {
     color: black !important;
-    background-color: yellow !important;
+    background-color: #ffcc00 !important;
 }
 
 .style-warning .mat-button-wrapper {
