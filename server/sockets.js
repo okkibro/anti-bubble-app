@@ -29,7 +29,7 @@ function runIO(io) {
 
 			// Look for a game with the entered pin
 			for (let i = 0; i < games.games.length; i++) {
-				if (params.pin === games.games[i].pin && games.games[i].gameLive === false) {
+				if (parseInt(params.pin) === games.games[i].pin && games.games[i].gameLive === false) {
 					let hostId = games.games[i].hostId;
 					gameFound = true;
 					if (players.getPlayers(hostId).find(x => x.email === params.player.email) !== undefined) {
@@ -40,7 +40,7 @@ function runIO(io) {
 						players.addPlayer(hostId, socket.id, `${params.player.firstName} ${params.player.lastName}`, { }, params.player.email);
 
 						// Player socket joins game room.
-						socket.join(params.pin);
+						socket.join(parseInt(params.pin));
 
 						// Return succes is true.
 						socket.emit('join-succes', games.games[i].gameData);
