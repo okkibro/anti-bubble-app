@@ -46,7 +46,7 @@ export class AnswerFormComponent implements OnInit {
     }
 
     /** This method lets students submit an answer to the teacher (digiboard). */
-    sendAnswer() {
+    sendAnswer(): void {
         if (this.getAnswerForm.get('getAnswer').value != '') {
             this.socketService.studentSubmit(this.getAnswerForm.get('getAnswer').value);
             this.getAnswerForm.get('getAnswer').setValue('');
@@ -54,17 +54,17 @@ export class AnswerFormComponent implements OnInit {
             // Prevents students from spamming the teacher with answers.
             this.alreadySubmitted = true;
         } else {
-            this.snackBar.open('Vul een antwoord in', 'X', { duration: 2500, panelClass: ['style-error'] });
+            this.snackBar.open('Vul een antwoord in.', 'X', { duration: 2500, panelClass: ['style-warning'] });
         }
     }
 
     /** This method lets a teacher submit a question to all of the students in the session. */
-    sendQuestion() {
+    sendQuestion(): void {
         if (this.sendQuestionsForm.get('getQuestion').value != '') {
             this.socketService.sendQuestion(this.sendQuestionsForm.get('getQuestion').value);
             this.sendQuestionsForm.get('getQuestion').setValue('');
         } else {
-            this.snackBar.open('Vul een onderwerp in', 'X', { duration: 2500, panelClass: ['style-error'] });
+            this.snackBar.open('Vul een onderwerp in.', 'X', { duration: 2500, panelClass: ['style-warning'] });
         }
     }
 }

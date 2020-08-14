@@ -32,6 +32,12 @@ export class ActivitiesComponent implements OnInit {
     isLeader: Boolean = true;
     submitted: Boolean = false;
     article;
+    allowedSites = ['Facebook',
+        'Instagram',
+        'NOS.nl',
+        'Telegraaf',
+        'Reddit'
+    ];
 
     constructor(
         private socketService: SocketIOService,

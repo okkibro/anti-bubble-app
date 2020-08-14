@@ -16,6 +16,7 @@ import { Articles } from 'src/app/models/articles';
 import { tokenData } from "../../models/tokenData";
 import { Title } from "@angular/platform-browser";
 import { environment } from "../../../environments/environment";
+import { AnswerFormComponent } from "../answer-form/answer-form.component";
 
 @Component({
     selector: 'mean-session',
@@ -50,7 +51,8 @@ export class SessionComponent implements OnInit {
         private router: Router,
         private sessionService: SessionService,
         private snackBar: MatSnackBar,
-        private titleService: Title
+        private titleService: Title,
+        private answerFormComponent: AnswerFormComponent
     ) { }
 
     ngOnInit(): void {
@@ -313,7 +315,7 @@ export class SessionComponent implements OnInit {
         let timeLeft = document.getElementById('counter');
         timeLeft.style.color = 'red';
 
-        // Remove all listeners so students cant submit answers.
+        // Remove all listeners so students can't continue to submit answers.
         this.socketService.removeListeners();
         this.showAnswersonScreen(this.gameData.game.name);
         this.finishGame();

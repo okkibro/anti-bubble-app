@@ -5,11 +5,12 @@
   -->
 
 <form *ngIf="tokenData.role == 'student'" [formGroup]="getAnswerForm" (ngSubmit)="sendAnswer()">
-    <mat-form-field>
+    <mat-form-field *ngIf="!alreadySubmitted">
         <mat-label>Vul hier je antwoord in</mat-label>
-        <textarea matInput formControlName="getAnswer" placeholder="[antwoord]"></textarea>
+        <textarea matInput formControlName="getAnswer" placeholder="Antwoord"></textarea>
     </mat-form-field><br>
-    <button mat-button class="general-button" type="submit" [disabled]="alreadySubmitted">Verstuur</button>
+    <button mat-button class="general-button" type="submit" *ngIf="!alreadySubmitted">Verstuur</button>
+    <p *ngIf="alreadySubmitted"><i>Je antwoord is ingeleverd. Wacht op verdere instructies van de docent.</i></p>
 </form>
 
 <form *ngIf="tokenData.role == 'teacher'" [formGroup]="sendQuestionsForm" (ngSubmit)="sendQuestion()">

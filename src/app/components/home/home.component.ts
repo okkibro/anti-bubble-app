@@ -77,7 +77,7 @@ export class HomeComponent implements OnInit {
             } else {
 
                 // On join fail, show error message.
-                this.snackBar.open('Er is iets mis gegaan, probeer het opnieuw', 'X', { duration: 2500, panelClass: ['style-error'] });
+                this.snackBar.open('Er is iets mis gegaan, check de code en probeer het opnieuw', 'X', { duration: 2500, panelClass: ['style-error'] });
             }
         }, () => {
 

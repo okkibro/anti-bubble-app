@@ -36,16 +36,12 @@
 
                         <mat-card-content *ngIf="gameData?.game.name == 'Botsende Bubbels'">
                             {{ gameData?.game.description }}<br>
-                            <p><i>Wacht op het onderwerp van de docent:</i></p>
+                            <p *ngIf="!enableAnswer"><i>Wacht op het onderwerp van de docent</i></p>
                             <p id="receiveQuestion"></p><br>
 
                             <div *ngIf="enableAnswer" class="teammates">Je mag zoeken op de volgende platforms:<br><br>
                                 <ul>
-                                    <li>Facebook</li>
-                                    <li>Instagram</li>
-                                    <li>NOS.nl</li>
-                                    <li>Telegraaf.nl</li>
-                                    <li>Reddit</li>
+                                    <li *ngFor="let site of allowedSites ">{{ site }}</li>
                                 </ul>
                             </div>
                             <mean-answer-form *ngIf="enableAnswer"></mean-answer-form>
@@ -63,7 +59,6 @@
                                 </ul>
                             </div>
                             <p><i>Wacht op de vraag van de docent:</i></p>
-                            <!-- <p class="receiveQuestion"></p> -->
                             <mean-answer-form *ngIf="enableAnswer"></mean-answer-form>
                         </mat-card-content>
 
