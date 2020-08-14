@@ -263,20 +263,7 @@ router.patch('/updatePassword', (req, res) => {
     }
 });
 
-/** GET method to get all milestone values in an array for the logged in user. */
-router.get('/milestone', auth, (req, res) => {
-
-    // Check if user is authorized to perform the action.
-    if (!req.payload._id) {
-        return res.status(401).json({ message: 'UnauthorizedError: unauthorized action' });
-    } else {
-        Users.findById(req.payload._id, (err, user) => {
-            return res.status(200).json(user.milestones);
-        });
-    }
-});
-
-/** POST method to changes a milestone by a given value, returns the updated value and whether it is completed now or not. */
+/** POST method to changes a milestone by a given value, returns the updated value and whether it is completed or not. */
 router.post('/milestone', auth, (req, res) => {
 
     // Check if user is authorized to perform the action.
@@ -310,7 +297,7 @@ router.post('/milestone', auth, (req, res) => {
                 // Mark and save changes.
                 user.markModified('milestones');
                 user.save(() => {
-                    return res.status(200).json({ updatedValue: user.milestones[milestone.index], completed: completed });
+                    return res.status(200).json({completed: completed });
                 });
             }
         })

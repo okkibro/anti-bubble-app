@@ -52,12 +52,6 @@ export const milestones = [
         name: 'Money Maker',
         maxValue: 100,
         description: '100 munten verzameld'
-    },
-    {
-        index: 8,
-        name: '3/4 Trofee',
-        maxValue: 75,
-        description: '75% van al je trofeeën behaald'
     }
 ]
 
