@@ -110,7 +110,7 @@ export class HomeComponent implements OnInit {
         });
     }
 
-    /** Method that makes sure you can only fill in numbers in the session code input field.*/
+    /** Method that makes sure you can only fill in numbers in the session code input field. */
     check(event: KeyboardEvent) {
         let code =  event.code.charCodeAt(0);
         if (code != 68) {

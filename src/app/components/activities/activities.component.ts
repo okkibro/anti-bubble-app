@@ -29,8 +29,8 @@ export class ActivitiesComponent implements OnInit {
     team;
     leaders;
     selected;
-    isLeader: Boolean = true;
-    submitted: Boolean = false;
+    isLeader: boolean = true;
+    submitted: boolean = false;
     article;
     allowedSites = ['Facebook',
         'Instagram',
@@ -38,6 +38,7 @@ export class ActivitiesComponent implements OnInit {
         'Telegraaf',
         'Reddit'
     ];
+    gameFinished: boolean = false;
 
     constructor(
         private socketService: SocketIOService,
@@ -64,22 +65,28 @@ export class ActivitiesComponent implements OnInit {
             this.router.navigate(['home']);
         }
 
-        // Check whether or not a teacher has sent a question
+        // Check whether or not a teacher has sent a question.
         this.receiveQuestion();
 
-        // Get teams from teacher's input
+        // Get teams from teacher's input.
         this.receiveTeam();
+
+        // Check whether the game has been stopped by the teacher.
+        this.disableInput();
     }
 
+    /** Method that returns the game data. */
     getGameData(): any {
         return this.socketService.gameData;
     }
 
-    receiveQuestion() {
+    /** Method that listens for incoming questions. */
+    receiveQuestion(): void {
 
         // Students listen for incoming questions.
         // Receive question.
         this.socketService.listenForQuestion((question) => {
+            console.log('here');
             let questionDisplay = document.getElementById('receiveQuestion');
             questionDisplay.innerHTML = question;
 
@@ -88,8 +95,8 @@ export class ActivitiesComponent implements OnInit {
         });
     }
 
-    /** Method that listens for teammembers */
-    receiveTeam() {
+    /** Method that listens for teammembers. */
+    receiveTeam(): void {
         this.socketService.listenForTeam((team, article, leaders) => {
             this.leaders = leaders;
             this.article = article;
@@ -105,14 +112,22 @@ export class ActivitiesComponent implements OnInit {
             image.setAttribute('src', article.image);
             image.setAttribute('height', '200px');
             articleSpace.appendChild(image);
-
         });
     }
 
     /** Method that submits an answer and data to the teacher. */
-    submit(data) {
+    submit(data): void {
         this.submitted = true;
         this.socketService.studentSubmit({ answer: this.selected, data: data });
+    }
+
+    /** Method that listens whether the game has been stopped by the teacher. */
+    disableInput(): void {
+
+        // Students listen for the signal that is sent when the teacher presses the "Stop activiteit" button.
+        this.socketService.listenForFinishGame(() => {
+            this.gameFinished = true;
+        });
     }
 }
 

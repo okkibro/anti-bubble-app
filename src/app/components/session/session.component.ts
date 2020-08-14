@@ -16,7 +16,6 @@ import { Articles } from 'src/app/models/articles';
 import { tokenData } from "../../models/tokenData";
 import { Title } from "@angular/platform-browser";
 import { environment } from "../../../environments/environment";
-import { AnswerFormComponent } from "../answer-form/answer-form.component";
 
 @Component({
     selector: 'mean-session',
@@ -51,8 +50,7 @@ export class SessionComponent implements OnInit {
         private router: Router,
         private sessionService: SessionService,
         private snackBar: MatSnackBar,
-        private titleService: Title,
-        private answerFormComponent: AnswerFormComponent
+        private titleService: Title
     ) { }
 
     ngOnInit(): void {
@@ -209,7 +207,7 @@ export class SessionComponent implements OnInit {
 
         // Teacher wants to start a game without any players in it.
         if (this.playerCount == 0) {
-            this.snackBar.open('Er zitten nog geen spelers in de sessie', 'X', { duration: 2500, panelClass: ['style-error'] });
+            this.snackBar.open('Er zitten nog geen spelers in de sessie', 'X', { duration: 2500, panelClass: ['style-warning'] });
         } else {
             if (this.canStart(this.gameData.game.name)) {
                 this.gameStarted = true;
@@ -228,7 +226,7 @@ export class SessionComponent implements OnInit {
         switch (game) {
             case 'Naamloos Nieuws':
                 if (this.playerCount < 3) {
-                    this.snackBar.open('Er moeten minstens 6 leerlingen meedoen met deze activiteit', 'X', { duration: 2500, panelClass: ['style-error'] });
+                    this.snackBar.open('Er moeten minstens 6 leerlingen meedoen met deze activiteit', 'X', { duration: 2500, panelClass: ['style-warning'] });
                     return false;
                 } else {
                     return true;
@@ -280,7 +278,7 @@ export class SessionComponent implements OnInit {
     /** Method that makes timer count down at the top of the screen. */
     startTimer(time: number) {
         setTimeout(() => {
-            this.finishGame();
+            this.socketService.finishGame();
         }, time * 1000);
 
         // Create an interval that calls the given function every second.
@@ -318,7 +316,7 @@ export class SessionComponent implements OnInit {
         // Remove all listeners so students can't continue to submit answers.
         this.socketService.removeListeners();
         this.showAnswersonScreen(this.gameData.game.name);
-        this.finishGame();
+        this.socketService.finishGame();
     }
 
     /** Method that makes the host leave the session and the page. */
@@ -329,6 +327,7 @@ export class SessionComponent implements OnInit {
         this.router.navigate(['home']);
     }
 
+    /** Method that shows the answer on screen when the game is finished. */
     showAnswersonScreen(game: String) {
         switch (game) {
             case 'Naamloos Nieuws':
@@ -346,9 +345,5 @@ export class SessionComponent implements OnInit {
                 break;
             default: break;
         }
-    }
-
-    finishGame() {
-        this.socketService.finishGame();
     }
 }

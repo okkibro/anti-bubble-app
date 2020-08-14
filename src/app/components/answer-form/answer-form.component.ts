@@ -27,6 +27,7 @@ export class AnswerFormComponent implements OnInit {
     });
     tokenData: tokenData;
     alreadySubmitted: boolean = false;
+    gameFinished: boolean = false;
 
     constructor(
         private fb: FormBuilder,
@@ -43,6 +44,9 @@ export class AnswerFormComponent implements OnInit {
         this.socketService.reactivateButton(() => {
             this.alreadySubmitted = false;
         });
+
+        // Check whether the game has been stopped by the teacher.
+        this.disableInput();
     }
 
     /** This method lets students submit an answer to the teacher (digiboard). */
@@ -66,5 +70,14 @@ export class AnswerFormComponent implements OnInit {
         } else {
             this.snackBar.open('Vul een onderwerp in.', 'X', { duration: 2500, panelClass: ['style-warning'] });
         }
+    }
+
+    /** Method that listens whether the game has been stopped by the teacher. */
+    disableInput(): void {
+
+        // Students listen for the signal that is sent when the teacher presses the "Stop activiteit" button.
+        this.socketService.listenForFinishGame(() => {
+            this.gameFinished = true;
+        });
     }
 }

@@ -107,6 +107,15 @@ export class SocketIOService {
         });
     }
 
+    /** Method that listens for the teacher pressing the "Stop Activiteit" button
+     *  disableInput gets called when the teacher presses said button
+     */
+    listenForFinishGame(disableInput) {
+        this.socket.on('finished-game', () => {
+            disableInput();
+        });
+    }
+
     listenForTeam(receiveTeam) {
         this.socket.on('receive-team', (team, article, leaders) => {
             receiveTeam(team, article, leaders);
@@ -133,7 +142,7 @@ export class SocketIOService {
     }
 
     /** Method that pairs students in groups of the given groupsize.
-     *  receivePairs is called when the ser has created the teams and sent them back.
+     *  receivePairs is called when the teacher has created the teams and sent them back.
      */
     pairStudents(groups, groupSize, articles, receivePairs) {
         this.socket.emit('pair-students', groups, groupSize, articles);
@@ -145,7 +154,7 @@ export class SocketIOService {
     /** Method that removes all listeners from the socket. */
     removeListeners() {
         this.socket.removeAllListeners();
-        this.removedListeners;
+        this.removedListeners = true;
     }
 
     /** Method that will make a player's inactive button active again. */

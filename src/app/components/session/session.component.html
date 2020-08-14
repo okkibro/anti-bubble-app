@@ -46,10 +46,10 @@
                 <mat-card *ngIf="tokenData?.role == 'student'">
                     <mat-card-header>
                         <mat-card-title>{{ gameData?.game.name }}</mat-card-title>
-                        <mat-card-subtitle>Wacht tot de docent de activiteit start</mat-card-subtitle>
                     </mat-card-header>
                     <mat-card-content>
-                        {{ gameData?.game.description }} <br>
+                        <p>{{ gameData?.game.description }}</p>
+                        <p><i>Wacht tot de docent de activiteit start.</i></p>
                     </mat-card-content>
                 </mat-card>
 

@@ -20,7 +20,7 @@ export class UserService {
 
     constructor(private http: HttpClient, private cookie: CookieService) { }
 
-    /** DELETE method for deleting a user's account.*/
+    /** DELETE method for deleting a user's account. */
     public deleteAccount(): Observable<any> {
         return this.http.delete(`${environment.ENDPOINT}/user/deleteAccount`,  { headers: { Authorization: 'Bearer ' + this.cookie.get('mean-token') }});
     }

@@ -6,7 +6,7 @@
 
 mat-panel-title {
     justify-content: center;
-    margin-left: 16px;  /*the toggle arrow takes up exactly 16px of margin on the right side, this evens it out and centers the title.*/
+    margin-left: 16px;  /* The toggle arrow takes up exactly 16px of margin on the right side, this evens it out and centers the title. */
     font-weight: bold;
 }
 
