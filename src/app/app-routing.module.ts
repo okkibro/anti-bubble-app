@@ -42,7 +42,7 @@ const routes: Routes = [
   { path: 'avatar', component: AvatarComponent, canActivate: [AuthGuardService] },
   { path: 'bubble-details', component: BubbleDetailsComponent, canActivate: [AuthGuardService], data: { roles: [Role.student] }},
   { path: 'teacher-overview', component: TeacherOverviewComponent, canActivate: [AuthGuardService], data: { roles: [Role.teacher] }},
-  { path: 'badges', component: BadgesComponent, canActivate: [AuthGuardService] },
+  { path: 'badges', component: BadgesComponent, canActivate: [AuthGuardService], data: { roles: [Role.student] } },
   { path: 'shop', component: ShopComponent, canActivate: [AuthGuardService] },
   { path: 'passwordrecovery', component: PasswordRecoveryComponent },
   { path: 'reset/:token', component: PasswordResetComponent },
