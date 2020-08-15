@@ -268,7 +268,9 @@ router.post('/milestone', auth, (req, res) => {
 
     // Check if user is authorized to perform the action.
     if (!req.payload._id) {
-        return res.status(401).json({ message: 'UnauthorizedError: unauthorized action' });
+        return res.status(401).json({message: 'UnauthorizedError: unauthorized action'});
+    } else if (req.payload.role === 'teacher') {
+        return res.status(200).json({message: 'Docenten kunnen geen badges ontvangen.'});
     } else {
 
         // Get currently logged in user.
