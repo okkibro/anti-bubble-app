@@ -5,18 +5,19 @@
   -->
 
 <form *ngIf="tokenData.role == 'student'" [formGroup]="getAnswerForm" (ngSubmit)="sendAnswer()">
-    <mat-form-field *ngIf="!alreadySubmitted">
+    <mat-form-field *ngIf="!answerSubmitted">
         <mat-label>Vul hier je antwoord in</mat-label>
         <textarea matInput formControlName="getAnswer" placeholder="Antwoord"></textarea>
-    </mat-form-field><br>
-    <button mat-button class="general-button" type="submit" *ngIf="!alreadySubmitted && !gameFinished">Verstuur</button>
-    <p *ngIf="alreadySubmitted"><i>Je antwoord is ingeleverd. Wacht op verdere instructies van de docent.</i></p>
+    </mat-form-field>
+    <button mat-button class="general-button" type="submit" *ngIf="!answerSubmitted">Verstuur</button>
+    <p *ngIf="answerSubmitted"><i>Je antwoord is ingeleverd. Wacht op verdere instructies van de docent.</i></p>
 </form>
 
 <form *ngIf="tokenData.role == 'teacher'" [formGroup]="sendQuestionsForm" (ngSubmit)="sendQuestion()">
-    <mat-form-field>
+    <mat-form-field *ngIf="!questionSubmitted">
         <mat-label>Vul hier een onderwerp in</mat-label>
         <textarea matInput formControlName="getQuestion" placeholder="Onderwerp"></textarea>
-    </mat-form-field><br>
-    <button mat-button class="general-button" type="submit">Verstuur</button>
+    </mat-form-field>
+    <p *ngIf="questionSubmitted">Je hebt <strong>{{ question }}</strong> als onderwerp ingestuurd.</p>
+    <button *ngIf="!questionSubmitted" mat-button class="general-button" type="submit">Verstuur</button>
 </form>

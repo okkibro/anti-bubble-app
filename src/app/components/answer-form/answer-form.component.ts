@@ -26,7 +26,9 @@ export class AnswerFormComponent implements OnInit {
         getQuestion: ['', []]
     });
     tokenData: tokenData;
-    alreadySubmitted: boolean = false;
+    answerSubmitted: boolean = false;
+    questionSubmitted: boolean = false;
+    question: string;
 
     constructor(
         private fb: FormBuilder,
@@ -41,7 +43,7 @@ export class AnswerFormComponent implements OnInit {
 
         // Reactivate the option to answer after the teacher has deleted the answer.
         this.socketService.reactivateButton(() => {
-            this.alreadySubmitted = false;
+            this.answerSubmitted = false;
         });
     }
 
@@ -52,7 +54,7 @@ export class AnswerFormComponent implements OnInit {
             this.getAnswerForm.get('getAnswer').setValue('');
 
             // Prevents students from spamming the teacher with answers.
-            this.alreadySubmitted = true;
+            this.answerSubmitted = true;
         } else {
             this.snackBar.open('Vul een antwoord in.', 'X', { duration: 2500, panelClass: ['style-warning'] });
         }
@@ -60,9 +62,12 @@ export class AnswerFormComponent implements OnInit {
 
     /** This method lets a teacher submit a question to all of the students in the session. */
     sendQuestion(): void {
-        if (this.sendQuestionsForm.get('getQuestion').value != '') {
-            this.socketService.sendQuestion(this.sendQuestionsForm.get('getQuestion').value);
+        let getQuestion = this.sendQuestionsForm.get('getQuestion').value
+        if (getQuestion != '') {
+            this.question = getQuestion;
+            this.socketService.sendQuestion(getQuestion);
             this.sendQuestionsForm.get('getQuestion').setValue('');
+            this.questionSubmitted = true;
         } else {
             this.snackBar.open('Vul een onderwerp in.', 'X', { duration: 2500, panelClass: ['style-warning'] });
         }
