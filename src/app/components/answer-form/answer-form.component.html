@@ -5,13 +5,12 @@
   -->
 
 <form *ngIf="tokenData.role == 'student'" [formGroup]="getAnswerForm" (ngSubmit)="sendAnswer()">
-    <mat-form-field *ngIf="!alreadySubmitted && !gameFinished">
+    <mat-form-field *ngIf="!alreadySubmitted">
         <mat-label>Vul hier je antwoord in</mat-label>
         <textarea matInput formControlName="getAnswer" placeholder="Antwoord"></textarea>
     </mat-form-field><br>
     <button mat-button class="general-button" type="submit" *ngIf="!alreadySubmitted && !gameFinished">Verstuur</button>
     <p *ngIf="alreadySubmitted"><i>Je antwoord is ingeleverd. Wacht op verdere instructies van de docent.</i></p>
-    <p *ngIf="gameFinished"><i>Het spel is gestopt door de docent, dus je kan geen antwoorden meer opsturen.</i></p>
 </form>
 
 <form *ngIf="tokenData.role == 'teacher'" [formGroup]="sendQuestionsForm" (ngSubmit)="sendQuestion()">

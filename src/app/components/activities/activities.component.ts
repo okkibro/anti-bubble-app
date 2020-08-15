@@ -86,7 +86,6 @@ export class ActivitiesComponent implements OnInit {
         // Students listen for incoming questions.
         // Receive question.
         this.socketService.listenForQuestion((question) => {
-            console.log('here');
             let questionDisplay = document.getElementById('receiveQuestion');
             questionDisplay.innerHTML = question;
 
