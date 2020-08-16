@@ -28,7 +28,7 @@ import { SessionOptionsComponent } from './components/session-options/session-op
 import { LabyrinthComponent } from './components/labyrinth/labyrinth.component';
 import { ActivitiesComponent } from './components/activities/activities.component';
 import { LabyrinthGuardService } from './services/labyrinth-guard.service';
-import { SettingsComponent } from "./components/settings/settings.component";
+import { SettingsComponent } from './components/settings/settings.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },

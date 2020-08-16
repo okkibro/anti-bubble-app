@@ -40,7 +40,10 @@ let userSchema = new Schema({
     recoverPasswordExpires: Date,
     inventory: {
         type: [{
-            item: { type: Schema.ObjectId, ref: 'Item' }
+            item: {
+                type: mongoose.Schema.Types.ObjectId,
+                ref: 'items'
+            }
         }],
         required: true
     },
@@ -53,20 +56,53 @@ let userSchema = new Schema({
     },
     classArray: {
         type: [{
-            item: { type: Schema.ObjectId, ref: 'Class' }
+            item: {
+                type: mongoose.Schema.Types.ObjectId,
+                ref: 'classes'
+            }
         }],
     },
     avatar: {
         type: {
-            hair1: Schema.ObjectId, ref: 'Item',
-            body: Schema.ObjectId, ref: 'Item', required: true,
-            pants: Schema.ObjectId, ref: 'Item', required: true,
-            shirt: Schema.ObjectId, ref: 'Item', required: true,
-            shoes: Schema.ObjectId, ref: 'Item',
-            glasses: Schema.ObjectId, ref: 'Item',
-            hair2: Schema.ObjectId, ref: 'Item',
-            hat: Schema.ObjectId, ref: 'Item',
-            medal: Schema.ObjectId, ref: 'Item'
+            hair1: {
+                type: mongoose.Schema.Types.ObjectId,
+                ref: 'items'
+            },
+            body: {
+                type: mongoose.Schema.Types.ObjectId,
+                ref: 'items',
+                required: true
+            },
+            pants: {
+                type: mongoose.Schema.Types.ObjectId,
+                ref: 'items',
+                required: true
+            },
+            shirt: {
+                type: mongoose.Schema.Types.ObjectId,
+                ref: 'items',
+                required: true
+            },
+            shoes: {
+                type: mongoose.Schema.Types.ObjectId,
+                ref: 'items'
+            },
+            glasses: {
+                type: mongoose.Schema.Types.ObjectId,
+                ref: 'items'
+            },
+            hair2: {
+                type: mongoose.Schema.Types.ObjectId,
+                ref: 'items'
+            },
+            hat: {
+                type: mongoose.Schema.Types.ObjectId,
+                ref: 'items'
+            },
+            medal: {
+                type: mongoose.Schema.Types.ObjectId,
+                ref: 'items'
+            },
         },
         required: false
     },

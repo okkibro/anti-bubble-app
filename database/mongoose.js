@@ -21,4 +21,5 @@ module.exports = {
     activities: require('./models/activities'),
     questions: require('./models/questions'),
     articles: require('./models/articles'),
+    activityLog: require('./models/activityLog')
 };

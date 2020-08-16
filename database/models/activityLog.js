@@ -7,36 +7,50 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-let classesSchema = new Schema({
-    code: {
-        type: Number,
-        required: true
-    },
-    level: {
+let activityLogSchema = new Schema({
+    name: {
         type: String,
         required: true
     },
-    year: {
-        type: Number,
+    category: {
+        type: String,
         required: true
     },
-    title: {
-        type: String,
+    class: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'classes',
+        required: true
+    },
+    user: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'users',
         required: true
     },
     students: {
         type: [{
             item: {
                 type: mongoose.Schema.Types.ObjectId,
-                ref: 'users' }
+                ref: 'users'
+            }
         }],
         required: true
     },
-    teacher: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'users',
+    question: {
+        type: [{
+            item: {
+                type: String
+            }
+        }],
+        required: true
+    },
+    answers: {
+        type: [{
+            item: {
+                type: String
+            }
+        }],
         required: true
     }
 });
 
-module.exports = mongoose.model('classes', classesSchema);
+module.exports = mongoose.model('activityLog', activityLogSchema);
