@@ -5,7 +5,7 @@
  */
 
 export class Activities {
-    name: string;
-    category: string;
-    description: string;
+	name: string;
+	category: string;
+	description: string;
 }

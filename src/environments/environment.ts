@@ -9,9 +9,9 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false,
-  ENDPOINT: 'https://localhost:3000',
-  TITLE_TRAIL: ' | Anti Bubble App'
+	production: false,
+	ENDPOINT: 'https://localhost:3000',
+	TITLE_TRAIL: ' | Anti Bubble App'
 };
 
 /*

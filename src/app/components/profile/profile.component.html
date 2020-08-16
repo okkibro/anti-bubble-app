@@ -11,77 +11,77 @@
     <mat-sidenav-content>
         <mean-toolbar (sidenavToggle)="sidenav.toggle()"></mean-toolbar>
         <body>
-            <div class="container-div" fxLayout="column" fxLayoutGap="10px" fxLayoutAlign="space-evenly">
-                <div fxLayout.xs="column" fxLayoutGap="10px" fxLayoutAlign="space-evenly">
-                    <mat-card fxFlex="100%">
-                        <mat-card-header>
-                            <mat-card-title>Profiel</mat-card-title>
-                        </mat-card-header>
-                        <mat-card-content>
-                            <table class="profile-table">
-                                <tr>
-                                    <td class="top-data">Gebruikersnaam</td>
-                                    <td>{{ userDetails?.firstName }}</td>
-                                </tr>
-                                <tr>
-                                    <td class="top-data">Volledige naam</td>
-                                    <td>{{ userDetails?.firstName }} {{ userDetails?.lastName }}</td>
-                                </tr>
-                                <tr>
-                                    <td class="top-data">E-mailadres</td>
-                                    <td>{{ userDetails?.email }}</td>
-                                </tr>
-                                <tr *ngIf="userDetails?.role == 'student' && userClassTitle != undefined">
-                                    <td class="top-data">Klas</td>
-                                    <td>{{ userClassTitle }}</td>
-                                </tr>
-                            </table>
-                        </mat-card-content>
-                    </mat-card>
-                    <mat-card fxFlex="50%" fxFlex.xs="100%" *ngIf="userDetails?.role == 'student'">
-                        <mat-card-header>
-                            <mat-card-title>Badges</mat-card-title>
-                            <mat-card-subtitle>Badge met de meeste voortgang</mat-card-subtitle>
-                        </mat-card-header>
-                        <mat-card-content>
-                            <table class="general-table">
-                                <tr *ngIf="milestoneShown.name !='Gefeliciteerd'">
-                                    <td>
-                                        <strong>{{ milestoneShown.name }}</strong><br>
-                                        {{ milestoneShown.description }}<br>
-                                        <i>Voortgang:</i>{{ userDetails?.milestones[milestoneShown.index] }}/{{ milestoneShown.maxValue }}
-                                    </td>
-                                </tr>
-                            </table>
-                            <mat-card-footer>
-                                <a mat-button class="general-link" [routerLink]="'/badges'">Alle badges</a>
-                            </mat-card-footer>
-                            <br>
-                        </mat-card-content>
-                    </mat-card>
-                </div>
-
-                <div fxLayout.xs="column" fxLayoutGap="10px" fxLayoutAlign="space-evenly">
-                    <mat-card fxFlex="50%" fxFlex.xs="100%" *ngIf="userDetails?.role == 'student'">
-                        <mat-card-header>
-                            <mat-card-title>Mijn Bubbel</mat-card-title>
-                        </mat-card-header>
-                        <mat-card-content>
-                            <mean-bubble-visualisation></mean-bubble-visualisation>
-                            <a mat-button class="general-link" [routerLink]="'/bubble-details'">Meer details</a>
-                        </mat-card-content>
-                    </mat-card>
-                    <mat-card fxFlex="100%">
-                        <mat-card-header>
-                            <mat-card-title>Avatar</mat-card-title>
-                        </mat-card-header>
-                        <mat-card-content>
-                            <mean-avatar-display></mean-avatar-display>
-                            <a mat-button class="general-link" [routerLink]="'/avatar'">Avatar aanpassen</a>
-                        </mat-card-content>
-                    </mat-card>
-                </div>
+        <div class="container-div" fxLayout="column" fxLayoutGap="10px" fxLayoutAlign="space-evenly">
+            <div fxLayout.xs="column" fxLayoutGap="10px" fxLayoutAlign="space-evenly">
+                <mat-card fxFlex="100%">
+                    <mat-card-header>
+                        <mat-card-title>Profiel</mat-card-title>
+                    </mat-card-header>
+                    <mat-card-content>
+                        <table class="profile-table">
+                            <tr>
+                                <td class="top-data">Gebruikersnaam</td>
+                                <td>{{ userDetails?.firstName }}</td>
+                            </tr>
+                            <tr>
+                                <td class="top-data">Volledige naam</td>
+                                <td>{{ userDetails?.firstName }} {{ userDetails?.lastName }}</td>
+                            </tr>
+                            <tr>
+                                <td class="top-data">E-mailadres</td>
+                                <td>{{ userDetails?.email }}</td>
+                            </tr>
+                            <tr *ngIf="userDetails?.role == 'student' && userClassTitle != undefined">
+                                <td class="top-data">Klas</td>
+                                <td>{{ userClassTitle }}</td>
+                            </tr>
+                        </table>
+                    </mat-card-content>
+                </mat-card>
+                <mat-card fxFlex="50%" fxFlex.xs="100%" *ngIf="userDetails?.role == 'student'">
+                    <mat-card-header>
+                        <mat-card-title>Badges</mat-card-title>
+                        <mat-card-subtitle>Badge met de meeste voortgang</mat-card-subtitle>
+                    </mat-card-header>
+                    <mat-card-content>
+                        <table class="general-table">
+                            <tr *ngIf="milestoneShown.name !='Gefeliciteerd'">
+                                <td>
+                                    <strong>{{ milestoneShown.name }}</strong><br>
+                                    {{ milestoneShown.description }}<br>
+                                    <i>Voortgang:</i>{{ userDetails?.milestones[milestoneShown.index] }}/{{ milestoneShown.maxValue }}
+                                </td>
+                            </tr>
+                        </table>
+                        <mat-card-footer>
+                            <a mat-button class="general-link" [routerLink]="'/badges'">Alle badges</a>
+                        </mat-card-footer>
+                        <br>
+                    </mat-card-content>
+                </mat-card>
             </div>
+
+            <div fxLayout.xs="column" fxLayoutGap="10px" fxLayoutAlign="space-evenly">
+                <mat-card fxFlex="50%" fxFlex.xs="100%" *ngIf="userDetails?.role == 'student'">
+                    <mat-card-header>
+                        <mat-card-title>Mijn Bubbel</mat-card-title>
+                    </mat-card-header>
+                    <mat-card-content>
+                        <mean-bubble-visualisation></mean-bubble-visualisation>
+                        <a mat-button class="general-link" [routerLink]="'/bubble-details'">Meer details</a>
+                    </mat-card-content>
+                </mat-card>
+                <mat-card fxFlex="100%">
+                    <mat-card-header>
+                        <mat-card-title>Avatar</mat-card-title>
+                    </mat-card-header>
+                    <mat-card-content>
+                        <mean-avatar-display></mean-avatar-display>
+                        <a mat-button class="general-link" [routerLink]="'/avatar'">Avatar aanpassen</a>
+                    </mat-card-content>
+                </mat-card>
+            </div>
+        </div>
         </body>
         <footer class="footer">
             <p> &copy; Utrecht University (ICS)</p>

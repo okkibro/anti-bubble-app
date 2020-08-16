@@ -11,15 +11,16 @@ import { CookieService } from 'ngx-cookie-service';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
-    providedIn: 'root'
+	providedIn: 'root'
 })
 
 export class AvatarService {
 
-    constructor(private http: HttpClient, private cookie: CookieService) { }
+	constructor(private http: HttpClient, private cookie: CookieService) {
+	}
 
-    /** Method to do a POST request to the backend to equip and item on the avatar of the user. */
-    equip(item): Observable<any>{
-        return this.http.post(`${environment.ENDPOINT}/user/avatar`, { avatarItem: item }, { headers: { Authorization: 'Bearer ' + this.cookie.get('mean-token') }});
-    }
+	/** Method to do a POST request to the backend to equip and item on the avatar of the user. */
+	equip(item): Observable<any> {
+		return this.http.post(`${environment.ENDPOINT}/user/avatar`, { avatarItem: item }, { headers: { Authorization: 'Bearer ' + this.cookie.get('mean-token') }});
+	}
 }

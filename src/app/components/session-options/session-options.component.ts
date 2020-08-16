@@ -14,42 +14,43 @@ import { environment } from '../../../environments/environment';
 import { Title } from '@angular/platform-browser';
 
 @Component({
-    selector: 'mean-session-options',
-    templateUrl: './session-options.component.html',
-    styleUrls: ['./session-options.component.css',
-        '../../shared/general-styles.css']
+	selector: 'mean-session-options',
+	templateUrl: './session-options.component.html',
+	styleUrls: ['./session-options.component.css',
+		'../../shared/general-styles.css']
 })
 
 export class SessionOptionsComponent implements OnInit {
-    teamOptionAAForm = this.fb.group({
-        teamOptionAA: ['', Validators.required]
-    });
+	teamOptionAAForm = this.fb.group({
+		teamOptionAA: ['', Validators.required]
+	});
 
-    constructor(
-        private auth: AuthenticationService,
-        private router: Router,
-        private socketService: SocketIOService,
-        private sessionService: SessionService,
-        private fb: FormBuilder,
-        private titleService: Title
-    ) { }
+	constructor(
+		private auth: AuthenticationService,
+		private router: Router,
+		private socketService: SocketIOService,
+		private sessionService: SessionService,
+		private fb: FormBuilder,
+		private titleService: Title
+	) { }
 
-    ngOnInit() {
-        this.titleService.setTitle('Sessie opties' + environment.TITLE_TRAIL);
-    }
 
-    /** Method that fets called when teacher presses create session button. gamedata contains the name of the game and time of the slider. */
-    createSession(gameData) {
+	ngOnInit() {
+		this.titleService.setTitle('Sessie opties' + environment.TITLE_TRAIL);
+	}
 
-        // Get the entire activity data from the database
-        this.sessionService.getActivity(gameData.game).subscribe(data => {
-            gameData.game = data;
+	/** Method that fets called when teacher presses create session button. gamedata contains the name of the game and time of the slider. */
+	createSession(gameData) {
 
-            // Create a session in socket io service and pass it the chosen activity with set options
-            this.socketService.createSession(gameData);
+		// Get the entire activity data from the database
+		this.sessionService.getActivity(gameData.game).subscribe(data => {
+			gameData.game = data;
 
-            // Navigate to session page
-            this.router.navigate(['session']);
-        });
-    }
+			// Create a session in socket io service and pass it the chosen activity with set options
+			this.socketService.createSession(gameData);
+
+			// Navigate to session page
+			this.router.navigate(['session']);
+		});
+	}
 }

@@ -13,67 +13,68 @@ import { environment } from '../../../environments/environment';
 import { Title } from '@angular/platform-browser';
 
 @Component({
-    selector: 'mean-password-reset',
-    templateUrl: './password-reset.component.html',
-    styleUrls: ['./password-reset.component.css',
-        '../../shared/general-styles.css']
+	selector: 'mean-password-reset',
+	templateUrl: './password-reset.component.html',
+	styleUrls: ['./password-reset.component.css',
+		'../../shared/general-styles.css']
 })
 
 export class PasswordResetComponent implements OnInit {
-    passwordResetForm = this.fb.group({
-        password: ['', [Validators.required]],
-        repeatPassword: ['', Validators.required],
-    },
-    {
-        validator: this.passwordMatchValidator
-    });
+	passwordResetForm = this.fb.group({
+			password: ['', [Validators.required]],
+			repeatPassword: ['', Validators.required]
+		},
+		{
+			validator: this.passwordMatchValidator
+		});
 
-    constructor(
-        private route: ActivatedRoute,
-        private router: Router,
-        private fb: FormBuilder,
-        private snackBar: MatSnackBar,
-        private passwordRecoveryService: PasswordRecoveryService,
-        private titleService: Title
-    ) { }
+	constructor(
+		private route: ActivatedRoute,
+		private router: Router,
+		private fb: FormBuilder,
+		private snackBar: MatSnackBar,
+		private passwordRecoveryService: PasswordRecoveryService,
+		private titleService: Title
+	) { }
 
-    ngOnInit(): void {
 
-        // Check if token is correct, otherwise navigate back to login.
-        this.passwordRecoveryService.getResetPage(this.route.snapshot.paramMap.get('token')).subscribe((data) => {
-            if (!data.correct) {
-                this.router.navigate(['/login']);
-            }
-        });
+	ngOnInit(): void {
 
-        this.titleService.setTitle('Wachtwoord resetten' + environment.TITLE_TRAIL);
-    }
+		// Check if token is correct, otherwise navigate back to login.
+		this.passwordRecoveryService.getResetPage(this.route.snapshot.paramMap.get('token')).subscribe((data) => {
+			if (!data.correct) {
+				this.router.navigate(['/login']);
+			}
+		});
 
-    /** Method to reset your password based on the filled in passwords in the form. */
-    resetPassword() {
+		this.titleService.setTitle('Wachtwoord resetten' + environment.TITLE_TRAIL);
+	}
 
-        // Get password and confirm from the form.
-        let password = this.passwordResetForm.get('password').value;
-        let repeatPassword = this.passwordResetForm.get('repeatPassword').value;
+	/** Method to reset your password based on the filled in passwords in the form. */
+	resetPassword() {
 
-        // Send password and confirm to back-end which will return whether it was a succes and the message to show the user.
-        this.passwordRecoveryService.postNewPassword(this.route.snapshot.paramMap.get('token'), password, repeatPassword).subscribe(data => {
-            if (!data.succes) {
-                this.snackBar.open(data.message, 'X', { duration: 2500, panelClass: ['style-error'] });
-            } else {
-                this.snackBar.open(data.message, 'X', { duration: 2500, panelClass: ['style-succes'] }).afterDismissed().subscribe(() => {
-                    this.router.navigate(['/login']);
-                });
-            }
-        });
-    }
+		// Get password and confirm from the form.
+		let password = this.passwordResetForm.get('password').value;
+		let repeatPassword = this.passwordResetForm.get('repeatPassword').value;
 
-    /** Method to check if the filled in passwords match. */
-    passwordMatchValidator(form: FormGroup) {
-        let password = form.get('password').value;
-        let repeatPassword = form.get('repeatPassword').value;
-        if (password != repeatPassword) {
-            form.get('repeatPassword').setErrors({ noPasswordMatch: true });
-        }
-    }
+		// Send password and confirm to back-end which will return whether it was a succes and the message to show the user.
+		this.passwordRecoveryService.postNewPassword(this.route.snapshot.paramMap.get('token'), password, repeatPassword).subscribe(data => {
+			if (!data.succes) {
+				this.snackBar.open(data.message, 'X', { duration: 2500, panelClass: ['style-error'] });
+			} else {
+				this.snackBar.open(data.message, 'X', { duration: 2500, panelClass: ['style-succes'] }).afterDismissed().subscribe(() => {
+					this.router.navigate(['/login']);
+				});
+			}
+		});
+	}
+
+	/** Method to check if the filled in passwords match. */
+	passwordMatchValidator(form: FormGroup) {
+		let password = form.get('password').value;
+		let repeatPassword = form.get('repeatPassword').value;
+		if (password != repeatPassword) {
+			form.get('repeatPassword').setErrors({ noPasswordMatch: true });
+		}
+	}
 }

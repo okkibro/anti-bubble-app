@@ -15,68 +15,69 @@ import { Title } from '@angular/platform-browser';
 import { UserService } from '../../services/user.service';
 
 @Component({
-    selector: 'mean-register',
-    templateUrl: './register.component.html',
-    styleUrls: ['./register.component.css',
-        '../../shared/general-styles.css']
+	selector: 'mean-register',
+	templateUrl: './register.component.html',
+	styleUrls: ['./register.component.css',
+		'../../shared/general-styles.css']
 })
 
 export class RegisterComponent implements OnInit {
-    registerForm = this.fb.group({
-        firstName: ['', Validators.required],
-        lastName: ['', Validators.required],
-        email: ['', {
-            validators: [Validators.required, Validators.email],
-            asyncValidators: [this.userService.uniqueEmailValidator()],
-            updateOn: 'blur'
-        }],
-        role: ['', Validators.required],
-        password: ['', Validators.required],
-        repeatPassword: ['', Validators.required],
-        classCode: ['',],
-    },
-        {
-            validator: this.passwordMatchValidator
-        });
+	registerForm = this.fb.group({
+			firstName: ['', Validators.required],
+			lastName: ['', Validators.required],
+			email: ['', {
+				validators: [Validators.required, Validators.email],
+				asyncValidators: [this.userService.uniqueEmailValidator()],
+				updateOn: 'blur'
+			}],
+			role: ['', Validators.required],
+			password: ['', Validators.required],
+			repeatPassword: ['', Validators.required],
+			classCode: ['']
+		},
+		{
+			validator: this.passwordMatchValidator
+		});
 
-    constructor(
-        private auth: AuthenticationService,
-        private router: Router,
-        private fb: FormBuilder,
-        private shop: ShopService,
-        private titleService: Title,
-        private userService: UserService
-    ) { }
+	constructor(
+		private auth: AuthenticationService,
+		private router: Router,
+		private fb: FormBuilder,
+		private shop: ShopService,
+		private titleService: Title,
+		private userService: UserService
+	) { }
 
-    ngOnInit() {
-        this.titleService.setTitle('Registreer' + environment.TITLE_TRAIL);
-    }
 
-    /** Method to register a new user based on the information filled in on the form. */
-    registerUser() {
-        let user = new User();
-        user.firstName = this.registerForm.get('firstName').value;
-        user.lastName = this.registerForm.get('lastName').value;
-        user.email = this.registerForm.get('email').value;
-        user.role = this.registerForm.get('role').value;
-        user.password = this.registerForm.get('password').value;
+	ngOnInit() {
+		this.titleService.setTitle('Registreer' + environment.TITLE_TRAIL);
+	}
 
-        this.auth.register(user).subscribe(() => {
-            this.shop.getBaseInventory().subscribe(data => {
-                for (let i = 0 ; i < data.length ; i++) {
-                    this.shop.buy(data[i]).subscribe();
-                }
-                this.router.navigate(['login']);
-            });
-        });
-    }
+	/** Method to register a new user based on the information filled in on the form. */
+	registerUser() {
+		let user = new User();
+		user.firstName = this.registerForm.get('firstName').value;
+		user.lastName = this.registerForm.get('lastName').value;
+		user.email = this.registerForm.get('email').value;
+		user.role = this.registerForm.get('role').value;
+		user.password = this.registerForm.get('password').value;
 
-    /** Method to check if the filled in passwords match. */
-    passwordMatchValidator(form: FormGroup) {
-        let password = form.get('password').value;
-        let repeatPassword = form.get('repeatPassword').value;
-        if (password != repeatPassword) {
-            form.get('repeatPassword').setErrors({ noPasswordMatch: true });
-        }
-    }
+		this.auth.register(user).subscribe(() => {
+			this.shop.getBaseInventory().subscribe(data => {
+				for (let i = 0; i < data.length; i++) {
+					this.shop.buy(data[i]).subscribe();
+				}
+				this.router.navigate(['login']);
+			});
+		});
+	}
+
+	/** Method to check if the filled in passwords match. */
+	passwordMatchValidator(form: FormGroup) {
+		let password = form.get('password').value;
+		let repeatPassword = form.get('repeatPassword').value;
+		if (password != repeatPassword) {
+			form.get('repeatPassword').setErrors({ noPasswordMatch: true });
+		}
+	}
 }

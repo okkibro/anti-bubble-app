@@ -9,28 +9,29 @@ import { AuthenticationService } from '../../services/authentication.service';
 import { tokenData } from 'src/app/models/tokenData';
 
 @Component({
-    selector: 'mean-toolbar',
-    templateUrl: './toolbar.component.html',
-    styleUrls: ['./toolbar.component.css']
+	selector: 'mean-toolbar',
+	templateUrl: './toolbar.component.html',
+	styleUrls: ['./toolbar.component.css']
 })
 
 export class ToolbarComponent implements OnInit {
-    @Output() public sidenavToggle = new EventEmitter();
+	@Output() public sidenavToggle = new EventEmitter();
 
-    tokenData: tokenData;
+	tokenData: tokenData;
 
-    constructor(private auth: AuthenticationService) { }
+	constructor(private auth: AuthenticationService) {
+	}
 
-    ngOnInit(): void {
-        this.tokenData = this.auth.getTokenData();
-    }
+	ngOnInit(): void {
+		this.tokenData = this.auth.getTokenData();
+	}
 
-    /** Method to logout. */
-    logoutButton() {
-        return this.auth.logout();
-    }
+	/** Method to logout. */
+	logoutButton() {
+		return this.auth.logout();
+	}
 
-    public onToggleSidenav = () => {
-        this.sidenavToggle.emit();
-    }
+	public onToggleSidenav = () => {
+		this.sidenavToggle.emit();
+	};
 }

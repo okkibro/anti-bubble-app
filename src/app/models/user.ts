@@ -5,26 +5,26 @@
  */
 
 import { Role } from './role';
-import { ShopItem } from './shopItem'
-import { Milestone } from './milestone'
+import { ShopItem } from './shopItem';
+import { Milestone } from './milestone';
 
 export class User {
-    _id: string;
-    firstName: string;
-    lastName: string;
-    email: string;
-    role: Role;
-    password: string;
-    salt: string;
-    recoverPasswordToken: string;
-    recoverPasswordExpires: Date;
-    inventory: [ShopItem];
-    currency: number;
-    milestones: [Milestone];
-    classArray: [string];
-    avatar: any;
-    recentMilestones: [string];
-    bubbleInit: boolean;
-    labyrinthAnswers: [Number];
-    bubble: any;
+	_id: string;
+	firstName: string;
+	lastName: string;
+	email: string;
+	role: Role;
+	password: string;
+	salt: string;
+	recoverPasswordToken: string;
+	recoverPasswordExpires: Date;
+	inventory: [ShopItem];
+	currency: number;
+	milestones: [Milestone];
+	classArray: [string];
+	avatar: any;
+	recentMilestones: [string];
+	bubbleInit: boolean;
+	labyrinthAnswers: [Number];
+	bubble: any;
 }

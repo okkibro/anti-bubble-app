@@ -15,118 +15,119 @@ import { SessionService } from 'src/app/services/session.service';
 import { UserService } from '../../services/user.service';
 
 @Component({
-    selector: 'mean-activities',
-    templateUrl: './activities.component.html',
-    styleUrls: ['./activities.component.css',
-        '../../shared/general-styles.css']
+	selector: 'mean-activities',
+	templateUrl: './activities.component.html',
+	styleUrls: ['./activities.component.css',
+		'../../shared/general-styles.css']
 })
 
 export class ActivitiesComponent implements OnInit {
-    gameData;
-    pin;
-    userDetails: User;
-    enableAnswer: boolean = false;
-    team;
-    leaders;
-    selected;
-    isLeader: boolean = true;
-    submitted: boolean = false;
-    article;
-    allowedSites = ['Facebook',
-        'Instagram',
-        'NOS.nl',
-        'Telegraaf',
-        'Reddit'
-    ];
-    gameFinished: boolean = false;
+	gameData;
+	pin;
+	userDetails: User;
+	enableAnswer: boolean = false;
+	team;
+	leaders;
+	selected;
+	isLeader: boolean = true;
+	submitted: boolean = false;
+	article;
+	allowedSites = ['Facebook',
+		'Instagram',
+		'NOS.nl',
+		'Telegraaf',
+		'Reddit'
+	];
+	gameFinished: boolean = false;
 
-    constructor(
-        private socketService: SocketIOService,
-        private router: Router,
-        private data: DataService,
-        private fb: FormBuilder,
-        private sessionService: SessionService,
-        private userService: UserService
-    ) { }
+	constructor(
+		private socketService: SocketIOService,
+		private router: Router,
+		private data: DataService,
+		private fb: FormBuilder,
+		private sessionService: SessionService,
+		private userService: UserService
+	) { }
 
-    ngOnInit(): void {
-        this.gameData = this.getGameData();
 
-        this.data.currentMessage.subscribe(message => {
-            if (message) {
-                this.pin = message;
-                this.socketService.pin = message;
-            }
-        });
+	ngOnInit(): void {
+		this.gameData = this.getGameData();
 
-        window.addEventListener('beforeunload', beforeUnload);
+		this.data.currentMessage.subscribe(message => {
+			if (message) {
+				this.pin = message;
+				this.socketService.pin = message;
+			}
+		});
 
-        if (this.gameData == undefined) {
-            this.router.navigate(['home']);
-        }
+		window.addEventListener('beforeunload', beforeUnload);
 
-        // Check whether or not a teacher has sent a question.
-        this.receiveQuestion();
+		if (this.gameData == undefined) {
+			this.router.navigate(['home']);
+		}
 
-        // Get teams from teacher's input.
-        this.receiveTeam();
+		// Check whether or not a teacher has sent a question.
+		this.receiveQuestion();
 
-        // Check whether the game has been stopped by the teacher.
-        this.disableInput();
-    }
+		// Get teams from teacher's input.
+		this.receiveTeam();
 
-    /** Method that returns the game data. */
-    getGameData(): any {
-        return this.socketService.gameData;
-    }
+		// Check whether the game has been stopped by the teacher.
+		this.disableInput();
+	}
 
-    /** Method that listens for incoming questions. */
-    receiveQuestion(): void {
+	/** Method that returns the game data. */
+	getGameData(): any {
+		return this.socketService.gameData;
+	}
 
-        // Students listen for incoming questions.
-        // Receive question.
-        this.socketService.listenForQuestion((question) => {
-            let questionDisplay = document.getElementById('receiveQuestion');
-            questionDisplay.innerHTML = question;
+	/** Method that listens for incoming questions. */
+	receiveQuestion(): void {
 
-            // Student can only answer after the teacher has submitted a question.
-            this.enableAnswer = true;
-        });
-    }
+		// Students listen for incoming questions.
+		// Receive question.
+		this.socketService.listenForQuestion((question) => {
+			let questionDisplay = document.getElementById('receiveQuestion');
+			questionDisplay.innerHTML = question;
 
-    /** Method that listens for teammembers. */
-    receiveTeam(): void {
-        this.socketService.listenForTeam((team, article, leaders) => {
-            this.leaders = leaders;
-            this.article = article;
-            this.userService.profile().subscribe(user => {
-                this.userDetails = user;
-                if (leaders.find(x => x.email == this.userDetails.email) == undefined) {
-                    this.isLeader = false;
-                }
-            });
-            this.team = team;
-            let articleSpace = document.getElementsByClassName('article')[0];
-            let image = document.createElement('img');
-            image.setAttribute('src', article.image);
-            image.setAttribute('height', '200px');
-            articleSpace.appendChild(image);
-        });
-    }
+			// Student can only answer after the teacher has submitted a question.
+			this.enableAnswer = true;
+		});
+	}
 
-    /** Method that submits an answer and data to the teacher. */
-    submit(data): void {
-        this.submitted = true;
-        this.socketService.studentSubmit({ answer: this.selected, data: data });
-    }
+	/** Method that listens for teammembers. */
+	receiveTeam(): void {
+		this.socketService.listenForTeam((team, article, leaders) => {
+			this.leaders = leaders;
+			this.article = article;
+			this.userService.profile().subscribe(user => {
+				this.userDetails = user;
+				if (leaders.find(x => x.email == this.userDetails.email) == undefined) {
+					this.isLeader = false;
+				}
+			});
+			this.team = team;
+			let articleSpace = document.getElementsByClassName('article')[0];
+			let image = document.createElement('img');
+			image.setAttribute('src', article.image);
+			image.setAttribute('height', '200px');
+			articleSpace.appendChild(image);
+		});
+	}
 
-    /** Method that listens whether the game has been stopped by the teacher. */
-    disableInput(): void {
+	/** Method that submits an answer and data to the teacher. */
+	submit(data): void {
+		this.submitted = true;
+		this.socketService.studentSubmit({ answer: this.selected, data: data });
+	}
 
-        // Students listen for the signal that is sent when the teacher presses the 'Stop activiteit' button.
-        this.socketService.listenForFinishGame(() => {
-            this.gameFinished = true;
-        });
-    }
+	/** Method that listens whether the game has been stopped by the teacher. */
+	disableInput(): void {
+
+		// Students listen for the signal that is sent when the teacher presses the 'Stop activiteit' button.
+		this.socketService.listenForFinishGame(() => {
+			this.gameFinished = true;
+		});
+	}
 }
 

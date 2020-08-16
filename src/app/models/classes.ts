@@ -5,10 +5,10 @@
  */
 
 export class Class {
-    code: number;
-    level: string;
-    year: number;
-    title: string;
-    students: [number];
-    teacher: number;
+	code: number;
+	level: string;
+	year: number;
+	title: string;
+	students: [number];
+	teacher: number;
 }

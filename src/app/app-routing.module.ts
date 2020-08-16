@@ -6,7 +6,7 @@
 
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { Role } from './models/role'
+import { Role } from './models/role';
 
 import { HomeComponent } from './components/home/home.component';
 import { LoginComponent } from './components/login/login.component';
@@ -31,33 +31,34 @@ import { LabyrinthGuardService } from './services/labyrinth-guard.service';
 import { SettingsComponent } from './components/settings/settings.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: '/login', pathMatch: 'full' },
-  { path: 'home', component: HomeComponent, canActivate: [AuthGuardService] },
-  { path: 'login', component: LoginComponent },
-  { path: 'register', component: RegisterComponent },
-  { path: 'session', component: SessionComponent, canActivate: [AuthGuardService], canDeactivate: [SessionGuardService]},
-  { path: 'profile', component: ProfileComponent, canActivate: [AuthGuardService] },
-  { path: 'class-overview', component: ClassOverviewComponent, canActivate: [AuthGuardService] },
-  { path: 'classmate-profile/:id', component: ClassmateProfileComponent, canActivate: [AuthGuardService] },
-  { path: 'avatar', component: AvatarComponent, canActivate: [AuthGuardService] },
-  { path: 'bubble-details', component: BubbleDetailsComponent, canActivate: [AuthGuardService], data: { roles: [Role.student] }},
-  { path: 'teacher-overview', component: TeacherOverviewComponent, canActivate: [AuthGuardService], data: { roles: [Role.teacher] }},
-  { path: 'badges', component: BadgesComponent, canActivate: [AuthGuardService], data: { roles: [Role.student] } },
-  { path: 'shop', component: ShopComponent, canActivate: [AuthGuardService] },
-  { path: 'passwordrecovery', component: PasswordRecoveryComponent },
-  { path: 'reset/:token', component: PasswordResetComponent },
-  { path: 'labyrinth', component: LabyrinthComponent, canActivate: [LabyrinthGuardService] },
-  { path: 'session-options', component: SessionOptionsComponent, canActivate: [AuthGuardService] , data: { roles: [Role.teacher] }},
-  { path: 'activities', component: ActivitiesComponent, canActivate: [AuthGuardService], canDeactivate: [SessionGuardService]},
-  { path: 'settings', component: SettingsComponent, canActivate: [AuthGuardService]},
+	{ path: '', redirectTo: '/login', pathMatch: 'full' },
+	{ path: 'home', component: HomeComponent, canActivate: [AuthGuardService] },
+	{ path: 'login', component: LoginComponent },
+	{ path: 'register', component: RegisterComponent },
+	{ path: 'session', component: SessionComponent, canActivate: [AuthGuardService], canDeactivate: [SessionGuardService] },
+	{ path: 'profile', component: ProfileComponent, canActivate: [AuthGuardService] },
+	{ path: 'class-overview', component: ClassOverviewComponent, canActivate: [AuthGuardService] },
+	{ path: 'classmate-profile/:id', component: ClassmateProfileComponent, canActivate: [AuthGuardService] },
+	{ path: 'avatar', component: AvatarComponent, canActivate: [AuthGuardService] },
+	{ path: 'bubble-details', component: BubbleDetailsComponent, canActivate: [AuthGuardService], data: { roles: [Role.student] }},
+	{ path: 'teacher-overview', component: TeacherOverviewComponent, canActivate: [AuthGuardService], data: { roles: [Role.teacher] }},
+	{ path: 'badges', component: BadgesComponent, canActivate: [AuthGuardService], data: { roles: [Role.student] }},
+	{ path: 'shop', component: ShopComponent, canActivate: [AuthGuardService] },
+	{ path: 'passwordrecovery', component: PasswordRecoveryComponent },
+	{ path: 'reset/:token', component: PasswordResetComponent },
+	{ path: 'labyrinth', component: LabyrinthComponent, canActivate: [LabyrinthGuardService] },
+	{ path: 'session-options', component: SessionOptionsComponent, canActivate: [AuthGuardService], data: { roles: [Role.teacher] }},
+	{ path: 'activities', component: ActivitiesComponent, canActivate: [AuthGuardService], canDeactivate: [SessionGuardService] },
+	{ path: 'settings', component: SettingsComponent, canActivate: [AuthGuardService] },
 
-  // Automatically redirect to login page when user inputs a wrong URL.
-  { path: '**', redirectTo: '/login', pathMatch: 'full' },
+	// Automatically redirect to login page when user inputs a wrong URL.
+	{ path: '**', redirectTo: '/login', pathMatch: 'full' }
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+	imports: [RouterModule.forRoot(routes)],
+	exports: [RouterModule]
 })
 
-export class AppRoutingModule { }
+export class AppRoutingModule {
+}

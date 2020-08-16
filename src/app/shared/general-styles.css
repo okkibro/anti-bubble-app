@@ -7,7 +7,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap');
 
 .mat-card-title, .mat-card-subtitle {
-    font-family: 'Fredoka One', cursive; 
+    font-family: 'Fredoka One', cursive;
     /* NOTE: text-fill-color paints the text once more over the actual text. This can have unwanted side effects that should be fixed in local css */
     -webkit-text-fill-color: white;
     -webkit-text-stroke: 1px #41596c;
@@ -68,7 +68,7 @@ mat-card-header {
 .general-table th,
 .general-table td {
     text-align: left;
-    padding: 10px;    
+    padding: 10px;
 }
 
 .footer {

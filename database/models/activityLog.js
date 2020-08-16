@@ -8,49 +8,49 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 let activityLogSchema = new Schema({
-    name: {
-        type: String,
-        required: true
-    },
-    category: {
-        type: String,
-        required: true
-    },
-    class: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'classes',
-        required: true
-    },
-    user: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'users',
-        required: true
-    },
-    students: {
-        type: [{
-            item: {
-                type: mongoose.Schema.Types.ObjectId,
-                ref: 'users'
-            }
-        }],
-        required: true
-    },
-    question: {
-        type: [{
-            item: {
-                type: String
-            }
-        }],
-        required: true
-    },
-    answers: {
-        type: [{
-            item: {
-                type: String
-            }
-        }],
-        required: true
-    }
+	name: {
+		type: String,
+		required: true
+	},
+	category: {
+		type: String,
+		required: true
+	},
+	class: {
+		type: mongoose.Schema.Types.ObjectId,
+		ref: 'classes',
+		required: true
+	},
+	user: {
+		type: mongoose.Schema.Types.ObjectId,
+		ref: 'users',
+		required: true
+	},
+	students: {
+		type: [{
+			item: {
+				type: mongoose.Schema.Types.ObjectId,
+				ref: 'users'
+			}
+		}],
+		required: true
+	},
+	question: {
+		type: [{
+			item: {
+				type: String
+			}
+		}],
+		required: true
+	},
+	answers: {
+		type: [{
+			item: {
+				type: String
+			}
+		}],
+		required: true
+	}
 });
 
 module.exports = mongoose.model('activityLog', activityLogSchema);

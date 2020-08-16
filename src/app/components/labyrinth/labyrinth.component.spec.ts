@@ -9,19 +9,18 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { LabyrinthComponent } from './labyrinth.component';
 
 describe('LabyrinthComponent', () => {
-  let component: LabyrinthComponent;
-  let fixture: ComponentFixture<LabyrinthComponent>;
+	let component: LabyrinthComponent;
+	let fixture: ComponentFixture<LabyrinthComponent>;
 
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      declarations: [LabyrinthComponent]
-    })
-      .compileComponents();
-  }));
+	beforeEach(async(() => {
+		TestBed.configureTestingModule({
+			declarations: [LabyrinthComponent]
+		}).compileComponents();
+	}));
 
-  beforeEach(() => {
-    fixture = TestBed.createComponent(LabyrinthComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
+	beforeEach(() => {
+		fixture = TestBed.createComponent(LabyrinthComponent);
+		component = fixture.componentInstance;
+		fixture.detectChanges();
+	});
 });

@@ -16,7 +16,7 @@ const jwt = require('express-jwt');
 // Small constant for authentication.
 const auth = jwt({
 	secret: process.env.MY_SECRET,
-	userProperty: 'payload',
+	userProperty: 'payload'
 });
 
 /** GET method to get the articles from the database */
@@ -28,7 +28,7 @@ router.get('/articles', auth, (req, res) => {
 	} else {
 		Users.findById(req.payload._id, (err, user) => {
 			// Get the logged in user.
-			Articles.find({ }, (err, articles) => {
+			Articles.find({}, (err, articles) => {
 
 				// Send all article data from the database.
 				return res.status(200).json(articles);
@@ -93,7 +93,7 @@ router.post('/questions', auth, (req, res) => {
 			if (!err) {
 				return res.status(200).json(questions);
 			} else {
-				return res.status(404).json({ message: err })
+				return res.status(404).json({ message: err });
 			}
 		});
 	}

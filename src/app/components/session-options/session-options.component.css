@@ -6,15 +6,15 @@
 
 mat-panel-title {
     justify-content: center;
-    margin-left: 16px;  /* The toggle arrow takes up exactly 16px of margin on the right side, this evens it out and centers the title. */
+    margin-left: 16px; /* The toggle arrow takes up exactly 16px of margin on the right side, this evens it out and centers the title. */
     font-weight: bold;
 }
 
-.session-options-table td{
+.session-options-table td {
     width: 50%;
 }
 
-.session-options-table th{
+.session-options-table th {
     text-align: center;
     width: 10%;
 }

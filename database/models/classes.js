@@ -8,35 +8,36 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 let classesSchema = new Schema({
-    code: {
-        type: Number,
-        required: true
-    },
-    level: {
-        type: String,
-        required: true
-    },
-    year: {
-        type: Number,
-        required: true
-    },
-    title: {
-        type: String,
-        required: true
-    },
-    students: {
-        type: [{
-            item: {
-                type: mongoose.Schema.Types.ObjectId,
-                ref: 'users' }
-        }],
-        required: true
-    },
-    teacher: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'users',
-        required: true
-    }
+	code: {
+		type: Number,
+		required: true
+	},
+	level: {
+		type: String,
+		required: true
+	},
+	year: {
+		type: Number,
+		required: true
+	},
+	title: {
+		type: String,
+		required: true
+	},
+	students: {
+		type: [{
+			item: {
+				type: mongoose.Schema.Types.ObjectId,
+				ref: 'users'
+			}
+		}],
+		required: true
+	},
+	teacher: {
+		type: mongoose.Schema.Types.ObjectId,
+		ref: 'users',
+		required: true
+	}
 });
 
 module.exports = mongoose.model('classes', classesSchema);

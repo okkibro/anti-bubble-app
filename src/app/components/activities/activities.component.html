@@ -13,64 +13,65 @@
         <mean-toolbar (sidenavToggle)="sidenav.toggle()"></mean-toolbar>
 
         <body>
-            <div class="container-div" fxLayoutGap="10px" fxLayout="column" fxLayoutAlign="space-evenly">
-                <div fxLayout.xs="row" fxLayoutGap="10px" fxLayoutAlign="space-evenly">
-                    <mat-card fxFlex="100%">
-                        <mat-card-header>
-                            <mat-card-title>{{ gameData?.game.name }}</mat-card-title>
-                        </mat-card-header>
+        <div class="container-div" fxLayoutGap="10px" fxLayout="column" fxLayoutAlign="space-evenly">
+            <div fxLayout.xs="row" fxLayoutGap="10px" fxLayoutAlign="space-evenly">
+                <mat-card fxFlex="100%">
+                    <mat-card-header>
+                        <mat-card-title>{{ gameData?.game.name }}</mat-card-title>
+                    </mat-card-header>
 
-                        <mat-card-content *ngIf="gameData?.game.name == 'Naamloos Nieuws'">
-                            <p>{{ gameData?.game.description }}</p>
-                            <div class="article"></div>
-                            <mat-form-field *ngIf="!isLeader">
-                                <mat-label>Teams</mat-label>
-                                <mat-select [(value)]="selected">
-                                    <mat-option *ngFor="let leader of leaders" value="{{ leader.email }}">{{ leader.name }}
-                                    </mat-option>
-                                </mat-select>
-                            </mat-form-field>
-                            <button mat-button class="general-button" [disabled]="selected == undefined || submitted"
-                                *ngIf="!isLeader" (click)="submit({ article: article })">Verstuur</button>
-                        </mat-card-content>
+                    <mat-card-content *ngIf="gameData?.game.name == 'Naamloos Nieuws'">
+                        <p>{{ gameData?.game.description }}</p>
+                        <div class="article"></div>
+                        <mat-form-field *ngIf="!isLeader">
+                            <mat-label>Teams</mat-label>
+                            <mat-select [(value)]="selected">
+                                <mat-option *ngFor="let leader of leaders" value="{{ leader.email }}">{{ leader.name }}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                        <button mat-button class="general-button" [disabled]="selected == undefined || submitted"
+                                *ngIf="!isLeader" (click)="submit({ article: article })">Verstuur
+                        </button>
+                    </mat-card-content>
 
-                        <mat-card-content *ngIf="gameData?.game.name == 'Botsende Bubbels'">
-                            <p>{{ gameData?.game.description }}</p>
-                            <p *ngIf="!enableAnswer && !gameFinished"><i>Wacht op het onderwerp van de docent.</i></p>
-                            <p *ngIf="gameFinished"><i>Het spel is gestopt door de docent.</i></p>
-                            <p id="receiveQuestion" *ngIf="!gameFinished"></p>
+                    <mat-card-content *ngIf="gameData?.game.name == 'Botsende Bubbels'">
+                        <p>{{ gameData?.game.description }}</p>
+                        <p *ngIf="!enableAnswer && !gameFinished"><i>Wacht op het onderwerp van de docent.</i></p>
+                        <p *ngIf="gameFinished"><i>Het spel is gestopt door de docent.</i></p>
+                        <p id="receiveQuestion" *ngIf="!gameFinished"></p>
 
-                            <div *ngIf="enableAnswer && !gameFinished" class="teammates">
-                                <p>Je mag zoeken op de volgende platformen:</p>
-                                <ul>
-                                    <li *ngFor="let site of allowedSites ">{{ site }}</li>
-                                </ul>
-                            </div>
-                            <mean-answer-form *ngIf="enableAnswer && !gameFinished"></mean-answer-form>
-                        </mat-card-content>
+                        <div *ngIf="enableAnswer && !gameFinished" class="teammates">
+                            <p>Je mag zoeken op de volgende platformen:</p>
+                            <ul>
+                                <li *ngFor="let site of allowedSites ">{{ site }}</li>
+                            </ul>
+                        </div>
+                        <mean-answer-form *ngIf="enableAnswer && !gameFinished"></mean-answer-form>
+                    </mat-card-content>
 
-                        <mat-card-content *ngIf="gameData?.game.name == 'Alternatieve Antwoorden'">
-                            <p>{{ gameData?.game.description }}</p>
-                            <p *ngIf="team != undefined && team.length != 0"> Je zit in een team met:</p>
+                    <mat-card-content *ngIf="gameData?.game.name == 'Alternatieve Antwoorden'">
+                        <p>{{ gameData?.game.description }}</p>
+                        <p *ngIf="team != undefined && team.length != 0"> Je zit in een team met:</p>
 
-                            <div class="teammates">
-                                <ul>
-                                    <li *ngFor="let teamMember of team">
-                                        {{ teamMember.name }}
-                                    </li>
-                                </ul>
-                            </div>
-                            <p><i>Wacht op de vraag van de docent.</i></p>
-                            <mean-answer-form *ngIf="enableAnswer"></mean-answer-form>
-                        </mat-card-content>
+                        <div class="teammates">
+                            <ul>
+                                <li *ngFor="let teamMember of team">
+                                    {{ teamMember.name }}
+                                </li>
+                            </ul>
+                        </div>
+                        <p><i>Wacht op de vraag van de docent.</i></p>
+                        <mean-answer-form *ngIf="enableAnswer"></mean-answer-form>
+                    </mat-card-content>
 
-                        <mat-card-content *ngIf="gameData?.game.name == 'Aanradend Algoritme'">
-                            <p>{{ gameData?.game.description }}</p>
-                        </mat-card-content>
+                    <mat-card-content *ngIf="gameData?.game.name == 'Aanradend Algoritme'">
+                        <p>{{ gameData?.game.description }}</p>
+                    </mat-card-content>
 
-                    </mat-card>
-                </div>
+                </mat-card>
             </div>
+        </div>
         </body>
         <footer class="footer">
             <p> &copy; Utrecht University (ICS)</p>

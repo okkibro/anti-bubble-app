@@ -11,34 +11,38 @@
     <mat-sidenav-content>
         <mean-toolbar (sidenavToggle)="sidenav.toggle()"></mean-toolbar>
         <body>
-            <div class="container-div" fxLayoutGap="10px" fxLayout="row" fxLayout.lt-sm="column" fxLayoutAlign="space-evenly">
-                <mat-card fxFlex=50%>
-                    <mean-avatar-display></mean-avatar-display>
-                </mat-card>
+        <div class="container-div" fxLayoutGap="10px" fxLayout="row" fxLayout.lt-sm="column" fxLayoutAlign="space-evenly">
+            <mat-card fxFlex=50%>
+                <mean-avatar-display></mean-avatar-display>
+            </mat-card>
 
-                <mat-card fxFlex="50%">
-                    <mat-card-header>
-                        <mat-card-title>Avatar Wijzigen</mat-card-title>
-                    </mat-card-header>
-                    <mat-card-content>
-                        <mat-tab-group mat-align-tabs="center" animationDuration="0ms" (selectedTabChange)="tabChange($event)">
-                            <mat-tab *ngFor = "let category of itemCategories" label="{{category}}">
-                                <mat-grid-list [cols]="itemColumns" (window:resize)="onResize($event)">
-                                    <mat-grid-tile *ngFor = "let item of filteredAvatar">
-                                        <mat-card fxFlex="100%" fxLayout="column" fxLayoutGap="10px" class='avatar-item-display'>
-                                            <div fxLayoutAlign="center">
-                                                <img mat-card-image src="{{ item.previewImage }}" alt="{{ item.title }}" (click)="equip(item)"><br>
-                                            </div>
-                                        </mat-card>
-                                    </mat-grid-tile>
-                                </mat-grid-list>
-                            </mat-tab>
-                        </mat-tab-group>
-                        <a mat-button class="general-link" [routerLink]="'/profile'"> <mat-icon>keyboard_backspace</mat-icon> Terug naar profiel </a><br><br>
-                        <a mat-button class="general-link" [routerLink]="'/shop'"> Ga naar winkel <mat-icon>shopping_cart</mat-icon> </a>
-                    </mat-card-content>
-                </mat-card>
-            </div>
+            <mat-card fxFlex="50%">
+                <mat-card-header>
+                    <mat-card-title>Avatar Wijzigen</mat-card-title>
+                </mat-card-header>
+                <mat-card-content>
+                    <mat-tab-group mat-align-tabs="center" animationDuration="0ms" (selectedTabChange)="tabChange($event)">
+                        <mat-tab *ngFor="let category of itemCategories" label="{{category}}">
+                            <mat-grid-list [cols]="itemColumns" (window:resize)="onResize($event)">
+                                <mat-grid-tile *ngFor="let item of filteredAvatar">
+                                    <mat-card fxFlex="100%" fxLayout="column" fxLayoutGap="10px" class='avatar-item-display'>
+                                        <div fxLayoutAlign="center">
+                                            <img mat-card-image src="{{ item.previewImage }}" alt="{{ item.title }}" (click)="equip(item)"><br>
+                                        </div>
+                                    </mat-card>
+                                </mat-grid-tile>
+                            </mat-grid-list>
+                        </mat-tab>
+                    </mat-tab-group>
+                    <a mat-button class="general-link" [routerLink]="'/profile'">
+                        <mat-icon>keyboard_backspace</mat-icon>
+                        Terug naar profiel </a><br><br>
+                    <a mat-button class="general-link" [routerLink]="'/shop'"> Ga naar winkel
+                        <mat-icon>shopping_cart</mat-icon>
+                    </a>
+                </mat-card-content>
+            </mat-card>
+        </div>
         </body>
         <footer class="footer">
             <p> &copy; Utrecht University (ICS)</p>

@@ -6,59 +6,59 @@
 
 <mean-not-logged-in-toolbar></mean-not-logged-in-toolbar>
 <body>
-    <div class="container-div" fxLayoutGap="10px" fxLayout="column" fxLayoutAlign="space-evenly">
-        <mat-card>
-            <mat-card-header>
-                <mat-card-title>Login</mat-card-title>
-            </mat-card-header>
-            <mat-card-content>
-                <form class="login-form" [formGroup]="loginForm" (ngSubmit)="loginUser()">
-                    <table class="general-table">
-                        <tr>
-                            <td>
-                                <mat-form-field>
-                                    <mat-label>Email</mat-label>
-                                    <input matInput placeholder="Email" formControlName="email" type="email" required>
-                                    <mat-error
+<div class="container-div" fxLayoutGap="10px" fxLayout="column" fxLayoutAlign="space-evenly">
+    <mat-card>
+        <mat-card-header>
+            <mat-card-title>Login</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+            <form class="login-form" [formGroup]="loginForm" (ngSubmit)="loginUser()">
+                <table class="general-table">
+                    <tr>
+                        <td>
+                            <mat-form-field>
+                                <mat-label>Email</mat-label>
+                                <input matInput placeholder="Email" formControlName="email" type="email" required>
+                                <mat-error
                                         *ngIf="loginForm.get('email').hasError('email') && !loginForm.get('email').hasError('required')">
-                                        Vul een geldig emailadres in
-                                    </mat-error>
-                                    <mat-error *ngIf="loginForm.get('email').hasError('required')">
-                                        Email is <strong>verplicht</strong>
-                                    </mat-error>
-                                </mat-form-field>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <mat-form-field>
-                                    <mat-label>Wachtwoord</mat-label>
-                                    <input matInput placeholder="Wachtwoord" formControlName="password" type="password" required>
-                                    <mat-error *ngIf="loginForm.get('password').hasError('required')">
-                                        Wachtwoord is <strong>verplicht</strong>
-                                    </mat-error>
-                                </mat-form-field>
-                            </td>
-                        </tr>
-                        <tr>
-                            Velden met een (*) zijn verplicht.
-                        </tr>
-                    </table>
-                    <mat-card-actions>
-                        <button mat-button class="general-button" type="submit" [disabled]="!loginForm.valid" color="primary">Login</button>
-                    </mat-card-actions>
-                </form>
-            </mat-card-content>
-            <mat-divider></mat-divider>
-            <mat-card-actions>
-                <a mat-button class="general-link" [routerLink]="'/passwordrecovery'">Wachtwoord vergeten?</a>
-            </mat-card-actions>
-            <mat-divider></mat-divider>
-            <mat-card-actions>
-                <a mat-button class="general-link" [routerLink]="'/register'">Maak een account</a>
-            </mat-card-actions>
-        </mat-card>
-    </div>
+                                    Vul een geldig emailadres in
+                                </mat-error>
+                                <mat-error *ngIf="loginForm.get('email').hasError('required')">
+                                    Email is <strong>verplicht</strong>
+                                </mat-error>
+                            </mat-form-field>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <mat-form-field>
+                                <mat-label>Wachtwoord</mat-label>
+                                <input matInput placeholder="Wachtwoord" formControlName="password" type="password" required>
+                                <mat-error *ngIf="loginForm.get('password').hasError('required')">
+                                    Wachtwoord is <strong>verplicht</strong>
+                                </mat-error>
+                            </mat-form-field>
+                        </td>
+                    </tr>
+                    <tr>
+                        Velden met een (*) zijn verplicht.
+                    </tr>
+                </table>
+                <mat-card-actions>
+                    <button mat-button class="general-button" type="submit" [disabled]="!loginForm.valid" color="primary">Login</button>
+                </mat-card-actions>
+            </form>
+        </mat-card-content>
+        <mat-divider></mat-divider>
+        <mat-card-actions>
+            <a mat-button class="general-link" [routerLink]="'/passwordrecovery'">Wachtwoord vergeten?</a>
+        </mat-card-actions>
+        <mat-divider></mat-divider>
+        <mat-card-actions>
+            <a mat-button class="general-link" [routerLink]="'/register'">Maak een account</a>
+        </mat-card-actions>
+    </mat-card>
+</div>
 </body>
 <footer class="footer">
     <p> &copy; Utrecht University (ICS)</p>

@@ -13,70 +13,70 @@ const jwt = require('express-jwt');
 
 // Small constant for authentication.
 const auth = jwt({
-    secret: process.env.MY_SECRET,
-    userProperty: 'payload'
+	secret: process.env.MY_SECRET,
+	userProperty: 'payload'
 });
 
 /** GET method to get shop items from the database based on a query. */
 router.get('/', (req, res) => {
-    Shops.find({ category: req.headers.id.toLowerCase() }, (err, shop) => {
-            return res.status(200).json(shop);
-        });
+	Shops.find({ category: req.headers.id.toLowerCase() }, (err, shop) => {
+		return res.status(200).json(shop);
+	});
 });
 
 router.get('/getBaseInventory', auth, (req, res) => {
-    // Check if user is authorized to perform the action.
-    if (!req.payload._id) {
-        return res.status(401).json({ message: 'UnauthorizedError: unauthorized action' });
-    } else {
-        Shops.find({ initial: true }, (err, shop) => {
-            return res.status(200).json(shop);
-        });
-    }
+	// Check if user is authorized to perform the action.
+	if (!req.payload._id) {
+		return res.status(401).json({ message: 'UnauthorizedError: unauthorized action' });
+	} else {
+		Shops.find({ initial: true }, (err, shop) => {
+			return res.status(200).json(shop);
+		});
+	}
 });
 
 router.post('/buy', auth, (req, res) => {
 
-    // Check if user is authorized to perform the action.
-    if (!req.payload._id) {
-        return res.status(401).json({ message: 'UnauthorizedError: unauthorized action' });
-    } else {
+	// Check if user is authorized to perform the action.
+	if (!req.payload._id) {
+		return res.status(401).json({ message: 'UnauthorizedError: unauthorized action' });
+	} else {
 
-        // Get the logged in user.
-        Users.findById(req.payload._id, (err, user) => {
+		// Get the logged in user.
+		Users.findById(req.payload._id, (err, user) => {
 
-            // Check if the user has enough money and hasnt bought the item yet.
-            if (user.currency >= req.body.item.price && user.inventory.find(x => x._id === req.body.item._id) == null) {
+			// Check if the user has enough money and hasnt bought the item yet.
+			if (user.currency >= req.body.item.price && user.inventory.find(x => x._id === req.body.item._id) == null) {
 
-                // Add item to inventory.
-                user.inventory.push(req.body.item);
+				// Add item to inventory.
+				user.inventory.push(req.body.item);
 
-                // Pay the money.
-                user.currency -= req.body.item.price;
-                user.markModified('inventory');
-                user.save();
+				// Pay the money.
+				user.currency -= req.body.item.price;
+				user.markModified('inventory');
+				user.save();
 
-                // Show succes message.
-                return res.status(200).json({
-                    succes: true,
-                    message: `Je hebt ${req.body.item.title} succesvol gekocht!`
-                });
-            } else {
-                if (user.currency < req.body.item.price) {
+				// Show succes message.
+				return res.status(200).json({
+					succes: true,
+					message: `Je hebt ${req.body.item.title} succesvol gekocht!`
+				});
+			} else {
+				if (user.currency < req.body.item.price) {
 
-                    // If not enough money, show appropriate message.
-                    return res.status(200).json({
-                        succes: false,
-                        message: `Je hebt niet genoeg geld om ${req.body.item.title} te kopen`
-                    });
-                } else {
+					// If not enough money, show appropriate message.
+					return res.status(200).json({
+						succes: false,
+						message: `Je hebt niet genoeg geld om ${req.body.item.title} te kopen`
+					});
+				} else {
 
-                    // Else show message that item has already been bought.
-                    return res.status(200).json({ succes: false, message: `Je hebt ${req.body.item.title} al gekocht`});
-                }
-            }
-        });
-    }
+					// Else show message that item has already been bought.
+					return res.status(200).json({ succes: false, message: `Je hebt ${req.body.item.title} al gekocht` });
+				}
+			}
+		});
+	}
 });
 
 module.exports = router;

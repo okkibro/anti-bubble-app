@@ -16,55 +16,56 @@ import { environment } from '../../../environments/environment';
 import { UserService } from '../../services/user.service';
 
 @Component({
-    selector: 'mean-profile',
-    templateUrl: './profile.component.html',
-    styleUrls: ['./profile.component.css',
-        '../../shared/general-styles.css']
+	selector: 'mean-profile',
+	templateUrl: './profile.component.html',
+	styleUrls: ['./profile.component.css',
+		'../../shared/general-styles.css']
 })
 
 export class ProfileComponent implements OnInit {
-    userDetails: User;
-    milestoneShown: Milestone;
-    userClassTitle: string;
+	userDetails: User;
+	milestoneShown: Milestone;
+	userClassTitle: string;
 
-    constructor(
-        private snackBar: MatSnackBar,
-        private classService: ClassesService,
-        private router: Router,
-        private titleService: Title,
-        private userService: UserService
-    ) { }
+	constructor(
+		private snackBar: MatSnackBar,
+		private classService: ClassesService,
+		private router: Router,
+		private titleService: Title,
+		private userService: UserService
+	) { }
 
-    ngOnInit() {
 
-        // Milestone that gets shown when you have all badges.
-        this.milestoneShown = {
-            name: 'Gefeliciteerd',
-            description: 'Je hebt alle badges gehaald',
-            index: 0,
-            maxValue: 0
-        }
+	ngOnInit() {
 
-        // Get user's class
-        this.classService.getClass().subscribe((data) => {
-            if (data.succes) {
-                this.userClassTitle = data.class.title;
-            }
-        });
+		// Milestone that gets shown when you have all badges.
+		this.milestoneShown = {
+			name: 'Gefeliciteerd',
+			description: 'Je hebt alle badges gehaald',
+			index: 0,
+			maxValue: 0
+		};
 
-        this.userService.profile().subscribe(user => {
-            this.userDetails = user;
+		// Get user's class
+		this.classService.getClass().subscribe((data) => {
+			if (data.succes) {
+				this.userClassTitle = data.class.title;
+			}
+		});
 
-            // Loop over all milestones and find the one with the most progress that the user didnt complete yet.
-            for (let i = 0; i < milestones.length; i++) {
-                if (user.milestones[i] != milestones[i].maxValue && user.milestones[i] >= user.milestones[this.milestoneShown.index]) {
-                    this.milestoneShown = milestones[i];
-                }
-            }
-        }, (err) => {
-            console.error(err);
-        });
+		this.userService.profile().subscribe(user => {
+			this.userDetails = user;
 
-        this.titleService.setTitle('Profiel' + environment.TITLE_TRAIL);
-    }
+			// Loop over all milestones and find the one with the most progress that the user didnt complete yet.
+			for (let i = 0; i < milestones.length; i++) {
+				if (user.milestones[i] != milestones[i].maxValue && user.milestones[i] >= user.milestones[this.milestoneShown.index]) {
+					this.milestoneShown = milestones[i];
+				}
+			}
+		}, (err) => {
+			console.error(err);
+		});
+
+		this.titleService.setTitle('Profiel' + environment.TITLE_TRAIL);
+	}
 }

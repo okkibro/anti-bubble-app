@@ -14,42 +14,44 @@ import { Title } from '@angular/platform-browser';
 import { environment } from '../../../environments/environment';
 
 @Component({
-    selector: 'mean-login',
-    templateUrl: './login.component.html',
-    styleUrls: ['./login.component.css',
-        '../../shared/general-styles.css']
+	selector: 'mean-login',
+	templateUrl: './login.component.html',
+	styleUrls: ['./login.component.css',
+		'../../shared/general-styles.css']
 })
 
 export class LoginComponent implements OnInit {
-    loginForm = this.fb.group({email: ['', [Validators.required, Validators.email]],
-        password: ['', Validators.required],
-    });
+	loginForm = this.fb.group({
+		email: ['', [Validators.required, Validators.email]],
+		password: ['', Validators.required]
+	});
 
-    constructor(
-        private auth: AuthenticationService,
-        private router: Router,
-        private fb: FormBuilder,
-        private snackBar: MatSnackBar,
-        private titleService: Title
-    ) { }
+	constructor(
+		private auth: AuthenticationService,
+		private router: Router,
+		private fb: FormBuilder,
+		private snackBar: MatSnackBar,
+		private titleService: Title
+	) { }
 
-    ngOnInit() {
-        if (this.auth.isLoggedIn()) {
-            this.router.navigate(['home']);
-        }
 
-        this.titleService.setTitle('Login' + environment.TITLE_TRAIL);
-    }
+	ngOnInit() {
+		if (this.auth.isLoggedIn()) {
+			this.router.navigate(['home']);
+		}
 
-    /** Method to login. */
-    loginUser() {
-        let user = new User();
-        user.email = this.loginForm.get('email').value;
-        user.password = this.loginForm.get('password').value;
-        this.auth.login(user).subscribe(() => {
-            this.router.navigate(['home']);
-        }, () => {
-            this.snackBar.open('Onjuist wachtwoord of email.', 'X', { duration: 2500, panelClass: ['style-error'] });
-        });
-    }
+		this.titleService.setTitle('Login' + environment.TITLE_TRAIL);
+	}
+
+	/** Method to login. */
+	loginUser() {
+		let user = new User();
+		user.email = this.loginForm.get('email').value;
+		user.password = this.loginForm.get('password').value;
+		this.auth.login(user).subscribe(() => {
+			this.router.navigate(['home']);
+		}, () => {
+			this.snackBar.open('Onjuist wachtwoord of email.', 'X', { duration: 2500, panelClass: ['style-error'] });
+		});
+	}
 }

@@ -22,39 +22,40 @@ import { MatGridListModule } from '@angular/material/grid-list';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
 
 @NgModule({
-    imports: [
-        CommonModule,
-        MatToolbarModule,
-        MatButtonModule,
-        MatCardModule,
-        MatInputModule,
-        MatDialogModule,
-        MatTableModule,
-        MatMenuModule,
-        MatIconModule,
-        MatProgressSpinnerModule,
-        MatExpansionModule,
-        MatSnackBarModule,
-        MatRadioModule,
-        MatGridListModule,
-        MatButtonToggleModule,
-    ],
-    exports: [
-        CommonModule,
-        MatToolbarModule,
-        MatButtonModule,
-        MatCardModule,
-        MatInputModule,
-        MatDialogModule,
-        MatTableModule,
-        MatMenuModule,
-        MatIconModule,
-        MatProgressSpinnerModule,
-        MatExpansionModule,
-        MatSnackBarModule,
-        MatRadioModule,
-        MatGridListModule,
-        MatButtonToggleModule,
-    ],
+	imports: [
+		CommonModule,
+		MatToolbarModule,
+		MatButtonModule,
+		MatCardModule,
+		MatInputModule,
+		MatDialogModule,
+		MatTableModule,
+		MatMenuModule,
+		MatIconModule,
+		MatProgressSpinnerModule,
+		MatExpansionModule,
+		MatSnackBarModule,
+		MatRadioModule,
+		MatGridListModule,
+		MatButtonToggleModule
+	],
+	exports: [
+		CommonModule,
+		MatToolbarModule,
+		MatButtonModule,
+		MatCardModule,
+		MatInputModule,
+		MatDialogModule,
+		MatTableModule,
+		MatMenuModule,
+		MatIconModule,
+		MatProgressSpinnerModule,
+		MatExpansionModule,
+		MatSnackBarModule,
+		MatRadioModule,
+		MatGridListModule,
+		MatButtonToggleModule
+	]
 })
-export class CustomMaterialModule { }
+export class CustomMaterialModule {
+}

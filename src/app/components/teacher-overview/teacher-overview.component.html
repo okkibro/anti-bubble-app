@@ -11,90 +11,98 @@
     <mat-sidenav-content>
         <mean-toolbar (sidenavToggle)="sidenav.toggle()"></mean-toolbar>
         <body>
-            <div class="container-div" fxLayoutGap="10px" fxLayout="column">
-                <mat-card>
-                    <mat-card-header>
-                        <mat-card-title>Klas overzicht</mat-card-title>
-                        <mat-card-subtitle *ngIf="currentClass">
-                            Overzicht van alle spelers van klas {{ currentClass?.title }}, code: {{ currentClass?.code }}.
-                        </mat-card-subtitle>
-                    </mat-card-header>
-                    <mat-card-content>
-                        <table *ngIf="currentClass?.students?.length > 0" class="general-table">
-                            <tr>
-                                <th>Naam</th>
-                                <th></th>
-                                <th></th>
-                            </tr>
-                            <tr *ngFor="let classmate of classmates">
-                                <td>{{ classmate.firstName }}</td>
-                                <td><a mat-button class="general-link" [routerLink]="'/classmate-profile/' + classmate._id">Bekijk Profiel</a></td>
-                                <td><button mat-button class="general-nope-button" id="remove-student-button" (click)="openRemoveFromClassDialog(classmate)"></button></td>
-                            </tr>
-                        </table>
-                        <p *ngIf="currentClass?.students?.length == 0 && currentClass != undefined">De klas heeft nog geen leerlingen</p>
-                        <p *ngIf="currentClass == undefined">Je hebt nog geen klas aangemaakt. Dit kan je hieronder doen.</p>
-                    </mat-card-content>
-                </mat-card>
+        <div class="container-div" fxLayoutGap="10px" fxLayout="column">
+            <mat-card>
+                <mat-card-header>
+                    <mat-card-title>Klas overzicht</mat-card-title>
+                    <mat-card-subtitle *ngIf="currentClass">
+                        Overzicht van alle spelers van klas {{ currentClass?.title }}, code: {{ currentClass?.code }}.
+                    </mat-card-subtitle>
+                </mat-card-header>
+                <mat-card-content>
+                    <table *ngIf="currentClass?.students?.length > 0" class="general-table">
+                        <tr>
+                            <th>Naam</th>
+                            <th></th>
+                            <th></th>
+                        </tr>
+                        <tr *ngFor="let classmate of classmates">
+                            <td>{{ classmate.firstName }}</td>
+                            <td><a mat-button class="general-link" [routerLink]="'/classmate-profile/' + classmate._id">Bekijk Profiel</a></td>
+                            <td>
+                                <button mat-button class="general-nope-button" id="remove-student-button" (click)="openRemoveFromClassDialog(classmate)"></button>
+                            </td>
+                        </tr>
+                    </table>
+                    <p *ngIf="currentClass?.students?.length == 0 && currentClass != undefined">De klas heeft nog geen leerlingen</p>
+                    <p *ngIf="currentClass == undefined">Je hebt nog geen klas aangemaakt. Dit kan je hieronder doen.</p>
+                </mat-card-content>
+            </mat-card>
 
-                <mat-card *ngIf="userDetails?.classArray.length > 0">
-                    <mat-form-field appearance="fill" id="class-select">
+            <mat-card *ngIf="userDetails?.classArray.length > 0">
+                <mat-form-field appearance="fill" id="class-select">
                     <mat-label>Selecteer klas</mat-label>
-                        <mat-select>
-                            <mat-option *ngFor="let klas of classes" [value]="klas.title" (click)="switchClass(klas.id)">{{ klas.title }}</mat-option>
-                        </mat-select>
-                    </mat-form-field>
-                </mat-card>
+                    <mat-select>
+                        <mat-option *ngFor="let klas of classes" [value]="klas.title" (click)="switchClass(klas.id)">{{ klas.title }}</mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </mat-card>
 
-                <mat-card>
-                    <button class="general-button" mat-button (click)="onClickOpenForm()">Maak een nieuwe klas aan</button>
-                    <form [hidden]="!openform" [formGroup]="classForm" (ngSubmit)="createClass()">
-                        <table class="general-table">
-                            <tr>
-                                <td>
-                                    <mat-form-field>
-                                        <mat-label>Klassennaam</mat-label>
-                                        <input matInput placeholder="Klassennaam" formControlName="classTitle" required>
-                                        <mat-error *ngIf="classForm.get('classTitle').hasError('required')">
-                                            Klassennaam is <strong>verplicht</strong>
-                                        </mat-error>
-                                    </mat-form-field>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <mat-label>Niveau *</mat-label>
-                                    <mat-radio-group class="radio-group" formControlName="classLevel" required>
-                                        <mat-radio-button class="radio-button" value="VMBO" color="primary" [disabled]="classForm.get('classYear').value == 5 || classForm.get('classYear').value == 6">VMBO</mat-radio-button>
-                                        <mat-radio-button class="radio-button" value="HAVO" color="primary" [disabled]="classForm.get('classYear').value == 6">HAVO</mat-radio-button>
-                                        <mat-radio-button class="radio-button" value="VWO" color="primary">VWO</mat-radio-button>
-                                    </mat-radio-group>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <mat-label>Jaar *</mat-label>
-                                    <mat-radio-group class="radio-group" formControlName="classYear" required>
-                                        <mat-radio-button class="radio-button" value="1" color="primary">1</mat-radio-button>
-                                        <mat-radio-button class="radio-button" value="2" color="primary">2</mat-radio-button>
-                                        <mat-radio-button class="radio-button" value="3" color="primary">3</mat-radio-button>
-                                        <mat-radio-button class="radio-button" value="4" color="primary">4</mat-radio-button>
-                                        <mat-radio-button class="radio-button" value="5" color="primary" [disabled]="classForm.get('classLevel').value == 'VMBO'">5</mat-radio-button>
-                                        <mat-radio-button class="radio-button" value="6" color="primary" [disabled]="classForm.get('classLevel').value == 'VMBO' || classForm.get('classLevel').value == 'HAVO'">6</mat-radio-button>
-                                    </mat-radio-group>
-                                </td>
-                            </tr>
-                        </table>
-                        <mat-card-actions>
-                            <button class="general-button" mat-button type="submit" [disabled]="!classForm.valid">Aanmaken</button>
-                        </mat-card-actions>
-                    </form>
-                </mat-card>
+            <mat-card>
+                <button class="general-button" mat-button (click)="onClickOpenForm()">Maak een nieuwe klas aan</button>
+                <form [hidden]="!openform" [formGroup]="classForm" (ngSubmit)="createClass()">
+                    <table class="general-table">
+                        <tr>
+                            <td>
+                                <mat-form-field>
+                                    <mat-label>Klassennaam</mat-label>
+                                    <input matInput placeholder="Klassennaam" formControlName="classTitle" required>
+                                    <mat-error *ngIf="classForm.get('classTitle').hasError('required')">
+                                        Klassennaam is <strong>verplicht</strong>
+                                    </mat-error>
+                                </mat-form-field>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <mat-label>Niveau *</mat-label>
+                                <mat-radio-group class="radio-group" formControlName="classLevel" required>
+                                    <mat-radio-button class="radio-button" value="VMBO" color="primary"
+                                                      [disabled]="classForm.get('classYear').value == 5 || classForm.get('classYear').value == 6">VMBO
+                                    </mat-radio-button>
+                                    <mat-radio-button class="radio-button" value="HAVO" color="primary" [disabled]="classForm.get('classYear').value == 6">HAVO
+                                    </mat-radio-button>
+                                    <mat-radio-button class="radio-button" value="VWO" color="primary">VWO</mat-radio-button>
+                                </mat-radio-group>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <mat-label>Jaar *</mat-label>
+                                <mat-radio-group class="radio-group" formControlName="classYear" required>
+                                    <mat-radio-button class="radio-button" value="1" color="primary">1</mat-radio-button>
+                                    <mat-radio-button class="radio-button" value="2" color="primary">2</mat-radio-button>
+                                    <mat-radio-button class="radio-button" value="3" color="primary">3</mat-radio-button>
+                                    <mat-radio-button class="radio-button" value="4" color="primary">4</mat-radio-button>
+                                    <mat-radio-button class="radio-button" value="5" color="primary" [disabled]="classForm.get('classLevel').value == 'VMBO'">5
+                                    </mat-radio-button>
+                                    <mat-radio-button class="radio-button" value="6" color="primary"
+                                                      [disabled]="classForm.get('classLevel').value == 'VMBO' || classForm.get('classLevel').value == 'HAVO'">6
+                                    </mat-radio-button>
+                                </mat-radio-group>
+                            </td>
+                        </tr>
+                    </table>
+                    <mat-card-actions>
+                        <button class="general-button" mat-button type="submit" [disabled]="!classForm.valid">Aanmaken</button>
+                    </mat-card-actions>
+                </form>
+            </mat-card>
 
-                <mat-card *ngIf="userDetails?.classArray.length > 0">
-                    <button mat-button class="general-nope-button" (click)="openDeleteClassDialog()">Verwijder huidige klas</button>
-                </mat-card>
-            </div>
+            <mat-card *ngIf="userDetails?.classArray.length > 0">
+                <button mat-button class="general-nope-button" (click)="openDeleteClassDialog()">Verwijder huidige klas</button>
+            </mat-card>
+        </div>
         </body>
         <footer class="footer">
             <p> &copy; Utrecht University (ICS)</p>

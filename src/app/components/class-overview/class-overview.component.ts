@@ -16,99 +16,101 @@ import { environment } from 'src/environments/environment';
 import { UserService } from '../../services/user.service';
 
 @Component({
-    selector: 'mean-class-overview',
-    templateUrl: './class-overview.component.html',
-    styleUrls: ['./class-overview.component.css',
-        '../../shared/general-styles.css']
+	selector: 'mean-class-overview',
+	templateUrl: './class-overview.component.html',
+	styleUrls: ['./class-overview.component.css',
+		'../../shared/general-styles.css']
 })
 
 export class ClassOverviewComponent implements OnInit {
-    searchForm = this.fb.group({
-        query: ['', []]
-    });
+	searchForm = this.fb.group({
+		query: ['', []]
+	});
 
-    classmates: User[];
-    userClass;
-    userDetails: User;
+	classmates: User[];
+	userClass;
+	userDetails: User;
 
-    constructor(
-        private classService: ClassesService,
-        private router: Router,
-        private fb: FormBuilder,
-        private dialog: MatDialog,
-        private titleService: Title,
-        private userService: UserService
-    ) { }
+	constructor(
+		private classService: ClassesService,
+		private router: Router,
+		private fb: FormBuilder,
+		private dialog: MatDialog,
+		private titleService: Title,
+		private userService: UserService
+	) { }
 
-    ngOnInit() {
-        this.userService.profile().subscribe(user => {
-            this.userDetails = user;
-        });
 
-        this.classService.getClass().subscribe((data) => {
-            if (data.succes) {
-                this.userClass = data.class;
-                this.classmates = data.classmates;
-            }
-        });
+	ngOnInit() {
+		this.userService.profile().subscribe(user => {
+			this.userDetails = user;
+		});
 
-        this.titleService.setTitle('Klas overzicht' + environment.TITLE_TRAIL);
-    }
+		this.classService.getClass().subscribe((data) => {
+			if (data.succes) {
+				this.userClass = data.class;
+				this.classmates = data.classmates;
+			}
+		});
 
-    /** Method to filter the students in a class. */
-    search() {
-        let query: string = this.searchForm.get('query').value.toLowerCase();
-        let table = document.getElementById('table').childNodes;
-        for (let i: number = 0; i < this.classmates.length; i++) {
-            if (this.classmates[i].firstName.toLowerCase().includes(query) || this.classmates[i].lastName.toLowerCase().includes(query)) {
-                (table[i + 1] as HTMLElement).style.display = '';
-            } else {
-                (table[i + 1] as HTMLElement).style.display = 'none';
-            }
-        }
-    }
+		this.titleService.setTitle('Klas overzicht' + environment.TITLE_TRAIL);
+	}
 
-    /** Method to clear the filter so all students are displayed again. */
-    clear() {
-        this.searchForm.get('query').setValue('');
-        let table = document.getElementById('table').childNodes;
-        for (let i: number = 0; i < this.classmates.length; i++) {
-            (table[i + 1] as HTMLElement).style.display = '';
-        }
-    }
+	/** Method to filter the students in a class. */
+	search() {
+		let query: string = this.searchForm.get('query').value.toLowerCase();
+		let table = document.getElementById('table').childNodes;
+		for (let i: number = 0; i < this.classmates.length; i++) {
+			if (this.classmates[i].firstName.toLowerCase().includes(query) || this.classmates[i].lastName.toLowerCase().includes(query)) {
+				(table[i + 1] as HTMLElement).style.display = '';
+			} else {
+				(table[i + 1] as HTMLElement).style.display = 'none';
+			}
+		}
+	}
 
-    /** Method that opens the leave class dialog. */
-    openLeaveClassDialog() {
-        this.dialog.open(LeaveClassDialog, { data: { userId: this.userDetails._id, classId: this.userClass._id, classTitle: this.userClass.title, leaving: true }});
-    }
+	/** Method to clear the filter so all students are displayed again. */
+	clear() {
+		this.searchForm.get('query').setValue('');
+		let table = document.getElementById('table').childNodes;
+		for (let i: number = 0; i < this.classmates.length; i++) {
+			(table[i + 1] as HTMLElement).style.display = '';
+		}
+	}
+
+	/** Method that opens the leave class dialog. */
+	openLeaveClassDialog() {
+		this.dialog.open(LeaveClassDialog, { data: { userId: this.userDetails._id, classId: this.userClass._id, classTitle: this.userClass.title, leaving: true }});
+	}
 }
 
 @Component({
-    selector: 'leave-class-dialog',
-    templateUrl: 'leave-class-dialog.html',
+	selector: 'leave-class-dialog',
+	templateUrl: 'leave-class-dialog.html'
 })
 
 export class LeaveClassDialog {
 
-    constructor(
-        private classService: ClassesService,
-        private dialog: MatDialog,
-        private dialogRef: MatDialogRef<LeaveClassDialog>,
-        private snackBar: MatSnackBar,
-        @Inject(MAT_DIALOG_DATA) public data: any
-    ) { }
+	constructor(
+		private classService: ClassesService,
+		private dialog: MatDialog,
+		private dialogRef: MatDialogRef<LeaveClassDialog>,
+		private snackBar: MatSnackBar,
+		@Inject(MAT_DIALOG_DATA) public data: any
+	) { }
 
-    /** Method to leave your class. */
-    leaveClass() {
-        this.classService.leaveClass(this.data.userId, this.data.classId, this.data.leaving).subscribe(data => {
-            if (data.succes) {
-                this.dialogRef.close();
-                this.snackBar.open(data.message, 'X', { duration: 2500, panelClass: ['style-succes']}).afterDismissed().subscribe(() => {
-                    window.location.reload();
-                });
-            } else {
-                this.snackBar.open('Er is iets fout gegaan, probeer het later opnieuw.', 'X', { duration: 2500, panelClass: ['style-error']});
-            }
-        })
-    }
+
+	/** Method to leave your class. */
+	leaveClass() {
+		this.classService.leaveClass(this.data.userId, this.data.classId, this.data.leaving).subscribe(data => {
+			if (data.succes) {
+				this.dialogRef.close();
+				this.snackBar.open(data.message, 'X', { duration: 2500, panelClass: ['style-succes'] }).afterDismissed().subscribe(() => {
+					window.location.reload();
+				});
+			} else {
+				this.snackBar.open('Er is iets fout gegaan, probeer het later opnieuw.', 'X', { duration: 2500, panelClass: ['style-error'] });
+			}
+		});
+	}
 }

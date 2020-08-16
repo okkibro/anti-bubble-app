@@ -15,7 +15,7 @@ const Classes = mongoose.model('classes');
 // Small constant for authentication.
 const auth = jwt({
 	secret: process.env.MY_SECRET,
-	userProperty: 'payload',
+	userProperty: 'payload'
 });
 
 /** POST method to create a new class in the database. */
@@ -60,7 +60,11 @@ router.post('/joinClass', auth, (req, res) => {
 
 					// Check the code corresponds with an existing.
 					if (!foundClass) {
-						return res.status(200).json({ succes: false, message: 'Geen klas gevonden met de gegeven code, controleer de code en probeer het opnieuw.', err: err });
+						return res.status(200).json({
+							succes: false,
+							message: 'Geen klas gevonden met de gegeven code, controleer de code en probeer het opnieuw.',
+							err: err
+						});
 					} else {
 
 						// Check if your role is a student. (students can only be in one class!).
@@ -206,7 +210,7 @@ router.get('/classmateProfile/:id', auth, (req, res) => {
 							let userId = user.classArray[0]._id.toString();
 							let classmateId = classmate.classArray[0]._id.toString();
 							if (userId !== classmateId) {
-								return res.status(401).json({ message: "Not authorized to see user's profile" });
+								return res.status(401).json({ message: 'Not authorized to see user\'s profile' });
 							} else {
 								return res.status(200).json(classmate);
 							}
@@ -214,11 +218,11 @@ router.get('/classmateProfile/:id', auth, (req, res) => {
 							return res.status(200).json(classmate);
 						}
 					} else {
-						return res.status(404).json({ message: "Classmate's profile not found" });
+						return res.status(404).json({ message: 'Classmate\'s profile not found' });
 					}
 				});
 			} else {
-				return res.status(404).json({ message: "User's profile not found" });
+				return res.status(404).json({ message: 'User\'s profile not found' });
 			}
 		});
 	}
@@ -237,14 +241,14 @@ router.delete('/deleteClass/:id', auth, (req, res) => {
 
 			// If we found a class in the database with said id delete it and continue.
 			if (!err && klas != null) {
-				Classes.findByIdAndDelete({_id: klas._id}).exec();
+				Classes.findByIdAndDelete({ _id: klas._id }).exec();
 
 				// Update 'classArray' of all users that were apart of the class so they will not be members of a deleted class.
 				// We don't check for length of 'students' array since the class will always have atleast 1 memmber, namely the teacher.
 				Users.find({ 'classArray._id': klas._id }, (err, classMembers) => {
 					if (!err && classMembers != null) {
 						for (let classMember of classMembers) {
-							Users.findByIdAndUpdate({ _id: classMember._id }, { $pull: { classArray: { _id: klas._id }}}).exec();
+							Users.findByIdAndUpdate({ _id: classMember._id }, { $pull: { classArray: { _id: klas._id } } }).exec();
 							classMember.save();
 						}
 					} else {
@@ -271,12 +275,12 @@ router.patch('/leaveClass', auth, (req, res) => {
 		Users.findById(req.body.userId, (err, user) => {
 			Classes.findById(req.body.classId, (err, klas) => {
 				if (!err && user != null && klas != null) {
-					Users.findByIdAndUpdate({_id: user._id}, {$pull: {classArray: {_id: req.body.classId}}}).exec();
+					Users.findByIdAndUpdate({ _id: user._id }, { $pull: { classArray: { _id: req.body.classId } } }).exec();
 					user.save();
-					Classes.findByIdAndUpdate({_id: klas._id}, {$pull: {students: {_id: req.body.userId}}}).exec();
+					Classes.findByIdAndUpdate({ _id: klas._id }, { $pull: { students: { _id: req.body.userId } } }).exec();
 					klas.save();
 				} else {
-					return res.status(404).json({succes: false, message: err});
+					return res.status(404).json({ succes: false, message: err });
 				}
 			});
 		});

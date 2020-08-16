@@ -37,7 +37,7 @@ function runIO(io) {
 					} else {
 
 						// Add player to the list of players.
-						players.addPlayer(hostId, socket.id, `${params.player.firstName} ${params.player.lastName}`, { }, params.player.email);
+						players.addPlayer(hostId, socket.id, `${params.player.firstName} ${params.player.lastName}`, {}, params.player.email);
 
 						// Player socket joins game room.
 						socket.join(parseInt(params.pin));
@@ -104,7 +104,6 @@ function runIO(io) {
 					// Gets the pin of the game.
 					let pin = game.pin;
 
-
 					//Removes player from players class.
 					players.removePlayer(socket.id);
 
@@ -123,7 +122,6 @@ function runIO(io) {
 
 			// Finding game with socket.id.
 			let game = games.getGame(socket.id);
-
 
 			// If a game hosted by that id is found, the socket disconnected is a host.
 			if (game) {
@@ -203,7 +201,7 @@ function runIO(io) {
 			let articleList = [];
 			let leaders = [];
 			let sources = [];
-			let subjects = []
+			let subjects = [];
 
 			// Get all the players in the current game.
 			let playersInGame = players.getPlayers(socket.id);
@@ -221,7 +219,7 @@ function runIO(io) {
 				while (playersInGame.length > 0) {
 					pairs[pairsIndex] = [];
 					articleList[pairsIndex] = [];
-					parts = articles.filter(x => x.articlenr === pairsIndex)
+					parts = articles.filter(x => x.articlenr === pairsIndex);
 					for (let a = 0; a < groupSize; a++) {
 						let player = playersInGame.shift();
 						pairs[pairsIndex].push(player);
@@ -247,12 +245,12 @@ function runIO(io) {
 					pairs[i] = [];
 					for (let j = 0; j < groups[i].length; j++) {
 						pairs[i].push(playersInGame.find(x => {
-							return x.email === groups[i][j].email
+							return x.email === groups[i][j].email;
 						}));
 					}
 				}
 			}
-			
+
 			socket.emit('send-pairs', pairs, leaders, sources, subjects);
 
 			for (let i = 0; i < pairs.length; i++) {

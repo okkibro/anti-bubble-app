@@ -13,39 +13,40 @@ import { environment } from '../../../environments/environment';
 import { Title } from '@angular/platform-browser';
 
 @Component({
-    selector: 'mean-classmate-profile',
-    templateUrl: './classmate-profile.component.html',
-    styleUrls: ['./classmate-profile.component.css',
-        '../../shared/general-styles.css']
+	selector: 'mean-classmate-profile',
+	templateUrl: './classmate-profile.component.html',
+	styleUrls: ['./classmate-profile.component.css',
+		'../../shared/general-styles.css']
 })
 
 export class ClassmateProfileComponent implements OnInit {
-    classmate: User;
-    classmateClassTitle: string;
+	classmate: User;
+	classmateClassTitle: string;
 
-    constructor(
-        private classService: ClassesService,
-        private auth: AuthenticationService,
-        private route: ActivatedRoute,
-        private router: Router,
-        private titleService: Title
-    ) { }
+	constructor(
+		private classService: ClassesService,
+		private auth: AuthenticationService,
+		private route: ActivatedRoute,
+		private router: Router,
+		private titleService: Title
+	) { }
 
-    ngOnInit() {
-        this.classService.classmateProfile(this.route.snapshot.paramMap.get('id')).subscribe(classmate => {
-            this.classmate = classmate;
 
-            // Get classmate's class
-            this.classService.getClass().subscribe((data) => {
-                if (data.succes) {
-                    this.classmateClassTitle = data.class.title;
-                }
-            });
-        }, (err) => {
-            console.error(err);
-            this.router.navigate(['/home']);
-        });
+	ngOnInit() {
+		this.classService.classmateProfile(this.route.snapshot.paramMap.get('id')).subscribe(classmate => {
+			this.classmate = classmate;
 
-        this.titleService.setTitle('Klasgenoot profiel' + environment.TITLE_TRAIL);
-    }
+			// Get classmate's class
+			this.classService.getClass().subscribe((data) => {
+				if (data.succes) {
+					this.classmateClassTitle = data.class.title;
+				}
+			});
+		}, (err) => {
+			console.error(err);
+			this.router.navigate(['/home']);
+		});
+
+		this.titleService.setTitle('Klasgenoot profiel' + environment.TITLE_TRAIL);
+	}
 }

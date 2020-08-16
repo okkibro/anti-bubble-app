@@ -5,6 +5,6 @@
  */
 
 export enum Role {
-    teacher = 'teacher',
-    student = 'student'
+	teacher = 'teacher',
+	student = 'student'
 }

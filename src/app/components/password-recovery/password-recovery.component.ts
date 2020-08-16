@@ -13,42 +13,43 @@ import { Title } from '@angular/platform-browser';
 import { environment } from '../../../environments/environment';
 
 @Component({
-    selector: 'mean-password-recovery',
-    templateUrl: './password-recovery.component.html',
-    styleUrls: ['./password-recovery.component.css',
-        '../../shared/general-styles.css']
+	selector: 'mean-password-recovery',
+	templateUrl: './password-recovery.component.html',
+	styleUrls: ['./password-recovery.component.css',
+		'../../shared/general-styles.css']
 })
 
 export class PasswordRecoveryComponent implements OnInit {
-    passwordRecoveryForm = this.fb.group({
-        email: ['', [Validators.required, Validators.email]],
-    });
+	passwordRecoveryForm = this.fb.group({
+		email: ['', [Validators.required, Validators.email]]
+	});
 
-    constructor(
-        private passwordRecoveryService: PasswordRecoveryService,
-        private router: Router,
-        private fb: FormBuilder,
-        private snackBar: MatSnackBar,
-        private titleService: Title
-    ) { }
+	constructor(
+		private passwordRecoveryService: PasswordRecoveryService,
+		private router: Router,
+		private fb: FormBuilder,
+		private snackBar: MatSnackBar,
+		private titleService: Title
+	) { }
 
-    ngOnInit() {
-        this.titleService.setTitle('Wachtwoord vergeten' + environment.TITLE_TRAIL);
-    }
 
-    /** Method to send an email to the user to reset their password. */
-    sendEmail() {
-        let email = this.passwordRecoveryForm.get('email').value; // Get email from the input field.
+	ngOnInit() {
+		this.titleService.setTitle('Wachtwoord vergeten' + environment.TITLE_TRAIL);
+	}
 
-        // Send email, data returns whether the action was a succes and a message to show to the user.
-        this.passwordRecoveryService.sendEmail(email).subscribe(data => {
-            if (data.succes) {
-                this.snackBar.open(data.message, 'X' , { duration: 5000, panelClass: ['style-succes'] }).afterDismissed().subscribe(() => {
-                    this.router.navigate(['/login']);
-                });
-            } else {
-                this.snackBar.open(data.message, 'X' , { duration: 2500, panelClass: ['style-error'] });
-            }
-        });
-    }
+	/** Method to send an email to the user to reset their password. */
+	sendEmail() {
+		let email = this.passwordRecoveryForm.get('email').value; // Get email from the input field.
+
+		// Send email, data returns whether the action was a succes and a message to show to the user.
+		this.passwordRecoveryService.sendEmail(email).subscribe(data => {
+			if (data.succes) {
+				this.snackBar.open(data.message, 'X', { duration: 5000, panelClass: ['style-succes'] }).afterDismissed().subscribe(() => {
+					this.router.navigate(['/login']);
+				});
+			} else {
+				this.snackBar.open(data.message, 'X', { duration: 2500, panelClass: ['style-error'] });
+			}
+		});
+	}
 }

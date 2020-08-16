@@ -9,28 +9,29 @@ import { AuthenticationService } from '../../services/authentication.service';
 import { tokenData } from '../../models/tokenData';
 
 @Component({
-    selector: 'mean-sidenav',
-    templateUrl: './sidenav.component.html',
-    styleUrls: ['./sidenav.component.css']
+	selector: 'mean-sidenav',
+	templateUrl: './sidenav.component.html',
+	styleUrls: ['./sidenav.component.css']
 })
 
 export class SidenavComponent implements OnInit {
-    @Output() public sidenavClose = new EventEmitter();
+	@Output() public sidenavClose = new EventEmitter();
 
-    tokenData: tokenData;
+	tokenData: tokenData;
 
-    constructor(private auth: AuthenticationService) { }
+	constructor(private auth: AuthenticationService) {
+	}
 
-    ngOnInit(): void {
-        this.tokenData = this.auth.getTokenData();
-    }
+	ngOnInit(): void {
+		this.tokenData = this.auth.getTokenData();
+	}
 
-    /** Method to logout. */
-    logoutButton() {
-        return this.auth.logout();
-    }
+	/** Method to logout. */
+	logoutButton() {
+		return this.auth.logout();
+	}
 
-    public onSidenavClose = () => {
-        this.sidenavClose.emit();
-    }
+	public onSidenavClose = () => {
+		this.sidenavClose.emit();
+	};
 }

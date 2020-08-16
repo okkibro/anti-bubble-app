@@ -11,46 +11,48 @@
     <mat-sidenav-content>
         <mean-toolbar (sidenavToggle)="sidenav.toggle()"></mean-toolbar>
         <body>
-            <div class="container-div" fxLayoutGap="10px" fxLayout="column" fxLayoutAlign="space-evenly">
-                <mat-card fxFlex="100%">
-                    <mat-card-header>
-                        <mat-card-title>Alle badges</mat-card-title>
-                    </mat-card-header>
-                    <mat-card-content>
-                        Je hebt nu {{ completedRatio() }}% van alle badges behaald.<br>
-                        <mat-progress-bar mode="determinate" role="progressbar" class="progress-bar" value="{{ percentageComplete }}" aria-valuemin="0" aria-valuemax="100">=</mat-progress-bar>
-                    </mat-card-content>
-                </mat-card>
+        <div class="container-div" fxLayoutGap="10px" fxLayout="column" fxLayoutAlign="space-evenly">
+            <mat-card fxFlex="100%">
+                <mat-card-header>
+                    <mat-card-title>Alle badges</mat-card-title>
+                </mat-card-header>
+                <mat-card-content>
+                    Je hebt nu {{ completedRatio() }}% van alle badges behaald.<br>
+                    <mat-progress-bar mode="determinate" role="progressbar" class="progress-bar" value="{{ percentageComplete }}" aria-valuemin="0" aria-valuemax="100">
+                        =
+                    </mat-progress-bar>
+                </mat-card-content>
+            </mat-card>
 
-                <mat-card fxFlex="100%">
-                    <mat-card-content>
-                        <mat-tab-group mat-align-tabs="center">
-                            <mat-tab label="Behaald">
-                                <table class="general-table">
-                                    <tr >
-                                        <td *ngFor="let milestoneCompleted of completed">
-                                            <strong>{{ milestoneCompleted.milestone.name }}</strong><br>
-                                            {{ milestoneCompleted.milestone.description }}
-                                        </td>
-                                    </tr>
-                                </table>
-                            </mat-tab>
+            <mat-card fxFlex="100%">
+                <mat-card-content>
+                    <mat-tab-group mat-align-tabs="center">
+                        <mat-tab label="Behaald">
+                            <table class="general-table">
+                                <tr>
+                                    <td *ngFor="let milestoneCompleted of completed">
+                                        <strong>{{ milestoneCompleted.milestone.name }}</strong><br>
+                                        {{ milestoneCompleted.milestone.description }}
+                                    </td>
+                                </tr>
+                            </table>
+                        </mat-tab>
 
-                            <mat-tab label="Te behalen">
-                                <table class="general-table">
-                                    <tr>
-                                        <td  *ngFor="let milestoneCompleted of uncompleted">
-                                            <strong>{{ milestoneCompleted.milestone.name }}</strong><br>
-                                            {{ milestoneCompleted.milestone.description }}<br>
-                                            <i>Voortgang: {{ userDetails?.milestones[milestoneCompleted.index] }} / {{ milestoneCompleted.milestone.maxValue }}</i>
-                                        </td>
-                                    </tr>
-                                </table>
-                            </mat-tab>
-                        </mat-tab-group>
-                    </mat-card-content>
-                </mat-card>
-            </div>
+                        <mat-tab label="Te behalen">
+                            <table class="general-table">
+                                <tr>
+                                    <td *ngFor="let milestoneCompleted of uncompleted">
+                                        <strong>{{ milestoneCompleted.milestone.name }}</strong><br>
+                                        {{ milestoneCompleted.milestone.description }}<br>
+                                        <i>Voortgang: {{ userDetails?.milestones[milestoneCompleted.index] }} / {{ milestoneCompleted.milestone.maxValue }}</i>
+                                    </td>
+                                </tr>
+                            </table>
+                        </mat-tab>
+                    </mat-tab-group>
+                </mat-card-content>
+            </mat-card>
+        </div>
         </body>
         <footer class="footer">
             <p> &copy; Utrecht University (ICS)</p>

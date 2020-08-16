@@ -11,39 +11,41 @@
     <mat-sidenav-content>
         <mean-toolbar (sidenavToggle)="sidenav.toggle()"></mean-toolbar>
         <body>
-            <div class="container-div" fxLayoutGap="10px" fxLayout="column" fxLayoutAlign="space-evenly">
-                <mat-card>
-                    <mat-card-header>
-                        <mat-card-title>Winkel</mat-card-title>
-                    </mat-card-header>
-                    <mat-card-content class="currency">
-                        Aantal munten
-                        <p><b>{{ userDetails?.currency }}</b></p>
-                    </mat-card-content>
-                </mat-card>
+        <div class="container-div" fxLayoutGap="10px" fxLayout="column" fxLayoutAlign="space-evenly">
+            <mat-card>
+                <mat-card-header>
+                    <mat-card-title>Winkel</mat-card-title>
+                </mat-card-header>
+                <mat-card-content class="currency">
+                    Aantal munten
+                    <p><b>{{ userDetails?.currency }}</b></p>
+                </mat-card-content>
+            </mat-card>
 
-                <mat-card>
-                    <mat-card-content>
-                        <mat-tab-group mat-align-tabs="center" animationDuration="0ms" (selectedTabChange)="tabChange($event)">
-                            <mat-tab *ngFor = "let category of shopCategories" label="{{category}}">
-                                <mat-grid-list [cols]="itemColumns" gutterSize="10px" (window:resize)="onResize($event)">
-                                    <mat-grid-tile *ngFor = "let item of filteredShop" fxFlexAlign="stretch">
-                                        <mat-card fxLayout="column" fxFlexAlign="stretch">
-                                            <mat-card-subtitle fxFlex="10%">{{ item.title }}</mat-card-subtitle>
-                                            <div fxFlex="60%">
-                                                <img mat-card-image src="{{ item.previewImage }}" alt="{{ item.title }}">
-                                            </div>
-                                            <mat-card-footer fxFlex="10%">
-                                                <button mat-button (click)="buy(item)" class="shop-buy-button">{{ item.price }} <mat-icon>payment</mat-icon></button>
-                                            </mat-card-footer>
-                                        </mat-card>
-                                    </mat-grid-tile>
-                                </mat-grid-list>
-                            </mat-tab>
-                        </mat-tab-group>
-                    </mat-card-content>
-                </mat-card>
-            </div>
+            <mat-card>
+                <mat-card-content>
+                    <mat-tab-group mat-align-tabs="center" animationDuration="0ms" (selectedTabChange)="tabChange($event)">
+                        <mat-tab *ngFor="let category of shopCategories" label="{{category}}">
+                            <mat-grid-list [cols]="itemColumns" gutterSize="10px" (window:resize)="onResize($event)">
+                                <mat-grid-tile *ngFor="let item of filteredShop" fxFlexAlign="stretch">
+                                    <mat-card fxLayout="column" fxFlexAlign="stretch">
+                                        <mat-card-subtitle fxFlex="10%">{{ item.title }}</mat-card-subtitle>
+                                        <div fxFlex="60%">
+                                            <img mat-card-image src="{{ item.previewImage }}" alt="{{ item.title }}">
+                                        </div>
+                                        <mat-card-footer fxFlex="10%">
+                                            <button mat-button (click)="buy(item)" class="shop-buy-button">{{ item.price }}
+                                                <mat-icon>payment</mat-icon>
+                                            </button>
+                                        </mat-card-footer>
+                                    </mat-card>
+                                </mat-grid-tile>
+                            </mat-grid-list>
+                        </mat-tab>
+                    </mat-tab-group>
+                </mat-card-content>
+            </mat-card>
+        </div>
         </body>
         <footer class="footer">
             <p> &copy; Utrecht University (ICS)</p>
