@@ -29,7 +29,7 @@
     "@angular/platform-browser": "~9.0.2",
     "@angular/platform-browser-dynamic": "~9.0.2",
     "@angular/router": "~9.0.2",
-    "@types/jest": "^25.1.4",
+    "@types/jest": "^26.0.10",
     "angular-highcharts": "^9.0.2",
     "body-parser": "^1.19.0",
     "csurf": "^1.11.0",
@@ -60,11 +60,12 @@
     "@angular/cli": "^9.0.5",
     "@angular/compiler-cli": "~9.0.2",
     "@angular/language-service": "~9.0.2",
-    "@types/jasmine": "^3.5.10",
+    "@types/jasmine": "^3.5.12",
     "@types/node": "^12.11.1",
     "cors": "^2.8.5",
     "jasmine": "^3.5.0",
     "jasmine-core": "^3.5.0",
+    "jsdoc": "^3.6.5",
     "karma": "^5.0.9",
     "karma-chrome-launcher": "^3.1.0",
     "karma-coverage-istanbul-reporter": "^3.0.3",
@@ -72,6 +73,7 @@
     "karma-jasmine-html-reporter": "^1.5.4",
     "ts-node": "~7.0.0",
     "tslint": "~5.15.0",
+    "typedoc": "^0.18.0",
     "typescript": "~3.7.5"
   }
 }
