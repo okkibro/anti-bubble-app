@@ -10,8 +10,8 @@ import { AuthenticationService } from '../../services/authentication.service';
 import { Router } from '@angular/router';
 import { User } from '../../models/user';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { Title } from "@angular/platform-browser";
-import { environment } from "../../../environments/environment";
+import { Title } from '@angular/platform-browser';
+import { environment } from '../../../environments/environment';
 
 @Component({
     selector: 'mean-login',
@@ -21,8 +21,7 @@ import { environment } from "../../../environments/environment";
 })
 
 export class LoginComponent implements OnInit {
-    loginForm = this.fb.group({
-        email: ['', [Validators.required, Validators.email]],
+    loginForm = this.fb.group({email: ['', [Validators.required, Validators.email]],
         password: ['', Validators.required],
     });
 
@@ -42,7 +41,7 @@ export class LoginComponent implements OnInit {
         this.titleService.setTitle('Login' + environment.TITLE_TRAIL);
     }
 
-    /** Method to login. */ 
+    /** Method to login. */
     loginUser() {
         let user = new User();
         user.email = this.loginForm.get('email').value;

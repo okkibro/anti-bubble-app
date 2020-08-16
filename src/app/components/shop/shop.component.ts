@@ -11,9 +11,9 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { User } from '../../models/user';
 import { MilestoneUpdatesService } from '../../services/milestone-updates.service'
 import { milestones } from '../../../../constants';
-import { Title } from "@angular/platform-browser";
-import { environment } from "../../../environments/environment";
-import { UserService } from "../../services/user.service";
+import { Title } from '@angular/platform-browser';
+import { environment } from '../../../environments/environment';
+import { UserService } from '../../services/user.service';
 
 @Component({
     selector: 'mean-shop',

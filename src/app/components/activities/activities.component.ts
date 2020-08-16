@@ -12,7 +12,7 @@ import { FormBuilder } from '@angular/forms';
 import { User } from '../../models/user';
 import { beforeUnload } from '../../../../constants';
 import { SessionService } from 'src/app/services/session.service';
-import { UserService } from "../../services/user.service";
+import { UserService } from '../../services/user.service';
 
 @Component({
     selector: 'mean-activities',
@@ -123,7 +123,7 @@ export class ActivitiesComponent implements OnInit {
     /** Method that listens whether the game has been stopped by the teacher. */
     disableInput(): void {
 
-        // Students listen for the signal that is sent when the teacher presses the "Stop activiteit" button.
+        // Students listen for the signal that is sent when the teacher presses the 'Stop activiteit' button.
         this.socketService.listenForFinishGame(() => {
             this.gameFinished = true;
         });

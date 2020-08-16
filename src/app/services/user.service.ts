@@ -9,8 +9,8 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { CookieService } from 'ngx-cookie-service';
 import { environment } from 'src/environments/environment';
-import { AbstractControl, AsyncValidatorFn, ValidationErrors } from "@angular/forms";
-import { map } from "rxjs/operators";
+import { AbstractControl, AsyncValidatorFn, ValidationErrors } from '@angular/forms';
+import { map } from 'rxjs/operators';
 
 @Injectable({
     providedIn: 'root'

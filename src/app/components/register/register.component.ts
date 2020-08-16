@@ -10,9 +10,9 @@ import { AuthenticationService } from '../../services/authentication.service';
 import { Router } from '@angular/router';
 import { User } from '../../models/user';
 import { ShopService } from 'src/app/services/shop.service';
-import { environment } from "../../../environments/environment";
-import { Title } from "@angular/platform-browser";
-import { UserService } from "../../services/user.service";
+import { environment } from '../../../environments/environment';
+import { Title } from '@angular/platform-browser';
+import { UserService } from '../../services/user.service';
 
 @Component({
     selector: 'mean-register',
@@ -53,7 +53,7 @@ export class RegisterComponent implements OnInit {
     }
 
     /** Method to register a new user based on the information filled in on the form. */
-    registerUser() { 
+    registerUser() {
         let user = new User();
         user.firstName = this.registerForm.get('firstName').value;
         user.lastName = this.registerForm.get('lastName').value;

@@ -15,8 +15,8 @@ import { beforeUnload, milestones } from '../../../../constants';
 import { SessionService } from 'src/app/services/session.service';
 import { Title } from '@angular/platform-browser';
 import { environment } from 'src/environments/environment';
-import { UserService } from "../../services/user.service";
-import { MilestoneUpdatesService } from "../../services/milestone-updates.service";
+import { UserService } from '../../services/user.service';
+import { MilestoneUpdatesService } from '../../services/milestone-updates.service';
 
 @Component({
     selector: 'mean-home',
@@ -61,7 +61,7 @@ export class HomeComponent implements OnInit {
     createSession() {
         this.router.navigate(['session-options']);
     }
-    
+
     /** Method to join a session based on the filled in code. */
     joinSession() {
         const user = this.userDetails;

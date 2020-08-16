@@ -12,9 +12,9 @@ import { AuthenticationService } from '../../services/authentication.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { BubbleGraphService } from 'src/app/services/bubble-graph.service';
 import { FormBuilder, Validators } from '@angular/forms';
-import { environment } from "../../../environments/environment";
-import { Title } from "@angular/platform-browser";
-import { UserService } from "../../services/user.service";
+import { environment } from '../../../environments/environment';
+import { Title } from '@angular/platform-browser';
+import { UserService } from '../../services/user.service';
 
 @Component({
     selector: 'mean-labyrinth',

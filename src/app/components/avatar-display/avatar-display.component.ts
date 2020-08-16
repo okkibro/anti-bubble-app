@@ -6,9 +6,9 @@
 
 import { Component, OnInit } from '@angular/core';
 import { User } from '../../models/user';
-import { ActivatedRoute } from "@angular/router";
-import { ClassesService } from "../../services/classes.service";
-import { UserService } from "../../services/user.service";
+import { ActivatedRoute } from '@angular/router';
+import { ClassesService } from '../../services/classes.service';
+import { UserService } from '../../services/user.service';
 
 @Component({
     selector: 'mean-avatar-display',

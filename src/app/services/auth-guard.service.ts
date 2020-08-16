@@ -16,7 +16,7 @@ export class AuthGuardService implements CanActivate {
 
     constructor(private auth: AuthenticationService, private router: Router) { }
 
-    /** Method to check whether the user can access a certain page. */ 
+    /** Method to check whether the user can access a certain page. */
     canActivate(route: ActivatedRouteSnapshot) {
 
         // Check if user is logged in.

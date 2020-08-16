@@ -11,10 +11,10 @@ import { User } from 'src/app/models/user';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Class } from 'src/app/models/classes';
 import { ClassesService } from 'src/app/services/classes.service';
-import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from "@angular/material/dialog";
-import { environment } from "../../../environments/environment";
-import { Title } from "@angular/platform-browser";
-import { UserService } from "../../services/user.service";
+import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { environment } from '../../../environments/environment';
+import { Title } from '@angular/platform-browser';
+import { UserService } from '../../services/user.service';
 
 @Component({
     selector: 'mean-teacher-overview',
@@ -124,7 +124,7 @@ export class TeacherOverviewComponent implements OnInit {
 
     /** Method to change a boolean to unhide part of the html page */
     onClickOpenForm(): void {
-        this.openform = !this.openform;  
+        this.openform = !this.openform;
     }
 
     /** Method that opens the delete class dialog. */

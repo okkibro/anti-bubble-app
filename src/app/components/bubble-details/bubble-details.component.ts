@@ -7,12 +7,12 @@
 import { Component, OnInit } from '@angular/core';
 import { User } from '../../models/user';
 import * as Highcharts2 from 'highcharts';
-import { Title } from "@angular/platform-browser";
-import { environment } from "../../../environments/environment";
-import { UserService } from "../../services/user.service";
-import { milestones } from "../../../../constants";
-import { MilestoneUpdatesService } from "../../services/milestone-updates.service";
-import { MatSnackBar } from "@angular/material/snack-bar";
+import { Title } from '@angular/platform-browser';
+import { environment } from '../../../environments/environment';
+import { UserService } from '../../services/user.service';
+import { milestones } from '../../../../constants';
+import { MilestoneUpdatesService } from '../../services/milestone-updates.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
     selector: 'mean-bubble-details',

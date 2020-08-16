@@ -6,7 +6,7 @@
 
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { AuthenticationService } from '../../services/authentication.service';
-import { tokenData } from "../../models/tokenData";
+import { tokenData } from '../../models/tokenData';
 
 @Component({
     selector: 'mean-sidenav',

@@ -9,11 +9,11 @@ import { Router } from '@angular/router';
 import { User } from '../../models/user';
 import { FormBuilder } from '@angular/forms';
 import { ClassesService } from '../../services/classes.service';
-import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from "@angular/material/dialog";
-import { MatSnackBar } from "@angular/material/snack-bar";
+import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Title } from '@angular/platform-browser';
 import { environment } from 'src/environments/environment';
-import { UserService } from "../../services/user.service";
+import { UserService } from '../../services/user.service';
 
 @Component({
     selector: 'mean-class-overview',

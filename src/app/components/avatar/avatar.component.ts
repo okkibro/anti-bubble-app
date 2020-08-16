@@ -9,9 +9,9 @@ import { User } from '../../models/user';
 import { ShopService } from 'src/app/services/shop.service';
 import { AvatarService } from 'src/app/services/avatar.service';
 import { AvatarDisplayComponent } from '../avatar-display/avatar-display.component';
-import { Title } from "@angular/platform-browser";
-import { environment } from "../../../environments/environment";
-import { UserService } from "../../services/user.service";
+import { Title } from '@angular/platform-browser';
+import { environment } from '../../../environments/environment';
+import { UserService } from '../../services/user.service';
 
 @Component({
     selector: 'mean-avatar',

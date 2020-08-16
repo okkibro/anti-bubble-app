@@ -13,9 +13,9 @@ import { SessionService } from 'src/app/services/session.service';
 import { beforeUnload } from '../../../../constants';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Articles } from 'src/app/models/articles';
-import { tokenData } from "../../models/tokenData";
-import { Title } from "@angular/platform-browser";
-import { environment } from "../../../environments/environment";
+import { tokenData } from '../../models/tokenData';
+import { Title } from '@angular/platform-browser';
+import { environment } from '../../../environments/environment';
 
 @Component({
     selector: 'mean-session',

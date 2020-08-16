@@ -7,9 +7,9 @@
 import { Component, OnInit } from '@angular/core';
 import { milestones } from '../../../../constants';
 import { User } from '../../models/user';
-import { Title } from "@angular/platform-browser";
-import { environment } from "../../../environments/environment";
-import { UserService } from "../../services/user.service";
+import { Title } from '@angular/platform-browser';
+import { environment } from '../../../environments/environment';
+import { UserService } from '../../services/user.service';
 
 @Component({
     selector: 'mean-badges',

@@ -33,7 +33,7 @@ export class SocketIOService {
         });
     }
 
-    /** Method that adds the given user to the session with the given pin. 
+    /** Method that adds the given user to the session with the given pin.
      *  join gets called at the end and returns whether the join was a succes or not.
      *  backToHome gets called when the host disconnects.
      *  redirect gets called when the game starts.
@@ -107,7 +107,7 @@ export class SocketIOService {
         });
     }
 
-    /** Method that listens for the teacher pressing the "Stop Activiteit" button
+    /** Method that listens for the teacher pressing the 'Stop Activiteit' button
      *  disableInput gets called when the teacher presses said button
      */
     listenForFinishGame(disableInput) {

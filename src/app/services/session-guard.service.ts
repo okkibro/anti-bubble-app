@@ -59,5 +59,5 @@ export class SessionGuardService implements CanDeactivate<SessionComponent> {
                 return true;
             }
         }
-    } 
+    }
 }

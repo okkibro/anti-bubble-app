@@ -7,8 +7,8 @@
 import { Component, OnInit } from '@angular/core';
 import { User } from '../../models/user';
 import { UserService } from '../../services/user.service';
-import { ActivatedRoute } from "@angular/router";
-import { ClassesService } from "../../services/classes.service";
+import { ActivatedRoute } from '@angular/router';
+import { ClassesService } from '../../services/classes.service';
 
 @Component({
     selector: 'mean-bubble-visualisation',

@@ -9,8 +9,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { PasswordRecoveryService } from '../../services/password-recovery.service';
-import { environment } from "../../../environments/environment";
-import { Title } from "@angular/platform-browser";
+import { environment } from '../../../environments/environment';
+import { Title } from '@angular/platform-browser';
 
 @Component({
     selector: 'mean-password-reset',

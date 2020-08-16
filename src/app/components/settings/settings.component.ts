@@ -5,16 +5,16 @@
  */
 
 import { Component, Inject, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from "@angular/forms";
-import { environment } from "../../../environments/environment";
-import { AuthenticationService } from "../../services/authentication.service";
-import { MatSnackBar } from "@angular/material/snack-bar";
-import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from "@angular/material/dialog";
-import { ClassesService } from "../../services/classes.service";
-import { Router } from "@angular/router";
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { environment } from '../../../environments/environment';
+import { AuthenticationService } from '../../services/authentication.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { ClassesService } from '../../services/classes.service';
+import { Router } from '@angular/router';
 import { User } from '../../models/user';
-import { Title } from "@angular/platform-browser";
-import { UserService } from "../../services/user.service";
+import { Title } from '@angular/platform-browser';
+import { UserService } from '../../services/user.service';
 
 @Component({
     selector: 'mean-settings',

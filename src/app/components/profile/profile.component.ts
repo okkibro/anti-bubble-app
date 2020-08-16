@@ -11,9 +11,9 @@ import { milestones } from '../../../../constants';
 import { Milestone } from 'src/app/models/milestone';
 import { ClassesService } from 'src/app/services/classes.service';
 import { Router } from '@angular/router';
-import { Title } from "@angular/platform-browser";
-import { environment } from "../../../environments/environment";
-import { UserService } from "../../services/user.service";
+import { Title } from '@angular/platform-browser';
+import { environment } from '../../../environments/environment';
+import { UserService } from '../../services/user.service';
 
 @Component({
     selector: 'mean-profile',
