@@ -4,16 +4,6 @@
  * Computing Sciences)
  */
 
-/* The following code alters the mat-cards to layer over each other and display the avatar. */
-.avatarDisplay {
-    position: absolute;
-    top: 35%;
-    left: 5%;
-    background-color: transparent;
-    border: transparent;
-    box-shadow: none;
-}
-
 .mat-card {
     position: relative;
     height: 30em;
