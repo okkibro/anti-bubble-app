@@ -4,6 +4,14 @@
  * Computing Sciences)
  */
 
+/**
+ * badges.component.ts
+ * This file handles all the logic for displaying the user's milestone/badge collection.progression by
+ * looking at their database entry.
+ * @packageDocumentation
+ */
+
+
 import { Component, OnInit } from '@angular/core';
 import { milestones } from '../../../../constants';
 import { User } from '../../models/user';
@@ -24,9 +32,17 @@ export class BadgesComponent implements OnInit {
 	userDetails: User;
 	percentageComplete: string;
 
-	constructor(private userService: UserService, private titleService: Title) {
-	}
+	/**
+	 * BadgesComponent constructor.
+	 * @param userService
+	 * @param titleService
+	 */
+	constructor(private userService: UserService, private titleService: Title) { }
 
+	/**
+	 * Initialization method.
+	 * @returns
+	 */
 	ngOnInit(): void {
 		this.userService.profile().subscribe(user => {
 			this.userDetails = user;
@@ -49,7 +65,10 @@ export class BadgesComponent implements OnInit {
 		this.titleService.setTitle('Badges' + environment.TITLE_TRAIL);
 	}
 
-	/** Method to calculate how far you are in completing all milestones. */
+	/**
+	 * Method to calculate how far you are in completing all milestones.
+	 * @returns Percentage of milestones achieved.
+	 */
 	completedRatio(): string {
 		return (this.completed.length / (this.completed.length + this.uncompleted.length) * 100).toFixed(0);
 	}

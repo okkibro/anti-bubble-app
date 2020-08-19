@@ -4,6 +4,13 @@
  * Computing Sciences)
  */
 
+/**
+ * join-class.component.ts
+ * This file is a sub-component used by the class-overview component and is mainly used for handling the
+ * keyboard input and joining a class though the typed in code.
+ * @packageDocumentation
+ */
+
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { ClassesService } from '../../services/classes.service';
@@ -24,10 +31,17 @@ export class JoinClassComponent implements OnInit {
 	constructor(private fb: FormBuilder, private classesService: ClassesService, private snackBar: MatSnackBar) {
 	}
 
+	/**
+	 * Initialization method.
+	 * @returns
+	 */
 	ngOnInit(): void {
 	}
 
-	/** Method to join a class based on the code you filled in. */
+	/**
+	 * Method to join a class based on the code you filled in.
+	 * @returns
+	 */
 	joinClass(): void {
 		this.classesService.joinClass(this.joinClassForm.get('code').value).subscribe(data => {
 			if (data.succes) {
@@ -40,7 +54,11 @@ export class JoinClassComponent implements OnInit {
 		});
 	}
 
-	/** Method that makes sure you can only fill in numbers in the session code input field. */
+	/**
+	 * Method that makes sure you can only fill in numbers in the session code input field.
+	 * @param event Event triggered when a key is pressed in the join session input.
+	 * @returns
+	 */
 	check(event: KeyboardEvent) {
 		let code = event.code.charCodeAt(0);
 		if (code != 68) {

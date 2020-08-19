@@ -20,12 +20,12 @@ export class MilestoneUpdatesService {
     constructor(private http: HttpClient, private cookie: CookieService) { }
 
     /** Method to do a POST request to update a given milestone to a given value. */
-    public updateMilestone(milestone: Milestone, value: Number): Observable<any> {
+    public updateMilestone(milestone: Milestone, value: number): Observable<any> {
         return this.http.post(`${environment.ENDPOINT}/user/milestone`, { milestone: milestone, value: value }, { headers: { Authorization: 'Bearer ' + this.cookie.get('mean-token') }});
     }
 
     /** Method to do a POST request to update the recent milestone to the given value. */
-    public updateRecent(value: String): Observable<any> {
+    public updateRecent(value: string): Observable<any> {
         return this.http.post(`${environment.ENDPOINT}/user/recentMilestones`, { value: value }, { headers: { Authorization: 'Bearer ' + this.cookie.get('mean-token') }});
     }
 }

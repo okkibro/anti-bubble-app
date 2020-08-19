@@ -4,6 +4,14 @@
  * Computing Sciences)
  */
 
+/**
+ * session.component.ts
+ * This file handles all the logic for handling resetting the user's old password by setting a new one through
+ * a form. This page can only be visited by a user who is already registered in the database, requested a new
+ * password through the password-recovery component and clicked the link with the correct reset token.
+ * @packageDocumentation
+ */
+
 import { Component, OnInit } from '@angular/core';
 import { AuthenticationService } from '../../services/authentication.service';
 import { SocketIOService } from 'src/app/services/socket-io.service';
@@ -43,6 +51,16 @@ export class SessionComponent implements OnInit {
 	sources;
 	subjects;
 
+	/**
+	 * SessionComponent constructor.
+	 * @param auth
+	 * @param socketService
+	 * @param data
+	 * @param router
+	 * @param sessionService
+	 * @param snackBar
+	 * @param titleService
+	 */
 	constructor(
 		private auth: AuthenticationService,
 		private socketService: SocketIOService,
@@ -53,7 +71,10 @@ export class SessionComponent implements OnInit {
 		private titleService: Title
 	) { }
 
-
+	/**
+	 * Initialization method.
+	 * @returns
+	 */
 	ngOnInit(): void {
 		this.gameStarted = false;
 		this.randomGroups = true;
@@ -178,32 +199,42 @@ export class SessionComponent implements OnInit {
 		this.titleService.setTitle('Sessie' + environment.TITLE_TRAIL);
 	}
 
-	/** Method that calls the leave session function in the socket io service. */
+	/**
+	 * Method that calls the leave session function in the socket io service.
+	 * @returns
+	 */
 	leaveSession() {
 		this.socketService.leaveSession();
 	}
 
-	/** Method that returns if a student leaving the session was caused by the host disconnecting. */
+	/**
+	 * Method that returns if a student leaving the session was caused by the host disconnecting.
+	 * @returns Whether student leaving was caused by teacher disconnecting.
+	 */
 	isHostDisconnected(): boolean {
 		return this.socketService.hostDisconnected;
 	}
 
-	/** Method that returns the game data. */
+	/**
+	 * Method that returns the game data.
+	 * @returns Data of the game.
+	 */
 	getGameData(): any {
 		return this.socketService.gameData;
 	}
 
-	/** Method that sends the passed question to all students in the session. */
-	sendQuestion(question: string) {
-		this.socketService.sendQuestion(question);
-	}
-
-	/** Method that submits the passed answer to the host of the session. */
-	submit(data) {
+	/**
+	 * Method that submits the passed answer to the host of the session.
+	 * @param data Student's answer.
+	 */
+	submit(data: string) {
 		this.socketService.studentSubmit(data);
 	}
 
-	/** Method that starts the game. Making it unable for students to join the session. */
+	/**
+	 * Method that starts the game. Making it unable for students to join the session.
+	 * @returns
+	 */
 	startGame() {
 
 		// Teacher wants to start a game without any players in it.
@@ -222,8 +253,11 @@ export class SessionComponent implements OnInit {
 		}
 	}
 
-	/** Method that takes the game name and will return whether the game can start or not. */
-	canStart(game: string): Boolean {
+	/** Method that takes the game name and will return whether the game can start or not.
+	 * @param game Type of the activity.
+	 * @return Whether it is possible to start the game.
+	 */
+	canStart(game: string): boolean {
 		switch (game) {
 			case 'Naamloos Nieuws':
 				if (this.playerCount < 3) {
@@ -237,8 +271,11 @@ export class SessionComponent implements OnInit {
 		}
 	}
 
-	/** Method that initializes the game based on the given game name. */
-	initGame(game: string) {
+	/** Method that initializes the game based on the given game name.
+	 * @param game Type of the activity.
+	 * @returns
+	 */
+	initGame(game: string): void {
 		switch (game) {
 			case 'Naamloos Nieuws':
 
@@ -278,8 +315,12 @@ export class SessionComponent implements OnInit {
 		}
 	}
 
-	/** Method that makes timer count down at the top of the screen. */
-	startTimer(time: number) {
+	/**
+	 * Method that makes timer count down at the top of the screen.
+	 * @param time Amount of time to play the game.
+	 * @returns
+	 */
+	startTimer(time: number): void {
 		setTimeout(() => {
 			this.socketService.finishGame();
 		}, time * 1000);
@@ -302,15 +343,24 @@ export class SessionComponent implements OnInit {
 		}, 1000);
 	}
 
-	/** Method that groups students. */
-	pairStudents(groups: String[][], groupSize: Number, articles: Articles, receivePairs) {
+	/**
+	 * Method that groups students into groups of a certain size for the 'Naamloos Nieuws' activity.
+	 * @param groups Array of groups of students only used when teacher created the groups manually.
+	 * @param groupSize Size of the group.
+	 * @param articles Articles to be paired to students in the group.
+	 * @param receivePairs Callback function.
+	 */
+	pairStudents(groups: string[][], groupSize: number, articles: Articles, receivePairs: Function): void {
 		this.socketService.pairStudents(groups, groupSize, articles, (pairs, leaders, sources) => {
 			receivePairs(pairs, leaders, sources);
 		});
 	}
 
-	/** Method that stops the timer and game. */
-	stopGame() {
+	/**
+	 * Method that stops the timer and game.
+	 * @returns
+	 */
+	stopGame(): void {
 		this.gameFinished = true;
 		clearInterval(this.interval);
 		let timeLeft = document.getElementById('counter');
@@ -322,16 +372,23 @@ export class SessionComponent implements OnInit {
 		this.socketService.finishGame();
 	}
 
-	/** Method that makes the host leave the session and the page. */
-	leaveGame() {
+	/**
+	 * Method that makes the host leave the session and the page.
+	 * @returns
+	 */
+	leaveGame(): void {
 		this.leaveSession();
 		this.leaveByHomeButton = true;
 		window.removeEventListener('beforeunload', beforeUnload);
 		this.router.navigate(['home']);
 	}
 
-	/** Method that shows the answer on screen when the game is finished. */
-	showAnswersonScreen(game: String) {
+	/**
+	 * Method that shows the answer on screen when the game is finished.
+	 * @param game Type of the activity.
+	 * @returns
+	 */
+	showAnswersonScreen(game: string): void {
 		switch (game) {
 			case 'Naamloos Nieuws':
 				let table = document.getElementsByClassName('submit-table')[0];

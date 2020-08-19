@@ -4,6 +4,13 @@
  * Computing Sciences)
  */
 
+/**
+ * session-options.component.ts
+ * This file handles all the logic for teachers who want to create a session in the app. Different types
+ * of games can be started so the createSession() method can handle a lot of different data.
+ * @packageDocumentation
+ */
+
 import { Component, OnInit } from '@angular/core';
 import { AuthenticationService } from '../../services/authentication.service';
 import { SocketIOService } from 'src/app/services/socket-io.service';
@@ -25,6 +32,15 @@ export class SessionOptionsComponent implements OnInit {
 		teamOptionAA: ['', Validators.required]
 	});
 
+	/**
+	 * SessionOptionsComponent constructor.
+	 * @param auth
+	 * @param router
+	 * @param socketService
+	 * @param sessionService
+	 * @param fb
+	 * @param titleService
+	 */
 	constructor(
 		private auth: AuthenticationService,
 		private router: Router,
@@ -34,13 +50,20 @@ export class SessionOptionsComponent implements OnInit {
 		private titleService: Title
 	) { }
 
-
-	ngOnInit() {
+	/**
+	 * Initialization method.
+	 * @returns
+	 */
+	ngOnInit(): void {
 		this.titleService.setTitle('Sessie opties' + environment.TITLE_TRAIL);
 	}
 
-	/** Method that fets called when teacher presses create session button. gamedata contains the name of the game and time of the slider. */
-	createSession(gameData) {
+	/**
+	 * Method that fets called when teacher presses create session button. gamedata contains the name of the game and time of the slider.
+	 * @param gameData All required data to start a session of one of the app's different types.
+	 * @returns
+	 */
+	createSession(gameData: any): void {
 
 		// Get the entire activity data from the database
 		this.sessionService.getActivity(gameData.game).subscribe(data => {

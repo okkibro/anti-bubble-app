@@ -4,6 +4,14 @@
  * Computing Sciences)
  */
 
+/**
+ * bubble-visualistaion.component.ts
+ * This file is a sub-component used by the (classmate-)profile components and handles all the logic for
+ * displaying the user's current bubble as an image. Bubble is not stored as an image in the database so
+ * the updateBubble() method does this instead.
+ * @packageDocumentation
+ */
+
 import { Component, OnInit } from '@angular/core';
 import { User } from '../../models/user';
 import { UserService } from '../../services/user.service';
@@ -19,9 +27,18 @@ import { ClassesService } from '../../services/classes.service';
 
 export class BubbleVisualisationComponent implements OnInit {
 
-	constructor(private userService: UserService, private route: ActivatedRoute, private classService: ClassesService) {
-	}
+	/**
+	 * BubbleVisualisationComponent constructor.
+	 * @param userService
+	 * @param route
+	 * @param classService
+	 */
+	constructor(private userService: UserService, private route: ActivatedRoute, private classService: ClassesService) { }
 
+	/**
+	 * Initialization method.
+	 * @returns
+	 */
 	ngOnInit(): void {
 		if (this.route.snapshot.paramMap.get('id')) {
 			this.classService.classmateProfile(this.route.snapshot.paramMap.get('id')).subscribe(classmate => {
@@ -34,7 +51,11 @@ export class BubbleVisualisationComponent implements OnInit {
 		}
 	}
 
-	/** Method that updates the visual representation of a users bubble based on their statistics. */
+	/**
+	 * Method that updates the visual representation of a user's bubble based on their statistics.
+	 * @param user User who's bubble has to be visualised.
+	 * @returns
+	 */
 	updateBubble(user: User): void {
 		let mainstream = user.bubble.mainstream.pop();
 		let online = user.bubble.online.pop();
@@ -57,8 +78,12 @@ export class BubbleVisualisationComponent implements OnInit {
 		leftHalf.setAttribute('src', leftHighestRated);
 	}
 
-	/** Method that returns the name (from the second array) of the highest value from the first array, */
-	getHighestIndex(inputValues, nameValues): string {
+	/** Method that returns the name (from the second array) of the highest value from the first array.
+	 * @param inputValues List of numerical values of certain bubble categories.
+	 * @param nameValues List of strings of location of bubble images.
+	 * @returns Name of highest value of certain category.
+	 */
+	getHighestIndex(inputValues: Array<number>, nameValues: Array<string>): string {
 		let currentMax = -1;
 		let currentName = 'wrong';
 		for (let i = 0; i < inputValues.length; i++) {

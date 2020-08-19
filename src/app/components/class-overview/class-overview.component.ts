@@ -4,6 +4,13 @@
  * Computing Sciences)
  */
 
+/**
+ * class-overview.component.ts
+ * This file handles all the logic for the overview of a student's class where all the student's classmates are shown.
+ * Also contains methods for searching for a specific classmate and a supplementary for leaving a class.
+ * @packageDocumentation
+ */
+
 import { Component, Inject, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { User } from '../../models/user';
@@ -31,6 +38,15 @@ export class ClassOverviewComponent implements OnInit {
 	userClass;
 	userDetails: User;
 
+	/**
+	 * ClassOverviewComponent constructor.
+	 * @param classService
+	 * @param router
+	 * @param fb
+	 * @param dialog
+	 * @param titleService
+	 * @param userService
+	 */
 	constructor(
 		private classService: ClassesService,
 		private router: Router,
@@ -40,8 +56,11 @@ export class ClassOverviewComponent implements OnInit {
 		private userService: UserService
 	) { }
 
-
-	ngOnInit() {
+	/**
+	 * Initialization method.
+	 * @returns
+	 */
+	ngOnInit(): void {
 		this.userService.profile().subscribe(user => {
 			this.userDetails = user;
 		});
@@ -56,7 +75,10 @@ export class ClassOverviewComponent implements OnInit {
 		this.titleService.setTitle('Klas overzicht' + environment.TITLE_TRAIL);
 	}
 
-	/** Method to filter the students in a class. */
+	/**
+	 * Method to filter the students in a class.
+	 * @returns
+	 */
 	search() {
 		let query: string = this.searchForm.get('query').value.toLowerCase();
 		let table = document.getElementById('table').childNodes;
@@ -69,7 +91,10 @@ export class ClassOverviewComponent implements OnInit {
 		}
 	}
 
-	/** Method to clear the filter so all students are displayed again. */
+	/**
+	 * Method to clear the filter so all students are displayed again.
+	 * @returns
+	 */
 	clear() {
 		this.searchForm.get('query').setValue('');
 		let table = document.getElementById('table').childNodes;
@@ -78,7 +103,10 @@ export class ClassOverviewComponent implements OnInit {
 		}
 	}
 
-	/** Method that opens the leave class dialog. */
+	/**
+	 * Method that opens the leave class dialog.
+	 * @returns
+	 */
 	openLeaveClassDialog() {
 		this.dialog.open(LeaveClassDialog, { data: { userId: this.userDetails._id, classId: this.userClass._id, classTitle: this.userClass.title, leaving: true }});
 	}
@@ -91,6 +119,14 @@ export class ClassOverviewComponent implements OnInit {
 
 export class LeaveClassDialog {
 
+	/**
+	 * LeaveClassDialog constructor.
+	 * @param classService
+	 * @param dialog
+	 * @param dialogRef
+	 * @param snackBar
+	 * @param data
+	 */
 	constructor(
 		private classService: ClassesService,
 		private dialog: MatDialog,
@@ -100,7 +136,10 @@ export class LeaveClassDialog {
 	) { }
 
 
-	/** Method to leave your class. */
+	/**
+	 * Method so the current user can leave his class.
+	 * @returns
+	 */
 	leaveClass() {
 		this.classService.leaveClass(this.data.userId, this.data.classId, this.data.leaving).subscribe(data => {
 			if (data.succes) {

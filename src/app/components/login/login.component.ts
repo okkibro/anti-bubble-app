@@ -4,6 +4,13 @@
  * Computing Sciences)
  */
 
+/**
+ * activities.component.ts
+ * This file handles all the logic for logging in a user to the app. Only contains a method that calls the login()
+ * method of the AuthenticationService.
+ * @packageDocumentation
+ */
+
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { AuthenticationService } from '../../services/authentication.service';
@@ -26,6 +33,14 @@ export class LoginComponent implements OnInit {
 		password: ['', Validators.required]
 	});
 
+	/**
+	 * LoginComponent constructor.
+	 * @param auth
+	 * @param router
+	 * @param fb
+	 * @param snackBar
+	 * @param titleService
+	 */
 	constructor(
 		private auth: AuthenticationService,
 		private router: Router,
@@ -34,8 +49,11 @@ export class LoginComponent implements OnInit {
 		private titleService: Title
 	) { }
 
-
-	ngOnInit() {
+	/**
+	 * Initialization method.
+	 * @returns
+	 */
+	ngOnInit(): void {
 		if (this.auth.isLoggedIn()) {
 			this.router.navigate(['home']);
 		}
@@ -43,7 +61,10 @@ export class LoginComponent implements OnInit {
 		this.titleService.setTitle('Login' + environment.TITLE_TRAIL);
 	}
 
-	/** Method to login. */
+	/**
+	 * Method to login a user.
+	 * @returns
+	 */
 	loginUser() {
 		let user = new User();
 		user.email = this.loginForm.get('email').value;

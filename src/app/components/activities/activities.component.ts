@@ -4,6 +4,13 @@
  * Computing Sciences)
  */
 
+/**
+ * activities.component.ts
+ * This file handles all the logic during a session on the student's side. Methods for receving questions,
+ * team members and sending questions can be found here.
+ * @packageDocumentation
+ */
+
 import { Component, OnInit } from '@angular/core';
 import { SocketIOService } from 'src/app/services/socket-io.service';
 import { Router } from '@angular/router';
@@ -40,6 +47,15 @@ export class ActivitiesComponent implements OnInit {
 	];
 	gameFinished: boolean = false;
 
+	/**
+	 * ActivitiesComponent constructor.
+	 * @param socketService
+	 * @param router
+	 * @param data
+	 * @param fb
+	 * @param sessionService
+	 * @param userService
+	 */
 	constructor(
 		private socketService: SocketIOService,
 		private router: Router,
@@ -49,7 +65,10 @@ export class ActivitiesComponent implements OnInit {
 		private userService: UserService
 	) { }
 
-
+	/**
+	 * Initialization method.
+	 * @returns
+	 */
 	ngOnInit(): void {
 		this.gameData = this.getGameData();
 
@@ -76,12 +95,18 @@ export class ActivitiesComponent implements OnInit {
 		this.disableInput();
 	}
 
-	/** Method that returns the game data. */
+	/**
+	 * Method that returns the game data.
+	 * @returns
+	 */
 	getGameData(): any {
 		return this.socketService.gameData;
 	}
 
-	/** Method that listens for incoming questions. */
+	/**
+	 * Method that listens for incoming questions.
+	 * @returns
+	 */
 	receiveQuestion(): void {
 
 		// Students listen for incoming questions.
@@ -95,7 +120,10 @@ export class ActivitiesComponent implements OnInit {
 		});
 	}
 
-	/** Method that listens for teammembers. */
+	/**
+	 * Method that listens for team members.
+	 * @returns
+	 */
 	receiveTeam(): void {
 		this.socketService.listenForTeam((team, article, leaders) => {
 			this.leaders = leaders;
@@ -115,13 +143,20 @@ export class ActivitiesComponent implements OnInit {
 		});
 	}
 
-	/** Method that submits an answer and data to the teacher. */
-	submit(data): void {
+	/**
+	 * Method that submits an answer and data to the teacher.
+	 * @param data Answer given by student to be sent to teacher.
+	 * @returns
+	 */
+	submit(data: any): void {
 		this.submitted = true;
 		this.socketService.studentSubmit({ answer: this.selected, data: data });
 	}
 
-	/** Method that listens whether the game has been stopped by the teacher. */
+	/**
+	 * Method that listens whether the game has been stopped by the teacher.
+	 * @returns
+	 */
 	disableInput(): void {
 
 		// Students listen for the signal that is sent when the teacher presses the 'Stop activiteit' button.

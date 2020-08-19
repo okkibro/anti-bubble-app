@@ -4,6 +4,13 @@
  * Computing Sciences)
  */
 
+/**
+ * avatar-display.component.ts
+ * This file is a sub-component used by the avatar and (classmate-)profile components and handles all the
+ * logic for displaying the avatar on the screen by collecting all the equipped items from the database.
+ * @packageDocumentation
+ */
+
 import { Component, OnInit } from '@angular/core';
 import { User } from '../../models/user';
 import { ActivatedRoute } from '@angular/router';
@@ -18,13 +25,19 @@ import { UserService } from '../../services/user.service';
 
 export class AvatarDisplayComponent implements OnInit {
 
-	constructor(
-		private route: ActivatedRoute,
-		private classService: ClassesService,
-		private userService: UserService
-	) { }
+	/**
+	 * AvatarDisplayComponent constructor.
+	 * @param route
+	 * @param classService
+	 * @param userService
+	 */
+	constructor(private route: ActivatedRoute, private classService: ClassesService, private userService: UserService) { }
 
 
+	/**
+	 * Initialization method.
+	 * @returns
+	 */
 	ngOnInit(): void {
 		if (this.route.snapshot.paramMap.get('id')) {
 			this.classService.classmateProfile(this.route.snapshot.paramMap.get('id')).subscribe(classmate => {
@@ -37,8 +50,11 @@ export class AvatarDisplayComponent implements OnInit {
 		}
 	}
 
-	/** Method to show the avatar, taking the object from the database */
-	showAvatar(user: User) {
+	/**
+	 * Method to show the avatar, taking the object from the database.
+	 * @param user User who's avatar has to be displayed.
+	 */
+	showAvatar(user: User): void {
 		document.getElementById('haar1').setAttribute('src', user.avatar.haar?.fullImage2);
 		document.getElementById('lichaam').setAttribute('src', user.avatar.lichaam.fullImage);
 		document.getElementById('broek').setAttribute('src', user.avatar.broek.fullImage);

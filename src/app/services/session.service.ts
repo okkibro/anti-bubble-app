@@ -20,7 +20,7 @@ export class SessionService {
 	}
 
 	/** Method to do a POST request to get the given activity. */
-	public getActivity(activity: String): Observable<any> {
+	public getActivity(activity: string): Observable<any> {
 		return this.http.post(`${environment.ENDPOINT}/session/activity`, { activity: activity }, { headers: { Authorization: 'Bearer ' + this.cookie.get('mean-token') }});
 	}
 
@@ -35,7 +35,7 @@ export class SessionService {
 	}
 
 	/** Method to do a POST request to get all the questions given a part. */
-	public getShuffledQuestions(part: Number): Observable<any> {
+	public getShuffledQuestions(part: number): Observable<any> {
 		return this.http.post(`${environment.ENDPOINT}/session/questions`, { part: part }, { headers: { Authorization: 'Bearer ' + this.cookie.get('mean-token') }});
 	}
 
@@ -45,7 +45,7 @@ export class SessionService {
 	}
 
 	/** Method to do a POST request to let the user earn money for the shop. */
-	public earnMoney(money: Number): Observable<any> {
+	public earnMoney(money: number): Observable<any> {
 		return this.http.post(`${environment.ENDPOINT}/session/earnMoney`, { money: money }, { headers: { Authorization: 'Bearer ' + this.cookie.get('mean-token') }});
 	}
 }

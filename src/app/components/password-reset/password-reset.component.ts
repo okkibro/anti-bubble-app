@@ -4,6 +4,14 @@
  * Computing Sciences)
  */
 
+/**
+ * password-reset.component.ts
+ * This file handles all the logic for handling resetting the user's old password by setting a new one through
+ * a form. This page can only be visited by a user who is already registered in the database, requested a new
+ * password through the password-recovery component and clicked the link with the correct reset token.
+ * @packageDocumentation
+ */
+
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
@@ -28,6 +36,15 @@ export class PasswordResetComponent implements OnInit {
 			validator: this.passwordMatchValidator
 		});
 
+	/**
+	 * PasswordResetComponent constructor.
+	 * @param route
+	 * @param router
+	 * @param fb
+	 * @param snackBar
+	 * @param passwordRecoveryService
+	 * @param titleService
+	 */
 	constructor(
 		private route: ActivatedRoute,
 		private router: Router,
@@ -38,6 +55,10 @@ export class PasswordResetComponent implements OnInit {
 	) { }
 
 
+	/**
+	 * Initialization method.
+	 * @returns
+	 */
 	ngOnInit(): void {
 
 		// Check if token is correct, otherwise navigate back to login.
@@ -50,8 +71,11 @@ export class PasswordResetComponent implements OnInit {
 		this.titleService.setTitle('Wachtwoord resetten' + environment.TITLE_TRAIL);
 	}
 
-	/** Method to reset your password based on the filled in passwords in the form. */
-	resetPassword() {
+	/**
+	 * Method to reset your password based on the filled in passwords in the form.
+	 * @returns
+	 */
+	resetPassword(): void {
 
 		// Get password and confirm from the form.
 		let password = this.passwordResetForm.get('password').value;
@@ -69,8 +93,11 @@ export class PasswordResetComponent implements OnInit {
 		});
 	}
 
-	/** Method to check if the filled in passwords match. */
-	passwordMatchValidator(form: FormGroup) {
+	/** Method to check if the filled in passwords match.
+	 * @param form Form in which the validation has to take place.
+	 * @returns
+	 */
+	passwordMatchValidator(form: FormGroup): void {
 		let password = form.get('password').value;
 		let repeatPassword = form.get('repeatPassword').value;
 		if (password != repeatPassword) {

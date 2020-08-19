@@ -4,8 +4,17 @@
  * Computing Sciences)
  */
 
+/**
+ * shop.component.ts
+ * This file handles all the logic for handling for creating the app's item shop. User can browse throught the store
+ * and buy items they don't have yet. Each item category has its own tab and changing tabs and filtering items based on
+ * the tab is all handled here.
+ * @packageDocumentation
+ */
+
 import { Component, OnInit } from '@angular/core';
 import { Shop } from '../../models/shop';
+import { ShopItem } from '../../models/shopItem';
 import { ShopService } from 'src/app/services/shop.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { User } from '../../models/user';
@@ -14,6 +23,7 @@ import { milestones } from '../../../../constants';
 import { Title } from '@angular/platform-browser';
 import { environment } from '../../../environments/environment';
 import { UserService } from '../../services/user.service';
+import { MatTabChangeEvent } from '@angular/material/tabs';
 
 @Component({
 	selector: 'mean-shop',
@@ -28,8 +38,24 @@ export class ShopComponent implements OnInit {
 	filteredShop: Shop[];
 	succesWindow: boolean = false;
 	itemColumns: number;
-	shopCategories: string[] = ['Hoofddeksel', 'Haar', 'Bril', 'Shirt', 'Broek', 'Schoenen', 'Medaille'];
+	shopCategories: string[] = [
+		'Hoofddeksel',
+		'Haar',
+		'Bril',
+		'Shirt',
+		'Broek',
+		'Schoenen',
+		'Medaille'
+	];
 
+	/**
+	 * ShopComponent constructor.
+	 * @param shopService
+	 * @param snackBar
+	 * @param milestoneUpdates
+	 * @param titleService
+	 * @param userService
+	 */
 	constructor(
 		private shopService: ShopService,
 		private snackBar: MatSnackBar,
@@ -38,7 +64,10 @@ export class ShopComponent implements OnInit {
 		private userService: UserService
 	) { }
 
-
+	/**
+	 * Initialization method.
+	 * @returns
+	 */
 	ngOnInit(): void {
 		this.shopService.shop('hoofddeksel').subscribe(shop => {
 			this.shopDetails = shop;
@@ -58,8 +87,12 @@ export class ShopComponent implements OnInit {
 		this.titleService.setTitle('Shop' + environment.TITLE_TRAIL);
 	}
 
-	/** Method to change categoty of items you are looking at in the shop */
-	tabChange(event) {
+	/**
+	 * Method to change categoty of items you are looking at in the shop.
+	 * @param event Event triggered by changing tab/category.
+	 * @returns
+	 */
+	tabChange(event: MatTabChangeEvent): void {
 		this.shopService.shop(event.tab.textLabel).subscribe(shop => {
 			this.shopDetails = shop;
 			this.filteredShop = this.filterShop();
@@ -68,8 +101,11 @@ export class ShopComponent implements OnInit {
 		});
 	}
 
-	/** Method to buy and item from the shop and add it to the users inventory and update the milestone if needed */
-	buy(item): void {
+	/** Method to buy and item from the shop and add it to the users inventory and update the milestone if needed
+	 * @param item Item that is bought by the user.
+	 * @returns
+	 */
+	buy(item: ShopItem): void {
 		this.shopService.buy(item).subscribe((data: any) => {
 			if (data.succes && this.succesWindow) {
 				this.snackBar.open(data.message, 'X', { duration: 2000, panelClass: ['style-succes'] }).afterDismissed().subscribe(() => {
@@ -99,14 +135,19 @@ export class ShopComponent implements OnInit {
 		});
 	}
 
-	/** Method to filter the shop based on if the user already owns the item. */
+	/** Method to filter the shop based on if the user already owns the item.
+	 * @returns List of items that comply to the applied filter.
+	 */
 	filterShop(): Shop[] {
 		return this.shopDetails.filter(x => {
 			return this.userDetails.inventory.find(y => y._id == x._id) == null;
 		});
 	}
 
-	/** Method that sets the initial amount of columns based on screen width. */
+	/**
+	 * Method that sets the initial amount of columns based on screen width.
+	 * @returns
+	 */
 	setItemColumns(): void {
 		const screenWidth = window.innerWidth;
 
@@ -123,7 +164,11 @@ export class ShopComponent implements OnInit {
 		}
 	}
 
-	/** Method that changes the amount of columns when the window size changes. */
+	/**
+	 * Method that changes the amount of columns when the window size changes.
+	 * @param event Event triggered when the screen changes size.
+	 * @returns
+	 */
 	onResize(event): void {
 		const screenWidth = event.target.innerWidth;
 

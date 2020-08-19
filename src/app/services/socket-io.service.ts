@@ -95,7 +95,7 @@ export class SocketIOService {
 	}
 
 	/** Method that sends a question to all students in the session. */
-	sendQuestion(question) {
+	teacherSubmit(question) {
 		this.socket.emit('send-question', question);
 	}
 

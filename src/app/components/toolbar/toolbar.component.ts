@@ -4,6 +4,12 @@
  * Computing Sciences)
  */
 
+/**
+ * toolbar.component.ts
+ * This file contains all the logic and methods used by the toolbar (desktop mode).
+ * @packageDocumentation
+ */
+
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { AuthenticationService } from '../../services/authentication.service';
 import { tokenData } from 'src/app/models/tokenData';
@@ -11,7 +17,8 @@ import { tokenData } from 'src/app/models/tokenData';
 @Component({
 	selector: 'mean-toolbar',
 	templateUrl: './toolbar.component.html',
-	styleUrls: ['./toolbar.component.css']
+	styleUrls: ['./toolbar.component.css',
+		'../../shared/general-styles.css']
 })
 
 export class ToolbarComponent implements OnInit {
@@ -19,19 +26,33 @@ export class ToolbarComponent implements OnInit {
 
 	tokenData: tokenData;
 
-	constructor(private auth: AuthenticationService) {
-	}
+	/**
+	 * ToolbarComponent constructor.
+	 * @param auth
+	 */
+	constructor(private auth: AuthenticationService) {}
 
+	/**
+	 * Initialization method.
+	 * @returns
+	 */
 	ngOnInit(): void {
 		this.tokenData = this.auth.getTokenData();
 	}
 
-	/** Method to logout. */
-	logoutButton() {
+	/**
+	 * Method to logout the current user.
+	 * @returns
+	 */
+	logoutButton(): void {
 		return this.auth.logout();
 	}
 
-	public onToggleSidenav = () => {
+	/**
+	 * Method that toggles the sidebar in/out when it is running in 'mobile' mode.
+	 * @returns
+	 */
+	public onToggleSidenav = (): void => {
 		this.sidenavToggle.emit();
 	};
 }

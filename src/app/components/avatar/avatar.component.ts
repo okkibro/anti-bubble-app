@@ -4,14 +4,22 @@
  * Computing Sciences)
  */
 
+/**
+ * avatar.component.ts
+ * This file is responsible for the 'avatar' page in the app. The file contains methods
+ * @packageDocumentation
+ */
+
 import { Component, OnInit } from '@angular/core';
 import { User } from '../../models/user';
+import { ShopItem } from '../../models/shopItem';
 import { ShopService } from 'src/app/services/shop.service';
 import { AvatarService } from 'src/app/services/avatar.service';
 import { AvatarDisplayComponent } from '../avatar-display/avatar-display.component';
 import { Title } from '@angular/platform-browser';
 import { environment } from '../../../environments/environment';
 import { UserService } from '../../services/user.service';
+import { MatTabChangeEvent } from '@angular/material/tabs';
 
 @Component({
 	selector: 'mean-avatar',
@@ -25,9 +33,25 @@ export class AvatarComponent implements OnInit {
 	userDetails: User;
 	itemsShown = [];
 	filteredAvatar = [];
-	itemCategories: string[] = ['Hoofddeksel', 'Haar', 'Bril', 'Shirt', 'Broek', 'Schoenen', 'Medaille'];
+	itemCategories: string[] = [
+		'Hoofddeksel',
+		'Haar',
+		'Bril',
+		'Shirt',
+		'Broek',
+		'Schoenen',
+		'Medaille'
+	];
 	itemColumns: number;
 
+	/**
+	 * AvatarComponent constructor.
+	 * @param shopService
+	 * @param avatarService
+	 * @param avatarDisplay
+	 * @param titleService
+	 * @param userService
+	 */
 	constructor(
 		private shopService: ShopService,
 		private avatarService: AvatarService,
@@ -36,8 +60,11 @@ export class AvatarComponent implements OnInit {
 		private userService: UserService
 	) { }
 
-
-	ngOnInit() {
+	/**
+	 * Initialization method.
+	 * @returns
+	 */
+	ngOnInit(): void {
 		this.shopService.shop('hoofddeksel').subscribe(shop => {
 			this.userService.profile().subscribe(user => {
 				this.userDetails = user;
@@ -58,8 +85,12 @@ export class AvatarComponent implements OnInit {
 		this.titleService.setTitle('Avatar' + environment.TITLE_TRAIL);
 	}
 
-	/** Method that assigns an item to the user's avatar in the database. */
-	equip(item) {
+	/**
+	 * Method that assigns an item to the user's avatar in the database.
+	 * @param item Item to be equipped by the user.
+	 * @returns
+	 */
+	equip(item: ShopItem): void {
 		this.avatarService.equip(item).subscribe(data => {
 
 			// Updates the image shown to the player without reloading the page.
@@ -72,8 +103,12 @@ export class AvatarComponent implements OnInit {
 		});
 	}
 
-	/** Method to change the tab in the HTML and updates the shown items. */
-	tabChange(event) {
+	/**
+	 * Method to change the tab in the HTML and updates the shown items.
+	 * @param event Event triggered by changing tab/category.
+	 * @returns
+	 */
+	tabChange(event: MatTabChangeEvent): void {
 		this.shopService.shop(event.tab.textLabel).subscribe(shop => {
 			this.itemsShown = shop;
 			this.filteredAvatar = this.filterAvatar();
@@ -82,14 +117,20 @@ export class AvatarComponent implements OnInit {
 		});
 	}
 
-	/** Method to filter the avatar items to only show the items in the inventory/that the player bought. */
+	/**
+	 * Method to filter the avatar items to only show the items in the inventory/that the player bought.
+	 * @returns List of items currently owned by the user.
+	 */
 	filterAvatar(): AvatarComponent[] {
 		return this.itemsShown.filter(x => {
 			return this.userDetails.inventory.find(y => x._id == y._id) != null;
 		});
 	}
 
-	/** Method that sets the initial amount of columns based on screen width. */
+	/**
+	 * Method that sets the initial amount of columns based on screen width.
+	 * @returns
+	 */
 	setItemColumns(): void {
 		const screenWidth = window.innerWidth;
 
@@ -100,7 +141,11 @@ export class AvatarComponent implements OnInit {
 		}
 	}
 
-	/** Method that changes the amount of columns when the window size changes. */
+	/**
+	 * Method that changes the amount of columns when the window size changes.
+	 * @param event Event triggered when the screen changes size.
+	 * @returns
+	 */
 	onResize(event): void {
 		const screenWidth = event.target.innerWidth;
 

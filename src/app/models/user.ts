@@ -25,6 +25,6 @@ export class User {
 	avatar: any;
 	recentMilestones: [string];
 	bubbleInit: boolean;
-	labyrinthAnswers: [Number];
+	labyrinthAnswers: [number];
 	bubble: any;
 }

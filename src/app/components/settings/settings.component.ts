@@ -4,6 +4,15 @@
  * Computing Sciences)
  */
 
+/**
+ * settings.component.ts
+ * This file handles all the logic for user's who want to change certain field of their profile, like first name
+ * or email. Also contains a form for changing a user's password, very similar to the one found in the
+ * password-reset component. Finally, contains a sub-component, DeleteAccountDialog, for when a user wants to
+ * delete his account from the app.
+ * @packageDocumentation
+ */
+
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { environment } from '../../../environments/environment';
@@ -45,6 +54,16 @@ export class SettingsComponent implements OnInit {
 	editEnabledLastName: boolean = false;
 	editEnabledEmail: boolean = false;
 
+	/**
+	 * SettingsComponent constructor.
+	 * @param fb
+	 * @param snackBar
+	 * @param classService
+	 * @param router
+	 * @param dialog
+	 * @param titleService
+	 * @param userService
+	 */
 	constructor(
 		private fb: FormBuilder,
 		private snackBar: MatSnackBar,
@@ -55,7 +74,10 @@ export class SettingsComponent implements OnInit {
 		private userService: UserService
 	) { }
 
-
+	/**
+	 * Initialization method.
+	 * @returns
+	 */
 	ngOnInit(): void {
 		this.userService.profile().subscribe(user => {
 			this.userDetails = user;
@@ -64,7 +86,10 @@ export class SettingsComponent implements OnInit {
 		this.titleService.setTitle('Instellingen' + environment.TITLE_TRAIL);
 	}
 
-	/** Method to change you password on the profile page. */
+	/**
+	 * Method to change you password on the profile page.
+	 * @returns
+	 */
 	changePassword(): void {
 		let email = this.userDetails.email;
 		let oldPassword = this.changePasswordForm.get('oldPassword').value;
@@ -82,7 +107,10 @@ export class SettingsComponent implements OnInit {
 		});
 	}
 
-	/** Method to check of the passwords given in the form match. */
+	/** Method to check if the filled in passwords match.
+	 * @param form Form in which the validation has to take place.
+	 * @returns
+	 */
 	passwordMatchValidator(form: FormGroup): void {
 		let newpassword = form.get('newPassword').value;
 		let repeatPassword = form.get('repeatPassword').value;
@@ -91,12 +119,18 @@ export class SettingsComponent implements OnInit {
 		}
 	}
 
-	/** Method that opens the delete user acocunt dialog. */
+	/**
+	 * Method that opens the delete user acocunt dialog.
+	 * @returns
+	 */
 	openDeleteAccountDialog(): void {
 		this.dialog.open(DeleteAccountDialog, { data: { role: this.userDetails?.role }});
 	}
 
-	/** Method that changes the profile-table so that it can be edited */
+	/** Method that changes the profile-table so that it can be edited
+	 * @param field Row of user's profile that has to switch to/from edit mode.
+	 * @returns
+	 */
 	changeEditMode(field: string): void {
 		switch (field) {
 			case 'firstName':
@@ -111,7 +145,12 @@ export class SettingsComponent implements OnInit {
 		}
 	}
 
-	/** Method that updates a value of the person's profile */
+	/**
+	 * Method that updates a value of the person's profile.
+	 * @param field User profile field that has to be updated.
+	 * @param value New value of passed user profile field.
+	 * @returns
+	 */
 	updateField(field: string, value: string): void {
 		this.userService.updateUser(field, value).subscribe(data => {
 			if (data.succes) {
@@ -137,6 +176,14 @@ export class SettingsComponent implements OnInit {
 
 export class DeleteAccountDialog {
 
+	/**
+	 * DeleteAccountDialog constructor.
+	 * @param auth
+	 * @param userService
+	 * @param snackBar
+	 * @param dialogRef
+	 * @param data
+	 */
 	constructor(
 		private auth: AuthenticationService,
 		private userService: UserService,
@@ -146,7 +193,10 @@ export class DeleteAccountDialog {
 	) { }
 
 
-	/** Method to delete a user's account. */
+	/**
+	 * Method to delete a user's account.
+	 * @returns
+	 */
 	deleteAccount(): void {
 		this.userService.deleteAccount().subscribe(data => {
 			if (data.succes) {

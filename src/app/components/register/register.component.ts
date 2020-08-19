@@ -4,6 +4,14 @@
  * Computing Sciences)
  */
 
+/**
+ * register.component.ts
+ * This file handles all the logic for registering a new user in the app. Most of the validation of the
+ * form inputs is done here in the front-end and passed to the back-end where some sanitization of
+ * inputs is done and hashing of the password.
+ * @packageDocumentation
+ */
+
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthenticationService } from '../../services/authentication.service';
@@ -39,6 +47,15 @@ export class RegisterComponent implements OnInit {
 			validator: this.passwordMatchValidator
 		});
 
+	/**
+	 * RegisterComponent constructor.
+	 * @param auth
+	 * @param router
+	 * @param fb
+	 * @param shop
+	 * @param titleService
+	 * @param userService
+	 */
 	constructor(
 		private auth: AuthenticationService,
 		private router: Router,
@@ -48,13 +65,19 @@ export class RegisterComponent implements OnInit {
 		private userService: UserService
 	) { }
 
-
-	ngOnInit() {
+	/**
+	 * Initialization method.
+	 * @returns
+	 */
+	ngOnInit(): void {
 		this.titleService.setTitle('Registreer' + environment.TITLE_TRAIL);
 	}
 
-	/** Method to register a new user based on the information filled in on the form. */
-	registerUser() {
+	/**
+	 * Method to register a new user based on the information filled in on the form.
+	 * @returns
+	 */
+	registerUser(): void {
 		let user = new User();
 		user.firstName = this.registerForm.get('firstName').value;
 		user.lastName = this.registerForm.get('lastName').value;
@@ -72,8 +95,11 @@ export class RegisterComponent implements OnInit {
 		});
 	}
 
-	/** Method to check if the filled in passwords match. */
-	passwordMatchValidator(form: FormGroup) {
+	/** Method to check if the filled in passwords match.
+	 * @param form Form in which the validation has to take place.
+	 * @returns
+	 */
+	passwordMatchValidator(form: FormGroup): void {
 		let password = form.get('password').value;
 		let repeatPassword = form.get('repeatPassword').value;
 		if (password != repeatPassword) {

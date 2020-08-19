@@ -22,7 +22,7 @@ export class ShopService {
 	}
 
 	/** Method to do a POST request to get an item from the shop of a specific type. */
-	public shop(type: 'haar' | 'lichaam' | 'broek' | 'shirt' | 'schoenen' | 'bril' | 'hoofddeksel' | 'medaille'): Observable<any> {
+	public shop(type: string): Observable<any> {
 		return this.http.get(`${environment.ENDPOINT}/shop`, { headers: { id: type }});
 	}
 

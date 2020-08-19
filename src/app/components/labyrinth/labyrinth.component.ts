@@ -4,8 +4,16 @@
  * Computing Sciences)
  */
 
+/**
+ * labyrinth.component.ts
+ * This file handles all the logic during a session on the student's side. Methods for receving questions,
+ * team members and sending questions can be found here.
+ * @packageDocumentation
+ */
+
 import { Component, OnInit } from '@angular/core';
 import { User } from '../../models/user';
+import { Question } from '../../models/question';
 import { Router } from '@angular/router';
 import { SessionService } from '../../services/session.service';
 import { AuthenticationService } from '../../services/authentication.service';
@@ -29,7 +37,7 @@ export class LabyrinthComponent implements OnInit {
 	nextQuestionDisabled: boolean;
 	questions = [];
 	questionOptions = [];
-	part: Number;
+	part: number;
 	answers: [{ question: any, answer: any }] = [,];
 	currentQuestion;
 	questionLoaded: boolean = false;
@@ -38,6 +46,17 @@ export class LabyrinthComponent implements OnInit {
 		answer: ['', Validators.required]
 	});
 
+	/**
+	 * LabyrinthComponent constructor.
+	 * @param router
+	 * @param sessionService
+	 * @param auth
+	 * @param snackBar
+	 * @param bubbleService
+	 * @param fb
+	 * @param titleService
+	 * @param userService
+	 */
 	constructor(
 		private router: Router,
 		private sessionService: SessionService,
@@ -50,6 +69,10 @@ export class LabyrinthComponent implements OnInit {
 	) { }
 
 
+	/**
+	 * Initialization method.
+	 * @returns
+	 */
 	ngOnInit(): void {
 		this.userService.profile().subscribe(user => {
 			this.userDetails = user;
@@ -61,8 +84,11 @@ export class LabyrinthComponent implements OnInit {
 		this.titleService.setTitle('Doolhof' + environment.TITLE_TRAIL);
 	}
 
-	/** Method that saves answers the user gave and sets their bubble initialization to true so they can join a session after this. */
-	performedLabyrinth() {
+	/**
+	 * Method that saves answers the user gave and sets their bubble initialization to true so they can join a session after this.
+	 * @returns
+	 */
+	performedLabyrinth(): void {
 		this.sessionService.performedLabyrinth().subscribe(data => {
 
 			// Labyrinth boolean is set to true. Player now has a bubble and can join activity sessions.
@@ -83,8 +109,11 @@ export class LabyrinthComponent implements OnInit {
 		});
 	}
 
-	/** Method that starts the labyrinth. */
-	startLabyrinth() {
+	/**
+	 * Method that starts the labyrinth.
+	 * @returns
+	 */
+	startLabyrinth(): void {
 
 		// Shows the question screen due to ngIfs in the HTML.
 		this.startedLabyrinth = true;
@@ -98,8 +127,11 @@ export class LabyrinthComponent implements OnInit {
 		});
 	}
 
-	/** Method to pause the labyrinth */
-	paused() {
+	/**
+	 * Method to pause the labyrinth.
+	 * @returns
+	 */
+	paused(): void {
 		this.sessionService.saveAnswers(this.answers).subscribe(() => {
 			this.snackBar.open('Doolhof gepauzeerd. Zorg dat je het voor de volgende les hebt afgemaakt.', 'X', {
 				duration: 2500,
@@ -112,8 +144,11 @@ export class LabyrinthComponent implements OnInit {
 		});
 	}
 
-	/** Method that shows the next question on the screen. */
-	nextQuestion(prevQuestion) {
+	/** Method that shows the next question on the screen.
+	 * @param prevQuestion Question used to determine what question is next in the labyrinth.
+	 * @returns
+	 */
+	nextQuestion(prevQuestion: Question): void {
 		this.nextQuestionDisabled = true;
 		this.questionLoaded = false;
 		if (this.questions.length === 0) {
@@ -153,8 +188,11 @@ export class LabyrinthComponent implements OnInit {
 		}
 	}
 
-	/** Method that saves a question to this.answers. */
-	saveQuestion(question) {
+	/** Method that saves a question to the global this.answers array.
+	 * @param question Question that has just been answerd by the user.
+	 * @returns
+	 */
+	saveQuestion(question: Question): void {
 		if (question) {
 
 			// Push the result with its corresponding question to this.answers.
@@ -165,8 +203,11 @@ export class LabyrinthComponent implements OnInit {
 		}
 	}
 
-	/** Method that shows a question on the screen. */
-	showQuestion(question) {
+	/** Method that shows a question on the screen.
+	 * @param question Quesiton that has to be shown to the user.
+	 * @returns
+	 */
+	showQuestion(question: Question): void {
 
 		// Set question title.
 		document.getElementById('question').innerHTML = question.question;
@@ -177,6 +218,8 @@ export class LabyrinthComponent implements OnInit {
 		// For each question...
 		for (let i = 0; i < question.choices.length; i++) {
 
+			// Determine whether the question to be shown is an image question by looking at the path
+			// and adjusting the styling as necessary.
 			if (question.choices[i].startsWith('/assets/')) {
 				setTimeout(() => {
 					let radioGroup = document.getElementById('radio-button-options');
@@ -219,7 +262,7 @@ export class LabyrinthComponent implements OnInit {
 		}
 	}
 
-	selectedOption() {
+	selectedOption(): void {
 		this.nextQuestionDisabled = false;
 	}
 }

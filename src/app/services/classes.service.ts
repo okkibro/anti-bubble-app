@@ -30,7 +30,7 @@ export class ClassesService {
 	}
 
 	/** Method to do a POST request to join an existing class based on the given code. */
-	public joinClass(code: Number): Observable<any> {
+	public joinClass(code: number): Observable<any> {
 		return this.http.post(`${environment.ENDPOINT}/class/joinClass`, { code: code }, { headers: { Authorization: 'Bearer ' + this.cookie.get('mean-token') }});
 	}
 

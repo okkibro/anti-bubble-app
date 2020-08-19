@@ -4,6 +4,14 @@
  * Computing Sciences)
  */
 
+/**
+ * bubble-details.component.ts
+ * This file handles most of the logic for displaying the details of the user's bubble. This includes a table with the
+ * current bubble's data (points per category) and a chart with the user's bubble history. The actual displaying of
+ * the user's current bubble is handled by bubble-visualisation.component.ts.
+ * @packageDocumentation
+ */
+
 import { Component, OnInit } from '@angular/core';
 import { User } from '../../models/user';
 import * as Highcharts2 from 'highcharts';
@@ -43,6 +51,13 @@ export class BubbleDetailsComponent implements OnInit {
 	chartOptions = {};
 	userDetails: User;
 
+	/**
+	 * BubbleDetailsComponent constructor.
+	 * @param userService
+	 * @param titleService
+	 * @param milestoneUpdates
+	 * @param snackBar
+	 */
 	constructor(
 		private userService: UserService,
 		private titleService: Title,
@@ -50,8 +65,11 @@ export class BubbleDetailsComponent implements OnInit {
 		private snackBar: MatSnackBar
 	) { }
 
-
-	ngOnInit() {
+	/**
+	 * Initialization method.
+	 * @returns
+	 */
+	ngOnInit(): void {
 		this.userService.profile().subscribe(user => {
 			this.userDetails = user;
 			this.data = user.bubble;
@@ -71,7 +89,11 @@ export class BubbleDetailsComponent implements OnInit {
 		this.titleService.setTitle('Bubbel details' + environment.TITLE_TRAIL);
 	}
 
-	initChart() {
+	/**
+	 * Initialization method for showing the user's bubble history.
+	 * @returns
+	 */
+	initChart(): void {
 		this.chartOptions = {
 			chart: {
 				type: 'spline'

@@ -4,6 +4,13 @@
  * Computing Sciences)
  */
 
+/**
+ * password-recovery.component.ts
+ * This file handles all the logic for handling the password recovery form for users who have forgotten
+ * their password and want to request a new one.
+ * @packageDocumentation
+ */
+
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -24,6 +31,14 @@ export class PasswordRecoveryComponent implements OnInit {
 		email: ['', [Validators.required, Validators.email]]
 	});
 
+	/**
+	 * PasswordRecoveryComponent constructor.
+	 * @param passwordRecoveryService
+	 * @param router
+	 * @param fb
+	 * @param snackBar
+	 * @param titleService
+	 */
 	constructor(
 		private passwordRecoveryService: PasswordRecoveryService,
 		private router: Router,
@@ -32,13 +47,19 @@ export class PasswordRecoveryComponent implements OnInit {
 		private titleService: Title
 	) { }
 
-
-	ngOnInit() {
+	/**
+	 * Initialization method.
+	 * @returns
+	 */
+	ngOnInit(): void {
 		this.titleService.setTitle('Wachtwoord vergeten' + environment.TITLE_TRAIL);
 	}
 
-	/** Method to send an email to the user to reset their password. */
-	sendEmail() {
+	/**
+	 * Method to send an email to the user to reset their password.
+	 * @returns
+	 */
+	sendEmail(): void {
 		let email = this.passwordRecoveryForm.get('email').value; // Get email from the input field.
 
 		// Send email, data returns whether the action was a succes and a message to show to the user.
