@@ -5,5 +5,7 @@
  */
 
 export const environment = {
-	production: true
+	production: true,
+	ENDPOINT: 'https://localhost:3000',
+	TITLE_TRAIL: ' | Anti Bubble App'
 };
