@@ -8,7 +8,7 @@
     <mat-form-field *ngIf="!answerSubmitted">
         <mat-label>Vul hier je antwoord in</mat-label>
         <textarea matInput formControlName="getAnswer" placeholder="Antwoord"></textarea>
-    </mat-form-field>
+    </mat-form-field><br>
     <button mat-button class="general-button" type="submit" *ngIf="!answerSubmitted">Verstuur</button>
     <p *ngIf="answerSubmitted"><i>Je antwoord is ingeleverd. Wacht op verdere instructies van de docent.</i></p>
 </form>
@@ -18,6 +18,6 @@
         <mat-label>Vul hier een onderwerp in</mat-label>
         <textarea matInput formControlName="getQuestion" placeholder="Onderwerp"></textarea>
     </mat-form-field>
-    <p *ngIf="questionSubmitted">Je hebt <strong>{{ question }}</strong> als onderwerp ingestuurd.</p>
     <button *ngIf="!questionSubmitted" mat-button class="general-button" type="submit">Verstuur</button>
+    <p *ngIf="questionSubmitted">Je hebt <strong>{{ question }}</strong> als onderwerp ingestuurd.</p>
 </form>

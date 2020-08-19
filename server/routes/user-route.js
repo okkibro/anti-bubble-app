@@ -187,7 +187,7 @@ router.post('/reset/:token', (req, res) => {
 	// Find the user that belongs to the given token
 	Users.findOne({ recoverPasswordToken: req.params.token, recoverPasswordExpires: { $gt: Date.now() } }, (err, user) => {
 		if (!err) {
-			user.setPassword(req.body.password, (err) => {
+			user.setPassword(req.body.newPassword, (err) => {
 				if (err) {
 					return res.status(500).json({ succes: false, message: err });
 				}
@@ -234,14 +234,14 @@ router.post('/checkEmailTaken', (req, res) => {
 });
 
 /** PATCH method to update a password given an email. */
-router.patch('/updatePassword', (req, res) => {
+router.patch('/updatePassword', auth, (req, res) => {
 
 	// Check if user is authorized to perform the action.
 	if (!req.payload._id) {
 		return res.status(401).json({ message: 'UnauthorizedError: unauthorized action' });
 	} else {
-		Users.findOne({ email: sanitize(req.body.email) }).then(user => {
-			if (user) {
+		Users.findById(req.payload._id, (err, user) => {
+			if (!err && user != null) {
 
 				// Check if old password is filled in correctly.
 				if (user.validatePassword(sanitize(req.body.oldPassword))) {

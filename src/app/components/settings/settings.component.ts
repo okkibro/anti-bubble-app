@@ -91,10 +91,9 @@ export class SettingsComponent implements OnInit {
 	 * @returns
 	 */
 	changePassword(): void {
-		let email = this.userDetails.email;
 		let oldPassword = this.changePasswordForm.get('oldPassword').value;
 		let newPassword = this.changePasswordForm.get('newPassword').value;
-		this.userService.updatePassword(email, oldPassword, newPassword).subscribe(data => {
+		this.userService.updatePassword(oldPassword, newPassword).subscribe(data => {
 			if (data.succes) {
 				this.snackBar.open(data.message, 'X', { duration: 2500, panelClass: ['style-succes'] }).afterDismissed().subscribe(() => {
 					window.location.reload();

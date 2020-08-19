@@ -60,7 +60,9 @@ export class PasswordRecoveryComponent implements OnInit {
 	 * @returns
 	 */
 	sendEmail(): void {
-		let email = this.passwordRecoveryForm.get('email').value; // Get email from the input field.
+
+		// Get email from the input field.
+		let email = this.passwordRecoveryForm.get('email').value;
 
 		// Send email, data returns whether the action was a succes and a message to show to the user.
 		this.passwordRecoveryService.sendEmail(email).subscribe(data => {

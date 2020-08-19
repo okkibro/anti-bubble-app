@@ -4,6 +4,12 @@
  * Computing Sciences)
  */
 
+/**
+ * user.service.ts
+ * This file sends all HTTP requests used for recovering and resetting a user's password.
+ * @packageDocumentation
+ */
+
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
@@ -18,20 +24,34 @@ import { map } from 'rxjs/operators';
 
 export class UserService {
 
-	constructor(private http: HttpClient, private cookie: CookieService) {
-	}
+	/**
+	 * UserService constructor.
+	 * @param http
+	 * @param cookie
+	 */
+	constructor(private http: HttpClient, private cookie: CookieService) { }
 
-	/** DELETE method for deleting a user's account. */
+	/**
+	 * Method to do a DELETE request for deleting a user's account.
+	 * @returns HTTP response data in an Observable.
+	 */
 	public deleteAccount(): Observable<any> {
 		return this.http.delete(`${environment.ENDPOINT}/user/deleteAccount`, { headers: { Authorization: 'Bearer ' + this.cookie.get('mean-token') }});
 	}
 
-	/** POST method to check if a given email is already present in the database. */
+	/**
+	 * Method to do a POST request to check if a given email is already present in the database.
+	 * @param email Email to be checked.
+	 * @returns HTTP response data in an Observable.
+	 */
 	public checkEmailTaken(email: string) {
 		return this.http.post(`${environment.ENDPOINT}/user/checkEmailTaken`, { email: email });
 	}
 
-	/** An async validator method to check if an email is already taken. */
+	/**
+	 * An async validator method to check if an email is already taken.
+	 * @returns Validator function for verifying email uniqueness.
+	 */
 	public uniqueEmailValidator(): AsyncValidatorFn {
 		return (control: AbstractControl): Observable<ValidationErrors | null> => {
 			return this.checkEmailTaken(control.value).pipe(
@@ -46,12 +66,24 @@ export class UserService {
 		};
 	}
 
-	/** PATCH method to update the password of an already registered user. */
-	public updatePassword(email: string, oldPassword: string, newPassword: string): Observable<any> {
-		return this.http.patch(`${environment.ENDPOINT}/user/updatePassword`, { email: email, oldPassword: oldPassword, newPassword: newPassword });
+	/**
+	 * Method to do a PATCH request to update the password of an already registered user.
+	 * @param oldPassword Old password for verification.
+	 * @param newPassword New password for user.
+	 * @returns HTTP response data in an Observable.
+	 */
+	public updatePassword(oldPassword: string, newPassword: string): Observable<any> {
+		return this.http.patch(`${environment.ENDPOINT}/user/updatePassword`,
+			{ oldPassword: oldPassword, newPassword: newPassword },
+			{ headers: { Authorization: 'Bearer ' + this.cookie.get('mean-token') }});
 	}
 
-	/** PACTH method to change name/email/etc... of a user. */
+	/**
+	 * Method to do a PATCH request to change name/email/etc... of a user.
+	 * @param field User profile field to be updated.
+	 * @param value New value of specified field.
+	 * @returns HTTP response data in an Observable.
+	 */
 	public updateUser(field: string, value: string): Observable<any> {
 		return this.http.patch(`${environment.ENDPOINT}/user/updateUser`, {
 			field: field,
@@ -59,7 +91,10 @@ export class UserService {
 		}, { headers: { Authorization: 'Bearer ' + this.cookie.get('mean-token') }});
 	}
 
-	/** GET method for fetching a user's profile */
+	/**
+	 * Method to do a GEt request for fetching a user's profile
+	 * @returns HTTP response data in an Observable.
+	 */
 	public profile(): Observable<any> {
 		return this.http.get(`${environment.ENDPOINT}/user/profile`, { headers: { Authorization: 'Bearer ' + this.cookie.get('mean-token') }});
 	}

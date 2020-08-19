@@ -77,12 +77,11 @@ export class PasswordResetComponent implements OnInit {
 	 */
 	resetPassword(): void {
 
-		// Get password and confirm from the form.
-		let password = this.passwordResetForm.get('password').value;
-		let repeatPassword = this.passwordResetForm.get('repeatPassword').value;
+		// Get password from the form.
+		let newPassword = this.passwordResetForm.get('password').value;
 
 		// Send password and confirm to back-end which will return whether it was a succes and the message to show the user.
-		this.passwordRecoveryService.postNewPassword(this.route.snapshot.paramMap.get('token'), password, repeatPassword).subscribe(data => {
+		this.passwordRecoveryService.postNewPassword(this.route.snapshot.paramMap.get('token'), newPassword).subscribe(data => {
 			if (!data.succes) {
 				this.snackBar.open(data.message, 'X', { duration: 2500, panelClass: ['style-error'] });
 			} else {

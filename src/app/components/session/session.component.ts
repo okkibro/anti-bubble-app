@@ -255,7 +255,7 @@ export class SessionComponent implements OnInit {
 
 	/** Method that takes the game name and will return whether the game can start or not.
 	 * @param game Type of the activity.
-	 * @return Whether it is possible to start the game.
+	 * @returns Whether it is possible to start the game.
 	 */
 	canStart(game: string): boolean {
 		switch (game) {
