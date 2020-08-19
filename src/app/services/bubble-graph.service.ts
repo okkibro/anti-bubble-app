@@ -4,10 +4,17 @@
  * Computing Sciences)
  */
 
+/**
+ * bubble-graph.service.ts
+ * This file sends all HTTP requests used for processing the user's introduction labyrinth.
+ * @packageDocumentation
+ */
+
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { CookieService } from 'ngx-cookie-service';
 import { environment } from 'src/environments/environment';
+import { Observable } from 'rxjs';
 
 @Injectable({
 	providedIn: 'root'
@@ -15,15 +22,20 @@ import { environment } from 'src/environments/environment';
 
 export class BubbleGraphService {
 
-	constructor(private http: HttpClient, private cookie: CookieService) {
-	}
+	/**
+	 * BubbleGrappService constructor.
+	 * @param http
+	 * @param cookie
+	 */
+	constructor(private http: HttpClient, private cookie: CookieService) { }
 
-	/** Method to do a POST request to the backend to update the bubble statistics of a user */
-	public updateBubble(answers: [{ question: any, answer: any }]) {
-		return this.http.post(`${environment.ENDPOINT}/user/updateBubble`, { answers: answers }, { headers: { Authorization: 'Bearer ' + this.cookie.get('mean-token') }});
-	}
-
-	public processLabyrinth(answers: [{ question: any, answer: any }]) {
+	/**
+	 * Method to do a POST request to the backend to process the answers given during the introduction labyrinth
+	 * and generate the user's initial bubble.
+	 * @param answers Questions and their answers given duriong the introduction labyrinth.
+	 * @returns HTTP response data in an Observable.
+	 */
+	public processLabyrinth(answers: [{ question: any, answer: any }]): Observable<any> {
 		return this.http.post(`${environment.ENDPOINT}/user/processAnswers`, { answers: answers }, { headers: { Authorization: 'Bearer ' + this.cookie.get('mean-token') }});
 	}
 }
