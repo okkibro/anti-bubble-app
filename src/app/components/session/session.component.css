@@ -34,3 +34,13 @@
 .time-left {
     width: 200px;
 }
+
+.mat-card-subtitle {
+    margin-bottom: 5px !important;
+}
+
+.mat-card .mat-divider-horizontal {
+    margin-left: 10%;
+    width: 80%;
+    border-top-color: black;
+}

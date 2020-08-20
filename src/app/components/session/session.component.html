@@ -63,7 +63,7 @@
                 <div>
                     <mat-card-header>
                         <mat-card-title>{{ gameData?.game.name }}</mat-card-title>
-                        <mat-card-subtitle *ngIf="!enableQuestions">Antwoorden</mat-card-subtitle>
+                        <mat-card-subtitle *ngIf="!enableQuestions">Antwoorden:</mat-card-subtitle>
                     </mat-card-header>
 
                     <mat-card-content *ngIf="gameData?.game.name == 'Naamloos Nieuws'">
@@ -71,8 +71,9 @@
                     </mat-card-content>
 
                     <mat-card-content *ngIf="gameData?.game.name == 'Botsende Bubbels'">
-                        <mean-answer-form *ngIf="enableQuestions && !gameFinished"></mean-answer-form>
                         <table class="submit-table"></table>
+                        <mat-divider *ngIf="!enableQuestions"></mat-divider><br>
+                        <mean-answer-form *ngIf="!gameFinished"></mean-answer-form>
                         <p *ngIf="gameFinished && !timedOut"><i>Je hebt het spel gestopt. Ga terug naar het startscherm om een nieuwe sessie te starten.</i></p>
                         <p *ngIf="gameFinished && timedOut"><i>De tijd is om en het spel is afgelopen. Ga terug naar het startscherm om een nieuwe sessie te starten.</i></p>
                     </mat-card-content>
