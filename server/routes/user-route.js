@@ -370,8 +370,8 @@ router.post('/processAnswers', auth, (req, res) => {
 		return res.status(401).json({ message: 'UnauthorizedError: unauthorized action' });
 	} else {
 		Users.findById(req.payload._id, (err, user) => {
-			if (!err) {
-				for (let q of req.body.answers) {
+			if (!err && user != null) {
+				for (q of req.body.answers) {
 					if (q != null) {
 						if (q.question.choiceConsequence[q.answer] !== '') {
 							let oldValue = user.bubble[q.question.choiceConsequence[q.answer]].pop();
@@ -397,7 +397,7 @@ router.post('/processAnswers', auth, (req, res) => {
 					if (err) {
 						return res.status(500).json({ succes: false, message: err });
 					}
-					return res.status(200);
+					return res.status(200).json({ succes: true });
 				});
 			} else {
 				return res.status(404).json({ message: err });

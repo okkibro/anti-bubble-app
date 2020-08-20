@@ -60,7 +60,7 @@ export class SessionService {
 	 * @param part Part of the labyrinth which questions need to get.
 	 * @returns HTTP response data in an Observable.
 	 */
-	public getShuffledQuestions(part: number): Observable<any> {
+	public getQuestions(part: number): Observable<any> {
 		return this.http.post(`${environment.ENDPOINT}/session/questions`, { part: part }, { headers: { Authorization: 'Bearer ' + this.cookie.get('mean-token') }});
 	}
 

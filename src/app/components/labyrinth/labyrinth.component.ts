@@ -119,8 +119,8 @@ export class LabyrinthComponent implements OnInit {
 		this.startedLabyrinth = true;
 
 		// Get the part 1 questions from the database.
-		this.sessionService.getShuffledQuestions(1).subscribe(questions => {
-			this.questions = questions;
+		this.sessionService.getQuestions(1).subscribe(questions => {
+			this.questions = this.shuffle(questions);
 
 			// Show the first question, previous question does not exist so its null.
 			this.nextQuestion(null);
@@ -131,20 +131,21 @@ export class LabyrinthComponent implements OnInit {
 	 * Method to pause the labyrinth.
 	 * @returns
 	 */
-	paused(): void {
+	pauseLabyrinth(): void {
 		this.sessionService.saveAnswers(this.answers).subscribe(() => {
-			this.snackBar.open('Doolhof gepauzeerd. Zorg dat je het voor de volgende les hebt afgemaakt.', 'X', {
-				duration: 2500,
-				panelClass: ['style-warning']
-			}).afterDismissed().subscribe(() => {
-				this.bubbleService.processLabyrinth(this.answers).subscribe(() => {
+			this.bubbleService.processLabyrinth(this.answers).subscribe(() => {
+				this.snackBar.open('Doolhof gepauzeerd. Zorg dat je het voor de volgende les hebt afgemaakt.', 'X', {
+					duration: 2500,
+					panelClass: ['style-warning']
+				}).afterDismissed().subscribe(() => {
 					this.router.navigate(['home']);
 				});
 			});
 		});
 	}
 
-	/** Method that shows the next question on the screen.
+	/**
+	 * Method that shows the next question on the screen.
 	 * @param prevQuestion Question used to determine what question is next in the labyrinth.
 	 * @returns
 	 */
@@ -152,17 +153,25 @@ export class LabyrinthComponent implements OnInit {
 		this.nextQuestionDisabled = true;
 		this.questionLoaded = false;
 		if (this.questions.length === 0) {
-			if (this.part === 1) {
 
-				// If at the end of part 1, go to part 2.
-				this.part = 2;
-				this.sessionService.getShuffledQuestions(2).subscribe(questions => {
-					this.questions = questions;
+			if (this.part !== 4) {
+
+				// If at the end of part 1, 2 or 3; get the next part of questions.
+				this.part = this.part + 1;
+				this.sessionService.getQuestions(this.part).subscribe(questions => {
+
+					// Only shuffle the questions when getting the questions for part 2, since the order of
+					// questions matters for part 3 and 4.
+					if (this.part === 3 || this.part === 4) {
+						this.questions = questions;
+					} else {
+						this.questions = this.shuffle(questions);
+					}
 					this.nextQuestion(prevQuestion);
 				});
 			} else {
 
-				// If at the end of part 2, finish labyrinth.
+				// If at the end of part 4, finish labyrinth.
 				this.saveQuestion(prevQuestion);
 				this.performedLabyrinth();
 			}
@@ -262,7 +271,36 @@ export class LabyrinthComponent implements OnInit {
 		}
 	}
 
+	/**
+	 * Method that enables the button to go to the next question when an answer has been selected.
+	 * @returns
+	 */
 	selectedOption(): void {
 		this.nextQuestionDisabled = false;
+	}
+
+	/**
+	 * Method used for shuffling the array of questions so not all students answer the questions in the
+	 * same order. Based on the Fisher-Yates shuffle algorithm.
+	 * @param array Array of questions to shuffle.
+	 * @returns Array of shuffles questions.
+	 */
+	shuffle(array: any): any {
+		let currentIndex = array.length, temporaryValue, randomIndex;
+
+		// While there remain elements to shuffle...
+		while (0 !== currentIndex) {
+
+			// Pick a remaining element...
+			randomIndex = Math.floor(Math.random() * currentIndex);
+			currentIndex -= 1;
+
+			// And swap it with the current element.
+			temporaryValue = array[currentIndex];
+			array[currentIndex] = array[randomIndex];
+			array[randomIndex] = temporaryValue;
+		}
+
+		return array;
 	}
 }

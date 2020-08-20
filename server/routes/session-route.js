@@ -82,7 +82,7 @@ router.patch('/updateBubbleInit', auth, (req, res) => {
 	}
 });
 
-/** POST method to get the array of questions shuffled, based on the part given in the body of the request. */
+/** POST method to get the array of questions based on the part given in the body of the request. */
 router.post('/questions', auth, (req, res) => {
 
 	// Check if user is authorized to perform the action.
