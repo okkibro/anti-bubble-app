@@ -18,7 +18,7 @@ import { User } from '../../models/user';
 import { Router } from '@angular/router';
 import { DataService } from 'src/app/services/data-exchange.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { beforeUnload, milestones } from '../../../../constants';
+import { beforeUnload, milestones, earnAmount } from '../../../../constants';
 import { SessionService } from 'src/app/services/session.service';
 import { Title } from '@angular/platform-browser';
 import { environment } from 'src/environments/environment';
@@ -34,7 +34,6 @@ import { MilestoneUpdatesService } from '../../services/milestone-updates.servic
 
 export class HomeComponent implements OnInit {
 	userDetails: User;
-	earnAmount: number = 5;
 	joinSessionForm = this.fb.group({
 		pin: ['', Validators.required]
 	});
@@ -113,8 +112,8 @@ export class HomeComponent implements OnInit {
 		}, () => {
 
 			// finishedGame callback: earn money and process milestones
-			this.sessionService.earnMoney(this.earnAmount).subscribe();
-			this.milestoneUpdates.updateMilestone(milestones[1], this.earnAmount).subscribe(data => {
+			this.sessionService.earnMoney(earnAmount).subscribe();
+			this.milestoneUpdates.updateMilestone(milestones[1], earnAmount).subscribe(data => {
 				if (data.completed) {
 					this.milestoneUpdates.updateRecent(`${new Date().toLocaleDateString()}: Je hebt de badge 'Kleine Spaarder' verdiend!`).subscribe();
 					this.snackBar.open('\uD83C\uDF89 Gefeliciteerd! Je hebt de badge \'Kleine Spaarder\' verdiend! \uD83C\uDF89', 'X', {
@@ -123,7 +122,7 @@ export class HomeComponent implements OnInit {
 					});
 				}
 			});
-			this.milestoneUpdates.updateMilestone(milestones[7], this.earnAmount).subscribe(data => {
+			this.milestoneUpdates.updateMilestone(milestones[7], earnAmount).subscribe(data => {
 				if (data.completed) {
 					this.milestoneUpdates.updateRecent(`${new Date().toLocaleDateString()}: Je hebt de badge 'Money Maker' verdiend!`).subscribe();
 					this.snackBar.open('\uD83C\uDF89 Gefeliciteerd! Je hebt de badge \'Money Maker\' verdiend! \uD83C\uDF89', 'X', {

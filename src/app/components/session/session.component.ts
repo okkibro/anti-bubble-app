@@ -24,6 +24,7 @@ import { Articles } from 'src/app/models/articles';
 import { tokenData } from '../../models/tokenData';
 import { Title } from '@angular/platform-browser';
 import { environment } from '../../../environments/environment';
+import { earnAmount } from '../../../../constants';
 
 @Component({
 	selector: 'mean-session',
@@ -371,7 +372,7 @@ export class SessionComponent implements OnInit {
 		this.socketService.removeListeners();
 		this.showAnswersonScreen(this.gameData.game.name);
 		this.socketService.finishGame(timedOut);
-		this.sessionService.earnMoney(this.earnAmount).subscribe();
+		this.sessionService.earnMoney(earnAmount).subscribe();
 	}
 
 	/**

@@ -55,6 +55,8 @@ export const milestones = [
     }
 ]
 
+export const earnAmount = 5;
+
 export function beforeUnload(e:any) {
     e.returnValue = 'Weet je zeker dat je de sessie wilt verlaten?';
     return 'Weet je zeker dat je de sessie wilt verlaten?';
