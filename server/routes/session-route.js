@@ -115,8 +115,8 @@ router.post('/labyrinthAnswers', auth, (req, res) => {
 
 			// Loop over all questions and save corresponding answers to the user's answers based on the index of the question.
 			for (let i = 1; i < req.body.answers.length; i++) {
-				let index = req.body.answers[i].question.id;
-				user.labyrinthAnswers[index] = req.body.answers[i].answer;
+				let questionID = req.body.answers[i].question.id;
+				user.labyrinthAnswers[questionID] = req.body.answers[i].answer;
 			}
 			user.markModified('labyrinthAnswers');
 

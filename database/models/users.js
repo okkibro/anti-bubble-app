@@ -40,10 +40,7 @@ let userSchema = new Schema({
 	recoverPasswordExpires: Date,
 	inventory: {
 		type: [{
-			item: {
-				type: mongoose.Schema.Types.ObjectId,
-				ref: 'items'
-			}
+			item: { type: mongoose.Schema.Types.ObjectId, ref: 'items' }
 		}],
 		required: true
 	},
@@ -56,53 +53,20 @@ let userSchema = new Schema({
 	},
 	classArray: {
 		type: [{
-			item: {
-				type: mongoose.Schema.Types.ObjectId,
-				ref: 'classes'
-			}
+			item: { type: mongoose.Schema.Types.ObjectId, ref: 'classes' }
 		}]
 	},
 	avatar: {
 		type: {
-			hair1: {
-				type: mongoose.Schema.Types.ObjectId,
-				ref: 'items'
-			},
-			body: {
-				type: mongoose.Schema.Types.ObjectId,
-				ref: 'items',
-				required: true
-			},
-			pants: {
-				type: mongoose.Schema.Types.ObjectId,
-				ref: 'items',
-				required: true
-			},
-			shirt: {
-				type: mongoose.Schema.Types.ObjectId,
-				ref: 'items',
-				required: true
-			},
-			shoes: {
-				type: mongoose.Schema.Types.ObjectId,
-				ref: 'items'
-			},
-			glasses: {
-				type: mongoose.Schema.Types.ObjectId,
-				ref: 'items'
-			},
-			hair2: {
-				type: mongoose.Schema.Types.ObjectId,
-				ref: 'items'
-			},
-			hat: {
-				type: mongoose.Schema.Types.ObjectId,
-				ref: 'items'
-			},
-			medal: {
-				type: mongoose.Schema.Types.ObjectId,
-				ref: 'items'
-			}
+			hair1: { type: mongoose.Schema.Types.ObjectId, ref: 'items' },
+			body: { type: mongoose.Schema.Types.ObjectId, ref: 'items', required: true },
+			pants: { type: mongoose.Schema.Types.ObjectId, ref: 'items', required: true },
+			shirt: { type: mongoose.Schema.Types.ObjectId, ref: 'items', required: true },
+			shoes: { type: mongoose.Schema.Types.ObjectId, ref: 'items' },
+			glasses: { type: mongoose.Schema.Types.ObjectId, ref: 'items' },
+			hair2: { type: mongoose.Schema.Types.ObjectId, ref: 'items' },
+			hat: { type: mongoose.Schema.Types.ObjectId, ref: 'items' },
+			medal: { type: mongoose.Schema.Types.ObjectId, ref: 'items' }
 		},
 		required: false
 	},

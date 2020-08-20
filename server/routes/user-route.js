@@ -172,7 +172,7 @@ router.post('/passwordrecovery', async (req, res) => {
 router.get('/reset/:token', (req, res) => {
 
 	// Find the user that belongs to the given token
-	Users.findOne({ recoverPasswordToken: req.params.token, recoverPasswordExpires: { $gt: Date.now() } }, (err) => {
+	Users.findOne({ recoverPasswordToken: req.params.token, recoverPasswordExpires: { $gt: Date.now() }}, (err) => {
 		if (!err) {
 			return res.status(200).json({ correct: true });
 		} else {
@@ -185,7 +185,7 @@ router.get('/reset/:token', (req, res) => {
 router.post('/reset/:token', (req, res) => {
 
 	// Find the user that belongs to the given token
-	Users.findOne({ recoverPasswordToken: req.params.token, recoverPasswordExpires: { $gt: Date.now() } }, (err, user) => {
+	Users.findOne({ recoverPasswordToken: req.params.token, recoverPasswordExpires: { $gt: Date.now() }}, (err, user) => {
 		if (!err) {
 			user.setPassword(req.body.newPassword, (err) => {
 				if (err) {
@@ -428,7 +428,7 @@ router.delete('/deleteAccount', auth, (req, res) => {
 					if (user.classArray.length > 0) {
 						Classes.findById(user.classArray[0], (err, userKlas) => {
 							if (!err && userKlas != null) {
-								Classes.findByIdAndUpdate({ _id: userKlas._id }, { $pull: { students: { _id: user._id } } }).exec();
+								Classes.findByIdAndUpdate({ _id: userKlas._id }, { $pull: { students: { _id: user._id }}}).exec();
 								userKlas.save().catch((err) => {
 									return res.status(500).json({ message: err });
 								});
@@ -448,7 +448,7 @@ router.delete('/deleteAccount', auth, (req, res) => {
 								Users.find({ 'classArray._id': userKlas._id, role: 'student' }, (err, classMembers) => {
 									if (!err && classMembers.length > 0) {
 										for (let classMember of classMembers) {
-											Users.findByIdAndUpdate({ _id: classMember._id }, { $pull: { classArray: { _id: userKlas._id } } }).exec();
+											Users.findByIdAndUpdate({ _id: classMember._id }, { $pull: { classArray: { _id: userKlas._id }}}).exec();
 											classMember.save().catch((err) => {
 												return res.status(500).json({ message: err });
 											});

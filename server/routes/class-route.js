@@ -248,7 +248,7 @@ router.delete('/deleteClass/:id', auth, (req, res) => {
 				Users.find({ 'classArray._id': klas._id }, (err, classMembers) => {
 					if (!err && classMembers != null) {
 						for (let classMember of classMembers) {
-							Users.findByIdAndUpdate({ _id: classMember._id }, { $pull: { classArray: { _id: klas._id } } }).exec();
+							Users.findByIdAndUpdate({ _id: classMember._id }, { $pull: { classArray: { _id: klas._id }}}).exec();
 							classMember.save().catch((err) => {
 								return res.status(500).json({ message: err });
 							});
@@ -277,11 +277,11 @@ router.patch('/leaveClass', auth, (req, res) => {
 		Users.findById(req.body.userId, (err, user) => {
 			Classes.findById(req.body.classId, (err, klas) => {
 				if (!err && user != null && klas != null) {
-					Users.findByIdAndUpdate({ _id: user._id }, { $pull: { classArray: { _id: req.body.classId } } }).exec();
+					Users.findByIdAndUpdate({ _id: user._id }, { $pull: { classArray: { _id: req.body.classId }}}).exec();
 					user.save().catch((err) => {
 						return res.status(500).json({ message: err });
 					});
-					Classes.findByIdAndUpdate({ _id: klas._id }, { $pull: { students: { _id: req.body.userId } } }).exec();
+					Classes.findByIdAndUpdate({ _id: klas._id }, { $pull: { students: { _id: req.body.userId }}}).exec();
 					klas.save().catch((err) => {
 						return res.status(500).json({ message: err });
 					});

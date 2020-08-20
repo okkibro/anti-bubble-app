@@ -38,7 +38,7 @@ export class LabyrinthComponent implements OnInit {
 	questions = [];
 	questionOptions = [];
 	part: number;
-	answers: [{ question: any, answer: any }] = [,];
+	answers: [{ question: Question, answer: number }] = [,];
 	currentQuestion;
 	questionLoaded: boolean = false;
 	lastQuestionWasImage: boolean = false;
