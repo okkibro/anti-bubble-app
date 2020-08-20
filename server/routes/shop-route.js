@@ -54,12 +54,10 @@ router.post('/buy', auth, (req, res) => {
 				// Pay the money.
 				user.currency -= req.body.item.price;
 				user.markModified('inventory');
-				user.save();
-
-				// Show succes message.
-				return res.status(200).json({
-					succes: true,
-					message: `Je hebt ${req.body.item.title} succesvol gekocht!`
+				user.save().then(() => {
+					return res.status(200).json({ succes: true, message: `Je hebt ${req.body.item.title} succesvol gekocht!` });
+				}).catch((err) => {
+					return res.status(500).json({ message: err });
 				});
 			} else {
 				if (user.currency < req.body.item.price) {

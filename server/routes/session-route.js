@@ -76,9 +76,12 @@ router.patch('/updateBubbleInit', auth, (req, res) => {
 
 			// Set bubbleInit to true and save the schema.
 			user.bubbleInit = true;
-			user.save();
+			user.save().then(() => {
+				return res.status(200).json({ succes: true });
+			}).catch((err) => {
+				return res.status(500).json({ message: err });
+			});
 		});
-		return res.status(200).json({ succes: true });
 	}
 });
 
@@ -139,7 +142,7 @@ router.post('/earnMoney', auth, (req, res) => {
 			// Increase currency.
 			user.currency += req.body.money;
 			user.save(() => {
-				return res.status(200);
+				return res.status(200).jso;
 			});
 		});
 	}

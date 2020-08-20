@@ -250,8 +250,11 @@ router.patch('/updatePassword', auth, (req, res) => {
 					user.setPassword(sanitize(req.body.newPassword));
 
 					// Save changes to database.
-					user.save();
-					return res.status(200).json({ succes: true, message: 'Wachtwoord succesvol verandert.' });
+					user.save().then(() => {
+						return res.status(200).json({ succes: true, message: 'Wachtwoord succesvol verandert.' });
+					}).catch((err) => {
+						return res.status(500).json({ message: err });
+					});
 				} else {
 
 					// Handle error if old password doesn't match with the one in database.
@@ -426,7 +429,9 @@ router.delete('/deleteAccount', auth, (req, res) => {
 						Classes.findById(user.classArray[0], (err, userKlas) => {
 							if (!err && userKlas != null) {
 								Classes.findByIdAndUpdate({ _id: userKlas._id }, { $pull: { students: { _id: user._id } } }).exec();
-								userKlas.save();
+								userKlas.save().catch((err) => {
+									return res.status(500).json({ message: err });
+								});
 							} else {
 								return res.status(404).json({ succes: false, message: err });
 							}
@@ -444,7 +449,9 @@ router.delete('/deleteAccount', auth, (req, res) => {
 									if (!err && classMembers.length > 0) {
 										for (let classMember of classMembers) {
 											Users.findByIdAndUpdate({ _id: classMember._id }, { $pull: { classArray: { _id: userKlas._id } } }).exec();
-											classMember.save();
+											classMember.save().catch((err) => {
+												return res.status(500).json({ message: err });
+											});
 										}
 									}
 								});
@@ -474,7 +481,9 @@ router.patch('/updateUser', auth, (req, res) => {
 		Users.findById(req.payload._id, (err, user) => {
 			if (!err && user != null) {
 				Users.findByIdAndUpdate({ _id: user._id }, { [req.body.field]: sanitize(req.body.value) }).exec();
-				user.save();
+				user.save().catch((err) => {
+					return res.status(500).json({ message: err });
+				});
 				return res.status(200).json({ succes: true, message: 'Je profiel is succesvol bijgewerkt.' });
 			} else {
 				return res.status(404).json({ succes: false, message: err });

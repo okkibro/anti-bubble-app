@@ -40,7 +40,7 @@ router.post('/createClass', auth, (req, res) => {
 		klas.save().then(() => {
 			return res.status(200).json({ code: klas.code, id: klas._id });
 		}).catch((err) => {
-			return res.status(400).json({ message: err });
+			return res.status(500).json({ message: err });
 		});
 	}
 });
@@ -79,7 +79,7 @@ router.post('/joinClass', auth, (req, res) => {
 									});
 									user.classArray.push(foundClass);
 									user.save().catch((err) => {
-										return res.status(400).json({ message: err });
+										return res.status(500).json({ message: err });
 									});
 									return res.status(200).json({ succes: true, message: `Leerling is succesvol toegevoegd aan de klas ${foundClass.title}` });
 								}
@@ -249,7 +249,9 @@ router.delete('/deleteClass/:id', auth, (req, res) => {
 					if (!err && classMembers != null) {
 						for (let classMember of classMembers) {
 							Users.findByIdAndUpdate({ _id: classMember._id }, { $pull: { classArray: { _id: klas._id } } }).exec();
-							classMember.save();
+							classMember.save().catch((err) => {
+								return res.status(500).json({ message: err });
+							});
 						}
 					} else {
 						return res.status(404).json({ succes: false, message: err });
@@ -276,9 +278,13 @@ router.patch('/leaveClass', auth, (req, res) => {
 			Classes.findById(req.body.classId, (err, klas) => {
 				if (!err && user != null && klas != null) {
 					Users.findByIdAndUpdate({ _id: user._id }, { $pull: { classArray: { _id: req.body.classId } } }).exec();
-					user.save();
+					user.save().catch((err) => {
+						return res.status(500).json({ message: err });
+					});
 					Classes.findByIdAndUpdate({ _id: klas._id }, { $pull: { students: { _id: req.body.userId } } }).exec();
-					klas.save();
+					klas.save().catch((err) => {
+						return res.status(500).json({ message: err });
+					});
 				} else {
 					return res.status(404).json({ succes: false, message: err });
 				}
