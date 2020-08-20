@@ -91,7 +91,7 @@ router.post('/joinClass', auth, (req, res) => {
 							user.save().then(() => {
 								return res.status(200).json({ succes: true, message: `Docent is succesvol toegevoegd aan de klas ${foundClass.title}` });
 							}).catch((err) => {
-								return res.status(200).json({ succes: false, message: err });
+								return res.status(500).json({ succes: false, message: err });
 							});
 						}
 					}

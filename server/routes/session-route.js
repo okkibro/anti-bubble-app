@@ -121,8 +121,10 @@ router.post('/labyrinthAnswers', auth, (req, res) => {
 			user.markModified('labyrinthAnswers');
 
 			// Save the result.
-			user.save(() => {
+			user.save().then(() => {
 				return res.status(200).json({ succes: true });
+			}).catch((err) => {
+				return res.status(500).json({ succes: false, message: err });
 			});
 		});
 	}
@@ -141,8 +143,10 @@ router.post('/earnMoney', auth, (req, res) => {
 
 			// Increase currency.
 			user.currency += req.body.money;
-			user.save(() => {
-				return res.status(200).jso;
+			user.save().then(() => {
+				return res.status(200).json({ succes: true });
+			}).catch((err) => {
+				return res.status(500).json({ succes: false, message: err });
 			});
 		});
 	}

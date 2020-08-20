@@ -196,11 +196,10 @@ router.post('/reset/:token', (req, res) => {
 			user.recoverPasswordToken = undefined;
 			user.recoverPasswordExpires = undefined;
 
-			user.save((err) => {
-				if (err) {
-					return res.status(500).json({ succes: false, message: err });
-				}
+			user.save().then(() => {
 				return res.status(200).json({ succes: true, message: 'Wachtwoord succesvol verandert.' });
+			}).catch((err) => {
+				return res.status(500).json({ succes: false, message: err });
 			});
 		} else {
 			return res.status(200).json({ succes: false, message: 'Verkeerde of reeds verlopen token.' });
@@ -304,8 +303,10 @@ router.post('/milestone', auth, (req, res) => {
 
 				// Mark and save changes.
 				user.markModified('milestones');
-				user.save(() => {
-					return res.status(200).json({ completed: completed });
+				user.save().then(() => {
+					return res.status(200).json({ succes: true, completed: completed });
+				}).catch((err) => {
+					return res.status(500).json({ succes: false, message: err });
 				});
 			}
 		});
@@ -327,8 +328,10 @@ router.post('/recentMilestones', auth, (req, res) => {
 
 				// Remove oldest value of the 5.
 				user.recentMilestones.shift();
-				user.save(() => {
-					return res.status(200);
+				user.save().then(() => {
+					return res.status(200).json({ succes: true });
+				}).catch((err) => {
+					return res.status(500).json({ succes: false, message: err });
 				});
 			} else {
 				return res.status(404).json({ message: err });
@@ -348,15 +351,14 @@ router.post('/avatar', auth, (req, res) => {
 			if (!err) {
 				user.avatar[req.body.avatarItem.category] = req.body.avatarItem;
 				user.markModified('avatar');
-				user.save((err) => {
-					if (err) {
-						return res.status(500).json({ succes: false, message: err });
-					}
+				user.save().then(() => {
 					return res.status(200).json({
 						imageFull: req.body.avatarItem.fullImage,
 						imageFull2: req.body.avatarItem.fullImage2,
 						category: req.body.avatarItem.category
 					});
+				}).catch((err) => {
+					return res.status(500).json({ succes: false, message: err });
 				});
 			} else {
 				return res.status(404).json({ message: err });
@@ -396,11 +398,10 @@ router.post('/processAnswers', auth, (req, res) => {
 				}
 
 				user.markModified('bubble');
-				user.save((err) => {
-					if (err) {
-						return res.status(500).json({ succes: false, message: err });
-					}
+				user.save().then(() => {
 					return res.status(200).json({ succes: true });
+				}).catch((err) => {
+					return res.status(500).json({ succes: false, message: err });
 				});
 			} else {
 				return res.status(404).json({ message: err });
