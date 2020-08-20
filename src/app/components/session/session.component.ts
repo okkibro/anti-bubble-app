@@ -50,6 +50,7 @@ export class SessionComponent implements OnInit {
 	leaders;
 	sources;
 	subjects;
+	timedOut: boolean = false;
 
 	/**
 	 * SessionComponent constructor.
@@ -321,9 +322,6 @@ export class SessionComponent implements OnInit {
 	 * @returns
 	 */
 	startTimer(time: number): void {
-		setTimeout(() => {
-			this.socketService.finishGame();
-		}, time * 1000);
 
 		// Create an interval that calls the given function every second.
 		// The function updates the value of the time at the top of the screen to be 1 second less than the previous second it was called.
@@ -338,7 +336,8 @@ export class SessionComponent implements OnInit {
 					document.getElementById('counter').innerHTML = `Tijd over: <br><strong>${minutes}:${seconds}</strong>`;
 				}
 			} else {
-				this.stopGame();
+				this.timedOut = true;
+				this.stopGame(true);
 			}
 		}, 1000);
 	}
@@ -358,9 +357,10 @@ export class SessionComponent implements OnInit {
 
 	/**
 	 * Method that stops the timer and game.
+	 * @param timedOut Whether the game finished by the time running out or the teacher manually stopping it.
 	 * @returns
 	 */
-	stopGame(): void {
+	stopGame(timedOut: boolean): void {
 		this.gameFinished = true;
 		clearInterval(this.interval);
 		let timeLeft = document.getElementById('counter');
@@ -369,7 +369,7 @@ export class SessionComponent implements OnInit {
 		// Remove all listeners so students can't continue to submit answers.
 		this.socketService.removeListeners();
 		this.showAnswersonScreen(this.gameData.game.name);
-		this.socketService.finishGame();
+		this.socketService.finishGame(timedOut);
 	}
 
 	/**

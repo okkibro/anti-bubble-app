@@ -73,7 +73,8 @@
                     <mat-card-content *ngIf="gameData?.game.name == 'Botsende Bubbels'">
                         <mean-answer-form *ngIf="enableQuestions && !gameFinished"></mean-answer-form>
                         <table class="submit-table"></table>
-                        <p *ngIf="gameFinished"><i>Je hebt het spel gestopt. Ga terug naar het startscherm om een nieuwe sessie te starten.</i></p>
+                        <p *ngIf="gameFinished && !timedOut"><i>Je hebt het spel gestopt. Ga terug naar het startscherm om een nieuwe sessie te starten.</i></p>
+                        <p *ngIf="gameFinished && timedOut"><i>De tijd is om en het spel is afgelopen. Ga terug naar het startscherm om een nieuwe sessie te starten.</i></p>
                     </mat-card-content>
 
                     <mat-card-content *ngIf="gameData?.game.name == 'Alternatieve Antwoorden'">
@@ -90,7 +91,7 @@
             </mat-card>
 
             <mat-card *ngIf="tokenData?.role == 'teacher' && gameStarted">
-                <button mat-button class="general-nope-button" *ngIf="!gameFinished" (click)="stopGame()">Stop activiteit</button>
+                <button mat-button class="general-nope-button" *ngIf="!gameFinished" (click)="stopGame(false)">Stop activiteit</button>
                 <button mat-button class="general-button" *ngIf="gameFinished" (click)="leaveGame()">Home</button>
             </mat-card>
         </div>

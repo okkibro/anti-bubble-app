@@ -38,7 +38,8 @@
                     <mat-card-content *ngIf="gameData?.game.name == 'Botsende Bubbels'">
                         <p>{{ gameData?.game.description }}</p>
                         <p *ngIf="!enableAnswer && !gameFinished"><i>Wacht op het onderwerp van de docent.</i></p>
-                        <p *ngIf="gameFinished"><i>Het spel is gestopt door de docent.</i></p>
+                        <p *ngIf="gameFinished && !timedOut"><i>Het spel is gestopt door de docent.</i></p>
+                        <p *ngIf="gameFinished && timedOut"><i>De tijd is om en het spel is afgelopen.</i></p>
                         <p id="receiveQuestion" *ngIf="!gameFinished"></p>
 
                         <div *ngIf="enableAnswer && !gameFinished" class="teammates">

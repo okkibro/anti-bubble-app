@@ -289,6 +289,10 @@ function runIO(io) {
 		socket.on('finish-game', () => {
 			io.in(games.getGame(socket.id).pin).emit('finished-game');
 		});
+
+		socket.on('time-out', () => {
+			io.in(games.getGame(socket.id).pin).emit('timed-out');
+		});
 	});
 }
 

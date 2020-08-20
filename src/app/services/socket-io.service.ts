@@ -151,12 +151,24 @@ export class SocketIOService {
 	/**
 	 * Method that listens for the teacher pressing the 'Stop Activiteit' button.
 	 * disableInput gets called when the teacher presses said button.
-	 * @param disableInput disableInput() callback function.
+	 * @param disableInputStop disableInputStop() callback function.
 	 * @returns
 	 */
-	listenForFinishGame(disableInput: Function): void {
+	listenForFinishGame(disableInputStop: Function): void {
 		this.socket.on('finished-game', () => {
-			disableInput();
+			disableInputStop();
+		});
+	}
+
+	/**
+	 * Method that listens for the teacher pressing the 'Stop Activiteit' button.
+	 * disableInput gets called when the teacher presses said button.
+	 * @param disableInputTimeOut disableInputTimeOut() callback function.
+	 * @returns
+	 */
+	listenForTimeOut(disableInputTimeOut: Function): void {
+		this.socket.on('timed-out', () => {
+			disableInputTimeOut();
 		});
 	}
 
@@ -247,9 +259,15 @@ export class SocketIOService {
 
 	/**
 	 * Method that will finish a session.
+	 * @param timedOut Whether the game finished by the time running out or the teacher manually stopping it.
 	 * @returns
 	 */
-	finishGame(): void {
-		this.socket.emit('finish-game');
+	finishGame(timedOut: boolean): void {
+		if (timedOut) {
+			this.socket.emit('finish-game');
+			this.socket.emit('time-out');
+		} else {
+			this.socket.emit('finish-game');
+		}
 	}
 }

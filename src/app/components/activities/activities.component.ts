@@ -46,6 +46,7 @@ export class ActivitiesComponent implements OnInit {
 		'Reddit'
 	];
 	gameFinished: boolean = false;
+	timedOut: boolean = false;
 
 	/**
 	 * ActivitiesComponent constructor.
@@ -92,7 +93,10 @@ export class ActivitiesComponent implements OnInit {
 		this.receiveTeam();
 
 		// Check whether the game has been stopped by the teacher.
-		this.disableInput();
+		this.disableInputStop();
+
+		// Check whether the game has been stopped by time running out.
+		this.disableInputTimeOut();
 	}
 
 	/**
@@ -157,11 +161,25 @@ export class ActivitiesComponent implements OnInit {
 	 * Method that listens whether the game has been stopped by the teacher.
 	 * @returns
 	 */
-	disableInput(): void {
+	disableInputStop(): void {
 
 		// Students listen for the signal that is sent when the teacher presses the 'Stop activiteit' button.
 		this.socketService.listenForFinishGame(() => {
 			this.gameFinished = true;
+			this.timedOut = false;
+		});
+	}
+
+	/**
+	 * Method that listens whether the game has ended by time running out.
+	 * @returns
+	 */
+	disableInputTimeOut(): void {
+
+		// Students listen for the signal that is sent when the game's timer has run out.
+		this.socketService.listenForTimeOut(() => {
+			this.gameFinished = true;
+			this.timedOut = true;
 		});
 	}
 }
