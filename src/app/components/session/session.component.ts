@@ -51,6 +51,7 @@ export class SessionComponent implements OnInit {
 	sources;
 	subjects;
 	timedOut: boolean = false;
+	earnAmount: number = 5;
 
 	/**
 	 * SessionComponent constructor.
@@ -370,6 +371,7 @@ export class SessionComponent implements OnInit {
 		this.socketService.removeListeners();
 		this.showAnswersonScreen(this.gameData.game.name);
 		this.socketService.finishGame(timedOut);
+		this.sessionService.earnMoney(this.earnAmount).subscribe();
 	}
 
 	/**
