@@ -4,16 +4,16 @@
  * Computing Sciences)
  */
 
-import { Role } from './role';
+import { Activity } from './activity';
+import { User } from './user';
+import { Class } from './class';
 
-export class Shop {
+export class Log {
 	_id: string;
-	title: string;
-	category: string;
-	previewImage: string;
-	fullImage: string;
-	fullImage2: string;
-	price: number;
-	role: Role;
-	exp: number;
+	activity: Activity;
+	answers: string[];
+	class: Class;
+	questions: string[];
+	students: string[];
+	user: User;
 }

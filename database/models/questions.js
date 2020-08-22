@@ -7,7 +7,7 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-let questionSchema = new Schema({
+let questionsSchema = new Schema({
 	id: Number,
 	question: String,
 	part: Number,
@@ -16,4 +16,4 @@ let questionSchema = new Schema({
 	multipleAnswers: Boolean
 });
 
-module.exports = mongoose.model('questions', questionSchema);
+module.exports = mongoose.model('questions', questionsSchema);

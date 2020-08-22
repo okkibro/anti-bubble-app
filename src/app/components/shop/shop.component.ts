@@ -13,8 +13,7 @@
  */
 
 import { Component, OnInit } from '@angular/core';
-import { Shop } from '../../models/shop';
-import { ShopItem } from '../../models/shopItem';
+import { Item } from '../../models/item';
 import { ShopService } from 'src/app/services/shop.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { User } from '../../models/user';
@@ -34,8 +33,8 @@ import { MatTabChangeEvent } from '@angular/material/tabs';
 
 export class ShopComponent implements OnInit {
 	userDetails: User;
-	shopDetails: Shop[];
-	filteredShop: Shop[];
+	shopDetails: Item[];
+	filteredShop: Item[];
 	succesWindow: boolean = false;
 	itemColumns: number;
 	shopCategories: string[] = [
@@ -69,8 +68,8 @@ export class ShopComponent implements OnInit {
 	 * @returns
 	 */
 	ngOnInit(): void {
-		this.shopService.shop('hoofddeksel').subscribe(shop => {
-			this.shopDetails = shop;
+		this.shopService.getCategoryItems('hoofddeksel').subscribe(items => {
+			this.shopDetails = items;
 			this.userService.profile().subscribe(user => {
 				this.userDetails = user;
 				this.filteredShop = this.filterShop();
@@ -93,8 +92,8 @@ export class ShopComponent implements OnInit {
 	 * @returns
 	 */
 	tabChange(event: MatTabChangeEvent): void {
-		this.shopService.shop(event.tab.textLabel).subscribe(shop => {
-			this.shopDetails = shop;
+		this.shopService.getCategoryItems(event.tab.textLabel).subscribe(items => {
+			this.shopDetails = items;
 			this.filteredShop = this.filterShop();
 		}, (err) => {
 			console.error(err);
@@ -105,7 +104,7 @@ export class ShopComponent implements OnInit {
 	 * @param item Item that is bought by the user.
 	 * @returns
 	 */
-	buy(item: ShopItem): void {
+	buy(item: Item): void {
 		this.shopService.buy(item).subscribe((data: any) => {
 			if (data.succes && this.succesWindow) {
 				this.snackBar.open(data.message, 'X', { duration: 2000, panelClass: ['style-succes'] }).afterDismissed().subscribe(() => {
@@ -138,7 +137,7 @@ export class ShopComponent implements OnInit {
 	/** Method to filter the shop based on if the user already owns the item.
 	 * @returns List of items that comply to the applied filter.
 	 */
-	filterShop(): Shop[] {
+	filterShop(): Item[] {
 		return this.shopDetails.filter(x => {
 			return this.userDetails.inventory.find(y => y._id == x._id) == null;
 		});

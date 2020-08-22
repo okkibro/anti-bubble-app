@@ -8,7 +8,7 @@ export class Question {
 	id: number;
 	question: string;
 	part: number;
-	choiceConsequences: [string];
-	choices: [string];
+	choiceConsequences: string[];
+	choices: string[];
 	multipleAnswers: boolean;
 }

@@ -56,7 +56,7 @@ function runIO(io) {
 		});
 
 		socket.on('message', (message) => {
-			io.sockets.emit('message', `server: ${message}`);
+			socket.emit('message', `server: ${message}`);
 		});
 
 		socket.on('disconnect', () => {
@@ -162,11 +162,14 @@ function runIO(io) {
 					// Gets the pin of the game.
 					let pin = game.pin;
 
-					//Removes player from players class
+					// Removes player from players class.
 					players.removePlayer(socket.id);
 
 					// Sends data to host to update screen.
 					io.to(hostId).emit('remove-player', player);
+
+					// Send signal to remaining players in session that player has left.
+					io.in(game.pin).emit('player-left', player);
 
 					// Player is leaving the room.
 					socket.leave(pin);
@@ -175,7 +178,7 @@ function runIO(io) {
 		});
 
 		// Listener that will receive a question from the host and send it to all players in the session.
-		socket.on('send-question', (question) => {
+		socket.on('send-question', question => {
 
 			// Get the game that the host hosts.
 			let game = games.getGame(socket.id);
@@ -184,11 +187,16 @@ function runIO(io) {
 			io.in(game.pin).emit('receive-question', question);
 		});
 
-		socket.on('submit', (data) => {
+		// Listener that will receive an answer given by a student and send it to the host of the session
+		// so it can be seen on the digiboard and to the student so it can be recorded.
+		socket.on('submit', answer => {
 			let player = players.getPlayer(socket.id);
-			io.to(player.hostId).emit('receive-submit', { player: player, message: data });
+			io.to(player.playerId).emit('record-answer', answer);
+			io.to(player.hostId).emit('receive-submit', { player: player, message: answer });
 		});
 
+		// Listener that will set the game that has just started as live so the session can go to the next
+		// step and no one can join anymore.
 		socket.on('start-game', () => {
 			let game = games.getGame(socket.id);
 			game.gameLive = true;
@@ -204,7 +212,8 @@ function runIO(io) {
 			let subjects = [];
 
 			// Get all the players in the current game.
-			let playersInGame = players.getPlayers(socket.id);
+			let game = games.getGame(socket.id);
+			let playersInGame = players.getPlayers(game.hostId);
 
 			// Teacher selected create random groups.
 			if (groups == null) {
@@ -219,7 +228,7 @@ function runIO(io) {
 				while (playersInGame.length > 0) {
 					pairs[pairsIndex] = [];
 					articleList[pairsIndex] = [];
-					parts = articles.filter(x => x.articlenr === pairsIndex);
+					let parts = articles.filter(x => x.articlenr === pairsIndex);
 					for (let a = 0; a < groupSize; a++) {
 						let player = playersInGame.shift();
 						pairs[pairsIndex].push(player);
@@ -286,12 +295,23 @@ function runIO(io) {
 			socket.to(player.playerId).emit('reactivate');
 		});
 
-		socket.on('finish-game', () => {
-			io.in(games.getGame(socket.id).pin).emit('finished-game');
+		// This will delete the answer that the host removed from the player's recorded answers.
+		socket.on('remove-answer', (player) => {
+			socket.to(player.playerId).emit('delete-answer');
 		});
 
-		socket.on('time-out', () => {
-			io.in(games.getGame(socket.id).pin).emit('timed-out');
+		// Listener that will emit the 'finished-game' signal to all players in the session and also
+		// how the game ended (time ran out or the host stopped it).
+		socket.on('finish-game', (timedOut) => {
+			io.in(games.getGame(socket.id).pin).emit('finished-game', timedOut);
+		});
+
+		// Listener that gets activated the same time as the 'start-game' listener that emits to all
+		// players in the session who else is in the session so this can be recorded.
+		socket.on('get-players', () => {
+			let game = games.getGame(socket.id);
+			let sessionPlayers = players.getPlayers(game.hostId);
+			io.in(games.getGame(socket.id).pin).emit('got-players', sessionPlayers);
 		});
 	});
 }

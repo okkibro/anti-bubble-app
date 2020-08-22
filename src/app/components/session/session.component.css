@@ -5,7 +5,7 @@
  */
 
 .submit-table {
-    margin: 20px;
+    margin-bottom: 20px;
 }
 
 .session-table,
@@ -36,7 +36,11 @@
 }
 
 .mat-card-subtitle {
-    margin-bottom: 5px !important;
+    margin-bottom: 8px !important;
+}
+
+.mat-card-header .mat-card-title {
+    margin-bottom: 20px !important;
 }
 
 .mat-card .mat-divider-horizontal {
@@ -44,3 +48,4 @@
     width: 80%;
     border-top-color: black;
 }
+

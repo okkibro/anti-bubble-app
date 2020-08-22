@@ -7,10 +7,12 @@
 const express = require('express');
 const router = express.Router();
 const mongoose = require('mongoose');
+const sanitize = require('mongo-sanitize');
 const Activities = mongoose.model('activities');
 const Users = mongoose.model('users');
 const Questions = mongoose.model('questions');
 const Articles = mongoose.model('articles');
+const Logs = mongoose.model('logs');
 const jwt = require('express-jwt');
 
 // Small constant for authentication.
@@ -26,13 +28,18 @@ router.get('/articles', auth, (req, res) => {
 	if (!req.payload._id) {
 		return res.status(401).json({ message: 'UnauthorizedError: unauthorized action' });
 	} else {
-		Users.findById(req.payload._id, (err, user) => {
-			// Get the logged in user.
-			Articles.find({}, (err, articles) => {
 
-				// Send all article data from the database.
-				return res.status(200).json(articles);
-			});
+		// Get the logged in user.
+		Users.findById(req.payload._id, (err, user) => {
+			if (!err && user != null) {
+				Articles.find({}, (err, articles) => {
+
+					// Send all article data from the database.
+					return res.status(200).json(articles);
+				});
+			} else {
+				return res.status(404).json({ succes: false });
+			}
 		});
 	}
 });
@@ -148,6 +155,47 @@ router.post('/earnMoney', auth, (req, res) => {
 			}).catch((err) => {
 				return res.status(500).json({ succes: false, message: err });
 			});
+		});
+	}
+});
+
+/** POST method to record data about a session that has ended. */
+router.post('/recordSession', auth, (req, res) => {
+
+	// Check if user is authorized to perform the action.
+	if (!req.payload._id) {
+		return res.status(401).json({ message: 'UnauthorizedError: unauthorized action' });
+	} else {
+
+		// Make a new session log and fill it with the proper request data and afterwards
+		// store it in the database.
+		let log = new Logs();
+		let data = req.body.sessionData;
+		log.activity = data.activity;
+		log.answers = [];
+		for (let answer of data.answers) {
+			log.answers.push(sanitize(answer));
+		}
+		log.class = data.class;
+		log.questions = [];
+		for (let question of data.questions) {
+			log.questions.push(sanitize(question));
+		}
+		log.students = [];
+		for (let studentEmail of data.students) {
+			Users.findOne({ email: studentEmail }, (err, user) => {
+				if (!err && user != null) {
+					log.students.push(user);
+				} else {
+					return res.status(404).json({ succes: false });
+				}
+			});
+		}
+		log.user = data.user;
+		log.save().then(() => {
+			return res.status(200).json({ succes: true });
+		}).catch((err) => {
+			return res.status(500).json({ succes: false, message: err });
 		});
 	}
 });

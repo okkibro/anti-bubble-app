@@ -16,6 +16,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { CookieService } from 'ngx-cookie-service';
 import { environment } from 'src/environments/environment';
+import { Log } from '../models/log';
 
 @Injectable({
 	providedIn: 'root'
@@ -80,5 +81,14 @@ export class SessionService {
 	 */
 	public earnMoney(money: number): Observable<any> {
 		return this.http.post(`${environment.ENDPOINT}/session/earnMoney`, { money: money }, { headers: { Authorization: 'Bearer ' + this.cookie.get('mean-token') }});
+	}
+
+	/**
+	 * Method to do a POST request to record data about a session that has ended.
+	 * @param sessionData All relevant session data.
+	 * @returns HTTP response data in an Observable.
+	 */
+	public recordSession(sessionData: Log): Observable<any> {
+		return this.http.post(`${environment.ENDPOINT}/session/recordSession`, { sessionData: sessionData }, { headers: { Authorization: 'Bearer ' + this.cookie.get('mean-token') }});
 	}
 }

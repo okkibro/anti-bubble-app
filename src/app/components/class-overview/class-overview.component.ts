@@ -40,7 +40,7 @@ export class ClassOverviewComponent implements OnInit {
 
 	/**
 	 * ClassOverviewComponent constructor.
-	 * @param classService
+	 * @param classesService
 	 * @param router
 	 * @param fb
 	 * @param dialog
@@ -48,7 +48,7 @@ export class ClassOverviewComponent implements OnInit {
 	 * @param userService
 	 */
 	constructor(
-		private classService: ClassesService,
+		private classesService: ClassesService,
 		private router: Router,
 		private fb: FormBuilder,
 		private dialog: MatDialog,
@@ -65,7 +65,7 @@ export class ClassOverviewComponent implements OnInit {
 			this.userDetails = user;
 		});
 
-		this.classService.getClass().subscribe((data) => {
+		this.classesService.getClass().subscribe((data) => {
 			if (data.succes) {
 				this.userClass = data.class;
 				this.classmates = data.classmates;
@@ -121,14 +121,14 @@ export class LeaveClassDialog {
 
 	/**
 	 * LeaveClassDialog constructor.
-	 * @param classService
+	 * @param classesService
 	 * @param dialog
 	 * @param dialogRef
 	 * @param snackBar
 	 * @param data
 	 */
 	constructor(
-		private classService: ClassesService,
+		private classesService: ClassesService,
 		private dialog: MatDialog,
 		private dialogRef: MatDialogRef<LeaveClassDialog>,
 		private snackBar: MatSnackBar,
@@ -141,7 +141,7 @@ export class LeaveClassDialog {
 	 * @returns
 	 */
 	leaveClass() {
-		this.classService.leaveClass(this.data.userId, this.data.classId, this.data.leaving).subscribe(data => {
+		this.classesService.leaveClass(this.data.userId, this.data.classId, this.data.leaving).subscribe(data => {
 			if (data.succes) {
 				this.dialogRef.close();
 				this.snackBar.open(data.message, 'X', { duration: 2500, panelClass: ['style-succes'] }).afterDismissed().subscribe(() => {

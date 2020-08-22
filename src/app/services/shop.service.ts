@@ -14,7 +14,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
-import { ShopItem } from '../models/shopItem';
+import { Item } from '../models/item';
 import { CookieService } from 'ngx-cookie-service';
 import { environment } from 'src/environments/environment';
 
@@ -37,7 +37,7 @@ export class ShopService {
 	 * @param type Category of items to be fetched from the database.
 	 * @returns HTTP response data in an Observable.
 	 */
-	public shop(type: string): Observable<any> {
+	public getCategoryItems(type: string): Observable<any> {
 		return this.http.get(`${environment.ENDPOINT}/shop`, { headers: { id: type }});
 	}
 
@@ -46,7 +46,7 @@ export class ShopService {
 	 * @param item Item to be purchased by the user.
 	 * @returns HTTP response data in an Observable.
 	 */
-	public buy(item: ShopItem) {
+	public buy(item: Item) {
 		return this.http.post(`${environment.ENDPOINT}/shop/buy`, { item: item }, { headers: { Authorization: 'Bearer ' + this.cookie.get('mean-token') }});
 	}
 

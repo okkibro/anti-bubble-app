@@ -58,7 +58,7 @@ export class SettingsComponent implements OnInit {
 	 * SettingsComponent constructor.
 	 * @param fb
 	 * @param snackBar
-	 * @param classService
+	 * @param classesService
 	 * @param router
 	 * @param dialog
 	 * @param titleService
@@ -67,7 +67,7 @@ export class SettingsComponent implements OnInit {
 	constructor(
 		private fb: FormBuilder,
 		private snackBar: MatSnackBar,
-		private classService: ClassesService,
+		private classesService: ClassesService,
 		private router: Router,
 		private dialog: MatDialog,
 		private titleService: Title,

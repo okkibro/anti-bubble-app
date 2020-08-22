@@ -7,7 +7,7 @@
 const express = require('express');
 const router = express.Router();
 const mongoose = require('mongoose');
-const Shops = mongoose.model('shops');
+const Items = mongoose.model('items');
 const Users = mongoose.model('users');
 const jwt = require('express-jwt');
 
@@ -17,10 +17,10 @@ const auth = jwt({
 	userProperty: 'payload'
 });
 
-/** GET method to get shop items from the database based on a query. */
+/** GET method to get shop items from the database belonging to a certain category. */
 router.get('/', (req, res) => {
-	Shops.find({ category: req.headers.id.toLowerCase() }, (err, shop) => {
-		return res.status(200).json(shop);
+	Items.find({ category: req.headers.id.toLowerCase() }, (err, items) => {
+		return res.status(200).json(items);
 	});
 });
 
@@ -29,8 +29,8 @@ router.get('/getBaseInventory', auth, (req, res) => {
 	if (!req.payload._id) {
 		return res.status(401).json({ message: 'UnauthorizedError: unauthorized action' });
 	} else {
-		Shops.find({ initial: true }, (err, shop) => {
-			return res.status(200).json(shop);
+		Items.find({ initial: true }, (err, items) => {
+			return res.status(200).json(items);
 		});
 	}
 });

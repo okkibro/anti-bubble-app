@@ -4,11 +4,13 @@
  * Computing Sciences)
  */
 
-export class Class {
-	code: number;
-	level: string;
-	year: number;
+export class Item {
+	_id: string;
 	title: string;
-	students: [number];
-	teacher: number;
+	category: string;
+	previewImage: string;
+	fullImage: string;
+	fullImage2: string;
+	price: number;
+	initial: boolean;
 }

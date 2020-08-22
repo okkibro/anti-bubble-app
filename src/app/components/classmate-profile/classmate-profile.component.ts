@@ -31,14 +31,14 @@ export class ClassmateProfileComponent implements OnInit {
 
 	/**
 	 * ClassmateProfileComponent constructor.
-	 * @param classService
+	 * @param classesService
 	 * @param auth
 	 * @param route
 	 * @param router
 	 * @param titleService
 	 */
 	constructor(
-		private classService: ClassesService,
+		private classesService: ClassesService,
 		private auth: AuthenticationService,
 		private route: ActivatedRoute,
 		private router: Router,
@@ -50,11 +50,11 @@ export class ClassmateProfileComponent implements OnInit {
 	 * @returns
 	 */
 	ngOnInit(): void {
-		this.classService.classmateProfile(this.route.snapshot.paramMap.get('id')).subscribe(classmate => {
+		this.classesService.classmateProfile(this.route.snapshot.paramMap.get('id')).subscribe(classmate => {
 			this.classmate = classmate;
 
 			// Get classmate's class
-			this.classService.getClass().subscribe((data) => {
+			this.classesService.getClass().subscribe((data) => {
 				if (data.succes) {
 					this.classmateClassTitle = data.class.title;
 				}

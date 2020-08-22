@@ -11,7 +11,7 @@ const passport = require('passport');
 const sanitize = require('mongo-sanitize');
 const nodemailer = require('nodemailer');
 const crypto = require('crypto');
-const Shops = mongoose.model('shops');
+const Items = mongoose.model('items');
 const Users = mongoose.model('users');
 const Classes = mongoose.model('classes');
 const jwt = require('express-jwt');
@@ -58,11 +58,11 @@ router.post('/register', (req, res) => {
 	}
 
 	// Building the basic avatar upon registering.
-	Shops.findById('5edcf97b1167982a005b9737', (err, lichaam) => {
-		Shops.findById('5edcf97b1167982a005b977b', (err, broek) => {
-			Shops.findById('5edcf97b1167982a005b9754', (err, shirt) => {
-				Shops.findById('5edcf97b1167982a005b9787', (err, schoenen) => {
-					Shops.find({ title: 'Geen' }, (err, emptyLayers) => {
+	Items.findById('5edcf97b1167982a005b9737', (err, lichaam) => {
+		Items.findById('5edcf97b1167982a005b977b', (err, broek) => {
+			Items.findById('5edcf97b1167982a005b9754', (err, shirt) => {
+				Items.findById('5edcf97b1167982a005b9787', (err, schoenen) => {
+					Items.find({ title: 'Geen' }, (err, emptyLayers) => {
 						user.avatar = {
 							haar: emptyLayers[0],
 							hoofddeksel: emptyLayers[1],

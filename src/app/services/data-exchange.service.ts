@@ -6,7 +6,7 @@
 
 /**
  * data-exchange.service.ts
- * This file sends all HTTP requests for exchanging a message from a component to all other subscribed components,
+ * This file contains all the code for exchanging a message from a component to all other subscribed components,
  * which is mainly used to get the session code across.
  * @packageDocumentation
  */

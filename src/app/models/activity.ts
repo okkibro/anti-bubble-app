@@ -4,9 +4,8 @@
  * Computing Sciences)
  */
 
-export class Articles {
-	articlenr: number;
-	part: number;
-	image: string;
-	source: string;
+export class Activity {
+	name: string;
+	category: string;
+	description: string;
 }

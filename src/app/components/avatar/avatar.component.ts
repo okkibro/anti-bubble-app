@@ -12,7 +12,7 @@
 
 import { Component, OnInit } from '@angular/core';
 import { User } from '../../models/user';
-import { ShopItem } from '../../models/shopItem';
+import { Item } from '../../models/item';
 import { ShopService } from 'src/app/services/shop.service';
 import { AvatarService } from 'src/app/services/avatar.service';
 import { AvatarDisplayComponent } from '../avatar-display/avatar-display.component';
@@ -65,14 +65,14 @@ export class AvatarComponent implements OnInit {
 	 * @returns
 	 */
 	ngOnInit(): void {
-		this.shopService.shop('hoofddeksel').subscribe(shop => {
+		this.shopService.getCategoryItems('hoofddeksel').subscribe(items => {
 			this.userService.profile().subscribe(user => {
 				this.userDetails = user;
 
 				// Checks for items in the shop that the player bought
-				for (let i = 0; i < shop.length; i++) {
-					if (user.inventory.find(x => x._id == shop[i]._id) != null) {
-						this.itemsShown.push(shop[i]);
+				for (let i = 0; i < items.length; i++) {
+					if (user.inventory.find(x => x._id == items[i]._id) != null) {
+						this.itemsShown.push(items[i]);
 						this.filteredAvatar = this.filterAvatar();
 					}
 				}
@@ -90,7 +90,7 @@ export class AvatarComponent implements OnInit {
 	 * @param item Item to be equipped by the user.
 	 * @returns
 	 */
-	equip(item: ShopItem): void {
+	equip(item: Item): void {
 		this.avatarService.equip(item).subscribe(data => {
 
 			// Updates the image shown to the player without reloading the page.
@@ -109,8 +109,8 @@ export class AvatarComponent implements OnInit {
 	 * @returns
 	 */
 	tabChange(event: MatTabChangeEvent): void {
-		this.shopService.shop(event.tab.textLabel).subscribe(shop => {
-			this.itemsShown = shop;
+		this.shopService.getCategoryItems(event.tab.textLabel).subscribe(items => {
+			this.itemsShown = items;
 			this.filteredAvatar = this.filterAvatar();
 		}, (err) => {
 			console.error(err);

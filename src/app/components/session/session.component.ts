@@ -20,7 +20,7 @@ import { Router } from '@angular/router';
 import { SessionService } from 'src/app/services/session.service';
 import { beforeUnload } from '../../../../constants';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { Articles } from 'src/app/models/articles';
+import { Article } from 'src/app/models/article';
 import { tokenData } from '../../models/tokenData';
 import { Title } from '@angular/platform-browser';
 import { environment } from '../../../environments/environment';
@@ -184,7 +184,7 @@ export class SessionComponent implements OnInit {
 							deleteButton.parentElement.remove();
 							this.socketService.activateStudentButton(data.player);
 						});
-						tablerow.innerHTML = `<strong>${data.player.name}:</strong> ${data.message} `;
+						tablerow.innerHTML = `<strong>${data.player.name.split(' ')[0]}:</strong> ${data.message} `;
 						tablerow.appendChild(deleteButton);
 						tablerow.appendChild(breakLine);
 						submitTable.appendChild(tablerow);
@@ -351,7 +351,7 @@ export class SessionComponent implements OnInit {
 	 * @param articles Articles to be paired to students in the group.
 	 * @param receivePairs Callback function.
 	 */
-	pairStudents(groups: string[][], groupSize: number, articles: Articles, receivePairs: Function): void {
+	pairStudents(groups: string[][], groupSize: number, articles: Article, receivePairs: Function): void {
 		this.socketService.pairStudents(groups, groupSize, articles, (pairs, leaders, sources) => {
 			receivePairs(pairs, leaders, sources);
 		});

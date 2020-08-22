@@ -31,9 +31,9 @@ export class BubbleVisualisationComponent implements OnInit {
 	 * BubbleVisualisationComponent constructor.
 	 * @param userService
 	 * @param route
-	 * @param classService
+	 * @param classesService
 	 */
-	constructor(private userService: UserService, private route: ActivatedRoute, private classService: ClassesService) { }
+	constructor(private userService: UserService, private route: ActivatedRoute, private classesService: ClassesService) { }
 
 	/**
 	 * Initialization method.
@@ -41,7 +41,7 @@ export class BubbleVisualisationComponent implements OnInit {
 	 */
 	ngOnInit(): void {
 		if (this.route.snapshot.paramMap.get('id')) {
-			this.classService.classmateProfile(this.route.snapshot.paramMap.get('id')).subscribe(classmate => {
+			this.classesService.classmateProfile(this.route.snapshot.paramMap.get('id')).subscribe(classmate => {
 				this.updateBubble(classmate);
 			});
 		} else {

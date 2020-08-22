@@ -37,14 +37,14 @@ export class ProfileComponent implements OnInit {
 	/**
 	 * ProfileComponent constructor.
 	 * @param snackBar
-	 * @param classService
+	 * @param classesService
 	 * @param router
 	 * @param titleService
 	 * @param userService
 	 */
 	constructor(
 		private snackBar: MatSnackBar,
-		private classService: ClassesService,
+		private classesService: ClassesService,
 		private router: Router,
 		private titleService: Title,
 		private userService: UserService
@@ -65,7 +65,7 @@ export class ProfileComponent implements OnInit {
 		};
 
 		// Get user's class
-		this.classService.getClass().subscribe((data) => {
+		this.classesService.getClass().subscribe((data) => {
 			if (data.succes) {
 				this.userClassTitle = data.class.title;
 			}

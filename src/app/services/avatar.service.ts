@@ -16,7 +16,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { CookieService } from 'ngx-cookie-service';
 import { environment } from 'src/environments/environment';
-import { ShopItem } from '../models/shopItem';
+import { Item } from '../models/item';
 
 @Injectable({
 	providedIn: 'root'
@@ -35,7 +35,7 @@ export class AvatarService {
 	 * @param item Item to equip.
 	 * @returns HTTP response data in an Observable.
 	 */
-	equip(item: ShopItem): Observable<any> {
+	equip(item: Item): Observable<any> {
 		return this.http.post(`${environment.ENDPOINT}/user/avatar`, { avatarItem: item }, { headers: { Authorization: 'Bearer ' + this.cookie.get('mean-token') }});
 	}
 }

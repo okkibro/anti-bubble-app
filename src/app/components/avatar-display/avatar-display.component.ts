@@ -28,10 +28,10 @@ export class AvatarDisplayComponent implements OnInit {
 	/**
 	 * AvatarDisplayComponent constructor.
 	 * @param route
-	 * @param classService
+	 * @param classesService
 	 * @param userService
 	 */
-	constructor(private route: ActivatedRoute, private classService: ClassesService, private userService: UserService) { }
+	constructor(private route: ActivatedRoute, private classesService: ClassesService, private userService: UserService) { }
 
 
 	/**
@@ -40,7 +40,7 @@ export class AvatarDisplayComponent implements OnInit {
 	 */
 	ngOnInit(): void {
 		if (this.route.snapshot.paramMap.get('id')) {
-			this.classService.classmateProfile(this.route.snapshot.paramMap.get('id')).subscribe(classmate => {
+			this.classesService.classmateProfile(this.route.snapshot.paramMap.get('id')).subscribe(classmate => {
 				this.showAvatar(classmate);
 			});
 		} else {

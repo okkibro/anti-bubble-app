@@ -17,7 +17,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { AuthenticationService } from 'src/app/services/authentication.service';
 import { User } from 'src/app/models/user';
 import { FormBuilder, Validators } from '@angular/forms';
-import { Class } from 'src/app/models/classes';
+import { Class } from 'src/app/models/class';
 import { ClassesService } from 'src/app/services/classes.service';
 import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { environment } from '../../../environments/environment';
@@ -49,7 +49,7 @@ export class TeacherOverviewComponent implements OnInit {
 	/**
 	 * TeacherOverviewComponent constructor.
 	 * @param auth
-	 * @param classService
+	 * @param classesService
 	 * @param fb
 	 * @param snackBar
 	 * @param dialog
@@ -58,7 +58,7 @@ export class TeacherOverviewComponent implements OnInit {
 	 */
 	constructor(
 		private auth: AuthenticationService,
-		private classService: ClassesService,
+		private classesService: ClassesService,
 		private fb: FormBuilder,
 		private snackBar: MatSnackBar,
 		private dialog: MatDialog,
@@ -74,7 +74,7 @@ export class TeacherOverviewComponent implements OnInit {
 		this.userService.profile().subscribe(user => {
 			this.userDetails = user;
 			if (this.userDetails.classArray.length > 0) {
-				this.classService.getClassIds().subscribe((ids) => {
+				this.classesService.getClassIds().subscribe((ids) => {
 					this.classIds = ids.classIds;
 					this.setClass(this.classIds[0]._id);
 					this.getClasses();
@@ -98,8 +98,8 @@ export class TeacherOverviewComponent implements OnInit {
 			klas.year = this.classForm.get('classYear').value;
 			this.openform = false;
 
-			this.classService.createClass(klas, this.userDetails).subscribe((data) => {
-				this.classService.joinClass(data.code).subscribe((output) => {
+			this.classesService.createClass(klas, this.userDetails).subscribe((data) => {
+				this.classesService.joinClass(data.code).subscribe((output) => {
 					if (output.succes) {
 						this.snackBar.open(output.message, 'X', { duration: 2500, panelClass: ['style-succes'] }).afterDismissed().subscribe(() => {
 							window.location.reload();
@@ -117,7 +117,7 @@ export class TeacherOverviewComponent implements OnInit {
 	 * @param id ID of class to be shown on screen and set as current class for teacher.
 	 */
 	setClass(id: string): void {
-		this.classService.getSingleClass(id).subscribe((output) => {
+		this.classesService.getSingleClass(id).subscribe((output) => {
 			if (output.succes) {
 				this.currentClass = output.class;
 				this.classmates = output.classmates;
@@ -131,7 +131,7 @@ export class TeacherOverviewComponent implements OnInit {
 	 */
 	getClasses(): void {
 		for (let id of this.classIds) {
-			this.classService.getSingleClass(id._id).subscribe((output) => {
+			this.classesService.getSingleClass(id._id).subscribe((output) => {
 				if (output.succes) {
 					this.classes.push({ title: output.class.title, id: id._id });
 				}
@@ -193,14 +193,14 @@ export class DeleteClassDialog {
 
 	/**
 	 * DeleteClassDialog constructor.
-	 * @param classService
+	 * @param classesService
 	 * @param dialog
 	 * @param dialogRef
 	 * @param snackBar
 	 * @param data
 	 */
 	constructor(
-		private classService: ClassesService,
+		private classesService: ClassesService,
 		private dialog: MatDialog,
 		private dialogRef: MatDialogRef<DeleteClassDialog>,
 		private snackBar: MatSnackBar,
@@ -213,7 +213,7 @@ export class DeleteClassDialog {
 	 * @returns
 	 */
 	deleteClass(): void {
-		this.classService.deleteClass(this.data.klas._id).subscribe(data => {
+		this.classesService.deleteClass(this.data.klas._id).subscribe(data => {
 			if (data.succes) {
 				this.dialogRef.close();
 				this.snackBar.open(data.message, 'X', { duration: 2500, panelClass: ['style-succes'] }).afterDismissed().subscribe(() => {
@@ -235,14 +235,14 @@ export class RemoveFromClassDialog {
 
 	/**
 	 * RemoveFromClassDialog constructor.
-	 * @param classService
+	 * @param classesService
 	 * @param dialog
 	 * @param dialogRef
 	 * @param snackBar
 	 * @param data
 	 */
 	constructor(
-		private classService: ClassesService,
+		private classesService: ClassesService,
 		private dialog: MatDialog,
 		private dialogRef: MatDialogRef<DeleteClassDialog>,
 		private snackBar: MatSnackBar,
@@ -255,7 +255,7 @@ export class RemoveFromClassDialog {
 	 * @returns
 	 */
 	removeFromClass(): void {
-		this.classService.leaveClass(this.data.user._id, this.data.klas._id, this.data.leaving).subscribe(data => {
+		this.classesService.leaveClass(this.data.user._id, this.data.klas._id, this.data.leaving).subscribe(data => {
 			if (data.succes) {
 				this.dialogRef.close();
 				this.snackBar.open(data.message, 'X', { duration: 2500, panelClass: ['style-succes'] }).afterDismissed().subscribe(() => {

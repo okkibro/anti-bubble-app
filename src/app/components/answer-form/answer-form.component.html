@@ -17,7 +17,7 @@
     <mat-form-field *ngIf="!questionSubmitted">
         <mat-label>Vul hier een onderwerp in</mat-label>
         <textarea matInput formControlName="getQuestion" placeholder="Onderwerp"></textarea>
-    </mat-form-field>
+    </mat-form-field><br>
     <button *ngIf="!questionSubmitted" mat-button class="general-button" type="submit">Verstuur</button>
-    <p *ngIf="questionSubmitted">Je hebt <strong>{{ question }}</strong> als onderwerp ingestuurd.</p>
+    <p class="submitted-question" *ngIf="questionSubmitted">Je hebt <strong>{{ question }}</strong> als onderwerp ingestuurd.</p>
 </form>

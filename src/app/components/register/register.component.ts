@@ -52,7 +52,7 @@ export class RegisterComponent implements OnInit {
 	 * @param auth
 	 * @param router
 	 * @param fb
-	 * @param shop
+	 * @param shopService
 	 * @param titleService
 	 * @param userService
 	 */
@@ -60,7 +60,7 @@ export class RegisterComponent implements OnInit {
 		private auth: AuthenticationService,
 		private router: Router,
 		private fb: FormBuilder,
-		private shop: ShopService,
+		private shopService: ShopService,
 		private titleService: Title,
 		private userService: UserService
 	) { }
@@ -86,9 +86,9 @@ export class RegisterComponent implements OnInit {
 		user.password = this.registerForm.get('password').value;
 
 		this.auth.register(user).subscribe(() => {
-			this.shop.getBaseInventory().subscribe(data => {
+			this.shopService.getBaseInventory().subscribe(data => {
 				for (let i = 0; i < data.length; i++) {
-					this.shop.buy(data[i]).subscribe();
+					this.shopService.buy(data[i]).subscribe();
 				}
 				this.router.navigate(['login']);
 			});

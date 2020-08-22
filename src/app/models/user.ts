@@ -5,7 +5,7 @@
  */
 
 import { Role } from './role';
-import { ShopItem } from './shopItem';
+import { Item } from './item';
 import { Milestone } from './milestone';
 
 export class User {
@@ -18,13 +18,13 @@ export class User {
 	salt: string;
 	recoverPasswordToken: string;
 	recoverPasswordExpires: Date;
-	inventory: [ShopItem];
+	inventory: Item[];
 	currency: number;
-	milestones: [Milestone];
-	classArray: [string];
+	milestones: Milestone[];
+	classArray: string[];
 	avatar: any;
-	recentMilestones: [string];
+	recentMilestones: string[];
 	bubbleInit: boolean;
-	labyrinthAnswers: [number];
+	labyrinthAnswers: number[];
 	bubble: any;
 }
