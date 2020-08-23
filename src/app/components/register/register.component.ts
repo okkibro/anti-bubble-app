@@ -87,7 +87,7 @@ export class RegisterComponent implements OnInit {
 		user.password = this.registerForm.get('password').value;
 
 		this.auth.register(user).subscribe(() => {
-			this.shopService.getBaseInventory(user.gender).subscribe(data => {
+			this.shopService.getBaseInventory().subscribe(data => {
 				for (let i = 0; i < data.length; i++) {
 					this.shopService.buy(data[i]).subscribe();
 				}

@@ -6,6 +6,5 @@
 
 export enum Gender {
 	male = 'male',
-	female = 'female',
-	neutral = 'neutral'
+	female = 'female'
 }

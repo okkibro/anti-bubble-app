@@ -70,7 +70,7 @@ export class ShopComponent implements OnInit {
 	ngOnInit(): void {
 		this.userService.profile().subscribe(user => {
 			this.userDetails = user;
-			this.shopService.getCategoryItems('hoofddeksel', this.userDetails.gender).subscribe(items => {
+			this.shopService.getCategoryItems('hoofddeksel').subscribe(items => {
 				this.shopDetails = items;
 				this.filteredShop = this.filterShop();
 				this.succesWindow = true;
@@ -92,7 +92,7 @@ export class ShopComponent implements OnInit {
 	 * @returns
 	 */
 	tabChange(event: MatTabChangeEvent): void {
-		this.shopService.getCategoryItems(event.tab.textLabel, this.userDetails.gender).subscribe(items => {
+		this.shopService.getCategoryItems(event.tab.textLabel).subscribe(items => {
 			this.shopDetails = items;
 			this.filteredShop = this.filterShop();
 		}, (err) => {
@@ -139,7 +139,7 @@ export class ShopComponent implements OnInit {
 	 */
 	filterShop(): Item[] {
 		return this.shopDetails.filter(x => {
-			return this.userDetails.inventory.find(y => y._id === x._id) === null;
+			return this.userDetails.inventory.find(y => y._id === x._id) == null;
 		});
 	}
 

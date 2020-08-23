@@ -24,7 +24,7 @@ router.get('/', auth, (req, res) => {
 	if (!req.payload._id) {
 		return res.status(401).json({ message: 'UnauthorizedError: unauthorized action' });
 	} else {
-		Items.find({ category: req.headers.type.toLowerCase(), gender: { $in: [req.headers.gender, 'neutral'] } }, (err, items) => {
+		Items.find({ category: req.headers.type.toLowerCase() }, (err, items) => {
 			return res.status(200).json(items);
 		});
 	}
@@ -36,7 +36,7 @@ router.get('/getBaseInventory', auth, (req, res) => {
 	if (!req.payload._id) {
 		return res.status(401).json({ message: 'UnauthorizedError: unauthorized action' });
 	} else {
-		Items.find({ initial: true, gender: { $in: [req.headers.gender, 'neutral'] }}, (err, items) => {
+		Items.find({ initial: true }, (err, items) => {
 			return res.status(200).json(items);
 		});
 	}

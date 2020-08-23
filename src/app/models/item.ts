@@ -4,8 +4,6 @@
  * Computing Sciences)
  */
 
-import { Gender} from './gender';
-
 export class Item {
 	_id: string;
 	title: string;
@@ -15,5 +13,4 @@ export class Item {
 	fullImage2: string;
 	price: number;
 	initial: boolean;
-	gender: Gender;
 }
