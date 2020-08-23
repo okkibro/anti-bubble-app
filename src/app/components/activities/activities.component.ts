@@ -18,10 +18,12 @@ import { DataService } from 'src/app/services/data-exchange.service';
 import { FormBuilder } from '@angular/forms';
 import { User } from '../../models/user';
 import { Log } from '../../models/log';
-import { beforeUnload } from '../../../../constants';
+import { beforeUnload, milestones } from '../../../../constants';
 import { SessionService } from 'src/app/services/session.service';
 import { UserService } from '../../services/user.service';
 import { ClassesService } from '../../services/classes.service';
+import { MilestoneUpdatesService } from '../../services/milestone-updates.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
 	selector: 'mean-activities',
@@ -62,6 +64,8 @@ export class ActivitiesComponent implements OnInit {
 	 * @param sessionService
 	 * @param userService
 	 * @param classesService
+	 * @param milestoneUpdates
+	 * @param snackBar
 	 */
 	constructor(
 		private socketService: SocketIOService,
@@ -70,7 +74,9 @@ export class ActivitiesComponent implements OnInit {
 		private fb: FormBuilder,
 		private sessionService: SessionService,
 		private userService: UserService,
-		private classesService: ClassesService
+		private classesService: ClassesService,
+		private milestoneUpdates: MilestoneUpdatesService,
+		private snackBar: MatSnackBar
 	) { }
 
 	/**
@@ -145,7 +151,7 @@ export class ActivitiesComponent implements OnInit {
 
 		// Students listen for incoming questions.
 		// Receive question.
-		this.socketService.listenForQuestion(question => {
+		this.socketService.listenForQuestion((question: string) => {
 			let questionDisplay = document.getElementById('receiveQuestion');
 			questionDisplay.innerHTML = question;
 			this.questions.push(question);
@@ -194,7 +200,7 @@ export class ActivitiesComponent implements OnInit {
 
 		// Students listen for the signal that is sent when the session has ended, either by time running out or
 		// when the teacher presses the 'Stop activiteit' button.
-		this.socketService.listenForFinishGame(timedOut => {
+		this.socketService.listenForFinishGame((timedOut: boolean) => {
 
 			// Record final answers and questions in sessionData and save these in the database.
 			this.sessionData.questions = this.questions;
@@ -214,7 +220,7 @@ export class ActivitiesComponent implements OnInit {
 	getSessionPlayers(): void {
 
 		// Listener for getting all the players in the session and recording this in the sessionData.
-		this.socketService.listenForGetPlayers(sessionPlayers => {
+		this.socketService.listenForGetPlayers((sessionPlayers: any) => {
 
 			// Get email from all sessionPlayers and save these in the sessionData so they can later be converted
 			// to Users when the sessionData is saved.
@@ -223,7 +229,6 @@ export class ActivitiesComponent implements OnInit {
 				sessionPlayerEmails.push(player.email)
 			}
 			this.sessionData.students = sessionPlayerEmails;
-			console.log(this.sessionData.students);
 		});
 	}
 
@@ -234,7 +239,7 @@ export class ActivitiesComponent implements OnInit {
 	recordAnswer(): void {
 
 		// Listener for recording a submitted answer by a student.
-		this.socketService.listenForRecordAnswer(answer => {
+		this.socketService.listenForRecordAnswer((answer: string) => {
 			this.answers.push(answer);
 		});
 	}
@@ -247,7 +252,7 @@ export class ActivitiesComponent implements OnInit {
 	deleteAnswer(): void {
 
 		// Listener for removing an answer from a student that was already recorded.
-		this.socketService.listenForRemoveAnswer(answer => {
+		this.socketService.listenForRemoveAnswer((answer: string) => {
 			this.answers.pop();
 		});
 	}
@@ -260,7 +265,7 @@ export class ActivitiesComponent implements OnInit {
 	deletePlayer(): void {
 
 		// Listener for a player leaving the session so he can be removed from the recorded students in the session.
-		this.socketService.listenForLeavePlayer(student => {
+		this.socketService.listenForLeavePlayer((student: { email: string; }) => {
 			this.sessionData.students = this.sessionData.students.filter(e => e !== student.email);
 		});
 	}

@@ -131,6 +131,15 @@ export class HomeComponent implements OnInit {
 					});
 				}
 			});
+			this.milestoneUpdates.updateMilestone(milestones[0], 1).subscribe(data => {
+				if (data.completed) {
+					this.milestoneUpdates.updateRecent(`${new Date().toLocaleDateString()}: Je hebt de badge 'Beginner' verdiend!`).subscribe();
+					this.snackBar.open('\uD83C\uDF89 Gefeliciteerd! Je hebt de badge \'Beginner\' verdiend! \uD83C\uDF89', 'X', {
+						duration: 4000,
+						panelClass: ['style-succes']
+					});
+				}
+			});
 		});
 	}
 

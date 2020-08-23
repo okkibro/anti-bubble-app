@@ -52,7 +52,7 @@ router.post('/register', (req, res) => {
 	}
 	user.currency = 0;
 	user.classArray = [];
-	user.milestones = [0, 0, 0, 0, 0, 0, 0, 0, 0];
+	user.milestones = [0, 0, 0, 0, 0, 0, 0, 0];
 	user.recentMilestones = [];
 	for (let i = 0; i < 5; i++) {
 		user.recentMilestones[i] = '';
@@ -303,8 +303,9 @@ router.post('/milestone', auth, (req, res) => {
 					completed = true;
 				}
 
-				// Mark and save changes.
-				user.markModified('milestones');
+				// Save changes.
+				const query = 'milestones.' + milestone.index;
+				Users.findByIdAndUpdate({ _id: user._id }, { [query]: user.milestones[milestone.index] }).exec();
 				user.save().then(() => {
 					return res.status(200).json({ succes: true, completed: completed });
 				}).catch((err) => {
@@ -336,7 +337,7 @@ router.post('/recentMilestones', auth, (req, res) => {
 					return res.status(500).json({ succes: false, message: err });
 				});
 			} else {
-				return res.status(404).json({ message: err });
+				return res.status(404).json({ succes: false, message: err });
 			}
 		});
 	}
