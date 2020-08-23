@@ -15,6 +15,7 @@ import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { Item } from '../models/item';
+import { Gender } from '../models/gender';
 import { CookieService } from 'ngx-cookie-service';
 import { environment } from 'src/environments/environment';
 
@@ -35,10 +36,11 @@ export class ShopService {
 	/**
 	 * Method to do a POST request to get an item from the shop of a specific type.
 	 * @param type Category of items to be fetched from the database.
+	 * @param gender Gender of items to be fetched from the database.
 	 * @returns HTTP response data in an Observable.
 	 */
-	public getCategoryItems(type: string): Observable<any> {
-		return this.http.get(`${environment.ENDPOINT}/shop`, { headers: { id: type }});
+	public getCategoryItems(type: string, gender: Gender): Observable<any> {
+		return this.http.get(`${environment.ENDPOINT}/shop`, { headers: { type: type, gender: gender, Authorization: 'Bearer ' + this.cookie.get('mean-token') }});
 	}
 
 	/**
@@ -52,9 +54,10 @@ export class ShopService {
 
 	/**
 	 * Method to de a GET request to set the user's initial inventroy when he creates an account.
+	 * @param gender Gender of items for the base inventory.
 	 * @returns HTTP response data in an Observable.
 	 */
-	public getBaseInventory(): Observable<any> {
-		return this.http.get(`${environment.ENDPOINT}/shop/getBaseInventory`, { headers: { Authorization: 'Bearer ' + this.cookie.get('mean-token') }});
+	public getBaseInventory(gender: Gender): Observable<any> {
+		return this.http.get(`${environment.ENDPOINT}/shop/getBaseInventory`, { headers: { gender: gender, Authorization: 'Bearer ' + this.cookie.get('mean-token') }});
 	}
 }

@@ -38,6 +38,17 @@
                     </tr>
                     <tr>
                         <td>
+                            <mat-label>Geslacht:*</mat-label>
+                            <mat-radio-group class="role-radio-group" ngDefaultControl formControlName="gender">
+                                <mat-radio-button class="role-radio-button" value="male" color="primary">Jongen
+                                </mat-radio-button>
+                                <mat-radio-button class="role-radio-button" value="female" color="primary">Meisje
+                                </mat-radio-button>
+                            </mat-radio-group>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
                             <mat-form-field>
                                 <mat-label>Email</mat-label>
                                 <input matInput placeholder="Email" formControlName="email" required>

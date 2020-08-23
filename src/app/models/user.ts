@@ -7,6 +7,7 @@
 import { Role } from './role';
 import { Item } from './item';
 import { Milestone } from './milestone';
+import { Gender } from './gender';
 
 export class User {
 	_id: string;
@@ -14,6 +15,7 @@ export class User {
 	lastName: string;
 	email: string;
 	role: Role;
+	gender: Gender;
 	password: string;
 	salt: string;
 	recoverPasswordToken: string;

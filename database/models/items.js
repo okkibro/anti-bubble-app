@@ -14,7 +14,8 @@ let itemsSchema = new Schema({
 	fullImage: { type: String, required: true },
 	fullImage2: { type: String },
 	price: { type: Number, required: true },
-	initial: { type: Boolean, required: true }
+	initial: { type: Boolean, required: true },
+	gender: {type: String, enum: ['male', 'female', 'neutral'], required: true }
 });
 
 module.exports = mongoose.model('items', itemsSchema);

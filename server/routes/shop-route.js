@@ -18,18 +18,25 @@ const auth = jwt({
 });
 
 /** GET method to get shop items from the database belonging to a certain category. */
-router.get('/', (req, res) => {
-	Items.find({ category: req.headers.id.toLowerCase() }, (err, items) => {
-		return res.status(200).json(items);
-	});
-});
+router.get('/', auth, (req, res) => {
 
-router.get('/getBaseInventory', auth, (req, res) => {
 	// Check if user is authorized to perform the action.
 	if (!req.payload._id) {
 		return res.status(401).json({ message: 'UnauthorizedError: unauthorized action' });
 	} else {
-		Items.find({ initial: true }, (err, items) => {
+		Items.find({ category: req.headers.type.toLowerCase(), gender: { $in: [req.headers.gender, 'neutral'] } }, (err, items) => {
+			return res.status(200).json(items);
+		});
+	}
+});
+
+router.get('/getBaseInventory', auth, (req, res) => {
+
+	// Check if user is authorized to perform the action.
+	if (!req.payload._id) {
+		return res.status(401).json({ message: 'UnauthorizedError: unauthorized action' });
+	} else {
+		Items.find({ initial: true, gender: { $in: [req.headers.gender, 'neutral'] }}, (err, items) => {
 			return res.status(200).json(items);
 		});
 	}

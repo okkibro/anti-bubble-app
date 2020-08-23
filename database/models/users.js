@@ -14,6 +14,7 @@ let usersSchema = new Schema({
 	lastName: { type: String, required: true },
 	email: { type: String, unique: true, required: true },
 	role: { type: String, enum: ['teacher', 'student'], required: true },
+	gender: {type: String, enum: ['male', 'female'], required: true },
 	hash: { type: String, required: true },
 	salt: { type: String, required: true },
 	recoverPasswordToken: String,

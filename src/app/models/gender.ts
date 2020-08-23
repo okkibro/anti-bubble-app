@@ -4,16 +4,8 @@
  * Computing Sciences)
  */
 
-import { Gender} from './gender';
-
-export class Item {
-	_id: string;
-	title: string;
-	category: string;
-	previewImage: string;
-	fullImage: string;
-	fullImage2: string;
-	price: number;
-	initial: boolean;
-	gender: Gender;
+export enum Gender {
+	male = 'male',
+	female = 'female',
+	neutral = 'neutral'
 }

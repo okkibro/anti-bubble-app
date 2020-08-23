@@ -31,8 +31,9 @@ router.post('/register', (req, res) => {
 	// Fill in (the required) data to user attributes.
 	user.firstName = sanitize(req.body.firstName);
 	user.lastName = sanitize(req.body.lastName);
+	user.gender = req.body.gender;
 	user.email = sanitize(req.body.email);
-	user.role = sanitize(req.body.role);
+	user.role = req.body.role;
 	user.setPassword(sanitize(req.body.password));
 	user.inventory = [];
 	user.milestones = [];
@@ -58,7 +59,7 @@ router.post('/register', (req, res) => {
 	}
 
 	// Building the basic avatar upon registering.
-	Items.findById('5edcf97b1167982a005b9737', (err, lichaam) => {
+	Items.findById("5edcf97b1167982a005b9737", (err, lichaam) => {
 		Items.findById('5edcf97b1167982a005b977b', (err, broek) => {
 			Items.findById('5edcf97b1167982a005b9754', (err, shirt) => {
 				Items.findById('5edcf97b1167982a005b9787', (err, schoenen) => {

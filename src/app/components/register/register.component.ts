@@ -33,6 +33,7 @@ export class RegisterComponent implements OnInit {
 	registerForm = this.fb.group({
 			firstName: ['', Validators.required],
 			lastName: ['', Validators.required],
+			gender: ['', Validators.required],
 			email: ['', {
 				validators: [Validators.required, Validators.email],
 				asyncValidators: [this.userService.uniqueEmailValidator()],
@@ -41,7 +42,6 @@ export class RegisterComponent implements OnInit {
 			role: ['', Validators.required],
 			password: ['', Validators.required],
 			repeatPassword: ['', Validators.required],
-			classCode: ['']
 		},
 		{
 			validator: this.passwordMatchValidator
@@ -81,12 +81,13 @@ export class RegisterComponent implements OnInit {
 		let user = new User();
 		user.firstName = this.registerForm.get('firstName').value;
 		user.lastName = this.registerForm.get('lastName').value;
+		user.gender = this.registerForm.get('gender').value;
 		user.email = this.registerForm.get('email').value;
 		user.role = this.registerForm.get('role').value;
 		user.password = this.registerForm.get('password').value;
 
 		this.auth.register(user).subscribe(() => {
-			this.shopService.getBaseInventory().subscribe(data => {
+			this.shopService.getBaseInventory(user.gender).subscribe(data => {
 				for (let i = 0; i < data.length; i++) {
 					this.shopService.buy(data[i]).subscribe();
 				}

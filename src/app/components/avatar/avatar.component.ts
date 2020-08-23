@@ -40,7 +40,8 @@ export class AvatarComponent implements OnInit {
 		'Shirt',
 		'Broek',
 		'Schoenen',
-		'Medaille'
+		'Medaille',
+		'Lichaam'
 	];
 	itemColumns: number;
 
@@ -65,9 +66,9 @@ export class AvatarComponent implements OnInit {
 	 * @returns
 	 */
 	ngOnInit(): void {
-		this.shopService.getCategoryItems('hoofddeksel').subscribe(items => {
-			this.userService.profile().subscribe(user => {
-				this.userDetails = user;
+		this.userService.profile().subscribe(user => {
+			this.userDetails = user;
+			this.shopService.getCategoryItems('hoofddeksel', this.userDetails.gender).subscribe(items => {
 
 				// Checks for items in the shop that the player bought
 				for (let i = 0; i < items.length; i++) {
@@ -109,7 +110,7 @@ export class AvatarComponent implements OnInit {
 	 * @returns
 	 */
 	tabChange(event: MatTabChangeEvent): void {
-		this.shopService.getCategoryItems(event.tab.textLabel).subscribe(items => {
+		this.shopService.getCategoryItems(event.tab.textLabel, this.userDetails.gender).subscribe(items => {
 			this.itemsShown = items;
 			this.filteredAvatar = this.filterAvatar();
 		}, (err) => {
