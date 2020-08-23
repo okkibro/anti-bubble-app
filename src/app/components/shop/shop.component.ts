@@ -35,7 +35,6 @@ export class ShopComponent implements OnInit {
 	userDetails: User;
 	shopDetails: Item[];
 	filteredShop: Item[];
-	succesWindow: boolean = false;
 	itemColumns: number;
 	shopCategories: string[] = [
 		'Hoofddeksel',
@@ -73,7 +72,6 @@ export class ShopComponent implements OnInit {
 			this.shopService.getCategoryItems('hoofddeksel').subscribe(items => {
 				this.shopDetails = items;
 				this.filteredShop = this.filterShop();
-				this.succesWindow = true;
 			}, (err) => {
 				console.error(err);
 			});
@@ -106,7 +104,7 @@ export class ShopComponent implements OnInit {
 	 */
 	buy(item: Item): void {
 		this.shopService.buy(item).subscribe((data: any) => {
-			if (data.succes && this.succesWindow) {
+			if (data.succes) {
 				this.snackBar.open(data.message, 'X', { duration: 2000, panelClass: ['style-succes'] }).afterDismissed().subscribe(() => {
 					this.milestoneUpdates.updateMilestone(milestones[2], 1).subscribe(data => {
 						if (data.completed) {
@@ -128,7 +126,7 @@ export class ShopComponent implements OnInit {
 						});
 					});
 				});
-			} else if (this.succesWindow) {
+			} else {
 				this.snackBar.open(data.message, 'X', { duration: 2500, panelClass: ['style-error'] });
 			}
 		});

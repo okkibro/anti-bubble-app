@@ -23,7 +23,7 @@
                         <mat-card-subtitle class="gameChoice" *ngIf="gameData?.duration != null">
                             {{ gameData?.game.name }}, ({{ gameData?.duration }} min)
                         </mat-card-subtitle>
-                        <mat-card-subtitle class="gameChoice" *ngIf="gameData?.duration === null">
+                        <mat-card-subtitle class="gameChoice" *ngIf="gameData?.duration == null">
                             {{ gameData?.game.name }}
                         </mat-card-subtitle>
                     </mat-card-header>
