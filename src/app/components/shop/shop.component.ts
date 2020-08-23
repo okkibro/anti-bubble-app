@@ -139,7 +139,7 @@ export class ShopComponent implements OnInit {
 	 */
 	filterShop(): Item[] {
 		return this.shopDetails.filter(x => {
-			return this.userDetails.inventory.find(y => y._id == x._id) == null;
+			return this.userDetails.inventory.find(y => y._id === x._id) === null;
 		});
 	}
 

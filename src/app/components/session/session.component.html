@@ -12,9 +12,9 @@
         <mean-toolbar (sidenavToggle)="sidenav.toggle()"></mean-toolbar>
         <body>
         <div class="container-div" fxLayoutGap="10px" fxLayout="column">
-            <mat-card *ngIf="tokenData?.role == 'teacher' && !gameStarted" fxLayoutAlign="space-between start">
+            <mat-card *ngIf="tokenData?.role === 'teacher' && !gameStarted" fxLayoutAlign="space-between start">
                 <div class="time-left">
-                    <p *ngIf="tokenData?.role == 'teacher' && gameData?.duration != null">Tijd over:
+                    <p *ngIf="tokenData?.role === 'teacher' && gameData?.duration != null">Tijd over:
                         <br><strong>{{ gameData?.duration }}:00</strong></p>
                 </div>
                 <div>
@@ -23,7 +23,7 @@
                         <mat-card-subtitle class="gameChoice" *ngIf="gameData?.duration != null">
                             {{ gameData?.game.name }}, ({{ gameData?.duration }} min)
                         </mat-card-subtitle>
-                        <mat-card-subtitle class="gameChoice" *ngIf="gameData?.duration == null">
+                        <mat-card-subtitle class="gameChoice" *ngIf="gameData?.duration === null">
                             {{ gameData?.game.name }}
                         </mat-card-subtitle>
                     </mat-card-header>
@@ -41,11 +41,11 @@
                     </mat-card-content>
                 </div>
                 <div class="player-count">
-                    <p *ngIf="tokenData?.role == 'teacher'">Aantal spelers:<br><strong>{{ playerCount }}</strong></p>
+                    <p *ngIf="tokenData?.role === 'teacher'">Aantal spelers:<br><strong>{{ playerCount }}</strong></p>
                 </div>
             </mat-card>
 
-            <mat-card *ngIf="tokenData?.role == 'student'">
+            <mat-card *ngIf="tokenData?.role === 'student'">
                 <mat-card-header>
                     <mat-card-title>{{ gameData?.game.name }}</mat-card-title>
                 </mat-card-header>
@@ -55,9 +55,9 @@
                 </mat-card-content>
             </mat-card>
 
-            <mat-card *ngIf="tokenData?.role == 'teacher' && gameStarted" fxLayoutAlign="space-between start">
+            <mat-card *ngIf="tokenData?.role === 'teacher' && gameStarted" fxLayoutAlign="space-between start">
                 <div class="time-left">
-                    <p id="counter" *ngIf="tokenData?.role == 'teacher' && gameData?.duration != null">Tijd over:
+                    <p id="counter" *ngIf="tokenData?.role === 'teacher' && gameData?.duration != null">Tijd over:
                         <br><strong>{{ gameData?.duration }}:00</strong></p>
                 </div>
                 <div>
@@ -66,11 +66,11 @@
                         <mat-card-subtitle *ngIf="!enableQuestions">Antwoorden:</mat-card-subtitle>
                     </mat-card-header>
 
-                    <mat-card-content *ngIf="gameData?.game.name == 'Naamloos Nieuws'">
+                    <mat-card-content *ngIf="gameData?.game.name === 'Naamloos Nieuws'">
                         <table class="submit-table"></table>
                     </mat-card-content>
 
-                    <mat-card-content *ngIf="gameData?.game.name == 'Botsende Bubbels'">
+                    <mat-card-content *ngIf="gameData?.game.name === 'Botsende Bubbels'">
                         <table class="submit-table"></table>
                         <mat-divider *ngIf="!enableQuestions"></mat-divider><br>
                         <mean-answer-form *ngIf="!gameFinished"></mean-answer-form>
@@ -78,20 +78,20 @@
                         <p *ngIf="gameFinished && timedOut"><i>De tijd is om en het spel is afgelopen. Ga terug naar het startscherm om een nieuwe sessie te starten.</i></p>
                     </mat-card-content>
 
-                    <mat-card-content *ngIf="gameData?.game.name == 'Alternatieve Antwoorden'">
+                    <mat-card-content *ngIf="gameData?.game.name === 'Alternatieve Antwoorden'">
                         <mean-answer-form *ngIf="enableQuestions"></mean-answer-form>
                         <table class="submit-table"></table>
                     </mat-card-content>
 
-                    <mat-card-content *ngIf="gameData?.game.name == 'Aanradend Algoritme'">
+                    <mat-card-content *ngIf="gameData?.game.name === 'Aanradend Algoritme'">
                     </mat-card-content>
                 </div>
                 <div class="player-count">
-                    <p *ngIf="tokenData?.role == 'teacher'">Aantal spelers:<br><strong>{{ playerCount }}</strong></p>
+                    <p *ngIf="tokenData?.role === 'teacher'">Aantal spelers:<br><strong>{{ playerCount }}</strong></p>
                 </div>
             </mat-card>
 
-            <mat-card *ngIf="tokenData?.role == 'teacher' && gameStarted">
+            <mat-card *ngIf="tokenData?.role === 'teacher' && gameStarted">
                 <button mat-button class="general-nope-button" *ngIf="!gameFinished" (click)="stopGame(false)">Stop activiteit</button>
                 <button mat-button class="general-button" *ngIf="gameFinished" (click)="leaveGame()">Home</button>
             </mat-card>

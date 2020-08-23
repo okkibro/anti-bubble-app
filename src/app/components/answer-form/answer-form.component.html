@@ -4,7 +4,7 @@
   ~ Computing Sciences)
   -->
 
-<form *ngIf="tokenData.role == 'student'" [formGroup]="getAnswerForm" (ngSubmit)="sendAnswer()">
+<form *ngIf="tokenData.role === 'student'" [formGroup]="getAnswerForm" (ngSubmit)="sendAnswer()">
     <mat-form-field *ngIf="!answerSubmitted">
         <mat-label>Vul hier je antwoord in</mat-label>
         <textarea matInput formControlName="getAnswer" placeholder="Antwoord"></textarea>
@@ -13,7 +13,7 @@
     <p *ngIf="answerSubmitted"><i>Je antwoord is ingeleverd. Wacht op verdere instructies van de docent.</i></p>
 </form>
 
-<form *ngIf="tokenData.role == 'teacher'" [formGroup]="sendQuestionsForm" (ngSubmit)="sendQuestion()">
+<form *ngIf="tokenData.role === 'teacher'" [formGroup]="sendQuestionsForm" (ngSubmit)="sendQuestion()">
     <mat-form-field *ngIf="!questionSubmitted">
         <mat-label>Vul hier een onderwerp in</mat-label>
         <textarea matInput formControlName="getQuestion" placeholder="Onderwerp"></textarea>

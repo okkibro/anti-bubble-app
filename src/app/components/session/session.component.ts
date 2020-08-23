@@ -101,7 +101,7 @@ export class SessionComponent implements OnInit {
 			});
 
 			this.tokenData = this.auth.getTokenData();
-			if (this.tokenData.role == 'teacher') {
+			if (this.tokenData.role === 'teacher') {
 
 				// Callback that gets called whenever a player connects with the session.
 				this.socketService.listenForUpdates(newPlayer => {
@@ -148,7 +148,7 @@ export class SessionComponent implements OnInit {
 					for (let i = 0; i < htmlPlayers.length; i++) {
 
 						// If the name is equal to removed player.
-						if (htmlPlayers[i].childNodes[0].textContent == removedPlayer.name) {
+						if (htmlPlayers[i].childNodes[0].textContent === removedPlayer.name) {
 							htmlPlayers[i].remove(); // Remove the node.
 						}
 					}
@@ -241,7 +241,7 @@ export class SessionComponent implements OnInit {
 	startGame() {
 
 		// Teacher wants to start a game without any players in it.
-		if (this.playerCount == 0) {
+		if (this.playerCount === 0) {
 			this.snackBar.open('Er zitten nog geen spelers in de sessie', 'X', { duration: 2500, panelClass: ['style-warning'] });
 		} else {
 			if (this.canStart(this.gameData.game.name)) {

@@ -34,7 +34,7 @@
                             </td>
                         </tr>
                     </table>
-                    <p *ngIf="currentClass?.students?.length == 0 && currentClass != undefined">De klas heeft nog geen leerlingen</p>
+                    <p *ngIf="currentClass?.students?.length === 0 && currentClass != undefined">De klas heeft nog geen leerlingen</p>
                     <p *ngIf="currentClass == undefined">Je hebt nog geen klas aangemaakt. Dit kan je hieronder doen.</p>
                 </mat-card-content>
             </mat-card>
@@ -68,9 +68,9 @@
                                 <mat-label>Niveau *</mat-label>
                                 <mat-radio-group class="radio-group" formControlName="classLevel" required>
                                     <mat-radio-button class="radio-button" value="VMBO" color="primary"
-                                                      [disabled]="classForm.get('classYear').value == 5 || classForm.get('classYear').value == 6">VMBO
+                                                      [disabled]="classForm.get('classYear').value === 5 || classForm.get('classYear').value === 6">VMBO
                                     </mat-radio-button>
-                                    <mat-radio-button class="radio-button" value="HAVO" color="primary" [disabled]="classForm.get('classYear').value == 6">HAVO
+                                    <mat-radio-button class="radio-button" value="HAVO" color="primary" [disabled]="classForm.get('classYear').value === 6">HAVO
                                     </mat-radio-button>
                                     <mat-radio-button class="radio-button" value="VWO" color="primary">VWO</mat-radio-button>
                                 </mat-radio-group>
@@ -84,10 +84,10 @@
                                     <mat-radio-button class="radio-button" value="2" color="primary">2</mat-radio-button>
                                     <mat-radio-button class="radio-button" value="3" color="primary">3</mat-radio-button>
                                     <mat-radio-button class="radio-button" value="4" color="primary">4</mat-radio-button>
-                                    <mat-radio-button class="radio-button" value="5" color="primary" [disabled]="classForm.get('classLevel').value == 'VMBO'">5
+                                    <mat-radio-button class="radio-button" value="5" color="primary" [disabled]="classForm.get('classLevel').value === 'VMBO'">5
                                     </mat-radio-button>
                                     <mat-radio-button class="radio-button" value="6" color="primary"
-                                                      [disabled]="classForm.get('classLevel').value == 'VMBO' || classForm.get('classLevel').value == 'HAVO'">6
+                                                      [disabled]="classForm.get('classLevel').value === 'VMBO' || classForm.get('classLevel').value === 'HAVO'">6
                                     </mat-radio-button>
                                 </mat-radio-group>
                             </td>

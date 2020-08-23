@@ -35,14 +35,14 @@
                                 <td class="top-data">E-mailadres</td>
                                 <td>{{ userDetails?.email }}</td>
                             </tr>
-                            <tr *ngIf="userDetails?.role == 'student' && userClassTitle != undefined">
+                            <tr *ngIf="userDetails?.role === 'student' && userClassTitle != undefined">
                                 <td class="top-data">Klas</td>
                                 <td>{{ userClassTitle }}</td>
                             </tr>
                         </table>
                     </mat-card-content>
                 </mat-card>
-                <mat-card fxFlex="50%" fxFlex.xs="100%" *ngIf="userDetails?.role == 'student'">
+                <mat-card fxFlex="50%" fxFlex.xs="100%" *ngIf="userDetails?.role === 'student'">
                     <mat-card-header>
                         <mat-card-title>Badges</mat-card-title>
                         <mat-card-subtitle>Badge met de meeste voortgang</mat-card-subtitle>
@@ -66,7 +66,7 @@
             </div>
 
             <div fxLayout.xs="column" fxLayoutGap="10px" fxLayoutAlign="space-evenly">
-                <mat-card fxFlex="50%" fxFlex.xs="100%" *ngIf="userDetails?.role == 'student'">
+                <mat-card fxFlex="50%" fxFlex.xs="100%" *ngIf="userDetails?.role === 'student'">
                     <mat-card-header>
                         <mat-card-title>Mijn Bubbel</mat-card-title>
                     </mat-card-header>

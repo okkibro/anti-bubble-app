@@ -24,10 +24,10 @@
                             afgenomen.
                         </mat-card-subtitle>
                     </mat-card-header>
-                    <mat-card-content *ngIf="userDetails?.role == 'teacher'">
+                    <mat-card-content *ngIf="userDetails?.role === 'teacher'">
                         <button mat-button class="general-link" [routerLink]="'/session-options'"> Kies Activiteit</button>
                     </mat-card-content>
-                    <mat-card-content class="join-session" *ngIf="userDetails?.role == 'student' && userDetails?.bubbleInit">
+                    <mat-card-content class="join-session" *ngIf="userDetails?.role === 'student' && userDetails?.bubbleInit && userDetails?.classArray.length !== 0">
                         <form [formGroup]="joinSessionForm">
                             <mat-form-field>
                                 <input matInput formControlName="pin" placeholder="Sessie code" type="text" maxlength="6" (keypress)="check($event)"
@@ -36,8 +36,11 @@
                             <button mat-button class="general-button" (click)="joinSession()">Deelnemen aan sessie</button>
                         </form>
                     </mat-card-content>
-                    <mat-card-content *ngIf="userDetails?.role == 'student' && !userDetails?.bubbleInit">
+                    <mat-card-content *ngIf="userDetails?.role === 'student' && !userDetails?.bubbleInit">
                         <button mat-button class="general-link" [routerLink]="'/labyrinth'">Start Dwalende Doolhof</button>
+                    </mat-card-content>
+                    <mat-card-content *ngIf="userDetails?.role === 'student' && userDetails?.bubbleInit && userDetails?.classArray.length === 0">
+                        <p><i>Je moet in een klas zitten voordat je deel mag nemen aan een sessie, dus ga naar het 'Klas overzicht' en word lid van een klas.</i></p>
                     </mat-card-content>
                 </mat-card>
             </div>

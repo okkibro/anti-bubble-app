@@ -163,7 +163,7 @@ export class ActivitiesComponent implements OnInit {
 		this.socketService.listenForTeam((team, article, leaders) => {
 			this.leaders = leaders;
 			this.article = article;
-			if (leaders.find(x => x.email == this.userDetails.email) == undefined) {
+			if (leaders.find(x => x.email === this.userDetails.email) == undefined) {
 				this.isLeader = false;
 			}
 			this.team = team;

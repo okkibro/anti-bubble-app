@@ -134,6 +134,7 @@ router.post('/passwordrecovery', async (req, res) => {
 					port: account.smtp.port,
 					secure: account.smtp.secure,
 					auth: {
+
 						// Generated ethereal user.
 						user: account.user,
 

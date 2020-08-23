@@ -72,7 +72,7 @@ export class AvatarComponent implements OnInit {
 
 				// Checks for items in the shop that the player bought
 				for (let i = 0; i < items.length; i++) {
-					if (user.inventory.find(x => x._id == items[i]._id) != null) {
+					if (user.inventory.find(x => x._id === items[i]._id) != null) {
 						this.itemsShown.push(items[i]);
 						this.filteredAvatar = this.filterAvatar();
 					}
@@ -95,7 +95,7 @@ export class AvatarComponent implements OnInit {
 		this.avatarService.equip(item).subscribe(data => {
 
 			// Updates the image shown to the player without reloading the page.
-			if (data.category == 'haar') {
+			if (data.category === 'haar') {
 				document.getElementById('haar1').setAttribute('src', data.imageFull2);
 				document.getElementById('haar2').setAttribute('src', data.imageFull);
 			} else {
@@ -124,7 +124,7 @@ export class AvatarComponent implements OnInit {
 	 */
 	filterAvatar(): AvatarComponent[] {
 		return this.itemsShown.filter(x => {
-			return this.userDetails.inventory.find(y => x._id == y._id) != null;
+			return this.userDetails.inventory.find(y => x._id === y._id) != null;
 		});
 	}
 

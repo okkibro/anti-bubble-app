@@ -49,7 +49,7 @@ export class BadgesComponent implements OnInit {
 
 			// Loop over all milestones and sort them into the arrays.
 			for (let i = 0; i < milestones.length; i++) {
-				if (milestones[i].maxValue == user.milestones[i]) {
+				if (milestones[i].maxValue === user.milestones[i]) {
 					this.completed.push({ index: i, milestone: milestones[i] });
 				} else {
 					this.uncompleted.push({ index: i, milestone: milestones[i] });

@@ -33,7 +33,7 @@
                                 <td *ngIf="editEnabledFirstName">
                                     <button mat-button class="accept-changes-button"
                                             (click)="updateField('firstName', editProfileForm.get('firstName').value)"
-                                            [disabled]="(userDetails?.firstName == editProfileForm.get('firstName').value) || editProfileForm.get('firstName').value == ''"
+                                            [disabled]="(userDetails?.firstName === editProfileForm.get('firstName').value) || editProfileForm.get('firstName').value === ''"
                                     ></button>
                                     <button mat-button class="discard-changes-button" (click)="changeEditMode('firstName')"></button>
                                 </td>
@@ -52,7 +52,7 @@
                                 <td *ngIf="editEnabledLastName">
                                     <button mat-button class="accept-changes-button"
                                             (click)="updateField('lastName', editProfileForm.get('lastName').value)"
-                                            [disabled]="(userDetails?.lastName == editProfileForm.get('lastName').value) || editProfileForm.get('lastName').value == ''"
+                                            [disabled]="(userDetails?.lastName === editProfileForm.get('lastName').value) || editProfileForm.get('lastName').value === ''"
                                     ></button>
                                     <button mat-button class="discard-changes-button" (click)="changeEditMode('lastName')"></button>
                                 </td>
@@ -77,7 +77,7 @@
                                 <td *ngIf="editEnabledEmail">
                                     <button mat-button class="accept-changes-button"
                                             (click)="updateField('email', editProfileForm.get('email').value)"
-                                            [disabled]="!editProfileForm.valid || editProfileForm.get('email').value == ''"
+                                            [disabled]="!editProfileForm.valid || editProfileForm.get('email').value === ''"
                                     ></button>
                                     <button mat-button class="discard-changes-button" (click)="changeEditMode('email')"></button>
                                 </td>

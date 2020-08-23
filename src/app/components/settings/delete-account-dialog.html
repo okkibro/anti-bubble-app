@@ -5,7 +5,7 @@
   -->
 
 <h1 mat-dialog-title>Account verwijderen</h1>
-<div style="font-family: Roboto, 'Helvetica Neue', sans-serif" *ngIf="data.role == 'teacher'" mat-dialog-content>
+<div style="font-family: Roboto, 'Helvetica Neue', sans-serif" *ngIf="data.role === 'teacher'" mat-dialog-content>
     <p> Het verwijderen van je account zal de volgende gevolgen hebben: </p>
     <ul>
         <li> De klassen die je aangemaakt hebt zullen verwijderd worden.</li>
@@ -14,7 +14,7 @@
     </ul>
     <p> Weet je zeker dat je je account wilt verwijderen? </p>
 </div>
-<div style="font-family: Roboto, 'Helvetica Neue', sans-serif" *ngIf="data.role == 'student'" mat-dialog-content>
+<div style="font-family: Roboto, 'Helvetica Neue', sans-serif" *ngIf="data.role === 'student'" mat-dialog-content>
     <p> Weet je zeker dat je je account wilt verwijderen? </p>
     <p> Deze actie is <strong> niet </strong> terug te draaien. </p>
 </div>

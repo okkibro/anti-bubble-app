@@ -20,7 +20,7 @@
                         <mat-card-title>{{ gameData?.game.name }}</mat-card-title>
                     </mat-card-header>
 
-                    <mat-card-content *ngIf="gameData?.game.name == 'Naamloos Nieuws'">
+                    <mat-card-content *ngIf="gameData?.game.name === 'Naamloos Nieuws'">
                         <p>{{ gameData?.game.description }}</p>
                         <div class="article"></div>
                         <mat-form-field *ngIf="!isLeader">
@@ -35,7 +35,7 @@
                         </button>
                     </mat-card-content>
 
-                    <mat-card-content *ngIf="gameData?.game.name == 'Botsende Bubbels'">
+                    <mat-card-content *ngIf="gameData?.game.name === 'Botsende Bubbels'">
                         <p>{{ gameData?.game.description }}</p>
                         <p *ngIf="!enableAnswer && !gameFinished"><i>Wacht op het onderwerp van de docent.</i></p>
                         <p *ngIf="gameFinished && !timedOut"><i>Het spel is gestopt door de docent.</i></p>
@@ -51,7 +51,7 @@
                         <mean-answer-form *ngIf="enableAnswer && !gameFinished"></mean-answer-form>
                     </mat-card-content>
 
-                    <mat-card-content *ngIf="gameData?.game.name == 'Alternatieve Antwoorden'">
+                    <mat-card-content *ngIf="gameData?.game.name === 'Alternatieve Antwoorden'">
                         <p>{{ gameData?.game.description }}</p>
                         <p *ngIf="team != undefined && team.length != 0"> Je zit in een team met:</p>
 
@@ -66,7 +66,7 @@
                         <mean-answer-form *ngIf="enableAnswer"></mean-answer-form>
                     </mat-card-content>
 
-                    <mat-card-content *ngIf="gameData?.game.name == 'Aanradend Algoritme'">
+                    <mat-card-content *ngIf="gameData?.game.name === 'Aanradend Algoritme'">
                         <p>{{ gameData?.game.description }}</p>
                     </mat-card-content>
 

@@ -90,7 +90,7 @@ export class TeacherOverviewComponent implements OnInit {
 	 * @returns
 	 */
 	createClass(): void {
-		if (this.userDetails.role == 'teacher') {
+		if (this.userDetails.role === 'teacher') {
 			let klas = new Class();
 			klas.code = Math.floor(100000 + Math.random() * 900000);
 			klas.level = this.classForm.get('classLevel').value;
@@ -135,7 +135,7 @@ export class TeacherOverviewComponent implements OnInit {
 				if (output.succes) {
 					this.classes.push({ title: output.class.title, id: id._id });
 				}
-				if (this.classes.length == this.classIds.length) {
+				if (this.classes.length === this.classIds.length) {
 					this.loading = false;
 				}
 			});
