@@ -11,20 +11,28 @@ mat-panel-title {
 }
 
 .session-options-table td {
+    text-align: left;
     width: 50%;
+    border-bottom: 1px solid darkgrey;
 }
 
 .session-options-table th {
     text-align: center;
     width: 10%;
+    border-bottom: 1px solid darkgrey;
 }
 
 .session-options-table {
     margin: 10px;
     display: inline-block;
-    width: 75%;
+    width: 90%;
     border-collapse: collapse;
-    border: 1px solid black;
+    border: 2px solid black;
+}
+
+.final-table-row th,
+.final-table-row td {
+    border-bottom: unset;
 }
 
 .slideBar {

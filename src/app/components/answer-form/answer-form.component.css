@@ -7,3 +7,23 @@
 .submitted-question {
     margin-top: 0;
 }
+
+.student-submit-form-field {
+    width: 500px;
+}
+
+@media (max-width: 600px) {
+    .student-submit-form-field {
+        width: 280px;
+    }
+}
+
+.teacher-submit-form-field {
+    width: 500px;
+}
+
+@media (max-width: 800px) {
+    .teacher-submit-form-field {
+        width: 210px;
+    }
+}
