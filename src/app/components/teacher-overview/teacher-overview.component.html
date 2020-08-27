@@ -40,7 +40,7 @@
             </mat-card>
 
             <mat-card *ngIf="userDetails?.classArray.length > 0">
-                <mat-form-field appearance="fill" id="class-select">
+                <mat-form-field appearance="fill" class="general-dropdown">
                     <mat-label>Selecteer klas</mat-label>
                     <mat-select>
                         <mat-option *ngFor="let klas of classes" [value]="klas.title" (click)="switchClass(klas.id)">{{ klas.title }}</mat-option>

@@ -10,13 +10,14 @@
         <img src="../../../assets/images/Super_Map/Other/logo.png" alt="">
     </button>
     <div class="nav-items" fxHide.lt-md>
-        <a mat-button [routerLink]="'/home'" fxFlex="11.11%"> Anti-Bubble <img src="../../../assets/images/Super_Map/Other/logo.png" alt="Logo"> </a>
-        <a mat-button routerLinkActive="active-link" [routerLink]="'/home'" fxFlex="11.11%" fxFlexOffset="11.11%"> Home </a>
-        <a mat-button routerLinkActive="active-link" [routerLink]="'/teacher-overview'" *ngIf="tokenData.role === 'teacher'" fxFlex="11.11%"> Docent overzicht </a>
-        <a mat-button routerLinkActive="active-link" [routerLink]="'/class-overview'" *ngIf="tokenData.role === 'student'" fxFlex="11.11%"> Klas overzicht </a>
-        <a mat-button routerLinkActive="active-link" [routerLink]="'/profile'" fxFlex="11.11%"> Profiel </a>
-        <a mat-button routerLinkActive="active-link" [routerLink]="'/shop'" fxFlex="11.11%"> Shop </a>
-        <a mat-button routerLinkActive="active-link" [routerLink]="'/settings'" fxFlex="11.11%"> Instellingen </a>
-        <button mat-button (click)="logoutButton()" fxFlex="11.11%" fxFlexOffset="11.11%"> Log uit</button>
+        <a mat-button [routerLink]="'/home'" [fxFlex]="toolbarRatio"> Anti-Bubble <img src="../../../assets/images/Super_Map/Other/logo.png" alt="Logo"> </a>
+        <a mat-button routerLinkActive="active-link" [routerLink]="'/home'" [fxFlex]="toolbarRatio" [fxFlexOffset]="toolbarRatio"> Home </a>
+        <a mat-button routerLinkActive="active-link" [routerLink]="'/teacher-overview'" *ngIf="tokenData.role === 'teacher'" [fxFlex]="toolbarRatio"> Docent overzicht </a>
+        <a mat-button routerLinkActive="active-link" [routerLink]="'/session-overview'" *ngIf="tokenData.role === 'teacher'" [fxFlex]="toolbarRatio"> Sessie overzicht </a>
+        <a mat-button routerLinkActive="active-link" [routerLink]="'/class-overview'" *ngIf="tokenData.role === 'student'" [fxFlex]="toolbarRatio"> Klas overzicht </a>
+        <a mat-button routerLinkActive="active-link" [routerLink]="'/profile'" [fxFlex]="toolbarRatio"> Profiel </a>
+        <a mat-button routerLinkActive="active-link" [routerLink]="'/shop'" [fxFlex]="toolbarRatio"> Shop </a>
+        <a mat-button routerLinkActive="active-link" [routerLink]="'/settings'" [fxFlex]="toolbarRatio"> Instellingen </a>
+        <button mat-button (click)="logoutButton()" [fxFlex]="toolbarRatio" [fxFlexOffset]="toolbarRatio"> Log uit</button>
     </div>
 </mat-toolbar>

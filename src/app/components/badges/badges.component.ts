@@ -11,12 +11,10 @@
  * @packageDocumentation
  */
 
-
 import { Component, OnInit } from '@angular/core';
-import { milestones } from '../../../../constants';
+import { milestones, titleTrail } from '../../../../constants';
 import { User } from '../../models/user';
 import { Title } from '@angular/platform-browser';
-import { environment } from '../../../environments/environment';
 import { UserService } from '../../services/user.service';
 
 @Component({
@@ -41,7 +39,7 @@ export class BadgesComponent implements OnInit {
 
 	/**
 	 * Initialization method.
-	 * @returns
+	 * @return
 	 */
 	ngOnInit(): void {
 		this.userService.profile().subscribe(user => {
@@ -62,12 +60,13 @@ export class BadgesComponent implements OnInit {
 			console.error(err);
 		});
 
-		this.titleService.setTitle('Badges' + environment.TITLE_TRAIL);
+		// Set page title.
+		this.titleService.setTitle('Badges' + titleTrail);
 	}
 
 	/**
 	 * Method to calculate how far you are in completing all milestones.
-	 * @returns Percentage of milestones achieved.
+	 * @return Percentage of milestones achieved.
 	 */
 	completedRatio(): string {
 		return (this.completed.length / (this.completed.length + this.uncompleted.length) * 100).toFixed(0);

@@ -13,12 +13,12 @@
 
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
+import { titleTrail } from '../../../../constants';
 import { AuthenticationService } from '../../services/authentication.service';
 import { Router } from '@angular/router';
 import { User } from '../../models/user';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Title } from '@angular/platform-browser';
-import { environment } from '../../../environments/environment';
 
 @Component({
 	selector: 'mean-login',
@@ -51,19 +51,20 @@ export class LoginComponent implements OnInit {
 
 	/**
 	 * Initialization method.
-	 * @returns
+	 * @return
 	 */
 	ngOnInit(): void {
 		if (this.auth.isLoggedIn()) {
 			this.router.navigate(['home']);
 		}
 
-		this.titleService.setTitle('Login' + environment.TITLE_TRAIL);
+		// Set page title.
+		this.titleService.setTitle('Login' + titleTrail);
 	}
 
 	/**
 	 * Method to login a user.
-	 * @returns
+	 * @return
 	 */
 	loginUser() {
 		let user = new User();

@@ -36,7 +36,7 @@ export class AvatarDisplayComponent implements OnInit {
 
 	/**
 	 * Initialization method.
-	 * @returns
+	 * @return
 	 */
 	ngOnInit(): void {
 		if (this.route.snapshot.paramMap.get('id')) {

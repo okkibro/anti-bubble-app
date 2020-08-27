@@ -13,6 +13,7 @@ const Users = mongoose.model('users');
 const Questions = mongoose.model('questions');
 const Articles = mongoose.model('articles');
 const Logs = mongoose.model('logs');
+const Classes = mongoose.model('classes');
 const jwt = require('express-jwt');
 
 // Small constant for authentication.
@@ -65,6 +66,24 @@ router.post('/activity', auth, (req, res) => {
 					// Send the activity object returned by the findOne function.
 					return res.status(200).json(activity);
 				});
+			}
+		});
+	}
+});
+
+/** GET method to get all the activities from the database. */
+router.get('/activities', auth, (req, res) => {
+
+	// Check if user is authorized to perform the action.
+	if (!req.payload._id) {
+		return res.status(401).json({ message: 'UnauthorizedError: unauthorized action' });
+	} else {
+		Activities.find({}, (err, activities) => {
+			if (!err) {
+				// Send all activities found in the database to the user.
+				return res.status(200).json({ succes: true, activities: activities });
+			} else {
+				return res.status(500).json({ succes: false, message: err });
 			}
 		});
 	}
@@ -196,6 +215,73 @@ router.post('/recordSession', auth, (req, res) => {
 			return res.status(200).json({ succes: true });
 		}).catch((err) => {
 			return res.status(500).json({ succes: false, message: err });
+		});
+	}
+});
+
+/** GET method to get session logs from the database based on user specified filters. */
+router.get('/getLogs', auth, (req, res) => {
+
+	// Check if user is authorized to perform the action.
+	if (!req.payload._id || req.payload.role !== 'teacher') {
+		return res.status(401).json({ message: 'UnauthorizedError: unauthorized action' });
+	} else {
+
+		// Get teacher requesting logs.
+		Users.findById(req.payload._id, (err, user) => {
+			if (!err && user != null) {
+
+				// Get all the classes of the teacher.
+				Classes.find({ teacher: user._id }, (err, classes) => {
+
+					// Early exit if the teacher doesn't have any classes, otherwise continue.
+					if (classes.length === 0) {
+						return res.status(200).json({
+							succes: true,
+							logs: [],
+							classes: [],
+							students: []
+						});
+					} else {
+
+						// Create an array for studentIds and fill it.
+						let studentIds = [];
+						for (let klas of classes) {
+							if (klas.students.length !== 0) {
+								for (let student of klas.students) {
+									studentIds.push(student._id);
+								}
+							}
+						}
+
+						// Create an array for students and fill it.
+						let students = [];
+						Users.find({ _id: { $in: studentIds }}, (err, classmates) => {
+							if (!err) {
+								students = classmates;
+							} else {
+								return res.status(500).json({ succes: false, message: err });
+							}
+						});
+
+						// Get all the logs from students that are a member of one of the classes of the teacher.
+						Logs.find({ user: { $in: studentIds }}, (err, logs) => {
+							if (!err) {
+								return res.status(200).json({
+									succes: true,
+									logs: logs,
+									classes: classes,
+									students: students
+								});
+							} else {
+								return res.status(500).json({ succes: false, message: err });
+							}
+						});
+					}
+				});
+			} else {
+				return res.status(404).json({ succes: false, message: err });
+			}
 		});
 	}
 });

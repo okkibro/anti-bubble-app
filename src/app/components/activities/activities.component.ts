@@ -81,7 +81,7 @@ export class ActivitiesComponent implements OnInit {
 
 	/**
 	 * Initialization method.
-	 * @returns
+	 * @return
 	 */
 	ngOnInit(): void {
 		this.gameData = this.getGameData();
@@ -137,7 +137,7 @@ export class ActivitiesComponent implements OnInit {
 
 	/**
 	 * Method that returns the game data.
-	 * @returns
+	 * @return
 	 */
 	getGameData(): any {
 		return this.socketService.gameData;
@@ -145,7 +145,7 @@ export class ActivitiesComponent implements OnInit {
 
 	/**
 	 * Method that listens for incoming questions.
-	 * @returns
+	 * @return
 	 */
 	receiveQuestion(): void {
 
@@ -163,7 +163,7 @@ export class ActivitiesComponent implements OnInit {
 
 	/**
 	 * Method that listens for team members.
-	 * @returns
+	 * @return
 	 */
 	receiveTeam(): void {
 		this.socketService.listenForTeam((team, article, leaders) => {
@@ -184,7 +184,7 @@ export class ActivitiesComponent implements OnInit {
 	/**
 	 * Method that submits an answer and data to the teacher when the game mode is 'Naamloos Nieuws'.
 	 * @param data Article chosen by student.
-	 * @returns
+	 * @return
 	 */
 	submit(data: any): void {
 		this.submitted = true;
@@ -194,7 +194,7 @@ export class ActivitiesComponent implements OnInit {
 	/**
 	 * Method that listens whether the game has ended, either by time running out or by the teacher manually
 	 * stopping it.
-	 * @returns
+	 * @return
 	 */
 	disableInput(): void {
 
@@ -215,7 +215,7 @@ export class ActivitiesComponent implements OnInit {
 
 	/**
 	 * Method that listens for the starting of the game so the players participating can be recorded.
-	 * @returns
+	 * @return
 	 */
 	getSessionPlayers(): void {
 
@@ -234,7 +234,7 @@ export class ActivitiesComponent implements OnInit {
 
 	/**
 	 * Method that listens for answers being submitted so they can be recorded.
-	 * @returns
+	 * @return
 	 */
 	recordAnswer(): void {
 
@@ -247,7 +247,7 @@ export class ActivitiesComponent implements OnInit {
 	/**
 	 * Method that listens for answers being removed by the teacher so they can be deleted from the student's
 	 * already recorded answers.
-	 * @returns
+	 * @return
 	 */
 	deleteAnswer(): void {
 
@@ -260,7 +260,7 @@ export class ActivitiesComponent implements OnInit {
 	/**
 	 * Method that listens for a player leaving the session so he can be removed from the already recorded players in
 	 * the session.
-	 * @returns
+	 * @return
 	 */
 	deletePlayer(): void {
 

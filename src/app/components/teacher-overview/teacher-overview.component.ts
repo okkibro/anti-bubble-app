@@ -20,7 +20,7 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { Class } from 'src/app/models/class';
 import { ClassesService } from 'src/app/services/classes.service';
 import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog';
-import { environment } from '../../../environments/environment';
+import { titleTrail } from '../../../../constants';
 import { Title } from '@angular/platform-browser';
 import { UserService } from '../../services/user.service';
 
@@ -33,7 +33,6 @@ import { UserService } from '../../services/user.service';
 
 export class TeacherOverviewComponent implements OnInit {
 	userDetails: User;
-	loading = true;
 	classIds = [];
 	classes = [];
 	currentClass;
@@ -68,7 +67,7 @@ export class TeacherOverviewComponent implements OnInit {
 
 	/**
 	 * Initialization method.
-	 * @returns
+	 * @return
 	 */
 	ngOnInit(): void {
 		this.userService.profile().subscribe(user => {
@@ -82,12 +81,13 @@ export class TeacherOverviewComponent implements OnInit {
 			}
 		});
 
-		this.titleService.setTitle('Docent overzicht' + environment.TITLE_TRAIL);
+		// Set page title.
+		this.titleService.setTitle('Docent overzicht' + titleTrail);
 	}
 
 	/**
 	 * Method to create a new class based on the filled in information of the form and join this class based on the result of the creation method.
-	 * @returns
+	 * @return
 	 */
 	createClass(): void {
 		if (this.userDetails.role === 'teacher') {
@@ -98,7 +98,7 @@ export class TeacherOverviewComponent implements OnInit {
 			klas.year = this.classForm.get('classYear').value;
 			this.openform = false;
 
-			this.classesService.createClass(klas, this.userDetails).subscribe((data) => {
+			this.classesService.createClass(klas, this.userDetails).subscribe(data => {
 				this.classesService.joinClass(data.code).subscribe((output) => {
 					if (output.succes) {
 						this.snackBar.open(output.message, 'X', { duration: 2500, panelClass: ['style-succes'] }).afterDismissed().subscribe(() => {
@@ -127,16 +127,13 @@ export class TeacherOverviewComponent implements OnInit {
 
 	/**
 	 * Method to get all classes for a teacher.
-	 * @returns
+	 * @return
 	 */
 	getClasses(): void {
 		for (let id of this.classIds) {
 			this.classesService.getSingleClass(id._id).subscribe((output) => {
 				if (output.succes) {
 					this.classes.push({ title: output.class.title, id: id._id });
-				}
-				if (this.classes.length === this.classIds.length) {
-					this.loading = false;
 				}
 			});
 		}
@@ -152,7 +149,7 @@ export class TeacherOverviewComponent implements OnInit {
 
 	/**
 	 * Method to change a boolean to unhide part of the html page.
-	 * @returns
+	 * @return
 	 */
 	onClickSelectKlas(): void {
 		this.selectklas = !this.selectklas;
@@ -160,7 +157,7 @@ export class TeacherOverviewComponent implements OnInit {
 
 	/**
 	 * Method to change a boolean to unhide part of the html page.
-	 * @returns
+	 * @return
 	 */
 	onClickOpenForm(): void {
 		this.openform = !this.openform;
@@ -168,7 +165,7 @@ export class TeacherOverviewComponent implements OnInit {
 
 	/**
 	 * Method that opens the delete class dialog.
-	 * @returns
+	 * @return
 	 */
 	openDeleteClassDialog(): void {
 		this.dialog.open(DeleteClassDialog, { data: { klas: this.currentClass }});
@@ -177,7 +174,7 @@ export class TeacherOverviewComponent implements OnInit {
 	/**
 	 * Method that opens the remove student from class dialog.
 	 * @param user User that has to be removed from the current class.
-	 * @returns
+	 * @return
 	 */
 	openRemoveFromClassDialog(user: User): void {
 		this.dialog.open(RemoveFromClassDialog, { data: { user: user, klas: this.currentClass, leaving: false }});
@@ -210,7 +207,7 @@ export class DeleteClassDialog {
 
 	/**
 	 * Method to delete a user's account.
-	 * @returns
+	 * @return
 	 */
 	deleteClass(): void {
 		this.classesService.deleteClass(this.data.klas._id).subscribe(data => {
@@ -252,7 +249,7 @@ export class RemoveFromClassDialog {
 
 	/**
 	 * Method to remove a student from the current class.
-	 * @returns
+	 * @return
 	 */
 	removeFromClass(): void {
 		this.classesService.leaveClass(this.data.user._id, this.data.klas._id, this.data.leaving).subscribe(data => {

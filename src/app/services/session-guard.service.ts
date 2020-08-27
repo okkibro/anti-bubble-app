@@ -32,7 +32,7 @@ export class SessionGuardService implements CanDeactivate<SessionComponent> {
 	 * @param currentRoute
 	 * @param currentState
 	 * @param nextState
-	 * @returns Whether a user can leave the session/activities page.
+	 * @return Whether a user can leave the session/activities page.
 	 */
 	canDeactivate(
 		component: SessionComponent,

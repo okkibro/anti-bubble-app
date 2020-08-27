@@ -19,9 +19,13 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatListModule } from '@angular/material/list';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatSelectModule } from '@angular/material/select';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MAT_DATE_LOCALE, MatNativeDateModule } from '@angular/material/core';
+
 // Core modules.
 import { CustomMaterialModule } from './shared/material.module';
 import { AppRoutingModule } from './app-routing.module';
+
 // Component modules.
 import { AppComponent } from './app.component';
 import { LoginComponent } from './components/login/login.component';
@@ -49,6 +53,8 @@ import { ToolbarComponent } from './components/toolbar/toolbar.component';
 import { SidenavComponent } from './components/sidenav/sidenav.component';
 import { NotLoggedInToolbarComponent } from './components/not-logged-in-toolbar/not-logged-in-toolbar.component';
 import { DeleteAccountDialog, SettingsComponent } from './components/settings/settings.component';
+import { SessionOverviewComponent } from './components/session-overview/session-overview.component';
+
 // Services.
 import { AuthGuardService } from './services/auth-guard.service';
 import { CookieService } from 'ngx-cookie-service';
@@ -62,6 +68,8 @@ import { DataService } from './services/data-exchange.service';
 import { MilestoneUpdatesService } from './services/milestone-updates.service';
 import { ShopService } from './services/shop.service';
 import { UserService } from './services/user.service';
+import { SessionOverviewService } from './services/session-overview.service';
+
 
 @NgModule({
 	declarations: [
@@ -94,7 +102,8 @@ import { UserService } from './services/user.service';
 		DeleteClassDialog,
 		LeaveClassDialog,
 		RemoveFromClassDialog,
-		SettingsComponent
+		SettingsComponent,
+		SessionOverviewComponent
 	],
 	imports: [
 		BrowserModule,
@@ -112,7 +121,9 @@ import { UserService } from './services/user.service';
 		MatRadioModule,
 		MatSidenavModule,
 		MatListModule,
-		MatSelectModule
+		MatSelectModule,
+		MatDatepickerModule,
+		MatNativeDateModule
 	],
 	providers: [
 		AuthGuardService,
@@ -127,7 +138,11 @@ import { UserService } from './services/user.service';
 		MilestoneUpdatesService,
 		ShopService,
 		UserService,
-		SessionComponent
+		SessionOverviewService,
+		SessionComponent,
+		MatDatepickerModule,
+		MatNativeDateModule,
+		{ provide: MAT_DATE_LOCALE, useValue: 'nl-NL' }
 	],
 	bootstrap: [AppComponent],
 	schemas: [CUSTOM_ELEMENTS_SCHEMA]

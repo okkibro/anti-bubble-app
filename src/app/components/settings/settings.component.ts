@@ -15,7 +15,7 @@
 
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { environment } from '../../../environments/environment';
+import { titleTrail } from '../../../../constants';
 import { AuthenticationService } from '../../services/authentication.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog';
@@ -76,19 +76,20 @@ export class SettingsComponent implements OnInit {
 
 	/**
 	 * Initialization method.
-	 * @returns
+	 * @return
 	 */
 	ngOnInit(): void {
 		this.userService.profile().subscribe(user => {
 			this.userDetails = user;
 		});
 
-		this.titleService.setTitle('Instellingen' + environment.TITLE_TRAIL);
+		// Set page title.
+		this.titleService.setTitle('Instellingen' + titleTrail);
 	}
 
 	/**
 	 * Method to change you password on the profile page.
-	 * @returns
+	 * @return
 	 */
 	changePassword(): void {
 		let oldPassword = this.changePasswordForm.get('oldPassword').value;
@@ -108,7 +109,7 @@ export class SettingsComponent implements OnInit {
 
 	/** Method to check if the filled in passwords match.
 	 * @param form Form in which the validation has to take place.
-	 * @returns
+	 * @return
 	 */
 	passwordMatchValidator(form: FormGroup): void {
 		let newpassword = form.get('newPassword').value;
@@ -120,7 +121,7 @@ export class SettingsComponent implements OnInit {
 
 	/**
 	 * Method that opens the delete user acocunt dialog.
-	 * @returns
+	 * @return
 	 */
 	openDeleteAccountDialog(): void {
 		this.dialog.open(DeleteAccountDialog, { data: { role: this.userDetails?.role }});
@@ -128,7 +129,7 @@ export class SettingsComponent implements OnInit {
 
 	/** Method that changes the profile-table so that it can be edited
 	 * @param field Row of user's profile that has to switch to/from edit mode.
-	 * @returns
+	 * @return
 	 */
 	changeEditMode(field: string): void {
 		switch (field) {
@@ -148,7 +149,7 @@ export class SettingsComponent implements OnInit {
 	 * Method that updates a value of the person's profile.
 	 * @param field User profile field that has to be updated.
 	 * @param value New value of passed user profile field.
-	 * @returns
+	 * @return
 	 */
 	updateField(field: string, value: string): void {
 		this.userService.updateUser(field, value).subscribe(data => {
@@ -194,7 +195,7 @@ export class DeleteAccountDialog {
 
 	/**
 	 * Method to delete a user's account.
-	 * @returns
+	 * @return
 	 */
 	deleteAccount(): void {
 		this.userService.deleteAccount().subscribe(data => {

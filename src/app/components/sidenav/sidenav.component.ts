@@ -34,7 +34,7 @@ export class SidenavComponent implements OnInit {
 
 	/**
 	 * Initialization method.
-	 * @returns
+	 * @return
 	 */
 	ngOnInit(): void {
 		this.tokenData = this.auth.getTokenData();
@@ -42,7 +42,7 @@ export class SidenavComponent implements OnInit {
 
 	/**
 	 * Method to logout the current user.
-	 * @returns
+	 * @return
 	 */
 	logoutButton() {
 		return this.auth.logout();
@@ -50,7 +50,7 @@ export class SidenavComponent implements OnInit {
 
 	/**
 	 * Method that closes the sidenav when the user presses a button/link in the sidenav.
-	 * @returns
+	 * @return
 	 */
 	public onSidenavClose = (): void => {
 		this.sidenavClose.emit();

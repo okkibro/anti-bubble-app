@@ -25,6 +25,7 @@ export class ToolbarComponent implements OnInit {
 	@Output() public sidenavToggle = new EventEmitter();
 
 	tokenData: tokenData;
+	toolbarRatio: number;
 
 	/**
 	 * ToolbarComponent constructor.
@@ -34,15 +35,23 @@ export class ToolbarComponent implements OnInit {
 
 	/**
 	 * Initialization method.
-	 * @returns
+	 * @return
 	 */
 	ngOnInit(): void {
 		this.tokenData = this.auth.getTokenData();
+
+		// Calculated by dividing 100 by the amount of links for a certain role plus 2 for the
+		// offset for the home and login buttons.
+		if (this.tokenData.role === 'teacher') {
+			this.toolbarRatio = 10;
+		} else if (this.tokenData.role === 'student') {
+			this.toolbarRatio = 11.1;
+		}
 	}
 
 	/**
 	 * Method to logout the current user.
-	 * @returns
+	 * @return
 	 */
 	logoutButton(): void {
 		return this.auth.logout();
@@ -50,7 +59,7 @@ export class ToolbarComponent implements OnInit {
 
 	/**
 	 * Method that toggles the sidebar in/out when it is running in 'mobile' mode.
-	 * @returns
+	 * @return
 	 */
 	public onToggleSidenav = (): void => {
 		this.sidenavToggle.emit();

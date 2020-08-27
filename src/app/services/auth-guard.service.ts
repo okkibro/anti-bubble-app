@@ -32,7 +32,7 @@ export class AuthGuardService implements CanActivate {
 
 	/** Method to check whether the user can access a certain page.
 	 * @param route
-	 * @returns Whether the visitor can access the requested page.
+	 * @return Whether the visitor can access the requested page.
 	 */
 	canActivate(route: ActivatedRouteSnapshot): boolean {
 

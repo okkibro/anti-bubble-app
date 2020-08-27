@@ -30,7 +30,7 @@ export class PasswordRecoveryService {
     /**
      * Method to do a POST request to send an email to reset your password.
      * @param email Email of visitor who wants to recover his password.
-     * @returns HTTP response data in an Observable.
+     * @return HTTP response data in an Observable.
      */
     public sendEmail(email: string): Observable<any> {
         return this.http.post<any>(`${environment.ENDPOINT}/user/passwordrecovery`, { email: email });
@@ -39,7 +39,7 @@ export class PasswordRecoveryService {
     /**
      * Method to do a GET request to load the restPage.
      * @param token Recovery token.
-     * @returns HTTP response data in an Observable.
+     * @return HTTP response data in an Observable.
      */
     public getResetPage(token: string): Observable<any> {
         return this.http.get<any>(`${environment.ENDPOINT}/user/reset/${token}`);
@@ -49,7 +49,7 @@ export class PasswordRecoveryService {
      * Method to do a POST request to reset the password of user to the new password.
      * @param token Recovery token.
      * @param newPassword New password.
-     * @returns HTTP response data in an Observable.
+     * @return HTTP response data in an Observable.
      */
     public postNewPassword(token: string, newPassword: string): Observable<any> {
         return this.http.post<any>(`${environment.ENDPOINT}/user/reset/${token}`, { newPassword: newPassword });

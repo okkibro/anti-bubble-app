@@ -16,8 +16,8 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { titleTrail } from '../../../../constants';
 import { PasswordRecoveryService } from '../../services/password-recovery.service';
-import { environment } from '../../../environments/environment';
 import { Title } from '@angular/platform-browser';
 
 @Component({
@@ -57,23 +57,24 @@ export class PasswordResetComponent implements OnInit {
 
 	/**
 	 * Initialization method.
-	 * @returns
+	 * @return
 	 */
 	ngOnInit(): void {
 
 		// Check if token is correct, otherwise navigate back to login.
-		this.passwordRecoveryService.getResetPage(this.route.snapshot.paramMap.get('token')).subscribe((data) => {
+		this.passwordRecoveryService.getResetPage(this.route.snapshot.paramMap.get('token')).subscribe(data => {
 			if (!data.correct) {
 				this.router.navigate(['/login']);
 			}
 		});
 
-		this.titleService.setTitle('Wachtwoord resetten' + environment.TITLE_TRAIL);
+		// Set page title.
+		this.titleService.setTitle('Wachtwoord resetten' + titleTrail);
 	}
 
 	/**
 	 * Method to reset your password based on the filled in passwords in the form.
-	 * @returns
+	 * @return
 	 */
 	resetPassword(): void {
 
@@ -94,7 +95,7 @@ export class PasswordResetComponent implements OnInit {
 
 	/** Method to check if the filled in passwords match.
 	 * @param form Form in which the validation has to take place.
-	 * @returns
+	 * @return
 	 */
 	passwordMatchValidator(form: FormGroup): void {
 		let password = form.get('password').value;

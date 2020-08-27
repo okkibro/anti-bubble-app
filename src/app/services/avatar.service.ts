@@ -33,7 +33,7 @@ export class AvatarService {
 
 	/** Method to do a POST request to the backend to equip and item on the avatar of the user.
 	 * @param item Item to equip.
-	 * @returns HTTP response data in an Observable.
+	 * @return HTTP response data in an Observable.
 	 */
 	equip(item: Item): Observable<any> {
 		return this.http.post(`${environment.ENDPOINT}/user/avatar`, { avatarItem: item }, { headers: { Authorization: 'Bearer ' + this.cookie.get('mean-token') }});

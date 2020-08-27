@@ -35,7 +35,7 @@ export class ShopService {
 	/**
 	 * Method to do a POST request to get an item from the shop of a specific type.
 	 * @param type Category of items to be fetched from the database.
-	 * @returns HTTP response data in an Observable.
+	 * @return HTTP response data in an Observable.
 	 */
 	public getCategoryItems(type: string): Observable<any> {
 		return this.http.get(`${environment.ENDPOINT}/shop`, { headers: { type: type, Authorization: 'Bearer ' + this.cookie.get('mean-token') }});
@@ -44,7 +44,7 @@ export class ShopService {
 	/**
 	 * Method to do a POST request to buy an item form the shop and update the users inventory in the database.
 	 * @param item Item to be purchased by the user.
-	 * @returns HTTP response data in an Observable.
+	 * @return HTTP response data in an Observable.
 	 */
 	public buy(item: Item) {
 		return this.http.post(`${environment.ENDPOINT}/shop/buy`, { item: item }, { headers: { Authorization: 'Bearer ' + this.cookie.get('mean-token') }});
@@ -52,7 +52,7 @@ export class ShopService {
 
 	/**
 	 * Method to de a GET request to set the user's initial inventroy when he creates an account.
-	 * @returns HTTP response data in an Observable.
+	 * @return HTTP response data in an Observable.
 	 */
 	public getBaseInventory(): Observable<any> {
 		return this.http.get(`${environment.ENDPOINT}/shop/getBaseInventory`, { headers: { Authorization: 'Bearer ' + this.cookie.get('mean-token') }});

@@ -51,14 +51,9 @@ export class AnswerFormComponent implements OnInit {
 		private auth: AuthenticationService
 	) { }
 
-
 	/**
 	 * Initialization method.
-	 * @returns
-	 */
-		/**
-	 * Initialization method.
-	 * @returns
+	 * @return
 	 */
 	ngOnInit(): void {
 		this.tokenData = this.auth.getTokenData();
@@ -71,7 +66,7 @@ export class AnswerFormComponent implements OnInit {
 
 	/**
 	 * This method lets students submit an answer to the teacher that will be displayed on the digiboard.
-	 * @returns
+	 * @return
 	 */
 	sendAnswer(): void {
 		if (this.getAnswerForm.get('getAnswer').value != '') {
@@ -87,7 +82,7 @@ export class AnswerFormComponent implements OnInit {
 
 	/**
 	 * This method lets a teacher submit a question to all of the students in the session.
-	 * @returns
+	 * @return
 	 */
 	sendQuestion(): void {
 		let getQuestion = this.sendQuestionsForm.get('getQuestion').value;

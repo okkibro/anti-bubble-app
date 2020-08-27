@@ -8,4 +8,8 @@ export class Activity {
 	name: string;
 	category: string;
 	description: string;
+	goal: string;
+	explanation: string;
+	timed: boolean;
+	teams: boolean;
 }

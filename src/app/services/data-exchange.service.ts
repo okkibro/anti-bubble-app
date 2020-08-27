@@ -26,7 +26,7 @@ export class DataService {
 
 	/** Method to change the message.
 	 * @param message Data to be transferred between components.
-	 * @returns
+	 * @return
 	 */
 	changeMessage(message: string): void {
 		this.messageSource.next(message);

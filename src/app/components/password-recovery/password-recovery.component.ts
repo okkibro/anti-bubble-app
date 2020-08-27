@@ -15,9 +15,9 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { titleTrail } from '../../../../constants';
 import { PasswordRecoveryService } from '../../services/password-recovery.service';
 import { Title } from '@angular/platform-browser';
-import { environment } from '../../../environments/environment';
 
 @Component({
 	selector: 'mean-password-recovery',
@@ -49,15 +49,16 @@ export class PasswordRecoveryComponent implements OnInit {
 
 	/**
 	 * Initialization method.
-	 * @returns
+	 * @return
 	 */
 	ngOnInit(): void {
-		this.titleService.setTitle('Wachtwoord vergeten' + environment.TITLE_TRAIL);
+		// Set page title.
+		this.titleService.setTitle('Wachtwoord vergeten' + titleTrail);
 	}
 
 	/**
 	 * Method to send an email to the user to reset their password.
-	 * @returns
+	 * @return
 	 */
 	sendEmail(): void {
 

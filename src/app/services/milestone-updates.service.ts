@@ -34,7 +34,7 @@ export class MilestoneUpdatesService {
     /** Method to do a POST request to update a given milestone to a given value.
      * @param milestone Milestone to update.
      * @param value Value specified milestone has to be updated by.
-     * @returns HTTP response data in an Observable.
+     * @return HTTP response data in an Observable.
      */
     public updateMilestone(milestone: Milestone, value: number): Observable<any> {
         return this.http.post(`${environment.ENDPOINT}/user/milestone`, { milestone: milestone, value: value }, { headers: { Authorization: 'Bearer ' + this.cookie.get('mean-token') }});
@@ -42,7 +42,7 @@ export class MilestoneUpdatesService {
 
     /** Method to do a POST request to update the recent milestone to the given value.
      * @param value Text to be added to user's recent achievements on the 'Scorebord' on the home page.
-     * @returns HTTP response data in an Observable.
+     * @return HTTP response data in an Observable.
      */
     public updateRecent(value: string): Observable<any> {
         return this.http.post(`${environment.ENDPOINT}/user/recentMilestones`, { value: value }, { headers: { Authorization: 'Bearer ' + this.cookie.get('mean-token') }});

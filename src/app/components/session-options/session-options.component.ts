@@ -12,13 +12,15 @@
  */
 
 import { Component, OnInit } from '@angular/core';
+import { titleTrail } from '../../../../constants';
+import { Activity } from '../../models/activity';
 import { AuthenticationService } from '../../services/authentication.service';
 import { SocketIOService } from 'src/app/services/socket-io.service';
 import { Router } from '@angular/router';
 import { SessionService } from 'src/app/services/session.service';
 import { FormBuilder, Validators } from '@angular/forms';
-import { environment } from '../../../environments/environment';
 import { Title } from '@angular/platform-browser';
+import { SessionOverviewService } from '../../services/session-overview.service';
 
 @Component({
 	selector: 'mean-session-options',
@@ -28,8 +30,12 @@ import { Title } from '@angular/platform-browser';
 })
 
 export class SessionOptionsComponent implements OnInit {
-	teamOptionAAForm = this.fb.group({
-		teamOptionAA: ['', Validators.required]
+	activities: Activity[] = [];
+	teamOptionForm = this.fb.group({
+		teamOption: ['', Validators.required]
+	});
+	durationSliderForm = this.fb.group({
+		durationSlider: ['', Validators.required]
 	});
 
 	/**
@@ -40,28 +46,35 @@ export class SessionOptionsComponent implements OnInit {
 	 * @param sessionService
 	 * @param fb
 	 * @param titleService
+	 * @param sessionOverviewService
 	 */
 	constructor(
 		private auth: AuthenticationService,
 		private router: Router,
 		private socketService: SocketIOService,
 		private sessionService: SessionService,
+		private sessionOverviewService: SessionOverviewService,
 		private fb: FormBuilder,
 		private titleService: Title
 	) { }
 
 	/**
 	 * Initialization method.
-	 * @returns
+	 * @return
 	 */
 	ngOnInit(): void {
-		this.titleService.setTitle('Sessie opties' + environment.TITLE_TRAIL);
+
+		// Get all the different activities from the database.
+		this.getActivities();
+
+		// Set page title.
+		this.titleService.setTitle('Sessie opties' + titleTrail);
 	}
 
 	/**
 	 * Method that fets called when teacher presses create session button. gamedata contains the name of the game and time of the slider.
 	 * @param gameData All required data to start a session of one of the app's different types.
-	 * @returns
+	 * @return
 	 */
 	createSession(gameData: any): void {
 
@@ -74,6 +87,20 @@ export class SessionOptionsComponent implements OnInit {
 
 			// Navigate to session page
 			this.router.navigate(['session']);
+		});
+	}
+
+	/**
+	 * Method to get all the activities from the database so the teacher can filter between them.
+	 * @return
+	 */
+	getActivities(): void {
+		this.sessionOverviewService.getActivities().subscribe(data => {
+			if (data.succes) {
+				for (let activity of data.activities) {
+					this.activities.push(activity);
+				}
+			}
 		});
 	}
 }

@@ -11,13 +11,13 @@
  */
 
 import { Component, OnInit } from '@angular/core';
+import { titleTrail } from '../../../../constants';
 import { User } from '../../models/user';
 import { Item } from '../../models/item';
 import { ShopService } from 'src/app/services/shop.service';
 import { AvatarService } from 'src/app/services/avatar.service';
 import { AvatarDisplayComponent } from '../avatar-display/avatar-display.component';
 import { Title } from '@angular/platform-browser';
-import { environment } from '../../../environments/environment';
 import { UserService } from '../../services/user.service';
 import { MatTabChangeEvent } from '@angular/material/tabs';
 
@@ -63,7 +63,7 @@ export class AvatarComponent implements OnInit {
 
 	/**
 	 * Initialization method.
-	 * @returns
+	 * @return
 	 */
 	ngOnInit(): void {
 		this.userService.profile().subscribe(user => {
@@ -83,13 +83,14 @@ export class AvatarComponent implements OnInit {
 
 		this.setItemColumns();
 
-		this.titleService.setTitle('Avatar' + environment.TITLE_TRAIL);
+		// Set page title.
+		this.titleService.setTitle('Avatar' + titleTrail);
 	}
 
 	/**
 	 * Method that assigns an item to the user's avatar in the database.
 	 * @param item Item to be equipped by the user.
-	 * @returns
+	 * @return
 	 */
 	equip(item: Item): void {
 		this.avatarService.equip(item).subscribe(data => {
@@ -107,7 +108,7 @@ export class AvatarComponent implements OnInit {
 	/**
 	 * Method to change the tab in the HTML and updates the shown items.
 	 * @param event Event triggered by changing tab/category.
-	 * @returns
+	 * @return
 	 */
 	tabChange(event: MatTabChangeEvent): void {
 		this.shopService.getCategoryItems(event.tab.textLabel).subscribe(items => {
@@ -120,7 +121,7 @@ export class AvatarComponent implements OnInit {
 
 	/**
 	 * Method to filter the avatar items to only show the items in the inventory/that the player bought.
-	 * @returns List of items currently owned by the user.
+	 * @return List of items currently owned by the user.
 	 */
 	filterAvatar(): AvatarComponent[] {
 		return this.itemsShown.filter(x => {
@@ -130,7 +131,7 @@ export class AvatarComponent implements OnInit {
 
 	/**
 	 * Method that sets the initial amount of columns based on screen width.
-	 * @returns
+	 * @return
 	 */
 	setItemColumns(): void {
 		const screenWidth = window.innerWidth;
@@ -145,7 +146,7 @@ export class AvatarComponent implements OnInit {
 	/**
 	 * Method that changes the amount of columns when the window size changes.
 	 * @param event Event triggered when the screen changes size.
-	 * @returns
+	 * @return
 	 */
 	onResize(event): void {
 		const screenWidth = event.target.innerWidth;

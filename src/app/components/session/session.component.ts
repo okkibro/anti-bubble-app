@@ -18,12 +18,11 @@ import { SocketIOService } from 'src/app/services/socket-io.service';
 import { DataService } from 'src/app/services/data-exchange.service';
 import { Router } from '@angular/router';
 import { SessionService } from 'src/app/services/session.service';
-import { beforeUnload } from '../../../../constants';
+import { beforeUnload, titleTrail } from '../../../../constants';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Article } from 'src/app/models/article';
 import { tokenData } from '../../models/tokenData';
 import { Title } from '@angular/platform-browser';
-import { environment } from '../../../environments/environment';
 import { earnAmount } from '../../../../constants';
 
 @Component({
@@ -76,7 +75,7 @@ export class SessionComponent implements OnInit {
 
 	/**
 	 * Initialization method.
-	 * @returns
+	 * @return
 	 */
 	ngOnInit(): void {
 		this.gameStarted = false;
@@ -162,7 +161,7 @@ export class SessionComponent implements OnInit {
 
 					// Call function that listens for students to submit answers.
 					// Receive answer from student.
-					this.socketService.listenForSubmits((data) => {
+					this.socketService.listenForSubmits(data => {
 
 						// Add answer to screen using DOM manipulation.
 						let submitTable = document.getElementsByClassName('submit-table')[0];
@@ -199,12 +198,13 @@ export class SessionComponent implements OnInit {
 			window.addEventListener('beforeunload', beforeUnload);
 		}
 
-		this.titleService.setTitle('Sessie' + environment.TITLE_TRAIL);
+		// Set page title.
+		this.titleService.setTitle('Sessie' + titleTrail);
 	}
 
 	/**
 	 * Method that calls the leave session function in the socket io service.
-	 * @returns
+	 * @return
 	 */
 	leaveSession() {
 		this.socketService.leaveSession();
@@ -212,7 +212,7 @@ export class SessionComponent implements OnInit {
 
 	/**
 	 * Method that returns if a student leaving the session was caused by the host disconnecting.
-	 * @returns Whether student leaving was caused by teacher disconnecting.
+	 * @return Whether student leaving was caused by teacher disconnecting.
 	 */
 	isHostDisconnected(): boolean {
 		return this.socketService.hostDisconnected;
@@ -220,7 +220,7 @@ export class SessionComponent implements OnInit {
 
 	/**
 	 * Method that returns the game data.
-	 * @returns Data of the game.
+	 * @return Data of the game.
 	 */
 	getGameData(): any {
 		return this.socketService.gameData;
@@ -236,7 +236,7 @@ export class SessionComponent implements OnInit {
 
 	/**
 	 * Method that starts the game. Making it unable for students to join the session.
-	 * @returns
+	 * @return
 	 */
 	startGame() {
 
@@ -258,7 +258,7 @@ export class SessionComponent implements OnInit {
 
 	/** Method that takes the game name and will return whether the game can start or not.
 	 * @param game Type of the activity.
-	 * @returns Whether it is possible to start the game.
+	 * @return Whether it is possible to start the game.
 	 */
 	canStart(game: string): boolean {
 		switch (game) {
@@ -276,7 +276,7 @@ export class SessionComponent implements OnInit {
 
 	/** Method that initializes the game based on the given game name.
 	 * @param game Type of the activity.
-	 * @returns
+	 * @return
 	 */
 	initGame(game: string): void {
 		switch (game) {
@@ -321,7 +321,7 @@ export class SessionComponent implements OnInit {
 	/**
 	 * Method that makes timer count down at the top of the screen.
 	 * @param time Amount of time to play the game.
-	 * @returns
+	 * @return
 	 */
 	startTimer(time: number): void {
 
@@ -360,7 +360,7 @@ export class SessionComponent implements OnInit {
 	/**
 	 * Method that stops the timer and game.
 	 * @param timedOut Whether the game finished by the time running out or the teacher manually stopping it.
-	 * @returns
+	 * @return
 	 */
 	stopGame(timedOut: boolean): void {
 		this.gameFinished = true;
@@ -377,7 +377,7 @@ export class SessionComponent implements OnInit {
 
 	/**
 	 * Method that makes the host leave the session and the page.
-	 * @returns
+	 * @return
 	 */
 	leaveGame(): void {
 		this.leaveSession();
@@ -389,7 +389,7 @@ export class SessionComponent implements OnInit {
 	/**
 	 * Method that shows the answer on screen when the game is finished.
 	 * @param game Type of the activity.
-	 * @returns
+	 * @return
 	 */
 	showAnswersonScreen(game: string): void {
 		switch (game) {

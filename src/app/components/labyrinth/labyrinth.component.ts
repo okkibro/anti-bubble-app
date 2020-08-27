@@ -12,6 +12,7 @@
  */
 
 import { Component, OnInit } from '@angular/core';
+import { titleTrail } from '../../../../constants';
 import { User } from '../../models/user';
 import { Question } from '../../models/question';
 import { Router } from '@angular/router';
@@ -20,7 +21,6 @@ import { AuthenticationService } from '../../services/authentication.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { BubbleGraphService } from 'src/app/services/bubble-graph.service';
 import { FormBuilder, Validators } from '@angular/forms';
-import { environment } from '../../../environments/environment';
 import { Title } from '@angular/platform-browser';
 import { UserService } from '../../services/user.service';
 
@@ -71,7 +71,7 @@ export class LabyrinthComponent implements OnInit {
 
 	/**
 	 * Initialization method.
-	 * @returns
+	 * @return
 	 */
 	ngOnInit(): void {
 		this.userService.profile().subscribe(user => {
@@ -81,12 +81,13 @@ export class LabyrinthComponent implements OnInit {
 		// Start the labyrinth in part 1.
 		this.part = 1;
 
-		this.titleService.setTitle('Doolhof' + environment.TITLE_TRAIL);
+		// Set page title.
+		this.titleService.setTitle('Doolhof' + titleTrail);
 	}
 
 	/**
 	 * Method that saves answers the user gave and sets their bubble initialization to true so they can join a session after this.
-	 * @returns
+	 * @return
 	 */
 	performedLabyrinth(): void {
 		this.sessionService.performedLabyrinth().subscribe(data => {
@@ -111,7 +112,7 @@ export class LabyrinthComponent implements OnInit {
 
 	/**
 	 * Method that starts the labyrinth.
-	 * @returns
+	 * @return
 	 */
 	startLabyrinth(): void {
 
@@ -129,7 +130,7 @@ export class LabyrinthComponent implements OnInit {
 
 	/**
 	 * Method to pause the labyrinth.
-	 * @returns
+	 * @return
 	 */
 	pauseLabyrinth(): void {
 		this.sessionService.saveAnswers(this.answers).subscribe(() => {
@@ -147,7 +148,7 @@ export class LabyrinthComponent implements OnInit {
 	/**
 	 * Method that shows the next question on the screen.
 	 * @param prevQuestion Question used to determine what question is next in the labyrinth.
-	 * @returns
+	 * @return
 	 */
 	nextQuestion(prevQuestion: Question): void {
 		this.nextQuestionDisabled = true;
@@ -199,7 +200,7 @@ export class LabyrinthComponent implements OnInit {
 
 	/** Method that saves a question to the global this.answers array.
 	 * @param question Question that has just been answerd by the user.
-	 * @returns
+	 * @return
 	 */
 	saveQuestion(question: Question): void {
 		if (question) {
@@ -214,7 +215,7 @@ export class LabyrinthComponent implements OnInit {
 
 	/** Method that shows a question on the screen.
 	 * @param question Quesiton that has to be shown to the user.
-	 * @returns
+	 * @return
 	 */
 	showQuestion(question: Question): void {
 
@@ -273,7 +274,7 @@ export class LabyrinthComponent implements OnInit {
 
 	/**
 	 * Method that enables the button to go to the next question when an answer has been selected.
-	 * @returns
+	 * @return
 	 */
 	selectedOption(): void {
 		this.nextQuestionDisabled = false;
@@ -283,7 +284,7 @@ export class LabyrinthComponent implements OnInit {
 	 * Method used for shuffling the array of questions so not all students answer the questions in the
 	 * same order. Based on the Fisher-Yates shuffle algorithm.
 	 * @param array Array of questions to shuffle.
-	 * @returns Array of shuffles questions.
+	 * @return Array of shuffles questions.
 	 */
 	shuffle(array: any): any {
 		let currentIndex = array.length, temporaryValue, randomIndex;

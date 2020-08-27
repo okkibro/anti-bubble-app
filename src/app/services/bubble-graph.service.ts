@@ -34,7 +34,7 @@ export class BubbleGraphService {
 	 * Method to do a POST request to the backend to process the answers given during the introduction labyrinth
 	 * and generate the user's initial bubble.
 	 * @param answers Questions and their answers given duriong the introduction labyrinth.
-	 * @returns HTTP response data in an Observable.
+	 * @return HTTP response data in an Observable.
 	 */
 	public processLabyrinth(answers: [{ question: Question, answer: number }]): Observable<any> {
 		return this.http.post(`${environment.ENDPOINT}/user/processAnswers`, { answers: answers }, { headers: { Authorization: 'Bearer ' + this.cookie.get('mean-token') }});

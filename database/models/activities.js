@@ -10,7 +10,11 @@ const Schema = mongoose.Schema;
 let activitiesSchema = new Schema({
 	name: { type: String, required: true },
 	category: { type: String, required: true },
-	description: { type: String, required: true }
+	description: { type: String, required: true },
+	goal: { type: String, required: true },
+	explanation: { type: String, required: true },
+	timed: { type: Boolean, required: true },
+	teams: { type: Boolean, required: true }
 });
 
 module.exports = mongoose.model('activities', activitiesSchema);

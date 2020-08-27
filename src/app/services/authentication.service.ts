@@ -37,7 +37,7 @@ export class AuthenticationService {
 
     /** Method to save the JWT of the user in the browser's cookies.
      * @param token JWT to save in the user's browser cookies.
-     * @returns
+     * @return
      */
     private saveToken(token: string): void {
         this.cookie.set('mean-token', token, 1, '/', 'localhost', false, 'Strict');
@@ -46,7 +46,7 @@ export class AuthenticationService {
 
     /**
      * Method to get the JWT from the browser's cookies for the current user.
-     * @returns
+     * @return
      */
     private getToken(): string {
         if (!this.token) {
@@ -57,7 +57,7 @@ export class AuthenticationService {
 
     /**
      * Method to logout the user.
-     * @returns
+     * @return
      */
     public logout(): void {
         this.token = '';
@@ -67,7 +67,7 @@ export class AuthenticationService {
     }
 
     /** Method to extract all the important data from the user's JWT.
-     * @returns Data from JWT.
+     * @return Data from JWT.
      */
     public getTokenData(): tokenData {
         const token = this.getToken();
@@ -82,7 +82,7 @@ export class AuthenticationService {
     }
 
     /** Method to check whether the user is currently logged in by looking at their cookie.
-     * @returns Whether the requesting user is logged in or not.
+     * @return Whether the requesting user is logged in or not.
      */
     public isLoggedIn(): boolean {
         const user = this.getTokenData();
@@ -94,7 +94,7 @@ export class AuthenticationService {
     }
 
     /** Method to checks the role of the user.
-     * @returns User's role.
+     * @return User's role.
      */
     public getRole(): Role {
         return this.getTokenData().role;
@@ -103,7 +103,7 @@ export class AuthenticationService {
 
     /** POST method for registering a user
      * @param user User that wants to register.
-     * @returns HTTP response data in an Observable.
+     * @return HTTP response data in an Observable.
      */
     public register(user: User): Observable<any> {
         return this.http.post(`${environment.ENDPOINT}/user/register`, user).pipe(
@@ -115,7 +115,7 @@ export class AuthenticationService {
 
     /** POST method for logging in a user
      * @param user User that wants to login.
-     * @returns HTTP response data in an Observable.
+     * @return HTTP response data in an Observable.
      */
     public login(user: User): Observable<any> {
         return this.http.post(`${environment.ENDPOINT}/user/login`, user).pipe(

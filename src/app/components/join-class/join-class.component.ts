@@ -33,14 +33,14 @@ export class JoinClassComponent implements OnInit {
 
 	/**
 	 * Initialization method.
-	 * @returns
+	 * @return
 	 */
 	ngOnInit(): void {
 	}
 
 	/**
 	 * Method to join a class based on the code you filled in.
-	 * @returns
+	 * @return
 	 */
 	joinClass(): void {
 		this.classesService.joinClass(this.joinClassForm.get('code').value).subscribe(data => {
@@ -57,7 +57,7 @@ export class JoinClassComponent implements OnInit {
 	/**
 	 * Method that makes sure you can only fill in numbers in the session code input field.
 	 * @param event Event triggered when a key is pressed in the join session input.
-	 * @returns
+	 * @return
 	 */
 	check(event: KeyboardEvent) {
 		let code = event.code.charCodeAt(0);

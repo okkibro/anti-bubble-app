@@ -1,0 +1,113 @@
+<!--
+  ~ This program has been developed by students from the bachelor Computer Science at Utrecht University
+  ~ within the Software Project course. © Copyright Utrecht University (Department of Information and
+  ~ Computing Sciences)
+  -->
+
+<mat-sidenav-container>
+	<mat-sidenav #sidenav [autoFocus]="false" fixedInViewport="true">
+		<mean-sidenav (sidenavClose)="sidenav.close()"></mean-sidenav>
+	</mat-sidenav>
+	<mat-sidenav-content>
+		<mean-toolbar (sidenavToggle)="sidenav.toggle()"></mean-toolbar>
+		<body>
+			<div class="container-div" fxLayoutGap="10px" fxLayout="column" fxLayoutAlign="space-evenly">
+				<mat-card>
+					<mat-card-header>
+						<mat-card-title>Sessie overzicht</mat-card-title>
+						<mat-card-subtitle>
+							Hier kan je een overzicht zien van alle sessies die voltooid zijn door leerlingen die in een van jouw klassen zitten.<br>
+							Gebruik de onderstaande filters om preciezer te zoeken naar een bepaalde sessie.
+						</mat-card-subtitle>
+					</mat-card-header>
+				</mat-card>
+
+				<mat-card fxLayout="row" fxLayoutAlign="space-between center">
+					<mat-form-field appearance="fill" class="general-dropdown">
+						<mat-label>Klas</mat-label>
+						<mat-select multiple>
+							<mat-option *ngFor="let klas of classes" [value]="klas.title" (onSelectionChange)="filterLogs($event, 'class', klas._id)">
+								{{ klas.title }}
+							</mat-option>
+						</mat-select>
+					</mat-form-field>
+					<mat-form-field appearance="fill" class="general-dropdown">
+						<mat-label>Geslacht</mat-label>
+						<mat-select multiple>
+							<mat-option *ngFor="let gender of genders" [value]="gender.value" (onSelectionChange)="filterLogs($event, 'gender', gender.value)">
+								{{ gender.name }}
+							</mat-option>
+						</mat-select>
+					</mat-form-field>
+					<mat-form-field appearance="fill" class="general-dropdown">
+						<mat-label>Activiteit</mat-label>
+						<mat-select multiple>
+							<mat-option *ngFor="let activity of activities" [value]="activity._id" (onSelectionChange)="filterLogs($event, 'activity', activity._id)">
+								{{ activity.name }}
+							</mat-option>
+						</mat-select>
+					</mat-form-field>
+					<mat-form-field appearance="fill" class="general-dropdown">
+						<mat-label>Leerling</mat-label>
+						<mat-select multiple>
+							<mat-option *ngFor="let student of students" [value]="student._id" (onSelectionChange)="filterLogs($event, 'user', student._id)">
+								{{ student.firstName + ' ' + student.lastName }}
+							</mat-option>
+						</mat-select>
+					</mat-form-field>
+					<mat-form-field appearance="fill" class="general-dropdown">
+						<mat-label>Datum</mat-label>
+						<input matInput [matDatepicker]="picker" [(ngModel)]="startDate" (dateChange)="filterLogs($event,'comparisonDate', $event.value)">
+						<mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+						<mat-datepicker-toggle matSuffix (click)="resetDate()">
+							<mat-icon matDatepickerToggleIcon>clear</mat-icon>
+						</mat-datepicker-toggle>
+						<mat-datepicker #picker></mat-datepicker>
+					</mat-form-field>
+				</mat-card>
+
+				<mat-card *ngIf="logs.length !== 0">
+					<mat-accordion>
+						<mat-expansion-panel *ngFor="let log of logs">
+							<mat-expansion-panel-header>
+								<mat-panel-title>
+									{{ log.user.firstName }} {{ log.user.lastName }} - {{ log.class.title }} - {{ log.date }}
+								</mat-panel-title>
+							</mat-expansion-panel-header>
+							<mat-card-content>
+								<table class="log-table">
+									<thead>
+										<tr class="log-table-activity-row">
+											<th class="log-table-activity-row-header" colspan="3">{{ log.activity.name }}</th>
+										</tr>
+										<tr>
+											<th class="log-table-1st-header">Nummer</th>
+											<th class="log-table-2nd-header">Vraag</th>
+											<th>Antwoord</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr *ngFor="let question of log.questions; let i = index; ">
+											<td class="log-table-1st-or-2nd-data">{{ i + 1 }}</td>
+											<td class="log-table-1st-or-2nd-data">{{ question }}</td>
+											<td>{{ log.answers[i] }}</td>
+										</tr>
+									</tbody>
+								</table>
+							</mat-card-content>
+						</mat-expansion-panel>
+					</mat-accordion>
+				</mat-card>
+
+				<mat-card *ngIf="logs.length === 0">
+					<mat-card-content>
+						<p><i>Er konden geen sessies gevonden worden.</i></p>
+					</mat-card-content>
+				</mat-card>
+			</div>
+		</body>
+		<footer class="footer">
+			<p> &copy; Utrecht University (ICS)</p>
+		</footer>
+	</mat-sidenav-content>
+</mat-sidenav-container>

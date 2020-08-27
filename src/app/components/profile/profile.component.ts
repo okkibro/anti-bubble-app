@@ -14,12 +14,11 @@
 import { Component, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { User } from '../../models/user';
-import { milestones } from '../../../../constants';
+import { milestones, titleTrail } from '../../../../constants';
 import { Milestone } from 'src/app/models/milestone';
 import { ClassesService } from 'src/app/services/classes.service';
 import { Router } from '@angular/router';
 import { Title } from '@angular/platform-browser';
-import { environment } from '../../../environments/environment';
 import { UserService } from '../../services/user.service';
 
 @Component({
@@ -52,7 +51,7 @@ export class ProfileComponent implements OnInit {
 
 	/**
 	 * Initialization method.
-	 * @returns
+	 * @return
 	 */
 	ngOnInit(): void {
 
@@ -65,7 +64,7 @@ export class ProfileComponent implements OnInit {
 		};
 
 		// Get user's class
-		this.classesService.getClass().subscribe((data) => {
+		this.classesService.getClass().subscribe(data => {
 			if (data.succes) {
 				this.userClassTitle = data.class.title;
 			}
@@ -84,6 +83,7 @@ export class ProfileComponent implements OnInit {
 			console.error(err);
 		});
 
-		this.titleService.setTitle('Profiel' + environment.TITLE_TRAIL);
+		// Set page title.
+		this.titleService.setTitle('Profiel' + titleTrail);
 	}
 }

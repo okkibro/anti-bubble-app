@@ -13,13 +13,13 @@
 
 import { Component, Inject, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { titleTrail } from '../../../../constants';
 import { User } from '../../models/user';
 import { FormBuilder } from '@angular/forms';
 import { ClassesService } from '../../services/classes.service';
 import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Title } from '@angular/platform-browser';
-import { environment } from 'src/environments/environment';
 import { UserService } from '../../services/user.service';
 
 @Component({
@@ -58,26 +58,27 @@ export class ClassOverviewComponent implements OnInit {
 
 	/**
 	 * Initialization method.
-	 * @returns
+	 * @return
 	 */
 	ngOnInit(): void {
 		this.userService.profile().subscribe(user => {
 			this.userDetails = user;
 		});
 
-		this.classesService.getClass().subscribe((data) => {
+		this.classesService.getClass().subscribe(data => {
 			if (data.succes) {
 				this.userClass = data.class;
 				this.classmates = data.classmates;
 			}
 		});
 
-		this.titleService.setTitle('Klas overzicht' + environment.TITLE_TRAIL);
+		// Set page title.
+		this.titleService.setTitle('Klas overzicht' + titleTrail);
 	}
 
 	/**
 	 * Method to filter the students in a class.
-	 * @returns
+	 * @return
 	 */
 	search() {
 		let query: string = this.searchForm.get('query').value.toLowerCase();
@@ -93,7 +94,7 @@ export class ClassOverviewComponent implements OnInit {
 
 	/**
 	 * Method to clear the filter so all students are displayed again.
-	 * @returns
+	 * @return
 	 */
 	clear() {
 		this.searchForm.get('query').setValue('');
@@ -105,7 +106,7 @@ export class ClassOverviewComponent implements OnInit {
 
 	/**
 	 * Method that opens the leave class dialog.
-	 * @returns
+	 * @return
 	 */
 	openLeaveClassDialog() {
 		this.dialog.open(LeaveClassDialog, { data: { userId: this.userDetails._id, classId: this.userClass._id, classTitle: this.userClass.title, leaving: true }});
@@ -138,7 +139,7 @@ export class LeaveClassDialog {
 
 	/**
 	 * Method so the current user can leave his class.
-	 * @returns
+	 * @return
 	 */
 	leaveClass() {
 		this.classesService.leaveClass(this.data.userId, this.data.classId, this.data.leaving).subscribe(data => {

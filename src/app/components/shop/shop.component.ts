@@ -18,9 +18,8 @@ import { ShopService } from 'src/app/services/shop.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { User } from '../../models/user';
 import { MilestoneUpdatesService } from '../../services/milestone-updates.service';
-import { milestones } from '../../../../constants';
+import { milestones, titleTrail } from '../../../../constants';
 import { Title } from '@angular/platform-browser';
-import { environment } from '../../../environments/environment';
 import { UserService } from '../../services/user.service';
 import { MatTabChangeEvent } from '@angular/material/tabs';
 
@@ -64,7 +63,7 @@ export class ShopComponent implements OnInit {
 
 	/**
 	 * Initialization method.
-	 * @returns
+	 * @return
 	 */
 	ngOnInit(): void {
 		this.userService.profile().subscribe(user => {
@@ -79,15 +78,17 @@ export class ShopComponent implements OnInit {
 			console.error(err);
 		});
 
+		// Set initial amount of columns for items in the shop.
 		this.setItemColumns();
 
-		this.titleService.setTitle('Shop' + environment.TITLE_TRAIL);
+		// Set page title.
+		this.titleService.setTitle('Shop' + titleTrail);
 	}
 
 	/**
 	 * Method to change categoty of items you are looking at in the shop.
 	 * @param event Event triggered by changing tab/category.
-	 * @returns
+	 * @return
 	 */
 	tabChange(event: MatTabChangeEvent): void {
 		this.shopService.getCategoryItems(event.tab.textLabel).subscribe(items => {
@@ -100,7 +101,7 @@ export class ShopComponent implements OnInit {
 
 	/** Method to buy and item from the shop and add it to the users inventory and update the milestone if needed
 	 * @param item Item that is bought by the user.
-	 * @returns
+	 * @return
 	 */
 	buy(item: Item): void {
 		this.shopService.buy(item).subscribe((data: any) => {
@@ -133,7 +134,7 @@ export class ShopComponent implements OnInit {
 	}
 
 	/** Method to filter the shop based on if the user already owns the item.
-	 * @returns List of items that comply to the applied filter.
+	 * @return List of items that comply to the applied filter.
 	 */
 	filterShop(): Item[] {
 		return this.shopDetails.filter(x => {
@@ -143,7 +144,7 @@ export class ShopComponent implements OnInit {
 
 	/**
 	 * Method that sets the initial amount of columns based on screen width.
-	 * @returns
+	 * @return
 	 */
 	setItemColumns(): void {
 		const screenWidth = window.innerWidth;
@@ -164,7 +165,7 @@ export class ShopComponent implements OnInit {
 	/**
 	 * Method that changes the amount of columns when the window size changes.
 	 * @param event Event triggered when the screen changes size.
-	 * @returns
+	 * @return
 	 */
 	onResize(event): void {
 		const screenWidth = event.target.innerWidth;

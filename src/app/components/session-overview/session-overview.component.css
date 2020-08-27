@@ -1,0 +1,35 @@
+/*
+ * This program has been developed by students from the bachelor Computer Science at Utrecht University
+ *  within the Software Project course. © Copyright Utrecht University (Department of Information and
+ *  Computing Sciences)
+ */
+
+.log-table {
+	border: 1px solid black;
+	text-align: center;
+	margin: 0 auto;
+	width: 80%;
+	border-collapse: collapse;
+}
+
+.log-table-activity-row {
+	font-size: 16px;
+}
+
+.log-table-activity-row-header {
+	border-bottom: 1px solid black;
+}
+
+.log-table-1st-header {
+	width: 10%;
+}
+
+.log-table-1st-header,
+.log-table-2nd-header,
+.log-table-1st-or-2nd-data {
+	border-right: 1px solid black;
+}
+
+mat-datepicker-toggle {
+	display: inline-block;
+}

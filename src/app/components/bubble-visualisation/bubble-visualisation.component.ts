@@ -37,7 +37,7 @@ export class BubbleVisualisationComponent implements OnInit {
 
 	/**
 	 * Initialization method.
-	 * @returns
+	 * @return
 	 */
 	ngOnInit(): void {
 		if (this.route.snapshot.paramMap.get('id')) {
@@ -54,7 +54,7 @@ export class BubbleVisualisationComponent implements OnInit {
 	/**
 	 * Method that updates the visual representation of a user's bubble based on their statistics.
 	 * @param user User who's bubble has to be visualised.
-	 * @returns
+	 * @return
 	 */
 	updateBubble(user: User): void {
 		let mainstream = user.bubble.mainstream.pop();
@@ -81,7 +81,7 @@ export class BubbleVisualisationComponent implements OnInit {
 	/** Method that returns the name (from the second array) of the highest value from the first array.
 	 * @param inputValues List of numerical values of certain bubble categories.
 	 * @param nameValues List of strings of location of bubble images.
-	 * @returns Name of highest value of certain category.
+	 * @return Name of highest value of certain category.
 	 */
 	getHighestIndex(inputValues: Array<number>, nameValues: Array<string>): string {
 		let currentMax = -1;

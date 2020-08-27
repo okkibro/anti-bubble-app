@@ -28,7 +28,7 @@ export class NotLoggedInToolbarComponent implements OnInit {
 
 	/**
 	 * Initialization method.
-	 * @returns
+	 * @return
 	 */
 	ngOnInit(): void { }
 }

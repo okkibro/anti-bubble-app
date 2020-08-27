@@ -18,10 +18,9 @@ import { User } from '../../models/user';
 import { Router } from '@angular/router';
 import { DataService } from 'src/app/services/data-exchange.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { beforeUnload, milestones, earnAmount } from '../../../../constants';
+import { beforeUnload, milestones, earnAmount, titleTrail } from '../../../../constants';
 import { SessionService } from 'src/app/services/session.service';
 import { Title } from '@angular/platform-browser';
-import { environment } from 'src/environments/environment';
 import { UserService } from '../../services/user.service';
 import { MilestoneUpdatesService } from '../../services/milestone-updates.service';
 
@@ -64,20 +63,21 @@ export class HomeComponent implements OnInit {
 
 	/**
 	 * Initialization method.
-	 * @returns
+	 * @return
 	 */
 	ngOnInit(): void {
 		this.userService.profile().subscribe(user => {
 			this.userDetails = user;
 		});
 
-		this.titleService.setTitle('Home' + environment.TITLE_TRAIL);
+		// Set page title.
+		this.titleService.setTitle('Home' + titleTrail);
 	}
 
 	/**
 	 * Method to join a session based on the filled in code. Uses the joinSession() method declared in the
 	 * socketIOService. The required backToHome(), redirect() and finishedGame() methods are defined here.
-	 * @returns
+	 * @return
 	 */
 	joinSession() {
 		const user = this.userDetails;
@@ -146,7 +146,7 @@ export class HomeComponent implements OnInit {
 	/**
 	 * Method that makes sure you can only fill in numbers in the session code input field.
 	 * @param event Event triggered when a key is pressed in the join session input.
-	 * @returns
+	 * @return
 	 */
 	check(event: KeyboardEvent) {
 		let code = event.code.charCodeAt(0);

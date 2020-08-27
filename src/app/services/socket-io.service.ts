@@ -37,7 +37,7 @@ export class SocketIOService {
 
 	/**
 	 * Method to create a new session using socketIO.
-	 * @returns
+	 * @return
 	 */
 	createSession(gameData): void {
 		this.removedListeners = false;
@@ -60,7 +60,7 @@ export class SocketIOService {
 	 * @param backToHome backToHome() callback function.
 	 * @param redirect redirect() callback function.
 	 * @param finishedGame finishedGame() callback function.
-	 * @returns
+	 * @return
 	 */
 	joinSession(pin: string, user: User, join: Function, backToHome: Function, redirect: Function, finishedGame: Function): void {
 		this.hostDisconnected = false;
@@ -92,7 +92,7 @@ export class SocketIOService {
 
 	/**
 	 * Method that removes the student from a session.
-	 * @returns
+	 * @return
 	 */
 	leaveSession(): void {
 		this.socket.emit('leave');
@@ -105,7 +105,7 @@ export class SocketIOService {
 	/**
 	 * Method to send a message in the joined session.
 	 * @param message Message to be sent.
-	 * @returns
+	 * @return
 	 */
 	sendMessage(message: string): void {
 		this.socket.emit('message', message);
@@ -117,7 +117,7 @@ export class SocketIOService {
 	 * removePlayer gets called when a player leaves.
 	 * @param addPlayer addPlayer() callback function.
 	 * @param removePlayer removePlayer() callback function.
-	 * @returns
+	 * @return
 	 */
 	listenForUpdates(addPlayer: Function, removePlayer: Function): void {
 		this.socket.on('update-players', player => {
@@ -132,7 +132,7 @@ export class SocketIOService {
 	 * Method that listens for updates on players leaving so they can be removed from the
 	 * previously recorded session players.
 	 * @param deletePlayer deletePlayer() callback function.
-	 * @returns
+	 * @return
 	 */
 	listenForLeavePlayer(deletePlayer: Function): void {
 		this.socket.on('player-left', player => {
@@ -144,7 +144,7 @@ export class SocketIOService {
 	 * Method that listens for incoming questions.
 	 * receiveQuestion gets called when a question is received from the teacher.
 	 * @param receiveQuestion receiveQuestion() callback function.
-	 * @returns
+	 * @return
 	 */
 	listenForQuestion(receiveQuestion: Function): void {
 		this.socket.on('receive-question', (question) => {
@@ -157,7 +157,7 @@ export class SocketIOService {
 	 * ended, either by the time runnning out or the teacehr pressing the 'Stop activiteit' button.
 	 * disableInput gets called when the teacher presses said button.
 	 * @param disableInput disableInput() callback function.
-	 * @returns
+	 * @return
 	 */
 	listenForFinishGame(disableInput: Function): void {
 		this.socket.on('finished-game', timedOut => {
@@ -168,7 +168,7 @@ export class SocketIOService {
 	/**
 	 * Method that listens for receiving of teams.
 	 * @param receiveTeam receiveTeam() callback function.
-	 * @returns
+	 * @return
 	 */
 	listenForTeam(receiveTeam: Function): void {
 		this.socket.on('receive-team', (team, article, leaders) => {
@@ -180,7 +180,7 @@ export class SocketIOService {
 	 * Method that listens for incoming answer submits.
 	 * receiveSubmit gets called when an answer from a student is received.
 	 * @param receiveSubmit receiveSubmit() callback function.
-	 * @returns
+	 * @return
 	 */
 	listenForSubmits(receiveSubmit: Function): void {
 		this.socket.on('receive-submit', data => {
@@ -192,7 +192,7 @@ export class SocketIOService {
 	 * Method that listens for someone wanting to know the players in the current session.
 	 * receivePlayers gets called when the session is started and the list of players is needed.
 	 * @param getSessionPlayers getSessionPlayers() callback function.
-	 * @returns
+	 * @return
 	 */
 	listenForGetPlayers(getSessionPlayers: Function): void {
 		this.socket.on('got-players', sessionPlayers => {
@@ -203,7 +203,7 @@ export class SocketIOService {
 	/**
 	 * Method that listens for the student submitting an answer so it can be recorded.
 	 * @param recordAnswer recordAnswer() callback function.
-	 * @returns
+	 * @return
 	 */
 	listenForRecordAnswer(recordAnswer: Function): void {
 		this.socket.on('record-answer', answer => {
@@ -215,7 +215,7 @@ export class SocketIOService {
 	 * Method that listens for host removing an answer from a student so it can be deleted from
 	 * the student' recorded answers.
 	 * @param deleteAnswer deleteAnswer() callback function.
-	 * @returns
+	 * @return
 	 */
 	listenForRemoveAnswer(deleteAnswer: Function): void {
 		this.socket.on('delete-answer', answer => {
@@ -226,7 +226,7 @@ export class SocketIOService {
 	/**
 	 * Method that sends a question to all students in the session.
 	 * @param question Quesiton to be sent to all students in session.
-	 * @returns
+	 * @return
 	 */
 	teacherSubmit(question: string): void {
 		this.socket.emit('send-question', question);
@@ -236,7 +236,7 @@ export class SocketIOService {
 	/**
 	 * Method that submits an answer to the teacher.
 	 * @param data Answer given by student.
-	 * @returns
+	 * @return
 	 */
 	studentSubmit(data: any): void {
 		this.socket.emit('submit', data);
@@ -244,7 +244,7 @@ export class SocketIOService {
 
 	/**
 	 * Method that starts the game. Making it unable for new students to join.
-	 * @returns
+	 * @return
 	 */
 	startGame(): void {
 		this.socket.emit('start-game');
@@ -258,7 +258,7 @@ export class SocketIOService {
 	 * @param groupSize Size of the group.
 	 * @param articles Articles to be paired to students in the group.
 	 * @param receivePairs receivePairs() callback function.
-	 * @returns
+	 * @return
 	 */
 	pairStudents(groups, groupSize, articles, receivePairs): void {
 		this.socket.emit('pair-students', groups, groupSize, articles);
@@ -269,7 +269,7 @@ export class SocketIOService {
 
 	/**
 	 * Method that removes all listeners from the socket.
-	 * @returns
+	 * @return
 	 */
 	removeListeners(): void {
 		this.socket.removeAllListeners();
@@ -280,7 +280,7 @@ export class SocketIOService {
 	 * Method that will make a player's inactive button active again and remove his deleted answer
 	 * from his answers that have been recorded.
 	 * @param player
-	 * @returns
+	 * @return
 	 */
 	activateStudentButton(player: any): void {
 		this.socket.emit('reactivate-button', player);
@@ -290,7 +290,7 @@ export class SocketIOService {
 	/**
 	 * Method that will take a callback that will be called when the player's answer got deleted by the teacher.
 	 * @param reactivate reactivate() callback function.
-	 * @returns
+	 * @return
 	 */
 	reactivateButton(reactivate: Function): void {
 		this.socket.on('reactivate', () => {
@@ -301,7 +301,7 @@ export class SocketIOService {
 	/**
 	 * Method that will finish a session.
 	 * @param timedOut Whether the game finished by the time running out or the teacher manually stopping it.
-	 * @returns
+	 * @return
 	 */
 	finishGame(timedOut: boolean): void {
 		this.socket.emit('finish-game', timedOut);

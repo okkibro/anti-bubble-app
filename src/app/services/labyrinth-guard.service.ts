@@ -32,7 +32,7 @@ export class LabyrinthGuardService implements CanActivate {
      * Guard that makes sure the user can't direct back to labyrinth after it is already completed.
      * @param currentRoute
      * @param currentState
-     * @returns Whether user can visit the labyrinth page.
+     * @return Whether user can visit the labyrinth page.
      */
     canActivate(currentRoute: ActivatedRouteSnapshot, currentState: RouterStateSnapshot): boolean {
         this.userService.profile().subscribe((user) => {

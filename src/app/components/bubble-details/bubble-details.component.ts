@@ -16,9 +16,8 @@ import { Component, OnInit } from '@angular/core';
 import { User } from '../../models/user';
 import * as Highcharts2 from 'highcharts';
 import { Title } from '@angular/platform-browser';
-import { environment } from '../../../environments/environment';
 import { UserService } from '../../services/user.service';
-import { milestones } from '../../../../constants';
+import { milestones, titleTrail } from '../../../../constants';
 import { MilestoneUpdatesService } from '../../services/milestone-updates.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
@@ -67,7 +66,7 @@ export class BubbleDetailsComponent implements OnInit {
 
 	/**
 	 * Initialization method.
-	 * @returns
+	 * @return
 	 */
 	ngOnInit(): void {
 		this.userService.profile().subscribe(user => {
@@ -86,12 +85,13 @@ export class BubbleDetailsComponent implements OnInit {
 			}
 		});
 
-		this.titleService.setTitle('Bubbel details' + environment.TITLE_TRAIL);
+		// Set page title.
+		this.titleService.setTitle('Bubbel details' + titleTrail);
 	}
 
 	/**
 	 * Initialization method for showing the user's bubble history.
-	 * @returns
+	 * @return
 	 */
 	initChart(): void {
 		this.chartOptions = {

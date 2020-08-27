@@ -19,6 +19,11 @@
         Docent overzicht
     </button>
     <mat-divider *ngIf="tokenData.role === 'teacher'"></mat-divider>
+    <button mat-button [routerLink]="'/session-overview'" *ngIf="tokenData.role === 'teacher'" (click)="onSidenavClose()">
+        <mat-icon>insert_chart_outlined</mat-icon>
+        Sessie overzicht
+    </button>
+    <mat-divider *ngIf="tokenData.role === 'teacher'"></mat-divider>
     <button mat-button [routerLink]="'/class-overview'" *ngIf="tokenData.role === 'student'" (click)="onSidenavClose()">
         <mat-icon>class</mat-icon>
         Klas overzicht

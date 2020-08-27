@@ -11,11 +11,11 @@
  */
 
 import { Component, OnInit } from '@angular/core';
+import { titleTrail } from '../../../../constants';
 import { AuthenticationService } from '../../services/authentication.service';
 import { User } from '../../models/user';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ClassesService } from 'src/app/services/classes.service';
-import { environment } from '../../../environments/environment';
 import { Title } from '@angular/platform-browser';
 
 @Component({
@@ -47,14 +47,14 @@ export class ClassmateProfileComponent implements OnInit {
 
 	/**
 	 * Initialization method.
-	 * @returns
+	 * @return
 	 */
 	ngOnInit(): void {
 		this.classesService.classmateProfile(this.route.snapshot.paramMap.get('id')).subscribe(classmate => {
 			this.classmate = classmate;
 
 			// Get classmate's class
-			this.classesService.getClass().subscribe((data) => {
+			this.classesService.getClass().subscribe(data => {
 				if (data.succes) {
 					this.classmateClassTitle = data.class.title;
 				}
@@ -64,6 +64,7 @@ export class ClassmateProfileComponent implements OnInit {
 			this.router.navigate(['/home']);
 		});
 
-		this.titleService.setTitle('Klasgenoot profiel' + environment.TITLE_TRAIL);
+		// Set page title.
+		this.titleService.setTitle('Klasgenoot profiel' + titleTrail);
 	}
 }

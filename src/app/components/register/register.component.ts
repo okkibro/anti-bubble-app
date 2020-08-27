@@ -14,11 +14,11 @@
 
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { titleTrail } from '../../../../constants';
 import { AuthenticationService } from '../../services/authentication.service';
 import { Router } from '@angular/router';
 import { User } from '../../models/user';
 import { ShopService } from 'src/app/services/shop.service';
-import { environment } from '../../../environments/environment';
 import { Title } from '@angular/platform-browser';
 import { UserService } from '../../services/user.service';
 
@@ -67,15 +67,16 @@ export class RegisterComponent implements OnInit {
 
 	/**
 	 * Initialization method.
-	 * @returns
+	 * @return
 	 */
 	ngOnInit(): void {
-		this.titleService.setTitle('Registreer' + environment.TITLE_TRAIL);
+		// Set page title.
+		this.titleService.setTitle('Registreer' + titleTrail);
 	}
 
 	/**
 	 * Method to register a new user based on the information filled in on the form.
-	 * @returns
+	 * @return
 	 */
 	registerUser(): void {
 		let user = new User();
@@ -98,7 +99,7 @@ export class RegisterComponent implements OnInit {
 
 	/** Method to check if the filled in passwords match.
 	 * @param form Form in which the validation has to take place.
-	 * @returns
+	 * @return
 	 */
 	passwordMatchValidator(form: FormGroup): void {
 		let password = form.get('password').value;

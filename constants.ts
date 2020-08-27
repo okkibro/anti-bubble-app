@@ -55,7 +55,9 @@ export const milestones = [
     }
 ]
 
-export const earnAmount = 5;
+export const earnAmount: number = 5;
+
+export const titleTrail: string = ' | Anti Bubble App';
 
 export function beforeUnload(e:any) {
     e.returnValue = 'Weet je zeker dat je de sessie wilt verlaten?';
