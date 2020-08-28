@@ -21,6 +21,7 @@ import { MatRadioModule } from '@angular/material/radio';
 import { MatSelectModule } from '@angular/material/select';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MAT_DATE_LOCALE, MatNativeDateModule } from '@angular/material/core';
+import { MatPaginatorIntl, MatPaginatorModule } from '@angular/material/paginator';
 
 // Core modules.
 import { CustomMaterialModule } from './shared/material.module';
@@ -70,6 +71,8 @@ import { ShopService } from './services/shop.service';
 import { UserService } from './services/user.service';
 import { SessionOverviewService } from './services/session-overview.service';
 
+// Other
+import { getDutchPaginatorIntl } from './shared/dutch-paginator';
 
 @NgModule({
 	declarations: [
@@ -123,7 +126,8 @@ import { SessionOverviewService } from './services/session-overview.service';
 		MatListModule,
 		MatSelectModule,
 		MatDatepickerModule,
-		MatNativeDateModule
+		MatNativeDateModule,
+		MatPaginatorModule
 	],
 	providers: [
 		AuthGuardService,
@@ -142,7 +146,9 @@ import { SessionOverviewService } from './services/session-overview.service';
 		SessionComponent,
 		MatDatepickerModule,
 		MatNativeDateModule,
-		{ provide: MAT_DATE_LOCALE, useValue: 'nl-NL' }
+		{ provide: MAT_DATE_LOCALE, useValue: 'nl-NL' },
+		{ provide: MatPaginatorIntl, useValue: getDutchPaginatorIntl() }
+
 	],
 	bootstrap: [AppComponent],
 	schemas: [CUSTOM_ELEMENTS_SCHEMA]

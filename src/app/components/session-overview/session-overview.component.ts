@@ -16,6 +16,7 @@ import { Title } from '@angular/platform-browser';
 import { titleTrail } from '../../../../constants';
 import { Log } from '../../models/log';
 import { SessionOverviewService } from '../../services/session-overview.service';
+import { PageEvent } from '@angular/material/paginator';
 
 @Component({
 	selector: 'mean-session-overview',
@@ -27,6 +28,7 @@ import { SessionOverviewService } from '../../services/session-overview.service'
 export class SessionOverviewComponent implements OnInit {
 	logs: Log[] = [];
 	originalLogs: Log[] = [];
+	displayedLogs: Log[] = [];
 	classes = [];
 	students = [];
 	activities = [];
@@ -40,7 +42,10 @@ export class SessionOverviewComponent implements OnInit {
 	genders = [
 		{ value: 'male', name: 'Jongen' },
 		{ value: 'female', name: 'Meisje' }];
-	startDate: Date;
+	startDate;
+	pageIndex = 0;
+	pageSize = 1;
+	pageSizeOptions: number[] = [1, 2, 5, 10, 25, 100];
 
 	/**
 	 * SessionOverviewComponent constructor.
@@ -107,6 +112,8 @@ export class SessionOverviewComponent implements OnInit {
 					log.activity = this.activities[activityIndex];
 				}
 			}
+
+			this.displayedLogs = this.logs.slice(0, this.pageSize);
 
 			// Make a deep copy of the logs from the database that we will use when filtering logs
 			// in the filterLogs(0 method.
@@ -201,5 +208,13 @@ export class SessionOverviewComponent implements OnInit {
 				}
 			}
 		}
+
+		this.displayedLogs = this.logs;
+	}
+
+	changePage(event: PageEvent): void {
+		const start = event.pageIndex * event.pageSize;
+		const end = (event.pageIndex + 1) * event.pageSize;
+		this.displayedLogs = this.logs.slice(start, end);
 	}
 }
