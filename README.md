@@ -65,3 +65,8 @@
 + git checkout master
 + git merge develop
 + git branch -d feature_branch
+
+### Generating TypeDocs
+All ```*.ts``` files in the ```./src``` folder of the project have TypeDoc comments. To automatically generate docs (which can be hosted on GitHub Pages) use the ```typedoc --options typedoc.json``` command.
+
+Make sure the ```_config.yml``` file in the root of the project is also located in the root of the by TypeDoc generated ```./docs``` folder, otherwsie GitHub Pages will not work.

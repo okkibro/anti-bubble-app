@@ -1,1 +1,3 @@
-theme: jekyll-theme-minimal
+include:
+  - "_*_.html"
+  - "_*_.*.html"
