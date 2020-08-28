@@ -26,7 +26,7 @@
 					<mat-form-field appearance="fill" class="general-dropdown">
 						<mat-label>Klas</mat-label>
 						<mat-select multiple>
-							<mat-option *ngFor="let klas of classes" [value]="klas.title" (onSelectionChange)="filterLogs($event, 'class', klas._id)">
+							<mat-option *ngFor="let klas of classes" [value]="klas.title" (onSelectionChange)="filterLogs($event, 'class', klas._id, false)">
 								{{ klas.title }}
 							</mat-option>
 						</mat-select>
@@ -34,7 +34,7 @@
 					<mat-form-field appearance="fill" class="general-dropdown">
 						<mat-label>Geslacht</mat-label>
 						<mat-select multiple>
-							<mat-option *ngFor="let gender of genders" [value]="gender.value" (onSelectionChange)="filterLogs($event, 'gender', gender.value)">
+							<mat-option *ngFor="let gender of genders" [value]="gender.value" (onSelectionChange)="filterLogs($event, 'gender', gender.value, false)">
 								{{ gender.name }}
 							</mat-option>
 						</mat-select>
@@ -42,7 +42,7 @@
 					<mat-form-field appearance="fill" class="general-dropdown">
 						<mat-label>Activiteit</mat-label>
 						<mat-select multiple>
-							<mat-option *ngFor="let activity of activities" [value]="activity._id" (onSelectionChange)="filterLogs($event, 'activity', activity._id)">
+							<mat-option *ngFor="let activity of activities" [value]="activity._id" (onSelectionChange)="filterLogs($event, 'activity', activity._id, false)">
 								{{ activity.name }}
 							</mat-option>
 						</mat-select>
@@ -50,16 +50,16 @@
 					<mat-form-field appearance="fill" class="general-dropdown">
 						<mat-label>Leerling</mat-label>
 						<mat-select multiple>
-							<mat-option *ngFor="let student of students" [value]="student._id" (onSelectionChange)="filterLogs($event, 'user', student._id)">
+							<mat-option *ngFor="let student of students" [value]="student._id" (onSelectionChange)="filterLogs($event, 'user', student._id, false)">
 								{{ student.firstName + ' ' + student.lastName }}
 							</mat-option>
 						</mat-select>
 					</mat-form-field>
 					<mat-form-field appearance="fill" class="general-dropdown">
 						<mat-label>Datum</mat-label>
-						<input matInput [matDatepicker]="picker" [(ngModel)]="startDate" (dateChange)="filterLogs($event,'comparisonDate', $event.value)">
+						<input matInput [matDatepicker]="picker" [(ngModel)]="startDate" (dateChange)="filterLogs($event,'comparisonDate', $event.value, false)">
 						<mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-						<mat-datepicker-toggle matSuffix (click)="resetDate()">
+						<mat-datepicker-toggle matSuffix (click)="this.filterLogs(null, null, null, true);">
 							<mat-icon matDatepickerToggleIcon>clear</mat-icon>
 						</mat-datepicker-toggle>
 						<mat-datepicker #picker></mat-datepicker>

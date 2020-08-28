@@ -27,7 +27,6 @@ import { SessionOverviewService } from '../../services/session-overview.service'
 export class SessionOverviewComponent implements OnInit {
 	logs: Log[] = [];
 	originalLogs: Log[] = [];
-	lastLogs: Log[] = [];
 	classes = [];
 	students = [];
 	activities = [];
@@ -123,8 +122,8 @@ export class SessionOverviewComponent implements OnInit {
 	convertObjectIdToDate(objectId: string): string[] {
 		const dateObject = new Date(parseInt(objectId.substring(0, 8), 16) * 1000);
 
-		// comparisonDate is a date with special formatting used in the filterLogs method to filter logs based on the date
-		// they were entered into the database.
+		// comparisonDate is a date with special formatting used in the filterLogs() method to filter logs based on the date
+		// they were entered into the database. The other date is a more readable format used for displaying to the user.
 		const comparisonDate = (dateObject.getUTCMonth() + 1) + '/' + dateObject.getUTCDate() + '/' + dateObject.getFullYear();
 		const options = { year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric' };
 		const date = dateObject.toLocaleString('nl-NL', options)
@@ -136,15 +135,10 @@ export class SessionOverviewComponent implements OnInit {
 	 * @param event MatOptionSelectionChange event triggered by user (un)selecting an option in the MatSelect.
 	 * @param param The parameter to filter on or remove from the filters.
 	 * @param value The value to filter on or remove from the filters.
+	 * @param dateReset Whether the method was called by resetting the date.
 	 * @return
 	 */
-	filterLogs(event: any, param: string, value: string | unknown): void {
-
-		// Empty the logs that were previously displayed yo the user and deep copy the currently displayed logs
-		// so we have a record of the last displayed logs (needed for resetting the date in the MatDatePicker
-		// and all the functionality still working).
-		this.lastLogs = [];
-		this.logs.forEach(log => this.lastLogs.push(Object.assign({}, log)));
+	filterLogs(event: any = null, param: string = null, value: string | unknown = null, dateReset: boolean): void {
 
 		// Empty the logs that were displayed to the user and deep copy back the orginally found logs in the
 		// getLogs() method so we can work with the original set, without accessing the database again/needing
@@ -152,20 +146,27 @@ export class SessionOverviewComponent implements OnInit {
 		this.logs = [];
 		this.originalLogs.forEach(log => this.logs.push(Object.assign({}, log)));
 
-		// Check if the event that was submitted came from the MatDatePicker (if-statement) or from the
-		// MatOptionSelectionChange (else if/else-statements). If it was for checking a checkbox in the
-		// select, then add the param-value pair to this filters and if it was for unchecking a checkbox
-		// in the select, then remove the param-value pair from this.filters.
-		if (typeof value !== 'string') {
-
-			// Convert date given in the event from the MatDatPicker to a date that is the same format as the
-			// previously set comparisonDate in the getLogs() method.
-			value = value.toLocaleString().slice(0, 9)
-			this.filters[param].push(value);
-		} else if (event.source._selected) {
-			this.filters[param].push(value);
+		// Check if the method was triggered by resetting the date, or in any other way and act accordingly.
+		if (dateReset) {
+			this.startDate = null;
+			this.filters['comparisonDate'].pop();
 		} else {
-			this.filters[param].splice(this.filters[param].indexOf(value), 1);
+
+			// Check if the event that was submitted came from the MatDatePicker (if-statement) or from the
+			// MatOptionSelectionChange (else if/else-statements). If it was for checking a checkbox in the
+			// select, then add the param-value pair to this filters and if it was for unchecking a checkbox
+			// in the select, then remove the param-value pair from this.filters.
+			if (typeof value !== 'string') {
+
+				// Convert date given in the event from the MatDatPicker to a date that is the same format as the
+				// previously set comparisonDate in the getLogs() method.
+				value = value.toLocaleString().slice(0, 9)
+				this.filters[param].push(value);
+			} else if (event.source._selected) {
+				this.filters[param].push(value);
+			} else {
+				this.filters[param].splice(this.filters[param].indexOf(value), 1);
+			}
 		}
 
 		// Loop through all the param-value pairs in this.filters.
@@ -200,21 +201,5 @@ export class SessionOverviewComponent implements OnInit {
 				}
 			}
 		}
-	}
-
-	/**
-	 * Method to reset the date in the MatDatePicker and also reset the logs shown to the teacher.
-	 * @return
-	 */
-	resetDate(): void {
-
-		// Reset MatDatePicker, filters and the logs.
-		this.startDate = null;
-		this.filters['comparisonDate'].pop();
-
-		// Empty the logs that were displayed to the user and deep copy back the logs that were displayed previously
-		// to the user before the date was reset.
-		this.logs = [];
-		this.lastLogs.forEach(log => this.logs.push(Object.assign({}, log)));
 	}
 }
