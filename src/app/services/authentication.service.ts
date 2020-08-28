@@ -11,16 +11,16 @@
  * @packageDocumentation
  */
 
-import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
+import { CookieService } from 'ngx-cookie-service';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { User } from '../models/user';
-import { Role } from '../models/role';
-import { CookieService } from 'ngx-cookie-service';
-import { tokenData } from '../models/tokenData';
 import { environment } from 'src/environments/environment';
+import { Role } from '../models/role';
+import { tokenData } from '../models/tokenData';
+import { User } from '../models/user';
 
 interface TokenResponse {
     token: string;

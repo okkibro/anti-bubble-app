@@ -4,15 +4,15 @@
  * Computing Sciences)
  */
 
+import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { PasswordRecoveryService } from '../../services/password-recovery.service';
-import { RouterModule } from '@angular/router';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
+import { RouterModule } from '@angular/router';
 import { of } from 'rxjs';
+import { PasswordRecoveryService } from '../../services/password-recovery.service';
 
 import { PasswordRecoveryComponent } from './password-recovery.component';
-import { NO_ERRORS_SCHEMA } from '@angular/core';
 
 describe('PasswordRecoveryComponent', () => {
 	let component: PasswordRecoveryComponent;

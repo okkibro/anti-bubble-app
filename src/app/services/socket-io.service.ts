@@ -14,8 +14,8 @@
 import { Injectable } from '@angular/core';
 import * as io from 'socket.io-client';
 import { environment } from 'src/environments/environment';
-import { DataService } from './data-exchange.service';
 import { User } from '../models/user';
+import { DataService } from './data-exchange.service';
 
 @Injectable({
 	providedIn: 'root'

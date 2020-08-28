@@ -13,15 +13,15 @@
  */
 
 import { Component, OnInit } from '@angular/core';
-import { Item } from '../../models/item';
-import { ShopService } from 'src/app/services/shop.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatTabChangeEvent } from '@angular/material/tabs';
+import { Title } from '@angular/platform-browser';
+import { ShopService } from 'src/app/services/shop.service';
+import { milestones, titleTrail } from '../../../../constants';
+import { Item } from '../../models/item';
 import { User } from '../../models/user';
 import { MilestoneUpdatesService } from '../../services/milestone-updates.service';
-import { milestones, titleTrail } from '../../../../constants';
-import { Title } from '@angular/platform-browser';
 import { UserService } from '../../services/user.service';
-import { MatTabChangeEvent } from '@angular/material/tabs';
 
 @Component({
 	selector: 'mean-shop',

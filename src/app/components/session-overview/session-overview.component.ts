@@ -12,11 +12,11 @@
  */
 
 import { Component, OnInit } from '@angular/core';
+import { PageEvent } from '@angular/material/paginator';
 import { Title } from '@angular/platform-browser';
 import { titleTrail } from '../../../../constants';
 import { Log } from '../../models/log';
 import { SessionOverviewService } from '../../services/session-overview.service';
-import { PageEvent } from '@angular/material/paginator';
 
 @Component({
 	selector: 'mean-session-overview',

@@ -11,8 +11,8 @@
  */
 
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { AuthenticationService } from '../../services/authentication.service';
 import { tokenData } from 'src/app/models/tokenData';
+import { AuthenticationService } from '../../services/authentication.service';
 
 @Component({
 	selector: 'mean-toolbar',

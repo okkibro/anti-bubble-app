@@ -12,9 +12,9 @@
  */
 
 import { Component, OnInit } from '@angular/core';
+import { Title } from '@angular/platform-browser';
 import { milestones, titleTrail } from '../../../../constants';
 import { User } from '../../models/user';
-import { Title } from '@angular/platform-browser';
 import { UserService } from '../../services/user.service';
 
 @Component({

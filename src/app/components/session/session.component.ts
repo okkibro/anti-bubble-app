@@ -13,17 +13,16 @@
  */
 
 import { Component, OnInit } from '@angular/core';
-import { AuthenticationService } from '../../services/authentication.service';
-import { SocketIOService } from 'src/app/services/socket-io.service';
-import { DataService } from 'src/app/services/data-exchange.service';
-import { Router } from '@angular/router';
-import { SessionService } from 'src/app/services/session.service';
-import { beforeUnload, titleTrail } from '../../../../constants';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { Article } from 'src/app/models/article';
-import { tokenData } from '../../models/tokenData';
 import { Title } from '@angular/platform-browser';
-import { earnAmount } from '../../../../constants';
+import { Router } from '@angular/router';
+import { Article } from 'src/app/models/article';
+import { DataService } from 'src/app/services/data-exchange.service';
+import { SessionService } from 'src/app/services/session.service';
+import { SocketIOService } from 'src/app/services/socket-io.service';
+import { beforeUnload, earnAmount, titleTrail } from '../../../../constants';
+import { tokenData } from '../../models/tokenData';
+import { AuthenticationService } from '../../services/authentication.service';
 
 @Component({
 	selector: 'mean-session',

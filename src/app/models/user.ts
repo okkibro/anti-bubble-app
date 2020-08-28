@@ -4,10 +4,10 @@
  * Computing Sciences)
  */
 
-import { Role } from './role';
+import { Gender } from './gender';
 import { Item } from './item';
 import { Milestone } from './milestone';
-import { Gender } from './gender';
+import { Role } from './role';
 
 export class User {
 	_id: string;

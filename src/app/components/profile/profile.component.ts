@@ -13,12 +13,12 @@
 
 import { Component, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { User } from '../../models/user';
-import { milestones, titleTrail } from '../../../../constants';
+import { Title } from '@angular/platform-browser';
+import { Router } from '@angular/router';
 import { Milestone } from 'src/app/models/milestone';
 import { ClassesService } from 'src/app/services/classes.service';
-import { Router } from '@angular/router';
-import { Title } from '@angular/platform-browser';
+import { milestones, titleTrail } from '../../../../constants';
+import { User } from '../../models/user';
 import { UserService } from '../../services/user.service';
 
 @Component({

@@ -12,14 +12,14 @@
  */
 
 import { Component, Inject, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { titleTrail } from '../../../../constants';
-import { User } from '../../models/user';
 import { FormBuilder } from '@angular/forms';
-import { ClassesService } from '../../services/classes.service';
 import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Title } from '@angular/platform-browser';
+import { Router } from '@angular/router';
+import { titleTrail } from '../../../../constants';
+import { User } from '../../models/user';
+import { ClassesService } from '../../services/classes.service';
 import { UserService } from '../../services/user.service';
 
 @Component({

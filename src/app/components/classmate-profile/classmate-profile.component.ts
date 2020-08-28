@@ -11,12 +11,12 @@
  */
 
 import { Component, OnInit } from '@angular/core';
-import { titleTrail } from '../../../../constants';
-import { AuthenticationService } from '../../services/authentication.service';
-import { User } from '../../models/user';
+import { Title } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ClassesService } from 'src/app/services/classes.service';
-import { Title } from '@angular/platform-browser';
+import { titleTrail } from '../../../../constants';
+import { User } from '../../models/user';
+import { AuthenticationService } from '../../services/authentication.service';
 
 @Component({
 	selector: 'mean-classmate-profile',

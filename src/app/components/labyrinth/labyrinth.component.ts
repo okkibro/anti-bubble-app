@@ -12,16 +12,16 @@
  */
 
 import { Component, OnInit } from '@angular/core';
-import { titleTrail } from '../../../../constants';
-import { User } from '../../models/user';
-import { Question } from '../../models/question';
-import { Router } from '@angular/router';
-import { SessionService } from '../../services/session.service';
-import { AuthenticationService } from '../../services/authentication.service';
-import { MatSnackBar } from '@angular/material/snack-bar';
-import { BubbleGraphService } from 'src/app/services/bubble-graph.service';
 import { FormBuilder, Validators } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Title } from '@angular/platform-browser';
+import { Router } from '@angular/router';
+import { BubbleGraphService } from 'src/app/services/bubble-graph.service';
+import { titleTrail } from '../../../../constants';
+import { Question } from '../../models/question';
+import { User } from '../../models/user';
+import { AuthenticationService } from '../../services/authentication.service';
+import { SessionService } from '../../services/session.service';
 import { UserService } from '../../services/user.service';
 
 @Component({

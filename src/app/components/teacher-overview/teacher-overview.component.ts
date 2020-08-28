@@ -13,15 +13,15 @@
  */
 
 import { Component, Inject, OnInit } from '@angular/core';
-import { MatSnackBar } from '@angular/material/snack-bar';
-import { AuthenticationService } from 'src/app/services/authentication.service';
-import { User } from 'src/app/models/user';
 import { FormBuilder, Validators } from '@angular/forms';
-import { Class } from 'src/app/models/class';
-import { ClassesService } from 'src/app/services/classes.service';
 import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog';
-import { titleTrail } from '../../../../constants';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Title } from '@angular/platform-browser';
+import { Class } from 'src/app/models/class';
+import { User } from 'src/app/models/user';
+import { AuthenticationService } from 'src/app/services/authentication.service';
+import { ClassesService } from 'src/app/services/classes.service';
+import { titleTrail } from '../../../../constants';
 import { UserService } from '../../services/user.service';
 
 @Component({

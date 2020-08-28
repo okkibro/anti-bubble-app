@@ -4,17 +4,17 @@
  * Computing Sciences)
  */
 
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { LoginComponent } from './login.component';
-import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
-import { AuthenticationService } from '../../services/authentication.service';
-import { User } from '../../models/user';
 import { HttpClientModule } from '@angular/common/http';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
-import { RouterModule } from '@angular/router';
-import { ReactiveFormsModule } from '@angular/forms';
-import { of } from 'rxjs';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
+import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ReactiveFormsModule } from '@angular/forms';
+import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
+import { RouterModule } from '@angular/router';
+import { of } from 'rxjs';
+import { User } from '../../models/user';
+import { AuthenticationService } from '../../services/authentication.service';
+import { LoginComponent } from './login.component';
 
 describe('LoginComponent', () => {
 	let component: LoginComponent;

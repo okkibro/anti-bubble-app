@@ -5,7 +5,6 @@
  */
 
 import { NgModule } from '@angular/core';
-import { Role } from './models/role';
 import { RouterModule, Routes } from '@angular/router';
 
 import { ActivitiesComponent } from './components/activities/activities.component';
@@ -27,6 +26,7 @@ import { SessionComponent } from './components/session/session.component';
 import { SettingsComponent } from './components/settings/settings.component';
 import { ShopComponent } from './components/shop/shop.component';
 import { TeacherOverviewComponent } from './components/teacher-overview/teacher-overview.component';
+import { Role } from './models/role';
 
 import { AuthGuardService } from './services/auth-guard.service';
 import { LabyrinthGuardService } from './services/labyrinth-guard.service';

@@ -11,15 +11,15 @@
  */
 
 import { Component, OnInit } from '@angular/core';
-import { titleTrail } from '../../../../constants';
-import { User } from '../../models/user';
-import { Item } from '../../models/item';
-import { ShopService } from 'src/app/services/shop.service';
-import { AvatarService } from 'src/app/services/avatar.service';
-import { AvatarDisplayComponent } from '../avatar-display/avatar-display.component';
-import { Title } from '@angular/platform-browser';
-import { UserService } from '../../services/user.service';
 import { MatTabChangeEvent } from '@angular/material/tabs';
+import { Title } from '@angular/platform-browser';
+import { AvatarService } from 'src/app/services/avatar.service';
+import { ShopService } from 'src/app/services/shop.service';
+import { titleTrail } from '../../../../constants';
+import { Item } from '../../models/item';
+import { User } from '../../models/user';
+import { UserService } from '../../services/user.service';
+import { AvatarDisplayComponent } from '../avatar-display/avatar-display.component';
 
 @Component({
 	selector: 'mean-avatar',

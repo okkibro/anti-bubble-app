@@ -12,8 +12,8 @@
 
 import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, CanDeactivate, RouterStateSnapshot } from '@angular/router';
-import { SessionComponent } from '../components/session/session.component';
 import { beforeUnload } from '../../../constants';
+import { SessionComponent } from '../components/session/session.component';
 
 @Injectable({
 	providedIn: 'root'

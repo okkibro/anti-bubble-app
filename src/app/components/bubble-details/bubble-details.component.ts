@@ -13,13 +13,13 @@
  */
 
 import { Component, OnInit } from '@angular/core';
-import { User } from '../../models/user';
-import * as Highcharts2 from 'highcharts';
-import { Title } from '@angular/platform-browser';
-import { UserService } from '../../services/user.service';
-import { milestones, titleTrail } from '../../../../constants';
-import { MilestoneUpdatesService } from '../../services/milestone-updates.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { Title } from '@angular/platform-browser';
+import * as Highcharts2 from 'highcharts';
+import { milestones, titleTrail } from '../../../../constants';
+import { User } from '../../models/user';
+import { MilestoneUpdatesService } from '../../services/milestone-updates.service';
+import { UserService } from '../../services/user.service';
 
 @Component({
 	selector: 'mean-bubble-details',

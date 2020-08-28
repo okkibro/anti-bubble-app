@@ -4,12 +4,12 @@
  * Computing Sciences)
  */
 
+import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { PasswordRecoveryService } from '../../services/password-recovery.service';
 import { ActivatedRoute } from '@angular/router';
+import { PasswordRecoveryService } from '../../services/password-recovery.service';
 
 import { PasswordResetComponent } from './password-reset.component';
-import { NO_ERRORS_SCHEMA } from '@angular/core';
 
 describe('PasswordResetComponent', () => {
 	let component: PasswordResetComponent;

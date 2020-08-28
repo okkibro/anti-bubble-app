@@ -12,14 +12,14 @@
  */
 
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, Validators } from '@angular/forms';
+import { Title } from '@angular/platform-browser';
+import { Router } from '@angular/router';
+import { SessionService } from 'src/app/services/session.service';
+import { SocketIOService } from 'src/app/services/socket-io.service';
 import { titleTrail } from '../../../../constants';
 import { Activity } from '../../models/activity';
 import { AuthenticationService } from '../../services/authentication.service';
-import { SocketIOService } from 'src/app/services/socket-io.service';
-import { Router } from '@angular/router';
-import { SessionService } from 'src/app/services/session.service';
-import { FormBuilder, Validators } from '@angular/forms';
-import { Title } from '@angular/platform-browser';
 import { SessionOverviewService } from '../../services/session-overview.service';
 
 @Component({

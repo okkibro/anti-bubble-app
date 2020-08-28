@@ -12,17 +12,17 @@
  */
 
 import { Component, OnInit } from '@angular/core';
-import { SocketIOService } from '../../services/socket-io.service';
 import { FormBuilder, Validators } from '@angular/forms';
-import { User } from '../../models/user';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { Title } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 import { DataService } from 'src/app/services/data-exchange.service';
-import { MatSnackBar } from '@angular/material/snack-bar';
-import { beforeUnload, milestones, earnAmount, titleTrail } from '../../../../constants';
 import { SessionService } from 'src/app/services/session.service';
-import { Title } from '@angular/platform-browser';
-import { UserService } from '../../services/user.service';
+import { beforeUnload, earnAmount, milestones, titleTrail } from '../../../../constants';
+import { User } from '../../models/user';
 import { MilestoneUpdatesService } from '../../services/milestone-updates.service';
+import { SocketIOService } from '../../services/socket-io.service';
+import { UserService } from '../../services/user.service';
 
 @Component({
 	selector: 'mean-home',

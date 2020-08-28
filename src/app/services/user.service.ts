@@ -10,13 +10,13 @@
  * @packageDocumentation
  */
 
-import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
-import { CookieService } from 'ngx-cookie-service';
-import { environment } from 'src/environments/environment';
+import { Injectable } from '@angular/core';
 import { AbstractControl, AsyncValidatorFn, ValidationErrors } from '@angular/forms';
+import { CookieService } from 'ngx-cookie-service';
+import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
 	providedIn: 'root'

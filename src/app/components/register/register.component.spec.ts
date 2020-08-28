@@ -4,17 +4,17 @@
  * Computing Sciences)
  */
 
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { AuthenticationService } from '../../services/authentication.service';
 import { HttpClientModule } from '@angular/common/http';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
-import { RouterModule } from '@angular/router';
+import { NO_ERRORS_SCHEMA } from '@angular/core';
+import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { User } from '../../models/user';
+import { RouterModule } from '@angular/router';
 import { of } from 'rxjs';
+import { User } from '../../models/user';
+import { AuthenticationService } from '../../services/authentication.service';
 
 import { RegisterComponent } from './register.component';
-import { NO_ERRORS_SCHEMA } from '@angular/core';
 
 describe('RegisterComponent', () => {
 	let component: RegisterComponent;

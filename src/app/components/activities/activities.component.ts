@@ -12,18 +12,18 @@
  */
 
 import { Component, OnInit } from '@angular/core';
-import { SocketIOService } from 'src/app/services/socket-io.service';
+import { FormBuilder } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { DataService } from 'src/app/services/data-exchange.service';
-import { FormBuilder } from '@angular/forms';
-import { User } from '../../models/user';
-import { Log } from '../../models/log';
-import { beforeUnload, milestones } from '../../../../constants';
 import { SessionService } from 'src/app/services/session.service';
-import { UserService } from '../../services/user.service';
+import { SocketIOService } from 'src/app/services/socket-io.service';
+import { beforeUnload } from '../../../../constants';
+import { Log } from '../../models/log';
+import { User } from '../../models/user';
 import { ClassesService } from '../../services/classes.service';
 import { MilestoneUpdatesService } from '../../services/milestone-updates.service';
-import { MatSnackBar } from '@angular/material/snack-bar';
+import { UserService } from '../../services/user.service';
 
 @Component({
 	selector: 'mean-activities',

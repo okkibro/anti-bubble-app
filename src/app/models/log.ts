@@ -5,8 +5,8 @@
  */
 
 import { Activity } from './activity';
-import { User } from './user';
 import { Class } from './class';
+import { User } from './user';
 
 export class Log {
 	_id: string;

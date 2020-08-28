@@ -14,12 +14,12 @@
 
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { titleTrail } from '../../../../constants';
-import { AuthenticationService } from '../../services/authentication.service';
-import { Router } from '@angular/router';
-import { User } from '../../models/user';
-import { ShopService } from 'src/app/services/shop.service';
 import { Title } from '@angular/platform-browser';
+import { Router } from '@angular/router';
+import { ShopService } from 'src/app/services/shop.service';
+import { titleTrail } from '../../../../constants';
+import { User } from '../../models/user';
+import { AuthenticationService } from '../../services/authentication.service';
 import { UserService } from '../../services/user.service';
 
 @Component({

@@ -13,8 +13,8 @@
 
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
-import { ClassesService } from '../../services/classes.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { ClassesService } from '../../services/classes.service';
 
 @Component({
 	selector: 'mean-join-class',
