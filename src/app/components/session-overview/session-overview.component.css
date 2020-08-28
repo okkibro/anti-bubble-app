@@ -8,7 +8,7 @@
 	border: 1px solid black;
 	text-align: center;
 	margin: 0 auto;
-	width: 80%;
+	width: 95%;
 	border-collapse: collapse;
 }
 
@@ -32,4 +32,18 @@
 
 mat-datepicker-toggle {
 	display: inline-block;
+}
+
+.date-select {
+	width: 204px;
+}
+
+.log-filters {
+	flex-wrap: wrap;
+	place-content: center space-around !important;
+	padding: 16px 16px 6px 16px !important;
+}
+
+.general-dropdown {
+	padding-bottom: 10px;
 }

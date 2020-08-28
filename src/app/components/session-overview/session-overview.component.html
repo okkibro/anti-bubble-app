@@ -22,7 +22,7 @@
 					</mat-card-header>
 				</mat-card>
 
-				<mat-card fxLayout="row" fxLayoutAlign="space-between center">
+				<mat-card fxLayout="row" class="log-filters">
 					<mat-form-field appearance="fill" class="general-dropdown">
 						<mat-label>Klas</mat-label>
 						<mat-select multiple>
@@ -55,7 +55,7 @@
 							</mat-option>
 						</mat-select>
 					</mat-form-field>
-					<mat-form-field appearance="fill" class="general-dropdown">
+					<mat-form-field appearance="fill" class="general-dropdown date-select">
 						<mat-label>Datum</mat-label>
 						<input matInput [matDatepicker]="picker" [(ngModel)]="startDate" (dateChange)="filterLogs($event,'comparisonDate', $event.value, false)">
 						<mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
