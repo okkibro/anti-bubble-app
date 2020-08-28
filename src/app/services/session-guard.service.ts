@@ -5,7 +5,6 @@
  */
 
 /**
- * session-guard.service.ts
  * This file contains the guard for whether a user can leave the session he is in.
  * @packageDocumentation
  */

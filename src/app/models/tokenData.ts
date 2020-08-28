@@ -4,6 +4,13 @@
  * Computing Sciences)
  */
 
+/**
+ * This file contains the exported TypeScript class/model for tokenData, which is the sensitive user data
+ * that is stored in the browser's cookies and is used a bunch for things like authentication and
+ * authorization.
+ * @packageDocumentation
+ */
+
 import { Role } from './role';
 
 export class tokenData {

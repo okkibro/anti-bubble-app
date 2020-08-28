@@ -5,8 +5,10 @@
  */
 
 /**
- * avatar.component.ts
- * This file is responsible for the 'avatar' page in the app. The file contains methods
+ * This file is responsible for the 'avatar' page in the app where a user can coustomzie their avatar. The
+ * file conatins methods for equiping items and sorting through a user's inventory. The file also contains
+ * two helper methods for setting the correct amount of columns to be displayed depending on the user's
+ * screen size.
  * @packageDocumentation
  */
 

@@ -5,7 +5,6 @@
  */
 
 /**
- * activities.component.ts
  * This file handles all the logic for logging in a user to the app. Only contains a method that calls the login()
  * method of the AuthenticationService.
  * @packageDocumentation

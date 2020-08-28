@@ -5,7 +5,6 @@
  */
 
 /**
- * bubble-graph.service.ts
  * This file sends all HTTP requests used for processing the user's introduction labyrinth.
  * @packageDocumentation
  */

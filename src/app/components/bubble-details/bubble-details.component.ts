@@ -5,7 +5,6 @@
  */
 
 /**
- * bubble-details.component.ts
  * This file handles most of the logic for displaying the details of the user's bubble. This includes a table with the
  * current bubble's data (points per category) and a chart with the user's bubble history. The actual displaying of
  * the user's current bubble is handled by bubble-visualisation.component.ts.

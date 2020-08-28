@@ -5,7 +5,6 @@
  */
 
 /**
- * avatar-display.component.ts
  * This file is a sub-component used by the avatar and (classmate-)profile components and handles all the
  * logic for displaying the avatar on the screen by collecting all the equipped items from the database.
  * @packageDocumentation

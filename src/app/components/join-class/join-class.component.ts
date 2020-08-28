@@ -5,7 +5,6 @@
  */
 
 /**
- * join-class.component.ts
  * This file is a sub-component used by the class-overview component and is mainly used for handling the
  * keyboard input and joining a class though the typed in code.
  * @packageDocumentation

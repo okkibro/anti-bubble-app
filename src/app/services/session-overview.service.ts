@@ -5,7 +5,6 @@
  */
 
 /**
- * session-overview.service.ts
  * This file sends all HTTP requests for getting session logs from the database based on user decided filters.
  * @packageDocumentation
  */

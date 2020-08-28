@@ -4,6 +4,11 @@
  * Computing Sciences)
  */
 
+/**
+ * This file contains the exported TypeScript class/model for an Article used in the front-end.
+ * @packageDocumentation
+ */
+
 export class Article {
 	articlenr: number;
 	part: number;

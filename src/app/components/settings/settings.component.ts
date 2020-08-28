@@ -5,7 +5,6 @@
  */
 
 /**
- * settings.component.ts
  * This file handles all the logic for user's who want to change certain field of their profile, like first name
  * or email. Also contains a form for changing a user's password, very similar to the one found in the
  * password-reset component. Finally, contains a sub-component, DeleteAccountDialog, for when a user wants to

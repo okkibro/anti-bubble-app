@@ -4,6 +4,11 @@
  * Computing Sciences)
  */
 
+/**
+ * This file contains the exported TypeScript class/model for an Item from the shop used in the front-end.
+ * @packageDocumentation
+ */
+
 export class Item {
 	_id: string;
 	title: string;

@@ -5,7 +5,6 @@
  */
 
 /**
- * password-recovery.component.ts
  * This file handles all the logic for handling the password recovery form for users who have forgotten
  * their password and want to request a new one.
  * @packageDocumentation

@@ -5,7 +5,6 @@
  */
 
 /**
- * bubble-visualistaion.component.ts
  * This file is a sub-component used by the (classmate-)profile components and handles all the logic for
  * displaying the user's current bubble as an image. Bubble is not stored as an image in the database so
  * the updateBubble() method does this instead.

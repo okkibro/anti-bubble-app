@@ -4,6 +4,11 @@
  * Computing Sciences)
  */
 
+/**
+ * This file contains the exported TypeScript class/model for a Milestone used in the front-end.
+ * @packageDocumentation
+ */
+
 export class Milestone {
 	index: number;
 	name: string;

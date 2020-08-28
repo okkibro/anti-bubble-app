@@ -5,7 +5,6 @@
  */
 
 /**
- * session-options.component.ts
  * This file handles all the logic for teachers who want to create a session in the app. Different types
  * of games can be started so the createSession() method can handle a lot of different data.
  * @packageDocumentation

@@ -5,7 +5,6 @@
  */
 
 /**
- * authentication.service.ts
  * This file sends all HTTP requests used for logging in, registering a user and contains all methods that deal
  * with the user's token/cokkie data.
  * @packageDocumentation

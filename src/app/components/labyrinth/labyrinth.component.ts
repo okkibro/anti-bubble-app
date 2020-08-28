@@ -5,7 +5,6 @@
  */
 
 /**
- * labyrinth.component.ts
  * This file handles all the logic during a session on the student's side. Methods for receving questions,
  * team members and sending questions can be found here.
  * @packageDocumentation

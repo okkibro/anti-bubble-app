@@ -5,7 +5,6 @@
  */
 
 /**
- * badges.component.ts
  * This file handles all the logic for displaying the user's milestone/badge collection.progression by
  * looking at their database entry.
  * @packageDocumentation

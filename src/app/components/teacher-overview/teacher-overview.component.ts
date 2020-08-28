@@ -5,7 +5,6 @@
  */
 
 /**
- * teacher-overview.component.ts
  * This file handles all the logic for the class overview for the teacher. The file contains methods for
  * creating a class, changing the class and displaying all the class members of the selected class.
  * File contains two sub-components for removing a student from a class and deleting a class.

@@ -5,7 +5,6 @@
  */
 
 /**
- * answer-form.component.ts
  * This file is a sub-component used by the activities component to handle receving of form and input data
  * through the SocketIoService, linked through the studentSubmit() and the teacherSubmit() method.
  * @packageDocumentation

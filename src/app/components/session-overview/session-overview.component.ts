@@ -5,7 +5,6 @@
  */
 
 /**
- * session-overview.component.ts
  * This file contains all the logic to enable teachers to look at recorded sessions from students and filter
  * through them using a handful of predetermined filter options.
  * @packageDocumentation

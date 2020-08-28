@@ -5,7 +5,6 @@
  */
 
 /**
- * sidenav.component.ts
  * This file contains all the logic and methods used by the sidenav (mobile toolbar).
  * @packageDocumentation
  */

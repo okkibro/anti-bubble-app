@@ -5,7 +5,6 @@
  */
 
 /**
- * class-overview.component.ts
  * This file handles all the logic for the overview of a student's class where all the student's classmates are shown.
  * Also contains methods for searching for a specific classmate and a supplementary for leaving a class.
  * @packageDocumentation

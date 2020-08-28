@@ -5,7 +5,6 @@
  */
 
 /**
- * shop.service.ts
  * This file sends all HTTP requests used for recovering and resetting a user's password.
  * @packageDocumentation
  */

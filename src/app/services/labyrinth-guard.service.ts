@@ -5,7 +5,6 @@
  */
 
 /**
- * labyrinth-guard.service.ts
  * This file contains the guard for determining whether a user can visit the labyrinth page, which he can
  * only when he hasn't done it yet.
  * @packageDocumentation

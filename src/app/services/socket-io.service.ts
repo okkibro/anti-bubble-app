@@ -5,7 +5,6 @@
  */
 
 /**
- * socket-io.service.ts
  * This file contains all methods used by socketIO for our implementation of sockets for the classical
  * game sessions.
  * @packageDocumentation

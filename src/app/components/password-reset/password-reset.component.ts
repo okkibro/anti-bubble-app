@@ -5,7 +5,6 @@
  */
 
 /**
- * password-reset.component.ts
  * This file handles all the logic for handling resetting the user's old password by setting a new one through
  * a form. This page can only be visited by a user who is already registered in the database, requested a new
  * password through the password-recovery component and clicked the link with the correct reset token.

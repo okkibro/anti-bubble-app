@@ -5,7 +5,6 @@
  */
 
 /**
- * avatar.service.ts
  * This file sends all HTTP requests needed by the avatar page, which is just the equiping of items by
  * changing them in the database.
  * @packageDocumentation

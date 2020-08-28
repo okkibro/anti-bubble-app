@@ -5,7 +5,6 @@
  */
 
 /**
- * register.component.ts
  * This file handles all the logic for registering a new user in the app. Most of the validation of the
  * form inputs is done here in the front-end and passed to the back-end where some sanitization of
  * inputs is done and hashing of the password.

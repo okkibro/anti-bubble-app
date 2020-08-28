@@ -4,6 +4,12 @@
  * Computing Sciences)
  */
 
+/**
+ * This file contains the exported TypeScript class/model for a Question in the initial labyrinth the user
+ * goes through to form their original bubble used in the front-end.
+ * @packageDocumentation
+ */
+
 export class Question {
 	id: number;
 	question: string;

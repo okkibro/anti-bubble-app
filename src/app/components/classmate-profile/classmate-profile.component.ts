@@ -5,7 +5,6 @@
  */
 
 /**
- * classmate-profile.component.ts
  * This file handles all the logic for when a user visits the profile page of one of his classmates.
  * @packageDocumentation
  */

@@ -4,6 +4,11 @@
  * Computing Sciences)
  */
 
+/**
+ * This file contains the exported TypeScript class/model for a Class used in the front-end.
+ * @packageDocumentation
+ */
+
 export class Class {
 	code: number;
 	level: string;

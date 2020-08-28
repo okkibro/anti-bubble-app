@@ -5,7 +5,6 @@
  */
 
 /**
- * session.service.ts
  * This file sends all HTTP requests used for recording/p-laying/finishing sessions, saving answers and
  * getting/saving questions/ansers from the initial labyrinth.
  * @packageDocumentation

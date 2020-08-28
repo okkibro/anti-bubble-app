@@ -5,7 +5,6 @@
  */
 
 /**
- * not-logged-in-toolbar.component.ts
  * This file is just for the toolbar that is shown when a visitor is not logged in.
  * @packageDocumentation
  */

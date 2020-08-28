@@ -5,7 +5,6 @@
  */
 
 /**
- * shop.component.ts
  * This file handles all the logic for handling for creating the app's item shop. User can browse throught the store
  * and buy items they don't have yet. Each item category has its own tab and changing tabs and filtering items based on
  * the tab is all handled here.

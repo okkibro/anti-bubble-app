@@ -5,7 +5,6 @@
  */
 
 /**
- * auth-guard.service.ts
  * This file contains the guard for checking whether a visitor can access the requested page by looking if
  * they are logged in and their role if the page requires it. Required role for a certain page are defined in
  * app-routing module.

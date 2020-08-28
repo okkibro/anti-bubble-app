@@ -5,7 +5,6 @@
  */
 
 /**
- * classes.service.ts
  * This file sends all HTTP requests related to classes in the app. HTTP request methods for creating, deleting
  * getting, leaving and joining classes are in this file.
  * @packageDocumentation

@@ -5,8 +5,8 @@
  */
 
 /**
- * toolbar.component.ts
- * This file contains all the logic and methods used by the toolbar (desktop mode).
+ * This file contains all the logic and methods used by the horizontal toolbar shown in 'desktop mode'.
+ * The logout button in fetched and a method for toggling the sidebar is included.
  * @packageDocumentation
  */
 

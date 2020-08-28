@@ -5,7 +5,6 @@
  */
 
 /**
- * home.component.ts
  * This file handles all the logic for displaying the home screen of the app. This file mainly consists of the joinSession()
  * form which is needed for students to join a session created by a teacher.
  * @packageDocumentation

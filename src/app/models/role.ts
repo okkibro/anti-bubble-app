@@ -4,6 +4,11 @@
  * Computing Sciences)
  */
 
+/**
+ * This file contains the exported TypeScript enum for the app's roles used in the front-end.
+ * @packageDocumentation
+ */
+
 export enum Role {
 	teacher = 'teacher',
 	student = 'student'

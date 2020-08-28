@@ -5,7 +5,6 @@
  */
 
 /**
- * milestone-updates.service.ts
  * This file sends all HTTP requests for determining whether a user can visit the labyrinth page, which he can
  * only when he hasn't done it yet.
  * @packageDocumentation

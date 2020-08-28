@@ -5,7 +5,6 @@
  */
 
 /**
- * profile.component.ts
  * This file handles all the logic for collecting all the information necessary for displaying the user's
  * profile. The component is not the same for teachers and students, but the ngOnInit() method is.
  * @packageDocumentation
