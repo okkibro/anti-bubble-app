@@ -44,9 +44,9 @@ export class SessionOverviewComponent implements OnInit {
 		{ value: 'male', name: 'Jongen' },
 		{ value: 'female', name: 'Meisje' }];
 	public startDate;
-	public pageIndex = 0;
-	public pageSize = 1;
-	public pageSizeOptions: number[] = [1, 2, 5, 10, 25, 100];
+	public pageIndex: number = 0;
+	public pageSize: number = 5;
+	public pageSizeOptions: number[] = [5, 10, 25, 100];
 
 	/**
 	 * SessionOverviewComponent constructor.
