@@ -4,14 +4,6 @@
  * Computing Sciences)
  */
 
-/**
- * This file handles all the logic for user's who want to change certain field of their profile, like first name
- * or email. Also contains a form for changing a user's password, very similar to the one found in the
- * password-reset component. Finally, contains a sub-component, DeleteAccountDialog, for when a user wants to
- * delete his account from the app.
- * @packageDocumentation
- */
-
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog';
@@ -24,22 +16,28 @@ import { AuthenticationService } from '../../services/authentication.service';
 import { ClassesService } from '../../services/classes.service';
 import { UserService } from '../../services/user.service';
 
+/**
+ * This class handles all the logic for users who want to change certain field of their profile, like first name
+ * or email. Also contains a form for changing a user's password, very similar to the one found in the
+ * password-reset component. Class contains a helper method for openin a MatDialog for deleting a user's
+ * account, defined as a sub-component in the file.
+ */
 @Component({
-	selector: 'mean-settings',
+	selector: 'settings-component',
 	templateUrl: './settings.component.html',
 	styleUrls: ['./settings.component.css',
 		'../../shared/general-styles.css']
 })
 
 export class SettingsComponent implements OnInit {
-	changePasswordForm = this.fb.group({
+	public changePasswordForm = this.fb.group({
 		oldPassword: ['', Validators.required],
 		newPassword: ['', Validators.required],
 		repeatPassword: ['', Validators.required]
 	}, {
-		validator: this.passwordMatchValidator
+		validator: SettingsComponent.passwordMatchValidator
 	});
-	editProfileForm = this.fb.group({
+	public editProfileForm = this.fb.group({
 		firstName: [''],
 		lastName: [''],
 		email: ['', {
@@ -48,10 +46,10 @@ export class SettingsComponent implements OnInit {
 			updateOn: 'blur'
 		}]
 	});
-	userDetails: User;
-	editEnabledFirstName: boolean = false;
-	editEnabledLastName: boolean = false;
-	editEnabledEmail: boolean = false;
+	public userDetails: User;
+	public editEnabledFirstName: boolean = false;
+	public editEnabledLastName: boolean = false;
+	public editEnabledEmail: boolean = false;
 
 	/**
 	 * SettingsComponent constructor.
@@ -77,7 +75,7 @@ export class SettingsComponent implements OnInit {
 	 * Initialization method.
 	 * @return
 	 */
-	ngOnInit(): void {
+	public ngOnInit(): void {
 		this.userService.profile().subscribe(user => {
 			this.userDetails = user;
 		});
@@ -90,7 +88,7 @@ export class SettingsComponent implements OnInit {
 	 * Method to change you password on the profile page.
 	 * @return
 	 */
-	changePassword(): void {
+	public changePassword(): void {
 		let oldPassword = this.changePasswordForm.get('oldPassword').value;
 		let newPassword = this.changePasswordForm.get('newPassword').value;
 		this.userService.updatePassword(oldPassword, newPassword).subscribe(data => {
@@ -110,7 +108,7 @@ export class SettingsComponent implements OnInit {
 	 * @param form Form in which the validation has to take place.
 	 * @return
 	 */
-	passwordMatchValidator(form: FormGroup): void {
+	private static passwordMatchValidator(form: FormGroup): void {
 		let newpassword = form.get('newPassword').value;
 		let repeatPassword = form.get('repeatPassword').value;
 		if (newpassword != repeatPassword) {
@@ -122,7 +120,7 @@ export class SettingsComponent implements OnInit {
 	 * Method that opens the delete user acocunt dialog.
 	 * @return
 	 */
-	openDeleteAccountDialog(): void {
+	public openDeleteAccountDialog(): void {
 		this.dialog.open(DeleteAccountDialog, { data: { role: this.userDetails?.role }});
 	}
 
@@ -130,7 +128,7 @@ export class SettingsComponent implements OnInit {
 	 * @param field Row of user's profile that has to switch to/from edit mode.
 	 * @return
 	 */
-	changeEditMode(field: string): void {
+	public changeEditMode(field: string): void {
 		switch (field) {
 			case 'firstName':
 				this.editEnabledFirstName = !this.editEnabledFirstName;
@@ -150,7 +148,7 @@ export class SettingsComponent implements OnInit {
 	 * @param value New value of passed user profile field.
 	 * @return
 	 */
-	updateField(field: string, value: string): void {
+	public updateField(field: string, value: string): void {
 		this.userService.updateUser(field, value).subscribe(data => {
 			if (data.succes) {
 				this.snackBar.open(data.message, 'X', { duration: 2500, panelClass: ['style-succes'] }).afterDismissed().subscribe(() => {
@@ -168,6 +166,10 @@ export class SettingsComponent implements OnInit {
 	}
 }
 
+/**
+ * This class is defined as a sub-component of the Settings Component and handles the MatDialog for when a user
+ * wants to delete their account.
+ */
 @Component({
 	selector: 'delete-account-dialog',
 	templateUrl: '../settings/delete-account-dialog.html'
@@ -196,7 +198,7 @@ export class DeleteAccountDialog {
 	 * Method to delete a user's account.
 	 * @return
 	 */
-	deleteAccount(): void {
+	public deleteAccount(): void {
 		this.userService.deleteAccount().subscribe(data => {
 			if (data.succes) {
 				this.dialogRef.close();

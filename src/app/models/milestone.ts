@@ -5,8 +5,7 @@
  */
 
 /**
- * This file contains the exported TypeScript class/model for a Milestone used in the front-end.
- * @packageDocumentation
+ * This class represents the database model for a Milestone used in the front-end.
  */
 
 export class Milestone {

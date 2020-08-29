@@ -4,17 +4,15 @@
  * Computing Sciences)
  */
 
-/**
- * This file contains all the logic and methods used by the sidenav (mobile toolbar).
- * @packageDocumentation
- */
-
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { tokenData } from '../../models/tokenData';
 import { AuthenticationService } from '../../services/authentication.service';
 
+/**
+ * This class contains all the logic and methods used by the sidenav (mobile toolbar).
+ */
 @Component({
-	selector: 'mean-sidenav',
+	selector: 'sidenav-component',
 	templateUrl: './sidenav.component.html',
 	styleUrls: ['./sidenav.component.css',
 		'../../shared/general-styles.css']
@@ -23,7 +21,7 @@ import { AuthenticationService } from '../../services/authentication.service';
 export class SidenavComponent implements OnInit {
 	@Output() public sidenavClose = new EventEmitter();
 
-	tokenData: tokenData;
+	public tokenData: tokenData;
 
 	/**
 	 * SidenavComponent constructor.
@@ -35,7 +33,7 @@ export class SidenavComponent implements OnInit {
 	 * Initialization method.
 	 * @return
 	 */
-	ngOnInit(): void {
+	public ngOnInit(): void {
 		this.tokenData = this.auth.getTokenData();
 	}
 
@@ -43,7 +41,7 @@ export class SidenavComponent implements OnInit {
 	 * Method to logout the current user.
 	 * @return
 	 */
-	logoutButton() {
+	public logoutButton() {
 		return this.auth.logout();
 	}
 

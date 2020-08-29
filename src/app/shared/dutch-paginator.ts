@@ -4,14 +4,12 @@
  *  Computing Sciences)
  */
 
-/**
- * This file contains the method used in the MatPaginatorIntl provider in app.module.ts for making the
- * tooltips of the paginator on the session-overview page Dutch instead of English.
- * @packageDocumentation
- */
-
 import { MatPaginatorIntl } from '@angular/material/paginator';
 
+/**
+ * This function is used in the MatPaginatorIntl provider in app.module.ts for making the
+ * tooltips of the paginator on the session-overview page Dutch instead of English.
+ */
 export function getDutchPaginatorIntl() {
 	const paginatorIntl = new MatPaginatorIntl();
 	paginatorIntl.itemsPerPageLabel = 'Items per pagina:';

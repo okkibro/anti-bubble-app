@@ -4,15 +4,14 @@
  * Computing Sciences)
  */
 
-/**
- * This file contains the exported TypeScript class/model for a User used in the front-end.
- * @packageDocumentation
- */
-
 import { Gender } from './gender';
 import { Item } from './item';
 import { Milestone } from './milestone';
 import { Role } from './role';
+
+/**
+ * This class represents the database model for a User used in the front-end.
+ */
 
 export class User {
 	_id: string;

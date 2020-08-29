@@ -5,8 +5,7 @@
  */
 
 /**
- * This file contains the exported TypeScript enum for the app's roles used in the front-end.
- * @packageDocumentation
+ * This is the enum for the app's available roles used in the front-end.
  */
 
 export enum Role {

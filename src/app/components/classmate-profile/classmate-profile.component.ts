@@ -4,11 +4,6 @@
  * Computing Sciences)
  */
 
-/**
- * This file handles all the logic for when a user visits the profile page of one of his classmates.
- * @packageDocumentation
- */
-
 import { Component, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -17,16 +12,19 @@ import { titleTrail } from '../../../../constants';
 import { User } from '../../models/user';
 import { AuthenticationService } from '../../services/authentication.service';
 
+/**
+ * This class handles all the logic for when a user visits the profile page of one of his classmates.
+ */
 @Component({
-	selector: 'mean-classmate-profile',
+	selector: 'classmate-profile-component',
 	templateUrl: './classmate-profile.component.html',
 	styleUrls: ['./classmate-profile.component.css',
 		'../../shared/general-styles.css']
 })
 
 export class ClassmateProfileComponent implements OnInit {
-	classmate: User;
-	classmateClassTitle: string;
+	public classmate: User;
+	public classmateClassTitle: string;
 
 	/**
 	 * ClassmateProfileComponent constructor.
@@ -48,7 +46,7 @@ export class ClassmateProfileComponent implements OnInit {
 	 * Initialization method.
 	 * @return
 	 */
-	ngOnInit(): void {
+	public ngOnInit(): void {
 		this.classesService.classmateProfile(this.route.snapshot.paramMap.get('id')).subscribe(classmate => {
 			this.classmate = classmate;
 

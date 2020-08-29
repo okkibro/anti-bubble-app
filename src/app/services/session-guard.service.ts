@@ -4,19 +4,18 @@
  * Computing Sciences)
  */
 
-/**
- * This file contains the guard for whether a user can leave the session he is in.
- * @packageDocumentation
- */
-
 import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, CanDeactivate, RouterStateSnapshot } from '@angular/router';
 import { beforeUnload } from '../../../constants';
 import { SessionComponent } from '../components/session/session.component';
 
+/**
+ * This file contains the guard for whether a user can leave the session he is in.
+ */
 @Injectable({
 	providedIn: 'root'
 })
+
 export class SessionGuardService implements CanDeactivate<SessionComponent> {
 
 	/**
@@ -33,7 +32,7 @@ export class SessionGuardService implements CanDeactivate<SessionComponent> {
 	 * @param nextState
 	 * @return Whether a user can leave the session/activities page.
 	 */
-	canDeactivate(
+	public canDeactivate(
 		component: SessionComponent,
 		currentRoute: ActivatedRouteSnapshot,
 		currentState: RouterStateSnapshot,

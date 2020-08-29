@@ -4,14 +4,13 @@
  * Computing Sciences)
  */
 
-/**
- * This file contains the exported TypeScript class/model for a Log from a recored session used in the front-end.
- * @packageDocumentation
- */
-
 import { Activity } from './activity';
 import { Class } from './class';
 import { User } from './user';
+
+/**
+ * This class represents the database model for a Log from a recored session used in the front-end.
+ */
 
 export class Log {
 	_id: string;

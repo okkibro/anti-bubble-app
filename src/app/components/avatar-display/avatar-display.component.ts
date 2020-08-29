@@ -4,20 +4,18 @@
  * Computing Sciences)
  */
 
-/**
- * This file is a sub-component used by the avatar and (classmate-)profile components and handles all the
- * logic for displaying the avatar on the screen by collecting all the equipped items from the database.
- * @packageDocumentation
- */
-
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { User } from '../../models/user';
 import { ClassesService } from '../../services/classes.service';
 import { UserService } from '../../services/user.service';
 
+/**
+ * This class is a sub-component used by the avatar and (classmate-)profile components and handles all the
+ * logic for displaying the avatar on the screen by collecting all the equipped items from the database.
+ */
 @Component({
-	selector: 'mean-avatar-display',
+	selector: 'avatar-display-component',
 	templateUrl: './avatar-display.component.html',
 	styleUrls: ['./avatar-display.component.css']
 })
@@ -53,7 +51,7 @@ export class AvatarDisplayComponent implements OnInit {
 	 * Method to show the avatar, taking the object from the database.
 	 * @param user User who's avatar has to be displayed.
 	 */
-	showAvatar(user: User): void {
+	public showAvatar(user: User): void {
 		document.getElementById('haar1').setAttribute('src', user.avatar.haar?.fullImage2);
 		document.getElementById('lichaam').setAttribute('src', user.avatar.lichaam.fullImage);
 		document.getElementById('broek').setAttribute('src', user.avatar.broek.fullImage);

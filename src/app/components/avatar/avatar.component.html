@@ -6,14 +6,14 @@
 
 <mat-sidenav-container>
     <mat-sidenav #sidenav [autoFocus]="false" fixedInViewport="true">
-        <mean-sidenav (sidenavClose)="sidenav.close()"></mean-sidenav>
+        <sidenav-component (sidenavClose)="sidenav.close()"></sidenav-component>
     </mat-sidenav>
     <mat-sidenav-content>
-        <mean-toolbar (sidenavToggle)="sidenav.toggle()"></mean-toolbar>
+        <toolbar-component (sidenavToggle)="sidenav.toggle()"></toolbar-component>
         <body>
         <div class="container-div" fxLayoutGap="10px" fxLayout="row" fxLayout.lt-sm="column" fxLayoutAlign="space-evenly">
             <mat-card fxFlex=50%>
-                <mean-avatar-display></mean-avatar-display>
+                <avatar-display-component></avatar-display-component>
             </mat-card>
 
             <mat-card fxFlex="50%">

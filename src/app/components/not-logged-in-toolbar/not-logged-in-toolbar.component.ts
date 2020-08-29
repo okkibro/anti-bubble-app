@@ -4,15 +4,13 @@
  * Computing Sciences)
  */
 
-/**
- * This file is just for the toolbar that is shown when a visitor is not logged in.
- * @packageDocumentation
- */
-
 import { Component, OnInit } from '@angular/core';
 
+/**
+ * This class is just for the toolbar that is shown when a visitor is not logged in.
+ */
 @Component({
-	selector: 'mean-not-logged-in-toolbar',
+	selector: 'not-logged-in-toolbar-component',
 	templateUrl: './not-logged-in-toolbar.component.html',
 	styleUrls: ['./not-logged-in-toolbar.component.css',
 		'../../shared/general-styles.css']
@@ -29,5 +27,5 @@ export class NotLoggedInToolbarComponent implements OnInit {
 	 * Initialization method.
 	 * @return
 	 */
-	ngOnInit(): void { }
+	public ngOnInit(): void { }
 }

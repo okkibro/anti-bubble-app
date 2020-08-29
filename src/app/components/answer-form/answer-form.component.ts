@@ -4,12 +4,6 @@
  * Computing Sciences)
  */
 
-/**
- * This file is a sub-component used by the activities component to handle receving of form and input data
- * through the SocketIoService, linked through the studentSubmit() and the teacherSubmit() method.
- * @packageDocumentation
- */
-
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -17,24 +11,28 @@ import { AuthenticationService } from 'src/app/services/authentication.service';
 import { SocketIOService } from 'src/app/services/socket-io.service';
 import { tokenData } from '../../models/tokenData';
 
+/**
+ * This class is a sub-component used by the activities component to handle receving of form and input data
+ * through the SocketIoService, linked through the studentSubmit() and the teacherSubmit() method.
+ */
 @Component({
-	selector: 'mean-answer-form',
+	selector: 'answer-form-component',
 	templateUrl: './answer-form.component.html',
 	styleUrls: ['./answer-form.component.css',
 		'../../shared/general-styles.css']
 })
 
 export class AnswerFormComponent implements OnInit {
-	getAnswerForm = this.fb.group({
+	public getAnswerForm = this.fb.group({
 		getAnswer: ['', []]
 	});
-	sendQuestionsForm = this.fb.group({
+	public sendQuestionsForm = this.fb.group({
 		getQuestion: ['', []]
 	});
-	tokenData: tokenData;
-	answerSubmitted: boolean = false;
-	questionSubmitted: boolean = false;
-	question: string;
+	public tokenData: tokenData;
+	public answerSubmitted: boolean = false;
+	public questionSubmitted: boolean = false;
+	public question: string;
 
 	/**
 	 * AnswerFormComponent constructor.
@@ -54,7 +52,7 @@ export class AnswerFormComponent implements OnInit {
 	 * Initialization method.
 	 * @return
 	 */
-	ngOnInit(): void {
+	public ngOnInit(): void {
 		this.tokenData = this.auth.getTokenData();
 
 		// Reactivate the option to answer after the teacher has deleted the answer.
@@ -67,7 +65,7 @@ export class AnswerFormComponent implements OnInit {
 	 * This method lets students submit an answer to the teacher that will be displayed on the digiboard.
 	 * @return
 	 */
-	sendAnswer(): void {
+	public sendAnswer(): void {
 		if (this.getAnswerForm.get('getAnswer').value != '') {
 			this.socketService.studentSubmit(this.getAnswerForm.get('getAnswer').value);
 			this.getAnswerForm.get('getAnswer').setValue('');
@@ -83,7 +81,7 @@ export class AnswerFormComponent implements OnInit {
 	 * This method lets a teacher submit a question to all of the students in the session.
 	 * @return
 	 */
-	sendQuestion(): void {
+	public sendQuestion(): void {
 		let getQuestion = this.sendQuestionsForm.get('getQuestion').value;
 		if (getQuestion != '') {
 			this.question = getQuestion;

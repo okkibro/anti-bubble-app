@@ -6,10 +6,10 @@
 
 <mat-sidenav-container>
     <mat-sidenav #sidenav [autoFocus]="false" fixedInViewport="true">
-        <mean-sidenav (sidenavClose)="sidenav.close()"></mean-sidenav>
+        <sidenav-component (sidenavClose)="sidenav.close()"></sidenav-component>
     </mat-sidenav>
     <mat-sidenav-content>
-        <mean-toolbar (sidenavToggle)="sidenav.toggle()"></mean-toolbar>
+        <toolbar-component (sidenavToggle)="sidenav.toggle()"></toolbar-component>
 
         <body>
         <div class="container-div" fxLayoutGap="10px" fxLayout="column" fxLayoutAlign="space-evenly">
@@ -47,7 +47,7 @@
                                 <li *ngFor="let site of allowedSites ">{{ site }}</li>
                             </ul>
                         </div>
-                        <mean-answer-form *ngIf="enableAnswer && !gameFinished"></mean-answer-form>
+                        <answer-form-component *ngIf="enableAnswer && !gameFinished"></answer-form-component>
                     </mat-card-content>
 
                     <mat-card-content *ngIf="gameData?.game.name === 'Alternatieve Antwoorden'">
@@ -62,7 +62,7 @@
                             </ul>
                         </div>
                         <p><i>Wacht op de vraag van de docent.</i></p>
-                        <mean-answer-form *ngIf="enableAnswer"></mean-answer-form>
+                        <answer-form-component *ngIf="enableAnswer"></answer-form-component>
                     </mat-card-content>
 
                     <mat-card-content *ngIf="gameData?.game.name === 'Aanradend Algoritme'">
@@ -78,4 +78,4 @@
         </footer>
     </mat-sidenav-content>
 </mat-sidenav-container>
-<mean-nav-bar></mean-nav-bar>
+<nav-bar-component></nav-bar-component>

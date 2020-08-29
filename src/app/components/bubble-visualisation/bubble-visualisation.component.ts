@@ -4,21 +4,19 @@
  * Computing Sciences)
  */
 
-/**
- * This file is a sub-component used by the (classmate-)profile components and handles all the logic for
- * displaying the user's current bubble as an image. Bubble is not stored as an image in the database so
- * the updateBubble() method does this instead.
- * @packageDocumentation
- */
-
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { User } from '../../models/user';
 import { ClassesService } from '../../services/classes.service';
 import { UserService } from '../../services/user.service';
 
+/**
+ * This class is a sub-component used by the (classmate-)profile components and handles all the logic for
+ * displaying the user's current bubble as an image. Bubble is not stored as an image in the database so
+ * the updateBubble() method does this instead.
+ */
 @Component({
-	selector: 'mean-bubble-visualisation',
+	selector: 'bubble-visualisation-component',
 	templateUrl: './bubble-visualisation.component.html',
 	styleUrls: ['./bubble-visualisation.component.css',
 		'../../shared/general-styles.css']
@@ -38,14 +36,14 @@ export class BubbleVisualisationComponent implements OnInit {
 	 * Initialization method.
 	 * @return
 	 */
-	ngOnInit(): void {
+	public ngOnInit(): void {
 		if (this.route.snapshot.paramMap.get('id')) {
 			this.classesService.classmateProfile(this.route.snapshot.paramMap.get('id')).subscribe(classmate => {
-				this.updateBubble(classmate);
+				BubbleVisualisationComponent.updateBubble(classmate);
 			});
 		} else {
 			this.userService.profile().subscribe(user => {
-				this.updateBubble(user);
+				BubbleVisualisationComponent.updateBubble(user);
 			});
 		}
 	}
@@ -55,7 +53,7 @@ export class BubbleVisualisationComponent implements OnInit {
 	 * @param user User who's bubble has to be visualised.
 	 * @return
 	 */
-	updateBubble(user: User): void {
+	private static updateBubble(user: User): void {
 		let mainstream = user.bubble.mainstream.pop();
 		let online = user.bubble.online.pop();
 		let social = user.bubble.social.pop();
@@ -64,14 +62,14 @@ export class BubbleVisualisationComponent implements OnInit {
 
 		let rightValues = [mainstream, social, online];
 		let rightValuePaths = ['/assets/images/Super_Map/Bubble_UI/UI_Bubble_Turquoise.png', '/assets/images/Super_Map/Bubble_UI/UI_Bubble_Green.png', '/assets/images/Super_Map/Bubble_UI/UI_Bubble_Purple.png'];
-		let rightHighestRated = this.getHighestIndex(rightValues, rightValuePaths);
+		let rightHighestRated = BubbleVisualisationComponent.getHighestIndex(rightValues, rightValuePaths);
 
 		let rightHalf = document.getElementById('rightHalf');
 		rightHalf.setAttribute('src', rightHighestRated);
 
 		let leftValues = [category1, category2];
 		let leftValuePaths = ['/assets/images/Super_Map/Bubble_UI/UI_Bubble_Blue.png', '/assets/images/Super_Map/Bubble_UI/UI_Bubble_Orange.png'];
-		let leftHighestRated = this.getHighestIndex(leftValues, leftValuePaths);
+		let leftHighestRated = BubbleVisualisationComponent.getHighestIndex(leftValues, leftValuePaths);
 
 		let leftHalf = document.getElementById('leftHalf');
 		leftHalf.setAttribute('src', leftHighestRated);
@@ -82,7 +80,7 @@ export class BubbleVisualisationComponent implements OnInit {
 	 * @param nameValues List of strings of location of bubble images.
 	 * @return Name of highest value of certain category.
 	 */
-	getHighestIndex(inputValues: Array<number>, nameValues: Array<string>): string {
+	private static getHighestIndex(inputValues: Array<number>, nameValues: Array<string>): string {
 		let currentMax = -1;
 		let currentName = 'wrong';
 		for (let i = 0; i < inputValues.length; i++) {

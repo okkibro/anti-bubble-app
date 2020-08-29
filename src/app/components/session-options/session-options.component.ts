@@ -4,12 +4,6 @@
  * Computing Sciences)
  */
 
-/**
- * This file handles all the logic for teachers who want to create a session in the app. Different types
- * of games can be started so the createSession() method can handle a lot of different data.
- * @packageDocumentation
- */
-
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Title } from '@angular/platform-browser';
@@ -21,19 +15,23 @@ import { Activity } from '../../models/activity';
 import { AuthenticationService } from '../../services/authentication.service';
 import { SessionOverviewService } from '../../services/session-overview.service';
 
+/**
+ * This class handles all the logic for teachers who want to create a session in the app. Different types
+ * of games can be started so the createSession() method can handle a lot of different data.
+ */
 @Component({
-	selector: 'mean-session-options',
+	selector: 'session-options-component',
 	templateUrl: './session-options.component.html',
 	styleUrls: ['./session-options.component.css',
 		'../../shared/general-styles.css']
 })
 
 export class SessionOptionsComponent implements OnInit {
-	activities: Activity[] = [];
-	teamOptionForm = this.fb.group({
+	public activities: Activity[] = [];
+	public teamOptionForm = this.fb.group({
 		teamOption: ['', Validators.required]
 	});
-	durationSliderForm = this.fb.group({
+	public durationSliderForm = this.fb.group({
 		durationSlider: ['', Validators.required]
 	});
 
@@ -61,7 +59,7 @@ export class SessionOptionsComponent implements OnInit {
 	 * Initialization method.
 	 * @return
 	 */
-	ngOnInit(): void {
+	public ngOnInit(): void {
 
 		// Get all the different activities from the database.
 		this.getActivities();
@@ -75,7 +73,7 @@ export class SessionOptionsComponent implements OnInit {
 	 * @param gameData All required data to start a session of one of the app's different types.
 	 * @return
 	 */
-	createSession(gameData: any): void {
+	public createSession(gameData: any): void {
 
 		// Get the entire activity data from the database
 		this.sessionService.getActivity(gameData.game).subscribe(data => {
@@ -93,7 +91,7 @@ export class SessionOptionsComponent implements OnInit {
 	 * Method to get all the activities from the database so the teacher can filter between them.
 	 * @return
 	 */
-	getActivities(): void {
+	private getActivities(): void {
 		this.sessionOverviewService.getActivities().subscribe(data => {
 			if (data.succes) {
 				for (let activity of data.activities) {

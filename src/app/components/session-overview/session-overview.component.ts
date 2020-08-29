@@ -4,12 +4,6 @@
  *  Computing Sciences)
  */
 
-/**
- * This file contains all the logic to enable teachers to look at recorded sessions from students and filter
- * through them using a handful of predetermined filter options.
- * @packageDocumentation
- */
-
 import { Component, OnInit } from '@angular/core';
 import { PageEvent } from '@angular/material/paginator';
 import { Title } from '@angular/platform-browser';
@@ -17,34 +11,38 @@ import { titleTrail } from '../../../../constants';
 import { Log } from '../../models/log';
 import { SessionOverviewService } from '../../services/session-overview.service';
 
+/**
+ * This class contains all the logic to enable teachers to look at recorded sessions from students and filter
+ * through them using a handful of predetermined filter options.
+ */
 @Component({
-	selector: 'mean-session-overview',
+	selector: 'session-overview-component',
 	templateUrl: './session-overview.component.html',
 	styleUrls: ['./session-overview.component.css',
 		'../../shared/general-styles.css']
 })
 
 export class SessionOverviewComponent implements OnInit {
-	logs: Log[] = [];
-	originalLogs: Log[] = [];
-	displayedLogs: Log[] = [];
-	classes = [];
-	students = [];
-	activities = [];
-	filters = {
+	public logs: Log[] = [];
+	private originalLogs: Log[] = [];
+	public displayedLogs: Log[] = [];
+	public classes = [];
+	public students = [];
+	public activities = [];
+	private filters = {
 		class: [],
 		gender: [],
 		activity: [],
 		user: [],
 		comparisonDate: []
 	};
-	genders = [
+	public genders = [
 		{ value: 'male', name: 'Jongen' },
 		{ value: 'female', name: 'Meisje' }];
-	startDate;
-	pageIndex = 0;
-	pageSize = 1;
-	pageSizeOptions: number[] = [1, 2, 5, 10, 25, 100];
+	public startDate;
+	public pageIndex = 0;
+	public pageSize = 1;
+	public pageSizeOptions: number[] = [1, 2, 5, 10, 25, 100];
 
 	/**
 	 * SessionOverviewComponent constructor.
@@ -57,7 +55,7 @@ export class SessionOverviewComponent implements OnInit {
 	 * Initialization method.
 	 * @return
 	 */
-	ngOnInit(): void {
+	public ngOnInit(): void {
 
 		// Get all the activities from the database.
 		this.getActivities();
@@ -73,7 +71,7 @@ export class SessionOverviewComponent implements OnInit {
 	 * Method to get all the activities from the database so the teacher can filter between them.
 	 * @return
 	 */
-	getActivities(): void {
+	private getActivities(): void {
 		this.sessionOverviewService.getActivities().subscribe(data => {
 			if (data.succes) {
 				for (let activity of data.activities) {
@@ -87,11 +85,11 @@ export class SessionOverviewComponent implements OnInit {
 	 * Method to get all the session logs from the database based on certain user specified filters.
 	 * @return
 	 */
-	getLogs(): void {
+	private getLogs(): void {
 		this.sessionOverviewService.getLogs().subscribe(data => {
 			if (data.succes) {
 				for (let log of data.logs) {
-					let dates = this.convertObjectIdToDate(log._id);
+					let dates = SessionOverviewComponent.convertObjectIdToDate(log._id);
 					log.comparisonDate = dates[0];
 					log.date = dates[1];
 					this.logs.push(log);
@@ -125,7 +123,7 @@ export class SessionOverviewComponent implements OnInit {
 	 * @param objectId ObjectId of log.
 	 * @return Timestamp of when the log was entered into the database.
 	 */
-	convertObjectIdToDate(objectId: string): string[] {
+	private static convertObjectIdToDate(objectId: string): string[] {
 		const dateObject = new Date(parseInt(objectId.substring(0, 8), 16) * 1000);
 
 		// comparisonDate is a date with special formatting used in the filterLogs() method to filter logs based on the date
@@ -144,7 +142,7 @@ export class SessionOverviewComponent implements OnInit {
 	 * @param dateReset Whether the method was called by resetting the date.
 	 * @return
 	 */
-	filterLogs(event: any = null, param: string = null, value: string | unknown = null, dateReset: boolean): void {
+	public filterLogs(event: any = null, param: string = null, value: string | unknown = null, dateReset: boolean): void {
 
 		// Empty the logs that were displayed to the user and deep copy back the orginally found logs in the
 		// getLogs() method so we can work with the original set, without accessing the database again/needing
@@ -211,7 +209,7 @@ export class SessionOverviewComponent implements OnInit {
 		this.displayedLogs = this.logs;
 	}
 
-	changePage(event: PageEvent): void {
+	public changePage(event: PageEvent): void {
 		const start = event.pageIndex * event.pageSize;
 		const end = (event.pageIndex + 1) * event.pageSize;
 		this.displayedLogs = this.logs.slice(start, end);

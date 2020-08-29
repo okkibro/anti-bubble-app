@@ -4,17 +4,15 @@
  * Computing Sciences)
  */
 
-/**
- * This file contains the guard for checking whether a visitor can access the requested page by looking if
- * they are logged in and their role if the page requires it. Required role for a certain page are defined in
- * app-routing module.
- * @packageDocumentation
- */
-
 import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, CanActivate, Router } from '@angular/router';
 import { AuthenticationService } from './authentication.service';
 
+/**
+ * This class contains the guard for checking whether a visitor can access the requested page by looking if
+ * they are logged in and their role if the page requires it. Required role for a certain page are defined in
+ * app-routing module.
+ */
 @Injectable({
 	providedIn: 'root'
 })
@@ -33,7 +31,7 @@ export class AuthGuardService implements CanActivate {
 	 * @param route
 	 * @return Whether the visitor can access the requested page.
 	 */
-	canActivate(route: ActivatedRouteSnapshot): boolean {
+	public canActivate(route: ActivatedRouteSnapshot): boolean {
 
 		// Check if user is logged in.
 		if (this.auth.isLoggedIn()) {

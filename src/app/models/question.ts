@@ -5,9 +5,8 @@
  */
 
 /**
- * This file contains the exported TypeScript class/model for a Question in the initial labyrinth the user
- * goes through to form their original bubble used in the front-end.
- * @packageDocumentation
+ * This class represents the database model for a Question in the initial labyrinth a user
+ * goes through to form their original filter bubble used in the front-end.
  */
 
 export class Question {

@@ -4,12 +4,6 @@
  * Computing Sciences)
  */
 
-/**
- * This file handles all the logic during a session on the student's side. Methods for receving questions,
- * team members and sending questions can be found here.
- * @packageDocumentation
- */
-
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -23,25 +17,29 @@ import { AuthenticationService } from '../../services/authentication.service';
 import { SessionService } from '../../services/session.service';
 import { UserService } from '../../services/user.service';
 
+/**
+ * This class handles all the logic during a session on the student's side. Methods for receving questions,
+ * team members and sending questions can be found here.
+ */
 @Component({
-	selector: 'mean-labyrinth',
+	selector: 'labyrinth-component',
 	templateUrl: './labyrinth.component.html',
 	styleUrls: ['./labyrinth.component.css',
 		'../../shared/general-styles.css']
 })
 
 export class LabyrinthComponent implements OnInit {
-	userDetails: User;
-	startedLabyrinth: boolean;
-	nextQuestionDisabled: boolean;
-	questions = [];
-	questionOptions = [];
-	part: number;
-	answers: [{ question: Question, answer: number }] = [,];
-	currentQuestion;
-	questionLoaded: boolean = false;
-	lastQuestionWasImage: boolean = false;
-	labyrinthQuestionForm = this.fb.group({
+	private userDetails: User;
+	public startedLabyrinth: boolean;
+	public nextQuestionDisabled: boolean;
+	private questions = [];
+	public questionOptions = [];
+	private part: number;
+	private answers: [{ question: Question, answer: number }] = [,];
+	public currentQuestion;
+	public questionLoaded: boolean = false;
+	private lastQuestionWasImage: boolean = false;
+	public labyrinthQuestionForm = this.fb.group({
 		answer: ['', Validators.required]
 	});
 
@@ -72,7 +70,7 @@ export class LabyrinthComponent implements OnInit {
 	 * Initialization method.
 	 * @return
 	 */
-	ngOnInit(): void {
+	public ngOnInit(): void {
 		this.userService.profile().subscribe(user => {
 			this.userDetails = user;
 		});
@@ -88,7 +86,7 @@ export class LabyrinthComponent implements OnInit {
 	 * Method that saves answers the user gave and sets their bubble initialization to true so they can join a session after this.
 	 * @return
 	 */
-	performedLabyrinth(): void {
+	private performedLabyrinth(): void {
 		this.sessionService.performedLabyrinth().subscribe(data => {
 
 			// Labyrinth boolean is set to true. Player now has a bubble and can join activity sessions.
@@ -113,14 +111,14 @@ export class LabyrinthComponent implements OnInit {
 	 * Method that starts the labyrinth.
 	 * @return
 	 */
-	startLabyrinth(): void {
+	public startLabyrinth(): void {
 
 		// Shows the question screen due to ngIfs in the HTML.
 		this.startedLabyrinth = true;
 
 		// Get the part 1 questions from the database.
 		this.sessionService.getQuestions(1).subscribe(questions => {
-			this.questions = this.shuffle(questions);
+			this.questions = LabyrinthComponent.shuffle(questions);
 
 			// Show the first question, previous question does not exist so its null.
 			this.nextQuestion(null);
@@ -131,7 +129,7 @@ export class LabyrinthComponent implements OnInit {
 	 * Method to pause the labyrinth.
 	 * @return
 	 */
-	pauseLabyrinth(): void {
+	public pauseLabyrinth(): void {
 		this.sessionService.saveAnswers(this.answers).subscribe(() => {
 			this.bubbleService.processLabyrinth(this.answers).subscribe(() => {
 				this.snackBar.open('Doolhof gepauzeerd. Zorg dat je het voor de volgende les hebt afgemaakt.', 'X', {
@@ -149,7 +147,7 @@ export class LabyrinthComponent implements OnInit {
 	 * @param prevQuestion Question used to determine what question is next in the labyrinth.
 	 * @return
 	 */
-	nextQuestion(prevQuestion: Question): void {
+	public nextQuestion(prevQuestion: Question): void {
 		this.nextQuestionDisabled = true;
 		this.questionLoaded = false;
 		if (this.questions.length === 0) {
@@ -165,7 +163,7 @@ export class LabyrinthComponent implements OnInit {
 					if (this.part === 3 || this.part === 4) {
 						this.questions = questions;
 					} else {
-						this.questions = this.shuffle(questions);
+						this.questions = LabyrinthComponent.shuffle(questions);
 					}
 					this.nextQuestion(prevQuestion);
 				});
@@ -201,7 +199,7 @@ export class LabyrinthComponent implements OnInit {
 	 * @param question Question that has just been answerd by the user.
 	 * @return
 	 */
-	saveQuestion(question: Question): void {
+	private saveQuestion(question: Question): void {
 		if (question) {
 
 			// Push the result with its corresponding question to this.answers.
@@ -216,7 +214,7 @@ export class LabyrinthComponent implements OnInit {
 	 * @param question Quesiton that has to be shown to the user.
 	 * @return
 	 */
-	showQuestion(question: Question): void {
+	private showQuestion(question: Question): void {
 
 		// Set question title.
 		document.getElementById('question').innerHTML = question.question;
@@ -275,7 +273,7 @@ export class LabyrinthComponent implements OnInit {
 	 * Method that enables the button to go to the next question when an answer has been selected.
 	 * @return
 	 */
-	selectedOption(): void {
+	public selectedOption(): void {
 		this.nextQuestionDisabled = false;
 	}
 
@@ -285,7 +283,7 @@ export class LabyrinthComponent implements OnInit {
 	 * @param array Array of questions to shuffle.
 	 * @return Array of shuffles questions.
 	 */
-	shuffle(array: any): any {
+	private static shuffle(array: any): any {
 		let currentIndex = array.length, temporaryValue, randomIndex;
 
 		// While there remain elements to shuffle...

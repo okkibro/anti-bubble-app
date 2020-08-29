@@ -4,30 +4,28 @@
  * Computing Sciences)
  */
 
-/**
- * This file handles all the logic for displaying the user's milestone/badge collection.progression by
- * looking at their database entry.
- * @packageDocumentation
- */
-
 import { Component, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { milestones, titleTrail } from '../../../../constants';
 import { User } from '../../models/user';
 import { UserService } from '../../services/user.service';
 
+/**
+ * This class handles all the logic for displaying the user's milestone/badge collection.progression by
+ * looking at their database entry.
+ */
 @Component({
-	selector: 'mean-badges',
+	selector: 'badges-component',
 	templateUrl: './badges.component.html',
 	styleUrls: ['./badges.component.css',
 		'../../shared/general-styles.css']
 })
 
 export class BadgesComponent implements OnInit {
-	completed = [];
-	uncompleted = [];
-	userDetails: User;
-	percentageComplete: string;
+	public completed = [];
+	public uncompleted = [];
+	public userDetails: User;
+	public percentageComplete: string;
 
 	/**
 	 * BadgesComponent constructor.
@@ -40,7 +38,7 @@ export class BadgesComponent implements OnInit {
 	 * Initialization method.
 	 * @return
 	 */
-	ngOnInit(): void {
+	public ngOnInit(): void {
 		this.userService.profile().subscribe(user => {
 			this.userDetails = user;
 
@@ -67,7 +65,7 @@ export class BadgesComponent implements OnInit {
 	 * Method to calculate how far you are in completing all milestones.
 	 * @return Percentage of milestones achieved.
 	 */
-	completedRatio(): string {
+	public completedRatio(): string {
 		return (this.completed.length / (this.completed.length + this.uncompleted.length) * 100).toFixed(0);
 	}
 }

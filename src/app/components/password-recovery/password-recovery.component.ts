@@ -4,12 +4,6 @@
  * Computing Sciences)
  */
 
-/**
- * This file handles all the logic for handling the password recovery form for users who have forgotten
- * their password and want to request a new one.
- * @packageDocumentation
- */
-
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -18,15 +12,19 @@ import { Router } from '@angular/router';
 import { titleTrail } from '../../../../constants';
 import { PasswordRecoveryService } from '../../services/password-recovery.service';
 
+/**
+ * This class handles all the logic for handling the password recovery form for users who have forgotten
+ * their password and want to request a new one.
+ */
 @Component({
-	selector: 'mean-password-recovery',
+	selector: 'password-recovery-component',
 	templateUrl: './password-recovery.component.html',
 	styleUrls: ['./password-recovery.component.css',
 		'../../shared/general-styles.css']
 })
 
 export class PasswordRecoveryComponent implements OnInit {
-	passwordRecoveryForm = this.fb.group({
+	public passwordRecoveryForm = this.fb.group({
 		email: ['', [Validators.required, Validators.email]]
 	});
 
@@ -50,7 +48,7 @@ export class PasswordRecoveryComponent implements OnInit {
 	 * Initialization method.
 	 * @return
 	 */
-	ngOnInit(): void {
+	public ngOnInit(): void {
 		// Set page title.
 		this.titleService.setTitle('Wachtwoord vergeten' + titleTrail);
 	}
@@ -59,7 +57,7 @@ export class PasswordRecoveryComponent implements OnInit {
 	 * Method to send an email to the user to reset their password.
 	 * @return
 	 */
-	sendEmail(): void {
+	public sendEmail(): void {
 
 		// Get email from the input field.
 		let email = this.passwordRecoveryForm.get('email').value;

@@ -4,12 +4,6 @@
  * Computing Sciences)
  */
 
-/**
- * This file sends all HTTP requests used for logging in, registering a user and contains all methods that deal
- * with the user's token/cokkie data.
- * @packageDocumentation
- */
-
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
@@ -25,6 +19,10 @@ interface TokenResponse {
     token: string;
 }
 
+/**
+ * This file sends all HTTP requests used for logging in, registering a user and contains all methods that deal
+ * with the user's token/cokkie data.
+ */
 @Injectable({
     providedIn: 'root'
 })
@@ -32,6 +30,12 @@ interface TokenResponse {
 export class AuthenticationService {
     private token: string;
 
+    /**
+     * AuthenticationSerivice constructor.
+     * @param http
+     * @param router
+     * @param cookie
+     */
     constructor(private http: HttpClient, private router: Router, private cookie: CookieService) { }
 
     /** Method to save the JWT of the user in the browser's cookies.

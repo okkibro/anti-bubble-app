@@ -4,13 +4,6 @@
  * Computing Sciences)
  */
 
-/**
- * This file handles most of the logic for displaying the details of the user's bubble. This includes a table with the
- * current bubble's data (points per category) and a chart with the user's bubble history. The actual displaying of
- * the user's current bubble is handled by bubble-visualisation.component.ts.
- * @packageDocumentation
- */
-
 import { Component, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Title } from '@angular/platform-browser';
@@ -20,34 +13,39 @@ import { User } from '../../models/user';
 import { MilestoneUpdatesService } from '../../services/milestone-updates.service';
 import { UserService } from '../../services/user.service';
 
+/**
+ * This class handles most of the logic for displaying the details of the user's bubble. This includes a table with the
+ * current bubble's data (points per category) and a chart with the user's bubble history. The actual displaying of
+ * the user's current bubble is handled by bubble-visualisation.component.ts.
+ */
 @Component({
-	selector: 'mean-bubble-details',
+	selector: 'bubble-details-component',
 	templateUrl: './bubble-details.component.html',
 	styleUrls: ['./bubble-details.component.css',
 		'../../shared/general-styles.css']
 })
 
 export class BubbleDetailsComponent implements OnInit {
-	data;
-	charts = Highcharts2;
+	public data;
+	public charts = Highcharts2;
 
 	// Optional string, defaults to 'chart'.
-	chartConstructor = 'chart';
+	public chartConstructor = 'chart';
 
 	// Optional function, defaults to null.
-	chartCallback = function () {
+	public chartCallback = function () {
 	};
 
 	// Optional boolean.
-	updateFlag = false;
+	public updateFlag = false;
 
 	// Optional boolean, defaults to false.
-	oneToOneFlag = true;
+	public oneToOneFlag = true;
 
 	// Optional boolean, defaults to false.
-	runOutsideAngularFlag = false;
-	chartOptions = {};
-	userDetails: User;
+	public runOutsideAngularFlag = false;
+	public chartOptions = {};
+	private userDetails: User;
 
 	/**
 	 * BubbleDetailsComponent constructor.
@@ -67,7 +65,7 @@ export class BubbleDetailsComponent implements OnInit {
 	 * Initialization method.
 	 * @return
 	 */
-	ngOnInit(): void {
+	public ngOnInit(): void {
 		this.userService.profile().subscribe(user => {
 			this.userDetails = user;
 			this.data = user.bubble;
@@ -92,7 +90,7 @@ export class BubbleDetailsComponent implements OnInit {
 	 * Initialization method for showing the user's bubble history.
 	 * @return
 	 */
-	initChart(): void {
+	private initChart(): void {
 		this.chartOptions = {
 			chart: {
 				type: 'spline'

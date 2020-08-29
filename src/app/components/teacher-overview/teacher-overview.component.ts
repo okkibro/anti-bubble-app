@@ -4,13 +4,6 @@
  * Computing Sciences)
  */
 
-/**
- * This file handles all the logic for the class overview for the teacher. The file contains methods for
- * creating a class, changing the class and displaying all the class members of the selected class.
- * File contains two sub-components for removing a student from a class and deleting a class.
- * @packageDocumentation
- */
-
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog';
@@ -23,26 +16,32 @@ import { ClassesService } from 'src/app/services/classes.service';
 import { titleTrail } from '../../../../constants';
 import { UserService } from '../../services/user.service';
 
+/**
+ * This class handles all the logic for the class-overview for a teacher. The class contains methods for
+ * creating a class, switching between teacher owned classes and displaying all the class members
+ * of the selected class. Class contains two helper methods for opening MatDialogs for kicking students
+ * out of a class and deleting a class, defined as sub-components in the file.
+ */
 @Component({
-	selector: 'mean-teacher-overview',
+	selector: 'teacher-overview-component',
 	templateUrl: './teacher-overview.component.html',
 	styleUrls: ['./teacher-overview.component.css',
 		'../../shared/general-styles.css']
 })
 
 export class TeacherOverviewComponent implements OnInit {
-	userDetails: User;
-	classIds = [];
-	classes = [];
-	currentClass;
-	classmates: User[];
-	classForm = this.fb.group({
+	public userDetails: User;
+	private classIds = [];
+	public classes = [];
+	public currentClass;
+	public classmates: User[];
+	public classForm = this.fb.group({
 		classTitle: ['', Validators.required],
 		classLevel: ['', Validators.required],
 		classYear: ['', Validators.required]
 	});
-	openform = false;
-	selectklas = false;
+	public openform = false;
+	private selectklas = false;
 
 	/**
 	 * TeacherOverviewComponent constructor.
@@ -68,7 +67,7 @@ export class TeacherOverviewComponent implements OnInit {
 	 * Initialization method.
 	 * @return
 	 */
-	ngOnInit(): void {
+	public ngOnInit(): void {
 		this.userService.profile().subscribe(user => {
 			this.userDetails = user;
 			if (this.userDetails.classArray.length > 0) {
@@ -88,7 +87,7 @@ export class TeacherOverviewComponent implements OnInit {
 	 * Method to create a new class based on the filled in information of the form and join this class based on the result of the creation method.
 	 * @return
 	 */
-	createClass(): void {
+	public createClass(): void {
 		if (this.userDetails.role === 'teacher') {
 			let klas = new Class();
 			klas.code = Math.floor(100000 + Math.random() * 900000);
@@ -115,7 +114,7 @@ export class TeacherOverviewComponent implements OnInit {
 	 * Method to set the current class based on the id.
 	 * @param id ID of class to be shown on screen and set as current class for teacher.
 	 */
-	setClass(id: string): void {
+	private setClass(id: string): void {
 		this.classesService.getSingleClass(id).subscribe((output) => {
 			if (output.succes) {
 				this.currentClass = output.class;
@@ -128,7 +127,7 @@ export class TeacherOverviewComponent implements OnInit {
 	 * Method to get all classes for a teacher.
 	 * @return
 	 */
-	getClasses(): void {
+	private getClasses(): void {
 		for (let id of this.classIds) {
 			this.classesService.getSingleClass(id._id).subscribe((output) => {
 				if (output.succes) {
@@ -141,7 +140,7 @@ export class TeacherOverviewComponent implements OnInit {
 	/** Method to update the html to display the correct class based on the ID.
 	 * @param id ID of class that has to be switched out with current class ID.
 	 */
-	switchClass(id: string): void {
+	public switchClass(id: string): void {
 		this.setClass(id);
 		this.onClickSelectKlas();
 	}
@@ -150,7 +149,7 @@ export class TeacherOverviewComponent implements OnInit {
 	 * Method to change a boolean to unhide part of the html page.
 	 * @return
 	 */
-	onClickSelectKlas(): void {
+	public onClickSelectKlas(): void {
 		this.selectklas = !this.selectklas;
 	}
 
@@ -158,7 +157,7 @@ export class TeacherOverviewComponent implements OnInit {
 	 * Method to change a boolean to unhide part of the html page.
 	 * @return
 	 */
-	onClickOpenForm(): void {
+	public onClickOpenForm(): void {
 		this.openform = !this.openform;
 	}
 
@@ -166,7 +165,7 @@ export class TeacherOverviewComponent implements OnInit {
 	 * Method that opens the delete class dialog.
 	 * @return
 	 */
-	openDeleteClassDialog(): void {
+	public openDeleteClassDialog(): void {
 		this.dialog.open(DeleteClassDialog, { data: { klas: this.currentClass }});
 	}
 
@@ -175,11 +174,15 @@ export class TeacherOverviewComponent implements OnInit {
 	 * @param user User that has to be removed from the current class.
 	 * @return
 	 */
-	openRemoveFromClassDialog(user: User): void {
+	public openRemoveFromClassDialog(user: User): void {
 		this.dialog.open(RemoveFromClassDialog, { data: { user: user, klas: this.currentClass, leaving: false }});
 	}
 }
 
+/**
+ * This class is defined as a sub-component of the TeacherOverviewComponent and handles the MatDialog for when a teacher
+ * wants to delete a class.
+ */
 @Component({
 	selector: 'delete-class-dialog',
 	templateUrl: 'delete-class-dialog.html'
@@ -208,7 +211,7 @@ export class DeleteClassDialog {
 	 * Method to delete a user's account.
 	 * @return
 	 */
-	deleteClass(): void {
+	public deleteClass(): void {
 		this.classesService.deleteClass(this.data.klas._id).subscribe(data => {
 			if (data.succes) {
 				this.dialogRef.close();
@@ -222,6 +225,10 @@ export class DeleteClassDialog {
 	}
 }
 
+/**
+ * This class is defined as a sub-component of the TeacherOverviewComponent and handles the MatDialog for when a teacher
+ * wants to remove a students from the currently displayed class.
+ */
 @Component({
 	selector: 'remove-from-class-dialog',
 	templateUrl: 'remove-from-class-dialog.html'
@@ -250,7 +257,7 @@ export class RemoveFromClassDialog {
 	 * Method to remove a student from the current class.
 	 * @return
 	 */
-	removeFromClass(): void {
+	public removeFromClass(): void {
 		this.classesService.leaveClass(this.data.user._id, this.data.klas._id, this.data.leaving).subscribe(data => {
 			if (data.succes) {
 				this.dialogRef.close();

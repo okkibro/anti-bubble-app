@@ -4,12 +4,6 @@
  * Computing Sciences)
  */
 
-/**
- * This file handles all the logic for displaying the home screen of the app. This file mainly consists of the joinSession()
- * form which is needed for students to join a session created by a teacher.
- * @packageDocumentation
- */
-
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -23,16 +17,20 @@ import { MilestoneUpdatesService } from '../../services/milestone-updates.servic
 import { SocketIOService } from '../../services/socket-io.service';
 import { UserService } from '../../services/user.service';
 
+/**
+ * This class handles all the logic for displaying the home screen of the app. This class mainly consists of the joinSession()
+ * form which is needed for students to join a session created by a teacher.
+ */
 @Component({
-	selector: 'mean-home',
+	selector: 'home-component',
 	templateUrl: './home.component.html',
 	styleUrls: ['./home.component.css',
 		'../../shared/general-styles.css']
 })
 
 export class HomeComponent implements OnInit {
-	userDetails: User;
-	joinSessionForm = this.fb.group({
+	public userDetails: User;
+	public joinSessionForm = this.fb.group({
 		pin: ['', Validators.required]
 	});
 
@@ -64,7 +62,7 @@ export class HomeComponent implements OnInit {
 	 * Initialization method.
 	 * @return
 	 */
-	ngOnInit(): void {
+	public ngOnInit(): void {
 		this.userService.profile().subscribe(user => {
 			this.userDetails = user;
 		});
@@ -78,7 +76,7 @@ export class HomeComponent implements OnInit {
 	 * socketIOService. The required backToHome(), redirect() and finishedGame() methods are defined here.
 	 * @return
 	 */
-	joinSession() {
+	public joinSession() {
 		const user = this.userDetails;
 
 		// Call the joinsession function in socketio service and define all callbacks.
@@ -147,7 +145,7 @@ export class HomeComponent implements OnInit {
 	 * @param event Event triggered when a key is pressed in the join session input.
 	 * @return
 	 */
-	check(event: KeyboardEvent) {
+	public check(event: KeyboardEvent) {
 		let code = event.code.charCodeAt(0);
 		if (code != 68) {
 			event.preventDefault();

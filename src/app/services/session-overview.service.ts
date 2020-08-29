@@ -4,17 +4,15 @@
  *  Computing Sciences)
  */
 
-/**
- * This file sends all HTTP requests for getting session logs from the database based on user decided filters.
- * @packageDocumentation
- */
-
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';
 import { Observable } from 'rxjs';
 import { environment } from '../../environments/environment';
 
+/**
+ * This file sends all HTTP requests for getting session logs from the database based on user decided filters.
+ */
 @Injectable({
 	providedIn: 'root'
 })

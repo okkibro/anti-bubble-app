@@ -4,12 +4,6 @@
  * Computing Sciences)
  */
 
-/**
- * This file sends all HTTP requests used for recording/p-laying/finishing sessions, saving answers and
- * getting/saving questions/ansers from the initial labyrinth.
- * @packageDocumentation
- */
-
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';
@@ -17,6 +11,10 @@ import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { Log } from '../models/log';
 
+/**
+ * This file sends all HTTP requests used for recording/p-laying/finishing sessions, saving answers and
+ * getting/saving questions/ansers from the initial labyrinth.
+ */
 @Injectable({
 	providedIn: 'root'
 })

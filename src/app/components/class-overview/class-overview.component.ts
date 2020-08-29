@@ -4,12 +4,6 @@
  * Computing Sciences)
  */
 
-/**
- * This file handles all the logic for the overview of a student's class where all the student's classmates are shown.
- * Also contains methods for searching for a specific classmate and a supplementary for leaving a class.
- * @packageDocumentation
- */
-
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog';
@@ -21,21 +15,26 @@ import { User } from '../../models/user';
 import { ClassesService } from '../../services/classes.service';
 import { UserService } from '../../services/user.service';
 
+/**
+ * This class handles all the logic for the overview of a student's class where all the student's classmates are shown.
+ * The class contains helper methods used in the HTML of the componenet to filter thorugh classmates and also a
+ * method to open a MatDialog to leave a class, defined as a sub-component in the file.
+ */
 @Component({
-	selector: 'mean-class-overview',
+	selector: 'class-overview-component',
 	templateUrl: './class-overview.component.html',
 	styleUrls: ['./class-overview.component.css',
 		'../../shared/general-styles.css']
 })
 
 export class ClassOverviewComponent implements OnInit {
-	searchForm = this.fb.group({
+	public searchForm = this.fb.group({
 		query: ['', []]
 	});
 
-	classmates: User[];
-	userClass;
-	userDetails: User;
+	public classmates: User[];
+	public userClass;
+	public userDetails: User;
 
 	/**
 	 * ClassOverviewComponent constructor.
@@ -59,7 +58,7 @@ export class ClassOverviewComponent implements OnInit {
 	 * Initialization method.
 	 * @return
 	 */
-	ngOnInit(): void {
+	public ngOnInit(): void {
 		this.userService.profile().subscribe(user => {
 			this.userDetails = user;
 		});
@@ -79,7 +78,7 @@ export class ClassOverviewComponent implements OnInit {
 	 * Method to filter the students in a class.
 	 * @return
 	 */
-	search() {
+	public search() {
 		let query: string = this.searchForm.get('query').value.toLowerCase();
 		let table = document.getElementById('table').childNodes;
 		for (let i: number = 0; i < this.classmates.length; i++) {
@@ -95,7 +94,7 @@ export class ClassOverviewComponent implements OnInit {
 	 * Method to clear the filter so all students are displayed again.
 	 * @return
 	 */
-	clear() {
+	public clear() {
 		this.searchForm.get('query').setValue('');
 		let table = document.getElementById('table').childNodes;
 		for (let i: number = 0; i < this.classmates.length; i++) {
@@ -107,11 +106,15 @@ export class ClassOverviewComponent implements OnInit {
 	 * Method that opens the leave class dialog.
 	 * @return
 	 */
-	openLeaveClassDialog() {
+	public openLeaveClassDialog() {
 		this.dialog.open(LeaveClassDialog, { data: { userId: this.userDetails._id, classId: this.userClass._id, classTitle: this.userClass.title, leaving: true }});
 	}
 }
 
+/**
+ * This class is defined as a sub-component of the ClassOverviewComponent and handles the MatDialog for when a user
+ * wants to leave their class.
+ */
 @Component({
 	selector: 'leave-class-dialog',
 	templateUrl: 'leave-class-dialog.html'
@@ -140,7 +143,7 @@ export class LeaveClassDialog {
 	 * Method so the current user can leave his class.
 	 * @return
 	 */
-	leaveClass() {
+	public leaveClass() {
 		this.classesService.leaveClass(this.data.userId, this.data.classId, this.data.leaving).subscribe(data => {
 			if (data.succes) {
 				this.dialogRef.close();

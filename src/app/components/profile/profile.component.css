@@ -24,6 +24,6 @@
     }
 }
 
-mean-avatar-display mat-card img {
+avatar-display-component mat-card img {
     width: 15%;
 }

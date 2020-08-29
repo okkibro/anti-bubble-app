@@ -4,12 +4,6 @@
  * Computing Sciences)
  */
 
-/**
- * This file handles all the logic during a session on the student's side. Methods for receving questions,
- * team members and sending questions can be found here.
- * @packageDocumentation
- */
-
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -24,35 +18,39 @@ import { ClassesService } from '../../services/classes.service';
 import { MilestoneUpdatesService } from '../../services/milestone-updates.service';
 import { UserService } from '../../services/user.service';
 
+/**
+ * This class handles all the logic during a session on the student's side. Methods for receving questions,
+ * team members and sending questions can be found here.
+ */
 @Component({
-	selector: 'mean-activities',
+	selector: 'activities-component',
 	templateUrl: './activities.component.html',
 	styleUrls: ['./activities.component.css',
 		'../../shared/general-styles.css']
 })
 
 export class ActivitiesComponent implements OnInit {
-	gameData;
-	pin;
-	userDetails: User;
-	sessionData = new Log();
-	questions: string[] = [];
-	answers: string[] = [];
-	enableAnswer: boolean = false;
-	team;
-	leaders;
-	selected;
-	isLeader: boolean = true;
-	submitted: boolean = false;
-	article;
-	allowedSites = ['Facebook',
+	private pin;
+	private userDetails: User;
+	private sessionData = new Log();
+	private questions: string[] = [];
+	private answers: string[] = [];
+	public enableAnswer: boolean = false;
+	public team;
+	public leaders;
+	public selected;
+	public isLeader: boolean = true;
+	public submitted: boolean = false;
+	public article;
+	public allowedSites: string[] = ['Facebook',
 		'Instagram',
 		'NOS.nl',
 		'Telegraaf',
 		'Reddit'
 	];
-	gameFinished: boolean = false;
-	timedOut: boolean = false;
+	public gameFinished: boolean = false;
+	public timedOut: boolean = false;
+	public gameData;
 
 	/**
 	 * ActivitiesComponent constructor.
@@ -82,7 +80,7 @@ export class ActivitiesComponent implements OnInit {
 	 * Initialization method.
 	 * @return
 	 */
-	ngOnInit(): void {
+	public ngOnInit(): void {
 		this.gameData = this.getGameData();
 
 		if (this.gameData != undefined) {
@@ -138,7 +136,7 @@ export class ActivitiesComponent implements OnInit {
 	 * Method that returns the game data.
 	 * @return
 	 */
-	getGameData(): any {
+	private getGameData(): any {
 		return this.socketService.gameData;
 	}
 
@@ -146,7 +144,7 @@ export class ActivitiesComponent implements OnInit {
 	 * Method that listens for incoming questions.
 	 * @return
 	 */
-	receiveQuestion(): void {
+	private receiveQuestion(): void {
 
 		// Students listen for incoming questions.
 		// Receive question.
@@ -164,7 +162,7 @@ export class ActivitiesComponent implements OnInit {
 	 * Method that listens for team members.
 	 * @return
 	 */
-	receiveTeam(): void {
+	private receiveTeam(): void {
 		this.socketService.listenForTeam((team, article, leaders) => {
 			this.leaders = leaders;
 			this.article = article;
@@ -185,7 +183,7 @@ export class ActivitiesComponent implements OnInit {
 	 * @param data Article chosen by student.
 	 * @return
 	 */
-	submit(data: any): void {
+	public submit(data: any): void {
 		this.submitted = true;
 		this.socketService.studentSubmit({ answer: this.selected, data: data });
 	}
@@ -195,7 +193,7 @@ export class ActivitiesComponent implements OnInit {
 	 * stopping it.
 	 * @return
 	 */
-	disableInput(): void {
+	private disableInput(): void {
 
 		// Students listen for the signal that is sent when the session has ended, either by time running out or
 		// when the teacher presses the 'Stop activiteit' button.
@@ -216,7 +214,7 @@ export class ActivitiesComponent implements OnInit {
 	 * Method that listens for the starting of the game so the players participating can be recorded.
 	 * @return
 	 */
-	getSessionPlayers(): void {
+	private getSessionPlayers(): void {
 
 		// Listener for getting all the players in the session and recording this in the sessionData.
 		this.socketService.listenForGetPlayers((sessionPlayers: any) => {
@@ -235,7 +233,7 @@ export class ActivitiesComponent implements OnInit {
 	 * Method that listens for answers being submitted so they can be recorded.
 	 * @return
 	 */
-	recordAnswer(): void {
+	private recordAnswer(): void {
 
 		// Listener for recording a submitted answer by a student.
 		this.socketService.listenForRecordAnswer((answer: string) => {
@@ -248,10 +246,10 @@ export class ActivitiesComponent implements OnInit {
 	 * already recorded answers.
 	 * @return
 	 */
-	deleteAnswer(): void {
+	private deleteAnswer(): void {
 
 		// Listener for removing an answer from a student that was already recorded.
-		this.socketService.listenForRemoveAnswer((answer: string) => {
+		this.socketService.listenForRemoveAnswer(() => {
 			this.answers.pop();
 		});
 	}
@@ -261,7 +259,7 @@ export class ActivitiesComponent implements OnInit {
 	 * the session.
 	 * @return
 	 */
-	deletePlayer(): void {
+	private deletePlayer(): void {
 
 		// Listener for a player leaving the session so he can be removed from the recorded students in the session.
 		this.socketService.listenForLeavePlayer((student: { email: string; }) => {

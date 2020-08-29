@@ -4,41 +4,39 @@
  * Computing Sciences)
  */
 
-/**
- * This file contains all methods used by socketIO for our implementation of sockets for the classical
- * game sessions.
- * @packageDocumentation
- */
-
 import { Injectable } from '@angular/core';
 import * as io from 'socket.io-client';
 import { environment } from 'src/environments/environment';
 import { User } from '../models/user';
 import { DataService } from './data-exchange.service';
 
+/**
+ * This file contains all methods used by socketIO for our implementation of sockets for the classical
+ * game sessions.
+ */
 @Injectable({
 	providedIn: 'root'
 })
 
 export class SocketIOService {
-	socket = io(environment.ENDPOINT);
-	players;
-	pin;
-	hostDisconnected;
-	gameData;
-	removedListeners;
+	public socket = io(environment.ENDPOINT);
+	public players;
+	public pin;
+	public hostDisconnected;
+	public gameData;
+	public removedListeners;
 
 	/**
 	 * SocketIOService constructor.
 	 * @param data
 	 */
-	constructor(private data: DataService) { }
+	constructor(public data: DataService) { }
 
 	/**
 	 * Method to create a new session using socketIO.
 	 * @return
 	 */
-	createSession(gameData): void {
+	public createSession(gameData): void {
 		this.removedListeners = false;
 		this.gameData = gameData;
 		this.socket.emit('host-join', gameData);
@@ -61,7 +59,7 @@ export class SocketIOService {
 	 * @param finishedGame finishedGame() callback function.
 	 * @return
 	 */
-	joinSession(pin: string, user: User, join: Function, backToHome: Function, redirect: Function, finishedGame: Function): void {
+	public joinSession(pin: string, user: User, join: Function, backToHome: Function, redirect: Function, finishedGame: Function): void {
 		this.hostDisconnected = false;
 		this.socket.emit('player-join', { pin: pin, player: user });
 		this.socket.on('join-succes', (gameData) => {
@@ -93,7 +91,7 @@ export class SocketIOService {
 	 * Method that removes the student from a session.
 	 * @return
 	 */
-	leaveSession(): void {
+	public leaveSession(): void {
 		this.socket.emit('leave');
 		this.socket.on('remove-listeners', () => {
 			this.socket.removeAllListeners();
@@ -106,7 +104,7 @@ export class SocketIOService {
 	 * @param message Message to be sent.
 	 * @return
 	 */
-	sendMessage(message: string): void {
+	public sendMessage(message: string): void {
 		this.socket.emit('message', message);
 	}
 
@@ -118,7 +116,7 @@ export class SocketIOService {
 	 * @param removePlayer removePlayer() callback function.
 	 * @return
 	 */
-	listenForUpdates(addPlayer: Function, removePlayer: Function): void {
+	public listenForUpdates(addPlayer: Function, removePlayer: Function): void {
 		this.socket.on('update-players', player => {
 			addPlayer(player);
 		});
@@ -133,7 +131,7 @@ export class SocketIOService {
 	 * @param deletePlayer deletePlayer() callback function.
 	 * @return
 	 */
-	listenForLeavePlayer(deletePlayer: Function): void {
+	public listenForLeavePlayer(deletePlayer: Function): void {
 		this.socket.on('player-left', player => {
 			deletePlayer(player);
 		});
@@ -145,7 +143,7 @@ export class SocketIOService {
 	 * @param receiveQuestion receiveQuestion() callback function.
 	 * @return
 	 */
-	listenForQuestion(receiveQuestion: Function): void {
+	public listenForQuestion(receiveQuestion: Function): void {
 		this.socket.on('receive-question', (question) => {
 			receiveQuestion(question);
 		});
@@ -158,7 +156,7 @@ export class SocketIOService {
 	 * @param disableInput disableInput() callback function.
 	 * @return
 	 */
-	listenForFinishGame(disableInput: Function): void {
+	public listenForFinishGame(disableInput: Function): void {
 		this.socket.on('finished-game', timedOut => {
 			disableInput(timedOut);
 		});
@@ -169,7 +167,7 @@ export class SocketIOService {
 	 * @param receiveTeam receiveTeam() callback function.
 	 * @return
 	 */
-	listenForTeam(receiveTeam: Function): void {
+	public listenForTeam(receiveTeam: Function): void {
 		this.socket.on('receive-team', (team, article, leaders) => {
 			receiveTeam(team, article, leaders);
 		});
@@ -181,7 +179,7 @@ export class SocketIOService {
 	 * @param receiveSubmit receiveSubmit() callback function.
 	 * @return
 	 */
-	listenForSubmits(receiveSubmit: Function): void {
+	public listenForSubmits(receiveSubmit: Function): void {
 		this.socket.on('receive-submit', data => {
 			receiveSubmit(data);
 		});
@@ -193,7 +191,7 @@ export class SocketIOService {
 	 * @param getSessionPlayers getSessionPlayers() callback function.
 	 * @return
 	 */
-	listenForGetPlayers(getSessionPlayers: Function): void {
+	public listenForGetPlayers(getSessionPlayers: Function): void {
 		this.socket.on('got-players', sessionPlayers => {
 			getSessionPlayers(sessionPlayers);
 		});
@@ -204,7 +202,7 @@ export class SocketIOService {
 	 * @param recordAnswer recordAnswer() callback function.
 	 * @return
 	 */
-	listenForRecordAnswer(recordAnswer: Function): void {
+	public listenForRecordAnswer(recordAnswer: Function): void {
 		this.socket.on('record-answer', answer => {
 			recordAnswer(answer);
 		});
@@ -216,9 +214,9 @@ export class SocketIOService {
 	 * @param deleteAnswer deleteAnswer() callback function.
 	 * @return
 	 */
-	listenForRemoveAnswer(deleteAnswer: Function): void {
-		this.socket.on('delete-answer', answer => {
-			deleteAnswer(answer);
+	public listenForRemoveAnswer(deleteAnswer: Function): void {
+		this.socket.on('delete-answer', () => {
+			deleteAnswer();
 		});
 	}
 
@@ -227,7 +225,7 @@ export class SocketIOService {
 	 * @param question Quesiton to be sent to all students in session.
 	 * @return
 	 */
-	teacherSubmit(question: string): void {
+	public teacherSubmit(question: string): void {
 		this.socket.emit('send-question', question);
 	}
 
@@ -237,7 +235,7 @@ export class SocketIOService {
 	 * @param data Answer given by student.
 	 * @return
 	 */
-	studentSubmit(data: any): void {
+	public studentSubmit(data: any): void {
 		this.socket.emit('submit', data);
 	}
 
@@ -245,7 +243,7 @@ export class SocketIOService {
 	 * Method that starts the game. Making it unable for new students to join.
 	 * @return
 	 */
-	startGame(): void {
+	public startGame(): void {
 		this.socket.emit('start-game');
 		this.socket.emit('get-players');
 	}
@@ -259,7 +257,7 @@ export class SocketIOService {
 	 * @param receivePairs receivePairs() callback function.
 	 * @return
 	 */
-	pairStudents(groups, groupSize, articles, receivePairs): void {
+	public pairStudents(groups, groupSize, articles, receivePairs): void {
 		this.socket.emit('pair-students', groups, groupSize, articles);
 		this.socket.on('send-pairs', (pairs, leaders, sources, subjects) => {
 			receivePairs(pairs, leaders, { sources: sources, subjects: subjects });
@@ -270,7 +268,7 @@ export class SocketIOService {
 	 * Method that removes all listeners from the socket.
 	 * @return
 	 */
-	removeListeners(): void {
+	public removeListeners(): void {
 		this.socket.removeAllListeners();
 		this.removedListeners = true;
 	}
@@ -281,7 +279,7 @@ export class SocketIOService {
 	 * @param player
 	 * @return
 	 */
-	activateStudentButton(player: any): void {
+	public activateStudentButton(player: any): void {
 		this.socket.emit('reactivate-button', player);
 		this.socket.emit('remove-answer', player)
 	}
@@ -291,7 +289,7 @@ export class SocketIOService {
 	 * @param reactivate reactivate() callback function.
 	 * @return
 	 */
-	reactivateButton(reactivate: Function): void {
+	public reactivateButton(reactivate: Function): void {
 		this.socket.on('reactivate', () => {
 			reactivate();
 		});
@@ -302,7 +300,7 @@ export class SocketIOService {
 	 * @param timedOut Whether the game finished by the time running out or the teacher manually stopping it.
 	 * @return
 	 */
-	finishGame(timedOut: boolean): void {
+	public finishGame(timedOut: boolean): void {
 		this.socket.emit('finish-game', timedOut);
 	}
 }

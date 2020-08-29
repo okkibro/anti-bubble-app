@@ -4,13 +4,6 @@
  * Computing Sciences)
  */
 
-/**
- * This file handles all the logic for handling resetting the user's old password by setting a new one through
- * a form. This page can only be visited by a user who is already registered in the database, requested a new
- * password through the password-recovery component and clicked the link with the correct reset token.
- * @packageDocumentation
- */
-
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -19,20 +12,25 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { titleTrail } from '../../../../constants';
 import { PasswordRecoveryService } from '../../services/password-recovery.service';
 
+/**
+ * This class handles all the logic for handling resetting the user's old password by setting a new one through
+ * a form. This page can only be visited by a user who is already registered in the database, requested a new
+ * password through the password-recovery component and clicked the link with the correct reset token.
+ */
 @Component({
-	selector: 'mean-password-reset',
+	selector: 'password-reset-component',
 	templateUrl: './password-reset.component.html',
 	styleUrls: ['./password-reset.component.css',
 		'../../shared/general-styles.css']
 })
 
 export class PasswordResetComponent implements OnInit {
-	passwordResetForm = this.fb.group({
+	public passwordResetForm = this.fb.group({
 			password: ['', [Validators.required]],
 			repeatPassword: ['', Validators.required]
 		},
 		{
-			validator: this.passwordMatchValidator
+			validator: PasswordResetComponent.passwordMatchValidator
 		});
 
 	/**
@@ -58,7 +56,7 @@ export class PasswordResetComponent implements OnInit {
 	 * Initialization method.
 	 * @return
 	 */
-	ngOnInit(): void {
+	public ngOnInit(): void {
 
 		// Check if token is correct, otherwise navigate back to login.
 		this.passwordRecoveryService.getResetPage(this.route.snapshot.paramMap.get('token')).subscribe(data => {
@@ -75,7 +73,7 @@ export class PasswordResetComponent implements OnInit {
 	 * Method to reset your password based on the filled in passwords in the form.
 	 * @return
 	 */
-	resetPassword(): void {
+	public resetPassword(): void {
 
 		// Get password from the form.
 		let newPassword = this.passwordResetForm.get('password').value;
@@ -96,7 +94,7 @@ export class PasswordResetComponent implements OnInit {
 	 * @param form Form in which the validation has to take place.
 	 * @return
 	 */
-	passwordMatchValidator(form: FormGroup): void {
+	private static passwordMatchValidator(form: FormGroup): void {
 		let password = form.get('password').value;
 		let repeatPassword = form.get('repeatPassword').value;
 		if (password != repeatPassword) {

@@ -4,18 +4,16 @@
  * Computing Sciences)
  */
 
-/**
- * This file contains all the logic and methods used by the horizontal toolbar shown in 'desktop mode'.
- * The logout button in fetched and a method for toggling the sidebar is included.
- * @packageDocumentation
- */
-
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { tokenData } from 'src/app/models/tokenData';
 import { AuthenticationService } from '../../services/authentication.service';
 
+/**
+ * This class contains all the logic and methods used by the horizontal toolbar shown in 'desktop mode'.
+ * The logout button in fetched and a method for toggling the sidebar is included.
+ */
 @Component({
-	selector: 'mean-toolbar',
+	selector: 'toolbar-component',
 	templateUrl: './toolbar.component.html',
 	styleUrls: ['./toolbar.component.css',
 		'../../shared/general-styles.css']
@@ -24,8 +22,8 @@ import { AuthenticationService } from '../../services/authentication.service';
 export class ToolbarComponent implements OnInit {
 	@Output() public sidenavToggle = new EventEmitter();
 
-	tokenData: tokenData;
-	toolbarRatio: number;
+	public tokenData: tokenData;
+	public toolbarRatio: number;
 
 	/**
 	 * ToolbarComponent constructor.
@@ -37,7 +35,7 @@ export class ToolbarComponent implements OnInit {
 	 * Initialization method.
 	 * @return
 	 */
-	ngOnInit(): void {
+	public ngOnInit(): void {
 		this.tokenData = this.auth.getTokenData();
 
 		// Calculated by dividing 100 by the amount of links for a certain role plus 2 for the
@@ -53,7 +51,7 @@ export class ToolbarComponent implements OnInit {
 	 * Method to logout the current user.
 	 * @return
 	 */
-	logoutButton(): void {
+	public logoutButton(): void {
 		return this.auth.logout();
 	}
 

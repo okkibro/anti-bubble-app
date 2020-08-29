@@ -4,12 +4,6 @@
  * Computing Sciences)
  */
 
-/**
- * This file sends all HTTP requests needed by the avatar page, which is just the equiping of items by
- * changing them in the database.
- * @packageDocumentation
- */
-
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';
@@ -17,6 +11,10 @@ import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { Item } from '../models/item';
 
+/**
+ * This file sends all HTTP requests needed by the avatar page, which is just the equiping of items by
+ * changing them in the database.
+ */
 @Injectable({
 	providedIn: 'root'
 })
@@ -34,7 +32,7 @@ export class AvatarService {
 	 * @param item Item to equip.
 	 * @return HTTP response data in an Observable.
 	 */
-	equip(item: Item): Observable<any> {
+	public equip(item: Item): Observable<any> {
 		return this.http.post(`${environment.ENDPOINT}/user/avatar`, { avatarItem: item }, { headers: { Authorization: 'Bearer ' + this.cookie.get('mean-token') }});
 	}
 }

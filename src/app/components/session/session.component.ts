@@ -4,13 +4,6 @@
  * Computing Sciences)
  */
 
-/**
- * This file handles all the logic for handling resetting the user's old password by setting a new one through
- * a form. This page can only be visited by a user who is already registered in the database, requested a new
- * password through the password-recovery component and clicked the link with the correct reset token.
- * @packageDocumentation
- */
-
 import { Component, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Title } from '@angular/platform-browser';
@@ -23,33 +16,36 @@ import { beforeUnload, earnAmount, titleTrail } from '../../../../constants';
 import { tokenData } from '../../models/tokenData';
 import { AuthenticationService } from '../../services/authentication.service';
 
+/**
+ * This class handles all the logic for handling resetting the user's old password by setting a new one through
+ * a form. This page can only be visited by a user who is already registered in the database, requested a new
+ * password through the password-recovery component and clicked the link with the correct reset token.
+ */
 @Component({
-	selector: 'mean-session',
+	selector: 'session-component',
 	templateUrl: './session.component.html',
 	styleUrls: ['./session.component.css',
 		'../../shared/general-styles.css']
 })
 
 export class SessionComponent implements OnInit {
-	tokenData: tokenData;
-	players = [];
-	pin;
-	gameData;
-	playerCount = 0;
-	activity;
-	gameStarted;
-	interval;
-	gameFinished = false;
-	leaveByHomeButton = false;
-	enableQuestions: boolean = false;
-	pairs;
-	randomGroups: boolean;
-	submits: any[][] = [];
-	leaders;
-	sources;
-	subjects;
-	timedOut: boolean = false;
-	earnAmount: number = 5;
+	public tokenData: tokenData;
+	private players = [];
+	public pin;
+	public gameData;
+	public playerCount: number = 0;
+	public gameStarted;
+	public interval;
+	public gameFinished: boolean = false;
+	public leaveByHomeButton = false;
+	public enableQuestions: boolean = false;
+	private pairs;
+	private randomGroups: boolean;
+	private submits: any[][] = [];
+	private leaders;
+	private sources;
+	private subjects;
+	public timedOut: boolean = false;
 
 	/**
 	 * SessionComponent constructor.
@@ -75,7 +71,7 @@ export class SessionComponent implements OnInit {
 	 * Initialization method.
 	 * @return
 	 */
-	ngOnInit(): void {
+	public ngOnInit(): void {
 		this.gameStarted = false;
 		this.randomGroups = true;
 		this.gameData = this.getGameData();
@@ -204,7 +200,7 @@ export class SessionComponent implements OnInit {
 	 * Method that calls the leave session function in the socket io service.
 	 * @return
 	 */
-	leaveSession() {
+	public leaveSession() {
 		this.socketService.leaveSession();
 	}
 
@@ -212,7 +208,7 @@ export class SessionComponent implements OnInit {
 	 * Method that returns if a student leaving the session was caused by the host disconnecting.
 	 * @return Whether student leaving was caused by teacher disconnecting.
 	 */
-	isHostDisconnected(): boolean {
+	public isHostDisconnected(): boolean {
 		return this.socketService.hostDisconnected;
 	}
 
@@ -220,23 +216,15 @@ export class SessionComponent implements OnInit {
 	 * Method that returns the game data.
 	 * @return Data of the game.
 	 */
-	getGameData(): any {
+	private getGameData(): any {
 		return this.socketService.gameData;
-	}
-
-	/**
-	 * Method that submits the passed answer to the host of the session.
-	 * @param data Student's answer.
-	 */
-	submit(data: string) {
-		this.socketService.studentSubmit(data);
 	}
 
 	/**
 	 * Method that starts the game. Making it unable for students to join the session.
 	 * @return
 	 */
-	startGame() {
+	public startGame() {
 
 		// Teacher wants to start a game without any players in it.
 		if (this.playerCount === 0) {
@@ -258,7 +246,7 @@ export class SessionComponent implements OnInit {
 	 * @param game Type of the activity.
 	 * @return Whether it is possible to start the game.
 	 */
-	canStart(game: string): boolean {
+	private canStart(game: string): boolean {
 		switch (game) {
 			case 'Naamloos Nieuws':
 				if (this.playerCount < 3) {
@@ -276,7 +264,7 @@ export class SessionComponent implements OnInit {
 	 * @param game Type of the activity.
 	 * @return
 	 */
-	initGame(game: string): void {
+	private initGame(game: string): void {
 		switch (game) {
 			case 'Naamloos Nieuws':
 
@@ -321,7 +309,7 @@ export class SessionComponent implements OnInit {
 	 * @param time Amount of time to play the game.
 	 * @return
 	 */
-	startTimer(time: number): void {
+	private startTimer(time: number): void {
 
 		// Create an interval that calls the given function every second.
 		// The function updates the value of the time at the top of the screen to be 1 second less than the previous second it was called.
@@ -349,7 +337,7 @@ export class SessionComponent implements OnInit {
 	 * @param articles Articles to be paired to students in the group.
 	 * @param receivePairs Callback function.
 	 */
-	pairStudents(groups: string[][], groupSize: number, articles: Article, receivePairs: Function): void {
+	private pairStudents(groups: string[][], groupSize: number, articles: Article, receivePairs: Function): void {
 		this.socketService.pairStudents(groups, groupSize, articles, (pairs, leaders, sources) => {
 			receivePairs(pairs, leaders, sources);
 		});
@@ -360,7 +348,7 @@ export class SessionComponent implements OnInit {
 	 * @param timedOut Whether the game finished by the time running out or the teacher manually stopping it.
 	 * @return
 	 */
-	stopGame(timedOut: boolean): void {
+	public stopGame(timedOut: boolean): void {
 		this.gameFinished = true;
 		clearInterval(this.interval);
 		let timeLeft = document.getElementById('counter');
@@ -377,7 +365,7 @@ export class SessionComponent implements OnInit {
 	 * Method that makes the host leave the session and the page.
 	 * @return
 	 */
-	leaveGame(): void {
+	public leaveGame(): void {
 		this.leaveSession();
 		this.leaveByHomeButton = true;
 		window.removeEventListener('beforeunload', beforeUnload);
@@ -389,7 +377,7 @@ export class SessionComponent implements OnInit {
 	 * @param game Type of the activity.
 	 * @return
 	 */
-	showAnswersonScreen(game: string): void {
+	private showAnswersonScreen(game: string): void {
 		switch (game) {
 			case 'Naamloos Nieuws':
 				let table = document.getElementsByClassName('submit-table')[0];

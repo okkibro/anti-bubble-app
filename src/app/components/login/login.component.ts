@@ -4,12 +4,6 @@
  * Computing Sciences)
  */
 
-/**
- * This file handles all the logic for logging in a user to the app. Only contains a method that calls the login()
- * method of the AuthenticationService.
- * @packageDocumentation
- */
-
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -19,15 +13,19 @@ import { titleTrail } from '../../../../constants';
 import { User } from '../../models/user';
 import { AuthenticationService } from '../../services/authentication.service';
 
+/**
+ * This class handles all the logic for logging in a user to the app. Only contains a method that calls the login()
+ * method of the AuthenticationService.
+ */
 @Component({
-	selector: 'mean-login',
+	selector: 'login-component',
 	templateUrl: './login.component.html',
 	styleUrls: ['./login.component.css',
 		'../../shared/general-styles.css']
 })
 
 export class LoginComponent implements OnInit {
-	loginForm = this.fb.group({
+	public loginForm = this.fb.group({
 		email: ['', [Validators.required, Validators.email]],
 		password: ['', Validators.required]
 	});
@@ -52,7 +50,7 @@ export class LoginComponent implements OnInit {
 	 * Initialization method.
 	 * @return
 	 */
-	ngOnInit(): void {
+	public ngOnInit(): void {
 		if (this.auth.isLoggedIn()) {
 			this.router.navigate(['home']);
 		}
@@ -65,7 +63,7 @@ export class LoginComponent implements OnInit {
 	 * Method to login a user.
 	 * @return
 	 */
-	loginUser() {
+	public loginUser() {
 		let user = new User();
 		user.email = this.loginForm.get('email').value;
 		user.password = this.loginForm.get('password').value;

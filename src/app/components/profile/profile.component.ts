@@ -4,12 +4,6 @@
  * Computing Sciences)
  */
 
-/**
- * This file handles all the logic for collecting all the information necessary for displaying the user's
- * profile. The component is not the same for teachers and students, but the ngOnInit() method is.
- * @packageDocumentation
- */
-
 import { Component, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Title } from '@angular/platform-browser';
@@ -20,17 +14,21 @@ import { milestones, titleTrail } from '../../../../constants';
 import { User } from '../../models/user';
 import { UserService } from '../../services/user.service';
 
+/**
+ * This class handles all the logic for collecting all the information necessary for displaying the user's
+ * profile. The component is not the same for teachers and students, but the ngOnInit() method is.
+ */
 @Component({
-	selector: 'mean-profile',
+	selector: 'profile-component',
 	templateUrl: './profile.component.html',
 	styleUrls: ['./profile.component.css',
 		'../../shared/general-styles.css']
 })
 
 export class ProfileComponent implements OnInit {
-	userDetails: User;
-	milestoneShown: Milestone;
-	userClassTitle: string;
+	public userDetails: User;
+	public milestoneShown: Milestone;
+	public userClassTitle: string;
 
 	/**
 	 * ProfileComponent constructor.
@@ -52,7 +50,7 @@ export class ProfileComponent implements OnInit {
 	 * Initialization method.
 	 * @return
 	 */
-	ngOnInit(): void {
+	public ngOnInit(): void {
 
 		// Milestone that gets shown when you have all badges.
 		this.milestoneShown = {

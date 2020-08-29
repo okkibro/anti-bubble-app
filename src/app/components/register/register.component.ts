@@ -4,13 +4,6 @@
  * Computing Sciences)
  */
 
-/**
- * This file handles all the logic for registering a new user in the app. Most of the validation of the
- * form inputs is done here in the front-end and passed to the back-end where some sanitization of
- * inputs is done and hashing of the password.
- * @packageDocumentation
- */
-
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Title } from '@angular/platform-browser';
@@ -21,15 +14,20 @@ import { User } from '../../models/user';
 import { AuthenticationService } from '../../services/authentication.service';
 import { UserService } from '../../services/user.service';
 
+/**
+ * This class handles all the logic for registering a new user in the app. Most of the validation of the
+ * form inputs is done here in the front-end and passed to the back-end where some sanitization of
+ * inputs is done and hashing of the password.
+ */
 @Component({
-	selector: 'mean-register',
+	selector: 'register-component',
 	templateUrl: './register.component.html',
 	styleUrls: ['./register.component.css',
 		'../../shared/general-styles.css']
 })
 
 export class RegisterComponent implements OnInit {
-	registerForm = this.fb.group({
+	public registerForm = this.fb.group({
 			firstName: ['', Validators.required],
 			lastName: ['', Validators.required],
 			gender: ['', Validators.required],
@@ -43,7 +41,7 @@ export class RegisterComponent implements OnInit {
 			repeatPassword: ['', Validators.required],
 		},
 		{
-			validator: this.passwordMatchValidator
+			validator: RegisterComponent.passwordMatchValidator
 		});
 
 	/**
@@ -68,7 +66,7 @@ export class RegisterComponent implements OnInit {
 	 * Initialization method.
 	 * @return
 	 */
-	ngOnInit(): void {
+	public ngOnInit(): void {
 		// Set page title.
 		this.titleService.setTitle('Registreer' + titleTrail);
 	}
@@ -77,7 +75,7 @@ export class RegisterComponent implements OnInit {
 	 * Method to register a new user based on the information filled in on the form.
 	 * @return
 	 */
-	registerUser(): void {
+	public registerUser(): void {
 		let user = new User();
 		user.firstName = this.registerForm.get('firstName').value;
 		user.lastName = this.registerForm.get('lastName').value;
@@ -100,7 +98,7 @@ export class RegisterComponent implements OnInit {
 	 * @param form Form in which the validation has to take place.
 	 * @return
 	 */
-	passwordMatchValidator(form: FormGroup): void {
+	private static passwordMatchValidator(form: FormGroup): void {
 		let password = form.get('password').value;
 		let repeatPassword = form.get('repeatPassword').value;
 		if (password != repeatPassword) {

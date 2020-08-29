@@ -4,22 +4,20 @@
  * Computing Sciences)
  */
 
-/**
- * This file contains all the code for exchanging a message from a component to all other subscribed components,
- * which is mainly used to get the session code across.
- * @packageDocumentation
- */
-
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 
+/**
+ * This file contains all the code for exchanging a message from a component to all other subscribed components,
+ * which is mainly used to get the session code across.
+ */
 @Injectable({
 	providedIn: 'root'
 })
 
 export class DataService {
 	private messageSource = new BehaviorSubject('');
-	currentMessage = this.messageSource.asObservable();
+	public currentMessage = this.messageSource.asObservable();
 
 	constructor() { }
 
@@ -27,7 +25,7 @@ export class DataService {
 	 * @param message Data to be transferred between components.
 	 * @return
 	 */
-	changeMessage(message: string): void {
+	public changeMessage(message: string): void {
 		this.messageSource.next(message);
 	}
 }

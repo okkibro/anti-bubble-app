@@ -4,13 +4,6 @@
  * Computing Sciences)
  */
 
-/**
- * This file handles all the logic for handling for creating the app's item shop. User can browse throught the store
- * and buy items they don't have yet. Each item category has its own tab and changing tabs and filtering items based on
- * the tab is all handled here.
- * @packageDocumentation
- */
-
 import { Component, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatTabChangeEvent } from '@angular/material/tabs';
@@ -22,19 +15,24 @@ import { User } from '../../models/user';
 import { MilestoneUpdatesService } from '../../services/milestone-updates.service';
 import { UserService } from '../../services/user.service';
 
+/**
+ * This class handles all the logic for handling for creating the app's item shop. User can browse throught the store
+ * and buy items they don't have yet. Each item category has its own tab and changing tabs and filtering items based on
+ * the tab is all handled here.
+ */
 @Component({
-	selector: 'mean-shop',
+	selector: 'shop-component',
 	templateUrl: './shop.component.html',
 	styleUrls: ['./shop.component.css',
 		'../../shared/general-styles.css']
 })
 
 export class ShopComponent implements OnInit {
-	userDetails: User;
-	shopDetails: Item[];
-	filteredShop: Item[];
-	itemColumns: number;
-	shopCategories: string[] = [
+	public userDetails: User;
+	private shopDetails: Item[];
+	public filteredShop: Item[];
+	public itemColumns: number;
+	public shopCategories: string[] = [
 		'Hoofddeksel',
 		'Haar',
 		'Bril',
@@ -89,7 +87,7 @@ export class ShopComponent implements OnInit {
 	 * @param event Event triggered by changing tab/category.
 	 * @return
 	 */
-	tabChange(event: MatTabChangeEvent): void {
+	public tabChange(event: MatTabChangeEvent): void {
 		this.shopService.getCategoryItems(event.tab.textLabel).subscribe(items => {
 			this.shopDetails = items;
 			this.filteredShop = this.filterShop();
@@ -102,7 +100,7 @@ export class ShopComponent implements OnInit {
 	 * @param item Item that is bought by the user.
 	 * @return
 	 */
-	buy(item: Item): void {
+	public buy(item: Item): void {
 		this.shopService.buy(item).subscribe((data: any) => {
 			if (data.succes) {
 				this.snackBar.open(data.message, 'X', { duration: 2000, panelClass: ['style-succes'] }).afterDismissed().subscribe(() => {
@@ -135,7 +133,7 @@ export class ShopComponent implements OnInit {
 	/** Method to filter the shop based on if the user already owns the item.
 	 * @return List of items that comply to the applied filter.
 	 */
-	filterShop(): Item[] {
+	private filterShop(): Item[] {
 		return this.shopDetails.filter(x => {
 			return this.userDetails.inventory.find(y => y._id === x._id) == null;
 		});
@@ -145,7 +143,7 @@ export class ShopComponent implements OnInit {
 	 * Method that sets the initial amount of columns based on screen width.
 	 * @return
 	 */
-	setItemColumns(): void {
+	private setItemColumns(): void {
 		const screenWidth = window.innerWidth;
 
 		if (screenWidth >= 1280) {
@@ -166,7 +164,7 @@ export class ShopComponent implements OnInit {
 	 * @param event Event triggered when the screen changes size.
 	 * @return
 	 */
-	onResize(event): void {
+	public onResize(event): void {
 		const screenWidth = event.target.innerWidth;
 
 		if (screenWidth >= 1280) {
