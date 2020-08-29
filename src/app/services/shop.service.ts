@@ -4,6 +4,10 @@
  * Computing Sciences)
  */
 
+/**
+ * @packageDocumentation
+ * @module Services
+ */
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
@@ -13,7 +17,7 @@ import { environment } from 'src/environments/environment';
 import { Item } from '../models/item';
 
 /**
- * This file sends all HTTP requests used for recovering and resetting a user's password.
+ * This class sends all HTTP requests used for recovering and resetting a user's password.
  */
 @Injectable({
 	providedIn: 'root'

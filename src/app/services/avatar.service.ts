@@ -4,6 +4,10 @@
  * Computing Sciences)
  */
 
+/**
+ * @packageDocumentation
+ * @module Services
+ */
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';
@@ -12,7 +16,7 @@ import { environment } from 'src/environments/environment';
 import { Item } from '../models/item';
 
 /**
- * This file sends all HTTP requests needed by the avatar page, which is just the equiping of items by
+ * This class sends all HTTP requests needed by the avatar page, which is just the equiping of items by
  * changing them in the database.
  */
 @Injectable({

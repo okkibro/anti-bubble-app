@@ -5,6 +5,11 @@
  */
 
 /**
+ * @packageDocumentation
+ * @module Models
+ */
+
+/**
  * This class represents the database model for an Article used in the front-end.
  */
 

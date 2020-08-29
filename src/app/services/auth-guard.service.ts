@@ -4,6 +4,10 @@
  * Computing Sciences)
  */
 
+/**
+ * @packageDocumentation
+ * @module Services
+ */
 import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, CanActivate, Router } from '@angular/router';
 import { AuthenticationService } from './authentication.service';
@@ -28,7 +32,7 @@ export class AuthGuardService implements CanActivate {
 	}
 
 	/** Method to check whether the user can access a certain page.
-	 * @param route
+	 * @param route Information about the current route that has to be checked for access rights.
 	 * @return Whether the visitor can access the requested page.
 	 */
 	public canActivate(route: ActivatedRouteSnapshot): boolean {

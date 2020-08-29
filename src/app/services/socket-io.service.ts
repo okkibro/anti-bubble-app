@@ -4,6 +4,10 @@
  * Computing Sciences)
  */
 
+/**
+ * @packageDocumentation
+ * @module Services
+ */
 import { Injectable } from '@angular/core';
 import * as io from 'socket.io-client';
 import { environment } from 'src/environments/environment';
@@ -11,7 +15,7 @@ import { User } from '../models/user';
 import { DataService } from './data-exchange.service';
 
 /**
- * This file contains all methods used by socketIO for our implementation of sockets for the classical
+ * This class contains all methods used by socketIO for our implementation of sockets for the classical
  * game sessions.
  */
 @Injectable({

@@ -4,12 +4,16 @@
  * Computing Sciences)
  */
 
+/**
+ * @packageDocumentation
+ * @module Services
+ */
 import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot } from '@angular/router';
 import { UserService } from './user.service';
 
 /**
- * This file contains the guard for determining whether a user can visit the labyrinth page, which he can
+ * This class contains the guard for determining whether a user can visit the labyrinth page, which he can
  * only when he hasn't done it yet.
  */
 @Injectable({
@@ -27,11 +31,9 @@ export class LabyrinthGuardService implements CanActivate {
 
     /**
      * Guard that makes sure the user can't direct back to labyrinth after it is already completed.
-     * @param currentRoute
-     * @param currentState
      * @return Whether user can visit the labyrinth page.
      */
-    public canActivate(currentRoute: ActivatedRouteSnapshot, currentState: RouterStateSnapshot): boolean {
+    public canActivate(): boolean {
         this.userService.profile().subscribe((user) => {
             if (user.bubbleInit) {
                 this.router.navigateByUrl('/home');

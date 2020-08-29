@@ -1,9 +1,13 @@
 /*
  * This program has been developed by students from the bachelor Computer Science at Utrecht University
- *  within the Software Project course. © Copyright Utrecht University (Department of Information and
- *  Computing Sciences)
+ * within the Software Project course. © Copyright Utrecht University (Department of Information and
+ * Computing Sciences)
  */
 
+/**
+ * @packageDocumentation
+ * @module Components
+ */
 import { Component, OnInit } from '@angular/core';
 import { PageEvent } from '@angular/material/paginator';
 import { Title } from '@angular/platform-browser';

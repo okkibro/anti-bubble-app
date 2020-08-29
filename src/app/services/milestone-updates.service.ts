@@ -4,6 +4,10 @@
  * Computing Sciences)
  */
 
+/**
+ * @packageDocumentation
+ * @module Services
+ */
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';
@@ -12,7 +16,7 @@ import { environment } from 'src/environments/environment';
 import { Milestone } from '../models/milestone';
 
 /**
- * This file sends all HTTP requests for determining whether a user can visit the labyrinth page, which he can
+ * This class sends all HTTP requests for determining whether a user can visit the labyrinth page, which he can
  * only when he hasn't done it yet.
  */
 @Injectable({

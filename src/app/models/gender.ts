@@ -5,6 +5,11 @@
  */
 
 /**
+ * @packageDocumentation
+ * @module Models
+ */
+
+/**
  * This is the enum for the app's available genders used in the front-end.
  */
 

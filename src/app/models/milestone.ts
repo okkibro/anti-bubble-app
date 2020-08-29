@@ -5,6 +5,11 @@
  */
 
 /**
+ * @packageDocumentation
+ * @module Models
+ */
+
+/**
  * This class represents the database model for a Milestone used in the front-end.
  */
 

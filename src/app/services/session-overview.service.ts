@@ -1,9 +1,13 @@
 /*
  * This program has been developed by students from the bachelor Computer Science at Utrecht University
- *  within the Software Project course. © Copyright Utrecht University (Department of Information and
- *  Computing Sciences)
+ * within the Software Project course. © Copyright Utrecht University (Department of Information and
+ * Computing Sciences)
  */
 
+/**
+ * @packageDocumentation
+ * @module Services
+ */
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';
@@ -11,7 +15,7 @@ import { Observable } from 'rxjs';
 import { environment } from '../../environments/environment';
 
 /**
- * This file sends all HTTP requests for getting session logs from the database based on user decided filters.
+ * This class sends all HTTP requests for getting session logs from the database based on user decided filters.
  */
 @Injectable({
 	providedIn: 'root'

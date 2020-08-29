@@ -4,6 +4,10 @@
  * Computing Sciences)
  */
 
+/**
+ * @packageDocumentation
+ * @module Services
+ */
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
@@ -20,7 +24,7 @@ interface TokenResponse {
 }
 
 /**
- * This file sends all HTTP requests used for logging in, registering a user and contains all methods that deal
+ * This class sends all HTTP requests used for logging in, registering a user and contains all methods that deal
  * with the user's token/cokkie data.
  */
 @Injectable({

@@ -4,6 +4,11 @@
  * Computing Sciences)
  */
 
+/**
+ * @packageDocumentation
+ * @module Models
+ */
+
 import { Gender } from './gender';
 import { Item } from './item';
 import { Milestone } from './milestone';

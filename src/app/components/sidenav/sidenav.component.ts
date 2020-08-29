@@ -4,6 +4,10 @@
  * Computing Sciences)
  */
 
+/**
+ * @packageDocumentation
+ * @module Components
+ */
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { tokenData } from '../../models/tokenData';
 import { AuthenticationService } from '../../services/authentication.service';

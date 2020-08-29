@@ -4,6 +4,10 @@
  * Computing Sciences)
  */
 
+/**
+ * @packageDocumentation
+ * @module Services
+ */
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';
@@ -13,7 +17,7 @@ import { Class } from '../models/class';
 import { User } from '../models/user';
 
 /**
- * This file sends all HTTP requests related to classes in the app. HTTP request methods for creating, deleting
+ * This class sends all HTTP requests related to classes in the app. HTTP request methods for creating, deleting
  * getting, leaving and joining classes are in this file.
  */
 @Injectable({

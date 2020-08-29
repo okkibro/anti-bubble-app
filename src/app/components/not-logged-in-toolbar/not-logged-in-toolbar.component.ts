@@ -4,6 +4,10 @@
  * Computing Sciences)
  */
 
+/**
+ * @packageDocumentation
+ * @module Components
+ */
 import { Component, OnInit } from '@angular/core';
 
 /**

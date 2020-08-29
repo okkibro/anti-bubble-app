@@ -5,6 +5,11 @@
  */
 
 /**
+ * @packageDocumentation
+ * @module Models
+ */
+
+/**
  * This class represents the database model for a Question in the initial labyrinth a user
  * goes through to form their original filter bubble used in the front-end.
  */

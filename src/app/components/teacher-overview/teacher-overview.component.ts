@@ -4,6 +4,10 @@
  * Computing Sciences)
  */
 
+/**
+ * @packageDocumentation
+ * @module Components
+ */
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog';
@@ -208,7 +212,7 @@ export class DeleteClassDialog {
 
 
 	/**
-	 * Method to delete a user's account.
+	 * Method to delete a teacher's currently selected class.
 	 * @return
 	 */
 	public deleteClass(): void {

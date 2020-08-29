@@ -4,6 +4,11 @@
  * Computing Sciences)
  */
 
+/**
+ * @packageDocumentation
+ * @module Models
+ */
+
 import { Role } from './role';
 
 /**

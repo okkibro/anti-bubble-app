@@ -4,6 +4,11 @@
  * Computing Sciences)
  */
 
+/**
+ * @packageDocumentation
+ * @module Models
+ */
+
 import { Activity } from './activity';
 import { Class } from './class';
 import { User } from './user';

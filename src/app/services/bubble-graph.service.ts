@@ -4,6 +4,10 @@
  * Computing Sciences)
  */
 
+/**
+ * @packageDocumentation
+ * @module Services
+ */
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';
@@ -12,7 +16,7 @@ import { environment } from 'src/environments/environment';
 import { Question } from '../models/question';
 
 /**
- * This file sends all HTTP requests used for processing the user's introduction labyrinth.
+ * This class sends all HTTP requests used for processing the user's introduction labyrinth.
  */
 @Injectable({
 	providedIn: 'root'
