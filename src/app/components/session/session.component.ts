@@ -182,6 +182,7 @@ export class SessionComponent implements OnInit {
 							this.socketService.activateStudentButton(data.player);
 						});
 						tablerow.innerHTML = `<strong>${data.player.name.split(' ')[0]}:</strong> ${data.message} `;
+						tablerow.style.paddingBottom = '5px';
 						tablerow.appendChild(deleteButton);
 						tablerow.appendChild(breakLine);
 						submitTable.appendChild(tablerow);
