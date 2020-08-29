@@ -5,7 +5,10 @@
  */
 
 /**
- * This file sends all HTTP requests used for recovering and resetting a user's password.
+ * This file sends all HTTP requests related to a user's profile (data). The file contains methods for
+ * fetching a user's profile, methods to de HTTP requests for event triggered on the settings page (like
+ * deleting an account or changing a password) and it also contains a validator used in numerous places
+ * in the app for querying the database to see if an account with a certain email already exists.
  * @packageDocumentation
  */
 
