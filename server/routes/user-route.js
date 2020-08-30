@@ -22,7 +22,9 @@ const auth = jwt({
 	userProperty: 'payload'
 });
 
-/** POST method to register a new user to the database. */
+/**
+ * POST method to register a new user to the database.
+ */
 router.post('/register', (req, res) => {
 
 	// Make a new user.
@@ -53,9 +55,13 @@ router.post('/register', (req, res) => {
 	user.currency = 0;
 	user.classArray = [];
 	user.milestones = [0, 0, 0, 0, 0, 0, 0, 0];
-	user.recentMilestones = [];
+	user.scoreboard = [];
 	for (let i = 0; i < 5; i++) {
-		user.recentMilestones[i] = '';
+		user.scoreboard[i] = '';
+	}
+	user.classUpdates = [];
+	for (let i = 0; i < 5; i++) {
+		user.classUpdates[i] = '';
 	}
 
 	// Building the basic avatar upon registering.
@@ -85,7 +91,9 @@ router.post('/register', (req, res) => {
 	});
 });
 
-/** POST method to check if login details match with the database (authentication). */
+/**
+ * POST method to check if login details match with the database (authentication).
+ */
 router.post('/login', (req, res) => {
 	passport.authenticate('local', (err, user) => {
 
@@ -105,7 +113,9 @@ router.post('/login', (req, res) => {
 	})(req, res);
 });
 
-/** POST method to send a password recovery email. */
+/**
+ * POST method to send a password recovery email.
+ */
 router.post('/passwordrecovery', async (req, res) => {
 
 	// Generate Random Token.
@@ -170,7 +180,9 @@ router.post('/passwordrecovery', async (req, res) => {
 	});
 });
 
-/** GET method to check the password recovery token and shows the reset password page or a wrong token err. */
+/**
+ * GET method to check the password recovery token and shows the reset password page or a wrong token err.
+ */
 router.get('/reset/:token', (req, res) => {
 
 	// Find the user that belongs to the given token
@@ -183,7 +195,9 @@ router.get('/reset/:token', (req, res) => {
 	});
 });
 
-/** POST method to change the password of the user belonging to the given password recovery token. */
+/**
+ * POST method to change the password of the user belonging to the given password recovery token.
+ */
 router.post('/reset/:token', (req, res) => {
 
 	// Find the user that belongs to the given token
@@ -210,7 +224,9 @@ router.post('/reset/:token', (req, res) => {
 	});
 });
 
-/** GET method to get a user from the database given an id. */
+/**
+ * GET method to get a user from the database given an id.
+ */
 router.get('/profile', auth, (req, res) => {
 
 	// Check if user is authorized to perform the action.
@@ -223,7 +239,9 @@ router.get('/profile', auth, (req, res) => {
 	}
 });
 
-/** POST method to check if email is already present in the database. */
+/**
+ * POST method to check if email is already present in the database.
+ */
 router.post('/checkEmailTaken', (req, res) => {
 	Users.findOne({ email: sanitize(req.body.email) }).then(user => {
 		if (user) {
@@ -234,7 +252,9 @@ router.post('/checkEmailTaken', (req, res) => {
 	});
 });
 
-/** PATCH method to update a password given an email. */
+/**
+ * PATCH method to update a password given an email.
+ */
 router.patch('/updatePassword', auth, (req, res) => {
 
 	// Check if user is authorized to perform the action.
@@ -270,8 +290,10 @@ router.patch('/updatePassword', auth, (req, res) => {
 	}
 });
 
-/** POST method to changes a milestone by a given value, returns the updated value and whether it is completed or not. */
-router.post('/milestone', auth, (req, res) => {
+/**
+ * POST method to changes a milestone by a given value, returns the updated value and whether it is completed or not.
+ */
+router.post('/updateMilestone', auth, (req, res) => {
 
 	// Check if user is authorized to perform the action.
 	if (!req.payload._id) {
@@ -316,8 +338,10 @@ router.post('/milestone', auth, (req, res) => {
 	}
 });
 
-/** POST method to post a new message to recent milestones. */
-router.post('/recentMilestones', auth, (req, res) => {
+/**
+ * POST method to add a new message to a user's scorebaord so it can be shown on the home page.
+ */
+router.post('/updateScoreboard', auth, (req, res) => {
 
 	// Check if user is authorized to perform the action.
 	if (!req.payload._id) {
@@ -327,10 +351,10 @@ router.post('/recentMilestones', auth, (req, res) => {
 			if (!err) {
 
 				// Push new value into the array.
-				user.recentMilestones.push(req.body.value);
+				user.scoreboard.push(req.body.value);
 
 				// Remove oldest value of the 5.
-				user.recentMilestones.shift();
+				user.scoreboard.shift();
 				user.save().then(() => {
 					return res.status(200).json({ succes: true });
 				}).catch((err) => {
@@ -343,7 +367,38 @@ router.post('/recentMilestones', auth, (req, res) => {
 	}
 });
 
-/** POST method to equip the avatar with the send item. */
+/**
+ * POST method to post a new message to recent milestones.
+ */
+router.post('/classUpdates', auth, (req, res) => {
+
+	// Check if user is authorized to perform the action.
+	if (!req.payload._id) {
+		return res.status(401).json({ message: 'UnauthorizedError: unauthorized action' });
+	} else {
+		Users.findById(req.payload._id, (err, user) => {
+			if (!err) {
+
+				// Push new value into the array.
+				user.classUpdates.push(req.body.value);
+
+				// Remove oldest value of the 5.
+				user.classUpdates.shift();
+				user.save().then(() => {
+					return res.status(200).json({ succes: true });
+				}).catch((err) => {
+					return res.status(500).json({ succes: false, message: err });
+				});
+			} else {
+				return res.status(404).json({ succes: false, message: err });
+			}
+		});
+	}
+});
+
+/**
+ * POST method to equip the avatar with the send item.
+ */
 router.post('/avatar', auth, (req, res) => {
 
 	// Check if user is authorized to perform the action.
@@ -370,7 +425,9 @@ router.post('/avatar', auth, (req, res) => {
 	}
 });
 
-/** POST method to update user bubble after performing/pausing the labyrinth. */
+/**
+ * POST method to update user bubble after performing/pausing the labyrinth.
+ */
 router.post('/processAnswers', auth, (req, res) => {
 
 	// Check if user is authorized to perform the action.
@@ -413,7 +470,9 @@ router.post('/processAnswers', auth, (req, res) => {
 	}
 });
 
-/** DELETE method for deleting a user's account */
+/**
+ * DELETE method for deleting a user's account.
+ */
 router.delete('/deleteAccount', auth, (req, res) => {
 
 	// Check if user is authorized to perform the action.
@@ -476,7 +535,9 @@ router.delete('/deleteAccount', auth, (req, res) => {
 	}
 });
 
-/** PATCH method that updates a field of the user in the database. */
+/**
+ * PATCH method that updates a field of the user in the database.
+ */
 router.patch('/updateUser', auth, (req, res) => {
 	// Check if user is authorized to perform the action.
 	if (!req.payload._id) {

@@ -18,7 +18,9 @@ const auth = jwt({
 	userProperty: 'payload'
 });
 
-/** POST method to create a new class in the database. */
+/**
+ * POST method to create a new class in the database.
+ */
 router.post('/createClass', auth, (req, res) => {
 
 	// Check if user is authorized to perform the action.
@@ -45,7 +47,9 @@ router.post('/createClass', auth, (req, res) => {
 	}
 });
 
-/** POST method to join a user to a class. */
+/**
+ * POST method for a user to join an already existing class.
+ */
 router.post('/joinClass', auth, (req, res) => {
 
 	// Check if user is authorized to perform the action.
@@ -101,8 +105,10 @@ router.post('/joinClass', auth, (req, res) => {
 	}
 });
 
-/** GET method to get the class a user is in.
- * In case of a teacher this functions gives back the first class in the teachers class list. */
+/**
+ * GET method to get the class a user is in.
+ * In case of a teacher this functions gives back the first class in the teachers class list.
+ */
 router.get('/getClass', auth, (req, res) => {
 
 	// Check if user is authorized to perform the action.
@@ -142,7 +148,9 @@ router.get('/getClass', auth, (req, res) => {
 	}
 });
 
-/** GET method to get all the database class ids a user has in their class list. */
+/**
+ * GET method to get all the database class ids a user has in their class list.
+ */
 router.get('/getClassIds', auth, (req, res) => {
 
 	// Check if user is authorized to perform the action.
@@ -159,7 +167,9 @@ router.get('/getClassIds', auth, (req, res) => {
 	}
 });
 
-/** GET method to get a class based on the given id in the url. */
+/**
+ * GET method to get a class based on the given id in the url.
+ */
 router.get('/getSingleClass/:id', auth, (req, res) => {
 
 	// Check if user is authorized to perform the action.
@@ -193,7 +203,9 @@ router.get('/getSingleClass/:id', auth, (req, res) => {
 	}
 });
 
-/** GET method to get a profile of a user in your class. */
+/**
+ * GET method to get a profile of a user in your class.
+ */
 router.get('/classmateProfile/:id', auth, (req, res) => {
 
 	// Check if user is authorized to perform the action.
@@ -228,7 +240,9 @@ router.get('/classmateProfile/:id', auth, (req, res) => {
 	}
 });
 
-/** DELETE method for deleting a class based on a given id. */
+/**
+ * DELETE method for deleting a class based on a given id.
+ */
 router.delete('/deleteClass/:id', auth, (req, res) => {
 
 	// Check if user is authorized to perform the action.
@@ -265,7 +279,9 @@ router.delete('/deleteClass/:id', auth, (req, res) => {
 	}
 });
 
-/** PATCH that removes a student from a class (whether initiated by the teacher or the student themselves). */
+/**
+ * PATCH that removes a student from a class (whether initiated by the teacher or the student themselves).
+ */
 router.patch('/leaveClass', auth, (req, res) => {
 
 	// Check if user is authorized to perform the action.

@@ -46,7 +46,8 @@ let usersSchema = new Schema({
 		},
 		required: false
 	},
-	recentMilestones: { type: [String], required: true },
+	scoreboard: { type: [String], required: true },
+	classUpdates: { type: [String], required: true },
 	bubbleInit: { type: Boolean, required: true },
 	labyrinthAnswers: { type: [Number] },
 	bubble: {

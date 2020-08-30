@@ -17,7 +17,9 @@ const auth = jwt({
 	userProperty: 'payload'
 });
 
-/** GET method to get shop items from the database belonging to a certain category. */
+/**
+ * GET method to get shop items from the database belonging to a certain category.
+ */
 router.get('/', auth, (req, res) => {
 
 	// Check if user is authorized to perform the action.
@@ -30,6 +32,10 @@ router.get('/', auth, (req, res) => {
 	}
 });
 
+/**
+ * GET method to get all the items from the database that the user get when they first create
+ * their account.
+ */
 router.get('/getBaseInventory', auth, (req, res) => {
 
 	// Check if user is authorized to perform the action.
@@ -42,6 +48,9 @@ router.get('/getBaseInventory', auth, (req, res) => {
 	}
 });
 
+/**
+ * POST method for a user to but a given item from the shop.
+ */
 router.post('/buy', auth, (req, res) => {
 
 	// Check if user is authorized to perform the action.

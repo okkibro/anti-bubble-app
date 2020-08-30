@@ -34,7 +34,8 @@ export class User {
 	milestones: Milestone[];
 	classArray: string[];
 	avatar: any;
-	recentMilestones: string[];
+	scoreboard: string[];
+	classUpdates: string[];
 	bubbleInit: boolean;
 	labyrinthAnswers: number[];
 	bubble: any;

@@ -22,7 +22,9 @@ const auth = jwt({
 	userProperty: 'payload'
 });
 
-/** GET method to get the articles from the database */
+/**
+ * GET method to get the articles from the database.
+ */
 router.get('/articles', auth, (req, res) => {
 
 	// Check if user is authorized to perform the action.
@@ -45,7 +47,9 @@ router.get('/articles', auth, (req, res) => {
 	}
 });
 
-/** POST method to return a given activity from the database. */
+/**
+ * POST method to return a given activity from the database.
+ */
 router.post('/activity', auth, (req, res) => {
 
 	// Check if user is authorized to perform the action.
@@ -71,7 +75,9 @@ router.post('/activity', auth, (req, res) => {
 	}
 });
 
-/** GET method to get all the activities from the database. */
+/**
+ * GET method to get all the activities from the database.
+ */
 router.get('/activities', auth, (req, res) => {
 
 	// Check if user is authorized to perform the action.
@@ -89,7 +95,9 @@ router.get('/activities', auth, (req, res) => {
 	}
 });
 
-/** PATCH method to change the bubbleInit value to true if a user has completed the initial maze. */
+/**
+ * PATCH method to change the bubbleInit value to true if a user has completed the initial maze.
+ */
 router.patch('/updateBubbleInit', auth, (req, res) => {
 
 	// Check if user is authorized to perform the action.
@@ -111,7 +119,9 @@ router.patch('/updateBubbleInit', auth, (req, res) => {
 	}
 });
 
-/** POST method to get the array of questions based on the part given in the body of the request. */
+/**
+ * POST method to get the array of questions based on the part given in the body of the request.
+ */
 router.post('/questions', auth, (req, res) => {
 
 	// Check if user is authorized to perform the action.
@@ -128,7 +138,9 @@ router.post('/questions', auth, (req, res) => {
 	}
 });
 
-/** POST method to save answers to the logged in user. */
+/**
+ * POST method to save answers to the logged in user.
+ */
 router.post('/labyrinthAnswers', auth, (req, res) => {
 
 	// Check if user is authorized to perform the action.
@@ -156,7 +168,9 @@ router.post('/labyrinthAnswers', auth, (req, res) => {
 	}
 });
 
-/** POST method to change currency amount for the logged in user. */
+/**
+ * POST method to change currency amount for the logged in user.
+ */
 router.post('/earnMoney', auth, (req, res) => {
 
 	// Check if user is authorized to perform the action.
@@ -178,7 +192,9 @@ router.post('/earnMoney', auth, (req, res) => {
 	}
 });
 
-/** POST method to record data about a session that has ended. */
+/**
+ * POST method to record data about a session that has ended.
+ */
 router.post('/recordSession', auth, (req, res) => {
 
 	// Check if user is authorized to perform the action.
@@ -219,7 +235,9 @@ router.post('/recordSession', auth, (req, res) => {
 	}
 });
 
-/** GET method to get session logs from the database based on user specified filters. */
+/**
+ * GET method to get session logs from the database based on user specified filters.
+ */
 router.get('/getLogs', auth, (req, res) => {
 
 	// Check if user is authorized to perform the action.

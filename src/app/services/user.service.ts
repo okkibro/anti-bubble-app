@@ -96,10 +96,18 @@ export class UserService {
 	}
 
 	/**
-	 * Method to do a GEt request for fetching a user's profile
+	 * Method to do a GET request for fetching a user's profile
 	 * @return HTTP response data in an Observable.
 	 */
 	public profile(): Observable<any> {
 		return this.http.get(`${environment.ENDPOINT}/user/profile`, { headers: { Authorization: 'Bearer ' + this.cookie.get('jwt') }});
+	}
+
+	/**
+	 * Method to do a GET request for fetching a user's profile
+	 * @return HTTP response data in an Observable.
+	 */
+	public classUpdates(): Observable<any> {
+		return this.http.post(`${environment.ENDPOINT}/user/classUpdates`, { headers: { Authorization: 'Bearer ' + this.cookie.get('jwt') }});
 	}
 }

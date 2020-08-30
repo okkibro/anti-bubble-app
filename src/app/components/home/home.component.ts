@@ -116,7 +116,7 @@ export class HomeComponent implements OnInit {
 			this.sessionService.earnMoney(earnAmount).subscribe();
 			this.milestoneUpdates.updateMilestone(milestones[1], earnAmount).subscribe(data => {
 				if (data.completed) {
-					this.milestoneUpdates.updateRecent(`${new Date().toLocaleDateString()}: Je hebt de badge 'Kleine Spaarder' verdiend!`).subscribe();
+					this.milestoneUpdates.updateScoreboard(`${new Date().toLocaleString('nl-NL', { year: 'numeric', month: 'numeric', day: 'numeric' })}: Je hebt de badge 'Kleine Spaarder' verdiend!`).subscribe();
 					this.snackBar.open('\uD83C\uDF89 Gefeliciteerd! Je hebt de badge \'Kleine Spaarder\' verdiend! \uD83C\uDF89', 'X', {
 						duration: 4000,
 						panelClass: ['style-succes']
@@ -125,7 +125,7 @@ export class HomeComponent implements OnInit {
 			});
 			this.milestoneUpdates.updateMilestone(milestones[7], earnAmount).subscribe(data => {
 				if (data.completed) {
-					this.milestoneUpdates.updateRecent(`${new Date().toLocaleDateString()}: Je hebt de badge 'Money Maker' verdiend!`).subscribe();
+					this.milestoneUpdates.updateScoreboard(`${new Date().toLocaleString('nl-NL', { year: 'numeric', month: 'numeric', day: 'numeric' })}: Je hebt de badge 'Money Maker' verdiend!`).subscribe();
 					this.snackBar.open('\uD83C\uDF89 Gefeliciteerd! Je hebt de badge \'Money Maker\' verdiend! \uD83C\uDF89', 'X', {
 						duration: 4000,
 						panelClass: ['style-succes']
@@ -134,7 +134,7 @@ export class HomeComponent implements OnInit {
 			});
 			this.milestoneUpdates.updateMilestone(milestones[0], 1).subscribe(data => {
 				if (data.completed) {
-					this.milestoneUpdates.updateRecent(`${new Date().toLocaleDateString()}: Je hebt de badge 'Beginner' verdiend!`).subscribe();
+					this.milestoneUpdates.updateScoreboard(`${new Date().toLocaleString('nl-NL', { year: 'numeric', month: 'numeric', day: 'numeric' })}: Je hebt de badge 'Beginner' verdiend!`).subscribe();
 					this.snackBar.open('\uD83C\uDF89 Gefeliciteerd! Je hebt de badge \'Beginner\' verdiend! \uD83C\uDF89', 'X', {
 						duration: 4000,
 						panelClass: ['style-succes']

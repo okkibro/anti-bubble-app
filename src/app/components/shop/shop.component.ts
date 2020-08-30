@@ -111,7 +111,7 @@ export class ShopComponent implements OnInit {
 				this.snackBar.open(data.message, 'X', { duration: 2000, panelClass: ['style-succes'] }).afterDismissed().subscribe(() => {
 					this.milestoneUpdates.updateMilestone(milestones[2], 1).subscribe(data => {
 						if (data.completed) {
-							this.milestoneUpdates.updateRecent(`${new Date().toLocaleDateString()}: Je hebt de badge 'Gierige Gerrie' verdiend!`).subscribe();
+							this.milestoneUpdates.updateScoreboard(`${new Date().toLocaleString('nl-NL', { year: 'numeric', month: 'numeric', day: 'numeric' })}: Je hebt de badge 'Gierige Gerrie' verdiend!`).subscribe();
 							this.snackBar.open('\uD83C\uDF89 Gefeliciteerd! Je hebt de badge \'Gierige Gerrie\' verdiend! \uD83C\uDF89', 'X', {
 								duration: 4000,
 								panelClass: ['style-succes']
@@ -119,7 +119,7 @@ export class ShopComponent implements OnInit {
 						}
 						this.milestoneUpdates.updateMilestone(milestones[4], 1).subscribe(data => {
 							if (data.completed) {
-								this.milestoneUpdates.updateRecent(`${new Date().toLocaleDateString()}: Je hebt de badge 'Shoppaholic' verdiend`).subscribe();
+								this.milestoneUpdates.updateScoreboard(`${new Date().toLocaleString('nl-NL', { year: 'numeric', month: 'numeric', day: 'numeric' })}: Je hebt de badge 'Shoppaholic' verdiend`).subscribe();
 								this.snackBar.open('\uD83C\uDF89 Gefeliciteerd! Je hebt de badge \'Shoppaholic\' verdiend! \uD83C\uDF89', 'X', {
 									duration: 4000,
 									panelClass: ['style-succes']
