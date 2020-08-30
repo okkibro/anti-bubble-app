@@ -47,6 +47,8 @@ export class SessionOverviewComponent implements OnInit {
 	public pageIndex: number = 0;
 	public pageSize: number = 5;
 	public pageSizeOptions: number[] = [5, 10, 25, 100];
+	private start: number = this.pageIndex * this.pageSize;
+	private end: number = (this.pageIndex + 1) * this.pageSize;
 
 	/**
 	 * SessionOverviewComponent constructor.
@@ -210,12 +212,12 @@ export class SessionOverviewComponent implements OnInit {
 			}
 		}
 
-		this.displayedLogs = this.logs;
+		this.displayedLogs = this.logs.slice(this.start, this.end);
 	}
 
 	public changePage(event: PageEvent): void {
-		const start = event.pageIndex * event.pageSize;
-		const end = (event.pageIndex + 1) * event.pageSize;
-		this.displayedLogs = this.logs.slice(start, end);
+		this.start = event.pageIndex * event.pageSize;
+		this.end = (event.pageIndex + 1) * event.pageSize;
+		this.displayedLogs = this.logs.slice(this.start, this.end);
 	}
 }
