@@ -199,7 +199,8 @@ export class LabyrinthComponent implements OnInit {
 		}
 	}
 
-	/** Method that saves a question to the global this.answers array.
+	/**
+	 * Method that saves a question to the global this.answers array.
 	 * @param question Question that has just been answerd by the user.
 	 * @return
 	 */
@@ -214,7 +215,8 @@ export class LabyrinthComponent implements OnInit {
 		}
 	}
 
-	/** Method that shows a question on the screen.
+	/**
+	 * Method that shows a question on the screen.
 	 * @param question Quesiton that has to be shown to the user.
 	 * @return
 	 */

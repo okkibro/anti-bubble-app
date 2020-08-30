@@ -247,7 +247,8 @@ export class SessionComponent implements OnInit {
 		}
 	}
 
-	/** Method that takes the game name and will return whether the game can start or not.
+	/**
+	 * Method that takes the game name and will return whether the game can start or not.
 	 * @param game Type of the activity.
 	 * @return Whether it is possible to start the game.
 	 */
@@ -265,7 +266,8 @@ export class SessionComponent implements OnInit {
 		}
 	}
 
-	/** Method that initializes the game based on the given game name.
+	/**
+	 * Method that initializes the game based on the given game name.
 	 * @param game Type of the activity.
 	 * @return
 	 */

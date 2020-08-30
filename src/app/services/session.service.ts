@@ -38,7 +38,7 @@ export class SessionService {
 	 * @return HTTP response data in an Observable.
 	 */
 	public getActivity(activity: string): Observable<any> {
-		return this.http.post(`${environment.ENDPOINT}/session/activity`, { activity: activity }, { headers: { Authorization: 'Bearer ' + this.cookie.get('mean-token') }});
+		return this.http.post(`${environment.ENDPOINT}/session/activity`, { activity: activity }, { headers: { Authorization: 'Bearer ' + this.cookie.get('jwt') }});
 	}
 
 	/**
@@ -46,7 +46,7 @@ export class SessionService {
 	 * @return HTTP response data in an Observable.
 	 */
 	public getArticles(): Observable<any> {
-		return this.http.get(`${environment.ENDPOINT}/session/articles`, { headers: { Authorization: 'Bearer ' + this.cookie.get('mean-token') }});
+		return this.http.get(`${environment.ENDPOINT}/session/articles`, { headers: { Authorization: 'Bearer ' + this.cookie.get('jwt') }});
 	}
 
 	/**
@@ -54,7 +54,7 @@ export class SessionService {
 	 * @return HTTP response data in an Observable.
 	 */
 	public performedLabyrinth(): Observable<any> {
-		return this.http.patch(`${environment.ENDPOINT}/session/updateBubbleInit`, {}, { headers: { Authorization: 'Bearer ' + this.cookie.get('mean-token') }});
+		return this.http.patch(`${environment.ENDPOINT}/session/updateBubbleInit`, {}, { headers: { Authorization: 'Bearer ' + this.cookie.get('jwt') }});
 	}
 
 	/**
@@ -63,7 +63,7 @@ export class SessionService {
 	 * @return HTTP response data in an Observable.
 	 */
 	public getQuestions(part: number): Observable<any> {
-		return this.http.post(`${environment.ENDPOINT}/session/questions`, { part: part }, { headers: { Authorization: 'Bearer ' + this.cookie.get('mean-token') }});
+		return this.http.post(`${environment.ENDPOINT}/session/questions`, { part: part }, { headers: { Authorization: 'Bearer ' + this.cookie.get('jwt') }});
 	}
 
 	/**
@@ -72,7 +72,7 @@ export class SessionService {
 	 * @return HTTP response data in an Observable.
 	 */
 	public saveAnswers(answers: any): Observable<any> {
-		return this.http.post(`${environment.ENDPOINT}/session/labyrinthAnswers`, { answers: answers }, { headers: { Authorization: 'Bearer ' + this.cookie.get('mean-token') }});
+		return this.http.post(`${environment.ENDPOINT}/session/labyrinthAnswers`, { answers: answers }, { headers: { Authorization: 'Bearer ' + this.cookie.get('jwt') }});
 	}
 
 	/**
@@ -81,7 +81,7 @@ export class SessionService {
 	 * @return HTTP response data in an Observable.
 	 */
 	public earnMoney(money: number): Observable<any> {
-		return this.http.post(`${environment.ENDPOINT}/session/earnMoney`, { money: money }, { headers: { Authorization: 'Bearer ' + this.cookie.get('mean-token') }});
+		return this.http.post(`${environment.ENDPOINT}/session/earnMoney`, { money: money }, { headers: { Authorization: 'Bearer ' + this.cookie.get('jwt') }});
 	}
 
 	/**
@@ -90,6 +90,6 @@ export class SessionService {
 	 * @return HTTP response data in an Observable.
 	 */
 	public recordSession(sessionData: Log): Observable<any> {
-		return this.http.post(`${environment.ENDPOINT}/session/recordSession`, { sessionData: sessionData }, { headers: { Authorization: 'Bearer ' + this.cookie.get('mean-token') }});
+		return this.http.post(`${environment.ENDPOINT}/session/recordSession`, { sessionData: sessionData }, { headers: { Authorization: 'Bearer ' + this.cookie.get('jwt') }});
 	}
 }

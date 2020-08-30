@@ -108,7 +108,8 @@ export class SettingsComponent implements OnInit {
 		});
 	}
 
-	/** Method to check if the filled in passwords match.
+	/**
+	 * Method to check if the filled in passwords match.
 	 * @param form Form in which the validation has to take place.
 	 * @return
 	 */
@@ -128,7 +129,8 @@ export class SettingsComponent implements OnInit {
 		this.dialog.open(DeleteAccountDialog, { data: { role: this.userDetails?.role }});
 	}
 
-	/** Method that changes the profile-table so that it can be edited
+	/**
+	 * Method that changes the profile-table so that it can be edited
 	 * @param field Row of user's profile that has to switch to/from edit mode.
 	 * @return
 	 */

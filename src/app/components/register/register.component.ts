@@ -98,7 +98,8 @@ export class RegisterComponent implements OnInit {
 		});
 	}
 
-	/** Method to check if the filled in passwords match.
+	/**
+	 * Method to check if the filled in passwords match.
 	 * @param form Form in which the validation has to take place.
 	 * @return
 	 */

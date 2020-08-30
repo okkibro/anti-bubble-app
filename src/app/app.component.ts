@@ -7,7 +7,7 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-	selector: 'mean-root',
+	selector: 'app-component',
 	templateUrl: './app.component.html',
 	styleUrls: ['./app.component.css']
 })

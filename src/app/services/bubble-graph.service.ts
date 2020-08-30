@@ -38,6 +38,6 @@ export class BubbleGraphService {
 	 * @return HTTP response data in an Observable.
 	 */
 	public processLabyrinth(answers: [{ question: Question, answer: number }]): Observable<any> {
-		return this.http.post(`${environment.ENDPOINT}/user/processAnswers`, { answers: answers }, { headers: { Authorization: 'Bearer ' + this.cookie.get('mean-token') }});
+		return this.http.post(`${environment.ENDPOINT}/user/processAnswers`, { answers: answers }, { headers: { Authorization: 'Bearer ' + this.cookie.get('jwt') }});
 	}
 }

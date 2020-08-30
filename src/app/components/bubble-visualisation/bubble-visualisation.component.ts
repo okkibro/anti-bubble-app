@@ -79,7 +79,8 @@ export class BubbleVisualisationComponent implements OnInit {
 		leftHalf.setAttribute('src', leftHighestRated);
 	}
 
-	/** Method that returns the name (from the second array) of the highest value from the first array.
+	/**
+	 * Method that returns the name (from the second array) of the highest value from the first array.
 	 * @param inputValues List of numerical values of certain bubble categories.
 	 * @param nameValues List of strings of location of bubble images.
 	 * @return Name of highest value of certain category.

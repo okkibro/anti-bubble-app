@@ -35,7 +35,7 @@ export class SessionOverviewService {
 	 * @return HTTP response data in an Observable.
 	 */
 	public getLogs(): Observable<any> {
-		return this.http.get(`${environment.ENDPOINT}/session/getLogs`, { headers: { Authorization: 'Bearer ' + this.cookie.get('mean-token') }});
+		return this.http.get(`${environment.ENDPOINT}/session/getLogs`, { headers: { Authorization: 'Bearer ' + this.cookie.get('jwt') }});
 	}
 
 	/**
@@ -43,6 +43,6 @@ export class SessionOverviewService {
 	 * @return HTTP response data in an Observable.
 	 */
 	public getActivities(): Observable<any> {
-		return this.http.get(`${environment.ENDPOINT}/session/activities`, { headers: { Authorization: 'Bearer ' + this.cookie.get('mean-token') }});
+		return this.http.get(`${environment.ENDPOINT}/session/activities`, { headers: { Authorization: 'Bearer ' + this.cookie.get('jwt') }});
 	}
 }

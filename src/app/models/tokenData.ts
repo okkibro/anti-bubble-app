@@ -19,6 +19,8 @@ import { Role } from './role';
 
 export class tokenData {
 	email: string;
-	role: Role;
 	exp: number;
+	iat: number;
+	role: Role;
+	_id: string;
 }

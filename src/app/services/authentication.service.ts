@@ -42,12 +42,13 @@ export class AuthenticationService {
      */
     constructor(private http: HttpClient, private router: Router, private cookie: CookieService) { }
 
-    /** Method to save the JWT of the user in the browser's cookies.
+    /**
+     * Method to save the JWT of the user in the browser's cookies.
      * @param token JWT to save in the user's browser cookies.
      * @return
      */
     private saveToken(token: string): void {
-        this.cookie.set('mean-token', token, 1, '/', 'localhost', false, 'Strict');
+        this.cookie.set('jwt', token, 1, '/', 'localhost', false, 'Strict');
         this.token = token;
     }
 
@@ -57,7 +58,7 @@ export class AuthenticationService {
      */
     private getToken(): string {
         if (!this.token) {
-            this.token = this.cookie.get('mean-token');
+            this.token = this.cookie.get('jwt');
         }
         return this.token;
     }
@@ -68,12 +69,13 @@ export class AuthenticationService {
      */
     public logout(): void {
         this.token = '';
-        this.cookie.delete('mean-token');
+        this.cookie.delete('jwt');
         this.cookie.delete('io');
         this.router.navigateByUrl('/login');
     }
 
-    /** Method to extract all the important data from the user's JWT.
+    /**
+     * Method to extract all the important data from the user's JWT.
      * @return Data from JWT.
      */
     public getTokenData(): tokenData {
@@ -88,19 +90,21 @@ export class AuthenticationService {
         }
     }
 
-    /** Method to check whether the user is currently logged in by looking at their cookie.
+    /**
+     * Method to check whether the user is currently logged in by looking at their cookie.
      * @return Whether the requesting user is logged in or not.
      */
     public isLoggedIn(): boolean {
-        const user = this.getTokenData();
-        if (user) {
-            return user.exp < Date.now() + (86400 * 1000);
+        const tokenData = this.getTokenData();
+        if (tokenData) {
+            return tokenData.exp < Date.now() + (86400 * 1000);
         } else {
             return false;
         }
     }
 
-    /** Method to checks the role of the user.
+    /**
+     * Method to checks the role of the user.
      * @return User's role.
      */
     public getRole(): Role {
@@ -108,7 +112,8 @@ export class AuthenticationService {
     }
 
 
-    /** POST method for registering a user
+    /**
+     * POST method for registering a user
      * @param user User that wants to register.
      * @return HTTP response data in an Observable.
      */
@@ -120,13 +125,15 @@ export class AuthenticationService {
         );
     }
 
-    /** POST method for logging in a user
+    /**
+     * POST method for logging in a user
      * @param user User that wants to login.
      * @return HTTP response data in an Observable.
      */
     public login(user: User): Observable<any> {
         return this.http.post(`${environment.ENDPOINT}/user/login`, user).pipe(
             map((data: TokenResponse) => {
+                console.log(data.token);
                 this.saveToken(data.token);
             })
         );

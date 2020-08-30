@@ -141,7 +141,8 @@ export class TeacherOverviewComponent implements OnInit {
 		}
 	}
 
-	/** Method to update the html to display the correct class based on the ID.
+	/**
+	 * Method to update the html to display the correct class based on the ID.
 	 * @param id ID of class that has to be switched out with current class ID.
 	 */
 	public switchClass(id: string): void {

@@ -100,7 +100,8 @@ export class ShopComponent implements OnInit {
 		});
 	}
 
-	/** Method to buy and item from the shop and add it to the users inventory and update the milestone if needed
+	/**
+	 * Method to buy and item from the shop and add it to the users inventory and update the milestone if needed
 	 * @param item Item that is bought by the user.
 	 * @return
 	 */
@@ -134,7 +135,8 @@ export class ShopComponent implements OnInit {
 		});
 	}
 
-	/** Method to filter the shop based on if the user already owns the item.
+	/**
+	 * Method to filter the shop based on if the user already owns the item.
 	 * @return List of items that comply to the applied filter.
 	 */
 	private filterShop(): Item[] {

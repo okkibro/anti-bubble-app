@@ -25,7 +25,8 @@ export class DataService {
 
 	constructor() { }
 
-	/** Method to change the message.
+	/**
+	 * Method to change the message.
 	 * @param message Data to be transferred between components.
 	 * @return
 	 */

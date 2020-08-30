@@ -40,7 +40,7 @@ export class UserService {
 	 * @return HTTP response data in an Observable.
 	 */
 	public deleteAccount(): Observable<any> {
-		return this.http.delete(`${environment.ENDPOINT}/user/deleteAccount`, { headers: { Authorization: 'Bearer ' + this.cookie.get('mean-token') }});
+		return this.http.delete(`${environment.ENDPOINT}/user/deleteAccount`, { headers: { Authorization: 'Bearer ' + this.cookie.get('jwt') }});
 	}
 
 	/**
@@ -79,7 +79,7 @@ export class UserService {
 	public updatePassword(oldPassword: string, newPassword: string): Observable<any> {
 		return this.http.patch(`${environment.ENDPOINT}/user/updatePassword`,
 			{ oldPassword: oldPassword, newPassword: newPassword },
-			{ headers: { Authorization: 'Bearer ' + this.cookie.get('mean-token') }});
+			{ headers: { Authorization: 'Bearer ' + this.cookie.get('jwt') }});
 	}
 
 	/**
@@ -92,7 +92,7 @@ export class UserService {
 		return this.http.patch(`${environment.ENDPOINT}/user/updateUser`, {
 			field: field,
 			value: value
-		}, { headers: { Authorization: 'Bearer ' + this.cookie.get('mean-token') }});
+		}, { headers: { Authorization: 'Bearer ' + this.cookie.get('jwt') }});
 	}
 
 	/**
@@ -100,6 +100,6 @@ export class UserService {
 	 * @return HTTP response data in an Observable.
 	 */
 	public profile(): Observable<any> {
-		return this.http.get(`${environment.ENDPOINT}/user/profile`, { headers: { Authorization: 'Bearer ' + this.cookie.get('mean-token') }});
+		return this.http.get(`${environment.ENDPOINT}/user/profile`, { headers: { Authorization: 'Bearer ' + this.cookie.get('jwt') }});
 	}
 }

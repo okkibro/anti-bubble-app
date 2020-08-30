@@ -39,7 +39,7 @@ export class ShopService {
 	 * @return HTTP response data in an Observable.
 	 */
 	public getCategoryItems(type: string): Observable<any> {
-		return this.http.get(`${environment.ENDPOINT}/shop`, { headers: { type: type, Authorization: 'Bearer ' + this.cookie.get('mean-token') }});
+		return this.http.get(`${environment.ENDPOINT}/shop`, { headers: { type: type, Authorization: 'Bearer ' + this.cookie.get('jwt') }});
 	}
 
 	/**
@@ -48,7 +48,7 @@ export class ShopService {
 	 * @return HTTP response data in an Observable.
 	 */
 	public buy(item: Item) {
-		return this.http.post(`${environment.ENDPOINT}/shop/buy`, { item: item }, { headers: { Authorization: 'Bearer ' + this.cookie.get('mean-token') }});
+		return this.http.post(`${environment.ENDPOINT}/shop/buy`, { item: item }, { headers: { Authorization: 'Bearer ' + this.cookie.get('jwt') }});
 	}
 
 	/**
@@ -56,6 +56,6 @@ export class ShopService {
 	 * @return HTTP response data in an Observable.
 	 */
 	public getBaseInventory(): Observable<any> {
-		return this.http.get(`${environment.ENDPOINT}/shop/getBaseInventory`, { headers: { Authorization: 'Bearer ' + this.cookie.get('mean-token') }});
+		return this.http.get(`${environment.ENDPOINT}/shop/getBaseInventory`, { headers: { Authorization: 'Bearer ' + this.cookie.get('jwt') }});
 	}
 }

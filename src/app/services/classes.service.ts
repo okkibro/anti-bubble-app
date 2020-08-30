@@ -43,7 +43,7 @@ export class ClassesService {
 		return this.http.post(`${environment.ENDPOINT}/class/createClass`, {
 			classes: klas,
 			teacher: teacher
-		}, { headers: { Authorization: 'Bearer ' + this.cookie.get('mean-token') }});
+		}, { headers: { Authorization: 'Bearer ' + this.cookie.get('jwt') }});
 	}
 
 	/**
@@ -52,7 +52,7 @@ export class ClassesService {
 	 * @return HTTP response data in an Observable.
 	 */
 	public joinClass(code: number): Observable<any> {
-		return this.http.post(`${environment.ENDPOINT}/class/joinClass`, { code: code }, { headers: { Authorization: 'Bearer ' + this.cookie.get('mean-token') }});
+		return this.http.post(`${environment.ENDPOINT}/class/joinClass`, { code: code }, { headers: { Authorization: 'Bearer ' + this.cookie.get('jwt') }});
 	}
 
 	/**
@@ -60,7 +60,7 @@ export class ClassesService {
 	 * @return HTTP response data in an Observable.
 	 */
 	public getClass(): Observable<any> {
-		return this.http.get(`${environment.ENDPOINT}/class/getClass`, { headers: { Authorization: 'Bearer ' + this.cookie.get('mean-token') }});
+		return this.http.get(`${environment.ENDPOINT}/class/getClass`, { headers: { Authorization: 'Bearer ' + this.cookie.get('jwt') }});
 	}
 
 	/**
@@ -68,7 +68,7 @@ export class ClassesService {
 	 * @return HTTP response data in an Observable.
 	 */
 	public getClassIds(): Observable<any> {
-		return this.http.get(`${environment.ENDPOINT}/class/getClassIds`, { headers: { Authorization: 'Bearer ' + this.cookie.get('mean-token') }});
+		return this.http.get(`${environment.ENDPOINT}/class/getClassIds`, { headers: { Authorization: 'Bearer ' + this.cookie.get('jwt') }});
 	}
 
 	/**
@@ -77,7 +77,7 @@ export class ClassesService {
 	 * @return HTTP response data in an Observable.
 	 */
 	public getSingleClass(id: string): Observable<any> {
-		return this.http.get(`${environment.ENDPOINT}/class/getSingleClass/${id}`, { headers: { Authorization: 'Bearer ' + this.cookie.get('mean-token') }});
+		return this.http.get(`${environment.ENDPOINT}/class/getSingleClass/${id}`, { headers: { Authorization: 'Bearer ' + this.cookie.get('jwt') }});
 	}
 
 	/**
@@ -86,7 +86,7 @@ export class ClassesService {
 	 * @return HTTP response data in an Observable.
 	 */
 	public classmateProfile(id: string): Observable<any> {
-		return this.http.get(`${environment.ENDPOINT}/class/classmateProfile/${id}`, { headers: { Authorization: 'Bearer ' + this.cookie.get('mean-token') }});
+		return this.http.get(`${environment.ENDPOINT}/class/classmateProfile/${id}`, { headers: { Authorization: 'Bearer ' + this.cookie.get('jwt') }});
 	}
 
 	/**
@@ -95,7 +95,7 @@ export class ClassesService {
 	 * @return HTTP response data in an Observable.
 	 */
 	public deleteClass(id: string): Observable<any> {
-		return this.http.delete(`${environment.ENDPOINT}/class/deleteClass/${id}`, { headers: { Authorization: 'Bearer ' + this.cookie.get('mean-token') }});
+		return this.http.delete(`${environment.ENDPOINT}/class/deleteClass/${id}`, { headers: { Authorization: 'Bearer ' + this.cookie.get('jwt') }});
 	}
 
 	/**
@@ -110,6 +110,6 @@ export class ClassesService {
 			userId: userId,
 			classId: classId,
 			leaving: leaving
-		}, { headers: { Authorization: 'Bearer ' + this.cookie.get('mean-token') }});
+		}, { headers: { Authorization: 'Bearer ' + this.cookie.get('jwt') }});
 	}
 }
