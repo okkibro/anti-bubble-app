@@ -210,10 +210,13 @@ export class ActivitiesComponent implements OnInit {
 		// when the teacher presses the 'Stop activiteit' button.
 		this.socketService.listenForFinishGame((timedOut: boolean) => {
 
-			// Record final answers and questions in sessionData and save these in the database.
+			// Record final answers and questions in sessionData and save these in the database, only when they
+			// both contain data.
 			this.sessionData.questions = this.questions;
 			this.sessionData.answers = this.answers;
-			this.sessionService.recordSession(this.sessionData).subscribe();
+			if (this.sessionData.answers.length !== 0 && this.sessionData.questions.length !== 0) {
+				this.sessionService.recordSession(this.sessionData).subscribe();
+			}
 
 			// Finish game so correct information can be displayed to the student.
 			this.gameFinished = true;

@@ -173,7 +173,7 @@ router.get('/getSingleClass/:id', auth, (req, res) => {
 				// Check if there are students in this class.
 				if (numberOfMembers > 0) {
 					let classmates = [];
-					for (student of foundClass.students) {
+					for (let student of foundClass.students) {
 						Users.findById(student._id, (err, classmate) => {
 							classmates.push(classmate);
 
