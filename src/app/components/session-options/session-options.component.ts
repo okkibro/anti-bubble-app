@@ -38,6 +38,7 @@ export class SessionOptionsComponent implements OnInit {
 	public durationSliderForm = this.fb.group({
 		durationSlider: ['', Validators.required]
 	});
+	public sliderStartingValue: number = 5;
 
 	/**
 	 * SessionOptionsComponent constructor.
