@@ -1,5 +1,5 @@
 {
-  "inputFiles": "./src/app",
+  "inputFiles": ["./src/app"],
   "mode": "modules",
   "out": "./docs",
   "excludeExternals": true,
@@ -7,5 +7,6 @@
   "exclude": ["**/node_modules/**",
     "**/*+(.spec).ts",
     "**/app*.ts",
-    "**/shared/material.module.ts"]
+    "**/shared/material.module.ts"],
+  "hideGenerator": true
 }
