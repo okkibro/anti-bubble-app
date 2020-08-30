@@ -33,8 +33,16 @@ import { AuthenticationService } from '../../services/authentication.service';
 })
 
 export class SessionComponent implements OnInit {
-	public tokenData: tokenData;
 	private players = [];
+	private pairs;
+	private randomGroups: boolean;
+	private submits: any[][] = [];
+	private leaders;
+	private sources;
+	private subjects;
+
+	public tokenData: tokenData;
+	public gamePaused: boolean = false;
 	public pin;
 	public gameData;
 	public playerCount: number = 0;
@@ -43,12 +51,6 @@ export class SessionComponent implements OnInit {
 	public gameFinished: boolean = false;
 	public leaveByHomeButton = false;
 	public enableQuestions: boolean = false;
-	private pairs;
-	private randomGroups: boolean;
-	private submits: any[][] = [];
-	private leaders;
-	private sources;
-	private subjects;
 	public timedOut: boolean = false;
 
 	/**
@@ -318,10 +320,13 @@ export class SessionComponent implements OnInit {
 	 */
 	private startTimer(time: number): void {
 
-		// Create an interval that calls the given function every second.
+		// Create an interval that calls the given function every second, unless the session has been paused.
 		// The function updates the value of the time at the top of the screen to be 1 second less than the previous second it was called.
 		this.interval = setInterval(() => {
-			if (time > 0) {
+			if (this.gamePaused) {
+				{ }
+			}
+			else if (time > 0 && !this.gamePaused) {
 				time -= 1;
 				let minutes = Math.floor(time / 60);
 				let seconds = time % 60;
@@ -377,6 +382,24 @@ export class SessionComponent implements OnInit {
 		this.leaveByHomeButton = true;
 		window.removeEventListener('beforeunload', beforeUnload);
 		this.router.navigate(['home']);
+	}
+
+	/**
+	 * Method to pause a session by pausing the timer and restricting new answers from being submitted.
+	 * @return
+	 */
+	public pauseGame(): void {
+		this.gamePaused = true;
+		this.socketService.pauseGame();
+	}
+
+	/**
+	 * Method to resume a paused session.
+	 * @return
+	 */
+	public resumeGame(): void {
+		this.gamePaused = false;
+		this.socketService.resumeGame();
 	}
 
 	/**

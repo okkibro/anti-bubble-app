@@ -155,7 +155,7 @@ export class SocketIOService {
 
 	/**
 	 * Method that listens for the emissions of the 'finished-game' signal for when the session has
-	 * ended, either by the time runnning out or the teacehr pressing the 'Stop activiteit' button.
+	 * ended, either by the time runnning out or the teacher pressing the 'Stop activiteit' button.
 	 * disableInput gets called when the teacher presses said button.
 	 * @param disableInput disableInput() callback function.
 	 * @return
@@ -221,6 +221,28 @@ export class SocketIOService {
 	public listenForRemoveAnswer(deleteAnswer: Function): void {
 		this.socket.on('delete-answer', () => {
 			deleteAnswer();
+		});
+	}
+
+	/**
+	 * Method that listens for host pausing the game.
+	 * @param pauseInput pauseInput() callback function.
+	 * @return
+	 */
+	public listenForGamePaused(pauseInput: Function): void {
+		this.socket.on('paused-game', () => {
+			pauseInput();
+		});
+	}
+
+	/**
+	 * Method that listens for host resuming the game.
+	 * @param resumeInput resumeInput() callback function.
+	 * @return
+	 */
+	public listenForGameResumed(resumeInput: Function): void {
+		this.socket.on('resumed-game', () => {
+			resumeInput();
 		});
 	}
 
@@ -306,5 +328,21 @@ export class SocketIOService {
 	 */
 	public finishGame(timedOut: boolean): void {
 		this.socket.emit('finish-game', timedOut);
+	}
+
+	/**
+	 * Method that will pause a session and suspend the sending/receving of answers/questions.
+	 * @return
+	 */
+	public pauseGame(): void {
+		this.socket.emit('pause-game');
+	}
+
+	/**
+	 * Method that will resume a paused game.
+	 * @return
+	 */
+	public resumeGame(): void {
+		this.socket.emit('resume-game');
 	}
 }

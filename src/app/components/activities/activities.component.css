@@ -10,7 +10,8 @@
     margin: 5px;
 }
 
-.teammates ul {
+.teammates ul,
+.platforms ul {
     margin-top: 0;
     display: inline-block;
 }

@@ -54,6 +54,7 @@ export class ActivitiesComponent implements OnInit {
 	];
 	public gameFinished: boolean = false;
 	public timedOut: boolean = false;
+	public gamePaused: boolean = false;
 	public gameData;
 
 	/**
@@ -122,6 +123,12 @@ export class ActivitiesComponent implements OnInit {
 
 		// Check whether the game has been ended, either by teacher stopping it or time running out.
 		this.disableInput();
+
+		// Check whether the game has been paused.
+		this.pauseInput();
+
+		// Check whether the game has been resumed.
+		this.resumeInput();
 
 		// Get players in the current session.
 		this.getSessionPlayers();
@@ -211,6 +218,45 @@ export class ActivitiesComponent implements OnInit {
 			// Finish game so correct information can be displayed to the student.
 			this.gameFinished = true;
 			this.timedOut = timedOut;
+		});
+	}
+
+	/**
+	 * Method that listens for a host pausing the session, which in turn has to temporarily disable the input
+	 * for a player.
+	 * @return
+	 */
+	private pauseInput(): void {
+
+		// Listener for a host pausing the session so the input can be temporarily disabled.
+		this.socketService.listenForGamePaused(() => {
+
+			// Work around for showing/hiding the answer-form for students, since hiding it through the use
+			// of *ngIf.. will 'destroy' the component and when it has to be shown again the component gets
+			// 'reinitialised' and the submittedAnswer property get initialised to 'false', which means the
+			// student can submit multiple answers (and we don't want that).
+			let answerForm = document.getElementsByClassName('answer-form')[0];
+			answerForm.setAttribute('style', 'display: none;');
+			this.gamePaused = true;
+		});
+	}
+
+	/**
+	 * Method that listens for a host resuming a session, which in turn enables the previously disabled input.
+	 * @return
+	 */
+	private resumeInput(): void {
+
+		// Listener for a host resuming the session so the input can de enabled again.
+		this.socketService.listenForGameResumed(() => {
+
+			// Work around for showing/hiding the answer-form for students, since hiding it through the use
+			// of *ngIf.. will 'destroy' the component and when it has to be shown again the component gets
+			// 'reinitialised' and the submittedAnswer property get initialised to 'false', which means the
+			// student can submit multiple answers (and we don't want that).
+			let answerForm = document.getElementsByClassName('answer-form')[0];
+			answerForm.setAttribute('style', 'display: block;');
+			this.gamePaused = false;
 		});
 	}
 

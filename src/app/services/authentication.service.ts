@@ -133,7 +133,6 @@ export class AuthenticationService {
     public login(user: User): Observable<any> {
         return this.http.post(`${environment.ENDPOINT}/user/login`, user).pipe(
             map((data: TokenResponse) => {
-                console.log(data.token);
                 this.saveToken(data.token);
             })
         );

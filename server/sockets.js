@@ -313,6 +313,16 @@ function runIO(io) {
 			let sessionPlayers = players.getPlayers(game.hostId);
 			io.in(games.getGame(socket.id).pin).emit('got-players', sessionPlayers);
 		});
+
+		// Listener that will emit the 'paused-game' signal to all players in the session.
+		socket.on('pause-game', () => {
+			io.in(games.getGame(socket.id).pin).emit('paused-game');
+		});
+
+		// Listener that will emit the 'resumed-game' signal to all players.
+		socket.on('resume-game', () => {
+			io.in(games.getGame(socket.id).pin).emit('resumed-game');
+		});
 	});
 }
 
