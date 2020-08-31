@@ -1,30 +1,55 @@
-/* the following code will describe the rest of the (angular) page */
-body {
-    /* background-image: url("../../../favicon.ico"); */
-    text-align: center;
-    margin: 0;
-    padding: 0;
-    height: 100%;
-    width: 100%;
-    background-size: auto;
+/*
+ * This program has been developed by students from the bachelor Computer Science at Utrecht University
+ * within the Software Project course. © Copyright Utrecht University (Department of Information and
+ * Computing Sciences)
+ */
+
+.submit-table {
+    margin-bottom: 20px;
 }
 
-.bodyDiv {
-    height: 100%;
-    width: 70%;
-    display: inline-block;
-    /* background-color: orange; */
+.session-table,
+.submit-table {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }
 
-.matCardHeader {
-    display: inline-block;
+#teacherPin {
+    font-size: 66px;
 }
 
-.sessionTable {
-    display: inline-block;
+.gameChoice {
+    font-size: 20px;
 }
 
-.sessionTable th, td {
-    text-align: left;
-    padding: 10px;
+#startButton {
+    font-size: 30px;
+    margin-top: 10px;
+    margin-bottom: 20px;
 }
+
+.player-count,
+.time-left {
+    width: 200px;
+}
+
+.mat-card-subtitle {
+    margin-bottom: 8px !important;
+}
+
+.mat-card-header .mat-card-title {
+    margin-bottom: 20px !important;
+}
+
+.mat-card .mat-divider-horizontal {
+    margin-left: 10%;
+    width: 80%;
+    border-top-color: black;
+}
+
+.general-warning-button {
+    margin-right: 10px;
+}
+

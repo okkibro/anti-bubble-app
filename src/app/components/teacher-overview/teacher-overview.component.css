@@ -1,3 +1,26 @@
-.welcomeHeader {
-    font-size: 40px;
+/*
+ * This program has been developed by students from the bachelor Computer Science at Utrecht University
+ * within the Software Project course. © Copyright Utrecht University (Department of Information and
+ * Computing Sciences)
+ */
+
+.radio-group {
+    display: flex;
+    flex-direction: column;
+    margin: 5px 0;
+}
+
+.radio-button {
+    margin: 5px;
+}
+
+#remove-student-button:before {
+    content: 'Verwijder uit klas';
+}
+
+@media (max-width: 600px) {
+    #remove-student-button:before {
+        font-family: 'Material Icons', serif;
+        content: 'person_remove';
+    }
 }

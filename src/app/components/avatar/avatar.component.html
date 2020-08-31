@@ -1,59 +1,51 @@
-<mean-nav-bar></mean-nav-bar>
+<!--
+  ~ This program has been developed by students from the bachelor Computer Science at Utrecht University
+  ~ within the Software Project course. © Copyright Utrecht University (Department of Information and
+  ~ Computing Sciences)
+  -->
 
-<body>
+<mat-sidenav-container>
+    <mat-sidenav #sidenav [autoFocus]="false" fixedInViewport="true">
+        <sidenav-component (sidenavClose)="sidenav.close()"></sidenav-component>
+    </mat-sidenav>
+    <mat-sidenav-content>
+        <toolbar-component (sidenavToggle)="sidenav.toggle()"></toolbar-component>
+        <body>
+        <div class="container-div" fxLayoutGap="10px" fxLayout="row" fxLayout.lt-sm="column" fxLayoutAlign="space-evenly">
+            <mat-card fxFlex=50%>
+                <avatar-display-component></avatar-display-component>
+            </mat-card>
 
-    <div class="containerDiv" fxLayoutGap="0.2%" fxLayout="column" fxLayoutAlign="space-evenly">
-        <div fxLayout.xs="row" fxLayoutGap="0.5%" fxLayoutAlign="space-evenly">
-            <mat-card fxFlex="100%">
+            <mat-card fxFlex="50%">
                 <mat-card-header>
                     <mat-card-title>Avatar Wijzigen</mat-card-title>
-                </mat-card-header><br>
-                <img mat-card-image
-                    src="https://image.freepik.com/vrije-vector/jonge-vrouw-avatar-cartoon-karakter-profielfoto_18591-55056.jpg"
-                    alt="avatar voorbeeld">
+                </mat-card-header>
+                <mat-card-content>
+                    <mat-tab-group mat-align-tabs="center" animationDuration="0ms" (selectedTabChange)="tabChange($event)">
+                        <mat-tab *ngFor="let category of itemCategories" label="{{category}}">
+                            <mat-grid-list [cols]="itemColumns" (window:resize)="onResize($event)">
+                                <mat-grid-tile *ngFor="let item of filteredAvatar">
+                                    <mat-card fxFlex="100%" fxLayout="column" fxLayoutGap="10px" class='avatar-item-display'>
+                                        <div fxLayoutAlign="center">
+                                            <img mat-card-image src="{{ item.previewImage }}" alt="{{ item.title }}" (click)="equip(item)"><br>
+                                        </div>
+                                    </mat-card>
+                                </mat-grid-tile>
+                            </mat-grid-list>
+                        </mat-tab>
+                    </mat-tab-group>
+                    <a mat-button class="general-link" [routerLink]="'/profile'">
+                        <mat-icon>keyboard_backspace</mat-icon>
+                        Terug naar profiel </a><br><br>
+                    <a mat-button class="general-link" [routerLink]="'/shop'"> Ga naar winkel
+                        <mat-icon>shopping_cart</mat-icon>
+                    </a>
+                </mat-card-content>
             </mat-card>
         </div>
-
-        <div fxLayout.xs="row" fxLayoutGap="0.5%" fxLayoutAlign="space-evenly">
-            <mat-card id="itemCollection" fxFlex="100%">
-                <mat-tab-group (selectedTabChange)="tabChange($event)" dynamicHeight>
-                    <mat-tab label="Huidskleur"></mat-tab>
-                    <mat-tab label="Kleding">
-                        <table class="UItable">
-                            <tr>
-                                <td *ngFor="let item of itemsShown">
-                                    <ng-container *ngIf="item.category == 'kleding'">
-                                        <img mat-card-image src="{{item.image}}" alt="{{item.title}}"><br>
-                                        {{item.title}}
-                                    </ng-container>
-                                </td>
-                            </tr>
-                        </table>
-                    </mat-tab>
-                    <mat-tab label="Hoedjes">
-                        <table class="UItable">
-                            <tr>
-                                <td *ngFor="let item of itemsShown">
-                                    <ng-container *ngIf="item.category == 'hoofddeksel'">
-                                        <img mat-card-image src="{{item.image}}" alt="{{item.title}}"><br>
-                                        {{item.title}}
-                                    </ng-container>
-                                </td>
-                            </tr>
-                        </table>
-                    </mat-tab>
-                </mat-tab-group>
-            </mat-card>
-        </div>
-
-        <mat-card>
-            <mat-card-content>
-                <button mat-button [routerLink]="'/profile'">Wijzigingen Opslaan</button>
-            </mat-card-content>
-        </mat-card>
-
-        <button mat-button [routerLink]="'/profile'">
-            <mat-icon>keyboard_backspace</mat-icon> Terug naar profiel
-        </button>
-    </div>
-</body>
+        </body>
+        <footer class="footer">
+            <p> &copy; Utrecht University (ICS)</p>
+        </footer>
+    </mat-sidenav-content>
+</mat-sidenav-container>

@@ -1,0 +1,27 @@
+/*
+ * This program has been developed by students from the bachelor Computer Science at Utrecht University
+ * within the Software Project course. © Copyright Utrecht University (Department of Information and
+ * Computing Sciences)
+ */
+
+.mat-card {
+    position: relative;
+    height: 200px;
+    margin: auto;
+    background-color: transparent;
+    border: transparent;
+    box-shadow: none;
+}
+
+.mat-card img {
+    position: absolute;
+    width: 175px;
+    height: 175px;
+    margin-top: 10px;
+    margin-left: -86px;
+    opacity: 0.5;
+}
+
+#overlay {
+    opacity: 1;
+}

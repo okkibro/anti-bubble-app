@@ -1,0 +1,31 @@
+/*
+ * This program has been developed by students from the bachelor Computer Science at Utrecht University
+ * within the Software Project course. © Copyright Utrecht University (Department of Information and
+ * Computing Sciences)
+ */
+
+.progress-bar {
+    width: 50%;
+    display: inline-block;
+}
+
+.general-table {
+    padding: 10px;
+    border-spacing: 70px 0;
+    margin: 10px;
+}
+
+.general-table td {
+    padding: 20px;
+    text-align: center;
+    display: inline-block;
+    width: 150px;
+}
+
+mat-tab-group,
+mat-tab {
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+}

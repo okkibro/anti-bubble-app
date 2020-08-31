@@ -1,0 +1,25 @@
+/*
+ * This program has been developed by students from the bachelor Computer Science at Utrecht University
+ * within the Software Project course. © Copyright Utrecht University (Department of Information and
+ * Computing Sciences)
+ */
+
+.classmate-profile-table {
+    border-spacing: 20px 0;
+    margin: 0 auto;
+}
+
+.classmate-profile-table td {
+    text-align: left;
+    padding: 5px 0;
+}
+
+.classmate-profile-table .top-data {
+    font-weight: bold;
+}
+
+@media (max-width: 900px) {
+    .classmate-profile-table td {
+        display: table-row;
+    }
+}

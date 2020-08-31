@@ -1,0 +1,80 @@
+<!--
+  ~ This program has been developed by students from the bachelor Computer Science at Utrecht University
+  ~ within the Software Project course. © Copyright Utrecht University (Department of Information and
+  ~ Computing Sciences)
+  -->
+
+<mat-sidenav-container>
+    <mat-sidenav #sidenav [autoFocus]="false" fixedInViewport="true">
+        <sidenav-component (sidenavClose)="sidenav.close()"></sidenav-component>
+    </mat-sidenav>
+    <mat-sidenav-content>
+        <toolbar-component (sidenavToggle)="sidenav.toggle()"></toolbar-component>
+        <body>
+        <div class="container-div" fxLayoutGap="10px" fxLayout="column" fxLayoutAlign="space-evenly">
+            <div fxLayout.xs="row" fxLayoutGap="10px" fxLayoutAlign="space-evenly">
+                <mat-card fxFlex="100%">
+                    <mat-card-header>
+                        <mat-card-title>{{ gameData?.game.name }}</mat-card-title>
+                    </mat-card-header>
+
+                    <mat-card-content *ngIf="gameData?.game.name === 'Naamloos Nieuws'">
+                        <p>{{ gameData?.game.description }}</p>
+                        <div class="article"></div>
+                        <mat-form-field *ngIf="!isLeader">
+                            <mat-label>Teams</mat-label>
+                            <mat-select [(value)]="selected">
+                                <mat-option *ngFor="let leader of leaders" value="{{ leader.email }}">{{ leader.name }}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                        <button mat-button class="general-button" [disabled]="selected == undefined || submitted"
+                                *ngIf="!isLeader" (click)="submit({ article: article })">Verstuur
+                        </button>
+                    </mat-card-content>
+
+                    <mat-card-content *ngIf="gameData?.game.name === 'Botsende Bubbels'">
+                        <p>{{ gameData?.game.description }}</p>
+                        <p id="receiveQuestion" *ngIf="!gameFinished"></p>
+                        <div *ngIf="enableAnswer && !gameFinished" class="platforms">
+                            <p>Je mag zoeken op de volgende platformen:</p>
+                            <ul>
+                                <li *ngFor="let site of allowedSites ">{{ site }}</li>
+                            </ul>
+                        </div>
+                        <answer-form-component *ngIf="enableAnswer && !gameFinished" class="answer-form"></answer-form-component>
+                        <p *ngIf="!gameFinished && !enableAnswer && !gamePaused"><i>Wacht op het onderwerp van de docent.</i></p>
+                        <p *ngIf="!gameFinished && gamePaused"><i>Het spel is gepauzeerd door de docent.</i></p>
+                        <p *ngIf="gameFinished && !timedOut"><i>Het spel is beëindigd door de docent.</i></p>
+                        <p *ngIf="gameFinished && timedOut"><i>De tijd is om en het spel is afgelopen.</i></p>
+                    </mat-card-content>
+
+                    <mat-card-content *ngIf="gameData?.game.name === 'Alternatieve Antwoorden'">
+                        <p>{{ gameData?.game.description }}</p>
+                        <p *ngIf="team != undefined && team.length != 0"> Je zit in een team met:</p>
+
+                        <div class="teammates">
+                            <ul>
+                                <li *ngFor="let teamMember of team">
+                                    {{ teamMember.name }}
+                                </li>
+                            </ul>
+                        </div>
+                        <p><i>Wacht op de vraag van de docent.</i></p>
+                        <answer-form-component *ngIf="enableAnswer"></answer-form-component>
+                    </mat-card-content>
+
+                    <mat-card-content *ngIf="gameData?.game.name === 'Aanradend Algoritme'">
+                        <p>{{ gameData?.game.description }}</p>
+                    </mat-card-content>
+
+                </mat-card>
+            </div>
+        </div>
+        </body>
+        <footer class="footer">
+            <p> &copy; Utrecht University (ICS)</p>
+        </footer>
+    </mat-sidenav-content>
+</mat-sidenav-container>
+<nav-bar-component></nav-bar-component>

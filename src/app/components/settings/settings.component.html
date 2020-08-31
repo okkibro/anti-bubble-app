@@ -1,0 +1,148 @@
+<!--
+  ~ This program has been developed by students from the bachelor Computer Science at Utrecht University
+  ~ within the Software Project course. © Copyright Utrecht University (Department of Information and
+  ~ Computing Sciences)
+  -->
+
+<mat-sidenav-container>
+    <mat-sidenav #sidenav [autoFocus]="false" fixedInViewport="true">
+        <sidenav-component (sidenavClose)="sidenav.close()"></sidenav-component>
+    </mat-sidenav>
+    <mat-sidenav-content>
+        <toolbar-component (sidenavToggle)="sidenav.toggle()"></toolbar-component>
+        <body>
+        <div class="container-div" fxLayout="column" fxLayoutGap="10px" fxLayoutAlign="space-evenly">
+            <mat-card fxFlex="100%">
+                <mat-card-header>
+                    <mat-card-title>Profiel</mat-card-title>
+                </mat-card-header>
+                <mat-card-content>
+                    <form [formGroup]="editProfileForm">
+                        <table class="edit-profile-table">
+                            <tr>
+                                <th>Voornaam</th>
+                                <td *ngIf="!editEnabledFirstName">{{ userDetails?.firstName }}</td>
+                                <td *ngIf="editEnabledFirstName">
+                                    <input type="text" matInput formControlName="firstName" placeholder="{{ userDetails?.firstName }}">
+                                </td>
+                                <td *ngIf="!editEnabledFirstName">
+                                    <button mat-button (click)="changeEditMode('firstName')" [disabled]="editEnabledLastName || editEnabledEmail">
+                                        <mat-icon>edit</mat-icon>
+                                    </button>
+                                </td>
+                                <td *ngIf="editEnabledFirstName">
+                                    <button mat-button class="accept-changes-button"
+                                            (click)="updateField('firstName', editProfileForm.get('firstName').value)"
+                                            [disabled]="(userDetails?.firstName === editProfileForm.get('firstName').value) || editProfileForm.get('firstName').value === ''"
+                                    ></button>
+                                    <button mat-button class="discard-changes-button" (click)="changeEditMode('firstName')"></button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>Achternaam</th>
+                                <td *ngIf="!editEnabledLastName">{{ userDetails?.lastName }}</td>
+                                <td *ngIf="editEnabledLastName">
+                                    <input type="text" matInput formControlName="lastName" placeholder="{{ userDetails?.lastName }}">
+                                </td>
+                                <td *ngIf="!editEnabledLastName">
+                                    <button mat-button (click)="changeEditMode('lastName')" [disabled]="editEnabledFirstName || editEnabledEmail">
+                                        <mat-icon>edit</mat-icon>
+                                    </button>
+                                </td>
+                                <td *ngIf="editEnabledLastName">
+                                    <button mat-button class="accept-changes-button"
+                                            (click)="updateField('lastName', editProfileForm.get('lastName').value)"
+                                            [disabled]="(userDetails?.lastName === editProfileForm.get('lastName').value) || editProfileForm.get('lastName').value === ''"
+                                    ></button>
+                                    <button mat-button class="discard-changes-button" (click)="changeEditMode('lastName')"></button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>E-mailadres</th>
+                                <td *ngIf="!editEnabledEmail">{{ userDetails?.email }}</td>
+                                <td *ngIf="editEnabledEmail">
+                                    <input type="email" matInput formControlName="email" placeholder="{{ userDetails?.email }}">
+                                    <mat-error *ngIf="editProfileForm.get('email').hasError('email')">
+                                        Vul een geldig emailadres in
+                                    </mat-error>
+                                    <mat-error *ngIf="editProfileForm.get('email').hasError('emailTaken')">
+                                        Er bestaat al een account met dit emailadres
+                                    </mat-error>
+                                </td>
+                                <td *ngIf="!editEnabledEmail">
+                                    <button mat-button (click)="changeEditMode('email')" [disabled]="editEnabledFirstName || editEnabledLastName">
+                                        <mat-icon>edit</mat-icon>
+                                    </button>
+                                </td>
+                                <td *ngIf="editEnabledEmail">
+                                    <button mat-button class="accept-changes-button"
+                                            (click)="updateField('email', editProfileForm.get('email').value)"
+                                            [disabled]="!editProfileForm.valid || editProfileForm.get('email').value === ''"
+                                    ></button>
+                                    <button mat-button class="discard-changes-button" (click)="changeEditMode('email')"></button>
+                                </td>
+                            </tr>
+                        </table>
+                    </form>
+                </mat-card-content>
+            </mat-card>
+
+            <mat-card class="change-password-accordion" fxLayout.xs="column" fxLayoutAlign="space-evenly center">
+                <mat-accordion>
+                    <mat-expansion-panel>
+                        <mat-expansion-panel-header>
+                            <mat-panel-title>
+                                Wachtwoord aanpassen
+                            </mat-panel-title>
+                            <mat-panel-description>
+                                Vul je oude en nieuwe wachtwoord in
+                            </mat-panel-description>
+                        </mat-expansion-panel-header>
+                        <form [formGroup]="changePasswordForm" (ngSubmit)="changePassword()">
+                            <table class="change-password-table">
+                                <tr>
+                                    <mat-form-field>
+                                        <mat-label>Oude wachtwoord</mat-label>
+                                        <input matInput type="password" formControlName="oldPassword">
+                                        <mat-error
+                                                *ngIf="changePasswordForm.get('oldPassword').hasError('required')">
+                                            Wachtwoord is <strong>verplicht</strong>
+                                        </mat-error>
+                                    </mat-form-field>
+                                </tr>
+                                <tr>
+                                    <mat-form-field>
+                                        <mat-label>Nieuw wachtwoord</mat-label>
+                                        <input matInput type="password" formControlName="newPassword">
+                                        <mat-error
+                                                *ngIf="changePasswordForm.get('newPassword').hasError('required')">
+                                            Wachtwoord is <strong>verplicht</strong>
+                                        </mat-error>
+                                    </mat-form-field>
+                                </tr>
+                                <tr>
+                                    <mat-form-field>
+                                        <mat-label>Herhaal nieuw wachtwoord</mat-label>
+                                        <input matInput type="password" formControlName="repeatPassword">
+                                        <mat-error
+                                                *ngIf="changePasswordForm.get('repeatPassword').hasError('noPasswordMatch')">
+                                            Wachtwoorden komen niet overeen
+                                        </mat-error>
+                                    </mat-form-field>
+                                </tr>
+                            </table>
+                            <button mat-button class="general-button" type="submit" [disabled]="!changePasswordForm.valid">Aanpassen</button>
+                        </form>
+                    </mat-expansion-panel>
+                </mat-accordion>
+            </mat-card>
+            <mat-card fxLayout.xs="column" fxLayoutAlign="space-evenly center">
+                <button mat-button class="general-nope-button" (click)="openDeleteAccountDialog()">Verwijder account</button>
+            </mat-card>
+        </div>
+        </body>
+        <footer class="footer">
+            <p> &copy; Utrecht University (ICS)</p>
+        </footer>
+    </mat-sidenav-content>
+</mat-sidenav-container>

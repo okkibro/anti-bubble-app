@@ -1,70 +1,90 @@
-import { Component, OnInit } from '@angular/core';
-import { AuthenticationService } from '../../services/authentication.service';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { MatSnackBar } from '@angular/material/snack-bar';
-import { User } from '../../models/user';
-import { milestones } from '../../../../constants';
+/*
+ * This program has been developed by students from the bachelor Computer Science at Utrecht University
+ * within the Software Project course. © Copyright Utrecht University (Department of Information and
+ * Computing Sciences)
+ */
 
+/**
+ * @packageDocumentation
+ * @module Components
+ */
+import { Component, OnInit } from '@angular/core';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { Title } from '@angular/platform-browser';
+import { Router } from '@angular/router';
+import { Milestone } from 'src/app/models/milestone';
+import { ClassesService } from 'src/app/services/classes.service';
+import { milestones, titleTrail } from '../../../../constants';
+import { User } from '../../models/user';
+import { UserService } from '../../services/user.service';
+
+/**
+ * This class handles all the logic for collecting all the information necessary for displaying the user's
+ * profile. The component is not the same for teachers and students, but the ngOnInit() method is.
+ */
 @Component({
-    selector: 'mean-profile',
-    templateUrl: './profile.component.html',
-    styleUrls: ['./profile.component.css',
-                '../../shared/general-styles.css']
+	selector: 'profile-component',
+	templateUrl: './profile.component.html',
+	styleUrls: ['./profile.component.css',
+		'../../shared/general-styles.css']
 })
 
 export class ProfileComponent implements OnInit {
-    userDetails: User;
-    milestoneShown;
-    changePasswordForm = this.fb.group({
-        oldPassword: ['', Validators.required],
-        newPassword: ['', Validators.required],
-        repeatPassword: ['', Validators.required]
-    },{
-        validator: this.passwordMatchValidator
-    });
+	public userDetails: User;
+	public milestoneShown: Milestone;
+	public userClassTitle: string;
 
-    constructor(private auth: AuthenticationService, private fb: FormBuilder, private snackbar: MatSnackBar) {}
-    
-    ngOnInit() {
-        this.auth.profile().subscribe(user => {
-            this.userDetails = user;
-            this.milestoneShown = {
-                name: "Gefeliciteerd",
-                description: "Je hebt alle milestones gehaald",
-                index: 0,
-                maxValue: 0
-            }
-            for (let i = 0; i < milestones.length; i++) {
-                if (user.milestones[i] != milestones[i].maxValue && user.milestones[i] >= user.milestones[this.milestoneShown.index]) {
-                    console.log(user.miles)
-                    this.milestoneShown = milestones[i];
-                }
-            }
-        }, (err) => {
-            console.error(err);
-        });
-    }
+	/**
+	 * ProfileComponent constructor.
+	 * @param snackBar
+	 * @param classesService
+	 * @param router
+	 * @param titleService
+	 * @param userService
+	 */
+	constructor(
+		private snackBar: MatSnackBar,
+		private classesService: ClassesService,
+		private router: Router,
+		private titleService: Title,
+		private userService: UserService
+	) { }
 
-    changePassword() {
-        let oldPassword = this.changePasswordForm.get('oldPassword').value;
-        let newPassword = this.changePasswordForm.get('newPassword').value;
-        let email = this.userDetails.email;
-        this.auth.updatePassword(email, oldPassword, newPassword).subscribe(() => {
-            this.snackbar.open("Wachtwoord is aangepast!", "X", {duration: 2500})
-        }, (err) => {
-            console.error(err);
-        });
-    }
+	/**
+	 * Initialization method.
+	 * @return
+	 */
+	public ngOnInit(): void {
 
-    logoutButton() {
-      return this.auth.logout();
-    }
+		// Milestone that gets shown when you have all badges.
+		this.milestoneShown = {
+			name: 'Gefeliciteerd',
+			description: 'Je hebt alle badges gehaald',
+			index: 0,
+			maxValue: 0
+		};
 
-    passwordMatchValidator(form: FormGroup) {
-        let newpassword = form.get('newPassword').value;
-        let repeatPassword = form.get('repeatPassword').value;
-        if (newpassword != repeatPassword) {
-            form.get('repeatPassword').setErrors({ noPasswordMatch: true });
-        }
-    }
+		// Get user's class
+		this.classesService.getClass().subscribe(data => {
+			if (data.succes) {
+				this.userClassTitle = data.class.title;
+			}
+		});
+
+		this.userService.profile().subscribe(user => {
+			this.userDetails = user;
+
+			// Loop over all milestones and find the one with the most progress that the user didnt complete yet.
+			for (let i = 0; i < milestones.length; i++) {
+				if (user.milestones[i] != milestones[i].maxValue && user.milestones[i] >= user.milestones[this.milestoneShown.index]) {
+					this.milestoneShown = milestones[i];
+				}
+			}
+		}, (err) => {
+			console.error(err);
+		});
+
+		// Set page title.
+		this.titleService.setTitle('Profiel' + titleTrail);
+	}
 }

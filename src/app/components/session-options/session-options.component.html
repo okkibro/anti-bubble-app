@@ -1,0 +1,94 @@
+<!--
+  ~ This program has been developed by students from the bachelor Computer Science at Utrecht University
+  ~ within the Software Project course. © Copyright Utrecht University (Department of Information and
+  ~ Computing Sciences)
+  -->
+
+<!--This page represents all of the activities and their descriptions a teacher can choose. The teacher can create a session and will be redirected to the 'session'-page -->
+<mat-sidenav-container>
+    <mat-sidenav #sidenav [autoFocus]="false" fixedInViewport="true">
+        <sidenav-component (sidenavClose)="sidenav.close()"></sidenav-component>
+    </mat-sidenav>
+    <mat-sidenav-content>
+        <toolbar-component (sidenavToggle)="sidenav.toggle()"></toolbar-component>
+
+        <body>
+        <div class="container-div" fxLayout="column" fxLayoutAlign="space-evenly">
+            <mat-card>
+                <mat-card-header>
+                    <mat-card-title>Activiteiten</mat-card-title>
+                    <mat-card-subtitle>Kies een activiteit en de bijbehorende duratie</mat-card-subtitle>
+                </mat-card-header>
+                <mat-card-content>
+                    <mat-accordion>
+                        <mat-expansion-panel *ngFor="let activity of activities" hideToggle="true">
+                            <mat-expansion-panel-header>
+                                <mat-panel-title>{{ activity.name }}</mat-panel-title>
+                            </mat-expansion-panel-header>
+                            <div>
+                                <table class="session-options-table">
+                                    <tr>
+                                        <th>Soort activiteit:</th>
+                                        <td>{{ activity.category }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Doel:</th>
+                                        <td>{{ activity.goal }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Uitleg:</th>
+                                        <td>{{ activity.explanation }}</td>
+                                    </tr>
+                                    <tr class="final-table-row" *ngIf="activity.timed">
+                                        <th>Duratie (min):</th>
+                                        <td>
+                                            <form [formGroup]="durationSliderForm">
+                                                <mat-slider [(ngModel)]="sliderStartingValue" min="1" max="10" step="1" thumbLabel tickInterval="1" class="duration-slider" formControlName="durationSlider">
+                                                </mat-slider>
+                                            </form>
+                                        </td>
+                                    </tr>
+                                    <tr class="final-table-row" *ngIf="activity.teams">
+                                        <th>Teams:</th>
+                                        <td>
+                                            <form [formGroup]="teamOptionForm">
+                                                <mat-radio-group formControlName="teamOption">
+                                                    <mat-radio-button class="team-option-button" value="Willekeurig" color="primary" [checked]="true">
+                                                        Willekeurig
+                                                    </mat-radio-button>
+                                                    <mat-radio-button class="team-option-button" value="Handmatig" color="primary">
+                                                        Handmatig
+                                                    </mat-radio-button>
+                                                </mat-radio-group>
+                                            </form>
+                                        </td>
+                                    </tr>
+                                </table>
+                                <br>
+                                <button mat-button class="general-button" *ngIf="activity.timed && !activity.teams"
+                                        (click)="createSession({ game: [activity.name],
+                                        duration: durationSliderForm.get('durationSlider').value })">
+                                    Start sessie
+                                </button>
+                                <button mat-button class="general-button" *ngIf="!activity.timed && !activity.teams"
+                                        (click)="createSession({ game: [activity.name] })">
+                                    Start sessie
+                                </button>
+                                <button mat-button class="general-button" *ngIf="activity.timed && activity.teams"
+                                        (click)="createSession({ game: [activity.name],
+                                        duration: durationSliderForm.get('durationSlider').value,
+                                        teams: teamOptionForm.get('teamOption').value })">
+                                    Start sessie
+                                </button>
+                            </div>
+                        </mat-expansion-panel>
+                    </mat-accordion>
+                </mat-card-content>
+            </mat-card>
+        </div>
+        </body>
+        <footer class="footer">
+            <p> &copy; Utrecht University (ICS)</p>
+        </footer>
+    </mat-sidenav-content>
+</mat-sidenav-container>

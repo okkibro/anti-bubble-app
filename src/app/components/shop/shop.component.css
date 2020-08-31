@@ -1,21 +1,40 @@
-.welcomeHeader{
-    font-size: xx-large;
+/*
+ * This program has been developed by students from the bachelor Computer Science at Utrecht University
+ * within the Software Project course. © Copyright Utrecht University (Department of Information and
+ * Computing Sciences)
+ */
+
+.mat-card-subtitle {
+    font-family: Roboto, 'Helvetica Neue', sans-serif !important;
+    /* NOTE: text-fill-color paints the text once more over the actual text. This can have unwanted side effects that should be fixed in local css */
+    -webkit-text-fill-color: unset !important;
+    -webkit-text-stroke: unset !important;
+    text-shadow: unset !important;
+    color: unset !important;
+    font-size: 16px !important;
 }
 
-mat-card-title {
-   font-size: medium;
+.mat-card-footer {
+    padding-top: 5px;
 }
 
-::ng-deep .mat-simple-snackbar-action {
-    color: white;
+.currency {
+    font-size: 24px;
 }
 
-::ng-deep .style-error {
-    color: white;
-    background-color: red;
+.shop-buy-button {
+    background: transparent url("../../../assets/images/Super_Map/Basic_Buttons/Button_Blue_Rectangle.png") round;
 }
 
-::ng-deep .style-succes {
-    color: white;
-    background-color: green;
+.category-change-button {
+    height: 75%;
+    width: 75%;
+    padding: 0;
+    min-width: unset;
+}
+
+mat-card img {
+    margin-top: 0;
+    height: 100%;
+    width: 60%;
 }

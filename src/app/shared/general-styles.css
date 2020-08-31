@@ -1,104 +1,90 @@
-/* the following things define the toolbar*/
-#logoutButton {
-    color: black;
-    background-color: lightskyblue;
-    position: sticky;
-    display: inline-flex;
-    justify-content: center;
-    align-items: center;
-    height: 60px;
-    width: 60px;
-    right: 15px;
-    text-align: center;
-    font-size: 15px;
-    border-radius: 100%;
+/*
+ * This program has been developed by students from the bachelor Computer Science at Utrecht University
+ * within the Software Project course. © Copyright Utrecht University (Department of Information and
+ * Computing Sciences)
+ */
+
+@import url('https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap');
+
+.mat-card-title, .mat-card-subtitle {
+    font-family: 'Fredoka One', cursive;
+    /* NOTE: text-fill-color paints the text once more over the actual text. This can have unwanted side effects that should be fixed in local css */
+    -webkit-text-fill-color: white;
+    -webkit-text-stroke: 1px #41596c;
+    paint-order: fill stroke;
+    text-shadow: 1px 1px #41596c;
+    color: white;
+    font-size: 40px;
 }
 
-.navBarAng {
-    position: sticky;
-    top: 0;
-    z-index: 100;
+.mat-card-subtitle {
+    font-size: 20px;
 }
 
-.navBarAng div {
-    display: fixed;
-    flex: 1 1 auto;
-    text-align: center;
-}
-
-.navitems button {
-    padding-left: 30px;
-    padding-right: 30px;
-}
-
-.navBarAng button:hover {
-    color:  #fbe0d0;
-}
-
-.logo {
-    text-decoration: underline;
-    text-decoration-color:  #fbe0d0;
-    position: absolute;
-}
-
-
-/* the following code will describe the rest of the (angular) page */
 body {
-    /* background-image: url("../../favicon.ico"); */
-    background-image: url("/../../assets/images/background.png");
+    background-color: #addadb;
     text-align: center;
-    margin: 0;
-    padding: 0;
-    height: 100%;
-    width: 100%;
-    background-size: auto;  
-
+    background-size: auto;
     display: flex;
     justify-content: center;
-    align-items: center; 
+    align-items: center;
+    margin-top: 50px;
 }
 
-.containerDiv {
+.container-div {
     height: 100%;
     width: 80%;
-    justify-content: center;
     text-align: center;
-    align-items: center; 
     background-color: #addadb;
+    margin: 10px 0;
+}
+
+@media (max-width: 600px) {
+    .container-div {
+        width: 90%;
+    }
 }
 
 mat-card {
-    background-color: #fffcf3;
-    border: 5px solid #fceca9;
-    /* border-radius: 20px; */
+    background-color: #fff2f3;
+    border: 5px solid #dd6d59;
+    position: relative;
 }
 
 mat-card-header {
     display: inline-block;
 }
 
-mat-card button{
-    background-color: #addadb;
+.general-link,
+.general-button {
+    color: white;
+    background: transparent url("../../assets/images/Super_Map/Basic_Buttons/Button_Red_Rectangle.png") round;
 }
 
-mat-card img{
-    object-fit: cover; 
-    width: 15%; 
-    height: width;
-}
-
-mat-tab-group, mat-tab {
-    text-align: center;
-    justify-content: center;
-    align-items: center; 
-    display: flex;
-}
-
-.UItable {
+.general-table {
     display: inline-block;
 }
 
-.UItable th, td {
+.general-table th,
+.general-table td {
     text-align: left;
-    padding: 10px;    
+    padding: 10px;
+}
+
+.footer {
+    text-align: center;
+}
+
+.general-nope-button {
+    background-color: #f44336;
+    color: white;
+    border-radius: 5px;
+    box-shadow: 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
+}
+
+.general-warning-button {
+    background-color: #ffcc00;
+    color: black;
+    border-radius: 5px;
+    box-shadow: 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
 }

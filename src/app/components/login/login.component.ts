@@ -1,37 +1,80 @@
-import { Component, OnInit } from '@angular/core';
-import { Validators, FormBuilder } from '@angular/forms';
-import { AuthenticationService } from '../../services/authentication.service';
-import { Router } from '@angular/router';
-import { User } from '../../models/user';
-import { MatSnackBar } from '@angular/material/snack-bar';
+/*
+ * This program has been developed by students from the bachelor Computer Science at Utrecht University
+ * within the Software Project course. © Copyright Utrecht University (Department of Information and
+ * Computing Sciences)
+ */
 
+/**
+ * @packageDocumentation
+ * @module Components
+ */
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, Validators } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { Title } from '@angular/platform-browser';
+import { Router } from '@angular/router';
+import { titleTrail } from '../../../../constants';
+import { User } from '../../models/user';
+import { AuthenticationService } from '../../services/authentication.service';
+
+/**
+ * This class handles all the logic for logging in a user to the app. Only contains a method that calls the login()
+ * method of the AuthenticationService.
+ */
 @Component({
-    selector: 'mean-login',
-    templateUrl: './login.component.html',
-    styleUrls: ['./login.component.css',
-                '../../shared/general-styles.css']
+	selector: 'login-component',
+	templateUrl: './login.component.html',
+	styleUrls: ['./login.component.css',
+		'../../shared/general-styles.css']
 })
 
-// TODO: Make sure you can't see attempted password in plain text in "Network" tab in Chrome
-
 export class LoginComponent implements OnInit {
-    loginForm = this.fb.group({
-        email: ['', [Validators.required, Validators.email]],
-        password: ['', Validators.required],
-    });
+	public loginForm = this.fb.group({
+		email: ['', [Validators.required, Validators.email]],
+		password: ['', Validators.required]
+	});
 
-    constructor(private auth: AuthenticationService, private router: Router, private fb: FormBuilder, private snackBar: MatSnackBar) { }
+	/**
+	 * LoginComponent constructor.
+	 * @param auth
+	 * @param router
+	 * @param fb
+	 * @param snackBar
+	 * @param titleService
+	 */
+	constructor(
+		private auth: AuthenticationService,
+		private router: Router,
+		private fb: FormBuilder,
+		private snackBar: MatSnackBar,
+		private titleService: Title
+	) { }
 
-    ngOnInit() { }
+	/**
+	 * Initialization method.
+	 * @return
+	 */
+	public ngOnInit(): void {
+		if (this.auth.isLoggedIn()) {
+			this.router.navigate(['home']);
+		}
 
-    loginUser() {
-        let user = new User();
-        user.email = this.loginForm.get('email').value;
-        user.password = this.loginForm.get('password').value;
-        this.auth.login(user).subscribe(() => {
-            this.router.navigate(['home']);
-        }, () => {
-            this.snackBar.open("Onjuist wachtwoord of email", 'X', {duration: 2500});
-        });
-    }
+		// Set page title.
+		this.titleService.setTitle('Login' + titleTrail);
+	}
+
+	/**
+	 * Method to login a user.
+	 * @return
+	 */
+	public loginUser() {
+		let user = new User();
+		user.email = this.loginForm.get('email').value;
+		user.password = this.loginForm.get('password').value;
+		this.auth.login(user).subscribe(() => {
+			this.router.navigate(['home']);
+		}, () => {
+			this.snackBar.open('Onjuist wachtwoord of email.', 'X', { duration: 2500, panelClass: ['style-error'] });
+		});
+	}
 }

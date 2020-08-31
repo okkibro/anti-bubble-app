@@ -1,0 +1,35 @@
+/*
+ * This program has been developed by students from the bachelor Computer Science at Utrecht University
+ * within the Software Project course. © Copyright Utrecht University (Department of Information and
+ * Computing Sciences)
+ */
+
+.sidenav {
+    background-color: #addadb;
+    color: black;
+}
+
+.sidenav button {
+    text-align: left;
+    height: 50px;
+}
+
+.first-button {
+    background-color: #a7473b;
+    border-radius: 0;
+    color: white;
+}
+
+.sidenav img {
+    height: 36px;
+    padding-left: 5px;
+}
+
+mat-divider {
+    margin: 0 8px;
+    border-top-color: black;
+}
+
+mat-list {
+    padding-top: 0;
+}

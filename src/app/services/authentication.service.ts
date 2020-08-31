@@ -1,20 +1,32 @@
-import {Injectable} from '@angular/core';
-import {HttpClient} from '@angular/common/http';
-import {Router} from '@angular/router';
-import {Observable} from "rxjs";
-import {map} from "rxjs/operators";
-import {User} from '../models/user';
-import {Role} from '../models/role';
-import {AbstractControl, AsyncValidatorFn, ValidationErrors} from "@angular/forms";
-import {CookieService} from 'ngx-cookie-service';
+/*
+ * This program has been developed by students from the bachelor Computer Science at Utrecht University
+ * within the Software Project course. © Copyright Utrecht University (Department of Information and
+ * Computing Sciences)
+ */
 
-// TODO: Check for possible CSRF-attack vulnerabilities because of use of cookies
-// TODO: Add function to get user from database in this service or another
+/**
+ * @packageDocumentation
+ * @module Services
+ */
+import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
+import { CookieService } from 'ngx-cookie-service';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
+import { environment } from 'src/environments/environment';
+import { Role } from '../models/role';
+import { tokenData } from '../models/tokenData';
+import { User } from '../models/user';
 
 interface TokenResponse {
     token: string;
 }
 
+/**
+ * This class sends all HTTP requests used for logging in, registering a user and contains all methods that deal
+ * with the user's token/cokkie data.
+ */
 @Injectable({
     providedIn: 'root'
 })
@@ -22,31 +34,51 @@ interface TokenResponse {
 export class AuthenticationService {
     private token: string;
 
-    constructor(private http: HttpClient, private router: Router, private cookie: CookieService) {}
+    /**
+     * AuthenticationSerivice constructor.
+     * @param http
+     * @param router
+     * @param cookie
+     */
+    constructor(private http: HttpClient, private router: Router, private cookie: CookieService) { }
 
-    /** Method that saves the JWT of the user in the browser's cookies */
+    /**
+     * Method to save the JWT of the user in the browser's cookies.
+     * @param token JWT to save in the user's browser cookies.
+     * @return
+     */
     private saveToken(token: string): void {
-        this.cookie.set('mean-token', token, 1, '/', 'localhost', false, 'Strict');
+        this.cookie.set('jwt', token, 1, '/', 'localhost', false, 'Strict');
         this.token = token;
     }
 
-    /** Method that gets the JWT from the browser's cookies for the current user */
+    /**
+     * Method to get the JWT from the browser's cookies for the current user.
+     * @return
+     */
     private getToken(): string {
         if (!this.token) {
-            this.token = this.cookie.get('mean-token');
+            this.token = this.cookie.get('jwt');
         }
         return this.token;
     }
 
-    /** Method that logs the user out */
+    /**
+     * Method to logout the user.
+     * @return
+     */
     public logout(): void {
         this.token = '';
-        this.cookie.delete('mean-token');
+        this.cookie.delete('jwt');
+        this.cookie.delete('io');
         this.router.navigateByUrl('/login');
     }
 
-    /** Method that extracts all the important data from the user's JWT */
-    public getUserDetails(): User {
+    /**
+     * Method to extract all the important data from the user's JWT.
+     * @return Data from JWT.
+     */
+    public getTokenData(): tokenData {
         const token = this.getToken();
         let payload;
         if (token) {
@@ -58,105 +90,51 @@ export class AuthenticationService {
         }
     }
 
-    /** Method that checks whether the user is currently logged in */
+    /**
+     * Method to check whether the user is currently logged in by looking at their cookie.
+     * @return Whether the requesting user is logged in or not.
+     */
     public isLoggedIn(): boolean {
-        const user = this.getUserDetails();
-        if (user) {
-            return user.exp < Date.now() + (86400 * 1000);
+        const tokenData = this.getTokenData();
+        if (tokenData) {
+            return tokenData.exp < Date.now() + (86400 * 1000);
         } else {
             return false;
         }
     }
 
-    /** Method that checks whether the user is a teacher */
-    public isTeacher(): boolean {
-        const user = this.getUserDetails();
-        if (user && this.isLoggedIn()) {
-            return user.role === Role.teacher;
-        } else {
-            return false;
-        }
-    }
-
-    /** Method that checks whether the user is a student */
-    public isStudent(): boolean {
-        const user = this.getUserDetails();
-        if (user && this.isLoggedIn()) {
-            return user.role === Role.student;
-        } else {
-            return false;
-        }
-    }
-
-    /** Method that checks the role of the user*/
+    /**
+     * Method to checks the role of the user.
+     * @return User's role.
+     */
     public getRole(): Role {
-        return this.getUserDetails().role;
+        return this.getTokenData().role;
     }
 
-    // TODO: Add debouncing to reduce HTTP-requests for below 2 methods
 
-    /** Method that POSTs to the backend API to check if a given email is already present in the database */
-    public checkEmailTaken(email: string) {
-        return this.http.post('https://localhost:3000/user/checkEmailTaken', { email: email });
-    }
-
-    /** Async validator method for checking if an email is already taken  */
-    public uniqueEmailValidator(): AsyncValidatorFn {
-        return (control: AbstractControl): Observable<ValidationErrors | null> => {
-            return this.checkEmailTaken(control.value).pipe(
-                map(res => {
-                    return res.hasOwnProperty('emailTaken') == true ? { emailTaken: true } : null;
-                })
-            );
-        };
-    }
-
-    /** Method that updates the password of an already registered user */
-    public updatePassword(email: string, oldPassword: string, newPassword: string) {
-        return this.http.patch('https://localhost:3000/user/updatePassword', {email: email, oldPassword: oldPassword, newPassword: newPassword})
-    }
-
-    // TODO:: Check if this is necessary
-    private request(method: 'post'|'get', type: 'login'|'register'|'profile'|'getAllClassmates'|any , user?: User): Observable<any> {
-        let base;
-
-        if (method === 'post') {
-            base = this.http.post(`https://localhost:3000/user/${type}`, user);
-        } else {
-            base = this.http.get(`https://localhost:3000/user/${type}`, { headers: { Authorization: `Bearer ${this.getToken()}` }});
-        }
-
-        return base.pipe(
+    /**
+     * POST method for registering a user
+     * @param user User that wants to register.
+     * @return HTTP response data in an Observable.
+     */
+    public register(user: User): Observable<any> {
+        return this.http.post(`${environment.ENDPOINT}/user/register`, user).pipe(
             map((data: TokenResponse) => {
-                if (data.token) {
-                    this.saveToken(data.token);
-                }
-                return data;
+                this.saveToken(data.token);
             })
         );
     }
 
-    /** POST method for registering a user */
-    public register(user: User): Observable<any> {
-        return this.request('post', 'register', user);
-    }
-
-    /** POST method for logging in a user */
+    /**
+     * POST method for logging in a user
+     * @param user User that wants to login.
+     * @return HTTP response data in an Observable.
+     */
     public login(user: User): Observable<any> {
-        return this.request('post', 'login', user);
+        return this.http.post(`${environment.ENDPOINT}/user/login`, user).pipe(
+            map((data: TokenResponse) => {
+                this.saveToken(data.token);
+            })
+        );
     }
-
-    /** GET method for fetching a user's profile */
-    public profile(): Observable<any> {
-        return this.request('get', 'profile');
-    }
-
-    public getAllClassmates() : Observable<any> {
-        return this.request('get', 'getAllClassmates');
-    }
-
-    public classmateProfile(id: string) : Observable<any> {
-        return this.request('get', 'classmateProfile/' + id)
-    }
-
 }

@@ -1,31 +1,21 @@
-/* .bubbleIcon {
-    height: 250px;
-    width: 250px;
-}*/
-
-#joinSessionButton,
-#createSessionButton {
-    font-size: 20px;
-    margin-top: 20px;
-    color: white;
-    background-color: blue;
-    height: 75px;
-    width: 250px;
-    border-radius: 12px;
-    display: inline-flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.welcomeHeader{
-    font-size: 40px;
-}
+/*
+ * This program has been developed by students from the bachelor Computer Science at Utrecht University
+ * within the Software Project course. © Copyright Utrecht University (Department of Information and
+ * Computing Sciences)
+ */
 
 .profileTable th, td {
     text-align: left;
     padding: 10px;
 }
 
-.number{
+.number {
     font-size: 70px;
+}
+
+.join-session {
+    display: flex;
+    width: 200px;
+    flex-direction: column;
+    margin: 0 auto;
 }

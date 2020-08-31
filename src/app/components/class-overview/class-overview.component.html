@@ -1,96 +1,73 @@
-<mean-nav-bar></mean-nav-bar>
+<!--
+  ~ This program has been developed by students from the bachelor Computer Science at Utrecht University
+  ~ within the Software Project course. © Copyright Utrecht University (Department of Information and
+  ~ Computing Sciences)
+  -->
 
-<body>
-    <div class="containerDiv" fxLayoutGap="0.5%" fxLayout="column" fxLayoutAlign="space-evenly">
-        <mat-card>
-            <mat-card-header>
-                <mat-card-title> Klassen Overzicht </mat-card-title>
-                <mat-card-subtitle>
-                    Overzicht van alle spelers van klas [klasnaam].
-                </mat-card-subtitle>
-            </mat-card-header>
-        </mat-card>
+<mat-sidenav-container>
+    <mat-sidenav #sidenav [autoFocus]="false" fixedInViewport="true">
+        <sidenav-component (sidenavClose)="sidenav.close()"></sidenav-component>
+    </mat-sidenav>
+    <mat-sidenav-content>
+        <toolbar-component (sidenavToggle)="sidenav.toggle()"></toolbar-component>
+        <body>
+        <div class="container-div" fxLayoutGap="10px" fxLayout="column" fxLayoutAlign="space-evenly">
+            <mat-card *ngIf="userClass?.title">
+                <mat-card-header>
+                    <mat-card-title> Klas overzicht</mat-card-title>
+                    <mat-card-subtitle>
+                        Overzicht van alle spelers van klas {{ userClass?.title }}.
+                    </mat-card-subtitle>
+                </mat-card-header>
+            </mat-card>
 
-        <mat-card>
-            <mat-card-content>
-                <table class="UItable" id="table">
-                    <tr>
-                        <th>Naam</th>
-                        <th>Status</th>
-                    </tr>
-                    <tr *ngFor="let classmate of classmates">
-                        <td>{{ classmate.firstName }}</td>
-                        <td>Online</td>
-                        <td><button mat-button [routerLink]="'/classmateProfile/' + classmate._id" class="abutton">
-                                Bekijk Profiel </button></td>
-                    </tr>
-                </table>
-            </mat-card-content>
-        </mat-card>
+            <mat-card *ngIf="userClass?.title">
+                <mat-card-content>
+                    <table class="general-table" id="table">
+                        <tr>
+                            <th>Naam</th>
+                            <th></th>
+                        </tr>
+                        <tr *ngFor="let classmate of classmates">
+                            <td>{{ classmate.firstName }}</td>
+                            <td *ngIf="classmate._id === userDetails._id"><a mat-button class="general-link" [routerLink]="'/profile/'"> Bekijk Profiel </a></td>
+                            <td *ngIf="classmate._id !== userDetails._id"><a mat-button class="general-link" [routerLink]="'/classmate-profile/' + classmate._id"> Bekijk
+                                Profiel </a></td>
+                        </tr>
+                    </table>
+                </mat-card-content>
+            </mat-card>
 
-        <mat-card class="searchBar" [formGroup]="searchBar">
-            <mat-card-header>
-                <mat-card-title>Zoek klasgenoot</mat-card-title>
-            </mat-card-header>
-            <mat-card-content>
-                <mat-form-field>
-                    <input type="text" matInput formControlName="query" [(ngModel)]="value" placeholder="Zoek hier">
-                    <button mat-button *ngIf="value" matSuffix mat-icon-button aria-label="Clear" (click)="clear()">
-                        <mat-icon>close</mat-icon>
-                    </button>
-                </mat-form-field>
-                <button mat-flat-button [ngClass]="{'my-custom-theme': true}" color="primary" (click)="search()">Go</button>
-                <mat-accordion>
-                    <mat-expansion-panel>
-                        <mat-expansion-panel-header>
-                            <mat-panel-title>
-                                Klas tonen
-                            </mat-panel-title>
-                        </mat-expansion-panel-header>
-                        <table class="UItable">
-                            <tr>
-                                <th>Voornaam</th>
-                                <th>Achternaam</th>
-                            </tr>
-                            <tr>
-                                <td>Klasgenoot</td>
-                                <td>1</td>
-                            </tr>
-                        </table>
-                    </mat-expansion-panel>
-                </mat-accordion>
-            </mat-card-content>
-        </mat-card>
-    </div>
-</body>
+            <mat-card *ngIf="userClass?.title">
+                <mat-card-header>
+                    <mat-card-title>Zoek klasgenoot</mat-card-title>
+                </mat-card-header>
+                <mat-card-content>
+                    <form [formGroup]="searchForm">
+                        <mat-form-field class="classmate-search">
+                            <input type="text" matInput formControlName="query" placeholder="Zoek hier">
+                            <button type="reset" mat-button mat-icon-button matSuffix *ngIf="searchForm.get('query').value" (click)="clear()">
+                                <mat-icon>close</mat-icon>
+                            </button>
+                        </mat-form-field>
+                        <button mat-button class="general-button" type="submit" (click)="search()">
+                            <mat-icon>search</mat-icon>
+                        </button>
+                    </form>
+                </mat-card-content>
+            </mat-card>
 
-<footer>
-    <p> &copy; Utrecht University (ICS)</p>
-</footer>
+            <mat-card *ngIf="userClass?.title">
+                <button mat-button class="general-nope-button" (click)="openLeaveClassDialog()">Verlaat klas</button>
+            </mat-card>
 
-<!-- <tr>
-        <td>{{ userDetails?.firstName }}</td>
-        <td>Online</td>
-        <td><button mat-flat-button [routerLink]="'/classmateProfile'" [ngClass]="{'my-custom-theme': true}" color="primary"> Bekijk Profiel </button></td>
-    </tr>
-    <tr>
-        <td>[Naam 2]</td>
-        <td>Offline</td>
-        <td><button mat-flat-button [ngClass]="{'my-custom-theme': true}" color="primary">Bekijk profiel</button></td>
-    </tr>
-    <tr>
-        <td>[Naam 3]</td>
-        <td>Offline</td>
-        <td><button mat-flat-button [ngClass]="{'my-custom-theme': true}" color="primary">Bekijk profiel</button></td>
-    </tr>
-    <tr>
-        <td>[Naam 4]</td>
-        <td>Online</td>
-        <td><button mat-flat-button [ngClass]="{'my-custom-theme': true}" color="primary">Bekijk profiel</button></td>
-    </tr>
-    <tr>
-        <td>[Naam 5]</td>
-        <td>Offline</td>
-        <td><button mat-flat-button [ngClass]="{'my-custom-theme': true}" color="primary">Bekijk profiel</button></td>
-    </tr>
-</table> -->
+            <div *ngIf="userClass?.title == undefined">
+                <join-class-component></join-class-component>
+            </div>
+        </div>
+        </body>
+        <footer class="footer">
+            <p> &copy; Utrecht University (ICS)</p>
+        </footer>
+    </mat-sidenav-content>
+</mat-sidenav-container>

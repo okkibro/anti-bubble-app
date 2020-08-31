@@ -1,5 +1,13 @@
+/*!
+ * This program has been developed by students from the bachelor Computer Science at Utrecht University
+ * within the Software Project course. © Copyright Utrecht University (Department of Information and
+ * Computing Sciences)
+ */
+
 @import '~@angular/material/theming';
 @include mat-core();
+
+$custom-typography: mat-typography-config($font-family: '"Fredoka One", cursive;');
 
 $darkest-pink: (
     50 : #fff5f6,
@@ -65,7 +73,7 @@ contrast: (
     A400: white,
     A700: white,
   )
-  );
+);
 
   $medium-pink: (
     50: #ffffff,
@@ -98,7 +106,7 @@ contrast: (
     A400: white,
     A700: white,
   )
-  );
+);
 
   $light-pink: (
     50: #ffffff,
@@ -131,7 +139,7 @@ contrast: (
     A400: white,
     A700: white,
   )
-  );
+);
 
   $yellow: (
     50: #ffffff,
@@ -164,7 +172,7 @@ contrast: (
     A400: white,
     A700: white,
   )
-  );
+);
 
   $green: (
     50: #e7f6ea,
@@ -197,7 +205,7 @@ contrast: (
     A400: white,
     A700: white,
   )
-  );
+);
 
 $light-blue: (
     50: #ffffff,
@@ -230,7 +238,7 @@ contrast: (
     A400: white,
     A700: white,
   )
-  );
+);
 
   $medium-blue: (
     50: #e2ebef,
@@ -263,7 +271,7 @@ contrast: (
     A400: white,
     A700: white,
   )
-  );
+);
 
   $dark-blue: (
     50: #7c99b0,
@@ -296,13 +304,145 @@ contrast: (
     A400: white,
     A700: white,
   )
-  );
+);
+
+  $vibrant-red: (
+    50 : #fbedeb,
+    100 : #f5d3cd,
+    200 : #eeb6ac,
+    300 : #e7998b,
+    400 : #e28372,
+    500 : #dd6d59,
+    600 : #d96551,
+    700 : #d45a48,
+    800 : #cf503e,
+    900 : #c73e2e,
+    A100 : #ffffff,
+    A200 : #ffdad6,
+    A400 : #ffaca3,
+    A700 : #ff958a,
+    contrast: (
+    50 : #000000,
+    100 : #000000,
+    200 : #000000,
+    300 : #000000,
+    400 : #000000,
+    500 : #000000,
+    600 : #000000,
+    700 : #ffffff,
+    800 : #ffffff,
+    900 : #ffffff,
+    A100 : #000000,
+    A200 : #000000,
+    A400 : #000000,
+    A700 : #000000,
+    )
+);
+
+    $md-bloodsun: (
+    50 : #fffdfe,
+    100 : #fffbfb,
+    200 : #fff9f9,
+    300 : #fff6f7,
+    400 : #fff4f5,
+    500 : #fff2f3,
+    600 : #fff0f1,
+    700 : #ffeeef,
+    800 : #ffeced,
+    900 : #ffe8ea,
+    A100 : #ffffff,
+    A200 : #ffffff,
+    A400 : #ffffff,
+    A700 : #ffffff,
+    contrast: (
+      50 : #000000,
+      100 : #000000,
+      200 : #000000,
+      300 : #000000,
+      400 : #000000,
+      500 : #000000,
+      600 : #000000,
+      700 : #000000,
+      800 : #000000,
+      900 : #000000,
+      A100 : #000000,
+      A200 : #000000,
+      A400 : #000000,
+      A700 : #000000,
+    )
+);
+
+$aqua: (
+    50 : #f2f9f9,
+    100 : #ddf1f1,
+    200 : #c7e7e8,
+    300 : #b1dddf,
+    400 : #a0d6d8,
+    500 : #8fcfd1,
+    600 : #87cacc,
+    700 : #7cc3c6,
+    800 : #72bdc0,
+    900 : #60b2b5,
+    A100 : #ffffff,
+    A200 : #effeff,
+    A400 : #bcfdff,
+    A700 : #a2fcff,
+    contrast: (
+    50 : #000000,
+    100 : #000000,
+    200 : #000000,
+    300 : #000000,
+    400 : #000000,
+    500 : #000000,
+    600 : #000000,
+    700 : #000000,
+    800 : #000000,
+    900 : #000000,
+    A100 : #000000,
+    A200 : #000000,
+    A400 : #000000,
+    A700 : #000000,
+    )
+);
+
+$md-crimson: (
+    50 : #f6ebe9,
+    100 : #e9cdc9,
+    200 : #dbaca5,
+    300 : #cd8a81,
+    400 : #c27166,
+    500 : #b7584b,
+    600 : #b05044,
+    700 : #a7473b,
+    800 : #9f3d33,
+    900 : #902d23,
+    A100 : #ffd2cf,
+    A200 : #ffa39c,
+    A400 : #ff7469,
+    A700 : #ff5c4f,
+    contrast: (
+    50 : #000000,
+    100 : #000000,
+    200 : #000000,
+    300 : #000000,
+    400 : #000000,
+    500 : #ffffff,
+    600 : #ffffff,
+    700 : #ffffff,
+    800 : #ffffff,
+    900 : #ffffff,
+    A100 : #000000,
+    A200 : #000000,
+    A400 : #000000,
+    A700 : #000000,
+    )
+);
 
 // below creates a primary palette with three shades of blue
 // $my-primary: mat-palette($my-blue, 100, 50, 200);
 
-$my-custom-primary: mat-palette($green, 500, 300, 700);
-$my-custom-accent: mat-palette($light-blue, 500, 100, 700);
+$my-custom-primary: mat-palette($md-crimson, 700, 300, 700);
+$my-custom-accent: mat-palette($aqua, 500, 100, 700);
 $my-custom-warn: mat-palette($dark-pink);
 $my-custom-foreground: mat-palette($green, 500, 300, 700);
 $my-custom-background: mat-palette($light-pink, 500, 300, 700);
@@ -322,8 +462,6 @@ $alt-theme: mat-dark-theme($alt-primary, $alt-accent, $alt-warn);
   // @include angular-material-theme($alt-theme);
   @include mat-button-theme($alt-theme);
 }
-
-
 
 // .alternative {
 //   @include mat-button-theme($alt-theme);

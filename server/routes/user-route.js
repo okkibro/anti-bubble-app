@@ -1,307 +1,560 @@
-const express = require("express");
+/*
+ * This program has been developed by students from the bachelor Computer Science at Utrecht University
+ * within the Software Project course. © Copyright Utrecht University (Department of Information and
+ * Computing Sciences)
+ */
+
+const express = require('express');
 const router = express.Router();
 const mongoose = require('mongoose');
-const passport = require("passport");
-const User = mongoose.model('User');
+const passport = require('passport');
 const sanitize = require('mongo-sanitize');
 const nodemailer = require('nodemailer');
 const crypto = require('crypto');
-
+const Items = mongoose.model('items');
+const Users = mongoose.model('users');
+const Classes = mongoose.model('classes');
 const jwt = require('express-jwt');
+
+// Small constant for authentication.
 const auth = jwt({
-    secret: process.env.MY_SECRET,
-    userProperty: 'payload'
+	secret: process.env.MY_SECRET,
+	userProperty: 'payload'
 });
 
-//router to register a user in the database
+/**
+ * POST method to register a new user to the database.
+ */
 router.post('/register', (req, res) => {
-    //make a new user
-    let user = new User();
-    //fill in data to user attributes
-    user.firstName = sanitize(req.body.firstName);
-    user.lastName = sanitize(req.body.lastName);
-    user.email = sanitize(req.body.email);
-    user.role = sanitize(req.body.role);
-    user.setPassword(sanitize(req.body.password));
-    user.inventory = [];
-    user.milestones = [];
-    user.currency = 0;
-    for (let i = 0; i < 9; i++) { //TODO: change 9 to correct number when done making all the milestones
-        user.milestones.push(0);
-    }
 
-    //save the changes to the database
-    user.save(function () {
-        let token = user.generateJwt();
-        res.status(200).json({
-            token: token
-        });
-    });
+	// Make a new user.
+	let user = new Users();
+
+	// Fill in (the required) data to user attributes.
+	user.firstName = sanitize(req.body.firstName);
+	user.lastName = sanitize(req.body.lastName);
+	user.gender = req.body.gender;
+	user.email = sanitize(req.body.email);
+	user.role = req.body.role;
+	user.setPassword(sanitize(req.body.password));
+	user.inventory = [];
+	user.milestones = [];
+	user.bubbleInit = true;
+	user.bubble = {
+		online: [0],
+		social: [0],
+		mainstream: [0],
+		category1: [0],
+		category2: [0],
+		knowledge: [0],
+		techSavvy: [0]
+	};
+	if (user.role === 'student') {
+		user.bubbleInit = false;
+	}
+	user.currency = 0;
+	user.classArray = [];
+	user.milestones = [0, 0, 0, 0, 0, 0, 0, 0];
+	user.scoreboard = [];
+	for (let i = 0; i < 5; i++) {
+		user.scoreboard[i] = '';
+	}
+	user.classUpdates = [];
+	for (let i = 0; i < 5; i++) {
+		user.classUpdates[i] = '';
+	}
+
+	// Building the basic avatar upon registering.
+	Items.findById("5edcf97b1167982a005b9737", (err, lichaam) => {
+		Items.findById('5edcf97b1167982a005b977b', (err, broek) => {
+			Items.findById('5edcf97b1167982a005b9754', (err, shirt) => {
+				Items.findById('5edcf97b1167982a005b9787', (err, schoenen) => {
+					Items.find({ title: 'Geen' }, (err, emptyLayers) => {
+						user.avatar = {
+							haar: emptyLayers[0],
+							hoofddeksel: emptyLayers[1],
+							bril: emptyLayers[2],
+							lichaam: lichaam,
+							broek: broek,
+							shirt: shirt,
+							schoenen: schoenen,
+							medaille: emptyLayers[3]
+						};
+						user.save(function () {
+							let token = user.generateJwt();
+							return res.status(200).json({ token: token });
+						});
+					});
+				});
+			});
+		});
+	});
 });
 
-//router to check if login details match with the database (authentication)
+/**
+ * POST method to check if login details match with the database (authentication).
+ */
 router.post('/login', (req, res) => {
-    passport.authenticate('local', function (err, user) {
+	passport.authenticate('local', (err, user) => {
 
-        // If Passport throws/catches an error
-        if (err) {
-            return res.status(404).json(err);
-        }
+		// If Passport throws/catches an err.
+		if (err) {
+			return res.status(404).json({ message: err });
+		}
 
-        // If no user was found
-        if (!user) {
-            return res.status(401).json({
-                message: "Authentication failed"
-            });
-        }
+		// If no user was found.
+		if (!user) {
+			return res.status(401).json({ message: 'Authentication failed' });
+		}
 
-        // If a user is found
-        let token = user.generateJwt();
-        res.status(200).json({
-            token: token
-        });
-    })(req, res);
+		// If a user is found.
+		let token = user.generateJwt();
+		return res.status(200).json({ token: token });
+	})(req, res);
 });
 
-// router to send a password recovery email
+/**
+ * POST method to send a password recovery email.
+ */
 router.post('/passwordrecovery', async (req, res) => {
 
-    // Generate Random Token
-    const token = crypto.randomBytes(20).toString("hex");
-    console.log(token);
+	// Generate Random Token.
+	const token = crypto.randomBytes(20).toString('hex');
 
-    // Find the user with the given email and set the token
-    User.findOne({ email: req.body.email }, (error, user) => {
-        if (!user){
-            console.log("no user with that email");
-            res.json({ succes: false, message: "Geen gebruiker gevonden met het gegeven email adres"});
-            return res.end();
-        }
+	// Find the user with the given email and set the token.
+	Users.findOne({ email: req.body.email }, (err, user) => {
+		if (!err && user != null) {
+			user.recoverPasswordToken = token;
+			user.recoverPasswordExpires = Date.now() + 360000;
 
-        user.recoverPasswordToken = token;
-        user.recoverPasswordExpires = Date.now() + 360000;
+			user.save((err) => {
+				if (err) {
+					return res.status(500).json({ succes: false, message: err });
+				}
+			});
 
-        user.save((error) => {
-        if (error){
-            console.log(error.message);
-        }
-        });
-        // Send email with link and token in the link
-        nodemailer.createTestAccount((error, account) => {
-            if (error) {
-                return console.log(error.message);
-            }
+			// Send email with link and token in the link.
+			nodemailer.createTestAccount((err, account) => {
+				if (err) {
+					return res.status(500).json({ succes: false, message: err });
+				}
 
-            let transporter = nodemailer.createTransport({
-                host: account.smtp.host,
-                port: account.smtp.port,
-                secure: account.smtp.secure,
-                auth: {
-                user: account.user, // generated ethereal user
-                pass: account.pass // generated ethereal password
-                }
-            });
-        
-            let mailOptions = {
-                from: 'Anti Bubble App <' + account.user + '>',
-                to: req.body.email,
-                subject: "Password Recovery",
-                text: "",
-                html: "<h1>Password Recovery</h1><p>Reset Password by clicking on the following link: https://" + req.headers.host + "/reset/" + token // html body
-            };
-            
-            transporter.sendMail(mailOptions, (error, info) => {
-                if (error) {
-                    return console.log(error.message);
-                }
-                console.log(nodemailer.getTestMessageUrl(info));
-            });
-            
-            res.json({ succes: true, message: "Email succesvol verzonden" })
-            return res.status(200).end();
-        });
-    });
+				let transporter = nodemailer.createTransport({
+					host: account.smtp.host,
+					port: account.smtp.port,
+					secure: account.smtp.secure,
+					auth: {
+
+						// Generated ethereal user.
+						user: account.user,
+
+						// Fenerated ethereal password.
+						pass: account.pass
+					}
+				});
+
+				let mailOptions = {
+					from: 'Anti Bubble App <' + account.user + '>',
+					to: req.body.email,
+					subject: 'Password Recovery',
+					text: '',
+
+					// Html body.
+					html: '<h1>Password Recovery</h1>' +
+						'<p>Reset Password by clicking on the following link: https://' + req.headers.host + '/reset/' + token + '</p>'
+				};
+
+				transporter.sendMail(mailOptions, (err, info) => {
+					if (err) {
+						return res.status(500).json({ succes: false, message: err });
+					}
+					console.log(nodemailer.getTestMessageUrl(info));
+				});
+
+			});
+		}
+		return res.status(200).json({
+			succes: true,
+			message: 'Als het e-mailadres bij ons bekend is, heeft deze zojuist een link ontvangen om een nieuw wachtwoord aan te vragen, dus check je inbox.'
+		});
+	});
 });
 
-// router that checks the password recovery token and shows the reset password page or a wrong token error
+/**
+ * GET method to check the password recovery token and shows the reset password page or a wrong token err.
+ */
 router.get('/reset/:token', (req, res) => {
-    // Find the user that belongs to the given token
-    User.findOne({ recoverPasswordToken: req.params.token, recoverPasswordExpires: {$gt: Date.now() } }, (error, user) => {
-        if (!user) {
-            console.log("wrong token or token expired");
-            res.json({ correct: false });
-            res.status(200).end();
-        } else {
-            console.log("correct token");
-            res.json({ correct: true });
-            res.status(200).end();
-        }
-    });
+
+	// Find the user that belongs to the given token
+	Users.findOne({ recoverPasswordToken: req.params.token, recoverPasswordExpires: { $gt: Date.now() }}, (err) => {
+		if (!err) {
+			return res.status(200).json({ correct: true });
+		} else {
+			return res.status(200).json({ correct: false });
+		}
+	});
 });
 
-// router that changes the password of the user belonging to the given password recovery token
+/**
+ * POST method to change the password of the user belonging to the given password recovery token.
+ */
 router.post('/reset/:token', (req, res) => {
-    // Find the user that belongs to the given token
-    User.findOne({ recoverPasswordToken: req.params.token, recoverPasswordExpires: {$gt: Date.now() } }, (error, user) => {
-        if (error) { return console.log(error.message); }
-        if (!user) {
-            console.log("wrong token or token expired");
-            res.json({ succes: false, message: "wrong token or token expired" });
-            return res.end();
-        }
 
-        // Change the password in the database
-        if (req.body.password === req.body.confirmPassword) {
-            user.setPassword(req.body.password, (error) => {
-                if (error) { return console.log(error.message); }
-            });
-        } else {
-            console.log("password and confirmation are not the same");
-            res.json({ succes: false, message: "wachtwoord en bevestiging zijn niet hetzelfde" });
-            return res.end();
-        }
+	// Find the user that belongs to the given token
+	Users.findOne({ recoverPasswordToken: req.params.token, recoverPasswordExpires: { $gt: Date.now() }}, (err, user) => {
+		if (!err) {
+			user.setPassword(req.body.newPassword, (err) => {
+				if (err) {
+					return res.status(500).json({ succes: false, message: err });
+				}
+			});
 
-        user.recoverPasswordToken = undefined;
-        user.recoverPasswordExpires = undefined;
+			user.recoverPasswordToken = undefined;
+			user.recoverPasswordExpires = undefined;
 
-        user.save((error) => {
-            if (error) { return console.log(error.message); }
-            console.log("password change succesful");
-            res.json({ succes: true, message: "wachtwoord succesvol veranderd" });
-            res.status(200).end();
-        });
-    });
+			user.save().then(() => {
+				return res.status(200).json({ succes: true, message: 'Wachtwoord succesvol verandert.' });
+			}).catch((err) => {
+				return res.status(500).json({ succes: false, message: err });
+			});
+		} else {
+			return res.status(200).json({ succes: false, message: 'Verkeerde of reeds verlopen token.' });
+		}
+
+	});
 });
 
-//router to get a user given an id
+/**
+ * GET method to get a user from the database given an id.
+ */
 router.get('/profile', auth, (req, res) => {
 
-    // If no user ID exists in the JWT return a 401
-    if (!req.payload._id) {
-        res.status(401).json({
-            "message": "UnauthorizedError: private profile"
-        });
-    } else {
-        // Otherwise continue
-        User.findById(req.payload._id)
-            .exec(function (err, user) {
-                res.status(200).json(user);
-            });
-    }
+	// Check if user is authorized to perform the action.
+	if (!req.payload._id) {
+		return res.status(401).json({ message: 'UnauthorizedError: unauthorized action' });
+	} else {
+		Users.findById(req.payload._id).exec(function (err, user) {
+			return res.status(200).json(user);
+		});
+	}
 });
 
-router.get('/classmateProfile/:id', auth, (req, res) => {
-    // If no user ID exists in the JWT return a 401
-    if (!req.payload._id) {
-        res.status(401).json({
-            "message": "UnauthorizedError: private profile"
-        });
-    } else {
-        // Otherwise continue and find own and classmate's profile
-        User.findById(req.payload._id, (error, user) => {
-            User.findById(req.params.id, (error, classmate) => {
-                // Throw error if the given id does not correspond with a user
-                if (!classmate) {
-                    res.status(404).json({
-                        "message": "User's profile not found"
-                    })
-                } else {
-                    // Check if classmate is actually in the same class
-                    if (user.class != classmate.class) {
-                        res.status(401).json({
-                            "message": "Not authorized to see user's profile"
-                        })
-                    } else {
-                        res.status(200).json(classmate);
-                    }
-                }
-            });
-        });
-    }
-});
-
-router.get('/getAllClassmates', auth, (req, res) => {
-    if (!req.payload._id) {
-        res.status(401).json({
-            "message": "UnauthorizedError: private profile"
-        });
-    } else {
-        User.findById(req.payload._id, (error, user) => {
-            User.find({ class: user.class }, (error, classmates) => {
-                res.status(200).json(classmates);
-            });
-        });
-    }
-})
-
-
-//router to check if email is already present in the database
+/**
+ * POST method to check if email is already present in the database.
+ */
 router.post('/checkEmailTaken', (req, res) => {
-    User.findOne({ email: sanitize(req.body.email) }).then(user => {
-        if (user) {
-            return res.status(200).json({
-                emailTaken: true
-            });
-        } else {
-            return res.status(200).json({
-                emailNotTaken: true
-            });
-        }
-    });
+	Users.findOne({ email: sanitize(req.body.email) }).then(user => {
+		if (user) {
+			return res.status(200).json({ emailTaken: true });
+		} else {
+			return res.status(200).json({ emailTaken: false });
+		}
+	});
 });
 
-//router for updating a password given an email
-router.patch('/updatePassword', (req, res) => {
-    User.findOne({ email: sanitize(req.body.email) }).then(user => {
-        if (user) {
-            //check if old password is filled in correctly
-            if (user.validatePassword(sanitize(req.body.oldPassword))) {
-                //update password in database to new password
-                user.setPassword(sanitize(req.body.newPassword));
-                //save changes to database
-                user.save();
-                //return status ok
-                return res.status(200).json({
-                    message: "password changed"
-                });
-            } else {
-                //handle error if old password doesn't match with the one in database
-                return res.status(401).json({
-                    message: "password doesn't match with old password"
-                });
-            }
-        } else {
-            console.log("user not found")
-            //handle error if user is not found in database
-            return res.status(401).json({
-                message: "user not found"
-            });
-        }
-    });
+/**
+ * PATCH method to update a password given an email.
+ */
+router.patch('/updatePassword', auth, (req, res) => {
+
+	// Check if user is authorized to perform the action.
+	if (!req.payload._id) {
+		return res.status(401).json({ message: 'UnauthorizedError: unauthorized action' });
+	} else {
+		Users.findById(req.payload._id, (err, user) => {
+			if (!err && user != null) {
+
+				// Check if old password is filled in correctly.
+				if (user.validatePassword(sanitize(req.body.oldPassword))) {
+
+					// Update password in database to new password.
+					user.setPassword(sanitize(req.body.newPassword));
+
+					// Save changes to database.
+					user.save().then(() => {
+						return res.status(200).json({ succes: true, message: 'Wachtwoord succesvol verandert.' });
+					}).catch((err) => {
+						return res.status(500).json({ message: err });
+					});
+				} else {
+
+					// Handle error if old password doesn't match with the one in database.
+					return res.status(200).json({ success: false, message: 'Oude wachtwoord is niet correct.' });
+				}
+			} else {
+
+				// Handle error if user is not found in database.
+				return res.status(401).json({ succes: false, message: 'User not found.' });
+			}
+		});
+	}
 });
 
-// Router for getting all milestone values in an array for the logged in user
-router.get('/milestone', auth, (req, res) => {
-    User.findById(req.payload._id, (err, user) => {
-        res.json(user.milestones);
-    });
+/**
+ * POST method to changes a milestone by a given value, returns the updated value and whether it is completed or not.
+ */
+router.post('/updateMilestone', auth, (req, res) => {
+
+	// Check if user is authorized to perform the action.
+	if (!req.payload._id) {
+		return res.status(401).json({ message: 'UnauthorizedError: unauthorized action' });
+	} else if (req.payload.role === 'teacher') {
+		return res.status(200).json({ message: 'Docenten kunnen geen badges ontvangen.' });
+	} else {
+
+		// Get currently logged in user.
+		Users.findById(req.payload._id, (err, user) => {
+			let milestone = req.body.milestone;
+			let completed = false;
+
+			// Check if milestone is already completed.
+			if (user.milestones[milestone.index] === milestone.maxValue) {
+
+				// Return completed false because it was already completed.
+				return res.status(200).json({ updatedValue: milestone.maxValue, completed: completed });
+			} else {
+
+				// Add value to milestone.
+				user.milestones[milestone.index] += req.body.value;
+
+				// Check if you surpassed the max value.
+				if (user.milestones[milestone.index] >= milestone.maxValue) {
+
+					// Set value to max value cause it cant be larger than max value.
+					user.milestones[milestone.index] = milestone.maxValue;
+					completed = true;
+				}
+
+				// Save changes.
+				const query = 'milestones.' + milestone.index;
+				Users.findByIdAndUpdate({ _id: user._id }, { [query]: user.milestones[milestone.index] }).exec();
+				user.save().then(() => {
+					return res.status(200).json({ succes: true, completed: completed });
+				}).catch((err) => {
+					return res.status(500).json({ succes: false, message: err });
+				});
+			}
+		});
+	}
 });
 
-// Router that changes a milestone by a given value, returns the updated value and whether it is completed or not
-router.post('/milestone', auth, (req, res) => {
-    User.findById(req.payload._id, (err, user) => {
-        let milestone = req.body.milestone;
-        let completed = false;
-        user.milestones[milestone.index] += req.body.value;
-        if (user.milestones[milestone.index] > milestone.maxValue) {
-            user.milestones[milestone.index] = milestone.maxValue;
-            completed = true;
-        }
-        user.markModified('milestones');
-        user.save(() => {
-            res.json( { updatedValue: user.milestones[milestone.index], completed: completed } );
-        });
-    })
-})
+/**
+ * POST method to add a new message to a user's scorebaord so it can be shown on the home page.
+ */
+router.post('/updateScoreboard', auth, (req, res) => {
+
+	// Check if user is authorized to perform the action.
+	if (!req.payload._id) {
+		return res.status(401).json({ message: 'UnauthorizedError: unauthorized action' });
+	} else {
+		Users.findById(req.payload._id, (err, user) => {
+			if (!err) {
+
+				// Push new value into the array.
+				user.scoreboard.push(req.body.value);
+
+				// Remove oldest value of the 5.
+				user.scoreboard.shift();
+				user.save().then(() => {
+					return res.status(200).json({ succes: true });
+				}).catch((err) => {
+					return res.status(500).json({ succes: false, message: err });
+				});
+			} else {
+				return res.status(404).json({ succes: false, message: err });
+			}
+		});
+	}
+});
+
+/**
+ * POST method to post a new message to recent milestones.
+ */
+router.post('/classUpdates', auth, (req, res) => {
+
+	// Check if user is authorized to perform the action.
+	if (!req.payload._id) {
+		return res.status(401).json({ message: 'UnauthorizedError: unauthorized action' });
+	} else {
+		Users.findById(req.payload._id, (err, user) => {
+			if (!err) {
+
+				// Push new value into the array.
+				user.classUpdates.push(req.body.value);
+
+				// Remove oldest value of the 5.
+				user.classUpdates.shift();
+				user.save().then(() => {
+					return res.status(200).json({ succes: true });
+				}).catch((err) => {
+					return res.status(500).json({ succes: false, message: err });
+				});
+			} else {
+				return res.status(404).json({ succes: false, message: err });
+			}
+		});
+	}
+});
+
+/**
+ * POST method to equip the avatar with the send item.
+ */
+router.post('/avatar', auth, (req, res) => {
+
+	// Check if user is authorized to perform the action.
+	if (!req.payload._id) {
+		return res.status(401).json({ message: 'UnauthorizedError: unauthorized action' });
+	} else {
+		Users.findById(req.payload._id, (err, user) => {
+			if (!err) {
+				user.avatar[req.body.avatarItem.category] = req.body.avatarItem;
+				user.markModified('avatar');
+				user.save().then(() => {
+					return res.status(200).json({
+						imageFull: req.body.avatarItem.fullImage,
+						imageFull2: req.body.avatarItem.fullImage2,
+						category: req.body.avatarItem.category
+					});
+				}).catch((err) => {
+					return res.status(500).json({ succes: false, message: err });
+				});
+			} else {
+				return res.status(404).json({ message: err });
+			}
+		});
+	}
+});
+
+/**
+ * POST method to update user bubble after performing/pausing the labyrinth.
+ */
+router.post('/processAnswers', auth, (req, res) => {
+
+	// Check if user is authorized to perform the action.
+	if (!req.payload._id) {
+		return res.status(401).json({ message: 'UnauthorizedError: unauthorized action' });
+	} else {
+		Users.findById(req.payload._id, (err, user) => {
+			if (!err && user != null) {
+				for (q of req.body.answers) {
+					if (q != null) {
+						if (q.question.choiceConsequence[q.answer] !== '') {
+							let oldValue = user.bubble[q.question.choiceConsequence[q.answer]].pop();
+							let newValue = oldValue + q.question.values[q.answer];
+							if (user.bubble[q.question.choiceConsequence[q.answer]].length < 1) {
+								user.bubble[q.question.choiceConsequence[q.answer]].push(0);
+								user.bubble[q.question.choiceConsequence[q.answer]].push(newValue);
+							} else {
+								user.bubble[q.question.choiceConsequence[q.answer]].push(newValue);
+							}
+						}
+					}
+				}
+
+				for (let cat in user.bubble) {
+					if (user.bubble[cat].length < 2) {
+						user.bubble[cat].push(0);
+					}
+				}
+
+				user.markModified('bubble');
+				user.save().then(() => {
+					return res.status(200).json({ succes: true });
+				}).catch((err) => {
+					return res.status(500).json({ succes: false, message: err });
+				});
+			} else {
+				return res.status(404).json({ message: err });
+			}
+		});
+	}
+});
+
+/**
+ * DELETE method for deleting a user's account.
+ */
+router.delete('/deleteAccount', auth, (req, res) => {
+
+	// Check if user is authorized to perform the action.
+	if (!req.payload._id) {
+		return res.status(401).json({ message: 'UnauthorizedError: unauthorized action' });
+	} else {
+		Users.findById(req.payload._id, (err, user) => {
+			if (!err && user != null) {
+
+				// Delete user document from 'users' collection.
+				Users.findByIdAndDelete({ _id: user._id }).exec();
+				if (user.role === 'student') {
+
+					// Delete user from 'students' array of class he was apart of (if he was apart of a class). Student document itself
+					// will be deleted so we don't have to worry about the 'classArray' here.
+					if (user.classArray.length > 0) {
+						Classes.findById(user.classArray[0], (err, userKlas) => {
+							if (!err && userKlas != null) {
+								Classes.findByIdAndUpdate({ _id: userKlas._id }, { $pull: { students: { _id: user._id }}}).exec();
+								userKlas.save().catch((err) => {
+									return res.status(500).json({ message: err });
+								});
+							} else {
+								return res.status(404).json({ succes: false, message: err });
+							}
+						});
+					}
+				} else if (user.role === 'teacher') {
+
+					// Delete each class created by the teacher and update the 'classArray' of all the student of each class the teacher made
+					// to make sure no student is apart of a class that will no longer exist.
+					for (let klas of user.classArray) {
+						Classes.findById(klas._id, (err, userKlas) => {
+							if (!err && userKlas != null) {
+								Classes.findByIdAndDelete({ _id: userKlas._id }).exec();
+								Users.find({ 'classArray._id': userKlas._id, role: 'student' }, (err, classMembers) => {
+									if (!err && classMembers.length > 0) {
+										for (let classMember of classMembers) {
+											Users.findByIdAndUpdate({ _id: classMember._id }, { $pull: { classArray: { _id: userKlas._id }}}).exec();
+											classMember.save().catch((err) => {
+												return res.status(500).json({ message: err });
+											});
+										}
+									}
+								});
+							} else {
+								return res.status(404).json({ succes: false, message: err });
+							}
+						});
+					}
+				}
+				return res.status(200).json({
+					succes: true,
+					message: 'Account is succesvol verwijderd en je zal naar de inlogpagina worden verwezen.'
+				});
+			} else {
+				return res.status(404).json({ succes: false, message: err });
+			}
+		});
+	}
+});
+
+/**
+ * PATCH method that updates a field of the user in the database.
+ */
+router.patch('/updateUser', auth, (req, res) => {
+	// Check if user is authorized to perform the action.
+	if (!req.payload._id) {
+		return res.status(401).json({ message: 'UnauthorizedError: unauthorized action' });
+	} else {
+		Users.findById(req.payload._id, (err, user) => {
+			if (!err && user != null) {
+				Users.findByIdAndUpdate({ _id: user._id }, { [req.body.field]: sanitize(req.body.value) }).exec();
+				user.save().catch((err) => {
+					return res.status(500).json({ message: err });
+				});
+				return res.status(200).json({ succes: true, message: 'Je profiel is succesvol bijgewerkt.' });
+			} else {
+				return res.status(404).json({ succes: false, message: err });
+			}
+		});
+	}
+});
 
 module.exports = router;

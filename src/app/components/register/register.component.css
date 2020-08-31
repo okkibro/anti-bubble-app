@@ -1,3 +1,9 @@
+/*
+ * This program has been developed by students from the bachelor Computer Science at Utrecht University
+ * within the Software Project course. © Copyright Utrecht University (Department of Information and
+ * Computing Sciences)
+ */
+
 .role-radio-group {
     display: flex;
     flex-direction: column;
@@ -6,4 +12,12 @@
 
 .role-radio-button {
     margin: 5px;
+}
+
+body {
+    margin-top: 0 !important;
+}
+
+.container-div {
+    margin-top: 60px !important;
 }

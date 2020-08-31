@@ -1,0 +1,23 @@
+<!--
+  ~ This program has been developed by students from the bachelor Computer Science at Utrecht University
+  ~ within the Software Project course. © Copyright Utrecht University (Department of Information and
+  ~ Computing Sciences)
+  -->
+
+<mat-toolbar color="primary" class="toolbar">
+    <button mat-icon-button (click)="onToggleSidenav()" fxHide.gt-sm>
+        <mat-icon>menu</mat-icon>
+        <img src="../../../assets/images/Super_Map/Other/logo.png" alt="">
+    </button>
+    <div class="nav-items" fxHide.lt-md>
+        <a mat-button [routerLink]="'/home'" [fxFlex]="toolbarRatio"> Anti-Bubble <img src="../../../assets/images/Super_Map/Other/logo.png" alt="Logo"> </a>
+        <a mat-button routerLinkActive="active-link" [routerLink]="'/home'" [fxFlex]="toolbarRatio" [fxFlexOffset]="toolbarRatio"> Home </a>
+        <a mat-button routerLinkActive="active-link" [routerLink]="'/teacher-overview'" *ngIf="tokenData.role === 'teacher'" [fxFlex]="toolbarRatio"> Docent overzicht </a>
+        <a mat-button routerLinkActive="active-link" [routerLink]="'/session-overview'" *ngIf="tokenData.role === 'teacher'" [fxFlex]="toolbarRatio"> Sessie overzicht </a>
+        <a mat-button routerLinkActive="active-link" [routerLink]="'/class-overview'" *ngIf="tokenData.role === 'student'" [fxFlex]="toolbarRatio"> Klas overzicht </a>
+        <a mat-button routerLinkActive="active-link" [routerLink]="'/profile'" [fxFlex]="toolbarRatio"> Profiel </a>
+        <a mat-button routerLinkActive="active-link" [routerLink]="'/shop'" [fxFlex]="toolbarRatio"> Shop </a>
+        <a mat-button routerLinkActive="active-link" [routerLink]="'/settings'" [fxFlex]="toolbarRatio"> Instellingen </a>
+        <button mat-button (click)="logoutButton()" [fxFlex]="toolbarRatio" [fxFlexOffset]="toolbarRatio"> Log uit</button>
+    </div>
+</mat-toolbar>

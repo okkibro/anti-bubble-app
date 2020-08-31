@@ -1,19 +1,107 @@
-<mean-nav-bar></mean-nav-bar>
-<body>
-    <mat-card class="containerDiv">
-        <mat-card-header class="matCardHeader">
-            <mat-card-title>Game</mat-card-title>
-        </mat-card-header>
-        <mat-card-content>
-            <table class="sessionTable">
-                <tr>
-                    <th>Session code</th>
-                    <td>{{pin}}</td>
-                </tr>
-            </table>
-        </mat-card-content>
-    </mat-card>
-</body>
-<footer>
-    <p> &copy; Utrecht University (ICS)</p>
-</footer>
+<!--
+  ~ This program has been developed by students from the bachelor Computer Science at Utrecht University
+  ~ within the Software Project course. © Copyright Utrecht University (Department of Information and
+  ~ Computing Sciences)
+  -->
+
+<mat-sidenav-container>
+    <mat-sidenav #sidenav [autoFocus]="false" fixedInViewport="true">
+        <sidenav-component (sidenavClose)="sidenav.close()"></sidenav-component>
+    </mat-sidenav>
+    <mat-sidenav-content>
+        <toolbar-component (sidenavToggle)="sidenav.toggle()"></toolbar-component>
+        <body>
+        <div class="container-div" fxLayoutGap="10px" fxLayout="column">
+            <mat-card *ngIf="tokenData?.role === 'teacher' && !gameStarted" fxLayoutAlign="space-between start">
+                <div class="time-left">
+                    <p *ngIf="tokenData?.role === 'teacher' && gameData?.duration != null">Tijd over:
+                        <br><strong>{{ gameData?.duration }}:00</strong></p>
+                </div>
+                <div>
+                    <mat-card-header>
+                        <mat-card-title>Sessie code</mat-card-title>
+                        <mat-card-subtitle class="gameChoice" *ngIf="gameData?.duration != null">
+                            {{ gameData?.game.name }}, ({{ gameData?.duration }} min)
+                        </mat-card-subtitle>
+                        <mat-card-subtitle class="gameChoice" *ngIf="gameData?.duration == null">
+                            {{ gameData?.game.name }}
+                        </mat-card-subtitle>
+                    </mat-card-header>
+                    <mat-card-content>
+                        <table class="session-table">
+                            <tr>
+                                <td id="teacherPin">{{ pin }}</td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <button mat-button class="general-button" (click)="startGame()" id="startButton">Start!</button>
+                                </td>
+                            </tr>
+                        </table>
+                    </mat-card-content>
+                </div>
+                <div class="player-count">
+                    <p *ngIf="tokenData?.role === 'teacher'">Aantal spelers:<br><strong>{{ playerCount }}</strong></p>
+                </div>
+            </mat-card>
+
+            <mat-card *ngIf="tokenData?.role === 'student'">
+                <mat-card-header>
+                    <mat-card-title>{{ gameData?.game.name }}</mat-card-title>
+                </mat-card-header>
+                <mat-card-content>
+                    <p>{{ gameData?.game.description }}</p>
+                    <p><i>Wacht tot de docent de activiteit start.</i></p>
+                </mat-card-content>
+            </mat-card>
+
+            <mat-card *ngIf="tokenData?.role === 'teacher' && gameStarted" fxLayoutAlign="space-between start">
+                <div class="time-left">
+                    <p id="counter" *ngIf="tokenData?.role === 'teacher' && gameData?.duration != null">Tijd over:
+                        <br><strong>{{ gameData?.duration }}:00</strong></p>
+                </div>
+                <div>
+                    <mat-card-header>
+                        <mat-card-title>{{ gameData?.game.name }}</mat-card-title>
+                        <mat-card-subtitle *ngIf="!enableQuestions">Antwoorden:</mat-card-subtitle>
+                    </mat-card-header>
+
+                    <mat-card-content *ngIf="gameData?.game.name === 'Naamloos Nieuws'">
+                        <table class="submit-table"></table>
+                    </mat-card-content>
+
+                    <mat-card-content *ngIf="gameData?.game.name === 'Botsende Bubbels'">
+                        <table class="submit-table"></table>
+                        <mat-divider *ngIf="!enableQuestions"></mat-divider><br>
+                        <answer-form-component *ngIf="!gameFinished || gamePaused"></answer-form-component>
+                        <p *ngIf="gameFinished && !timedOut"><i>Je hebt het spel gestopt. Ga terug naar het startscherm om een nieuwe sessie te starten.</i></p>
+                        <p *ngIf="!gameFinished && gamePaused"><i>Je hebt het spel gepauzeerd. Hervat het spel om de timer door te laten gaan.</i></p>
+                        <p *ngIf="gameFinished && timedOut"><i>De tijd is om en het spel is afgelopen. Ga terug naar het startscherm om een nieuwe sessie te starten.</i></p>
+                    </mat-card-content>
+
+                    <mat-card-content *ngIf="gameData?.game.name === 'Alternatieve Antwoorden'">
+                        <answer-form-component *ngIf="enableQuestions"></answer-form-component>
+                        <table class="submit-table"></table>
+                    </mat-card-content>
+
+                    <mat-card-content *ngIf="gameData?.game.name === 'Aanradend Algoritme'">
+                    </mat-card-content>
+                </div>
+                <div class="player-count">
+                    <p *ngIf="tokenData?.role === 'teacher'">Aantal spelers:<br><strong>{{ playerCount }}</strong></p>
+                </div>
+            </mat-card>
+
+            <mat-card *ngIf="tokenData?.role === 'teacher' && gameStarted">
+                <button mat-button class="general-warning-button" *ngIf="!gameFinished && !gamePaused" (click)="pauseGame()">Pauzeer activiteit</button>
+                <button mat-button class="general-warning-button" *ngIf="!gameFinished && gamePaused" (click)="resumeGame()">Hervat activiteit</button>
+                <button mat-button class="general-nope-button" *ngIf="!gameFinished" (click)="stopGame(false)">Stop activiteit</button>
+                <button mat-button class="general-button" *ngIf="gameFinished" (click)="leaveGame()">Home</button>
+            </mat-card>
+        </div>
+        </body>
+        <footer class="footer">
+            <p> &copy; Utrecht University (ICS)</p>
+        </footer>
+    </mat-sidenav-content>
+</mat-sidenav-container>

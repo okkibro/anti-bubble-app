@@ -1,4 +1,20 @@
+/*
+ * This program has been developed by students from the bachelor Computer Science at Utrecht University
+ * within the Software Project course. © Copyright Utrecht University (Department of Information and
+ * Computing Sciences)
+ */
+
 .chart {
     width: 100%;
     display: block;
+}
+
+.mat-card-content {
+    display: flex;
+    justify-content: center;
+}
+
+.bubble-points-table {
+    text-align: left;
+    border-spacing: 10px 1px;
 }

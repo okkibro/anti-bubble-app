@@ -1,2 +1,97 @@
+/*
+ * This program has been developed by students from the bachelor Computer Science at Utrecht University
+ * within the Software Project course. © Copyright Utrecht University (Department of Information and
+ * Computing Sciences)
+ */
+
 /* You can add global styles to this file, and also import other style files */
 @import '~@angular/material/prebuilt-themes/indigo-pink.css';
+
+body {
+    margin: 0;
+}
+
+.mat-drawer {
+    background-color: #addadb !important;
+}
+
+.style-error {
+    color: white !important;
+    background-color: #f44336 !important;
+}
+
+.style-error .mat-button-wrapper {
+    color: white !important;
+}
+
+.style-succes {
+    color: white !important;
+    background-color: 	#339900	 !important;
+}
+
+.style-succes .mat-button-wrapper {
+    color: white !important;
+}
+
+.style-warning {
+    color: black !important;
+    background-color: #ffcc00 !important;
+}
+
+.style-warning .mat-button-wrapper {
+    color: black !important;
+}
+
+.mat-slider-thumb,
+.mat-slider-track-fill,
+.mat-slider-thumb-label {
+    background-color: #A7473B !important;
+}
+
+.mat-slider-thumb-label-text {
+    color: white !important;
+}
+
+.mat-focused .mat-form-field-label,
+.mat-focused:not(.mat-form-field-invalid) .mat-form-field-required-marker,
+.mat-select-arrow {
+    color: #948c8d !important;
+}
+.mat-focused:not(.mat-form-field-invalid) .mat-form-field-ripple {
+    background-color: #948c8d !important;
+}
+
+.mat-input-element {
+    caret-color: #948c8d !important;
+}
+
+.mat-error,
+.mat-form-field-invalid .mat-form-field-label,
+.mat-form-field-invalid .mat-form-field-required-marker,
+.mat-form-field-invalid {
+    color: red !important;
+}
+
+.mat-form-field-invalid .mat-form-field-ripple {
+    background-color: red !important;
+}
+
+.mat-primary .mat-option.mat-selected:not(.mat-option-disabled) {
+    color: black !important;
+}
+
+.mat-form-field-appearance-fill .mat-form-field-flex {
+    border-radius: 8px !important;
+}
+
+.mat-tab-header {
+    margin-bottom: 10px;
+}
+
+.general-dropdown .mat-form-field-underline {
+    display: none !important;
+}
+
+.general-dropdown .mat-form-field-wrapper {
+    padding-bottom: 0 !important;
+}

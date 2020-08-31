@@ -1,33 +1,80 @@
+/*
+ * This program has been developed by students from the bachelor Computer Science at Utrecht University
+ * within the Software Project course. © Copyright Utrecht University (Department of Information and
+ * Computing Sciences)
+ */
+
+/**
+ * @packageDocumentation
+ * @module Components
+ */
 import { Component, OnInit } from '@angular/core';
-import { Validators, FormBuilder } from '@angular/forms';
-import { Router } from '@angular/router';
+import { FormBuilder, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { Title } from '@angular/platform-browser';
+import { Router } from '@angular/router';
+import { titleTrail } from '../../../../constants';
 import { PasswordRecoveryService } from '../../services/password-recovery.service';
 
+/**
+ * This class handles all the logic for handling the password recovery form for users who have forgotten
+ * their password and want to request a new one.
+ */
 @Component({
-  selector: 'mean-password-recovery',
-  templateUrl: './password-recovery.component.html',
-  styleUrls: ['./password-recovery.component.css',
-              '../../shared/general-styles.css']
+	selector: 'password-recovery-component',
+	templateUrl: './password-recovery.component.html',
+	styleUrls: ['./password-recovery.component.css',
+		'../../shared/general-styles.css']
 })
+
 export class PasswordRecoveryComponent implements OnInit {
-  passwordRecoveryForm = this.fb.group({
-    email: ['', [Validators.required, Validators.email]],
-  });
+	public passwordRecoveryForm = this.fb.group({
+		email: ['', [Validators.required, Validators.email]]
+	});
 
-  constructor(private passwordRecoveryService: PasswordRecoveryService, private router: Router, private fb: FormBuilder, private snackBar: MatSnackBar) { }
+	/**
+	 * PasswordRecoveryComponent constructor.
+	 * @param passwordRecoveryService
+	 * @param router
+	 * @param fb
+	 * @param snackBar
+	 * @param titleService
+	 */
+	constructor(
+		private passwordRecoveryService: PasswordRecoveryService,
+		private router: Router,
+		private fb: FormBuilder,
+		private snackBar: MatSnackBar,
+		private titleService: Title
+	) { }
 
-  ngOnInit() { }
+	/**
+	 * Initialization method.
+	 * @return
+	 */
+	public ngOnInit(): void {
+		// Set page title.
+		this.titleService.setTitle('Wachtwoord vergeten' + titleTrail);
+	}
 
-  sendEmail() {
-    console.log("sending email...");
-    let email = this.passwordRecoveryForm.get('email').value;
-    this.passwordRecoveryService.sendEmail(email).subscribe(data => {
-      if (!data.succes){
-        this.snackBar.open(data.message, 'X' , { duration: 2500, panelClass: ['style-error'] });
-      } else {
-        this.snackBar.open(data.message, 'X' , { duration: 2500, panelClass: ['style-succes']})
-      }
-    });
-  }
+	/**
+	 * Method to send an email to the user to reset their password.
+	 * @return
+	 */
+	public sendEmail(): void {
+
+		// Get email from the input field.
+		let email = this.passwordRecoveryForm.get('email').value;
+
+		// Send email, data returns whether the action was a succes and a message to show to the user.
+		this.passwordRecoveryService.sendEmail(email).subscribe(data => {
+			if (data.succes) {
+				this.snackBar.open(data.message, 'X', { duration: 5000, panelClass: ['style-succes'] }).afterDismissed().subscribe(() => {
+					this.router.navigate(['/login']);
+				});
+			} else {
+				this.snackBar.open(data.message, 'X', { duration: 2500, panelClass: ['style-error'] });
+			}
+		});
+	}
 }

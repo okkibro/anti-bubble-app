@@ -1,0 +1,52 @@
+<!--
+  ~ This program has been developed by students from the bachelor Computer Science at Utrecht University
+  ~ within the Software Project course. © Copyright Utrecht University (Department of Information and
+  ~ Computing Sciences)
+  -->
+
+<mat-list fxLayout="column" class="sidenav">
+    <button mat-button class="first-button" (click)="onSidenavClose()">
+        <mat-icon>menu</mat-icon>
+        <img src="../../../assets/images/Super_Map/Other/logo.png" alt="">
+    </button>
+    <button mat-button [routerLink]="'/home'" (click)="onSidenavClose()">
+        <mat-icon>home</mat-icon>
+        Home
+    </button>
+    <mat-divider></mat-divider>
+    <button mat-button [routerLink]="'/teacher-overview'" *ngIf="tokenData.role === 'teacher'" (click)="onSidenavClose()">
+        <mat-icon>class</mat-icon>
+        Docent overzicht
+    </button>
+    <mat-divider *ngIf="tokenData.role === 'teacher'"></mat-divider>
+    <button mat-button [routerLink]="'/session-overview'" *ngIf="tokenData.role === 'teacher'" (click)="onSidenavClose()">
+        <mat-icon>insert_chart_outlined</mat-icon>
+        Sessie overzicht
+    </button>
+    <mat-divider *ngIf="tokenData.role === 'teacher'"></mat-divider>
+    <button mat-button [routerLink]="'/class-overview'" *ngIf="tokenData.role === 'student'" (click)="onSidenavClose()">
+        <mat-icon>class</mat-icon>
+        Klas overzicht
+    </button>
+    <mat-divider *ngIf="tokenData.role === 'student'"></mat-divider>
+    <button mat-button [routerLink]="'/profile'" (click)="onSidenavClose()">
+        <mat-icon>person</mat-icon>
+        Profiel
+    </button>
+    <mat-divider></mat-divider>
+    <button mat-button [routerLink]="'/shop'" (click)="onSidenavClose()">
+        <mat-icon>shopping_cart</mat-icon>
+        Shop
+    </button>
+    <mat-divider></mat-divider>
+    <button mat-button [routerLink]="'/settings'" (click)="onSidenavClose()">
+        <mat-icon>settings</mat-icon>
+        Instellingen
+    </button>
+    <mat-divider></mat-divider>
+    <button mat-button (click)="logoutButton()">
+        <mat-icon>login</mat-icon>
+        Log uit
+    </button>
+    <mat-divider></mat-divider>
+</mat-list>

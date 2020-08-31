@@ -19,8 +19,8 @@ build:
   tags:
    - docker
   only:
-   - master
    - Development
+   - Master
 
 test:karma:
   stage: test
@@ -36,8 +36,8 @@ test:karma:
   tags:
    - docker
   only:
-   - master
    - Development
+   - Master
 
 #test:e2e:
 #  stage: test

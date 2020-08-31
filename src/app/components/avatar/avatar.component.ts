@@ -1,102 +1,164 @@
-import { Component, OnInit, ContentChild } from '@angular/core';
-import { AuthenticationService } from '../../services/authentication.service';
-import { User } from '../../models/user';
-import { Variable } from '@angular/compiler/src/render3/r3_ast';
-import { MatTab } from '@angular/material/tabs';
+/*
+ * This program has been developed by students from the bachelor Computer Science at Utrecht University
+ * within the Software Project course. © Copyright Utrecht University (Department of Information and
+ * Computing Sciences)
+ */
+
+/**
+ * @packageDocumentation
+ * @module Components
+ */
+import { Component, OnInit } from '@angular/core';
+import { MatTabChangeEvent } from '@angular/material/tabs';
+import { Title } from '@angular/platform-browser';
+import { AvatarService } from 'src/app/services/avatar.service';
 import { ShopService } from 'src/app/services/shop.service';
+import { titleTrail } from '../../../../constants';
+import { Item } from '../../models/item';
+import { User } from '../../models/user';
+import { UserService } from '../../services/user.service';
+import { AvatarDisplayComponent } from '../avatar-display/avatar-display.component';
 
+/**
+ * This class is responsible for the 'avatar' page in the app where a user can coustomzie their avatar. The
+ * class contains methods for equiping items and sorting through a user's inventory. The class also contains
+ * two helper methods for setting the correct amount of columns to be displayed depending on the user's
+ * screen size.
+ */
 @Component({
-    selector: 'mean-avatar',
-    templateUrl: './avatar.component.html',
-    styleUrls: ['./avatar.component.css',
-        '../../shared/general-styles.css']
+	selector: 'avatar-component',
+	templateUrl: './avatar.component.html',
+	styleUrls: ['./avatar.component.css',
+		'../../shared/general-styles.css'],
+	providers: [AvatarDisplayComponent]
 })
+
 export class AvatarComponent implements OnInit {
+	private userDetails: User;
+	private itemsShown = [];
+	public filteredAvatar = [];
+	public itemCategories: string[] = [
+		'Hoofddeksel',
+		'Haar',
+		'Bril',
+		'Shirt',
+		'Broek',
+		'Schoenen',
+		'Medaille',
+		'Lichaam'
+	];
+	itemColumns: number;
 
-    userDetails: User;
-    itemsShown = [];
+	/**
+	 * AvatarComponent constructor.
+	 * @param shopService
+	 * @param avatarService
+	 * @param avatarDisplay
+	 * @param titleService
+	 * @param userService
+	 */
+	constructor(
+		private shopService: ShopService,
+		private avatarService: AvatarService,
+		private avatarDisplay: AvatarDisplayComponent,
+		private titleService: Title,
+		private userService: UserService
+	) { }
 
-    constructor(private auth: AuthenticationService, private shopService: ShopService) { }
+	/**
+	 * Initialization method.
+	 * @return
+	 */
+	public ngOnInit(): void {
+		this.userService.profile().subscribe(user => {
+			this.userDetails = user;
+			this.shopService.getCategoryItems('hoofddeksel').subscribe(items => {
 
-    logoutButton() {
-        return this.auth.logout();
-    }
+				// Checks for items in the shop that the player bought
+				for (let i = 0; i < items.length; i++) {
+					if (user.inventory.find(x => x._id === items[i]._id) != null) {
+						this.itemsShown.push(items[i]);
+						this.filteredAvatar = this.filterAvatar();
+					}
+				}
+				this.avatarDisplay.showAvatar(user);
+			});
+		});
 
-    ngOnInit() {
-        // //display skin colors on init
-        // var collection = document.getElementById("itemCollection");
-        // var sc_Images: string[] = ["../../../assets/images/avatarpage/brown.jpg",
-        // "../../../assets/images/avatarpage/beige.png",
-        // "../../../assets/images/avatarpage/darkbrown.jpg"];
+		this.setItemColumns();
 
-        // collection.appendChild(this.applyTabData(sc_Images)); 
+		// Set page title.
+		this.titleService.setTitle('Avatar' + titleTrail);
+	}
 
-        this.shopService.shop("alles").subscribe(shop => {
-            this.auth.profile().subscribe(user => {
-                for (let i = 0; i < shop.length; i++) {
-                    if (user.inventory.find(x => x._id == shop[i]._id) != null) {
-                        this.itemsShown.push(shop[i]);
-                    }
-                }
-            })
-        })
-    }
+	/**
+	 * Method that assigns an item to the user's avatar in the database.
+	 * @param item Item to be equipped by the user.
+	 * @return
+	 */
+	public equip(item: Item): void {
+		this.avatarService.equip(item).subscribe(data => {
 
-    tabChange(event) {
-        var currentTab = event.tab.textLabel;
+			// Updates the image shown to the player without reloading the page.
+			if (data.category === 'haar') {
+				document.getElementById('haar1').setAttribute('src', data.imageFull2);
+				document.getElementById('haar2').setAttribute('src', data.imageFull);
+			} else {
+				document.getElementById(data.category).setAttribute('src', data.imageFull);
+			}
+		});
+	}
 
-        // var collection = document.getElementById("itemCollection");
+	/**
+	 * Method to change the tab in the HTML and updates the shown items.
+	 * @param event Event triggered by changing tab/category.
+	 * @return
+	 */
+	public tabChange(event: MatTabChangeEvent): void {
+		this.shopService.getCategoryItems(event.tab.textLabel).subscribe(items => {
+			this.itemsShown = items;
+			this.filteredAvatar = this.filterAvatar();
+		}, (err) => {
+			console.error(err);
+		});
+	}
 
-        //replace existing images with the images corresponding to the clicked tab
-        // if (currentTab == "Huidskleur") {
-        //     var sc_Images: string[] = ["../../../assets/images/avatarpage/brown.jpg",
-        //     "../../../assets/images/avatarpage/beige.png",
-        //     "../../../assets/images/avatarpage/darkbrown.jpg"];
+	/**
+	 * Method to filter the avatar items to only show the items in the inventory/that the player bought.
+	 * @return List of items currently owned by the user.
+	 */
+	private filterAvatar(): AvatarComponent[] {
+		return this.itemsShown.filter(x => {
+			return this.userDetails.inventory.find(y => x._id === y._id) != null;
+		});
+	}
 
-        //     collection.lastChild.replaceWith(this.applyTabData(sc_Images));
-        // }
-        // else if (currentTab == "Kleding") {
-        //     var cl_Images: string[] = ["../../../assets/images/avatarpage/pants.png",
-        //     "../../../assets/images/avatarpage/shirt.png",
-        //     "../../../assets/images/avatarpage/dress.png"];
+	/**
+	 * Method that sets the initial amount of columns based on screen width.
+	 * @return
+	 */
+	private setItemColumns(): void {
+		const screenWidth = window.innerWidth;
 
-        //     collection.lastChild.replaceWith(this.applyTabData(cl_Images));
-        // }
-        // else {
-        //     var hat_Images: string[] = ["../../../assets/images/avatarpage/redHat1.png",
-        //     "../../../assets/images/avatarpage/blueHat2.png",
-        //     "../../../assets/images/avatarpage/blueHat4.png",
-        //     "../../../assets/images/avatarpage/blueHat5.png",
-        //     "../../../assets/images/avatarpage/greenHat2.png",
-        //     "../../../assets/images/avatarpage/greenHat3.png"];
+		if (screenWidth >= 1000) {
+			this.itemColumns = 3;
+		} else if (screenWidth < 1000) {
+			this.itemColumns = 2;
+		}
+	}
 
-        //     collection.lastChild.replaceWith(this.applyTabData(hat_Images));
-        //}
-    }
+	/**
+	 * Method that changes the amount of columns when the window size changes.
+	 * @param event Event triggered when the screen changes size.
+	 * @return
+	 */
+	public onResize(event): void {
+		const screenWidth = event.target.innerWidth;
 
-    applyTabData(images: string[]) {
-
-        var selectedTab = document.getElementById("itemCollection");
-        var tabData = document.createElement("mat-tab");
-        var newline = document.createElement("br");
-
-        for (var i = 0; i < images.length; i++) {
-            var image = document.createElement("img");
-            image.setAttribute("src", images[i]);
-            image.style.height = "40%";                      //height of artists' images is a lot higher
-            image.style.width = "20%";
-            image.style.padding = "0.5%";
-            tabData.appendChild(image);
-
-            if ((i % 3) == 0 && i > 0) {                   //breakline after 4 items (start at 0)
-                tabData.appendChild(newline);
-            }
-        }
-
-        selectedTab.appendChild(tabData);
-        return tabData;
-    }
-
-
-
+		if (screenWidth >= 1000) {
+			this.itemColumns = 3;
+		} else if (screenWidth < 1000) {
+			this.itemColumns = 2;
+		}
+	}
 }

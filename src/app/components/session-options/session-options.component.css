@@ -1,0 +1,46 @@
+/*
+ * This program has been developed by students from the bachelor Computer Science at Utrecht University
+ * within the Software Project course. © Copyright Utrecht University (Department of Information and
+ * Computing Sciences)
+ */
+
+mat-panel-title {
+    justify-content: center;
+    margin-left: 16px; /* The toggle arrow takes up exactly 16px of margin on the right side, this evens it out and centers the title. */
+    font-weight: bold;
+}
+
+.session-options-table td {
+    text-align: left;
+    width: 50%;
+    border-bottom: 1px solid darkgrey;
+}
+
+.session-options-table th {
+    text-align: center;
+    width: 10%;
+    border-bottom: 1px solid darkgrey;
+}
+
+.session-options-table {
+    margin: 10px;
+    display: inline-block;
+    width: 90%;
+    border-collapse: collapse;
+    border: 2px solid black;
+}
+
+.final-table-row th,
+.final-table-row td {
+    border-bottom: unset;
+}
+
+.duration-slider {
+    width: 75%;
+}
+
+.team-option-button {
+    display: block;
+    padding: 5px;
+}
+

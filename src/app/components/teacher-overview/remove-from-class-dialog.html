@@ -1,0 +1,15 @@
+<!--
+  ~ This program has been developed by students from the bachelor Computer Science at Utrecht University
+  ~ within the Software Project course. © Copyright Utrecht University (Department of Information and
+  ~ Computing Sciences)
+  -->
+
+<h1 mat-dialog-title>Leerling uit klas verwijderen</h1>
+<div style="font-family: Roboto, 'Helvetica Neue', sans-serif" mat-dialog-content>
+    <p> Weet je zeker dat je <strong>{{ data.user.firstName }}</strong>&nbsp;<strong>{{ data.user.lastName }}</strong> uit de klas wilt verwijderen? </p>
+    <p> Deze actie is <strong> niet </strong> terug te draaien. </p>
+</div>
+<div mat-dialog-actions>
+    <button mat-button mat-dialog-close>Nope</button>
+    <button style="background-color: red; color: white" mat-button (click)="removeFromClass()">Verwijder uit klas</button>
+</div>
