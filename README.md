@@ -8,13 +8,11 @@
     * **/routes**: *Declared routes to be imported on ```index.js```*
 + **/index.js**: *File that is used to start the node server*
 
-
 ### Prerequisites
 
 + **[Node.js & npm](https://nodejs.org/en/download/)**: *Please be sure you have installed Node.js and npm module on your computer before running the application*
 + **[MongoDB](https://www.mongodb.com/download-center)**: *Download & Install MongoDB, and make sure it's running on the default port (27017).*
 + **[AngularCLI](https://cli.angular.io/)**: *Is used to build front-end application. Use [npm install -g @angular/cli] to install this*
-
 
 ### First time usage
 
@@ -34,7 +32,6 @@
 + Navigate to project folder
 + Run ```npm start```
 + Open browser and navigate to localhost:4200
-
 
 ### Running test locally
 + Run ng test --code-coverage --browsers=Chrome
@@ -65,8 +62,3 @@
 + git checkout master
 + git merge develop
 + git branch -d feature_branch
-
-### Generating TypeDocs
-All ```*.ts``` files in the ```./src``` folder of the project have TypeDoc comments. To automatically generate docs (which can be hosted on GitHub Pages) use the ```typedoc --options typedoc.json``` command.
-
-Make sure the ```_config.yml``` file in the root of the project is also located in the root of the by TypeDoc generated ```./docs``` folder, otherwsie GitHub Pages will not work.
