@@ -1,7 +1,7 @@
 {
   "name": "anti-bubble-app",
   "version": "1.0.0",
-  "description": "A MEAN Stack (Mongo, Express, Angular, Node) application that teaches children about filter bubbles",
+  "description": "A MEAN Stack (Mongo, Express, Angular, Node) application that teaches children about filter bubbles.",
   "main": "index.js",
   "scripts": {
     "client": "ng serve",
@@ -15,10 +15,11 @@
   },
   "keywords": [
     "mean",
-    "application",
+    "mongoose",
+    "express",
     "angular",
     "node",
-    "express"
+    "application"
   ],
   "author": "Team A: Anti-Bubble",
   "license": "MIT",
