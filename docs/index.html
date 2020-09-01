@@ -1,0 +1,208 @@
+<!doctype html>
+<html class="default no-js">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>Anti-Bubble App</title>
+	<meta name="description" content="Documentation for Anti-Bubble App">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="assets/css/main.css">
+</head>
+<body>
+<header>
+	<div class="tsd-page-toolbar">
+		<div class="container">
+			<div class="table-wrap">
+				<div class="table-cell" id="tsd-search" data-index="assets/js/search.json" data-base=".">
+					<div class="field">
+						<label for="tsd-search-field" class="tsd-widget search no-caption">Search</label>
+						<input id="tsd-search-field" type="text" />
+					</div>
+					<ul class="results">
+						<li class="state loading">Preparing search index...</li>
+						<li class="state failure">The search index is not available</li>
+					</ul>
+					<a href="index.html" class="title">Anti-Bubble App</a>
+				</div>
+				<div class="table-cell" id="tsd-widgets">
+					<div id="tsd-filter">
+						<a href="#" class="tsd-widget options no-caption" data-toggle="options">Options</a>
+						<div class="tsd-filter-group">
+							<div class="tsd-select" id="tsd-filter-visibility">
+								<span class="tsd-select-label">All</span>
+								<ul class="tsd-select-list">
+									<li data-value="public">Public</li>
+									<li data-value="protected">Public/Protected</li>
+									<li data-value="private" class="selected">All</li>
+								</ul>
+							</div>
+							<input type="checkbox" id="tsd-filter-inherited" checked />
+							<label class="tsd-widget" for="tsd-filter-inherited">Inherited</label>
+							<input type="checkbox" id="tsd-filter-only-exported" />
+							<label class="tsd-widget" for="tsd-filter-only-exported">Only exported</label>
+						</div>
+					</div>
+					<a href="#" class="tsd-widget menu no-caption" data-toggle="menu">Menu</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="tsd-page-title">
+		<div class="container">
+			<ul class="tsd-breadcrumb">
+				<li>
+					<a href="globals.html">Globals</a>
+				</li>
+			</ul>
+			<h1>Anti-Bubble App</h1>
+		</div>
+	</div>
+</header>
+<div class="container container-main">
+	<div class="row">
+		<div class="col-8 col-content">
+			<div class="tsd-panel tsd-typography">
+				<a href="#anti-bubble-app" id="anti-bubble-app" style="color: inherit; text-decoration: none;">
+					<h1>Anti Bubble App</h1>
+				</a>
+				<a href="#folder-structure" id="folder-structure" style="color: inherit; text-decoration: none;">
+					<h3>Folder structure</h3>
+				</a>
+				<ul>
+					<li><strong>/src</strong>: <em>Angular app created using <code>angular/cli</code>.</em></li>
+					<li><strong>/database</strong>: <em>Contains mongoose Schemas</em></li>
+					<li><strong>/server</strong>: <em>Files to be used on server-side</em><ul>
+							<li><strong>/routes</strong>: <em>Declared routes to be imported on <code>index.js</code></em></li>
+						</ul>
+					</li>
+					<li><strong>/index.js</strong>: <em>File that is used to start the node server</em></li>
+				</ul>
+				<a href="#prerequisites" id="prerequisites" style="color: inherit; text-decoration: none;">
+					<h3>Prerequisites</h3>
+				</a>
+				<ul>
+					<li><strong><a href="https://nodejs.org/en/download/">Node.js &amp; npm</a></strong>: <em>Please be sure you have installed Node.js and npm module on your computer before running the application</em></li>
+					<li><strong><a href="https://www.mongodb.com/download-center">MongoDB</a></strong>: <em>Download &amp; Install MongoDB, and make sure it&#39;s running on the default port (27017).</em></li>
+					<li><strong><a href="https://cli.angular.io/">AngularCLI</a></strong>: <em>Is used to build front-end application. Use [npm install -g @angular/cli] to install this</em></li>
+				</ul>
+				<a href="#first-time-usage" id="first-time-usage" style="color: inherit; text-decoration: none;">
+					<h3>First time usage</h3>
+				</a>
+				<ul>
+					<li>Clone repository from <a href="https://git.science.uu.nl/breaking-bubbles/anti-bubble-app.git">https://git.science.uu.nl/breaking-bubbles/anti-bubble-app.git</a><ul>
+							<li>Can be done by using the <em>git clone [url]</em> function with <strong><a href="https://git-scm.com/">Git</a></strong></li>
+						</ul>
+					</li>
+					<li>Acquire the &quot;.env&quot; file from the secret holder and add this to the root of the application</li>
+					<li>Be sure you have started MongoDB service before running the application</li>
+					<li>Navigate to project folder</li>
+					<li>Run <code>npm install</code> on your folder</li>
+					<li>Run <code>ng build</code> on here to generate Angular necessary files. Output files are by default created on <code>/dist</code> subfolder</li>
+					<li>Now run <code>node index.js</code> This is the last step and if everything goes right, server will start listening for requests<ul>
+							<li>You can also install <strong>[nodemon]</strong> (<code>npm install -g nodemon</code>) to have auto refresh when working on the backend</li>
+							<li>When you work on the frontend and you want auto refresh use <code>npm start</code></li>
+						</ul>
+					</li>
+					<li>You can open your browser and navigate to localhost:4200 to see if application works</li>
+				</ul>
+				<a href="#normal-usage" id="normal-usage" style="color: inherit; text-decoration: none;">
+					<h3>Normal usage</h3>
+				</a>
+				<ul>
+					<li>Be sure you have started MongoDB</li>
+					<li>Navigate to project folder</li>
+					<li>Run <code>npm start</code></li>
+					<li>Open browser and navigate to localhost:4200</li>
+				</ul>
+				<a href="#running-test-locally" id="running-test-locally" style="color: inherit; text-decoration: none;">
+					<h3>Running test locally</h3>
+				</a>
+				<ul>
+					<li>Run ng test --code-coverage --browsers=Chrome</li>
+					<li>Updates automatically on save</li>
+				</ul>
+				<a href="#branches" id="branches" style="color: inherit; text-decoration: none;">
+					<h3>Branches</h3>
+				</a>
+				<a href="#hot-fix" id="hot-fix" style="color: inherit; text-decoration: none;">
+					<h4>Hot Fix</h4>
+				</a>
+				<ul>
+					<li>git checkout master</li>
+					<li>git checkout -b hotfix_branch</li>
+				</ul>
+				<p>** work is done commits are added to the hotfix_branch*</p>
+				<ul>
+					<li>git checkout develop</li>
+					<li>git merge hotfix_branch</li>
+					<li>git checkout master</li>
+					<li>git merge hotfix_branch</li>
+				</ul>
+				<a href="#feature" id="feature" style="color: inherit; text-decoration: none;">
+					<h4>Feature</h4>
+				</a>
+				<ul>
+					<li>git checkout master</li>
+					<li>git checkout -b develop</li>
+					<li>git checkout -b feature_branch</li>
+				</ul>
+				<p>** work happens on feature branch *</p>
+				<ul>
+					<li>git checkout develop</li>
+					<li>git merge feature_branch</li>
+					<li>git checkout master</li>
+					<li>git merge develop</li>
+					<li>git branch -d feature_branch</li>
+				</ul>
+			</div>
+		</div>
+		<div class="col-4 col-menu menu-sticky-wrap menu-highlight">
+			<nav class="tsd-navigation primary">
+				<ul>
+					<li class="globals  ">
+						<a href="globals.html"><em>Globals</em></a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/components.html">Components</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/models.html">Models</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/services.html">Services</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/shared.html">Shared</a>
+					</li>
+				</ul>
+			</nav>
+			<nav class="tsd-navigation secondary menu-sticky">
+				<ul class="before-current">
+				</ul>
+			</nav>
+		</div>
+	</div>
+</div>
+<footer>
+	<div class="container">
+		<h2>Legend</h2>
+		<div class="tsd-legend-group">
+			<ul class="tsd-legend">
+				<li class="tsd-kind-function"><span class="tsd-kind-icon">Function</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-enum"><span class="tsd-kind-icon">Enumeration</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-interface"><span class="tsd-kind-icon">Interface</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-class"><span class="tsd-kind-icon">Class</span></li>
+			</ul>
+		</div>
+	</div>
+</footer>
+<div class="overlay"></div>
+<script src="assets/js/main.js"></script>
+</body>
+</html>

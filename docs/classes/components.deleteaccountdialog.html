@@ -1,0 +1,417 @@
+<!doctype html>
+<html class="default no-js">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>DeleteAccountDialog | Anti-Bubble App</title>
+	<meta name="description" content="Documentation for Anti-Bubble App">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="../assets/css/main.css">
+</head>
+<body>
+<header>
+	<div class="tsd-page-toolbar">
+		<div class="container">
+			<div class="table-wrap">
+				<div class="table-cell" id="tsd-search" data-index="../assets/js/search.json" data-base="..">
+					<div class="field">
+						<label for="tsd-search-field" class="tsd-widget search no-caption">Search</label>
+						<input id="tsd-search-field" type="text" />
+					</div>
+					<ul class="results">
+						<li class="state loading">Preparing search index...</li>
+						<li class="state failure">The search index is not available</li>
+					</ul>
+					<a href="../index.html" class="title">Anti-Bubble App</a>
+				</div>
+				<div class="table-cell" id="tsd-widgets">
+					<div id="tsd-filter">
+						<a href="#" class="tsd-widget options no-caption" data-toggle="options">Options</a>
+						<div class="tsd-filter-group">
+							<div class="tsd-select" id="tsd-filter-visibility">
+								<span class="tsd-select-label">All</span>
+								<ul class="tsd-select-list">
+									<li data-value="public">Public</li>
+									<li data-value="protected">Public/Protected</li>
+									<li data-value="private" class="selected">All</li>
+								</ul>
+							</div>
+							<input type="checkbox" id="tsd-filter-inherited" checked />
+							<label class="tsd-widget" for="tsd-filter-inherited">Inherited</label>
+							<input type="checkbox" id="tsd-filter-only-exported" />
+							<label class="tsd-widget" for="tsd-filter-only-exported">Only exported</label>
+						</div>
+					</div>
+					<a href="#" class="tsd-widget menu no-caption" data-toggle="menu">Menu</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="tsd-page-title">
+		<div class="container">
+			<ul class="tsd-breadcrumb">
+				<li>
+					<a href="../globals.html">Globals</a>
+				</li>
+				<li>
+					<a href="../modules/components.html">Components</a>
+				</li>
+				<li>
+					<a href="components.deleteaccountdialog.html">DeleteAccountDialog</a>
+				</li>
+			</ul>
+			<h1>Class DeleteAccountDialog</h1>
+		</div>
+	</div>
+</header>
+<div class="container container-main">
+	<div class="row">
+		<div class="col-8 col-content">
+			<section class="tsd-panel tsd-comment">
+				<div class="tsd-comment tsd-typography">
+					<div class="lead">
+						<p>This class is defined as a sub-component of the Settings Component and handles the MatDialog for when a user
+						wants to delete their account.</p>
+					</div>
+				</div>
+			</section>
+			<section class="tsd-panel tsd-hierarchy">
+				<h3>Hierarchy</h3>
+				<ul class="tsd-hierarchy">
+					<li>
+						<span class="target">DeleteAccountDialog</span>
+					</li>
+				</ul>
+			</section>
+			<section class="tsd-panel-group tsd-index-group">
+				<h2>Index</h2>
+				<section class="tsd-panel tsd-index-panel">
+					<div class="tsd-index-content">
+						<section class="tsd-index-section ">
+							<h3>Constructors</h3>
+							<ul class="tsd-index-list">
+								<li class="tsd-kind-constructor tsd-parent-kind-class"><a href="components.deleteaccountdialog.html#constructor" class="tsd-kind-icon">constructor</a></li>
+							</ul>
+						</section>
+						<section class="tsd-index-section ">
+							<h3>Properties</h3>
+							<ul class="tsd-index-list">
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="components.deleteaccountdialog.html#auth" class="tsd-kind-icon">auth</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class"><a href="components.deleteaccountdialog.html#data" class="tsd-kind-icon">data</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="components.deleteaccountdialog.html#dialogref" class="tsd-kind-icon">dialog<wbr>Ref</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="components.deleteaccountdialog.html#snackbar" class="tsd-kind-icon">snack<wbr>Bar</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="components.deleteaccountdialog.html#userservice" class="tsd-kind-icon">user<wbr>Service</a></li>
+							</ul>
+						</section>
+						<section class="tsd-index-section ">
+							<h3>Methods</h3>
+							<ul class="tsd-index-list">
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="components.deleteaccountdialog.html#deleteaccount" class="tsd-kind-icon">delete<wbr>Account</a></li>
+							</ul>
+						</section>
+					</div>
+				</section>
+			</section>
+			<section class="tsd-panel-group tsd-member-group ">
+				<h2>Constructors</h2>
+				<section class="tsd-panel tsd-member tsd-kind-constructor tsd-parent-kind-class">
+					<a name="constructor" class="tsd-anchor"></a>
+					<h3>constructor</h3>
+					<ul class="tsd-signatures tsd-kind-constructor tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">new <wbr>Delete<wbr>Account<wbr>Dialog<span class="tsd-signature-symbol">(</span>auth<span class="tsd-signature-symbol">: </span><a href="services.authenticationservice.html" class="tsd-signature-type">AuthenticationService</a>, userService<span class="tsd-signature-symbol">: </span><a href="services.userservice.html" class="tsd-signature-type">UserService</a>, snackBar<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">MatSnackBar</span>, dialogRef<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">MatDialogRef</span><span class="tsd-signature-symbol">&lt;</span><a href="components.deleteaccountdialog.html" class="tsd-signature-type">DeleteAccountDialog</a><span class="tsd-signature-symbol">&gt;</span>, data<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="components.deleteaccountdialog.html" class="tsd-signature-type">DeleteAccountDialog</a></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in src/app/components/settings/settings.component.ts:184</li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>DeleteAccountDialog constructor.</p>
+								</div>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>auth: <a href="services.authenticationservice.html" class="tsd-signature-type">AuthenticationService</a></h5>
+								</li>
+								<li>
+									<h5>userService: <a href="services.userservice.html" class="tsd-signature-type">UserService</a></h5>
+								</li>
+								<li>
+									<h5>snackBar: <span class="tsd-signature-type">MatSnackBar</span></h5>
+								</li>
+								<li>
+									<h5>dialogRef: <span class="tsd-signature-type">MatDialogRef</span><span class="tsd-signature-symbol">&lt;</span><a href="components.deleteaccountdialog.html" class="tsd-signature-type">DeleteAccountDialog</a><span class="tsd-signature-symbol">&gt;</span></h5>
+								</li>
+								<li>
+									<h5>data: <span class="tsd-signature-type">any</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<div class="lead">
+										</div>
+									</div>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <a href="components.deleteaccountdialog.html" class="tsd-signature-type">DeleteAccountDialog</a></h4>
+						</li>
+					</ul>
+				</section>
+			</section>
+			<section class="tsd-panel-group tsd-member-group ">
+				<h2>Properties</h2>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private">
+					<a name="auth" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> auth</h3>
+					<div class="tsd-signature tsd-kind-icon">auth<span class="tsd-signature-symbol">:</span> <a href="services.authenticationservice.html" class="tsd-signature-type">AuthenticationService</a></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in src/app/components/settings/settings.component.ts:195</li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+					<a name="data" class="tsd-anchor"></a>
+					<h3>data</h3>
+					<div class="tsd-signature tsd-kind-icon">data<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in src/app/components/settings/settings.component.ts:199</li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+						</div>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private">
+					<a name="dialogref" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> dialog<wbr>Ref</h3>
+					<div class="tsd-signature tsd-kind-icon">dialog<wbr>Ref<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">MatDialogRef</span><span class="tsd-signature-symbol">&lt;</span><a href="components.deleteaccountdialog.html" class="tsd-signature-type">DeleteAccountDialog</a><span class="tsd-signature-symbol">&gt;</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in src/app/components/settings/settings.component.ts:198</li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private">
+					<a name="snackbar" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> snack<wbr>Bar</h3>
+					<div class="tsd-signature tsd-kind-icon">snack<wbr>Bar<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">MatSnackBar</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in src/app/components/settings/settings.component.ts:197</li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private">
+					<a name="userservice" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> user<wbr>Service</h3>
+					<div class="tsd-signature tsd-kind-icon">user<wbr>Service<span class="tsd-signature-symbol">:</span> <a href="services.userservice.html" class="tsd-signature-type">UserService</a></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in src/app/components/settings/settings.component.ts:196</li>
+						</ul>
+					</aside>
+				</section>
+			</section>
+			<section class="tsd-panel-group tsd-member-group ">
+				<h2>Methods</h2>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="deleteaccount" class="tsd-anchor"></a>
+					<h3>delete<wbr>Account</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">delete<wbr>Account<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in src/app/components/settings/settings.component.ts:207</li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Method to delete a user&#39;s account.</p>
+								</div>
+							</div>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+			</section>
+		</div>
+		<div class="col-4 col-menu menu-sticky-wrap menu-highlight">
+			<nav class="tsd-navigation primary">
+				<ul>
+					<li class="globals  ">
+						<a href="../globals.html"><em>Globals</em></a>
+					</li>
+					<li class="current tsd-kind-module">
+						<a href="../modules/components.html">Components</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="../modules/models.html">Models</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="../modules/services.html">Services</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="../modules/shared.html">Shared</a>
+					</li>
+				</ul>
+			</nav>
+			<nav class="tsd-navigation secondary menu-sticky">
+				<ul class="before-current">
+					<li class=" tsd-kind-class tsd-parent-kind-module">
+						<a href="components.activitiescomponent.html" class="tsd-kind-icon">Activities<wbr>Component</a>
+					</li>
+					<li class=" tsd-kind-class tsd-parent-kind-module">
+						<a href="components.answerformcomponent.html" class="tsd-kind-icon">Answer<wbr>Form<wbr>Component</a>
+					</li>
+					<li class=" tsd-kind-class tsd-parent-kind-module">
+						<a href="components.avatarcomponent.html" class="tsd-kind-icon">Avatar<wbr>Component</a>
+					</li>
+					<li class=" tsd-kind-class tsd-parent-kind-module">
+						<a href="components.avatardisplaycomponent.html" class="tsd-kind-icon">Avatar<wbr>Display<wbr>Component</a>
+					</li>
+					<li class=" tsd-kind-class tsd-parent-kind-module">
+						<a href="components.badgescomponent.html" class="tsd-kind-icon">Badges<wbr>Component</a>
+					</li>
+					<li class=" tsd-kind-class tsd-parent-kind-module">
+						<a href="components.bubbledetailscomponent.html" class="tsd-kind-icon">Bubble<wbr>Details<wbr>Component</a>
+					</li>
+					<li class=" tsd-kind-class tsd-parent-kind-module">
+						<a href="components.bubblevisualisationcomponent.html" class="tsd-kind-icon">Bubble<wbr>Visualisation<wbr>Component</a>
+					</li>
+					<li class=" tsd-kind-class tsd-parent-kind-module">
+						<a href="components.classoverviewcomponent.html" class="tsd-kind-icon">Class<wbr>Overview<wbr>Component</a>
+					</li>
+					<li class=" tsd-kind-class tsd-parent-kind-module">
+						<a href="components.classmateprofilecomponent.html" class="tsd-kind-icon">Classmate<wbr>Profile<wbr>Component</a>
+					</li>
+				</ul>
+				<ul class="current">
+					<li class="current tsd-kind-class tsd-parent-kind-module">
+						<a href="components.deleteaccountdialog.html" class="tsd-kind-icon">Delete<wbr>Account<wbr>Dialog</a>
+						<ul>
+							<li class=" tsd-kind-constructor tsd-parent-kind-class">
+								<a href="components.deleteaccountdialog.html#constructor" class="tsd-kind-icon">constructor</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private">
+								<a href="components.deleteaccountdialog.html#auth" class="tsd-kind-icon">auth</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class">
+								<a href="components.deleteaccountdialog.html#data" class="tsd-kind-icon">data</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private">
+								<a href="components.deleteaccountdialog.html#dialogref" class="tsd-kind-icon">dialog<wbr>Ref</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private">
+								<a href="components.deleteaccountdialog.html#snackbar" class="tsd-kind-icon">snack<wbr>Bar</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private">
+								<a href="components.deleteaccountdialog.html#userservice" class="tsd-kind-icon">user<wbr>Service</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="components.deleteaccountdialog.html#deleteaccount" class="tsd-kind-icon">delete<wbr>Account</a>
+							</li>
+						</ul>
+					</li>
+				</ul>
+				<ul class="after-current">
+					<li class=" tsd-kind-class tsd-parent-kind-module">
+						<a href="components.deleteclassdialog.html" class="tsd-kind-icon">Delete<wbr>Class<wbr>Dialog</a>
+					</li>
+					<li class=" tsd-kind-class tsd-parent-kind-module">
+						<a href="components.homecomponent.html" class="tsd-kind-icon">Home<wbr>Component</a>
+					</li>
+					<li class=" tsd-kind-class tsd-parent-kind-module">
+						<a href="components.joinclasscomponent.html" class="tsd-kind-icon">Join<wbr>Class<wbr>Component</a>
+					</li>
+					<li class=" tsd-kind-class tsd-parent-kind-module">
+						<a href="components.labyrinthcomponent.html" class="tsd-kind-icon">Labyrinth<wbr>Component</a>
+					</li>
+					<li class=" tsd-kind-class tsd-parent-kind-module">
+						<a href="components.leaveclassdialog.html" class="tsd-kind-icon">Leave<wbr>Class<wbr>Dialog</a>
+					</li>
+					<li class=" tsd-kind-class tsd-parent-kind-module">
+						<a href="components.logincomponent.html" class="tsd-kind-icon">Login<wbr>Component</a>
+					</li>
+					<li class=" tsd-kind-class tsd-parent-kind-module">
+						<a href="components.notloggedintoolbarcomponent.html" class="tsd-kind-icon">Not<wbr>Logged<wbr>InToolbar<wbr>Component</a>
+					</li>
+					<li class=" tsd-kind-class tsd-parent-kind-module">
+						<a href="components.passwordrecoverycomponent.html" class="tsd-kind-icon">Password<wbr>Recovery<wbr>Component</a>
+					</li>
+					<li class=" tsd-kind-class tsd-parent-kind-module">
+						<a href="components.passwordresetcomponent.html" class="tsd-kind-icon">Password<wbr>Reset<wbr>Component</a>
+					</li>
+					<li class=" tsd-kind-class tsd-parent-kind-module">
+						<a href="components.profilecomponent.html" class="tsd-kind-icon">Profile<wbr>Component</a>
+					</li>
+					<li class=" tsd-kind-class tsd-parent-kind-module">
+						<a href="components.registercomponent.html" class="tsd-kind-icon">Register<wbr>Component</a>
+					</li>
+					<li class=" tsd-kind-class tsd-parent-kind-module">
+						<a href="components.removefromclassdialog.html" class="tsd-kind-icon">Remove<wbr>From<wbr>Class<wbr>Dialog</a>
+					</li>
+					<li class=" tsd-kind-class tsd-parent-kind-module">
+						<a href="components.sessioncomponent.html" class="tsd-kind-icon">Session<wbr>Component</a>
+					</li>
+					<li class=" tsd-kind-class tsd-parent-kind-module">
+						<a href="components.sessionoptionscomponent.html" class="tsd-kind-icon">Session<wbr>Options<wbr>Component</a>
+					</li>
+					<li class=" tsd-kind-class tsd-parent-kind-module">
+						<a href="components.sessionoverviewcomponent.html" class="tsd-kind-icon">Session<wbr>Overview<wbr>Component</a>
+					</li>
+					<li class=" tsd-kind-class tsd-parent-kind-module">
+						<a href="components.settingscomponent.html" class="tsd-kind-icon">Settings<wbr>Component</a>
+					</li>
+					<li class=" tsd-kind-class tsd-parent-kind-module">
+						<a href="components.shopcomponent.html" class="tsd-kind-icon">Shop<wbr>Component</a>
+					</li>
+					<li class=" tsd-kind-class tsd-parent-kind-module">
+						<a href="components.sidenavcomponent.html" class="tsd-kind-icon">Sidenav<wbr>Component</a>
+					</li>
+					<li class=" tsd-kind-class tsd-parent-kind-module">
+						<a href="components.teacheroverviewcomponent.html" class="tsd-kind-icon">Teacher<wbr>Overview<wbr>Component</a>
+					</li>
+					<li class=" tsd-kind-class tsd-parent-kind-module">
+						<a href="components.toolbarcomponent.html" class="tsd-kind-icon">Toolbar<wbr>Component</a>
+					</li>
+				</ul>
+			</nav>
+		</div>
+	</div>
+</div>
+<footer>
+	<div class="container">
+		<h2>Legend</h2>
+		<div class="tsd-legend-group">
+			<ul class="tsd-legend">
+				<li class="tsd-kind-class"><span class="tsd-kind-icon">Class</span></li>
+				<li class="tsd-kind-constructor tsd-parent-kind-class"><span class="tsd-kind-icon">Constructor</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-class"><span class="tsd-kind-icon">Property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class"><span class="tsd-kind-icon">Method</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-function"><span class="tsd-kind-icon">Function</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-enum"><span class="tsd-kind-icon">Enumeration</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-interface"><span class="tsd-kind-icon">Interface</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><span class="tsd-kind-icon">Private property</span></li>
+			</ul>
+		</div>
+	</div>
+</footer>
+<div class="overlay"></div>
+<script src="../assets/js/main.js"></script>
+</body>
+</html>

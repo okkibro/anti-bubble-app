@@ -1,0 +1,654 @@
+<!doctype html>
+<html class="default no-js">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>AvatarComponent | Anti-Bubble App</title>
+	<meta name="description" content="Documentation for Anti-Bubble App">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="../assets/css/main.css">
+</head>
+<body>
+<header>
+	<div class="tsd-page-toolbar">
+		<div class="container">
+			<div class="table-wrap">
+				<div class="table-cell" id="tsd-search" data-index="../assets/js/search.json" data-base="..">
+					<div class="field">
+						<label for="tsd-search-field" class="tsd-widget search no-caption">Search</label>
+						<input id="tsd-search-field" type="text" />
+					</div>
+					<ul class="results">
+						<li class="state loading">Preparing search index...</li>
+						<li class="state failure">The search index is not available</li>
+					</ul>
+					<a href="../index.html" class="title">Anti-Bubble App</a>
+				</div>
+				<div class="table-cell" id="tsd-widgets">
+					<div id="tsd-filter">
+						<a href="#" class="tsd-widget options no-caption" data-toggle="options">Options</a>
+						<div class="tsd-filter-group">
+							<div class="tsd-select" id="tsd-filter-visibility">
+								<span class="tsd-select-label">All</span>
+								<ul class="tsd-select-list">
+									<li data-value="public">Public</li>
+									<li data-value="protected">Public/Protected</li>
+									<li data-value="private" class="selected">All</li>
+								</ul>
+							</div>
+							<input type="checkbox" id="tsd-filter-inherited" checked />
+							<label class="tsd-widget" for="tsd-filter-inherited">Inherited</label>
+							<input type="checkbox" id="tsd-filter-only-exported" />
+							<label class="tsd-widget" for="tsd-filter-only-exported">Only exported</label>
+						</div>
+					</div>
+					<a href="#" class="tsd-widget menu no-caption" data-toggle="menu">Menu</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="tsd-page-title">
+		<div class="container">
+			<ul class="tsd-breadcrumb">
+				<li>
+					<a href="../globals.html">Globals</a>
+				</li>
+				<li>
+					<a href="../modules/components.html">Components</a>
+				</li>
+				<li>
+					<a href="components.avatarcomponent.html">AvatarComponent</a>
+				</li>
+			</ul>
+			<h1>Class AvatarComponent</h1>
+		</div>
+	</div>
+</header>
+<div class="container container-main">
+	<div class="row">
+		<div class="col-8 col-content">
+			<section class="tsd-panel tsd-comment">
+				<div class="tsd-comment tsd-typography">
+					<div class="lead">
+						<p>This class is responsible for the &#39;avatar&#39; page in the app where a user can coustomzie their avatar. The
+							class contains methods for equiping items and sorting through a user&#39;s inventory. The class also contains
+							two helper methods for setting the correct amount of columns to be displayed depending on the user&#39;s
+						screen size.</p>
+					</div>
+				</div>
+			</section>
+			<section class="tsd-panel tsd-hierarchy">
+				<h3>Hierarchy</h3>
+				<ul class="tsd-hierarchy">
+					<li>
+						<span class="target">AvatarComponent</span>
+					</li>
+				</ul>
+			</section>
+			<section class="tsd-panel">
+				<h3>Implements</h3>
+				<ul class="tsd-hierarchy">
+					<li><span class="tsd-signature-type">OnInit</span></li>
+				</ul>
+			</section>
+			<section class="tsd-panel-group tsd-index-group">
+				<h2>Index</h2>
+				<section class="tsd-panel tsd-index-panel">
+					<div class="tsd-index-content">
+						<section class="tsd-index-section ">
+							<h3>Constructors</h3>
+							<ul class="tsd-index-list">
+								<li class="tsd-kind-constructor tsd-parent-kind-class"><a href="components.avatarcomponent.html#constructor" class="tsd-kind-icon">constructor</a></li>
+							</ul>
+						</section>
+						<section class="tsd-index-section ">
+							<h3>Properties</h3>
+							<ul class="tsd-index-list">
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="components.avatarcomponent.html#avatardisplay" class="tsd-kind-icon">avatar<wbr>Display</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="components.avatarcomponent.html#avatarservice" class="tsd-kind-icon">avatar<wbr>Service</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class"><a href="components.avatarcomponent.html#filteredavatar" class="tsd-kind-icon">filtered<wbr>Avatar</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class"><a href="components.avatarcomponent.html#itemcategories" class="tsd-kind-icon">item<wbr>Categories</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class"><a href="components.avatarcomponent.html#itemcolumns" class="tsd-kind-icon">item<wbr>Columns</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="components.avatarcomponent.html#itemsshown" class="tsd-kind-icon">items<wbr>Shown</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="components.avatarcomponent.html#shopservice" class="tsd-kind-icon">shop<wbr>Service</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="components.avatarcomponent.html#titleservice" class="tsd-kind-icon">title<wbr>Service</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="components.avatarcomponent.html#userdetails" class="tsd-kind-icon">user<wbr>Details</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="components.avatarcomponent.html#userservice" class="tsd-kind-icon">user<wbr>Service</a></li>
+							</ul>
+						</section>
+						<section class="tsd-index-section ">
+							<h3>Methods</h3>
+							<ul class="tsd-index-list">
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="components.avatarcomponent.html#equip" class="tsd-kind-icon">equip</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private"><a href="components.avatarcomponent.html#filteravatar" class="tsd-kind-icon">filter<wbr>Avatar</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="components.avatarcomponent.html#ngoninit" class="tsd-kind-icon">ng<wbr>OnInit</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="components.avatarcomponent.html#onresize" class="tsd-kind-icon">on<wbr>Resize</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private"><a href="components.avatarcomponent.html#setitemcolumns" class="tsd-kind-icon">set<wbr>Item<wbr>Columns</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="components.avatarcomponent.html#tabchange" class="tsd-kind-icon">tab<wbr>Change</a></li>
+							</ul>
+						</section>
+					</div>
+				</section>
+			</section>
+			<section class="tsd-panel-group tsd-member-group ">
+				<h2>Constructors</h2>
+				<section class="tsd-panel tsd-member tsd-kind-constructor tsd-parent-kind-class">
+					<a name="constructor" class="tsd-anchor"></a>
+					<h3>constructor</h3>
+					<ul class="tsd-signatures tsd-kind-constructor tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">new <wbr>Avatar<wbr>Component<span class="tsd-signature-symbol">(</span>shopService<span class="tsd-signature-symbol">: </span><a href="services.shopservice.html" class="tsd-signature-type">ShopService</a>, avatarService<span class="tsd-signature-symbol">: </span><a href="services.avatarservice.html" class="tsd-signature-type">AvatarService</a>, avatarDisplay<span class="tsd-signature-symbol">: </span><a href="components.avatardisplaycomponent.html" class="tsd-signature-type">AvatarDisplayComponent</a>, titleService<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Title</span>, userService<span class="tsd-signature-symbol">: </span><a href="services.userservice.html" class="tsd-signature-type">UserService</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="components.avatarcomponent.html" class="tsd-signature-type">AvatarComponent</a></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in src/app/components/avatar/avatar.component.ts:50</li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>AvatarComponent constructor.</p>
+								</div>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>shopService: <a href="services.shopservice.html" class="tsd-signature-type">ShopService</a></h5>
+								</li>
+								<li>
+									<h5>avatarService: <a href="services.avatarservice.html" class="tsd-signature-type">AvatarService</a></h5>
+								</li>
+								<li>
+									<h5>avatarDisplay: <a href="components.avatardisplaycomponent.html" class="tsd-signature-type">AvatarDisplayComponent</a></h5>
+								</li>
+								<li>
+									<h5>titleService: <span class="tsd-signature-type">Title</span></h5>
+								</li>
+								<li>
+									<h5>userService: <a href="services.userservice.html" class="tsd-signature-type">UserService</a></h5>
+									<div class="tsd-comment tsd-typography">
+										<div class="lead">
+										</div>
+									</div>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <a href="components.avatarcomponent.html" class="tsd-signature-type">AvatarComponent</a></h4>
+						</li>
+					</ul>
+				</section>
+			</section>
+			<section class="tsd-panel-group tsd-member-group ">
+				<h2>Properties</h2>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private">
+					<a name="avatardisplay" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> avatar<wbr>Display</h3>
+					<div class="tsd-signature tsd-kind-icon">avatar<wbr>Display<span class="tsd-signature-symbol">:</span> <a href="components.avatardisplaycomponent.html" class="tsd-signature-type">AvatarDisplayComponent</a></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in src/app/components/avatar/avatar.component.ts:63</li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private">
+					<a name="avatarservice" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> avatar<wbr>Service</h3>
+					<div class="tsd-signature tsd-kind-icon">avatar<wbr>Service<span class="tsd-signature-symbol">:</span> <a href="services.avatarservice.html" class="tsd-signature-type">AvatarService</a></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in src/app/components/avatar/avatar.component.ts:62</li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+					<a name="filteredavatar" class="tsd-anchor"></a>
+					<h3>filtered<wbr>Avatar</h3>
+					<div class="tsd-signature tsd-kind-icon">filtered<wbr>Avatar<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol"> = []</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in src/app/components/avatar/avatar.component.ts:39</li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+					<a name="itemcategories" class="tsd-anchor"></a>
+					<h3>item<wbr>Categories</h3>
+					<div class="tsd-signature tsd-kind-icon">item<wbr>Categories<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol"> = [&#x27;Hoofddeksel&#x27;,&#x27;Haar&#x27;,&#x27;Bril&#x27;,&#x27;Shirt&#x27;,&#x27;Broek&#x27;,&#x27;Schoenen&#x27;,&#x27;Medaille&#x27;,&#x27;Lichaam&#x27;]</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in src/app/components/avatar/avatar.component.ts:40</li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+					<a name="itemcolumns" class="tsd-anchor"></a>
+					<h3>item<wbr>Columns</h3>
+					<div class="tsd-signature tsd-kind-icon">item<wbr>Columns<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in src/app/components/avatar/avatar.component.ts:50</li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private">
+					<a name="itemsshown" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> items<wbr>Shown</h3>
+					<div class="tsd-signature tsd-kind-icon">items<wbr>Shown<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol"> = []</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in src/app/components/avatar/avatar.component.ts:38</li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private">
+					<a name="shopservice" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> shop<wbr>Service</h3>
+					<div class="tsd-signature tsd-kind-icon">shop<wbr>Service<span class="tsd-signature-symbol">:</span> <a href="services.shopservice.html" class="tsd-signature-type">ShopService</a></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in src/app/components/avatar/avatar.component.ts:61</li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private">
+					<a name="titleservice" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> title<wbr>Service</h3>
+					<div class="tsd-signature tsd-kind-icon">title<wbr>Service<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Title</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in src/app/components/avatar/avatar.component.ts:64</li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private">
+					<a name="userdetails" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> user<wbr>Details</h3>
+					<div class="tsd-signature tsd-kind-icon">user<wbr>Details<span class="tsd-signature-symbol">:</span> <a href="models.user.html" class="tsd-signature-type">User</a></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in src/app/components/avatar/avatar.component.ts:37</li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private">
+					<a name="userservice" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> user<wbr>Service</h3>
+					<div class="tsd-signature tsd-kind-icon">user<wbr>Service<span class="tsd-signature-symbol">:</span> <a href="services.userservice.html" class="tsd-signature-type">UserService</a></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in src/app/components/avatar/avatar.component.ts:65</li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+						</div>
+					</div>
+				</section>
+			</section>
+			<section class="tsd-panel-group tsd-member-group ">
+				<h2>Methods</h2>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="equip" class="tsd-anchor"></a>
+					<h3>equip</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">equip<span class="tsd-signature-symbol">(</span>item<span class="tsd-signature-symbol">: </span><a href="models.item.html" class="tsd-signature-type">Item</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in src/app/components/avatar/avatar.component.ts:99</li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Method that assigns an item to the user&#39;s avatar in the database.</p>
+								</div>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>item: <a href="models.item.html" class="tsd-signature-type">Item</a></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>Item to be equipped by the user.</p>
+									</div>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-private">
+					<a name="filteravatar" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> filter<wbr>Avatar</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-private">
+						<li class="tsd-signature tsd-kind-icon">filter<wbr>Avatar<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="components.avatarcomponent.html" class="tsd-signature-type">AvatarComponent</a><span class="tsd-signature-symbol">[]</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in src/app/components/avatar/avatar.component.ts:130</li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Method to filter the avatar items to only show the items in the inventory/that the player bought.</p>
+								</div>
+							</div>
+							<h4 class="tsd-returns-title">Returns <a href="components.avatarcomponent.html" class="tsd-signature-type">AvatarComponent</a><span class="tsd-signature-symbol">[]</span></h4>
+							<p>List of items currently owned by the user.</p>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="ngoninit" class="tsd-anchor"></a>
+					<h3>ng<wbr>OnInit</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">ng<wbr>OnInit<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in src/app/components/avatar/avatar.component.ts:72</li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Initialization method.</p>
+								</div>
+							</div>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="onresize" class="tsd-anchor"></a>
+					<h3>on<wbr>Resize</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">on<wbr>Resize<span class="tsd-signature-symbol">(</span>event<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in src/app/components/avatar/avatar.component.ts:155</li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Method that changes the amount of columns when the window size changes.</p>
+								</div>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>event: <span class="tsd-signature-type">any</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>Event triggered when the screen changes size.</p>
+									</div>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-private">
+					<a name="setitemcolumns" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> set<wbr>Item<wbr>Columns</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-private">
+						<li class="tsd-signature tsd-kind-icon">set<wbr>Item<wbr>Columns<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in src/app/components/avatar/avatar.component.ts:140</li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Method that sets the initial amount of columns based on screen width.</p>
+								</div>
+							</div>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="tabchange" class="tsd-anchor"></a>
+					<h3>tab<wbr>Change</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">tab<wbr>Change<span class="tsd-signature-symbol">(</span>event<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">MatTabChangeEvent</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in src/app/components/avatar/avatar.component.ts:117</li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Method to change the tab in the HTML and updates the shown items.</p>
+								</div>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>event: <span class="tsd-signature-type">MatTabChangeEvent</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>Event triggered by changing tab/category.</p>
+									</div>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+			</section>
+		</div>
+		<div class="col-4 col-menu menu-sticky-wrap menu-highlight">
+			<nav class="tsd-navigation primary">
+				<ul>
+					<li class="globals  ">
+						<a href="../globals.html"><em>Globals</em></a>
+					</li>
+					<li class="current tsd-kind-module">
+						<a href="../modules/components.html">Components</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="../modules/models.html">Models</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="../modules/services.html">Services</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="../modules/shared.html">Shared</a>
+					</li>
+				</ul>
+			</nav>
+			<nav class="tsd-navigation secondary menu-sticky">
+				<ul class="before-current">
+					<li class=" tsd-kind-class tsd-parent-kind-module">
+						<a href="components.activitiescomponent.html" class="tsd-kind-icon">Activities<wbr>Component</a>
+					</li>
+					<li class=" tsd-kind-class tsd-parent-kind-module">
+						<a href="components.answerformcomponent.html" class="tsd-kind-icon">Answer<wbr>Form<wbr>Component</a>
+					</li>
+				</ul>
+				<ul class="current">
+					<li class="current tsd-kind-class tsd-parent-kind-module">
+						<a href="components.avatarcomponent.html" class="tsd-kind-icon">Avatar<wbr>Component</a>
+						<ul>
+							<li class=" tsd-kind-constructor tsd-parent-kind-class">
+								<a href="components.avatarcomponent.html#constructor" class="tsd-kind-icon">constructor</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private">
+								<a href="components.avatarcomponent.html#avatardisplay" class="tsd-kind-icon">avatar<wbr>Display</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private">
+								<a href="components.avatarcomponent.html#avatarservice" class="tsd-kind-icon">avatar<wbr>Service</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class">
+								<a href="components.avatarcomponent.html#filteredavatar" class="tsd-kind-icon">filtered<wbr>Avatar</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class">
+								<a href="components.avatarcomponent.html#itemcategories" class="tsd-kind-icon">item<wbr>Categories</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class">
+								<a href="components.avatarcomponent.html#itemcolumns" class="tsd-kind-icon">item<wbr>Columns</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private">
+								<a href="components.avatarcomponent.html#itemsshown" class="tsd-kind-icon">items<wbr>Shown</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private">
+								<a href="components.avatarcomponent.html#shopservice" class="tsd-kind-icon">shop<wbr>Service</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private">
+								<a href="components.avatarcomponent.html#titleservice" class="tsd-kind-icon">title<wbr>Service</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private">
+								<a href="components.avatarcomponent.html#userdetails" class="tsd-kind-icon">user<wbr>Details</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private">
+								<a href="components.avatarcomponent.html#userservice" class="tsd-kind-icon">user<wbr>Service</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="components.avatarcomponent.html#equip" class="tsd-kind-icon">equip</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-private">
+								<a href="components.avatarcomponent.html#filteravatar" class="tsd-kind-icon">filter<wbr>Avatar</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="components.avatarcomponent.html#ngoninit" class="tsd-kind-icon">ng<wbr>OnInit</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="components.avatarcomponent.html#onresize" class="tsd-kind-icon">on<wbr>Resize</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-private">
+								<a href="components.avatarcomponent.html#setitemcolumns" class="tsd-kind-icon">set<wbr>Item<wbr>Columns</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="components.avatarcomponent.html#tabchange" class="tsd-kind-icon">tab<wbr>Change</a>
+							</li>
+						</ul>
+					</li>
+				</ul>
+				<ul class="after-current">
+					<li class=" tsd-kind-class tsd-parent-kind-module">
+						<a href="components.avatardisplaycomponent.html" class="tsd-kind-icon">Avatar<wbr>Display<wbr>Component</a>
+					</li>
+					<li class=" tsd-kind-class tsd-parent-kind-module">
+						<a href="components.badgescomponent.html" class="tsd-kind-icon">Badges<wbr>Component</a>
+					</li>
+					<li class=" tsd-kind-class tsd-parent-kind-module">
+						<a href="components.bubbledetailscomponent.html" class="tsd-kind-icon">Bubble<wbr>Details<wbr>Component</a>
+					</li>
+					<li class=" tsd-kind-class tsd-parent-kind-module">
+						<a href="components.bubblevisualisationcomponent.html" class="tsd-kind-icon">Bubble<wbr>Visualisation<wbr>Component</a>
+					</li>
+					<li class=" tsd-kind-class tsd-parent-kind-module">
+						<a href="components.classoverviewcomponent.html" class="tsd-kind-icon">Class<wbr>Overview<wbr>Component</a>
+					</li>
+					<li class=" tsd-kind-class tsd-parent-kind-module">
+						<a href="components.classmateprofilecomponent.html" class="tsd-kind-icon">Classmate<wbr>Profile<wbr>Component</a>
+					</li>
+					<li class=" tsd-kind-class tsd-parent-kind-module">
+						<a href="components.deleteaccountdialog.html" class="tsd-kind-icon">Delete<wbr>Account<wbr>Dialog</a>
+					</li>
+					<li class=" tsd-kind-class tsd-parent-kind-module">
+						<a href="components.deleteclassdialog.html" class="tsd-kind-icon">Delete<wbr>Class<wbr>Dialog</a>
+					</li>
+					<li class=" tsd-kind-class tsd-parent-kind-module">
+						<a href="components.homecomponent.html" class="tsd-kind-icon">Home<wbr>Component</a>
+					</li>
+					<li class=" tsd-kind-class tsd-parent-kind-module">
+						<a href="components.joinclasscomponent.html" class="tsd-kind-icon">Join<wbr>Class<wbr>Component</a>
+					</li>
+					<li class=" tsd-kind-class tsd-parent-kind-module">
+						<a href="components.labyrinthcomponent.html" class="tsd-kind-icon">Labyrinth<wbr>Component</a>
+					</li>
+					<li class=" tsd-kind-class tsd-parent-kind-module">
+						<a href="components.leaveclassdialog.html" class="tsd-kind-icon">Leave<wbr>Class<wbr>Dialog</a>
+					</li>
+					<li class=" tsd-kind-class tsd-parent-kind-module">
+						<a href="components.logincomponent.html" class="tsd-kind-icon">Login<wbr>Component</a>
+					</li>
+					<li class=" tsd-kind-class tsd-parent-kind-module">
+						<a href="components.notloggedintoolbarcomponent.html" class="tsd-kind-icon">Not<wbr>Logged<wbr>InToolbar<wbr>Component</a>
+					</li>
+					<li class=" tsd-kind-class tsd-parent-kind-module">
+						<a href="components.passwordrecoverycomponent.html" class="tsd-kind-icon">Password<wbr>Recovery<wbr>Component</a>
+					</li>
+					<li class=" tsd-kind-class tsd-parent-kind-module">
+						<a href="components.passwordresetcomponent.html" class="tsd-kind-icon">Password<wbr>Reset<wbr>Component</a>
+					</li>
+					<li class=" tsd-kind-class tsd-parent-kind-module">
+						<a href="components.profilecomponent.html" class="tsd-kind-icon">Profile<wbr>Component</a>
+					</li>
+					<li class=" tsd-kind-class tsd-parent-kind-module">
+						<a href="components.registercomponent.html" class="tsd-kind-icon">Register<wbr>Component</a>
+					</li>
+					<li class=" tsd-kind-class tsd-parent-kind-module">
+						<a href="components.removefromclassdialog.html" class="tsd-kind-icon">Remove<wbr>From<wbr>Class<wbr>Dialog</a>
+					</li>
+					<li class=" tsd-kind-class tsd-parent-kind-module">
+						<a href="components.sessioncomponent.html" class="tsd-kind-icon">Session<wbr>Component</a>
+					</li>
+					<li class=" tsd-kind-class tsd-parent-kind-module">
+						<a href="components.sessionoptionscomponent.html" class="tsd-kind-icon">Session<wbr>Options<wbr>Component</a>
+					</li>
+					<li class=" tsd-kind-class tsd-parent-kind-module">
+						<a href="components.sessionoverviewcomponent.html" class="tsd-kind-icon">Session<wbr>Overview<wbr>Component</a>
+					</li>
+					<li class=" tsd-kind-class tsd-parent-kind-module">
+						<a href="components.settingscomponent.html" class="tsd-kind-icon">Settings<wbr>Component</a>
+					</li>
+					<li class=" tsd-kind-class tsd-parent-kind-module">
+						<a href="components.shopcomponent.html" class="tsd-kind-icon">Shop<wbr>Component</a>
+					</li>
+					<li class=" tsd-kind-class tsd-parent-kind-module">
+						<a href="components.sidenavcomponent.html" class="tsd-kind-icon">Sidenav<wbr>Component</a>
+					</li>
+					<li class=" tsd-kind-class tsd-parent-kind-module">
+						<a href="components.teacheroverviewcomponent.html" class="tsd-kind-icon">Teacher<wbr>Overview<wbr>Component</a>
+					</li>
+					<li class=" tsd-kind-class tsd-parent-kind-module">
+						<a href="components.toolbarcomponent.html" class="tsd-kind-icon">Toolbar<wbr>Component</a>
+					</li>
+				</ul>
+			</nav>
+		</div>
+	</div>
+</div>
+<footer>
+	<div class="container">
+		<h2>Legend</h2>
+		<div class="tsd-legend-group">
+			<ul class="tsd-legend">
+				<li class="tsd-kind-class"><span class="tsd-kind-icon">Class</span></li>
+				<li class="tsd-kind-constructor tsd-parent-kind-class"><span class="tsd-kind-icon">Constructor</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-class"><span class="tsd-kind-icon">Property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class"><span class="tsd-kind-icon">Method</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><span class="tsd-kind-icon">Private property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private"><span class="tsd-kind-icon">Private method</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-function"><span class="tsd-kind-icon">Function</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-enum"><span class="tsd-kind-icon">Enumeration</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-interface"><span class="tsd-kind-icon">Interface</span></li>
+			</ul>
+		</div>
+	</div>
+</footer>
+<div class="overlay"></div>
+<script src="../assets/js/main.js"></script>
+</body>
+</html>

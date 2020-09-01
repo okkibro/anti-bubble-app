@@ -1,0 +1,1124 @@
+<!doctype html>
+<html class="default no-js">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>SessionComponent | Anti-Bubble App</title>
+	<meta name="description" content="Documentation for Anti-Bubble App">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="../assets/css/main.css">
+</head>
+<body>
+<header>
+	<div class="tsd-page-toolbar">
+		<div class="container">
+			<div class="table-wrap">
+				<div class="table-cell" id="tsd-search" data-index="../assets/js/search.json" data-base="..">
+					<div class="field">
+						<label for="tsd-search-field" class="tsd-widget search no-caption">Search</label>
+						<input id="tsd-search-field" type="text" />
+					</div>
+					<ul class="results">
+						<li class="state loading">Preparing search index...</li>
+						<li class="state failure">The search index is not available</li>
+					</ul>
+					<a href="../index.html" class="title">Anti-Bubble App</a>
+				</div>
+				<div class="table-cell" id="tsd-widgets">
+					<div id="tsd-filter">
+						<a href="#" class="tsd-widget options no-caption" data-toggle="options">Options</a>
+						<div class="tsd-filter-group">
+							<div class="tsd-select" id="tsd-filter-visibility">
+								<span class="tsd-select-label">All</span>
+								<ul class="tsd-select-list">
+									<li data-value="public">Public</li>
+									<li data-value="protected">Public/Protected</li>
+									<li data-value="private" class="selected">All</li>
+								</ul>
+							</div>
+							<input type="checkbox" id="tsd-filter-inherited" checked />
+							<label class="tsd-widget" for="tsd-filter-inherited">Inherited</label>
+							<input type="checkbox" id="tsd-filter-only-exported" />
+							<label class="tsd-widget" for="tsd-filter-only-exported">Only exported</label>
+						</div>
+					</div>
+					<a href="#" class="tsd-widget menu no-caption" data-toggle="menu">Menu</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="tsd-page-title">
+		<div class="container">
+			<ul class="tsd-breadcrumb">
+				<li>
+					<a href="../globals.html">Globals</a>
+				</li>
+				<li>
+					<a href="../modules/components.html">Components</a>
+				</li>
+				<li>
+					<a href="components.sessioncomponent.html">SessionComponent</a>
+				</li>
+			</ul>
+			<h1>Class SessionComponent</h1>
+		</div>
+	</div>
+</header>
+<div class="container container-main">
+	<div class="row">
+		<div class="col-8 col-content">
+			<section class="tsd-panel tsd-comment">
+				<div class="tsd-comment tsd-typography">
+					<div class="lead">
+						<p>This class handles all the logic for handling resetting the user&#39;s old password by setting a new one through
+							a form. This page can only be visited by a user who is already registered in the database, requested a new
+						password through the password-recovery component and clicked the link with the correct reset token.</p>
+					</div>
+				</div>
+			</section>
+			<section class="tsd-panel tsd-hierarchy">
+				<h3>Hierarchy</h3>
+				<ul class="tsd-hierarchy">
+					<li>
+						<span class="target">SessionComponent</span>
+					</li>
+				</ul>
+			</section>
+			<section class="tsd-panel">
+				<h3>Implements</h3>
+				<ul class="tsd-hierarchy">
+					<li><span class="tsd-signature-type">OnInit</span></li>
+				</ul>
+			</section>
+			<section class="tsd-panel-group tsd-index-group">
+				<h2>Index</h2>
+				<section class="tsd-panel tsd-index-panel">
+					<div class="tsd-index-content">
+						<section class="tsd-index-section ">
+							<h3>Constructors</h3>
+							<ul class="tsd-index-list">
+								<li class="tsd-kind-constructor tsd-parent-kind-class"><a href="components.sessioncomponent.html#constructor" class="tsd-kind-icon">constructor</a></li>
+							</ul>
+						</section>
+						<section class="tsd-index-section ">
+							<h3>Properties</h3>
+							<ul class="tsd-index-list">
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="components.sessioncomponent.html#auth" class="tsd-kind-icon">auth</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="components.sessioncomponent.html#data" class="tsd-kind-icon">data</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class"><a href="components.sessioncomponent.html#enablequestions" class="tsd-kind-icon">enable<wbr>Questions</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class"><a href="components.sessioncomponent.html#gamedata" class="tsd-kind-icon">game<wbr>Data</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class"><a href="components.sessioncomponent.html#gamefinished" class="tsd-kind-icon">game<wbr>Finished</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class"><a href="components.sessioncomponent.html#gamepaused" class="tsd-kind-icon">game<wbr>Paused</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class"><a href="components.sessioncomponent.html#gamestarted" class="tsd-kind-icon">game<wbr>Started</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class"><a href="components.sessioncomponent.html#interval" class="tsd-kind-icon">interval</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="components.sessioncomponent.html#leaders" class="tsd-kind-icon">leaders</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class"><a href="components.sessioncomponent.html#leavebyhomebutton" class="tsd-kind-icon">leave<wbr>ByHome<wbr>Button</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="components.sessioncomponent.html#pairs" class="tsd-kind-icon">pairs</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class"><a href="components.sessioncomponent.html#pin" class="tsd-kind-icon">pin</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class"><a href="components.sessioncomponent.html#playercount" class="tsd-kind-icon">player<wbr>Count</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="components.sessioncomponent.html#players" class="tsd-kind-icon">players</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="components.sessioncomponent.html#randomgroups" class="tsd-kind-icon">random<wbr>Groups</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="components.sessioncomponent.html#router" class="tsd-kind-icon">router</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="components.sessioncomponent.html#sessionservice" class="tsd-kind-icon">session<wbr>Service</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="components.sessioncomponent.html#snackbar" class="tsd-kind-icon">snack<wbr>Bar</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="components.sessioncomponent.html#socketservice" class="tsd-kind-icon">socket<wbr>Service</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="components.sessioncomponent.html#sources" class="tsd-kind-icon">sources</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="components.sessioncomponent.html#subjects" class="tsd-kind-icon">subjects</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="components.sessioncomponent.html#submits" class="tsd-kind-icon">submits</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class"><a href="components.sessioncomponent.html#timedout" class="tsd-kind-icon">timed<wbr>Out</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="components.sessioncomponent.html#titleservice" class="tsd-kind-icon">title<wbr>Service</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class"><a href="components.sessioncomponent.html#tokendata" class="tsd-kind-icon">token<wbr>Data</a></li>
+							</ul>
+						</section>
+						<section class="tsd-index-section ">
+							<h3>Methods</h3>
+							<ul class="tsd-index-list">
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private"><a href="components.sessioncomponent.html#canstart" class="tsd-kind-icon">can<wbr>Start</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private"><a href="components.sessioncomponent.html#getgamedata" class="tsd-kind-icon">get<wbr>Game<wbr>Data</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private"><a href="components.sessioncomponent.html#initgame" class="tsd-kind-icon">init<wbr>Game</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="components.sessioncomponent.html#ishostdisconnected" class="tsd-kind-icon">is<wbr>Host<wbr>Disconnected</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="components.sessioncomponent.html#leavegame" class="tsd-kind-icon">leave<wbr>Game</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="components.sessioncomponent.html#leavesession" class="tsd-kind-icon">leave<wbr>Session</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="components.sessioncomponent.html#ngoninit" class="tsd-kind-icon">ng<wbr>OnInit</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private"><a href="components.sessioncomponent.html#pairstudents" class="tsd-kind-icon">pair<wbr>Students</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="components.sessioncomponent.html#pausegame" class="tsd-kind-icon">pause<wbr>Game</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="components.sessioncomponent.html#resumegame" class="tsd-kind-icon">resume<wbr>Game</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private"><a href="components.sessioncomponent.html#showanswersonscreen" class="tsd-kind-icon">show<wbr>Answerson<wbr>Screen</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="components.sessioncomponent.html#startgame" class="tsd-kind-icon">start<wbr>Game</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private"><a href="components.sessioncomponent.html#starttimer" class="tsd-kind-icon">start<wbr>Timer</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="components.sessioncomponent.html#stopgame" class="tsd-kind-icon">stop<wbr>Game</a></li>
+							</ul>
+						</section>
+					</div>
+				</section>
+			</section>
+			<section class="tsd-panel-group tsd-member-group ">
+				<h2>Constructors</h2>
+				<section class="tsd-panel tsd-member tsd-kind-constructor tsd-parent-kind-class">
+					<a name="constructor" class="tsd-anchor"></a>
+					<h3>constructor</h3>
+					<ul class="tsd-signatures tsd-kind-constructor tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">new <wbr>Session<wbr>Component<span class="tsd-signature-symbol">(</span>auth<span class="tsd-signature-symbol">: </span><a href="services.authenticationservice.html" class="tsd-signature-type">AuthenticationService</a>, socketService<span class="tsd-signature-symbol">: </span><a href="services.socketioservice.html" class="tsd-signature-type">SocketIOService</a>, data<span class="tsd-signature-symbol">: </span><a href="services.dataservice.html" class="tsd-signature-type">DataService</a>, router<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Router</span>, sessionService<span class="tsd-signature-symbol">: </span><a href="services.sessionservice.html" class="tsd-signature-type">SessionService</a>, snackBar<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">MatSnackBar</span>, titleService<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Title</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="components.sessioncomponent.html" class="tsd-signature-type">SessionComponent</a></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in src/app/components/session/session.component.ts:54</li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>SessionComponent constructor.</p>
+								</div>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>auth: <a href="services.authenticationservice.html" class="tsd-signature-type">AuthenticationService</a></h5>
+								</li>
+								<li>
+									<h5>socketService: <a href="services.socketioservice.html" class="tsd-signature-type">SocketIOService</a></h5>
+								</li>
+								<li>
+									<h5>data: <a href="services.dataservice.html" class="tsd-signature-type">DataService</a></h5>
+								</li>
+								<li>
+									<h5>router: <span class="tsd-signature-type">Router</span></h5>
+								</li>
+								<li>
+									<h5>sessionService: <a href="services.sessionservice.html" class="tsd-signature-type">SessionService</a></h5>
+								</li>
+								<li>
+									<h5>snackBar: <span class="tsd-signature-type">MatSnackBar</span></h5>
+								</li>
+								<li>
+									<h5>titleService: <span class="tsd-signature-type">Title</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<div class="lead">
+										</div>
+									</div>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <a href="components.sessioncomponent.html" class="tsd-signature-type">SessionComponent</a></h4>
+						</li>
+					</ul>
+				</section>
+			</section>
+			<section class="tsd-panel-group tsd-member-group ">
+				<h2>Properties</h2>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private">
+					<a name="auth" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> auth</h3>
+					<div class="tsd-signature tsd-kind-icon">auth<span class="tsd-signature-symbol">:</span> <a href="services.authenticationservice.html" class="tsd-signature-type">AuthenticationService</a></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in src/app/components/session/session.component.ts:67</li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private">
+					<a name="data" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> data</h3>
+					<div class="tsd-signature tsd-kind-icon">data<span class="tsd-signature-symbol">:</span> <a href="services.dataservice.html" class="tsd-signature-type">DataService</a></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in src/app/components/session/session.component.ts:69</li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+					<a name="enablequestions" class="tsd-anchor"></a>
+					<h3>enable<wbr>Questions</h3>
+					<div class="tsd-signature tsd-kind-icon">enable<wbr>Questions<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> = false</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in src/app/components/session/session.component.ts:53</li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+					<a name="gamedata" class="tsd-anchor"></a>
+					<h3>game<wbr>Data</h3>
+					<div class="tsd-signature tsd-kind-icon">game<wbr>Data<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in src/app/components/session/session.component.ts:47</li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+					<a name="gamefinished" class="tsd-anchor"></a>
+					<h3>game<wbr>Finished</h3>
+					<div class="tsd-signature tsd-kind-icon">game<wbr>Finished<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> = false</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in src/app/components/session/session.component.ts:51</li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+					<a name="gamepaused" class="tsd-anchor"></a>
+					<h3>game<wbr>Paused</h3>
+					<div class="tsd-signature tsd-kind-icon">game<wbr>Paused<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> = false</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in src/app/components/session/session.component.ts:45</li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+					<a name="gamestarted" class="tsd-anchor"></a>
+					<h3>game<wbr>Started</h3>
+					<div class="tsd-signature tsd-kind-icon">game<wbr>Started<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in src/app/components/session/session.component.ts:49</li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+					<a name="interval" class="tsd-anchor"></a>
+					<h3>interval</h3>
+					<div class="tsd-signature tsd-kind-icon">interval<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in src/app/components/session/session.component.ts:50</li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private">
+					<a name="leaders" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> leaders</h3>
+					<div class="tsd-signature tsd-kind-icon">leaders<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in src/app/components/session/session.component.ts:40</li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+					<a name="leavebyhomebutton" class="tsd-anchor"></a>
+					<h3>leave<wbr>ByHome<wbr>Button</h3>
+					<div class="tsd-signature tsd-kind-icon">leave<wbr>ByHome<wbr>Button<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> = false</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in src/app/components/session/session.component.ts:52</li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private">
+					<a name="pairs" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> pairs</h3>
+					<div class="tsd-signature tsd-kind-icon">pairs<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in src/app/components/session/session.component.ts:37</li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+					<a name="pin" class="tsd-anchor"></a>
+					<h3>pin</h3>
+					<div class="tsd-signature tsd-kind-icon">pin<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in src/app/components/session/session.component.ts:46</li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+					<a name="playercount" class="tsd-anchor"></a>
+					<h3>player<wbr>Count</h3>
+					<div class="tsd-signature tsd-kind-icon">player<wbr>Count<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> = 0</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in src/app/components/session/session.component.ts:48</li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private">
+					<a name="players" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> players</h3>
+					<div class="tsd-signature tsd-kind-icon">players<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol"> = []</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in src/app/components/session/session.component.ts:36</li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private">
+					<a name="randomgroups" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> random<wbr>Groups</h3>
+					<div class="tsd-signature tsd-kind-icon">random<wbr>Groups<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in src/app/components/session/session.component.ts:38</li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private">
+					<a name="router" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> router</h3>
+					<div class="tsd-signature tsd-kind-icon">router<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Router</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in src/app/components/session/session.component.ts:70</li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private">
+					<a name="sessionservice" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> session<wbr>Service</h3>
+					<div class="tsd-signature tsd-kind-icon">session<wbr>Service<span class="tsd-signature-symbol">:</span> <a href="services.sessionservice.html" class="tsd-signature-type">SessionService</a></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in src/app/components/session/session.component.ts:71</li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private">
+					<a name="snackbar" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> snack<wbr>Bar</h3>
+					<div class="tsd-signature tsd-kind-icon">snack<wbr>Bar<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">MatSnackBar</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in src/app/components/session/session.component.ts:72</li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private">
+					<a name="socketservice" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> socket<wbr>Service</h3>
+					<div class="tsd-signature tsd-kind-icon">socket<wbr>Service<span class="tsd-signature-symbol">:</span> <a href="services.socketioservice.html" class="tsd-signature-type">SocketIOService</a></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in src/app/components/session/session.component.ts:68</li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private">
+					<a name="sources" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> sources</h3>
+					<div class="tsd-signature tsd-kind-icon">sources<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in src/app/components/session/session.component.ts:41</li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private">
+					<a name="subjects" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> subjects</h3>
+					<div class="tsd-signature tsd-kind-icon">subjects<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in src/app/components/session/session.component.ts:42</li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private">
+					<a name="submits" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> submits</h3>
+					<div class="tsd-signature tsd-kind-icon">submits<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol"> = []</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in src/app/components/session/session.component.ts:39</li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+					<a name="timedout" class="tsd-anchor"></a>
+					<h3>timed<wbr>Out</h3>
+					<div class="tsd-signature tsd-kind-icon">timed<wbr>Out<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> = false</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in src/app/components/session/session.component.ts:54</li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private">
+					<a name="titleservice" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> title<wbr>Service</h3>
+					<div class="tsd-signature tsd-kind-icon">title<wbr>Service<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Title</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in src/app/components/session/session.component.ts:73</li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+						</div>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+					<a name="tokendata" class="tsd-anchor"></a>
+					<h3>token<wbr>Data</h3>
+					<div class="tsd-signature tsd-kind-icon">token<wbr>Data<span class="tsd-signature-symbol">:</span> <a href="models.tokendata.html" class="tsd-signature-type">tokenData</a></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in src/app/components/session/session.component.ts:44</li>
+						</ul>
+					</aside>
+				</section>
+			</section>
+			<section class="tsd-panel-group tsd-member-group ">
+				<h2>Methods</h2>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-private">
+					<a name="canstart" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> can<wbr>Start</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-private">
+						<li class="tsd-signature tsd-kind-icon">can<wbr>Start<span class="tsd-signature-symbol">(</span>game<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in src/app/components/session/session.component.ts:257</li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Method that takes the game name and will return whether the game can start or not.</p>
+								</div>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>game: <span class="tsd-signature-type">string</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>Type of the activity.</p>
+									</div>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
+							<p>Whether it is possible to start the game.</p>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-private">
+					<a name="getgamedata" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> get<wbr>Game<wbr>Data</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-private">
+						<li class="tsd-signature tsd-kind-icon">get<wbr>Game<wbr>Data<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in src/app/components/session/session.component.ts:226</li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Method that returns the game data.</p>
+								</div>
+							</div>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">any</span></h4>
+							<p>Data of the game.</p>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-private">
+					<a name="initgame" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> init<wbr>Game</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-private">
+						<li class="tsd-signature tsd-kind-icon">init<wbr>Game<span class="tsd-signature-symbol">(</span>game<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in src/app/components/session/session.component.ts:276</li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Method that initializes the game based on the given game name.</p>
+								</div>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>game: <span class="tsd-signature-type">string</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>Type of the activity.</p>
+									</div>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="ishostdisconnected" class="tsd-anchor"></a>
+					<h3>is<wbr>Host<wbr>Disconnected</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">is<wbr>Host<wbr>Disconnected<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in src/app/components/session/session.component.ts:218</li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Method that returns if a student leaving the session was caused by the host disconnecting.</p>
+								</div>
+							</div>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
+							<p>Whether student leaving was caused by teacher disconnecting.</p>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="leavegame" class="tsd-anchor"></a>
+					<h3>leave<wbr>Game</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">leave<wbr>Game<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in src/app/components/session/session.component.ts:380</li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Method that makes the host leave the session and the page.</p>
+								</div>
+							</div>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="leavesession" class="tsd-anchor"></a>
+					<h3>leave<wbr>Session</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">leave<wbr>Session<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in src/app/components/session/session.component.ts:210</li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Method that calls the leave session function in the socket io service.</p>
+								</div>
+							</div>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="ngoninit" class="tsd-anchor"></a>
+					<h3>ng<wbr>OnInit</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">ng<wbr>OnInit<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in src/app/components/session/session.component.ts:80</li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Initialization method.</p>
+								</div>
+							</div>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-private">
+					<a name="pairstudents" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> pair<wbr>Students</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-private">
+						<li class="tsd-signature tsd-kind-icon">pair<wbr>Students<span class="tsd-signature-symbol">(</span>groups<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">[]</span>, groupSize<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span>, articles<span class="tsd-signature-symbol">: </span><a href="models.article.html" class="tsd-signature-type">Article</a>, receivePairs<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Function</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in src/app/components/session/session.component.ts:352</li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Method that groups students into groups of a certain size for the &#39;Naamloos Nieuws&#39; activity.</p>
+								</div>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>groups: <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">[]</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>Array of groups of students only used when teacher created the groups manually.</p>
+									</div>
+								</li>
+								<li>
+									<h5>groupSize: <span class="tsd-signature-type">number</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>Size of the group.</p>
+									</div>
+								</li>
+								<li>
+									<h5>articles: <a href="models.article.html" class="tsd-signature-type">Article</a></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>Articles to be paired to students in the group.</p>
+									</div>
+								</li>
+								<li>
+									<h5>receivePairs: <span class="tsd-signature-type">Function</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>Callback function.</p>
+									</div>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="pausegame" class="tsd-anchor"></a>
+					<h3>pause<wbr>Game</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">pause<wbr>Game<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in src/app/components/session/session.component.ts:391</li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Method to pause a session by pausing the timer and restricting new answers from being submitted.</p>
+								</div>
+							</div>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="resumegame" class="tsd-anchor"></a>
+					<h3>resume<wbr>Game</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">resume<wbr>Game<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in src/app/components/session/session.component.ts:400</li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Method to resume a paused session.</p>
+								</div>
+							</div>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-private">
+					<a name="showanswersonscreen" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> show<wbr>Answerson<wbr>Screen</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-private">
+						<li class="tsd-signature tsd-kind-icon">show<wbr>Answerson<wbr>Screen<span class="tsd-signature-symbol">(</span>game<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in src/app/components/session/session.component.ts:410</li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Method that shows the answer on screen when the game is finished.</p>
+								</div>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>game: <span class="tsd-signature-type">string</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>Type of the activity.</p>
+									</div>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="startgame" class="tsd-anchor"></a>
+					<h3>start<wbr>Game</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">start<wbr>Game<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in src/app/components/session/session.component.ts:234</li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Method that starts the game. Making it unable for students to join the session.</p>
+								</div>
+							</div>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-private">
+					<a name="starttimer" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> start<wbr>Timer</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-private">
+						<li class="tsd-signature tsd-kind-icon">start<wbr>Timer<span class="tsd-signature-symbol">(</span>time<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in src/app/components/session/session.component.ts:321</li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Method that makes timer count down at the top of the screen.</p>
+								</div>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>time: <span class="tsd-signature-type">number</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>Amount of time to play the game.</p>
+									</div>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="stopgame" class="tsd-anchor"></a>
+					<h3>stop<wbr>Game</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">stop<wbr>Game<span class="tsd-signature-symbol">(</span>timedOut<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in src/app/components/session/session.component.ts:363</li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Method that stops the timer and game.</p>
+								</div>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>timedOut: <span class="tsd-signature-type">boolean</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>Whether the game finished by the time running out or the teacher manually stopping it.</p>
+									</div>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+			</section>
+		</div>
+		<div class="col-4 col-menu menu-sticky-wrap menu-highlight">
+			<nav class="tsd-navigation primary">
+				<ul>
+					<li class="globals  ">
+						<a href="../globals.html"><em>Globals</em></a>
+					</li>
+					<li class="current tsd-kind-module">
+						<a href="../modules/components.html">Components</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="../modules/models.html">Models</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="../modules/services.html">Services</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="../modules/shared.html">Shared</a>
+					</li>
+				</ul>
+			</nav>
+			<nav class="tsd-navigation secondary menu-sticky">
+				<ul class="before-current">
+					<li class=" tsd-kind-class tsd-parent-kind-module">
+						<a href="components.activitiescomponent.html" class="tsd-kind-icon">Activities<wbr>Component</a>
+					</li>
+					<li class=" tsd-kind-class tsd-parent-kind-module">
+						<a href="components.answerformcomponent.html" class="tsd-kind-icon">Answer<wbr>Form<wbr>Component</a>
+					</li>
+					<li class=" tsd-kind-class tsd-parent-kind-module">
+						<a href="components.avatarcomponent.html" class="tsd-kind-icon">Avatar<wbr>Component</a>
+					</li>
+					<li class=" tsd-kind-class tsd-parent-kind-module">
+						<a href="components.avatardisplaycomponent.html" class="tsd-kind-icon">Avatar<wbr>Display<wbr>Component</a>
+					</li>
+					<li class=" tsd-kind-class tsd-parent-kind-module">
+						<a href="components.badgescomponent.html" class="tsd-kind-icon">Badges<wbr>Component</a>
+					</li>
+					<li class=" tsd-kind-class tsd-parent-kind-module">
+						<a href="components.bubbledetailscomponent.html" class="tsd-kind-icon">Bubble<wbr>Details<wbr>Component</a>
+					</li>
+					<li class=" tsd-kind-class tsd-parent-kind-module">
+						<a href="components.bubblevisualisationcomponent.html" class="tsd-kind-icon">Bubble<wbr>Visualisation<wbr>Component</a>
+					</li>
+					<li class=" tsd-kind-class tsd-parent-kind-module">
+						<a href="components.classoverviewcomponent.html" class="tsd-kind-icon">Class<wbr>Overview<wbr>Component</a>
+					</li>
+					<li class=" tsd-kind-class tsd-parent-kind-module">
+						<a href="components.classmateprofilecomponent.html" class="tsd-kind-icon">Classmate<wbr>Profile<wbr>Component</a>
+					</li>
+					<li class=" tsd-kind-class tsd-parent-kind-module">
+						<a href="components.deleteaccountdialog.html" class="tsd-kind-icon">Delete<wbr>Account<wbr>Dialog</a>
+					</li>
+					<li class=" tsd-kind-class tsd-parent-kind-module">
+						<a href="components.deleteclassdialog.html" class="tsd-kind-icon">Delete<wbr>Class<wbr>Dialog</a>
+					</li>
+					<li class=" tsd-kind-class tsd-parent-kind-module">
+						<a href="components.homecomponent.html" class="tsd-kind-icon">Home<wbr>Component</a>
+					</li>
+					<li class=" tsd-kind-class tsd-parent-kind-module">
+						<a href="components.joinclasscomponent.html" class="tsd-kind-icon">Join<wbr>Class<wbr>Component</a>
+					</li>
+					<li class=" tsd-kind-class tsd-parent-kind-module">
+						<a href="components.labyrinthcomponent.html" class="tsd-kind-icon">Labyrinth<wbr>Component</a>
+					</li>
+					<li class=" tsd-kind-class tsd-parent-kind-module">
+						<a href="components.leaveclassdialog.html" class="tsd-kind-icon">Leave<wbr>Class<wbr>Dialog</a>
+					</li>
+					<li class=" tsd-kind-class tsd-parent-kind-module">
+						<a href="components.logincomponent.html" class="tsd-kind-icon">Login<wbr>Component</a>
+					</li>
+					<li class=" tsd-kind-class tsd-parent-kind-module">
+						<a href="components.notloggedintoolbarcomponent.html" class="tsd-kind-icon">Not<wbr>Logged<wbr>InToolbar<wbr>Component</a>
+					</li>
+					<li class=" tsd-kind-class tsd-parent-kind-module">
+						<a href="components.passwordrecoverycomponent.html" class="tsd-kind-icon">Password<wbr>Recovery<wbr>Component</a>
+					</li>
+					<li class=" tsd-kind-class tsd-parent-kind-module">
+						<a href="components.passwordresetcomponent.html" class="tsd-kind-icon">Password<wbr>Reset<wbr>Component</a>
+					</li>
+					<li class=" tsd-kind-class tsd-parent-kind-module">
+						<a href="components.profilecomponent.html" class="tsd-kind-icon">Profile<wbr>Component</a>
+					</li>
+					<li class=" tsd-kind-class tsd-parent-kind-module">
+						<a href="components.registercomponent.html" class="tsd-kind-icon">Register<wbr>Component</a>
+					</li>
+					<li class=" tsd-kind-class tsd-parent-kind-module">
+						<a href="components.removefromclassdialog.html" class="tsd-kind-icon">Remove<wbr>From<wbr>Class<wbr>Dialog</a>
+					</li>
+				</ul>
+				<ul class="current">
+					<li class="current tsd-kind-class tsd-parent-kind-module">
+						<a href="components.sessioncomponent.html" class="tsd-kind-icon">Session<wbr>Component</a>
+						<ul>
+							<li class=" tsd-kind-constructor tsd-parent-kind-class">
+								<a href="components.sessioncomponent.html#constructor" class="tsd-kind-icon">constructor</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private">
+								<a href="components.sessioncomponent.html#auth" class="tsd-kind-icon">auth</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private">
+								<a href="components.sessioncomponent.html#data" class="tsd-kind-icon">data</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class">
+								<a href="components.sessioncomponent.html#enablequestions" class="tsd-kind-icon">enable<wbr>Questions</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class">
+								<a href="components.sessioncomponent.html#gamedata" class="tsd-kind-icon">game<wbr>Data</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class">
+								<a href="components.sessioncomponent.html#gamefinished" class="tsd-kind-icon">game<wbr>Finished</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class">
+								<a href="components.sessioncomponent.html#gamepaused" class="tsd-kind-icon">game<wbr>Paused</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class">
+								<a href="components.sessioncomponent.html#gamestarted" class="tsd-kind-icon">game<wbr>Started</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class">
+								<a href="components.sessioncomponent.html#interval" class="tsd-kind-icon">interval</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private">
+								<a href="components.sessioncomponent.html#leaders" class="tsd-kind-icon">leaders</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class">
+								<a href="components.sessioncomponent.html#leavebyhomebutton" class="tsd-kind-icon">leave<wbr>ByHome<wbr>Button</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private">
+								<a href="components.sessioncomponent.html#pairs" class="tsd-kind-icon">pairs</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class">
+								<a href="components.sessioncomponent.html#pin" class="tsd-kind-icon">pin</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class">
+								<a href="components.sessioncomponent.html#playercount" class="tsd-kind-icon">player<wbr>Count</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private">
+								<a href="components.sessioncomponent.html#players" class="tsd-kind-icon">players</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private">
+								<a href="components.sessioncomponent.html#randomgroups" class="tsd-kind-icon">random<wbr>Groups</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private">
+								<a href="components.sessioncomponent.html#router" class="tsd-kind-icon">router</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private">
+								<a href="components.sessioncomponent.html#sessionservice" class="tsd-kind-icon">session<wbr>Service</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private">
+								<a href="components.sessioncomponent.html#snackbar" class="tsd-kind-icon">snack<wbr>Bar</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private">
+								<a href="components.sessioncomponent.html#socketservice" class="tsd-kind-icon">socket<wbr>Service</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private">
+								<a href="components.sessioncomponent.html#sources" class="tsd-kind-icon">sources</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private">
+								<a href="components.sessioncomponent.html#subjects" class="tsd-kind-icon">subjects</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private">
+								<a href="components.sessioncomponent.html#submits" class="tsd-kind-icon">submits</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class">
+								<a href="components.sessioncomponent.html#timedout" class="tsd-kind-icon">timed<wbr>Out</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private">
+								<a href="components.sessioncomponent.html#titleservice" class="tsd-kind-icon">title<wbr>Service</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class">
+								<a href="components.sessioncomponent.html#tokendata" class="tsd-kind-icon">token<wbr>Data</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-private">
+								<a href="components.sessioncomponent.html#canstart" class="tsd-kind-icon">can<wbr>Start</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-private">
+								<a href="components.sessioncomponent.html#getgamedata" class="tsd-kind-icon">get<wbr>Game<wbr>Data</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-private">
+								<a href="components.sessioncomponent.html#initgame" class="tsd-kind-icon">init<wbr>Game</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="components.sessioncomponent.html#ishostdisconnected" class="tsd-kind-icon">is<wbr>Host<wbr>Disconnected</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="components.sessioncomponent.html#leavegame" class="tsd-kind-icon">leave<wbr>Game</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="components.sessioncomponent.html#leavesession" class="tsd-kind-icon">leave<wbr>Session</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="components.sessioncomponent.html#ngoninit" class="tsd-kind-icon">ng<wbr>OnInit</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-private">
+								<a href="components.sessioncomponent.html#pairstudents" class="tsd-kind-icon">pair<wbr>Students</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="components.sessioncomponent.html#pausegame" class="tsd-kind-icon">pause<wbr>Game</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="components.sessioncomponent.html#resumegame" class="tsd-kind-icon">resume<wbr>Game</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-private">
+								<a href="components.sessioncomponent.html#showanswersonscreen" class="tsd-kind-icon">show<wbr>Answerson<wbr>Screen</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="components.sessioncomponent.html#startgame" class="tsd-kind-icon">start<wbr>Game</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-private">
+								<a href="components.sessioncomponent.html#starttimer" class="tsd-kind-icon">start<wbr>Timer</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="components.sessioncomponent.html#stopgame" class="tsd-kind-icon">stop<wbr>Game</a>
+							</li>
+						</ul>
+					</li>
+				</ul>
+				<ul class="after-current">
+					<li class=" tsd-kind-class tsd-parent-kind-module">
+						<a href="components.sessionoptionscomponent.html" class="tsd-kind-icon">Session<wbr>Options<wbr>Component</a>
+					</li>
+					<li class=" tsd-kind-class tsd-parent-kind-module">
+						<a href="components.sessionoverviewcomponent.html" class="tsd-kind-icon">Session<wbr>Overview<wbr>Component</a>
+					</li>
+					<li class=" tsd-kind-class tsd-parent-kind-module">
+						<a href="components.settingscomponent.html" class="tsd-kind-icon">Settings<wbr>Component</a>
+					</li>
+					<li class=" tsd-kind-class tsd-parent-kind-module">
+						<a href="components.shopcomponent.html" class="tsd-kind-icon">Shop<wbr>Component</a>
+					</li>
+					<li class=" tsd-kind-class tsd-parent-kind-module">
+						<a href="components.sidenavcomponent.html" class="tsd-kind-icon">Sidenav<wbr>Component</a>
+					</li>
+					<li class=" tsd-kind-class tsd-parent-kind-module">
+						<a href="components.teacheroverviewcomponent.html" class="tsd-kind-icon">Teacher<wbr>Overview<wbr>Component</a>
+					</li>
+					<li class=" tsd-kind-class tsd-parent-kind-module">
+						<a href="components.toolbarcomponent.html" class="tsd-kind-icon">Toolbar<wbr>Component</a>
+					</li>
+				</ul>
+			</nav>
+		</div>
+	</div>
+</div>
+<footer>
+	<div class="container">
+		<h2>Legend</h2>
+		<div class="tsd-legend-group">
+			<ul class="tsd-legend">
+				<li class="tsd-kind-class"><span class="tsd-kind-icon">Class</span></li>
+				<li class="tsd-kind-constructor tsd-parent-kind-class"><span class="tsd-kind-icon">Constructor</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-class"><span class="tsd-kind-icon">Property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class"><span class="tsd-kind-icon">Method</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><span class="tsd-kind-icon">Private property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private"><span class="tsd-kind-icon">Private method</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-function"><span class="tsd-kind-icon">Function</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-enum"><span class="tsd-kind-icon">Enumeration</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-interface"><span class="tsd-kind-icon">Interface</span></li>
+			</ul>
+		</div>
+	</div>
+</footer>
+<div class="overlay"></div>
+<script src="../assets/js/main.js"></script>
+</body>
+</html>

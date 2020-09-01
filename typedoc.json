@@ -1,0 +1,12 @@
+{
+  "inputFiles": ["./src/app"],
+  "mode": "modules",
+  "out": "./docs",
+  "excludeExternals": true,
+  "name": "Anti-Bubble App",
+  "exclude": ["**/node_modules/**",
+    "**/*+(.spec).ts",
+    "**/app*.ts",
+    "**/shared/material.module.ts"],
+  "hideGenerator": true
+}

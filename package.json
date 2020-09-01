@@ -77,6 +77,8 @@
     "karma-jasmine-html-reporter": "^1.5.4",
     "ts-node": "~7.0.0",
     "tslint": "~5.15.0",
+    "typedoc": "^0.18.0",
+    "typedoc-plugin-external-module-name": "^4.0.3",
     "typescript": "3.8.3"
   }
 }
