@@ -1,5 +1,23 @@
 # Anti Bubble App 
 
+### Documentation
+
+Documentation is hosted on the GitHub Pages website belonging to this repository (can be visited at https://okkibro.github.io/anti-bubble.github.io/). The 
+documentation is exclusively for the front-end of the app (about 85% of the code) and is divided into 4 main sections, 
+which correspond the 4 folders found in the ```./src/app``` folder of the app. The folders are as follows:
++ ```Components``` - TypeScript components describing all the pages/components/classes of the app.
++ ```Models``` - TypeScript representations of all custom classes/enums used in the app, based on their MongoDB back-end counterparts.
++ ```Services``` - TypeScript services mainly used for HTTP requests for communicating with the Node.js/Express back-end.
++ ```Shared``` - Remaining files/services/functions used by the app.
+
+### Generating TypeDocs
+All ```*.ts``` files in the ```./src``` folder of the project have TypeDoc comments. 
+To automatically generate docs use the ```typedoc --options typedoc.json``` command after having merged the new code into the ```gh-pages````branch and 
+having checked out that branch.
+
+Make sure the ```_config.yml``` file in the root of the project is also located in the root of the by TypeDoc generated ```./docs``` folder, 
+otherwsie GitHub Pages will not work.
+
 ### Folder structure
 
 + **/src**: *Angular app created using ```angular/cli```.*
