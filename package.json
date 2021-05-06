@@ -43,7 +43,7 @@
     "express": "^4.16.3",
     "express-jwt": "^5.3.1",
     "helmet": "^3.21.3",
-    "highcharts": "^8.1.1",
+    "highcharts": "^9.0.0",
     "highcharts-angular": "^2.4.0",
     "jsonwebtoken": "^8.5.1",
     "mongo-sanitize": "^1.1.0",
